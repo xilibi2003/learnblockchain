@@ -1,373 +1,601 @@
 <!DOCTYPE html>
-<html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
-  <title>比特币是什么 | 深入浅出区块链</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-    <meta name="keywords" content="区块链" />
-  
-  <meta name="description" content="到底什么是比特币，它到底是怎么运行的 定义比特币是一种基于分布式网络（点对点）的加密数字货币。 货币是什么凯恩斯在《货币论》上讲，货币可以承载债务，价格以及一般等价物。">
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="比特币," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="到底什么是比特币，它到底是怎么运行的 定义比特币是一种基于分布式网络（点对点）的加密数字货币。 货币是什么凯恩斯在《货币论》上讲，货币可以承载债务，价格以及一般等价物。">
 <meta name="keywords" content="比特币">
 <meta property="og:type" content="article">
 <meta property="og:title" content="比特币是什么">
 <meta property="og:url" content="http://learnblockchain.cn/2017/10/23/whatisbitcoin/index.html">
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="到底什么是比特币，它到底是怎么运行的 定义比特币是一种基于分布式网络（点对点）的加密数字货币。 货币是什么凯恩斯在《货币论》上讲，货币可以承载债务，价格以及一般等价物。">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-10-24T08:44:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="比特币是什么">
 <meta name="twitter:description" content="到底什么是比特币，它到底是怎么运行的 定义比特币是一种基于分布式网络（点对点）的加密数字货币。 货币是什么凯恩斯在《货币论》上讲，货币可以承载债务，价格以及一般等价物。">
-  
-  
-    <link rel="icon" href="/favicon.ico">
-  
-  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="/js/pace.min.js"></script>
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://learnblockchain.cn/2017/10/23/whatisbitcoin/"/>
+
+
+
+
+
+  <title>比特币是什么 | 深入浅出区块链</title>
   
 
-  
-  
-  <div style="display: none;">
-    <script src="//s22.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
-  </div>
+
+
+
+
+
 
 
 </head>
 
-<body>
-  <div id="container">
-      <header id="header">
-    <div id="banner"></div>
-    <div id="header-outer">
-        <div id="header-menu" class="header-menu-pos animated">
-            <div class="header-menu-container">
-                <a href="/" class="left">
-                    <span class="site-title">深入浅出区块链</span>
-                </a>
-                <nav id="header-menu-nav" class="right">
-                    
-                    <a  href="/">
-                        <i class="fa fa-home"></i>
-                        <span>Home</span>
-                    </a>
-                    
-                    <a  href="/archives">
-                        <i class="fa fa-archive"></i>
-                        <span>Archives</span>
-                    </a>
-                    
-                    <a  href="/about">
-                        <i class="fa fa-user"></i>
-                        <span>About</span>
-                    </a>
-                    
-                </nav>
-                <a class="mobile-header-menu-button">
-                    <i class="fa fa-bars"></i>
-                </a>
-            </div>
-        </div>
-        <div id="header-row">
-            <div id="logo">
-                <a href="/">
-                    <img src="/images/logo.png" alt="logo">
-                </a>
-            </div>
-            <div class="header-info">
-                <div id="header-title">
-                    
-                    <h2>
-                        深入浅出区块链
-                    </h2>
-                    
-                </div>
-                <div id="header-description">
-                    
-                    <h3>
-                        全面系统学习区块链
-                    </h3>
-                    
-                </div>
-            </div>
-            <nav class="header-nav">
-                <div class="social">
-                    
-                        <a title="Home" target="_blank" href="//learnblockchain.cn">
-                            <i class="fa fa-home fa-2x"></i></a>
-                    
-                        <a title="Github" target="_blank" href="//github.com/xilibi2003">
-                            <i class="fa fa-github fa-2x"></i></a>
-                    
-                        <a title="Weibo" target="_blank" href="//weibo.com/xilibi2003">
-                            <i class="fa fa-weibo fa-2x"></i></a>
-                    
-                        <a title="微信号：blockchaincore"  href="//learnblockchain.cn">
-                            <i class="fa fa-weixin fa-2x"></i></a>
-                    
-                </div>
-            </nav>
-        </div>
-    </div>
-</header>
-      <div class="outer">
-        <section id="main" class="body-wrap"><article id="post-whatisbitcoin" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
   
-    <h1 class="post-title" itemprop="name">
-      比特币是什么
-    </h1>
-    <div class="post-title-bar">
-      <ul>
-          
-              <li>
-                  <i class="fa fa-book"></i>
-                  
-                      <a href="/categories/Bitcoin/">Bitcoin</a>
-                  
-              </li>
-          
-        <li>
-          <i class="fa fa-calendar"></i>  2017-10-23
-        </li>
-        <li>
-          <i class="fa fa-eye"></i>
-          <span id="busuanzi_value_page_pv"></span>
-        </li>
-      </ul>
-    </div>
+  
+    
   
 
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">系统学习区块链</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://learnblockchain.cn/2017/10/23/whatisbitcoin/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">比特币是什么</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-23T22:36:05+08:00">
+                2017-10-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bitcoin/" itemprop="url" rel="index">
+                    <span itemprop="name">Bitcoin</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry post-content" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-            
-            <p>  到底什么是比特币，它到底是怎么运行的</p>
+      
+
+      
+        <p>  到底什么是比特币，它到底是怎么运行的</p>
 <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>比特币是一种基于分布式网络（点对点）的加密数字货币。</p>
 <h2 id="货币是什么"><a href="#货币是什么" class="headerlink" title="货币是什么"></a>货币是什么</h2><p>凯恩斯在《货币论》上讲，货币可以承载债务，价格以及一般等价物。</p>
 
-            <div class="post-copyright">
-    <div class="content">
-        <p>最后更新： 2017年10月24日 16:44</p>
-        <p>原始链接： <a class="post-url" href="/2017/10/23/whatisbitcoin/" title="比特币是什么">http://learnblockchain.cn/2017/10/23/whatisbitcoin/</a></p>
-        <footer>
-            <a href="http://learnblockchain.cn">
-                <img src="/images/logo.png" alt="Tiny熊">
-                Tiny熊
-            </a>
-        </footer>
-    </div>
-</div>
-
       
     </div>
-    <footer class="article-footer">
-        
-        
-<div class="post-share">
-    <a href="javascript:;" id="share-sub" class="post-share-fab">
-        <i class="fa fa-share-alt"></i>
-    </a>
-    <div class="post-share-list" id="share-list">
-        <ul class="share-icons">
-          <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://learnblockchain.cn/2017/10/23/whatisbitcoin/&title=《比特币是什么》 — 深入浅出区块链&pic=/images/banner.jpg" data-title="微博">
-              <i class="fa fa-weibo"></i>
-            </a>
-          </li>
-          <li>
-            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
-              <i class="fa fa-weixin"></i>
-            </a>
-          </li>
-          <li>
-            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://learnblockchain.cn/2017/10/23/whatisbitcoin/&title=《比特币是什么》 — 深入浅出区块链&source=微信号:blockchaincore" data-title="QQ">
-              <i class="fa fa-qq"></i>
-            </a>
-          </li>
-          <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://learnblockchain.cn/2017/10/23/whatisbitcoin/" data-title="Facebook">
-              <i class="fa fa-facebook"></i>
-            </a>
-          </li>
-          <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《比特币是什么》 — 深入浅出区块链&url=http://learnblockchain.cn/2017/10/23/whatisbitcoin/&via=http://learnblockchain.cn" data-title="Twitter">
-              <i class="fa fa-twitter"></i>
-            </a>
-          </li>
-          <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://learnblockchain.cn/2017/10/23/whatisbitcoin/" data-title="Google+">
-              <i class="fa fa-google-plus"></i>
-            </a>
-          </li>
-        </ul>
-     </div>
-</div>
-<div class="post-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;" id="wxShare-close">×</a>
-    <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://learnblockchain.cn/2017/10/23/whatisbitcoin/" alt="微信分享二维码">
-</div>
+    
+    
+    
 
-<div class="mask"></div>
+    
 
-        
-        <ul class="article-footer-menu">
-            
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
+    
+
+    
+
+    <footer class="post-footer">
       
-    <a href="/tags/比特币/" class="color4">比特币</a>
+        <div class="post-tags">
+          
+            <a href="/tags/比特币/" rel="tag"># 比特币</a>
+          
+        </div>
       
-  </li>
 
-        </ul>
-        
+      
+      
+      
+
+      
+
+      
+      
     </footer>
   </div>
-</article>
+  
+  
+  
+  </article>
 
 
-    <aside class="post-toc-pos post-toc-top" id="post-toc">
-        <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#定义"><span class="post-toc-text">定义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#货币是什么"><span class="post-toc-text">货币是什么</span></a></li></ol>
-        </nav>
-    </aside>
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
     
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description">微信号:blockchaincore</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#货币是什么"><span class="nav-number">2.</span> <span class="nav-text">货币是什么</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
 
 
-
-    
-</section>
         
       </div>
-      <footer id="footer">
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-<p>
-    <span id="busuanzi_container_site_uv" style='display:none'>
-        总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style='display:none'>
-        总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
 
 
-      <p>
-        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
-        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
-      &copy; 2017 Tiny熊<br>
-      </p>
-    </div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
   </div>
-</footer>
-    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script>
-  var mihoConfig = {
-      root: "http://learnblockchain.cn",
-      animate: true,
-      isHome: false,
-      share: true
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
   }
 </script>
-<div class="sidebar">
-    <div id="sidebar-search" title="Search">
-        <i class="fa fa-search"></i>
-    </div>
-    <div id="sidebar-category" title="Categories">
-        <i class="fa fa-book"></i>
-    </div>
-    <div id="sidebar-tag" title="Tags">
-        <i class="fa fa-tags"></i>
-    </div>
-    <div id="sidebar-top">
-        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
-    </div>
-</div>
-<div class="sidebar-menu-box" id="sidebar-menu-box">
-    <div class="sidebar-menu-box-container">
-        <div id="sidebar-menu-box-categories">
-            <a class="category-link" href="/categories/Bitcoin/">Bitcoin</a>
-        </div>
-        <div id="sidebar-menu-box-tags">
-            <a href="/tags/比特币/" style="font-size: 10px;">比特币</a>
-        </div>
-    </div>
-    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
-</div>
-<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
-    <div class="mobile-header-menu-container">
-        <span class="title">Menus</span>
-        <ul class="mobile-header-menu-navbar">
-            
-            <li>
-                <a  href="/">
-                    <i class="fa fa-home"></i><span>Home</span>
-                </a>
-            </li>
-            
-            <li>
-                <a  href="/archives">
-                    <i class="fa fa-archive"></i><span>Archives</span>
-                </a>
-            </li>
-            
-            <li>
-                <a  href="/about">
-                    <i class="fa fa-user"></i><span>About</span>
-                </a>
-            </li>
-            
-        </ul>
-    </div>
-    <div class="mobile-header-tag-container">
-        <span class="title">Tags</span>
-        <div id="mobile-header-container-tags">
-            <a href="/tags/比特币/" style="font-size: 10px;">比特币</a>
-        </div>
-    </div>
-</div>
-<div class="search-wrap">
-    <span class="search-close">&times;</span>
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-            <i class="icon icon-lg icon-chevron-left"></i>
-        </a>
-        <input class="search-field" placeholder="Search..." id="keywords">
-        <a id="search-submit" href="javascript:;">
-            <i class="fa fa-search"></i>
-        </a>
-    <div class="search-container" id="search-container">
-        <ul class="search-result" id="search-result">
-        </ul>
-    </div>
-</div>
-
-<div id="search-tpl">
-    <li class="search-result-item">
-        <a href="{url}" class="search-item-li">
-            <span class="search-item-li-title" title="{title}">{title}</span>
-        </a>
-    </li>
-</div>
-<script src="/js/search.js"></script>
-<script src="/js/main.js"></script>
-
-
-  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
-  <div id="particles"></div>
-  <script src="/js/particles.js"></script>
 
 
 
@@ -375,10 +603,135 @@
 
 
 
-  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
-  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
-  <script src="/js/animate.js"></script>
 
-  </div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
 </body>
 </html>
