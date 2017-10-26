@@ -81,3 +81,6 @@ deploy:
   repo: git@github.com:xilibi2003/learnblockchain.git
   branch: master
 
+sitemap:
+  path: sitemap.xml
+  template: ./sitemap_template.xml
