@@ -2,6 +2,13 @@
 ## Docs: https://hexo.io/docs/configuration.html
 ## Source: https://github.com/hexojs/hexo/
 
+# title, chinese available
+links_title: 博客
+# links
+links:
+  我的小专栏: https://xiaozhuanlan.com/blockchaincore
+
+
 # Site
 title: 深入浅出区块链
 subtitle: 系统学习区块链
