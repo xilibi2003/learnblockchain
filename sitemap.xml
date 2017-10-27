@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://learnblockchain.cn/2017/10/27/%E7%94%A8Python%E4%BB%8E%E9%9B%B6%E6%9E%84%E5%BB%BA%E5%8C%BA%E5%9D%97%E9%93%BE/</loc>
+    
+    <lastmod>2017-10-27T14:44:41.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://learnblockchain.cn/about/index.html</loc>
+    
+    <lastmod>2017-10-26T15:51:46.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://learnblockchain.cn/2017/10/25/whatbc/</loc>
     
     <lastmod>2017-10-26T14:12:28.000Z</lastmod>
@@ -33,13 +47,6 @@
     <loc>http://learnblockchain.cn/categories/index.html</loc>
     
     <lastmod>2017-10-24T13:15:00.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://learnblockchain.cn/about/index.html</loc>
-    
-    <lastmod>2017-10-24T13:11:09.000Z</lastmod>
     
   </url>
   

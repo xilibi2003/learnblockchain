@@ -4,6 +4,31 @@
 
     
   <url>
+    <loc>http://learnblockchain.cn/2017/10/27/%E7%94%A8Python%E4%BB%8E%E9%9B%B6%E6%9E%84%E5%BB%BA%E5%8C%BA%E5%9D%97%E9%93%BE/</loc>
+    <lastmod>2017-10-27T14:44:41.000Z</lastmod>
+    <data>
+        <display>
+        <title>用Python从零开始创建区块链</title>
+        <pubTime>2017-10-27T02:15:28.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>创建区块链</tag>
+         
+        <tag>翻译</tag>
+         
+         
+           
+             
+              <breadCrumb title="BlockChain" url="http://learnblockchain.cn/categories/BlockChain/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
     <loc>http://learnblockchain.cn/2017/10/25/whatbc/</loc>
     <lastmod>2017-10-26T14:12:28.000Z</lastmod>
     <data>
@@ -66,7 +91,6 @@
     </data>
     </url>
 
-    
     
     
 </urlset>
