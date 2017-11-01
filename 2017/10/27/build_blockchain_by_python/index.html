@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://learnblockchain.cn/images/postman_post_new.png">
 <meta property="og:image" content="http://learnblockchain.cn/images/postman_register.png">
 <meta property="og:image" content="http://learnblockchain.cn/images/postman_resolve.png">
-<meta property="og:updated_time" content="2017-10-31T03:18:48.000Z">
+<meta property="og:updated_time" content="2017-11-01T09:40:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用Python从零开始创建区块链">
 <meta name="twitter:description" content="本文主要内容翻译自Learn Blockchains by Building One本文原始链接,转载请注明出处。作者认为最快的学习区块链的方式是自己创建一个，本文就跟随作者用Python来创建一个区块链。">
@@ -375,7 +375,7 @@
 <p>Blockchain类用来管理链条，它能存储交易，加入新块等，下面我们来进一步完善这些方法。</p>
 <h3 id="块结构"><a href="#块结构" class="headerlink" title="块结构"></a>块结构</h3><p>每个区块包含属性：索引（index），Unix时间戳（timestamp），交易列表（transactions），工作量证明（稍后解释）以及前一个区块的Hash值。</p>
 <p>以下是一个区块的结构：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">block = &#123;</div><div class="line">    <span class="string">'index'</span>: <span class="number">1</span>,</div><div class="line">    <span class="string">'timestamp'</span>: <span class="number">1506057125.900785</span>,</div><div class="line">    <span class="string">'transactions'</span>: [</div><div class="line">        &#123;</div><div class="line">            <span class="string">'sender'</span>: <span class="string">"8527147fe1f5426f9dd545de4b27ee00"</span>,</div><div class="line">            <span class="string">'recipient'</span>: <span class="string">"a77f5cdfa2934df3954a5c7c7da5df1f"</span>,</div><div class="line">            <span class="string">'amount'</span>: <span class="number">5</span>,</div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">    <span class="string">'proof'</span>: <span class="number">324984774000</span>,</div><div class="line">    <span class="string">'previous_hash'</span>: <span class="string">"2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>到这里，区块链的概念就清楚了，每个新的区块都包含上一个区块的Hash，这是关键的一点，它保障了区块链不可变性。如果攻击者破坏了前面的某个区块，那么后面所有区块的Hash都会变得不正确。不理解的话，慢慢消化，可参考<a href="/2017/10/25/whatbc/" title="区块链技术原理">区块链技术原理</a></p>
+<p>到这里，区块链的概念就清楚了，每个新的区块都包含上一个区块的Hash，这是关键的一点，它保障了区块链不可变性。如果攻击者破坏了前面的某个区块，那么后面所有区块的Hash都会变得不正确。不理解的话，慢慢消化，可参考<a href="/2017/10/25/whatbc/" title="区块链记账原理">区块链记账原理</a></p>
 <h3 id="加入交易"><a href="#加入交易" class="headerlink" title="加入交易"></a>加入交易</h3><p>接下来我们需要添加一个交易，来完善下new_transaction方法<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Blockchain</span><span class="params">(object)</span>:</span></div><div class="line">    ...</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">new_transaction</span><span class="params">(self, sender, recipient, amount)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line"><span class="string">        生成新交易信息，信息将加入到下一个待挖的区块中</span></div><div class="line"><span class="string">        :param sender: &lt;str&gt; Address of the Sender</span></div><div class="line"><span class="string">        :param recipient: &lt;str&gt; Address of the Recipient</span></div><div class="line"><span class="string">        :param amount: &lt;int&gt; Amount</span></div><div class="line"><span class="string">        :return: &lt;int&gt; The index of the Block that will hold this transaction</span></div><div class="line"><span class="string">        """</span></div><div class="line"></div><div class="line">        self.current_transactions.append(&#123;</div><div class="line">            <span class="string">'sender'</span>: sender,</div><div class="line">            <span class="string">'recipient'</span>: recipient,</div><div class="line">            <span class="string">'amount'</span>: amount,</div><div class="line">        &#125;)</div><div class="line"></div><div class="line">        <span class="keyword">return</span> self.last_block[<span class="string">'index'</span>] + <span class="number">1</span></div></pre></td></tr></table></figure></p>
 <p>方法向列表中添加一个交易记录，并返回该记录将被添加到的区块(下一个待挖掘的区块)的索引，等下在用户提交交易时会有用。</p>
 <h3 id="创建新块"><a href="#创建新块" class="headerlink" title="创建新块"></a>创建新块</h3><p>当Blockchain实例化后，我们需要构造一个创世块（没有前区块的第一个区块），并且给它加上一个工作量证明。<br>每个区块都需要经过工作量证明，俗称挖矿，稍后会继续讲解。</p>
@@ -508,8 +508,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/25/whatbc/" rel="next" title="区块链技术原理">
-                <i class="fa fa-chevron-left"></i> 区块链技术原理
+              <a href="/2017/10/25/whatbc/" rel="next" title="区块链记账原理">
+                <i class="fa fa-chevron-left"></i> 区块链记账原理
               </a>
             
           </div>
@@ -615,7 +615,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -656,7 +656,7 @@
               <ul class="links-of-blogroll-list">
                 
                   <li class="links-of-blogroll-item">
-                    <a href="https://xiaozhuanlan.com/blockchaincore" title="我的小专栏" target="_blank">我的小专栏</a>
+                    <a href="https://github.com/xilibi2003/learnblockchain" title="博客地址" target="_blank">博客地址</a>
                   </li>
                 
               </ul>

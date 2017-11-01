@@ -3,19 +3,22 @@
 
 
     
+    
   <url>
-    <loc>http://learnblockchain.cn/2017/10/27/build_blockchain_by_python/</loc>
-    <lastmod>2017-10-31T03:18:48.000Z</lastmod>
+    <loc>http://learnblockchain.cn/2017/10/25/whatbc/</loc>
+    <lastmod>2017-11-01T09:41:01.000Z</lastmod>
     <data>
         <display>
-        <title>用Python从零开始创建区块链</title>
-        <pubTime>2017-10-27T02:15:28.000Z</pubTime>
+        <title>区块链记账原理</title>
+        <pubTime>2017-10-25T15:26:04.000Z</pubTime>
         
-        <tag>python</tag>
+        <tag>区块链</tag>
          
-        <tag>创建区块链</tag>
+        <tag>原理</tag>
          
-        <tag>翻译</tag>
+        <tag>哈希</tag>
+         
+        <tag>如何记账</tag>
          
          
            
@@ -27,18 +30,19 @@
     </url>
 
     
-    
   <url>
-    <loc>http://learnblockchain.cn/2017/10/25/whatbc/</loc>
-    <lastmod>2017-10-26T14:12:28.000Z</lastmod>
+    <loc>http://learnblockchain.cn/2017/10/27/build_blockchain_by_python/</loc>
+    <lastmod>2017-11-01T09:40:30.000Z</lastmod>
     <data>
         <display>
-        <title>区块链技术原理</title>
-        <pubTime>2017-10-25T15:26:04.000Z</pubTime>
+        <title>用Python从零开始创建区块链</title>
+        <pubTime>2017-10-27T02:15:28.000Z</pubTime>
         
-        <tag>区块链</tag>
+        <tag>python</tag>
          
-        <tag>原理</tag>
+        <tag>创建区块链</tag>
+         
+        <tag>翻译</tag>
          
          
            
