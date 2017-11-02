@@ -264,6 +264,162 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://learnblockchain.cn/2017/11/02/bitcoin-own/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/02/bitcoin-own/" itemprop="url">比特币所有权及隐私问题-非对称机密技术</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-02T17:19:29+08:00">
+                2017-11-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/BlockChain/" itemprop="url" rel="index">
+                    <span itemprop="name">BlockChain</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p> 比特币系统是如何确定某个账户的比特币是属于谁的？谁可以支付这个账户比特币？<br> 如果你对这个问题还不是很明白，那就一起来看看吧。</p>
+<h2 id="银行系统"><a href="#银行系统" class="headerlink" title="银行系统"></a>银行系统</h2><p>我们先来回顾下现实的银行系统：</p>
+<ol>
+<li>首先我们需要把我们的个人信息（如身份证）给银行，银行给我们开立相对应的账户，银行在开户的时候确立了对账户的所有权。</li>
+<li>进行支付的时候，银行对交易双方完成转账（银行在开户的时候已经知道我们对应的账户）。</li>
+</ol>
+<p>同时银行会对账户信息进行保密（这点其实不能保证）。</p>
+<h2 id="匿名账本"><a href="#匿名账本" class="headerlink" title="匿名账本"></a>匿名账本</h2><p>那么比特币如何在没有第三方银行的参与下，在确保隐私的同时如何确定账户所有权的呢？</p>
+<p>实际上比特币的账户是用地址来表示，账本上不显示个人信息，转账是把比特币从一个地址转移到另一个地址。<br>转账记录如这样：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    "付款地址"："2A39CBa2390FDe"</div><div class="line">    "收款地址"："AAC9CBa239aFcc"</div><div class="line">    "金额"："0.2btc"</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>接下来问题就变为了 谁有权用某个地址进行付款。</p>
+<blockquote>
+<p>支付和所有权 实际是同一个问题，如果此比特币只有我可以用来支付，那么说明我拥有所有权</p>
+</blockquote>
+<h2 id="地址秘钥"><a href="#地址秘钥" class="headerlink" title="地址秘钥"></a>地址秘钥</h2><p>比特币的解决方案是，谁拥有某个地址的秘钥，谁就能用这个地址进行支付。</p>
+<p>待续</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://learnblockchain.cn/2017/10/27/build_blockchain_by_python/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -881,7 +1037,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -903,7 +1059,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

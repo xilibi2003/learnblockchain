@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>http://learnblockchain.cn/2017/11/02/bitcoin-own/</loc>
+    <lastmod>2017-11-02T10:32:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>比特币所有权及隐私问题-非对称机密技术</title>
+        <pubTime>2017-11-02T09:19:29.000Z</pubTime>
+        
+        <tag>区块链</tag>
+         
+        <tag>所有权问题</tag>
+         
+         
+           
+             
+              <breadCrumb title="BlockChain" url="http://learnblockchain.cn/categories/BlockChain/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://learnblockchain.cn/2017/10/25/whatbc/</loc>
     <lastmod>2017-11-02T04:11:34.000Z</lastmod>
     <data>
@@ -18,30 +40,6 @@
         <tag>哈希</tag>
          
         <tag>如何记账</tag>
-         
-         
-           
-             
-              <breadCrumb title="BlockChain" url="http://learnblockchain.cn/categories/BlockChain/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://learnblockchain.cn/2017/10/27/build_blockchain_by_python/</loc>
-    <lastmod>2017-11-01T15:26:42.000Z</lastmod>
-    <data>
-        <display>
-        <title>用Python从零开始创建区块链</title>
-        <pubTime>2017-10-27T02:15:28.000Z</pubTime>
-        
-        <tag>python</tag>
-         
-        <tag>创建区块链</tag>
-         
-        <tag>翻译</tag>
          
          
            
@@ -69,6 +67,30 @@
            
              
               <breadCrumb title="Bitcoin" url="http://learnblockchain.cn/categories/Bitcoin/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://learnblockchain.cn/2017/10/27/build_blockchain_by_python/</loc>
+    <lastmod>2017-11-01T15:26:42.000Z</lastmod>
+    <data>
+        <display>
+        <title>用Python从零开始创建区块链</title>
+        <pubTime>2017-10-27T02:15:28.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>创建区块链</tag>
+         
+        <tag>翻译</tag>
+         
+         
+           
+             
+              <breadCrumb title="BlockChain" url="http://learnblockchain.cn/categories/BlockChain/"/>
           
         </display>
     </data>
