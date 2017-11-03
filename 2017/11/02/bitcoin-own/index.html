@@ -91,7 +91,7 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="比特币系统是如何确定某个账户的比特币是属于谁的？谁可以支付这个账户比特币？ 如果你对这个问题还不是很明白，那就一起来看看吧。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-03T12:57:20.000Z">
+<meta property="og:updated_time" content="2017-11-03T13:31:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="比特币所有权及隐私问题-非对称加密应用">
 <meta name="twitter:description" content="比特币系统是如何确定某个账户的比特币是属于谁的？谁可以支付这个账户比特币？ 如果你对这个问题还不是很明白，那就一起来看看吧。">
@@ -378,16 +378,10 @@
 <p>还是上面交易的例子：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    "付款地址"："2A39CBa2390FDe",</div><div class="line">    "收款地址"："AAC9CBa239aFcc",</div><div class="line">    "金额"："0.2btc"</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>只有拥有地址2A39CBa2390FDe的私钥才能进行支付。</p>
 <h2 id="非对称加密技术"><a href="#非对称加密技术" class="headerlink" title="非对称加密技术"></a>非对称加密技术</h2><p>这个时候问题就变为了，如何证明你拥有某个地址的私钥（在不泄漏私钥的情况下）。</p>
-<h3 id="对交易信息进行签名"><a href="#对交易信息进行签名" class="headerlink" title="对交易信息进行签名"></a>对交易信息进行签名</h3><p>实际在签名之前，会先对交易信息进行Hash运算的到摘要信息，然后对摘要信息进行签名。过程大概是这样：</p>
-<ol>
-<li>对交易进行hash， 得到一个摘要信息（Hash值）</li>
-</ol>
+<h3 id="对交易信息进行签名"><a href="#对交易信息进行签名" class="headerlink" title="对交易信息进行签名"></a>对交易信息进行签名</h3><p>实际在签名之前，会先对交易信息进行Hash运算的到摘要信息，然后对摘要信息进行签名。过程大概是这样：<br>1.对交易进行hash， 得到一个摘要信息（Hash值）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">hash(&apos;</div><div class="line">    &#123;&quot;付款地址&quot;：&quot;2A39CBa2390FDe&quot;,</div><div class="line">    &quot;收款地址&quot;：&quot;AAC9CBa239aFcc&quot;,</div><div class="line">    &quot;金额&quot;：&quot;0.2btc&quot;</div><div class="line">    &#125;&apos;) -&gt; 8aDB23CDEA6</div></pre></td></tr></table></figure>
-<ol>
-<li>用私钥对交易摘要进行签名（付款方在安全的环境下进行，以避免私钥泄密）, 用代码表示大概是这样。<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#参数1为交易摘要</span></div><div class="line"><span class="comment">#参数2为私钥</span></div><div class="line"><span class="comment">#返回签名信息</span></div><div class="line">sign("8aDB23CDEA6", "J78sknJhidhLIqdngalket") -&gt; "3cdferdadgadg"</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="广播"><a href="#广播" class="headerlink" title="广播"></a>广播</h3><p>在签名之后，支付节点就开始广播：我支付了0.2btc到AAC9CBa239aFcc,签名信息是3cdferdadgadg，你们来确认一下吧。</p>
+<p>2.用私钥对交易摘要进行签名（付款方在安全的环境下进行，以避免私钥泄密）, 用代码表示大概是这样。<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#参数1为交易摘要</span></div><div class="line"><span class="comment">#参数2为私钥</span></div><div class="line"><span class="comment">#返回签名信息</span></div><div class="line">sign("8aDB23CDEA6", "J78sknJhidhLIqdngalket") -&gt; "3cdferdadgadg"</div></pre></td></tr></table></figure></p>
+<h3 id="广播"><a href="#广播" class="headerlink" title="广播"></a>广播</h3><p>在签名运算之后，付款节点就开始在全网进行广播：我支付了0.2btc到AAC9CBa239aFcc,签名信息是3cdferdadgadg，你们来确认一下吧。</p>
 <p>广播过程实际上是发信息到相连的其它节点，其它节点在验证通过后再转发到与之相连的节点，这样的扩散过程。</p>
 <p>广播的信息包含了交易原始信息和签名信息</p>
 <h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>其它节点在收到广播信息之后，会验证签名信息是不是付款方用私钥对交易原始信息签名产生的，如果验证通过说明确实是付款方本人发出的交易，说明交易有效，才会记录到账本中去。</p>
