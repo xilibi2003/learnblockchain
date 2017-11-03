@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://learnblockchain.cn/2017/11/02/bitcoin-own/</loc>
-    <lastmod>2017-11-03T05:31:44.000Z</lastmod>
+    <lastmod>2017-11-03T12:57:20.000Z</lastmod>
     <data>
         <display>
         <title>比特币所有权及隐私问题-非对称加密应用</title>
@@ -23,28 +23,6 @@
            
              
               <breadCrumb title="BlockChain" url="http://learnblockchain.cn/categories/BlockChain/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://learnblockchain.cn/2017/10/23/whatisbitcoin/</loc>
-    <lastmod>2017-11-03T05:31:44.000Z</lastmod>
-    <data>
-        <display>
-        <title>比特币是什么</title>
-        <pubTime>2017-10-23T14:36:05.000Z</pubTime>
-        
-        <tag>比特币</tag>
-         
-        <tag>定义</tag>
-         
-         
-           
-             
-              <breadCrumb title="Bitcoin" url="http://learnblockchain.cn/categories/Bitcoin/"/>
           
         </display>
     </data>
@@ -95,6 +73,28 @@
            
              
               <breadCrumb title="BlockChain" url="http://learnblockchain.cn/categories/BlockChain/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://learnblockchain.cn/2017/10/23/whatisbitcoin/</loc>
+    <lastmod>2017-11-03T05:31:44.000Z</lastmod>
+    <data>
+        <display>
+        <title>比特币是什么</title>
+        <pubTime>2017-10-23T14:36:05.000Z</pubTime>
+        
+        <tag>比特币</tag>
+         
+        <tag>定义</tag>
+         
+         
+           
+             
+              <breadCrumb title="Bitcoin" url="http://learnblockchain.cn/categories/Bitcoin/"/>
           
         </display>
     </data>
