@@ -1,2 +1,8 @@
 ## 深入浅出区块链
 http://learnblockchain.cn
+
+打造最好的区块链技术博客
+
+### 贡献
+
+源码为blog分支，欢迎大家发pull requests.
