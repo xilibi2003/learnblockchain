@@ -83,20 +83,20 @@
 
 
 
-<meta name="description" content="比特币采用了基于互联网的点对点（P2P：peer-to-peer）分布式网络架构。比特币网络可以人为是按照比特币P2P协议运行的一系列节点的集合，。通过本文带你来分析下比特币网络，了解它跟传统中心化网络的区别，以及比特币网络是如何发现相邻节点的。">
+<meta name="description" content="比特币采用了基于互联网的点对点（P2P：peer-to-peer）分布式网络架构。比特币网络可以认为是按照比特币P2P协议运行的一系列节点的集合。本文来分析下比特币网络，了解它跟传统中心化网络的区别，以及比特币网络是如何发现相邻节点的。">
 <meta name="keywords" content="p2p,去中心化,比特币网络">
 <meta property="og:type" content="article">
 <meta property="og:title" content="分析比特币网络：一种去中心化、点对点的网络架构">
 <meta property="og:url" content="http://learnblockchain.cn/2017/11/07/bitcoin-p2p/index.html">
 <meta property="og:site_name" content="深入浅出区块链">
-<meta property="og:description" content="比特币采用了基于互联网的点对点（P2P：peer-to-peer）分布式网络架构。比特币网络可以人为是按照比特币P2P协议运行的一系列节点的集合，。通过本文带你来分析下比特币网络，了解它跟传统中心化网络的区别，以及比特币网络是如何发现相邻节点的。">
+<meta property="og:description" content="比特币采用了基于互联网的点对点（P2P：peer-to-peer）分布式网络架构。比特币网络可以认为是按照比特币P2P协议运行的一系列节点的集合。本文来分析下比特币网络，了解它跟传统中心化网络的区别，以及比特币网络是如何发现相邻节点的。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://learnblockchain.cn/images/cs_network.jpeg">
 <meta property="og:image" content="http://learnblockchain.cn/images/p2p_network.jpeg">
-<meta property="og:updated_time" content="2017-11-07T09:33:52.000Z">
+<meta property="og:updated_time" content="2017-11-07T09:39:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分析比特币网络：一种去中心化、点对点的网络架构">
-<meta name="twitter:description" content="比特币采用了基于互联网的点对点（P2P：peer-to-peer）分布式网络架构。比特币网络可以人为是按照比特币P2P协议运行的一系列节点的集合，。通过本文带你来分析下比特币网络，了解它跟传统中心化网络的区别，以及比特币网络是如何发现相邻节点的。">
+<meta name="twitter:description" content="比特币采用了基于互联网的点对点（P2P：peer-to-peer）分布式网络架构。比特币网络可以认为是按照比特币P2P协议运行的一系列节点的集合。本文来分析下比特币网络，了解它跟传统中心化网络的区别，以及比特币网络是如何发现相邻节点的。">
 <meta name="twitter:image" content="http://learnblockchain.cn/images/cs_network.jpeg">
 
 
@@ -359,7 +359,7 @@
       
 
       
-        <p>比特币采用了基于互联网的点对点（P2P：peer-to-peer）分布式网络架构。<br>比特币网络可以人为是按照比特币P2P协议运行的一系列节点的集合，。<br>通过本文带你来分析下比特币网络，了解它跟传统中心化网络的区别，以及比特币网络是如何发现相邻节点的。</p>
+        <p>比特币采用了基于互联网的点对点（P2P：peer-to-peer）分布式网络架构。<br>比特币网络可以认为是按照比特币P2P协议运行的一系列节点的集合。<br>本文来分析下比特币网络，了解它跟传统中心化网络的区别，以及比特币网络是如何发现相邻节点的。</p>
 <a id="more"></a>
 <h2 id="中心化网络"><a href="#中心化网络" class="headerlink" title="中心化网络"></a>中心化网络</h2><p>为了更好的理解P2P网络，我们先来看看传统的中心化模型：<br><img src="/images/cs_network.jpeg" alt="中心化网络模型"></p>
 <p>这是一种典型的星型（“中心化”）结构，我们常见B/S及C/S网络架构就是这种模型，C1 、C2 、C3等之间没法直接的连接，C节点如果要连接必须要通过中心化S节点做为桥梁。<br>中心化节点充当服务者、中介作用，比如我们没有办法把资金直接从一个人转移给另一个人，必须通过银行这个中介。</p>
