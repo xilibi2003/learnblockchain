@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="比特币,挖矿,工作量证明,共识机制," />
+  <meta name="keywords" content="p2p,去中心化,比特币网络," />
 
 
 
@@ -83,20 +83,21 @@
 
 
 
-<meta name="description" content="在区块链记账原理 一篇，我们了解到记账是把交易记录、交易时间、账本序号、上一个Hash值等信息计算Hash打包的过程。我们知道所有的计算和存贮是需要消耗计算机资源的，既然要付出成本，那节点为什么还要参与记账呢？在中本聪（比特币之父）的设计里，完成记账的节点可以获得系统给与的一定数量的比特币奖励，这个奖励的过程也就是比特币的发行过程，因此大家形象的把记账称为“挖矿”，本文将详细讨论这个过程。">
-<meta name="keywords" content="比特币,挖矿,工作量证明,共识机制">
+<meta name="description" content="比特币采用了基于互联网的点对点（P2P：peer-to-peer）分布式网络架构。比特币网络可以人为是按照比特币P2P协议运行的一系列节点的集合，。通过本文带你来分析下比特币网络，了解它跟传统中心化网络的区别，以及比特币网络是如何发现相邻节点的。">
+<meta name="keywords" content="p2p,去中心化,比特币网络">
 <meta property="og:type" content="article">
-<meta property="og:title" content="比特币如何挖矿（挖矿原理）-工作量证明">
-<meta property="og:url" content="http://learnblockchain.cn/2017/11/04/bitcoin-pow/index.html">
+<meta property="og:title" content="分析比特币网络：一种去中心化、点对点的网络架构">
+<meta property="og:url" content="http://learnblockchain.cn/2017/11/07/bitcoin-p2p/index.html">
 <meta property="og:site_name" content="深入浅出区块链">
-<meta property="og:description" content="在区块链记账原理 一篇，我们了解到记账是把交易记录、交易时间、账本序号、上一个Hash值等信息计算Hash打包的过程。我们知道所有的计算和存贮是需要消耗计算机资源的，既然要付出成本，那节点为什么还要参与记账呢？在中本聪（比特币之父）的设计里，完成记账的节点可以获得系统给与的一定数量的比特币奖励，这个奖励的过程也就是比特币的发行过程，因此大家形象的把记账称为“挖矿”，本文将详细讨论这个过程。">
+<meta property="og:description" content="比特币采用了基于互联网的点对点（P2P：peer-to-peer）分布式网络架构。比特币网络可以人为是按照比特币P2P协议运行的一系列节点的集合，。通过本文带你来分析下比特币网络，了解它跟传统中心化网络的区别，以及比特币网络是如何发现相邻节点的。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://learnblockchain.cn/images/block_info_493050.jpg">
-<meta property="og:updated_time" content="2017-11-06T01:55:39.000Z">
+<meta property="og:image" content="http://learnblockchain.cn/images/cs_network.jpeg">
+<meta property="og:image" content="http://learnblockchain.cn/images/p2p_network.jpeg">
+<meta property="og:updated_time" content="2017-11-07T09:33:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="比特币如何挖矿（挖矿原理）-工作量证明">
-<meta name="twitter:description" content="在区块链记账原理 一篇，我们了解到记账是把交易记录、交易时间、账本序号、上一个Hash值等信息计算Hash打包的过程。我们知道所有的计算和存贮是需要消耗计算机资源的，既然要付出成本，那节点为什么还要参与记账呢？在中本聪（比特币之父）的设计里，完成记账的节点可以获得系统给与的一定数量的比特币奖励，这个奖励的过程也就是比特币的发行过程，因此大家形象的把记账称为“挖矿”，本文将详细讨论这个过程。">
-<meta name="twitter:image" content="http://learnblockchain.cn/images/block_info_493050.jpg">
+<meta name="twitter:title" content="分析比特币网络：一种去中心化、点对点的网络架构">
+<meta name="twitter:description" content="比特币采用了基于互联网的点对点（P2P：peer-to-peer）分布式网络架构。比特币网络可以人为是按照比特币P2P协议运行的一系列节点的集合，。通过本文带你来分析下比特币网络，了解它跟传统中心化网络的区别，以及比特币网络是如何发现相邻节点的。">
+<meta name="twitter:image" content="http://learnblockchain.cn/images/cs_network.jpeg">
 
 
 
@@ -126,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://learnblockchain.cn/2017/11/04/bitcoin-pow/"/>
+  <link rel="canonical" href="http://learnblockchain.cn/2017/11/07/bitcoin-p2p/"/>
 
 
 
 
 
-  <title>比特币如何挖矿（挖矿原理）-工作量证明 | 深入浅出区块链</title>
+  <title>分析比特币网络：一种去中心化、点对点的网络架构 | 深入浅出区块链</title>
   
 
 
@@ -269,7 +270,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://learnblockchain.cn/2017/11/04/bitcoin-pow/">
+    <link itemprop="mainEntityOfPage" href="http://learnblockchain.cn/2017/11/07/bitcoin-p2p/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Tiny熊">
@@ -286,7 +287,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">比特币如何挖矿（挖矿原理）-工作量证明</h2>
+          <h2 class="post-title" itemprop="name headline">分析比特币网络：一种去中心化、点对点的网络架构</h2>
         
 
         <div class="post-meta">
@@ -298,8 +299,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-04T16:12:29+08:00">
-                2017-11-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-07T11:25:30+08:00">
+                2017-11-07
               </time>
             
 
@@ -358,36 +359,32 @@
       
 
       
-        <p>在<a href="/2017/10/25/whatbc/" title="区块链记账原理">区块链记账原理</a> 一篇，我们了解到记账是把交易记录、交易时间、账本序号、上一个Hash值等信息计算Hash打包的过程。<br>我们知道所有的计算和存贮是需要消耗计算机资源的，既然要付出成本，那节点为什么还要参与记账呢？在中本聪（比特币之父）的设计里，完成记账的节点可以获得系统给与的一定数量的比特币奖励，这个奖励的过程也就是比特币的发行过程，因此大家形象的把记账称为“挖矿”，本文将详细讨论这个过程。</p>
+        <p>比特币采用了基于互联网的点对点（P2P：peer-to-peer）分布式网络架构。<br>比特币网络可以人为是按照比特币P2P协议运行的一系列节点的集合，。<br>通过本文带你来分析下比特币网络，了解它跟传统中心化网络的区别，以及比特币网络是如何发现相邻节点的。</p>
 <a id="more"></a>
-<h2 id="记账工作"><a href="#记账工作" class="headerlink" title="记账工作"></a>记账工作</h2><p>由于记账是有奖励的，每次记账都可以给自己凭空增加一定数量的个比特币（当前是12.5比特币，博文写作时每个比特币是4万人民币以上，大家可以算算多少钱），因此就出现大家争相记账，大家一起记账就会引起问题：出现记账不一致的问题，比特币系统引入工作量证明来解决这个问题，规则如下：</p>
-<ul>
-<li>一段时间内（10分钟左右，具体时间会与密码学难题难度相互影响）只有一人可以记账成功</li>
-<li>通过解决密码学难题（即工作量证明）竞争获得唯一记账权</li>
-<li>其他节点复制记账结果</li>
-</ul>
-<p>不过在进行工作量证明之前，记账节点会做进行如下准备工作：</p>
-<ul>
-<li>收集广播中还没有被记录账本的原始交易信息</li>
-<li>检查每个交易信息中付款地址有没有足够的余额</li>
-<li>验证交易是否有正确的签名</li>
-<li>把验证通过的交易信息进行打包记录</li>
-<li>添加一个奖励交易：给自己的地址增加12.5比特币</li>
-</ul>
-<p>如果节点争夺记账权成功的话，就可以得到12.5比特币的奖励。</p>
-<h2 id="工作量证明"><a href="#工作量证明" class="headerlink" title="工作量证明"></a>工作量证明</h2><a href="/2017/10/25/whatbc/" title="区块链记账原理">区块链记账原理</a>我们了解到，每次记账的时候回把上一个块的Hash值和当前的账页信息一起作为原始信息进行Hash。<br>如果仅仅是这样，显然每个人都可以很轻松的完成记账。<br>为了保证10分钟左右只有一个人可以记账，就必须要提高记账的难度，使得Hash的结果必须以若干个0开头。同是为了满足这个条件，在进行Hash时引入一个随机数变量。<br><br>用伪代码表示一下：<br><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 没有难度时为：Hash(上一个Hash值，交易记录集) = 456635BCD</span></div><div class="line">Hash(上一个Hash值，交易记录集，随机数) = <span class="number">0000</span>aFD635BCD</div></pre></td></tr></table></figure>
-<p>我们知道改变Hash的原始信息的任何一部分，Hash值也会随之不断的变化，因此在运算Hash时，不断的改变随机数的值，总可以找的一个随机数使的Hash的结果以若干个0开头（下文把这个过程称为猜谜），率先找到随机数的节点就获得此次记账的唯一记账权。</p>
-<h3 id="计算量分析"><a href="#计算量分析" class="headerlink" title="计算量分析"></a>计算量分析</h3><p>（这部分可选阅读）我们简单分析下记账难度有多大，<br>Hash值是由数字和大小写字母构成的字符串，每一位有62种可能性（可能为26个大写字母、26个小写字母，10个数字中任一个），假设任何一个字符出现的概率是均等的，那么第一位为0的概率是1/62（其他位出现什么字符先不管），理论上需要尝试62次Hash运算才会出现一次第一位为0的情况，如果前两2位为0，就得尝试62的平方次Hash运算，以n个0开头就需要尝试62的n次方次运算。我们结合当前实际区块#493050信息来看看：</p>
-<p><img src="/images/block_info_493050.jpg" alt="区块#493050"></p>
-<p>注：数据来源于<a href="https://blockchain.info" target="_blank" rel="external">https://blockchain.info</a><br>我们可以看到Hash值以18个0开头，理论上需要尝试62的18次方次，这个数是非常非常巨大的，我已经算不清楚了，应该是亿亿级别以上了。如此大的计算量需要投入大量的计算设备、电力等，<br>目前应该没有单矿工独立参与挖矿了，基本都是由矿工联合起来组成矿池进行挖矿（矿池里的矿工按算力百分比来分收益）。</p>
-<p>从经济的角度讲，只有挖矿还有收益（比特币价格不断上涨也让收益变大），就会有新的矿工加入，从而加剧竞争，提高算力难度，挖矿就需要耗费更多的运算和电力，相互作用引起最终成本会接近收益。</p>
-<p>题外话：国内由于电力成本较低，相对收益更高，中国的算力占整个网络的一半以上</p>
-<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><p>在节点成功找到满足的Hash值之后，会马上对全网进行广播打包区块，网络的节点收到广播打包区块，会立刻对其进行验证。</p>
-<p>如果验证通过，则表明已经有节点成功解迷，自己就不再竞争当前区块打包，而是选择接受这个区块，记录到自己的账本中，然后进行下一个区块的竞争猜谜。<br>网络中只有最快解谜的区块，才会添加的账本中，其他的节点进行复制，这样就保证了整个账本的唯一性。</p>
-<p>假如节点有任何的作弊行为，都会导致网络的节点验证不通过，直接丢弃其打包的区块，这个区块就无法记录到总账本中，作弊的节点耗费的成本就白费了，因此在巨大的挖矿成本下，也使得矿工自觉自愿的遵守比特币系统的共识协议，也就确保了整个系统的安全。</p>
-<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>矿工的收益其实不仅仅包含新发行的12.5比特币奖励，同时还有交易费收益（本文忽略一些细节是为了让主干更清晰）。</p>
-<p>有兴趣的同学可以看看图中区块都包含了那些信息，红箭头标示出的是本文涉及的信息。</p>
-<p>本文中有提到共识协议，比特币共识协议主要是由工作量证明和最长链机制 两部分组成，之后会有博文详细讲解。</p>
+<h2 id="中心化网络"><a href="#中心化网络" class="headerlink" title="中心化网络"></a>中心化网络</h2><p>为了更好的理解P2P网络，我们先来看看传统的中心化模型：<br><img src="/images/cs_network.jpeg" alt="中心化网络模型"></p>
+<p>这是一种典型的星型（“中心化”）结构，我们常见B/S及C/S网络架构就是这种模型，C1 、C2 、C3等之间没法直接的连接，C节点如果要连接必须要通过中心化S节点做为桥梁。<br>中心化节点充当服务者、中介作用，比如我们没有办法把资金直接从一个人转移给另一个人，必须通过银行这个中介。</p>
+<h2 id="P2P网络"><a href="#P2P网络" class="headerlink" title="P2P网络"></a>P2P网络</h2><p>P2P网络是指位于同一网络中的每台计算机都彼此对等，各个节点共同提供网络服务，不存在任何“特殊”节点，每个网络节点以扁平（flat）的拓扑结构相互连通。<br><img src="/images/p2p_network.jpeg" alt="p2p网络模型"></p>
+<p>对比中心化网络，在P2P网络中不存在任何服务端（server）、中央化的服务。<br>P2P网络的节点之间交互连接、协同，每个节点在对外提供服务的同时也使用网络中其他节点所提供的服务，每个节点即是服务端又是客户端。<br>P2P网络模型除应用于比特币网络，使用广泛的BT下载就是基于P2P网络。</p>
+<p>P2P网络不仅仅去除了中心化带来的风险（中心化可能作恶），还可以提高传输的效率。（中心化网络当能也有优点）</p>
+<h2 id="如何发现节点"><a href="#如何发现节点" class="headerlink" title="如何发现节点"></a>如何发现节点</h2><p>既然每个网络节点都是平等的（是指在网络层面上节点是平等的，但各节点在功能上可以有不同的分工, 如钱包节点、挖矿节点等），不存在任何“特殊”中心节点，那么当新的网络节点启动后，它是如何跟其他的节点建立连接，从而加入到比特币网络呢？</p>
+<blockquote>
+<p>在中心化网络中，新加入的节点只要连接“特殊”的中心节点就可以加入网络。</p>
+</blockquote>
+<p>为了能够加入到比特币网络，比特币客户端会做一下几件事情：</p>
+<ol>
+<li><p>节点会记住它最近成功连接的网络节点，当重新启动后它可以迅速与先前的对等节点网络重新建立连接。</p>
+</li>
+<li><p>节点会在失去已有连接时尝试发现新节点。</p>
+</li>
+<li><p>当建立一个或多个连接后，节点将一条包含自身IP地址消息发送给其相邻节点。相邻节点再将此消息依次转发给它们各自的相邻节点，从而保证节点信息被多个节点所接收、保证连接更稳定。</p>
+</li>
+<li><p>新接入的节点可以向它的相邻节点发送获取地址getaddr消息，要求它们返回其已知对等节点的IP地址列表。节点可以找到需连接到的对等节点。</p>
+</li>
+<li><p>在节点启动时，可以给节点指定一个正活跃节点IP, 如果没有，客户端也维持一个列表，列出了那些长期稳定运行的节点。这样的节点也被称为种子节点（其实和BT下载的种子文件道理是一样的），就可以通过种子节点来快速发现网络中的其他节点。</p>
+</li>
+</ol>
+<h2 id="节点通信简述"><a href="#节点通信简述" class="headerlink" title="节点通信简述"></a>节点通信简述</h2><p>比特币节点通常采用TCP协议、使用8333端口与相邻节点建立连接, 建立连接时也会有认证“握手”的通信过程，用来确定协议版本，软件版本，节点IP，区块高度等。</p>
+<p>当节点连接到相邻节点后，接着就开始跟相邻节点同步区块链数据（轻量级钱包应用其实不会同步所有区块数据），节点们会交换一个getblocks消息，它包含本地区块链最顶端的哈希值。如果某个节点识别出它接收到的哈希值并不属于顶端区块，而是属于一个非顶端区块的旧区块，就说其自身的本地区块链比其他节点的区块链更长，并告诉其他节点需要补充区块，其他节点发送getdata消息来请求区块，验证后更新到本地区块链中。</p>
 <p><a href="http://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客</p>
 
       
@@ -441,7 +438,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://learnblockchain.cn/2017/11/04/bitcoin-pow/" title="比特币如何挖矿（挖矿原理）-工作量证明">http://learnblockchain.cn/2017/11/04/bitcoin-pow/</a>
+    <a href="http://learnblockchain.cn/2017/11/07/bitcoin-p2p/" title="分析比特币网络：一种去中心化、点对点的网络架构">http://learnblockchain.cn/2017/11/07/bitcoin-p2p/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -456,13 +453,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/比特币/" rel="tag"># 比特币</a>
+            <a href="/tags/p2p/" rel="tag"># p2p</a>
           
-            <a href="/tags/挖矿/" rel="tag"># 挖矿</a>
+            <a href="/tags/去中心化/" rel="tag"># 去中心化</a>
           
-            <a href="/tags/工作量证明/" rel="tag"># 工作量证明</a>
-          
-            <a href="/tags/共识机制/" rel="tag"># 共识机制</a>
+            <a href="/tags/比特币网络/" rel="tag"># 比特币网络</a>
           
         </div>
       
@@ -475,8 +470,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/02/bitcoin-own/" rel="next" title="比特币所有权及隐私问题-非对称加密应用">
-                <i class="fa fa-chevron-left"></i> 比特币所有权及隐私问题-非对称加密应用
+              <a href="/2017/11/04/bitcoin-pow/" rel="next" title="比特币如何挖矿（挖矿原理）-工作量证明">
+                <i class="fa fa-chevron-left"></i> 比特币如何挖矿（挖矿原理）-工作量证明
               </a>
             
           </div>
@@ -484,10 +479,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/07/bitcoin-p2p/" rel="prev" title="分析比特币网络：一种去中心化、点对点的网络架构">
-                分析比特币网络：一种去中心化、点对点的网络架构 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -653,7 +644,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#记账工作"><span class="nav-number">1.</span> <span class="nav-text">记账工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工作量证明"><span class="nav-number">2.</span> <span class="nav-text">工作量证明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#计算量分析"><span class="nav-number">2.1.</span> <span class="nav-text">计算量分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证"><span class="nav-number">3.</span> <span class="nav-text">验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说明"><span class="nav-number">4.</span> <span class="nav-text">说明</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#中心化网络"><span class="nav-number">1.</span> <span class="nav-text">中心化网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P2P网络"><span class="nav-number">2.</span> <span class="nav-text">P2P网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何发现节点"><span class="nav-number">3.</span> <span class="nav-text">如何发现节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#节点通信简述"><span class="nav-number">4.</span> <span class="nav-text">节点通信简述</span></a></li></ol></div>
             
 
           </div>

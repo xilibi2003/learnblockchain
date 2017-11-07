@@ -3,6 +3,30 @@
 
 
     
+  <url>
+    <loc>http://learnblockchain.cn/2017/11/07/bitcoin-p2p/</loc>
+    <lastmod>2017-11-07T09:33:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>分析比特币网络：一种去中心化、点对点的网络架构</title>
+        <pubTime>2017-11-07T03:25:30.000Z</pubTime>
+        
+        <tag>p2p</tag>
+         
+        <tag>去中心化</tag>
+         
+        <tag>比特币网络</tag>
+         
+         
+           
+             
+              <breadCrumb title="Bitcoin" url="http://learnblockchain.cn/categories/Bitcoin/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>http://learnblockchain.cn/2017/11/04/bitcoin-pow/</loc>
@@ -105,6 +129,26 @@
 
     
   <url>
+    <loc>http://learnblockchain.cn/2017/10/20/%E5%89%8D%E8%A8%80/</loc>
+    <lastmod>2017-11-03T05:31:44.000Z</lastmod>
+    <data>
+        <display>
+        <title>前言-如何学习区块链</title>
+        <pubTime>2017-10-20T07:03:36.000Z</pubTime>
+        
+        <tag>如何学习</tag>
+         
+         
+           
+             
+              <breadCrumb title="Bitcoin" url="http://learnblockchain.cn/categories/Bitcoin/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://learnblockchain.cn/2017/10/27/build_blockchain_by_python/</loc>
     <lastmod>2017-11-03T05:31:44.000Z</lastmod>
     <data>
@@ -122,26 +166,6 @@
            
              
               <breadCrumb title="BlockChain" url="http://learnblockchain.cn/categories/BlockChain/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://learnblockchain.cn/2017/10/20/%E5%89%8D%E8%A8%80/</loc>
-    <lastmod>2017-11-03T05:31:44.000Z</lastmod>
-    <data>
-        <display>
-        <title>前言-如何学习区块链</title>
-        <pubTime>2017-10-20T07:03:36.000Z</pubTime>
-        
-        <tag>如何学习</tag>
-         
-         
-           
-             
-              <breadCrumb title="Bitcoin" url="http://learnblockchain.cn/categories/Bitcoin/"/>
           
         </display>
     </data>
