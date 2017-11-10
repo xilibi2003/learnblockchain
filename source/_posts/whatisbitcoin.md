@@ -28,5 +28,9 @@ author: Tiny熊
 
 比特币使用区块链技术来支撑整个系统的运行，有兴趣的同学，可以详细阅读下这几篇博文：{% post_link whatbc 区块链记账原理 %} 、 {% post_link bitcoin-own 比特币所有权问题 %}、{% post_link bitcoin-pow 比特币如何挖矿 %}
 
+还可进阶阅读：
+[分析比特币网络：一种去中心化、点对点的网络架构](https://xiaozhuanlan.com/topic/1670539284)，可以详细了解比特币网络。
+[比特币区块结构Merkle树及简单支付验证分析](https://xiaozhuanlan.com/topic/1402935768)，可以详细了解区块结构如何验证交易。
+
 
 [深入浅出区块链](http://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客
