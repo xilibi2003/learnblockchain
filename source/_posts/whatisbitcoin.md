@@ -26,7 +26,11 @@ author: Tiny熊
 同时使用简单多数原则，来保证账本的一致性。举个例子：如果有人在自己电脑上把自己的余额从1万改为1百万，他这个账本和大多数人的账本不一致，就会被比特币系统认为是无效的。
 
 
-比特币使用区块链技术来支撑整个系统的运行，有兴趣的同学，可以详细阅读下这几篇博文：{% post_link whatbc 区块链记账原理 %} 、 {% post_link bitcoin-own 比特币所有权问题 %}、{% post_link bitcoin-pow 比特币如何挖矿 %}
+比特币使用区块链技术来支撑整个系统的运行，有兴趣的同学，可以详细阅读下这几篇博文：
+* [区块链记账原理](http://learnblockchain.cn//2017/10/25/whatbc) 
+* [比特币所有权问题](http://learnblockchain.cn/2017/11/02/bitcoin-own/)
+* [比特币如何挖矿](http://learnblockchain.cn/2017/11/04/bitcoin-pow/)
+
 
 还可进阶阅读：
 [分析比特币网络：一种去中心化、点对点的网络架构](https://xiaozhuanlan.com/topic/1670539284)，可以详细了解比特币网络。
