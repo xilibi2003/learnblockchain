@@ -1,9 +1,9 @@
 ---
 title:  比特币所有权及隐私问题-非对称加密应用
 date: 2017-11-02 17:19:29
-categories: BlockChain
+categories: Bitcoin
 tags:
-    - 区块链
+    - 比特币
     - 所有权问题
     - 隐私问题
     - 非对称加密

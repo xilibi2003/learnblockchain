@@ -48,6 +48,9 @@ author: Tiny熊
 language: zh-Hans
 timezone: Asia/Shanghai
 
+# Set default keywords (Use a comma to separate)
+keywords: "区块链技术,Learn BlockChain,系统学习区块链,区块链Wiki"
+
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://learnblockchain.cn
@@ -149,3 +152,4 @@ deploy:
 sitemap:
   path: sitemap.xml
   template: ./sitemap_template.xml
+
