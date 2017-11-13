@@ -93,7 +93,6 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://learnblockchain.cn/images/own_chain.jpeg">
 <meta property="og:image" content="http://learnblockchain.cn/images/script.jpeg">
-<meta property="og:image" content="http://www.8btc.com/bitcoin_scripts">
 <meta property="og:image" content="http://learnblockchain.cn/images/script_run1.jpeg">
 <meta property="og:image" content="http://learnblockchain.cn/images/script_run2.jpeg">
 <meta property="og:image" content="http://learnblockchain.cn/images/tx_struce.jpeg">
@@ -101,7 +100,7 @@
 <meta property="og:image" content="http://learnblockchain.cn/images/tx_input_overview.jpeg">
 <meta property="og:image" content="http://learnblockchain.cn/images/tx_output_struce.jpeg">
 <meta property="og:image" content="http://learnblockchain.cn/images/tx_output_overview.jpeg">
-<meta property="og:updated_time" content="2017-11-13T03:23:01.000Z">
+<meta property="og:updated_time" content="2017-11-13T04:24:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="比特币脚本及交易分析 - 智能合约雏形">
 <meta name="twitter:description" content="大家都有转过账，每笔交易是这样的：张三账上减￥200，李四账上加￥200。在比特币区块链中，交易不是这么简单，交易实际是通过脚本来完成，以承载更多的功能个，这也是为什么比特币被称为是一种“可编程的货币”。本文就来分析一下交易是如何实现可编程的。">
@@ -393,7 +392,7 @@
 <p>如最为常见类型的比特币交易脚本（支付到公钥哈希：P2PKH（Pay-to-Public-Key-Hash））组合是这样：<br><img src="/images/script.jpeg" alt="script"></p>
 <h3 id="常见交易脚本验证过程"><a href="#常见交易脚本验证过程" class="headerlink" title="常见交易脚本验证过程"></a>常见交易脚本验证过程</h3><p>比特币交易脚本语言是一种基于逆波兰表示法的基于栈的执行语言（不知道逆波兰和栈的同学去翻大学数据结构课本，你也可跳过这个部分）。</p>
 <blockquote>
-<p>比特币脚本语言包含基本算数计算、基本逻辑(比如if…then)、报错以及返回结果和一些加密指令，不支持循环。想了解更多语言细节可参考:<img src="http://www.8btc.com/bitcoin_scripts" alt="比特币脚本"></p>
+<p>比特币脚本语言包含基本算数计算、基本逻辑(比如if…then)、报错以及返回结果和一些加密指令，不支持循环。想了解更多语言细节可参考:<a href="http://www.8btc.com/bitcoin_scripts" target="_blank" rel="external">比特币脚本</a></p>
 </blockquote>
 <p>脚本语言通过从左至右地处理每个项目的方式执行脚本。</p>
 <p>下面用两个图说明下常见类型的比特币交易脚本验证执行过程：<br><img src="/images/script_run1.jpeg" alt="script_run1"><br>上图为解锁脚本运行过程（主要是入栈）<br><img src="/images/script_run2.jpeg" alt="script_run2"><br>上图为锁定脚本运行过程（主要是出栈），最后的结果为真，说明交易有效。</p>
@@ -776,6 +775,12 @@
     
 
     
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
 
   </div>
 
@@ -932,6 +937,31 @@
 
 
   
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
   
 
   
