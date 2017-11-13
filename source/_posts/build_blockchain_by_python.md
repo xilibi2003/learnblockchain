@@ -668,6 +668,4 @@ pipenv run python blockchain.py -p 5001
 
 好啦，你可以邀请朋友们一起来测试你的区块链
 
-
-
-
+[深入浅出区块链](http://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客

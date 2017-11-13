@@ -25,6 +25,7 @@ social:
 
 social_icons:
   enable: true
+  
   ZhiHu: zhihu
   icons_only: false
   transition: false
