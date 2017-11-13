@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="区块链,原理,哈希,如何记账," />
+  <meta name="keywords" content="交易脚本,交易结构,智能合约," />
 
 
 
@@ -83,18 +83,29 @@
 
 
 
-<meta name="description" content="区块链(1.0)是一个基于密码学安全的分布式账本，是一个方便验证，不可篡改的账本。 通常认为与智能合约相结合的区块链为区块链2.0, 如以太坊是典型的区块链2.0 很多人只了解过比特币，不知道区块链，比特币实际是一个使用了区块链技术的应用，只是比特币当前太热，把区块链技术的光芒给掩盖了。区块链才是未来，期望各位开发人员少关心币价，多关心技术。 本文将讲解区块链1.0技术是如何实现的。">
-<meta name="keywords" content="区块链,原理,哈希,如何记账">
+<meta name="description" content="大家都有转过账，每笔交易是这样的：张三账上减￥200，李四账上加￥200。在比特币区块链中，交易不是这么简单，交易实际是通过脚本来完成，以承载更多的功能个，这也是为什么比特币被称为是一种“可编程的货币”。本文就来分析一下交易是如何实现可编程的。">
+<meta name="keywords" content="交易脚本,交易结构,智能合约">
 <meta property="og:type" content="article">
-<meta property="og:title" content="区块链记账原理">
-<meta property="og:url" content="http://learnblockchain.cn/2017/10/25/whatbc/index.html">
+<meta property="og:title" content="比特币脚本及交易分析 - 智能合约雏形">
+<meta property="og:url" content="http://learnblockchain.cn/2017/11/10/bitcoin-script/index.html">
 <meta property="og:site_name" content="深入浅出区块链">
-<meta property="og:description" content="区块链(1.0)是一个基于密码学安全的分布式账本，是一个方便验证，不可篡改的账本。 通常认为与智能合约相结合的区块链为区块链2.0, 如以太坊是典型的区块链2.0 很多人只了解过比特币，不知道区块链，比特币实际是一个使用了区块链技术的应用，只是比特币当前太热，把区块链技术的光芒给掩盖了。区块链才是未来，期望各位开发人员少关心币价，多关心技术。 本文将讲解区块链1.0技术是如何实现的。">
+<meta property="og:description" content="大家都有转过账，每笔交易是这样的：张三账上减￥200，李四账上加￥200。在比特币区块链中，交易不是这么简单，交易实际是通过脚本来完成，以承载更多的功能个，这也是为什么比特币被称为是一种“可编程的货币”。本文就来分析一下交易是如何实现可编程的。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-04T08:28:53.000Z">
+<meta property="og:image" content="http://learnblockchain.cn/images/own_chain.jpeg">
+<meta property="og:image" content="http://learnblockchain.cn/images/script.jpeg">
+<meta property="og:image" content="http://www.8btc.com/bitcoin_scripts">
+<meta property="og:image" content="http://learnblockchain.cn/images/script_run1.jpeg">
+<meta property="og:image" content="http://learnblockchain.cn/images/script_run2.jpeg">
+<meta property="og:image" content="http://learnblockchain.cn/images/tx_struce.jpeg">
+<meta property="og:image" content="http://learnblockchain.cn/images/tx_input_struce.jpeg">
+<meta property="og:image" content="http://learnblockchain.cn/images/tx_input_overview.jpeg">
+<meta property="og:image" content="http://learnblockchain.cn/images/tx_output_struce.jpeg">
+<meta property="og:image" content="http://learnblockchain.cn/images/tx_output_overview.jpeg">
+<meta property="og:updated_time" content="2017-11-13T02:57:44.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="区块链记账原理">
-<meta name="twitter:description" content="区块链(1.0)是一个基于密码学安全的分布式账本，是一个方便验证，不可篡改的账本。 通常认为与智能合约相结合的区块链为区块链2.0, 如以太坊是典型的区块链2.0 很多人只了解过比特币，不知道区块链，比特币实际是一个使用了区块链技术的应用，只是比特币当前太热，把区块链技术的光芒给掩盖了。区块链才是未来，期望各位开发人员少关心币价，多关心技术。 本文将讲解区块链1.0技术是如何实现的。">
+<meta name="twitter:title" content="比特币脚本及交易分析 - 智能合约雏形">
+<meta name="twitter:description" content="大家都有转过账，每笔交易是这样的：张三账上减￥200，李四账上加￥200。在比特币区块链中，交易不是这么简单，交易实际是通过脚本来完成，以承载更多的功能个，这也是为什么比特币被称为是一种“可编程的货币”。本文就来分析一下交易是如何实现可编程的。">
+<meta name="twitter:image" content="http://learnblockchain.cn/images/own_chain.jpeg">
 
 
 
@@ -124,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://learnblockchain.cn/2017/10/25/whatbc/"/>
+  <link rel="canonical" href="http://learnblockchain.cn/2017/11/10/bitcoin-script/"/>
 
 
 
 
 
-  <title>区块链记账原理 | 深入浅出区块链</title>
+  <title>比特币脚本及交易分析 - 智能合约雏形 | 深入浅出区块链</title>
   
 
 
@@ -277,7 +288,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://learnblockchain.cn/2017/10/25/whatbc/">
+    <link itemprop="mainEntityOfPage" href="http://learnblockchain.cn/2017/11/10/bitcoin-script/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Tiny熊">
@@ -294,7 +305,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">区块链记账原理</h2>
+          <h2 class="post-title" itemprop="name headline">比特币脚本及交易分析 - 智能合约雏形</h2>
         
 
         <div class="post-meta">
@@ -306,8 +317,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-25T23:26:04+08:00">
-                2017-10-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-10T17:05:33+08:00">
+                2017-11-10
               </time>
             
 
@@ -329,8 +340,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/BlockChain/" itemprop="url" rel="index">
-                    <span itemprop="name">BlockChain</span>
+                  <a href="/categories/Bitcoin/" itemprop="url" rel="index">
+                    <span itemprop="name">Bitcoin</span>
                   </a>
                 </span>
 
@@ -366,71 +377,63 @@
       
 
       
-        <p> 区块链(1.0)是一个基于密码学安全的分布式账本，是一个方便验证，不可篡改的账本。<br> 通常认为与智能合约相结合的区块链为区块链2.0, 如以太坊是典型的区块链2.0<br> 很多人只了解过比特币，不知道区块链，比特币实际是一个使用了区块链技术的应用，只是比特币当前太热，把区块链技术的光芒给掩盖了。区块链才是未来，期望各位开发人员少关心币价，多关心技术。<br> 本文将讲解区块链1.0技术是如何实现的。</p>
+        <p>大家都有转过账，每笔交易是这样的：张三账上减￥200，李四账上加￥200。<br>在比特币区块链中，交易不是这么简单，交易实际是通过脚本来完成，以承载更多的功能个，这也是为什么比特币被称为是一种“可编程的货币”。<br>本文就来分析一下交易是如何实现可编程的。</p>
 <a id="more"></a>
-<h2 id="哈希函数"><a href="#哈希函数" class="headerlink" title="哈希函数"></a>哈希函数</h2><p>在讲区块链记账之前，先说明一下哈希函数。<br>哈希函数：Hash(原始信息) = 摘要信息<br>原始信息可以是任意的信息, hash之后会得到一个简短的摘要信息</p>
-<p>哈希函数有几个特点:</p>
-<ul>
-<li>同样的原始信息用同一个哈希函数总能得到相同的摘要信息</li>
-<li>原始信息任何微小的变化都会哈希出面目全非的摘要信息</li>
-<li>从摘要信息无法逆向推算出原始信息</li>
-</ul>
-<p>举例说明：<br>Hash(张三借给李四100万，利息1%，1年后还本息 …..) = AC4635D34DEF<br>账本上记录了AC4635D34DEF这样一条记录。</p>
-<p>可以看出哈希函数有4个作用：</p>
-<ul>
-<li>简化信息<br>很好理解，哈希后的信息变短了。</li>
-<li>标识信息<br>可以使用AC4635D34DEF来标识原始信息，摘要信息也称为原始信息的id。</li>
-<li>隐匿信息<br>账本是AC4635D34DEF这样一条记录，原始信息被隐匿。</li>
-<li>验证信息<br>假如李四在还款时欺骗说，张三只借给李四10万，双方可以用AC4635D34DEF来验证原始信息</li>
-</ul>
-<p>哈希函数的这4个作用在区块链技术里有广泛的运用。<br>（哈希函数是一组函数或算法，以后会发文章专门介绍哈希）</p>
-<h2 id="区块链记账方法"><a href="#区块链记账方法" class="headerlink" title="区块链记账方法"></a>区块链记账方法</h2><p>假设有一个账页序号为0的账页交易记录如下:</p>
-<table>
-<thead>
-<tr>
-<th>账号</th>
-<th>入账</th>
-<th>出账</th>
-<th>余额</th>
-<th>备注说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>王二</td>
-<td>100</td>
-<td></td>
-<td>190</td>
-<td>收到xxx货款</td>
-</tr>
-<tr>
-<td>张三</td>
-<td></td>
-<td>100</td>
-<td>30</td>
-<td>xxxx</td>
-</tr>
-<tr>
-<td>李四</td>
-<td>120</td>
-<td>90</td>
-<td>170</td>
-<td>xxxx</td>
-</tr>
-</tbody>
-</table>
-<p>记账时间为：2017-10-22 10:22:02</p>
-<p>区块链在记账是会把账页信息（包含序号、记账时间、交易记录）作为原始信息进行Hash, 得到一个Hash值，如：787635ACD, 用函数表示为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Hash(序号0、记账时间、交易记录) = 787635ACD</div></pre></td></tr></table></figure></p>
-<p>账页信息和Hash值组合在一起就构成了第一个区块。</p>
+<h2 id="未花费的交易输出-UTXO"><a href="#未花费的交易输出-UTXO" class="headerlink" title="未花费的交易输出(UTXO)"></a>未花费的交易输出(UTXO)</h2><p>先引入一个概念：未花费的交易输出——UTXO（Unspent Transaction Output）</p>
+<p>其实比特币的交易都是基于UTXO上的，即交易的输入是之前交易未花费的输出，这笔交易的输出可以被当做下一笔新交易的输入。</p>
 <blockquote>
-<p>比特币系统里约10分钟记一次账，即每个区块生成时间大概间隔10分钟</p>
+<p>挖矿奖励属于一个特殊的交易（称为coinbase交易），可以没有输入。<br>UTXO是交易的基本单元，不能在分割。<br>在比特币没有余额概念，只有分散到区块链里的UTXO</p>
 </blockquote>
-<p>在记第2个账页的时候，会把上一个块的Hash值和当前的账页信息一起作为原始信息进行Hash,即：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Hash(上一个Hash值、序号1、记账时间、交易记录) = 456635BCD</div></pre></td></tr></table></figure>
-<p>这样第2个区块不仅包含了本账页信息，还间接的包含了第一个区块的信息。依次按照此方法继续记账，则最新的区块总是间接包含了所有之前的账页信息。</p>
-<p>所有这些区块组合起来就形成了区块链，这样的区块链就构成了一个便于验证（只要验证最后一个区块的Hash值就相当于验证了整个账本），不可更改（任何一个交易信息的更改，会让所有之后的区块的Hash值发生变化，这样在验证时就无法通过）的总账本。</p>
-<p>记账有成本，想了解节点为什么要记账，请看这篇：在<a href="/2017/11/04/bitcoin-pow/" title="比特币如何挖矿-工作量证明">比特币如何挖矿-工作量证明</a> </p>
-<p><a href="http://learnblockchain.cn/">深入浅出区块链</a>系统学习区块链，打造最好的区块链技术博客</p>
+<p>随着钱从一个地址被移动到另一个地址的同时形成了一条所有权链，像这样：<br><img src="/images/own_chain.jpeg" alt="own_chain"></p>
+<h2 id="比特币脚本"><a href="#比特币脚本" class="headerlink" title="比特币脚本"></a>比特币脚本</h2><p>比特币交易是首先要提供一个用于解锁UTXO（用私钥去匹配锁定脚本）的脚本（常称为解锁脚本：Signature script)，这也叫交易输入，<br>交易的输出则是指向一个脚本（称为锁定脚本：PubKey script），这个脚本表达了：谁的签名（签名是常见形式，并不一定必须是签名）能匹配这个输出地址，钱就支付给谁。</p>
+<p>每一个比特币节点会通过同时执行这解锁和锁定脚本（不是当前的锁定脚本，是指上一个交易的锁定脚本）来验证一笔交易，脚本组合结果为真，则为有效交易。</p>
+<blockquote>
+<p>当解锁版脚本与锁定版脚本的设定条件相匹配时，执行组合有效脚本时才会显示结果为真</p>
+</blockquote>
+<p>如最为常见类型的比特币交易脚本（支付到公钥哈希：P2PKH（Pay-to-Public-Key-Hash））组合是这样：<br><img src="/images/script.jpeg" alt="script"></p>
+<h3 id="常见交易脚本验证过程"><a href="#常见交易脚本验证过程" class="headerlink" title="常见交易脚本验证过程"></a>常见交易脚本验证过程</h3><p>比特币交易脚本语言是一种基于逆波兰表示法的基于栈的执行语言（不知道逆波兰和栈的同学去翻大学数据结构课本，你也可跳过这个部分）。</p>
+<blockquote>
+<p>比特币脚本语言包含基本算数计算、基本逻辑(比如if…then)、报错以及返回结果和一些加密指令，不支持循环。想了解更多语言细节可参考:<img src="http://www.8btc.com/bitcoin_scripts" alt="比特币脚本"></p>
+</blockquote>
+<p>脚本语言通过从左至右地处理每个项目的方式执行脚本。</p>
+<p>下面用两个图说明下常见类型的比特币交易脚本验证执行过程：<br><img src="/images/script_run1.jpeg" alt="script_run1"><br>上图为解锁脚本运行过程（主要是入栈）<br><img src="/images/script_run2.jpeg" alt="script_run2"><br>上图为锁定脚本运行过程（主要是出栈），最后的结果为真，说明交易有效。</p>
+<h2 id="交易分析"><a href="#交易分析" class="headerlink" title="交易分析"></a>交易分析</h2><p>实际上比特币的交易被设计为可以纳入多个输入和输出。</p>
+<h3 id="交易结构"><a href="#交易结构" class="headerlink" title="交易结构"></a>交易结构</h3><p>我们来看看完整的交易结构，<br><img src="/images/tx_struce.jpeg" alt=""></p>
+<blockquote>
+<p>交易的锁定时间定义了能被加到区块链里的最早的交易时间。在大多数交易里，它被设置成0，用来表示立即执行。<br>如果锁定时间不是0并且小于5亿，就被视为区块高度，意指在这个指定的区块高度之前，该交易不会被包含在区块链里。<br>如果锁定时间大于5亿，则它被当作是一个Unix纪元时间戳（从1970年1月1日以来的秒数），并且在这个指定时间之前，该交易不会被包含在区块链里。</p>
+</blockquote>
+<p>交易的数据结构没有交易费的字段，交易费通过所有输入的总和，以及所有输出的总和之间的差来表示，即：</p>
+<blockquote>
+<p>交易费 = 求和（所有输入） - 求和（所有输出）</p>
+</blockquote>
+<h3 id="交易输入结构"><a href="#交易输入结构" class="headerlink" title="交易输入结构"></a>交易输入结构</h3><p>刚刚我们提过输入需要提供一个解锁脚本，现在来看看一个交易的输入结构：<br><img src="/images/tx_input_struce.jpeg" alt=""></p>
+<p>我们结合整个交易的结构里看输入结构就是这样子：<br><img src="/images/tx_input_overview.jpeg" alt=""></p>
+<h3 id="交易输出结构"><a href="#交易输出结构" class="headerlink" title="交易输出结构"></a>交易输出结构</h3><p>刚刚我们提过输出是指向一个解锁脚本，具体交易的输出结构为：<br><img src="/images/tx_output_struce.jpeg" alt=""><br>我们结合整个交易的结构里看输出结构就是这样子：<br><img src="/images/tx_output_overview.jpeg" alt=""></p>
+<h3 id="交易哈希计算"><a href="#交易哈希计算" class="headerlink" title="交易哈希计算"></a>交易哈希计算</h3><p>在<a href="https://xiaozhuanlan.com/topic/1402935768" target="_blank" rel="external">比特币区块结构Merkle 树及简单支付验证分析</a> 讲到区块结构，区块结构包含多个交易的哈希。<br>那么交易哈希是怎么计算的呢？</p>
+<ol>
+<li>交易结构各字段序列化为字节数组</li>
+<li>把字节数组拼接为支付串</li>
+<li>对支付串计算两次SHA256 得到交易hash</li>
+</ol>
+<p>了解详情可进一步参考<a href="https://bitcoin.stackexchange.com/questions/2859/how-are-transaction-hashes-calculated" target="_blank" rel="external">如何计算交易Hash?</a>及<a href="https://bitcointalk.org/index.php?topic=54451.msg649253#msg649253" target="_blank" rel="external">如何创建Hash?</a></p>
+<p>现在是不是对完整的交易到区块有了更清晰的认识。</p>
+<h2 id="智能合约雏形-应用场景说明"><a href="#智能合约雏形-应用场景说明" class="headerlink" title="智能合约雏形 - 应用场景说明"></a>智能合约雏形 - 应用场景说明</h2><p>由于交易是通过脚本来实现，脚本语言可以表达出无数的条件变种。</p>
+<p>比特币的脚本目前常用的主要分为两种，一种是常见的P2PKH（支付给公钥哈希），另一种是P2SH（Pay-to-Script-Hash支付脚本哈希）。<br>P2SH支付中，锁定脚本被密码学哈希所取代，当一笔交易试图支付UTXO时，要解锁支付脚本，它必须含有与哈希相匹配的脚本。</p>
+<p>这里不展开技术细节，下面说明一些应用场景，以便大家有更直观的认识。</p>
+<ul>
+<li><p>多重签名应用<br>合伙经营中，如只有一半以上的的股东同意签名就可以进行支付，可为公司治理提供管控便利，同时也能有效防范盗窃、挪用和遗失。</p>
+<p>用于担保和争端调解，一个买家想和他不认识或不信任的某人交易，在一般情况交易正常进行时，买家不想任何第三方参与。那交易双方可以发起支付，但如果交易出现问题时，那第三方就可以根据裁定，使用自己的签名和裁定认可的一方共同签名来兑现这笔交易。</p>
+</li>
+<li><p>保证合同<br>保证合同是建造公众商品时的集资办法，公众商品是指一旦建成，任何人都可以免费享受到好处。标准的例子是灯塔，所有人都认同应该建造一个，但是对于个人航海者来说灯塔太贵了，灯塔同时也会方便其他航海者。<br>一个解决方案是向所有人集资，只有当筹集的资金超过所需的建造成本时，每个人才真正付钱，如果集资款不足，则谁都不用付钱。</p>
+</li>
+<li>依靠预言<br>假如老人想让他孙子继承遗产，继承时间是在他死后或者在孙子年满18岁时（也是一个带锁定时间交易），无论哪个条件先满足，他的孙子都可以得到遗产。<br>因为比特币节点可依靠预言对死亡条件进行判断，预言是指具有密钥对的服务器，当用户自定义的表达式被证明是真的，它能按照要求对交易签名。</li>
+</ul>
+<p>相信随着区块链的普及，会对未来的交易模式和商业结构带来巨大的影响。不过由于比特币的脚本语言不是图灵完备的，交易模式依旧有限，以太坊就是为解决这一问题而出现，后面我们会有大量介绍以太坊的文章。</p>
+<h2 id="参考文献-amp-补充阅读"><a href="#参考文献-amp-补充阅读" class="headerlink" title="参考文献 &amp; 补充阅读"></a>参考文献 &amp; 补充阅读</h2><ol>
+<li><a href="http://book.8btc.com/master_bitcoin" target="_blank" rel="external">精通比特币</a></li>
+<li>廖雪峰的<a href="http://www.infoq.com/cn/articles/deep-understanding-of-bitcoin-transaction-script" target="_blank" rel="external">深入理解比特币交易的脚本</a></li>
+<li><a href="http://www.8btc.com/bitcoin_contracts" target="_blank" rel="external">比特币合同</a></li>
+</ol>
 
       
     </div>
@@ -483,7 +486,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://learnblockchain.cn/2017/10/25/whatbc/" title="区块链记账原理">http://learnblockchain.cn/2017/10/25/whatbc/</a>
+    <a href="http://learnblockchain.cn/2017/11/10/bitcoin-script/" title="比特币脚本及交易分析 - 智能合约雏形">http://learnblockchain.cn/2017/11/10/bitcoin-script/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -498,13 +501,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/区块链/" rel="tag"># 区块链</a>
+            <a href="/tags/交易脚本/" rel="tag"># 交易脚本</a>
           
-            <a href="/tags/原理/" rel="tag"># 原理</a>
+            <a href="/tags/交易结构/" rel="tag"># 交易结构</a>
           
-            <a href="/tags/哈希/" rel="tag"># 哈希</a>
-          
-            <a href="/tags/如何记账/" rel="tag"># 如何记账</a>
+            <a href="/tags/智能合约/" rel="tag"># 智能合约</a>
           
         </div>
       
@@ -517,8 +518,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/23/whatisbitcoin/" rel="next" title="比特币是什么">
-                <i class="fa fa-chevron-left"></i> 比特币是什么
+              <a href="/2017/11/07/bitcoin-p2p/" rel="next" title="分析比特币网络：一种去中心化、点对点的网络架构">
+                <i class="fa fa-chevron-left"></i> 分析比特币网络：一种去中心化、点对点的网络架构
               </a>
             
           </div>
@@ -526,10 +527,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/27/build_blockchain_by_python/" rel="prev" title="用Python从零开始创建区块链">
-                用Python从零开始创建区块链 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -707,7 +704,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#哈希函数"><span class="nav-number">1.</span> <span class="nav-text">哈希函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区块链记账方法"><span class="nav-number">2.</span> <span class="nav-text">区块链记账方法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#未花费的交易输出-UTXO"><span class="nav-number">1.</span> <span class="nav-text">未花费的交易输出(UTXO)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比特币脚本"><span class="nav-number">2.</span> <span class="nav-text">比特币脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常见交易脚本验证过程"><span class="nav-number">2.1.</span> <span class="nav-text">常见交易脚本验证过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交易分析"><span class="nav-number">3.</span> <span class="nav-text">交易分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#交易结构"><span class="nav-number">3.1.</span> <span class="nav-text">交易结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交易输入结构"><span class="nav-number">3.2.</span> <span class="nav-text">交易输入结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交易输出结构"><span class="nav-number">3.3.</span> <span class="nav-text">交易输出结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交易哈希计算"><span class="nav-number">3.4.</span> <span class="nav-text">交易哈希计算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#智能合约雏形-应用场景说明"><span class="nav-number">4.</span> <span class="nav-text">智能合约雏形 - 应用场景说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献-amp-补充阅读"><span class="nav-number">5.</span> <span class="nav-text">参考文献 & 补充阅读</span></a></li></ol></div>
             
 
           </div>
