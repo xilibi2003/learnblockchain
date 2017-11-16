@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="如何学习," />
+  <meta name="keywords" content="非对称加密,数学,RSA算法," />
 
 
 
@@ -83,18 +83,20 @@
 
 
 
-<meta name="description" content="区块链未来3到5年应该会出现行业井喷式发展，相应所需的人才必定水涨船高，每一个开发人员都不应该错过这样的机会。区块链涉及的技术很多，很多开发人员看了一些资料后，感觉好像懂了，又好像没懂。如何系统的学习区块链技术，是很多想从事区块链开发的程序员的问题，我们来一起讨论下，希望可以帮助更多的人掌握区块链开发技术。">
-<meta name="keywords" content="如何学习">
+<meta name="description" content="非对称加密技术，在现在网络中，有非常广泛应用。加密技术更是数字货币的基础。 所谓非对称，就是指该算法需要一对密钥，使用其中一个（公钥）加密，则需要用另一个（私钥）才能解密。但是对于其原理大部分同学应该都是一知半解，今天就来分析下经典的非对称加密算法 - RSA算法。通过本文的分析，可以更好的理解非对称加密原理，可以让我们更好的使用非对称加密技术。">
+<meta name="keywords" content="非对称加密,数学,RSA算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="前言-如何学习区块链">
-<meta property="og:url" content="https://learnblockchain.cn/2017/10/20/前言/index.html">
+<meta property="og:title" content="非对称加密技术- RSA算法数学原理分析">
+<meta property="og:url" content="https://learnblockchain.cn/2017/11/15/asy-encryption/index.html">
 <meta property="og:site_name" content="深入浅出区块链">
-<meta property="og:description" content="区块链未来3到5年应该会出现行业井喷式发展，相应所需的人才必定水涨船高，每一个开发人员都不应该错过这样的机会。区块链涉及的技术很多，很多开发人员看了一些资料后，感觉好像懂了，又好像没懂。如何系统的学习区块链技术，是很多想从事区块链开发的程序员的问题，我们来一起讨论下，希望可以帮助更多的人掌握区块链开发技术。">
+<meta property="og:description" content="非对称加密技术，在现在网络中，有非常广泛应用。加密技术更是数字货币的基础。 所谓非对称，就是指该算法需要一对密钥，使用其中一个（公钥）加密，则需要用另一个（私钥）才能解密。但是对于其原理大部分同学应该都是一知半解，今天就来分析下经典的非对称加密算法 - RSA算法。通过本文的分析，可以更好的理解非对称加密原理，可以让我们更好的使用非对称加密技术。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-03T05:31:44.000Z">
+<meta property="og:image" content="https://learnblockchain.cn/images/aes_mod.png">
+<meta property="og:updated_time" content="2017-11-16T01:31:01.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="前言-如何学习区块链">
-<meta name="twitter:description" content="区块链未来3到5年应该会出现行业井喷式发展，相应所需的人才必定水涨船高，每一个开发人员都不应该错过这样的机会。区块链涉及的技术很多，很多开发人员看了一些资料后，感觉好像懂了，又好像没懂。如何系统的学习区块链技术，是很多想从事区块链开发的程序员的问题，我们来一起讨论下，希望可以帮助更多的人掌握区块链开发技术。">
+<meta name="twitter:title" content="非对称加密技术- RSA算法数学原理分析">
+<meta name="twitter:description" content="非对称加密技术，在现在网络中，有非常广泛应用。加密技术更是数字货币的基础。 所谓非对称，就是指该算法需要一对密钥，使用其中一个（公钥）加密，则需要用另一个（私钥）才能解密。但是对于其原理大部分同学应该都是一知半解，今天就来分析下经典的非对称加密算法 - RSA算法。通过本文的分析，可以更好的理解非对称加密原理，可以让我们更好的使用非对称加密技术。">
+<meta name="twitter:image" content="https://learnblockchain.cn/images/aes_mod.png">
 
 
 
@@ -124,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="https://learnblockchain.cn/2017/10/20/前言/"/>
+  <link rel="canonical" href="https://learnblockchain.cn/2017/11/15/asy-encryption/"/>
 
 
 
 
 
-  <title>前言-如何学习区块链 | 深入浅出区块链</title>
+  <title>非对称加密技术- RSA算法数学原理分析 | 深入浅出区块链</title>
   
 
 
@@ -277,7 +279,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2017/10/20/前言/">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2017/11/15/asy-encryption/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Tiny熊">
@@ -294,7 +296,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">前言-如何学习区块链</h2>
+          <h2 class="post-title" itemprop="name headline">非对称加密技术- RSA算法数学原理分析</h2>
         
 
         <div class="post-meta">
@@ -306,8 +308,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-20T15:03:36+08:00">
-                2017-10-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-15T10:53:27+08:00">
+                2017-11-15
               </time>
             
 
@@ -329,8 +331,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Bitcoin/" itemprop="url" rel="index">
-                    <span itemprop="name">Bitcoin</span>
+                  <a href="/categories/密码学/" itemprop="url" rel="index">
+                    <span itemprop="name">密码学</span>
                   </a>
                 </span>
 
@@ -366,31 +368,60 @@
       
 
       
-        <p>区块链未来3到5年应该会出现行业井喷式发展，相应所需的人才必定水涨船高，每一个开发人员都不应该错过这样的机会。<br>区块链涉及的技术很多，很多开发人员看了一些资料后，感觉好像懂了，又好像没懂。<br>如何系统的学习区块链技术，是很多想从事区块链开发的程序员的问题，我们来一起讨论下，希望可以帮助更多的人掌握区块链开发技术。</p>
+        <p>非对称加密技术，在现在网络中，有非常广泛应用。加密技术更是数字货币的基础。</p>
+<p>所谓非对称，就是指该算法需要一对密钥，使用其中一个（公钥）加密，则需要用另一个（私钥）才能解密。<br>但是对于其原理大部分同学应该都是一知半解，今天就来分析下经典的非对称加密算法 - RSA算法。<br>通过本文的分析，可以更好的理解非对称加密原理，可以让我们更好的使用非对称加密技术。</p>
 <a id="more"></a>
-<h2 id="确定方向"><a href="#确定方向" class="headerlink" title="确定方向"></a>确定方向</h2><p>从事区块链开发也有很多方向，如:区块链应用开发人员、区块链架构师、底层核心开发、共识算法研究等等。</p>
-<p>方向不同，需要学习的内容就不一样，如果做基于区块链应用开发，只需要了解一门编程语言（nodejs, Go, Python, C++ 等）, 大概了解区块链的原理，不一定要深入，当能理解越深入开发应用就越顺。<br>如果做区块链基础开发，就需要了解加密算法，P2P通信，共识算法等等。</p>
-<h2 id="投入时间学习-动手实践"><a href="#投入时间学习-动手实践" class="headerlink" title="投入时间学习-动手实践"></a>投入时间学习-动手实践</h2><p>由于区块链涉及的技术很多，可以相对各个技术有一个概念了解，再逐步深入原理。</p>
-<p>当你在学习了解概念的时候，必定会产生很多疑问， 例如我们经常可以看到一句： 比特币的共识机制是通过工作量证明（POW）来实现的。<br>就有了新疑问:什么是工作量证明，进一步了解，它是通过验证的一个特定结果，就能确认参与者完成了相应的工作量（不理解没关系，可以简单为，张三考试考了100分，就确认张三肯定好好学习了）。<br>这时又有了新的疑问，比特币在验证什么样的结果，这时你又需要了解密码学和Hash。</p>
-<p>逐步深入的过程也是解答疑问的过程，需要我们善用Google搜索。 </p>
-<p>如果觉得已进理解一个概念或原理时，可以尝试动手实现它，如在理解挖矿后，可以写代码模拟挖矿过程。</p>
-<p>学习是一个长期的过期，没有捷径，必须得多读书，读代码，写代码。</p>
-<h2 id="学习资源介绍"><a href="#学习资源介绍" class="headerlink" title="学习资源介绍"></a>学习资源介绍</h2><p>下面是一些学习资源的介绍，相信对大家有帮助</p>
-<ul>
-<li><a href="https://www.bitcoin.com/bitcoin.pdf" target="_blank" rel="external">比特币:一种点对点的电子现金系统-英文</a></li>
-<li><a href="http://www.8btc.com/wiki/bitcoin-a-peer-to-peer-electronic-cash-system" target="_blank" rel="external">比特币:一种点对点的电子现金系统-中文</a></li>
-<li><a href="https://github.com/ethereum/wiki/wiki/White-Paper" target="_blank" rel="external">以太坊白皮书-英文</a></li>
-<li><a href="http://ethfans.org/posts/ethereum-whitepaper" target="_blank" rel="external">以太坊白皮书-中文</a></li>
-<li><a href="https://www.gitbook.com/book/yeasy/blockchain_guide/details" target="_blank" rel="external">区块链技术指南-电子书</a></li>
-<li><a href="https://item.jd.com/12114753.html" target="_blank" rel="external">区块链开发指南-纸书</a></li>
-</ul>
-<ul>
-<li><a href="https://bitcoin.org/en/" target="_blank" rel="external">比特币 - 官网</a></li>
-<li><a href="https://github.com/ethereum" target="_blank" rel="external">以太坊 - github</a></li>
-<li><a href="https://github.com/hyperledger/hyperledger" target="_blank" rel="external">超级账本Hyperledger</a></li>
-<li><a href="http://ethfans.org" target="_blank" rel="external">ETHFANS - 社区</a></li>
-<li><a href="http://learnblockchain.cn">深入浅出区块链</a></li>
-</ul>
+<p>题外话:<br>并博客一直有打算写一系列文章通俗的密码学，昨天给站点上https, 因其中使用了RSA算法，就查了一下，发现现在网上介绍RSA算法的文章都写的太难理解了，反正也准备写密码学，就先写RSA算法吧，下面开始正文。</p>
+<h2 id="RSA算法原理"><a href="#RSA算法原理" class="headerlink" title="RSA算法原理"></a>RSA算法原理</h2><p>RSA算法的基于这样的数学事实：两个大质数相乘得到的大数难以被因式分解。<br>如：有很大质数p跟q，很容易算出N，使得 N = p * q，<br>但给出N, 比较难找p q（没有很好的方式， 只有不停的尝试）</p>
+<blockquote>
+<p>这其实也是单向函数的概念</p>
+</blockquote>
+<p>下面来看看<strong>数学演算过程</strong>：</p>
+<ol>
+<li><p>选取两个大质数p，q，计算N = p <em> q 及 φ ( N ) = φ (p) </em> φ (q)  = (p-1) * (q-1)</p>
+<blockquote>
+<p>三个数学概念：<br><strong>质数</strong>(prime numbe)：又称素数，为在大于1的自然数中，除了1和它本身以外不再有其他因数。<br><strong>互质关系</strong>：如果两个正整数，除了1以外，没有其他公因子，我们就称这两个数是<strong>互质关系</strong>（coprime）。<br><strong>φ(N)</strong>：叫做<strong>欧拉函数</strong>，是指任意给定正整数N，在小于等于N的正整数之中，有多少个与N构成互质关系。</p>
+<blockquote>
+<p>如果n是质数，则 φ(n)=n-1。<br>如果n可以分解成两个互质的整数之积， φ(n) = φ(p1p2) = φ(p1)φ(p2)。即积的欧拉函数等于各个因子的欧拉函数之积。</p>
+</blockquote>
+</blockquote>
+</li>
+<li><p>选择一个大于1 小于φ(N)的数e，使得 e 和 φ(N)互质</p>
+<blockquote>
+<p>e其实是1和φ(N)之前的一个质数</p>
+</blockquote>
+</li>
+<li><p>计算d，使得d<em>e=1 mod φ(N) 等价于方程式 ed-1 = k </em> φ(N) 求一组解。</p>
+<blockquote>
+<p>d 称为e的模反元素，e 和 φ(N)互质就肯定存在d。</p>
+<blockquote>
+<p><strong>模反元素</strong>是指如果两个正整数a和n互质，那么一定可以找到整数b，使得ab被n除的余数是1，则b称为a的模反元素。<br>可根据欧拉定理证明模反元素存在，<strong>欧拉定理</strong>是指若n,a互质，则：<img src="/images/aes_mod.png" alt=""><br>a^φ(n) ≡ 1(mod n)  及 a^φ(n) = a * a^（φ(n) - 1）， 可得a的 φ(n)-1 次方，就是a的模反元素。</p>
+</blockquote>
+</blockquote>
+</li>
+<li><p>(N, e)封装成公钥，(N, d)封装成私钥。<br>假设m为明文，加密就是算出密文c:<br> m^e mod N = c (明文m用公钥e加密并和随机数N取余得到密文c)<br>解密则是：<br> c^d mod N = m　(密文c用密钥解密并和随机数N取余得到明文m)</p>
+<blockquote>
+<p>私钥解密这个是可以证明的，这里不展开了。</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="加解密步骤"><a href="#加解密步骤" class="headerlink" title="加解密步骤"></a>加解密步骤</h2><p>具体还是来看看步骤，举个例子，假设Alice和Bob又要相互通信。</p>
+<ol>
+<li>Alice 随机取大质数P1=53，P2=59，那N=53*59=3127，φ(N)=3016</li>
+<li>取一个e=3，计算出d=2011。</li>
+<li>只将N=3127，e=3 作为公钥传给Bob（公钥公开）</li>
+<li>假设Bob需要加密的明文m=89，c = 89^3 mod 3127=1394，于是Bob传回c=1394。 （公钥加密过程）</li>
+<li>Alice使用c^d mod N = 1394^2011 mod 3127，就能得到明文m=89。 （私钥解密过程）</li>
+</ol>
+<p>假如攻击者能截取到公钥n=3127，e=3及密文c=1394，是仍然无法不通过d来进行密文解密的。</p>
+<h2 id="安全性分析"><a href="#安全性分析" class="headerlink" title="安全性分析"></a>安全性分析</h2><p>那么，有无可能在已知n和e的情况下，推导出d？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">　　ed≡1 (mod φ(n))。只有知道e和φ(n)，才能算出d。</div><div class="line">　　φ(n)=(p-1)(q-1)。只有知道p和q，才能算出φ(n)。</div><div class="line">　　n=pq。只有将n因数分解，才能算出p和q。</div></pre></td></tr></table></figure></p>
+<p>如果n可以被因数分解，d就可以算出，因此RSA安全性建立在N的因式分解上。大整数的因数分解，是一件非常困难的事情。<br>只要密钥长度足够长，用RSA加密的信息实际上是不能被解破的。</p>
+<h2 id="补充模运算规则"><a href="#补充模运算规则" class="headerlink" title="补充模运算规则"></a>补充模运算规则</h2><ol>
+<li>模运算加减法：<br> (a + b) mod p = (a mod p + b mod p) mod p<br> (a - b) mod p = (a mod p - b mod p) mod p</li>
+<li>模运算乘法：<br> (a <em> b) mod p = (a mod p </em> b mod p) mod p</li>
+<li>模运算幂<br> a ^ b mod p = ((a mod p)^b) mod p</li>
+</ol>
+<p><a href="http://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客</p>
 
       
     </div>
@@ -443,7 +474,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://learnblockchain.cn/2017/10/20/前言/" title="前言-如何学习区块链">https://learnblockchain.cn/2017/10/20/前言/</a>
+    <a href="https://learnblockchain.cn/2017/11/15/asy-encryption/" title="非对称加密技术- RSA算法数学原理分析">https://learnblockchain.cn/2017/11/15/asy-encryption/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -458,7 +489,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/如何学习/" rel="tag"># 如何学习</a>
+            <a href="/tags/非对称加密/" rel="tag"># 非对称加密</a>
+          
+            <a href="/tags/数学/" rel="tag"># 数学</a>
+          
+            <a href="/tags/RSA算法/" rel="tag"># RSA算法</a>
           
         </div>
       
@@ -471,15 +506,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/11/10/bitcoin-script/" rel="next" title="比特币脚本及交易分析 - 智能合约雏形">
+                <i class="fa fa-chevron-left"></i> 比特币脚本及交易分析 - 智能合约雏形
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/23/whatisbitcoin/" rel="prev" title="比特币是什么">
-                比特币是什么 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -661,7 +696,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#确定方向"><span class="nav-number">1.</span> <span class="nav-text">确定方向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#投入时间学习-动手实践"><span class="nav-number">2.</span> <span class="nav-text">投入时间学习-动手实践</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学习资源介绍"><span class="nav-number">3.</span> <span class="nav-text">学习资源介绍</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RSA算法原理"><span class="nav-number">1.</span> <span class="nav-text">RSA算法原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加解密步骤"><span class="nav-number">2.</span> <span class="nav-text">加解密步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安全性分析"><span class="nav-number">3.</span> <span class="nav-text">安全性分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充模运算规则"><span class="nav-number">4.</span> <span class="nav-text">补充模运算规则</span></a></li></ol></div>
             
 
           </div>
