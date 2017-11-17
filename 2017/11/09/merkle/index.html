@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="交易脚本,交易结构,智能合约," />
+  <meta name="keywords" content="比特币,区块结构,Merkle树,SPV简单支付验证," />
 
 
 
@@ -83,28 +83,22 @@
 
 
 
-<meta name="description" content="大家都有转过账，每笔交易是这样的：张三账上减￥200，李四账上加￥200。在比特币区块链中，交易不是这么简单，交易实际是通过脚本来完成，以承载更多的功能个，这也是为什么比特币被称为是一种“可编程的货币”。本文就来分析一下交易是如何实现可编程的。">
-<meta name="keywords" content="交易脚本,交易结构,智能合约">
+<meta name="description" content="在比特币网络中，不是每个节点都有能力储存完整的区块链数据，受限于存储空间的的限制，很多节点是以SPV（Simplified Payment Verification简单支付验证）钱包接入比特币网络，通过简单支付验证可以在不必存储完整区块链下对交易进行验证，本文将分析区块结构Merkle树及如何进行交易验证。">
+<meta name="keywords" content="比特币,区块结构,Merkle树,SPV简单支付验证">
 <meta property="og:type" content="article">
-<meta property="og:title" content="比特币脚本及交易分析 - 智能合约雏形">
-<meta property="og:url" content="https://learnblockchain.cn/2017/11/10/bitcoin-script/index.html">
+<meta property="og:title" content="比特币区块结构Merkle树及简单支付验证分析">
+<meta property="og:url" content="https://learnblockchain.cn/2017/11/09/merkle/index.html">
 <meta property="og:site_name" content="深入浅出区块链">
-<meta property="og:description" content="大家都有转过账，每笔交易是这样的：张三账上减￥200，李四账上加￥200。在比特币区块链中，交易不是这么简单，交易实际是通过脚本来完成，以承载更多的功能个，这也是为什么比特币被称为是一种“可编程的货币”。本文就来分析一下交易是如何实现可编程的。">
+<meta property="og:description" content="在比特币网络中，不是每个节点都有能力储存完整的区块链数据，受限于存储空间的的限制，很多节点是以SPV（Simplified Payment Verification简单支付验证）钱包接入比特币网络，通过简单支付验证可以在不必存储完整区块链下对交易进行验证，本文将分析区块结构Merkle树及如何进行交易验证。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://learnblockchain.cn/images/own_chain.jpeg">
-<meta property="og:image" content="https://learnblockchain.cn/images/script.jpeg">
-<meta property="og:image" content="https://learnblockchain.cn/images/script_run1.jpeg">
-<meta property="og:image" content="https://learnblockchain.cn/images/script_run2.jpeg">
-<meta property="og:image" content="https://learnblockchain.cn/images/tx_struce.jpeg">
-<meta property="og:image" content="https://learnblockchain.cn/images/tx_input_struce.jpeg">
-<meta property="og:image" content="https://learnblockchain.cn/images/tx_input_overview.jpeg">
-<meta property="og:image" content="https://learnblockchain.cn/images/tx_output_struce.jpeg">
-<meta property="og:image" content="https://learnblockchain.cn/images/tx_output_overview.jpeg">
-<meta property="og:updated_time" content="2017-11-13T04:24:59.000Z">
+<meta property="og:image" content="https://learnblockchain.cn/images/block_info_493050.jpg">
+<meta property="og:image" content="https://learnblockchain.cn/images/block_structure.jpeg">
+<meta property="og:image" content="https://learnblockchain.cn/images/ex_check_file.jpeg">
+<meta property="og:updated_time" content="2017-11-09T09:05:53.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="比特币脚本及交易分析 - 智能合约雏形">
-<meta name="twitter:description" content="大家都有转过账，每笔交易是这样的：张三账上减￥200，李四账上加￥200。在比特币区块链中，交易不是这么简单，交易实际是通过脚本来完成，以承载更多的功能个，这也是为什么比特币被称为是一种“可编程的货币”。本文就来分析一下交易是如何实现可编程的。">
-<meta name="twitter:image" content="https://learnblockchain.cn/images/own_chain.jpeg">
+<meta name="twitter:title" content="比特币区块结构Merkle树及简单支付验证分析">
+<meta name="twitter:description" content="在比特币网络中，不是每个节点都有能力储存完整的区块链数据，受限于存储空间的的限制，很多节点是以SPV（Simplified Payment Verification简单支付验证）钱包接入比特币网络，通过简单支付验证可以在不必存储完整区块链下对交易进行验证，本文将分析区块结构Merkle树及如何进行交易验证。">
+<meta name="twitter:image" content="https://learnblockchain.cn/images/block_info_493050.jpg">
 
 
 
@@ -134,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="https://learnblockchain.cn/2017/11/10/bitcoin-script/"/>
+  <link rel="canonical" href="https://learnblockchain.cn/2017/11/09/merkle/"/>
 
 
 
 
 
-  <title>比特币脚本及交易分析 - 智能合约雏形 | 深入浅出区块链</title>
+  <title>比特币区块结构Merkle树及简单支付验证分析 | 深入浅出区块链</title>
   
 
 
@@ -287,7 +281,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2017/11/10/bitcoin-script/">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2017/11/09/merkle/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Tiny熊">
@@ -304,7 +298,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">比特币脚本及交易分析 - 智能合约雏形</h2>
+          <h2 class="post-title" itemprop="name headline">比特币区块结构Merkle树及简单支付验证分析</h2>
         
 
         <div class="post-meta">
@@ -316,8 +310,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-10T17:05:33+08:00">
-                2017-11-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-09T10:03:36+08:00">
+                2017-11-09
               </time>
             
 
@@ -376,64 +370,29 @@
       
 
       
-        <p>大家都有转过账，每笔交易是这样的：张三账上减￥200，李四账上加￥200。<br>在比特币区块链中，交易不是这么简单，交易实际是通过脚本来完成，以承载更多的功能个，这也是为什么比特币被称为是一种“可编程的货币”。<br>本文就来分析一下交易是如何实现可编程的。</p>
+        <p>在比特币网络中，不是每个节点都有能力储存完整的区块链数据，受限于存储空间的的限制，很多节点是以SPV（Simplified Payment Verification简单支付验证）钱包接入比特币网络，通过简单支付验证可以在不必存储完整区块链下对交易进行验证，本文将分析区块结构Merkle树及如何进行交易验证。</p>
 <a id="more"></a>
-<h2 id="未花费的交易输出-UTXO"><a href="#未花费的交易输出-UTXO" class="headerlink" title="未花费的交易输出(UTXO)"></a>未花费的交易输出(UTXO)</h2><p>先引入一个概念：未花费的交易输出——UTXO（Unspent Transaction Output）</p>
-<p>其实比特币的交易都是基于UTXO上的，即交易的输入是之前交易未花费的输出，这笔交易的输出可以被当做下一笔新交易的输入。</p>
+<h2 id="区块结构"><a href="#区块结构" class="headerlink" title="区块结构"></a>区块结构</h2><p>在<a href="https://xiaozhuanlan.com/topic/7548206913" target="_blank" rel="external">工作量证明</a>中出现过一个区块信息截图：<br><img src="/images/block_info_493050.jpg" alt="区块#493050"></p>
+<p>细心的同学一定已经在里面发现了很多未讲的其他信息，如：时间戳，版本号，交易次数，二进制哈希树根(Merkle根)等。</p>
+<p>我们来看看一个区块结构到底是怎样的：</p>
+<p><img src="/images/block_structure.jpeg" alt="区块结构图"></p>
+<p>如上图（下文称：区块结构图）所示：每个数据区块包含区块头和区块体。<br>区块头封装了当前版本号、前一区块哈希值、当前区块PoW要求的随机数(Nonce)、时间戳、以及Merkle根信息。<br>区块体则包括当前区块经过验证的、 区块创建过程中生成的所有交易记录。这些记录通过 Merkle树的哈希过程生成唯一的Merkle根并记入区块头.</p>
 <blockquote>
-<p>挖矿奖励属于一个特殊的交易（称为coinbase交易），可以没有输入。<br>UTXO是交易的基本单元，不能在分割。<br>在比特币没有余额概念，只有分散到区块链里的UTXO</p>
+<p>区块哈希值实际上并不包含在区块的数据结构里，其实区块打包时只有区块头被用于计算哈希（从网络被接收时由每个节点计算出来），常说的区块哈希值实际是区块头哈希值，它可以用来唯一、明确地标识一个区块。</p>
 </blockquote>
-<p>随着钱从一个地址被移动到另一个地址的同时形成了一条所有权链，像这样：<br><img src="/images/own_chain.jpeg" alt="own_chain"></p>
-<h2 id="比特币脚本"><a href="#比特币脚本" class="headerlink" title="比特币脚本"></a>比特币脚本</h2><p>比特币交易是首先要提供一个用于解锁UTXO（用私钥去匹配锁定脚本）的脚本（常称为解锁脚本：Signature script)，这也叫交易输入，<br>交易的输出则是指向一个脚本（称为锁定脚本：PubKey script），这个脚本表达了：谁的签名（签名是常见形式，并不一定必须是签名）能匹配这个输出地址，钱就支付给谁。</p>
-<p>每一个比特币节点会通过同时执行这解锁和锁定脚本（不是当前的锁定脚本，是指上一个交易的锁定脚本）来验证一笔交易，脚本组合结果为真，则为有效交易。</p>
-<blockquote>
-<p>当解锁版脚本与锁定版脚本的设定条件相匹配时，执行组合有效脚本时才会显示结果为真</p>
-</blockquote>
-<p>如最为常见类型的比特币交易脚本（支付到公钥哈希：P2PKH（Pay-to-Public-Key-Hash））组合是这样：<br><img src="/images/script.jpeg" alt="script"></p>
-<h3 id="常见交易脚本验证过程"><a href="#常见交易脚本验证过程" class="headerlink" title="常见交易脚本验证过程"></a>常见交易脚本验证过程</h3><p>比特币交易脚本语言是一种基于逆波兰表示法的基于栈的执行语言（不知道逆波兰和栈的同学去翻大学数据结构课本，你也可跳过这个部分）。</p>
-<blockquote>
-<p>比特币脚本语言包含基本算数计算、基本逻辑(比如if…then)、报错以及返回结果和一些加密指令，不支持循环。想了解更多语言细节可参考:<a href="http://www.8btc.com/bitcoin_scripts" target="_blank" rel="external">比特币脚本</a></p>
-</blockquote>
-<p>脚本语言通过从左至右地处理每个项目的方式执行脚本。</p>
-<p>下面用两个图说明下常见类型的比特币交易脚本验证执行过程：<br><img src="/images/script_run1.jpeg" alt="script_run1"><br>上图为解锁脚本运行过程（主要是入栈）<br><img src="/images/script_run2.jpeg" alt="script_run2"><br>上图为锁定脚本运行过程（主要是出栈），最后的结果为真，说明交易有效。</p>
-<h2 id="交易分析"><a href="#交易分析" class="headerlink" title="交易分析"></a>交易分析</h2><p>实际上比特币的交易被设计为可以纳入多个输入和输出。</p>
-<h3 id="交易结构"><a href="#交易结构" class="headerlink" title="交易结构"></a>交易结构</h3><p>我们来看看完整的交易结构，<br><img src="/images/tx_struce.jpeg" alt=""></p>
-<blockquote>
-<p>交易的锁定时间定义了能被加到区块链里的最早的交易时间。在大多数交易里，它被设置成0，用来表示立即执行。<br>如果锁定时间不是0并且小于5亿，就被视为区块高度，意指在这个指定的区块高度之前，该交易不会被包含在区块链里。<br>如果锁定时间大于5亿，则它被当作是一个Unix纪元时间戳（从1970年1月1日以来的秒数），并且在这个指定时间之前，该交易不会被包含在区块链里。</p>
-</blockquote>
-<p>交易的数据结构没有交易费的字段，交易费通过所有输入的总和，以及所有输出的总和之间的差来表示，即：</p>
-<blockquote>
-<p>交易费 = 求和（所有输入） - 求和（所有输出）</p>
-</blockquote>
-<h3 id="交易输入结构"><a href="#交易输入结构" class="headerlink" title="交易输入结构"></a>交易输入结构</h3><p>刚刚我们提过输入需要提供一个解锁脚本，现在来看看一个交易的输入结构：<br><img src="/images/tx_input_struce.jpeg" alt=""></p>
-<p>我们结合整个交易的结构里看输入结构就是这样子：<br><img src="/images/tx_input_overview.jpeg" alt=""></p>
-<h3 id="交易输出结构"><a href="#交易输出结构" class="headerlink" title="交易输出结构"></a>交易输出结构</h3><p>刚刚我们提过输出是指向一个解锁脚本，具体交易的输出结构为：<br><img src="/images/tx_output_struce.jpeg" alt=""><br>我们结合整个交易的结构里看输出结构就是这样子：<br><img src="/images/tx_output_overview.jpeg" alt=""></p>
-<h3 id="交易哈希计算"><a href="#交易哈希计算" class="headerlink" title="交易哈希计算"></a>交易哈希计算</h3><p>在<a href="https://xiaozhuanlan.com/topic/1402935768" target="_blank" rel="external">比特币区块结构Merkle 树及简单支付验证分析</a> 讲到区块结构，区块结构包含多个交易的哈希。<br>那么交易哈希是怎么计算的呢？</p>
-<ol>
-<li>交易结构各字段序列化为字节数组</li>
-<li>把字节数组拼接为支付串</li>
-<li>对支付串计算两次SHA256 得到交易hash</li>
-</ol>
-<p>了解详情可进一步参考<a href="https://bitcoin.stackexchange.com/questions/2859/how-are-transaction-hashes-calculated" target="_blank" rel="external">如何计算交易Hash?</a>及<a href="https://bitcointalk.org/index.php?topic=54451.msg649253#msg649253" target="_blank" rel="external">如何创建Hash?</a></p>
-<p>现在是不是对完整的交易到区块有了更清晰的认识。</p>
-<h2 id="智能合约雏形-应用场景说明"><a href="#智能合约雏形-应用场景说明" class="headerlink" title="智能合约雏形 - 应用场景说明"></a>智能合约雏形 - 应用场景说明</h2><p>由于交易是通过脚本来实现，脚本语言可以表达出无数的条件变种。</p>
-<p>比特币的脚本目前常用的主要分为两种，一种是常见的P2PKH（支付给公钥哈希），另一种是P2SH（Pay-to-Script-Hash支付脚本哈希）。<br>P2SH支付中，锁定脚本被密码学哈希所取代，当一笔交易试图支付UTXO时，要解锁支付脚本，它必须含有与哈希相匹配的脚本。</p>
-<p>这里不展开技术细节，下面说明一些应用场景，以便大家有更直观的认识。</p>
-<ul>
-<li><p>多重签名应用<br>合伙经营中，如只有一半以上的的股东同意签名就可以进行支付，可为公司治理提供管控便利，同时也能有效防范盗窃、挪用和遗失。</p>
-<p>用于担保和争端调解，一个买家想和他不认识或不信任的某人交易，在一般情况交易正常进行时，买家不想任何第三方参与。那交易双方可以发起支付，但如果交易出现问题时，那第三方就可以根据裁定，使用自己的签名和裁定认可的一方共同签名来兑现这笔交易。</p>
-</li>
-<li><p>保证合同<br>保证合同是建造公众商品时的集资办法，公众商品是指一旦建成，任何人都可以免费享受到好处。标准的例子是灯塔，所有人都认同应该建造一个，但是对于个人航海者来说灯塔太贵了，灯塔同时也会方便其他航海者。<br>一个解决方案是向所有人集资，只有当筹集的资金超过所需的建造成本时，每个人才真正付钱，如果集资款不足，则谁都不用付钱。</p>
-</li>
-<li>依靠预言<br>假如老人想让他孙子继承遗产，继承时间是在他死后或者在孙子年满18岁时（也是一个带锁定时间交易），无论哪个条件先满足，他的孙子都可以得到遗产。<br>因为比特币节点可依靠预言对死亡条件进行判断，预言是指具有密钥对的服务器，当用户自定义的表达式被证明是真的，它能按照要求对交易签名。</li>
-</ul>
-<p>相信随着区块链的普及，会对未来的交易模式和商业结构带来巨大的影响。不过由于比特币的脚本语言不是图灵完备的，交易模式依旧有限，以太坊就是为解决这一问题而出现，后面我们会有大量介绍以太坊的文章。</p>
-<h2 id="参考文献-amp-补充阅读"><a href="#参考文献-amp-补充阅读" class="headerlink" title="参考文献 &amp; 补充阅读"></a>参考文献 &amp; 补充阅读</h2><ol>
-<li><a href="http://book.8btc.com/master_bitcoin" target="_blank" rel="external">精通比特币</a></li>
-<li>廖雪峰的<a href="http://www.infoq.com/cn/articles/deep-understanding-of-bitcoin-transaction-script" target="_blank" rel="external">深入理解比特币交易的脚本</a></li>
-<li><a href="http://www.8btc.com/bitcoin_contracts" target="_blank" rel="external">比特币合同</a></li>
-</ol>
-<p><a href="http://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客</p>
+<p>区块头是80字节，而平均每个交易至少是250字节，而且平均每个区块包含2000个交易。因此，包含完整交易的区块比区块头的4千倍还要大。<br>SPV节点只下载区块头，不下载包含在每个区块中的交易信息。这样的不含交易信息的区块链，大小只有完整区块链的几千分之1，那SPV节点是如何验证交易的呢？</p>
+<h2 id="哈希验证"><a href="#哈希验证" class="headerlink" title="哈希验证"></a>哈希验证</h2><p>上面先留一个引子，先来回顾下哈希函数，<a href="https://xiaozhuanlan.com/topic/9827453061" target="_blank" rel="external">记账原理</a>我们知道原始信息任何微小的变化都会哈希完全不同的哈希值。</p>
+<h3 id="简单文件验证"><a href="#简单文件验证" class="headerlink" title="简单文件验证"></a>简单文件验证</h3><p>我们通常用哈希来检验下载的文件是否完整，我经常看到这样的下载页面：<br><img src="/images/ex_check_file.jpeg" alt="下载hash"><br>可以看到下载链接后面提供了一个MD5（MD5也是一种Hash算法），这样我们可以在下载之后对文件计算MD5，如果MD5与提供的MD5相等，说明文件有没有被损坏，这个验证过程相信大家都能理解。</p>
+<h3 id="多点文件验证-哈希列表"><a href="#多点文件验证-哈希列表" class="headerlink" title="多点文件验证(哈希列表)"></a>多点文件验证(哈希列表)</h3><p>现在复杂度提高一点，在P2P网络中下载时，会把大文件切成小文件，同时从多个机器上下载数据，这个时候怎么验证数据呢？</p>
+<p>以BT下载为例，在下载真正的数据之前，我们会先下载一个哈希列表的（每个下小块计算出一个哈希），如果有一个小块数据在传输过程中损坏了，那我只要重新下载这一个数据块就行了，这时有一个问题就出现了，那么多的哈希，怎么保证它们本身(哈希列表中的哈希值)都是正确地呢？</p>
+<p>答案是把每个小块数据的哈希值拼到一起，然后对这个长字符串在作一次哈希运算，得到哈希列表的根哈希。只要根哈希校对比一样就说明验哈希列表是正确的，再通过哈希列表校验小数据块，如果所有的小数据块验证通过则说明大文件没有被损坏。</p>
+<h2 id="Merkle树"><a href="#Merkle树" class="headerlink" title="Merkle树"></a>Merkle树</h2><p>验证交易的过程和文件验证很相似，可以人为每个交易是一个小数据块，但比特币使用Merkle树的方式进行验证，相对于哈希列表，Merkle树是一种哈希二叉树，它的明显的一个好处是可以单独拿出一个分支来（作为一个小树）对部分数据进行校验，更加高效。</p>
+<p>我们回看下上面的区块结构图，区块体就包含这样一个Merkle树,Merkle树被用来归纳一个区块中的所有交易。</p>
+<p>每个叶子节点是每个交易信息的哈希，往上对相邻的两个哈希合并成字符串再哈希，继续类似的操作直到只剩下顶部的一个节点，即Merkle根，存入区块头。</p>
+<p>因为Merkle树是二叉树，所以它需要偶数个叶子节点。如果仅有奇数个交易需要归纳，那最后的交易就会被复制一份以构成偶数个叶子节点，这种偶数个叶子节点的树也被称为平衡树。</p>
+<h3 id="简化支付验证"><a href="#简化支付验证" class="headerlink" title="简化支付验证"></a>简化支付验证</h3><p>SPV节点不保存所有交易也不会下载整个区块，仅仅保存区块头，我们来看看它是如何对交易数据进行验证的。</p>
+<p>假如要验证区块结构图中交易6，SPV节点会通过向相邻节点索要（通过Merkleblock消息）包括从交易6哈希值沿Merkle树上溯至区块头根哈希处的哈希序列 (即哈希节点6, 5, 56, 78, 5678, 1234 1~8 - 称为认证路径) 来确认交易的存在性和正确性。（在N个交易组成的区块中确认任一交易只需要计算log2(N)个字节的哈希值，非常快速高效）</p>
+<p>大家明白了吗？</p>
 
       
     </div>
@@ -486,7 +445,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://learnblockchain.cn/2017/11/10/bitcoin-script/" title="比特币脚本及交易分析 - 智能合约雏形">https://learnblockchain.cn/2017/11/10/bitcoin-script/</a>
+    <a href="https://learnblockchain.cn/2017/11/09/merkle/" title="比特币区块结构Merkle树及简单支付验证分析">https://learnblockchain.cn/2017/11/09/merkle/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -501,11 +460,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/交易脚本/" rel="tag"># 交易脚本</a>
+            <a href="/tags/比特币/" rel="tag"># 比特币</a>
           
-            <a href="/tags/交易结构/" rel="tag"># 交易结构</a>
+            <a href="/tags/区块结构/" rel="tag"># 区块结构</a>
           
-            <a href="/tags/智能合约/" rel="tag"># 智能合约</a>
+            <a href="/tags/Merkle树/" rel="tag"># Merkle树</a>
+          
+            <a href="/tags/SPV简单支付验证/" rel="tag"># SPV简单支付验证</a>
           
         </div>
       
@@ -518,8 +479,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/09/merkle/" rel="next" title="比特币区块结构Merkle树及简单支付验证分析">
-                <i class="fa fa-chevron-left"></i> 比特币区块结构Merkle树及简单支付验证分析
+              <a href="/2017/11/07/bitcoin-p2p/" rel="next" title="分析比特币网络：一种去中心化、点对点的网络架构">
+                <i class="fa fa-chevron-left"></i> 分析比特币网络：一种去中心化、点对点的网络架构
               </a>
             
           </div>
@@ -528,8 +489,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/11/15/asy-encryption/" rel="prev" title="非对称加密技术- RSA算法数学原理分析">
-                非对称加密技术- RSA算法数学原理分析 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/11/10/bitcoin-script/" rel="prev" title="比特币脚本及交易分析 - 智能合约雏形">
+                比特币脚本及交易分析 - 智能合约雏形 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -712,7 +673,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#未花费的交易输出-UTXO"><span class="nav-number">1.</span> <span class="nav-text">未花费的交易输出(UTXO)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比特币脚本"><span class="nav-number">2.</span> <span class="nav-text">比特币脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常见交易脚本验证过程"><span class="nav-number">2.1.</span> <span class="nav-text">常见交易脚本验证过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交易分析"><span class="nav-number">3.</span> <span class="nav-text">交易分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#交易结构"><span class="nav-number">3.1.</span> <span class="nav-text">交易结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交易输入结构"><span class="nav-number">3.2.</span> <span class="nav-text">交易输入结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交易输出结构"><span class="nav-number">3.3.</span> <span class="nav-text">交易输出结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交易哈希计算"><span class="nav-number">3.4.</span> <span class="nav-text">交易哈希计算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#智能合约雏形-应用场景说明"><span class="nav-number">4.</span> <span class="nav-text">智能合约雏形 - 应用场景说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献-amp-补充阅读"><span class="nav-number">5.</span> <span class="nav-text">参考文献 & 补充阅读</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#区块结构"><span class="nav-number">1.</span> <span class="nav-text">区块结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#哈希验证"><span class="nav-number">2.</span> <span class="nav-text">哈希验证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单文件验证"><span class="nav-number">2.1.</span> <span class="nav-text">简单文件验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多点文件验证-哈希列表"><span class="nav-number">2.2.</span> <span class="nav-text">多点文件验证(哈希列表)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Merkle树"><span class="nav-number">3.</span> <span class="nav-text">Merkle树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简化支付验证"><span class="nav-number">3.1.</span> <span class="nav-text">简化支付验证</span></a></li></ol></li></ol></div>
             
 
           </div>

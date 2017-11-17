@@ -85,11 +85,11 @@
         
         <tag>比特币</tag>
          
-        <tag>非对称加密</tag>
-         
         <tag>所有权问题</tag>
          
         <tag>隐私问题</tag>
+         
+        <tag>非对称加密</tag>
          
          
            
@@ -149,6 +149,32 @@
     </url>
 
     
+    
+  <url>
+    <loc>https://learnblockchain.cn/2017/11/09/merkle/</loc>
+    <lastmod>2017-11-09T09:05:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>比特币区块结构Merkle树及简单支付验证分析</title>
+        <pubTime>2017-11-09T02:03:36.000Z</pubTime>
+        
+        <tag>比特币</tag>
+         
+        <tag>区块结构</tag>
+         
+        <tag>Merkle树</tag>
+         
+        <tag>SPV简单支付验证</tag>
+         
+         
+           
+             
+              <breadCrumb title="Bitcoin" url="https://learnblockchain.cn/categories/Bitcoin/"/>
+          
+        </display>
+    </data>
+    </url>
+
     
   <url>
     <loc>https://learnblockchain.cn/2017/11/07/bitcoin-p2p/</loc>
