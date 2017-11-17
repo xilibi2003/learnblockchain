@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://learnblockchain.cn/2017/11/09/merkle/</loc>
+    
+    <lastmod>2017-11-17T14:47:10.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://learnblockchain.cn/2017/11/15/asy-encryption/</loc>
     
     <lastmod>2017-11-16T01:31:01.000Z</lastmod>
@@ -47,13 +54,6 @@
     <loc>https://learnblockchain.cn/about/index.html</loc>
     
     <lastmod>2017-11-09T09:43:44.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://learnblockchain.cn/2017/11/09/merkle/</loc>
-    
-    <lastmod>2017-11-09T09:05:53.000Z</lastmod>
     
   </url>
   
