@@ -37,4 +37,4 @@ author: Tiny熊
 [比特币区块结构Merkle树及简单支付验证分析](https://xiaozhuanlan.com/topic/1402935768)，可以详细了解区块结构如何验证交易。
 
 
-[深入浅出区块链](http://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客
+[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客

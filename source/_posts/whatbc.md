@@ -75,4 +75,4 @@ Hash(上一个Hash值、序号1、记账时间、交易记录) = 456635BCD
 
 记账有成本，想了解节点为什么要记账，请看这篇：在{% post_link bitcoin-pow 比特币如何挖矿-工作量证明 %} 
 
-[深入浅出区块链](http://learnblockchain.cn/)系统学习区块链，打造最好的区块链技术博客
+[深入浅出区块链](https://learnblockchain.cn/)系统学习区块链，打造最好的区块链技术博客
