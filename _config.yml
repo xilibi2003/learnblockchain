@@ -39,6 +39,7 @@ links_layout: block
 links:
   博客地址: https://github.com/xilibi2003/learnblockchain
   我的小专栏: https://xiaozhuanlan.com/blockchaincore
+  区块链技术中文社区: https://bitshuo.com
 
 
 # Site
@@ -54,7 +55,7 @@ keywords: "区块链技术,Learn BlockChain,系统学习区块链,区块链Wiki"
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://learnblockchain.cn
+url: https://learnblockchain.cn
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:

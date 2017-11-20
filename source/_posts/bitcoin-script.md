@@ -113,4 +113,4 @@ P2SH支付中，锁定脚本被密码学哈希所取代，当一笔交易试图�
 3. [比特币合同](http://www.8btc.com/bitcoin_contracts)
 
 
-[深入浅出区块链](http://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客
+[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客
