@@ -92,7 +92,7 @@
 <meta property="og:description" content="非对称加密技术，在现在网络中，有非常广泛应用。加密技术更是数字货币的基础。 所谓非对称，就是指该算法需要一对密钥，使用其中一个（公钥）加密，则需要用另一个（私钥）才能解密。但是对于其原理大部分同学应该都是一知半解，今天就来分析下经典的非对称加密算法 - RSA算法。通过本文的分析，可以更好的理解非对称加密原理，可以让我们更好的使用非对称加密技术。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://learnblockchain.cn/images/aes_mod.png">
-<meta property="og:updated_time" content="2017-11-16T01:31:01.000Z">
+<meta property="og:updated_time" content="2017-11-17T14:52:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="非对称加密技术- RSA算法数学原理分析">
 <meta name="twitter:description" content="非对称加密技术，在现在网络中，有非常广泛应用。加密技术更是数字货币的基础。 所谓非对称，就是指该算法需要一对密钥，使用其中一个（公钥）加密，则需要用另一个（私钥）才能解密。但是对于其原理大部分同学应该都是一知半解，今天就来分析下经典的非对称加密算法 - RSA算法。通过本文的分析，可以更好的理解非对称加密原理，可以让我们更好的使用非对称加密技术。">
@@ -414,14 +414,14 @@
 <li>Alice使用c^d mod N = 1394^2011 mod 3127，就能得到明文m=89。 （私钥解密过程）</li>
 </ol>
 <p>假如攻击者能截取到公钥n=3127，e=3及密文c=1394，是仍然无法不通过d来进行密文解密的。</p>
-<h2 id="安全性分析"><a href="#安全性分析" class="headerlink" title="安全性分析"></a>安全性分析</h2><p>那么，有无可能在已知n和e的情况下，推导出d？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">　　ed≡1 (mod φ(n))。只有知道e和φ(n)，才能算出d。</div><div class="line">　　φ(n)=(p-1)(q-1)。只有知道p和q，才能算出φ(n)。</div><div class="line">　　n=pq。只有将n因数分解，才能算出p和q。</div></pre></td></tr></table></figure></p>
+<h2 id="安全性分析"><a href="#安全性分析" class="headerlink" title="安全性分析"></a>安全性分析</h2><p>那么，有无可能在已知n和e的情况下，推导出d？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">　　1. ed≡1 (mod φ(n))。只有知道e和φ(n)，才能算出d。</div><div class="line">　　2. φ(n)=(p-1)(q-1)。只有知道p和q，才能算出φ(n)。</div><div class="line">　　3. n=pq。只有将n因数分解，才能算出p和q。</div></pre></td></tr></table></figure></p>
 <p>如果n可以被因数分解，d就可以算出，因此RSA安全性建立在N的因式分解上。大整数的因数分解，是一件非常困难的事情。<br>只要密钥长度足够长，用RSA加密的信息实际上是不能被解破的。</p>
 <h2 id="补充模运算规则"><a href="#补充模运算规则" class="headerlink" title="补充模运算规则"></a>补充模运算规则</h2><ol>
 <li>模运算加减法：<br> (a + b) mod p = (a mod p + b mod p) mod p<br> (a - b) mod p = (a mod p - b mod p) mod p</li>
 <li>模运算乘法：<br> (a <em> b) mod p = (a mod p </em> b mod p) mod p</li>
 <li>模运算幂<br> a ^ b mod p = ((a mod p)^b) mod p</li>
 </ol>
-<p><a href="http://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客</p>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客</p>
 
       
     </div>
@@ -516,6 +516,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2017/11/20/whatiseth/" rel="prev" title="以太坊是什么 - 以太坊开发入门指南">
+                以太坊是什么 - 以太坊开发入门指南 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -591,7 +595,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -613,7 +617,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

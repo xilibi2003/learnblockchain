@@ -93,7 +93,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://learnblockchain.cn/images/cs_network.jpeg">
 <meta property="og:image" content="https://learnblockchain.cn/images/p2p_network.jpeg">
-<meta property="og:updated_time" content="2017-11-07T09:39:15.000Z">
+<meta property="og:updated_time" content="2017-11-17T14:52:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分析比特币网络：一种去中心化、点对点的网络架构">
 <meta name="twitter:description" content="比特币采用了基于互联网的点对点（P2P：peer-to-peer）分布式网络架构。比特币网络可以认为是按照比特币P2P协议运行的一系列节点的集合。本文来分析下比特币网络，了解它跟传统中心化网络的区别，以及比特币网络是如何发现相邻节点的。">
@@ -395,7 +395,7 @@
 </ol>
 <h2 id="节点通信简述"><a href="#节点通信简述" class="headerlink" title="节点通信简述"></a>节点通信简述</h2><p>比特币节点通常采用TCP协议、使用8333端口与相邻节点建立连接, 建立连接时也会有认证“握手”的通信过程，用来确定协议版本，软件版本，节点IP，区块高度等。</p>
 <p>当节点连接到相邻节点后，接着就开始跟相邻节点同步区块链数据（轻量级钱包应用其实不会同步所有区块数据），节点们会交换一个getblocks消息，它包含本地区块链最顶端的哈希值。如果某个节点识别出它接收到的哈希值并不属于顶端区块，而是属于一个非顶端区块的旧区块，就说其自身的本地区块链比其他节点的区块链更长，并告诉其他节点需要补充区块，其他节点发送getdata消息来请求区块，验证后更新到本地区块链中。</p>
-<p><a href="http://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客</p>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客</p>
 
       
     </div>
@@ -569,7 +569,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -591,7 +591,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
