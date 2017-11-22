@@ -3,6 +3,33 @@
 
 
     
+    
+  <url>
+    <loc>https://learnblockchain.cn/2017/11/04/bitcoin-pow/</loc>
+    <lastmod>2017-11-22T09:00:35.000Z</lastmod>
+    <data>
+        <display>
+        <title>比特币如何挖矿（挖矿原理）-工作量证明</title>
+        <pubTime>2017-11-04T08:12:29.000Z</pubTime>
+        
+        <tag>比特币</tag>
+         
+        <tag>挖矿</tag>
+         
+        <tag>工作量证明</tag>
+         
+        <tag>共识机制</tag>
+         
+         
+           
+             
+              <breadCrumb title="Bitcoin" url="https://learnblockchain.cn/categories/Bitcoin/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
   <url>
     <loc>https://learnblockchain.cn/2017/11/20/whatiseth/</loc>
     <lastmod>2017-11-22T06:48:50.000Z</lastmod>
@@ -218,32 +245,6 @@
 
     
   <url>
-    <loc>https://learnblockchain.cn/2017/11/04/bitcoin-pow/</loc>
-    <lastmod>2017-11-17T14:52:17.000Z</lastmod>
-    <data>
-        <display>
-        <title>比特币如何挖矿（挖矿原理）-工作量证明</title>
-        <pubTime>2017-11-04T08:12:29.000Z</pubTime>
-        
-        <tag>比特币</tag>
-         
-        <tag>挖矿</tag>
-         
-        <tag>工作量证明</tag>
-         
-        <tag>共识机制</tag>
-         
-         
-           
-             
-              <breadCrumb title="Bitcoin" url="https://learnblockchain.cn/categories/Bitcoin/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://learnblockchain.cn/2017/10/25/whatbc/</loc>
     <lastmod>2017-11-17T14:52:11.000Z</lastmod>
     <data>
@@ -268,7 +269,6 @@
     </data>
     </url>
 
-    
     
     
 </urlset>
