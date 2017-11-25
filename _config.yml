@@ -37,9 +37,10 @@ links_title: 友链
 links_layout: block
 # links
 links:
-  博客地址: https://github.com/xilibi2003/learnblockchain
   我的小专栏: https://xiaozhuanlan.com/blockchaincore
+  技术交流-知识星球: https://t.xiaomiquan.com/RfAu7uj
   区块链技术中文社区: https://bitshuo.com
+  
 
 
 # Site
@@ -130,7 +131,7 @@ theme: next
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, question icon will be loaded.
 menu:
   home: / || home
-  Wiki: http://wiki.learnblockchain.cn
+  Wiki: https://wiki.learnblockchain.cn
   about: /about/ || user
   tags: /tags/ || tags
   categories: /categories/ || th
