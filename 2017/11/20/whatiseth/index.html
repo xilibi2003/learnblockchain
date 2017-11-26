@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="以太坊,ethereum,入门," />
+  <meta name="keywords" content="ethereum,以太坊入门,以太坊概念," />
 
 
 
@@ -84,14 +84,14 @@
 
 
 <meta name="description" content="很多同学已经跃跃欲试投入到区块链开发队伍当中来，可是又感觉无从下手，本文将基于以太坊平台，以通俗的方式介绍以太坊开发中涉及的各晦涩的概念，轻松带大家入门。">
-<meta name="keywords" content="以太坊,ethereum,入门">
+<meta name="keywords" content="ethereum,以太坊入门,以太坊概念">
 <meta property="og:type" content="article">
 <meta property="og:title" content="以太坊是什么 - 以太坊开发入门指南">
 <meta property="og:url" content="https://learnblockchain.cn/2017/11/20/whatiseth/index.html">
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="很多同学已经跃跃欲试投入到区块链开发队伍当中来，可是又感觉无从下手，本文将基于以太坊平台，以通俗的方式介绍以太坊开发中涉及的各晦涩的概念，轻松带大家入门。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-22T06:48:50.000Z">
+<meta property="og:updated_time" content="2017-11-26T02:39:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="以太坊是什么 - 以太坊开发入门指南">
 <meta name="twitter:description" content="很多同学已经跃跃欲试投入到区块链开发队伍当中来，可是又感觉无从下手，本文将基于以太坊平台，以通俗的方式介绍以太坊开发中涉及的各晦涩的概念，轻松带大家入门。">
@@ -329,8 +329,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/BlockChain/" itemprop="url" rel="index">
-                    <span itemprop="name">BlockChain</span>
+                  <a href="/categories/以太坊/" itemprop="url" rel="index">
+                    <span itemprop="name">以太坊</span>
                   </a>
                 </span>
 
@@ -422,13 +422,19 @@
 <p>如果没有这个限制，就会有人写出无法停止（如：死循环）的合约来阻塞网络。</p>
 </blockquote>
 <p>因此实际上（把前面的内容串起来），我们需要一个有以太币余额的外部账户，来发起一个交易（普通交易或部署、运行一个合约），运行时，矿工收取相应的工作量费用。</p>
-<h2 id="测试网络：私有链"><a href="#测试网络：私有链" class="headerlink" title="测试网络：私有链"></a>测试网络：私有链</h2><p>有些着急的同学要问了，我没有以太币，要怎么进行智能合约的开发？<br>答案是创建自己的以太币私有测试网络，通常也称为私有链，我们可以用它来作为一个测试环境来开发、调试和测试智能合约。<br>通过上面提到的Geth很容易就可以创建一个属于自己的测试网络，以太币想挖多少挖多少，也免去了同步正式网络的整个区块链数据。</p>
-<p>另一个创建测试网络的方法是使用testrpc，testrpc是在本地使用内存模拟的一个以太坊环境，对于开发调试来说，更方便快捷。而且testrpc可以在启动时帮我们创建一堆存有资金的测试账户。<br>进行合约开发是，可以在testrpc中测试通过后，再部署到Geth中去。</p>
+<h2 id="以太坊网络"><a href="#以太坊网络" class="headerlink" title="以太坊网络"></a>以太坊网络</h2><p>有些着急的同学要问了，没有以太币，要怎么进行智能合约的开发？可以选择以下方式：</p>
+<h3 id="选择以太坊官网测试网络Testnet"><a href="#选择以太坊官网测试网络Testnet" class="headerlink" title="选择以太坊官网测试网络Testnet"></a>选择以太坊官网测试网络Testnet</h3><p>测试网络中，我们可以很容易获得免费的以太币，缺点是需要发很长时间初始化节点。</p>
+<h3 id="使用私有链"><a href="#使用私有链" class="headerlink" title="使用私有链"></a>使用私有链</h3><p>创建自己的以太币私有测试网络，通常也称为私有链，我们可以用它来作为一个测试环境来开发、调试和测试智能合约。<br>通过上面提到的Geth很容易就可以创建一个属于自己的测试网络，以太币想挖多少挖多少，也免去了同步正式网络的整个区块链数据。</p>
+<h3 id="使用开发者网络-模式"><a href="#使用开发者网络-模式" class="headerlink" title="使用开发者网络(模式)"></a>使用开发者网络(模式)</h3><p>相比私有链，开发者网络(模式)下，会自动分配一个有大量余额的开发者账户给我们使用。</p>
+<h3 id="使用模拟环境"><a href="#使用模拟环境" class="headerlink" title="使用模拟环境"></a>使用模拟环境</h3><p>另一个创建测试网络的方法是使用testrpc，testrpc是在本地使用内存模拟的一个以太坊环境，对于开发调试来说，更方便快捷。而且testrpc可以在启动时帮我们创建10个存有资金的测试账户。<br>进行合约开发时，可以在testrpc中测试通过后，再部署到Geth节点中去。</p>
+<blockquote>
+<p>更新：testrpc 现在已经并入到Truffle 开发框架中，现在名字是Ganache CLI。</p>
+</blockquote>
 <h2 id="Dapp：去中心化的应用程序"><a href="#Dapp：去中心化的应用程序" class="headerlink" title="Dapp：去中心化的应用程序"></a>Dapp：去中心化的应用程序</h2><p>以太坊社区把基于智能合约的应用称为去中心化的应用程序(Decentralized App)。如果我们把区块链理解为一个不可篡改的数据库，智能合约理解为和数据库打交道的程序，那就很容易理解Dapp了，一个Dapp不单单有智能合约，比如还需要有一个友好的用户界面和其他的东西。</p>
 <h3 id="Truffle"><a href="#Truffle" class="headerlink" title="Truffle"></a>Truffle</h3><p>Truffle是Dapp开发框架，他可以帮我们处理掉大量无关紧要的小事情，让我们可以迅速开始写代码-编译-部署-测试-打包DApp这个流程。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>我们现在来总结一下，以太坊是平台，它让我们方便的使用区块链技术开发去中心化的应用，在这个应用中，使用Solidity来编写和区块链交互的智能合约，合约编写好后之后，我们需要用以太坊客户端用一个有余额的账户去部署及运行合约（使用Truffle框架可以更好的帮助我们做这些事情了）。为了开发方便，我们可以用Geth或testrpc来搭建一个测试网络。</p>
 <p>注：本文中为了方便大家理解，对一些概念做了类比，有些严格来不是准确，不过我也认为对于初学者，也没有必要把每一个概念掌握的很细致和准确，学习是一个逐步深入的过程，很多时候我们会发现，过一段后，我们会对同一个东西有不一样的理解。</p>
-<p>本文完，这些概念你都明白了么？</p>
+<p>本文完，这些概念你都明白了么？现在你可以开始开发了，看看<a href="https://learnblockchain.cn/2017/11/24/init-env/">智能合约开发环境搭建及Hello World合约</a></p>
 <p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客</p>
 
       
@@ -497,11 +503,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/以太坊/" rel="tag"># 以太坊</a>
-          
             <a href="/tags/ethereum/" rel="tag"># ethereum</a>
           
-            <a href="/tags/入门/" rel="tag"># 入门</a>
+            <a href="/tags/以太坊入门/" rel="tag"># 以太坊入门</a>
+          
+            <a href="/tags/以太坊概念/" rel="tag"># 以太坊概念</a>
           
         </div>
       
@@ -523,6 +529,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/24/init-env/" rel="prev" title="智能合约开发环境搭建及Hello World合约">
+                智能合约开发环境搭建及Hello World合约 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -599,7 +609,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -610,7 +620,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -621,7 +631,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -704,7 +714,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#以太坊是什么"><span class="nav-number">1.</span> <span class="nav-text">以太坊是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#智能合约"><span class="nav-number">2.</span> <span class="nav-text">智能合约</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是智能合约"><span class="nav-number">2.1.</span> <span class="nav-text">什么是智能合约</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编程语言：Solidity"><span class="nav-number">2.2.</span> <span class="nav-text">编程语言：Solidity</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行环境：EVM"><span class="nav-number">2.3.</span> <span class="nav-text">运行环境：EVM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#合约的编译"><span class="nav-number">2.4.</span> <span class="nav-text">合约的编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#合约的部署"><span class="nav-number">2.5.</span> <span class="nav-text">合约的部署</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#以太坊客户端（钱包）"><span class="nav-number">2.5.1.</span> <span class="nav-text">以太坊客户端（钱包）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何部署"><span class="nav-number">2.5.2.</span> <span class="nav-text">如何部署</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行"><span class="nav-number">2.6.</span> <span class="nav-text">运行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gas"><span class="nav-number">3.</span> <span class="nav-text">Gas</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试网络：私有链"><span class="nav-number">4.</span> <span class="nav-text">测试网络：私有链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dapp：去中心化的应用程序"><span class="nav-number">5.</span> <span class="nav-text">Dapp：去中心化的应用程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Truffle"><span class="nav-number">5.1.</span> <span class="nav-text">Truffle</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#以太坊是什么"><span class="nav-number">1.</span> <span class="nav-text">以太坊是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#智能合约"><span class="nav-number">2.</span> <span class="nav-text">智能合约</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是智能合约"><span class="nav-number">2.1.</span> <span class="nav-text">什么是智能合约</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编程语言：Solidity"><span class="nav-number">2.2.</span> <span class="nav-text">编程语言：Solidity</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行环境：EVM"><span class="nav-number">2.3.</span> <span class="nav-text">运行环境：EVM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#合约的编译"><span class="nav-number">2.4.</span> <span class="nav-text">合约的编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#合约的部署"><span class="nav-number">2.5.</span> <span class="nav-text">合约的部署</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#以太坊客户端（钱包）"><span class="nav-number">2.5.1.</span> <span class="nav-text">以太坊客户端（钱包）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何部署"><span class="nav-number">2.5.2.</span> <span class="nav-text">如何部署</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行"><span class="nav-number">2.6.</span> <span class="nav-text">运行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gas"><span class="nav-number">3.</span> <span class="nav-text">Gas</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#以太坊网络"><span class="nav-number">4.</span> <span class="nav-text">以太坊网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#选择以太坊官网测试网络Testnet"><span class="nav-number">4.1.</span> <span class="nav-text">选择以太坊官网测试网络Testnet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用私有链"><span class="nav-number">4.2.</span> <span class="nav-text">使用私有链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用开发者网络-模式"><span class="nav-number">4.3.</span> <span class="nav-text">使用开发者网络(模式)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用模拟环境"><span class="nav-number">4.4.</span> <span class="nav-text">使用模拟环境</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dapp：去中心化的应用程序"><span class="nav-number">5.</span> <span class="nav-text">Dapp：去中心化的应用程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Truffle"><span class="nav-number">5.1.</span> <span class="nav-text">Truffle</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
