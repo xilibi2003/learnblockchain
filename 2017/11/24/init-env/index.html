@@ -97,7 +97,7 @@
 <meta property="og:image" content="https://learnblockchain.cn/images/geth_accounts_3.jpg">
 <meta property="og:image" content="https://learnblockchain.cn/images/eth_code_hello_step1.jpeg">
 <meta property="og:image" content="https://learnblockchain.cn/images/eth_code_hello_step2.jpeg">
-<meta property="og:updated_time" content="2017-11-26T03:20:13.000Z">
+<meta property="og:updated_time" content="2017-11-26T03:40:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="智能合约开发环境搭建及Hello World合约">
 <meta name="twitter:description" content="如果你对于以太坊智能合约开发还没有概念（本文会假设你已经知道这些概念），建议先阅读入门篇。就先学习任何编程语言一样，入门的第一个程序都是Hello World。今天我们来一步一步从搭建以太坊智能合约开发环境开始，讲解智能合约的Hello World如何编写。">
@@ -384,11 +384,11 @@
 <p>安装完以后，就是把geth控制台启动。</p>
 <h2 id="启动环境"><a href="#启动环境" class="headerlink" title="启动环境"></a>启动环境</h2><p>在入门篇讲过，geth是一个以太坊客户端，现在利用geth启动一个以太坊（开发者）网络节点。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">geth --datadir testNet --dev console 2&gt;&gt; test.log</div></pre></td></tr></table></figure>
-<p>执行命名后，会进入geth控制台，这时光标停在一个向右的箭头处，像这样：<br><img src="/images/open_geth_eth.jpg" alt=""></p>
+<p>执行命名后，会进入geth控制台，这时光标停在一个向右的箭头处，像这样：<br><img src="https://learnblockchain.cn/images/open_geth_eth.jpg" alt=""></p>
 <p>命令参数说明:<br><strong>–dev</strong> 启用开发者网络（模式），开发者网络会使用POA共识，默认预分配一个开发者账户并且会自动开启挖矿。<br><strong>–datadir</strong> 后面的参数是区块数据及秘钥存放目录。<br>第一次输入命令后，它会放在当前目录下新建一个testNet目录来存放数据。<br><strong>console</strong> 进入控制台<br><strong>2&gt;&gt; test.log</strong> 表示把控制台日志输出到test.log文件</p>
 <p>为了更好的理解，建议新开一个命令行终端，实时显示日志：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tail -f test.log</div></pre></td></tr></table></figure></p>
 <h2 id="准备账户"><a href="#准备账户" class="headerlink" title="准备账户"></a>准备账户</h2><p>部署智能合约需要一个外部账户，我们先来看看分配的开发者账户，在控制台使用以下命令查看账户：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; eth.accounts</div></pre></td></tr></table></figure></p>
-<p>回车后，返回一个账户数组，里面有一个默认账户，如：<br><img src="/images/geth_accounts_1.jpg" alt=""></p>
+<p>回车后，返回一个账户数组，里面有一个默认账户，如：<br><img src="https://learnblockchain.cn/images/geth_accounts_1.jpg" alt=""></p>
 <blockquote>
 <p>也可以使用personal.listAccounts查看账户，</p>
 </blockquote>
@@ -400,17 +400,17 @@
 <p>这时我们查看账户列表：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; eth.accounts</div></pre></td></tr></table></figure></p>
 <p>可以看到账户数组你包含两个账户，新账户在第二个（索引为1）位置。</p>
 <p>现在看看账户的余额：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; eth.getBalance(eth.accounts[1])</div><div class="line">0</div></pre></td></tr></table></figure></p>
-<p>回车后，返回的是0，新账户是0。结果如：<br><img src="/images/geth_accounts_2.jpg" alt=""></p>
+<p>回车后，返回的是0，新账户是0。结果如：<br><img src="https://learnblockchain.cn/images/geth_accounts_2.jpg" alt=""></p>
 <h3 id="给新账户转账"><a href="#给新账户转账" class="headerlink" title="给新账户转账"></a>给新账户转账</h3><p>我们知道没有余额的账户是没法部署合约的，那我们就从默认账户转1以太币给新账户，使用以下命令（请使用你自己eth.accounts对应输出的账户）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">eth.sendTransaction(&#123;from: &apos;0xb0ebe17ef0e96b5c525709c0a1ede347c66bd391&apos;, to: &apos;0xf280facfd60d61f6fd3f88c9dee4fb90d0e11dfc&apos;, value: web3.toWei(1, &quot;ether&quot;)&#125;)</div></pre></td></tr></table></figure></p>
 <blockquote>
-<p>在打开的<strong>tail -f test.log</strong>日志终端里，可以同时看到挖矿记录<br>再次查看新账户余额，可以新账户有1个以太币<br><img src="/images/geth_accounts_3.jpg" alt=""></p>
+<p>在打开的<strong>tail -f test.log</strong>日志终端里，可以同时看到挖矿记录<br>再次查看新账户余额，可以新账户有1个以太币<br><img src="https://learnblockchain.cn/images/geth_accounts_3.jpg" alt=""></p>
 </blockquote>
 <h3 id="解锁账户"><a href="#解锁账户" class="headerlink" title="解锁账户"></a>解锁账户</h3><p>在部署合约前需要先解锁账户（就像银行转账要输入密码一样），使用以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">personal.unlockAccount(eth.accounts[1],&quot;TinyXiong&quot;);</div></pre></td></tr></table></figure></p>
 <p>“TinyXiong” 是之前创建账户时的密码<br>解锁成功后，账户就准备完毕啦，接下来就是编写合约代码。</p>
 <h2 id="编写合约代码"><a href="#编写合约代码" class="headerlink" title="编写合约代码"></a>编写合约代码</h2><p>现在我们来开始编写第一个智能合约代码，solidity代码如下：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.18</span>;</div><div class="line">contract hello &#123;</div><div class="line">    string greeting;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">hello</span>(<span class="params">string _greeting</span>) <span class="title">public</span> </span>&#123;</div><div class="line">        greeting = _greeting;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">say</span>(<span class="params"></span>) <span class="title">constant</span> <span class="title">public</span> <span class="title">returns</span> (<span class="params">string</span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> greeting;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>简单解释下，我们定义了一个名为hello的合约，在合约初始化时保存了一个字符串（我们会传入hello world），每次调用say返回字符串。<br>把这段代码写(拷贝)到<a href="https://ethereum.github.io/browser-solidity" target="_blank" rel="external">Browser-Solidity</a>，如果没有错误，点击Details获取部署代码，如：<br><img src="/images/eth_code_hello_step1.jpeg" alt=""></p>
-<p>在弹出的对话框中找到WEB3DEPLOY部分，点拷贝，粘贴到编辑器后，修改初始化字符串为hello world。<br><img src="/images/eth_code_hello_step2.jpeg" alt=""></p>
+<p>简单解释下，我们定义了一个名为hello的合约，在合约初始化时保存了一个字符串（我们会传入hello world），每次调用say返回字符串。<br>把这段代码写(拷贝)到<a href="https://ethereum.github.io/browser-solidity" target="_blank" rel="external">Browser-Solidity</a>，如果没有错误，点击Details获取部署代码，如：<br><img src="https://learnblockchain.cn/images/eth_code_hello_step1.jpeg" alt=""></p>
+<p>在弹出的对话框中找到WEB3DEPLOY部分，点拷贝，粘贴到编辑器后，修改初始化字符串为hello world。<br><img src="https://learnblockchain.cn/images/eth_code_hello_step2.jpeg" alt=""></p>
 <blockquote>
 <p>solidity在博文写作时（2017/11/24），版本为0.4.18，solidity发展非常快，solidity版本之间有可能不能兼容，这是你可以在Browser-Solidity的Settings里选择对应的编译器版本。<br>Browser-Solidity也不停的更新中，截图可能和你看到的界面不一样。</p>
 </blockquote>
