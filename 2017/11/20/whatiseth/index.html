@@ -91,7 +91,7 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="很多同学已经跃跃欲试投入到区块链开发队伍当中来，可是又感觉无从下手，本文将基于以太坊平台，以通俗的方式介绍以太坊开发中涉及的各晦涩的概念，轻松带大家入门。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-28T03:17:04.000Z">
+<meta property="og:updated_time" content="2017-11-28T08:07:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="以太坊是什么 - 以太坊开发入门指南">
 <meta name="twitter:description" content="很多同学已经跃跃欲试投入到区块链开发队伍当中来，可是又感觉无从下手，本文将基于以太坊平台，以通俗的方式介绍以太坊开发中涉及的各晦涩的概念，轻松带大家入门。">
@@ -382,14 +382,14 @@
 </blockquote>
 <p>在<a href="https://learnblockchain.cn/2017/11/10/bitcoin-script/">比特币脚本</a>中，我们讲到过比特币的交易是可以编程的，但是比特币脚本有很多的限制，能够编写的程序也有限，<br>而以太坊则更加完备（在计算机科学术语中，称它为是“图灵完备的”），让我们就像使用任何高级语言一样来编写几乎可以做任何事情的程序（智能合约）。</p>
 <p>智能合约非常适合对信任、安全和持久性要求较高的应用场景，比如：数字货币、数字资产、投票、保险、金融应用、预测市场、产权所有权管理、物联网、点对点交易等等。<br>目前除数字货币之外，真正落地的应用还不多（就像移动平台刚开始出来一样），相信1到3年内，各种杀手级会慢慢出现。</p>
-<h3 id="编程语言：Solidity"><a href="#编程语言：Solidity" class="headerlink" title="编程语言：Solidity"></a>编程语言：Solidity</h3><p>智能合约的默认的编程语言是Solidity，文件扩展名以.sol结尾。<br>Solidity是和JavaScript相似的语言，用它来开发合约并编译成以太坊虚拟机字节代码。</p>
+<h3 id="编程语言：Solidity"><a href="#编程语言：Solidity" class="headerlink" title="编程语言：Solidity"></a>编程语言：Solidity</h3><p>智能合约的默认的编程语言是Solidity，文件扩展名以.sol结尾。<br>Solidity语言和JavaScript很相似，用它来开发合约并编译成以太坊虚拟机字节代码。</p>
 <blockquote>
 <p>还有Viper，Serpent，LLL及Bamboo，建议大家还是使用Solidity。<br>更新：Serpent官方已经不再推荐，建议Serpent的用户转换到Viper，他们都是类Python语言。</p>
 </blockquote>
 <p><a href="https://ethereum.github.io/browser-solidity" target="_blank" rel="external">Browser-Solidity</a>是一个浏览器的Solidity IDE, 大家可以点进去看看，以后我们更多文章介绍Solidity这个语言。</p>
 <h3 id="运行环境：EVM"><a href="#运行环境：EVM" class="headerlink" title="运行环境：EVM"></a>运行环境：EVM</h3><p>EVM（Ethereum Virtual Machine）以太坊虚拟机是以太坊中智能合约的运行环境。</p>
 <blockquote>
-<p>Solidity之于EVM，就像之于跟JVM的关系一样，这样大家就容易理解了。<br>以太坊虚拟机是一个隔离的环境，在EVM内部运行的代码不能跟外部有联系。</p>
+<p>Solidity之于EVM，就像之于跟JVM的关系一样，这样大家就容易理解了。<br>以太坊虚拟机是一个隔离的环境，外部无法接触到在EVM内部运行的代码。</p>
 </blockquote>
 <p>而EVM运行在以太坊节点上，当我们把合约部署到以太坊网络上之后，合约就可以在以太坊网络中运行了。</p>
 <h3 id="合约的编译"><a href="#合约的编译" class="headerlink" title="合约的编译"></a>合约的编译</h3><p>以太坊虚拟机上运行的是合约的字节码形式，需要我们在部署之前先对合约进行编译，可以选择<a href="https://ethereum.github.io/browser-solidity" target="_blank" rel="external">Browser-Solidity Web IDE</a>或solc编译器。</p>
