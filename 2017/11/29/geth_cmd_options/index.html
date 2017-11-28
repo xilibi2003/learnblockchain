@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+  <meta name="msvalidate.01" content="914C9C1CBC7078C5E2AC612AD5C1CC6C" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Geth命令用法,Geth命令参数详解,geth help,geth 手册," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Geth在以太坊智能合约开发中最常用的工具（必备开发工具），一个多用途的命令行工具。熟悉Geth可以让我们有更好的效率，大家可收藏起来作为Geth命令用法手册。 本文主要是对geth help的翻译，基于最新的geth 1.7.3-stable版本。">
+<meta name="keywords" content="Geth命令用法,Geth命令参数详解,geth help,geth 手册">
+<meta property="og:type" content="article">
+<meta property="og:title" content="以太坊客户端Geth命令用法-参数详解">
+<meta property="og:url" content="https://learnblockchain.cn/2017/11/29/geth_cmd_options/index.html">
+<meta property="og:site_name" content="深入浅出区块链">
+<meta property="og:description" content="Geth在以太坊智能合约开发中最常用的工具（必备开发工具），一个多用途的命令行工具。熟悉Geth可以让我们有更好的效率，大家可收藏起来作为Geth命令用法手册。 本文主要是对geth help的翻译，基于最新的geth 1.7.3-stable版本。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-11-28T15:47:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="以太坊客户端Geth命令用法-参数详解">
+<meta name="twitter:description" content="Geth在以太坊智能合约开发中最常用的工具（必备开发工具），一个多用途的命令行工具。熟悉Geth可以让我们有更好的效率，大家可收藏起来作为Geth命令用法手册。 本文主要是对geth help的翻译，基于最新的geth 1.7.3-stable版本。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://learnblockchain.cn/2017/11/29/geth_cmd_options/"/>
+
+
+
+
+
+  <title>以太坊客户端Geth命令用法-参数详解 | 深入浅出区块链</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">系统学习区块链技术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wiki">
+          <a href="https://wiki.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Wiki
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2017/11/29/geth_cmd_options/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">以太坊客户端Geth命令用法-参数详解</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-29T11:51:52+08:00">
+                2017-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/以太坊/" itemprop="url" rel="index">
+                    <span itemprop="name">以太坊</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Geth在以太坊智能合约开发中最常用的工具（必备开发工具），一个多用途的命令行工具。<br>熟悉Geth可以让我们有更好的效率，大家可收藏起来作为Geth命令用法手册。 本文主要是对geth help的翻译，基于最新的geth 1.7.3-stable版本。</p>
+<a id="more"></a>
+<p>如果你还不知道geth是什么，请先阅读<a href="https://learnblockchain.cn/2017/11/20/whatiseth/">入门篇：以太坊是什么</a>。<br>以下开始正文。</p>
+<h2 id="命令用法"><a href="#命令用法" class="headerlink" title="命令用法"></a>命令用法</h2><pre><code>geth [选项] 命令 [命令选项] [参数…]
+</code></pre><h3 id="版本："><a href="#版本：" class="headerlink" title="版本："></a>版本：</h3><pre><code>1.7.3-stable
+</code></pre><h3 id="命令"><a href="#命令" class="headerlink" title="命令:"></a>命令:</h3><pre><code>account    管理账户
+attach     启动交互式JavaScript环境（连接到节点）
+bug        上报bug Issues
+console    启动交互式JavaScript环境
+copydb     从文件夹创建本地链
+dump       Dump（分析）一个特定的块存储
+dumpconfig 显示配置值
+export     导出区块链到文件
+import     导入一个区块链文件
+init       启动并初始化一个新的创世纪块
+js         执行指定的JavaScript文件(多个)
+license    显示许可信息
+makecache  生成ethash验证缓存(用于测试)
+makedag    生成ethash 挖矿DAG(用于测试)
+monitor    监控和可视化节点指标
+removedb   删除区块链和状态数据库
+version    打印版本号
+wallet     管理Ethereum预售钱包
+help,h     显示一个命令或帮助一个命令列表
+</code></pre><h3 id="ETHEREUM选项"><a href="#ETHEREUM选项" class="headerlink" title="ETHEREUM选项:"></a>ETHEREUM选项:</h3><pre><code>--config value          TOML 配置文件
+–-datadir “xxx”         数据库和keystore密钥的数据目录
+–-keystore              keystore存放目录(默认在datadir内)
+--nousb                 禁用监控和管理USB硬件钱包
+–-networkid value       网络标识符(整型, 1=Frontier, 2=Morden (弃用), 3=Ropsten, 4=Rinkeby) (默认: 1)
+–-testnet               Ropsten网络:预先配置的POW(proof-of-work)测试网络
+--rinkeby               Rinkeby网络: 预先配置的POA(proof-of-authority)测试网络
+--syncmode &quot;fast&quot;       同步模式 (&quot;fast&quot;, &quot;full&quot;, or &quot;light&quot;)
+--ethstats value        上报ethstats service  URL (nodename:secret@host:port)
+--identity value        自定义节点名
+--lightserv value       允许LES请求时间最大百分比(0 – 90)(默认值:0) 
+--lightpeers value      最大LES client peers数量(默认值:20)
+--lightkdf              在KDF强度消费时降低key-derivation RAM&amp;CPU使用
+</code></pre><h3 id="开发者（模式）选项"><a href="#开发者（模式）选项" class="headerlink" title="开发者（模式）选项:"></a>开发者（模式）选项:</h3><pre><code>--dev               使用POA共识网络，默认预分配一个开发者账户并且会自动开启挖矿。
+--dev.period value  开发者模式下挖矿周期 (0 = 仅在交易时) (默认: 0)
+</code></pre><h3 id="ETHASH-选项"><a href="#ETHASH-选项" class="headerlink" title="ETHASH 选项:"></a>ETHASH 选项:</h3><pre><code>--ethash.cachedir                        ethash验证缓存目录(默认 = datadir目录内)
+--ethash.cachesinmem value               在内存保存的最近的ethash缓存个数  (每个缓存16MB ) (默认: 2)
+--ethash.cachesondisk value              在磁盘保存的最近的ethash缓存个数 (每个缓存16MB) (默认: 3)
+--ethash.dagdir &quot;&quot;                       存ethash DAGs目录 (默认 = 用户hom目录)
+--ethash.dagsinmem value                 在内存保存的最近的ethash DAGs 个数 (每个1GB以上) (默认: 1)
+--ethash.dagsondisk value                在磁盘保存的最近的ethash DAGs 个数 (每个1GB以上) (默认: 2)
+</code></pre><h3 id="交易池选项"><a href="#交易池选项" class="headerlink" title="交易池选项:"></a>交易池选项:</h3><pre><code>--txpool.nolocals            为本地提交交易禁用价格豁免
+--txpool.journal value       本地交易的磁盘日志：用于节点重启 (默认: &quot;transactions.rlp&quot;)
+--txpool.rejournal value     重新生成本地交易日志的时间间隔 (默认: 1小时)
+--txpool.pricelimit value    加入交易池的最小的gas价格限制(默认: 1)
+--txpool.pricebump value     价格波动百分比（相对之前已有交易） (默认: 10)
+--txpool.accountslots value  每个帐户保证可执行的最少交易槽数量  (默认: 16)
+--txpool.globalslots value   所有帐户可执行的最大交易槽数量 (默认: 4096)
+--txpool.accountqueue value  每个帐户允许的最多非可执行交易槽数量 (默认: 64)
+--txpool.globalqueue value   所有帐户非可执行交易最大槽数量  (默认: 1024)
+--txpool.lifetime value      非可执行交易最大入队时间(默认: 3小时)
+</code></pre><h3 id="性能调优的选项"><a href="#性能调优的选项" class="headerlink" title="性能调优的选项:"></a>性能调优的选项:</h3><pre><code>––cache value                分配给内部缓存的内存MB数量，缓存值(最低16 mb /数据库强制要求)(默认:128)
+––trie-cache-gens value      保持在内存中产生的trie node数量(默认:120)
+</code></pre><h3 id="帐户选项"><a href="#帐户选项" class="headerlink" title="帐户选项:"></a>帐户选项:</h3><pre><code>––unlock value              需解锁账户用逗号分隔
+––password value            用于非交互式密码输入的密码文件
+</code></pre><h3 id="API和控制台选项"><a href="#API和控制台选项" class="headerlink" title="API和控制台选项:"></a>API和控制台选项:</h3><pre><code>––rpc                       启用HTTP-RPC服务器
+––rpcaddr value             HTTP-RPC服务器接口地址(默认值:“localhost”)
+––rpcport value             HTTP-RPC服务器监听端口(默认值:8545)
+––rpcapi value              基于HTTP-RPC接口提供的API
+––ws                        启用WS-RPC服务器
+––wsaddr value              WS-RPC服务器监听接口地址(默认值:“localhost”)
+––wsport value              WS-RPC服务器监听端口(默认值:8546)
+––wsapi  value              基于WS-RPC的接口提供的API
+––wsorigins value           websockets请求允许的源
+––ipcdisable                禁用IPC-RPC服务器
+––ipcpath                   包含在datadir里的IPC socket/pipe文件名(转义过的显式路径)
+––rpccorsdomain value       允许跨域请求的域名列表(逗号分隔)(浏览器强制)
+––jspath loadScript         JavaScript加载脚本的根路径(默认值:“.”)
+––exec value                执行JavaScript语句(只能结合console/attach使用)
+––preload value             预加载到控制台的JavaScript文件列表(逗号分隔)
+</code></pre><h3 id="网络选项"><a href="#网络选项" class="headerlink" title="网络选项:"></a>网络选项:</h3><pre><code>––bootnodes value    用于P2P发现引导的enode urls(逗号分隔)(对于light servers用v4+v5代替)
+--bootnodesv4 value  用于P2P v4发现引导的enode urls(逗号分隔) (light server, 全节点)
+--bootnodesv5 value  用于P2P v5发现引导的enode urls(逗号分隔) (light server, 轻节点)
+-–port value         网卡监听端口(默认值:30303)
+-–maxpeers value     最大的网络节点数量(如果设置为0，网络将被禁用)(默认值:25)
+-–maxpendpeers value    最大尝试连接的数量(如果设置为0，则将使用默认值)(默认值:0)
+-–nat value             NAT端口映射机制 (any|none|upnp|pmp|extip:&lt;IP&gt;) (默认: “any”)
+-–nodiscover            禁用节点发现机制(手动添加节点)
+-–v5disc                启用实验性的RLPx V5(Topic发现)机制
+-–nodekey value         P2P节点密钥文件
+-–nodekeyhex value      十六进制的P2P节点密钥(用于测试)
+</code></pre><h3 id="矿工选项"><a href="#矿工选项" class="headerlink" title="矿工选项:"></a>矿工选项:</h3><pre><code>––mine                  打开挖矿
+––minerthreads value    挖矿使用的CPU线程数量(默认值:8)
+––etherbase value       挖矿奖励地址(默认=第一个创建的帐户)(默认值:“0”)
+––targetgaslimit value  目标gas限制：设置最低gas限制（低于这个不会被挖？） (默认值:“4712388”)
+––gasprice value        挖矿接受交易的最低gas价格
+––extradata value       矿工设置的额外块数据(默认=client version)
+</code></pre><h3 id="GAS价格选项"><a href="#GAS价格选项" class="headerlink" title="GAS价格选项:"></a>GAS价格选项:</h3><pre><code>--gpoblocks value      用于检查gas价格的最近块的个数  (默认: 10)
+--gpopercentile value  建议gas价参考最近交易的gas价的百分位数，(默认: 50)
+</code></pre><h3 id="虚拟机的选项"><a href="#虚拟机的选项" class="headerlink" title="虚拟机的选项:"></a>虚拟机的选项:</h3><pre><code>––vmdebug        记录VM及合约调试信息
+</code></pre><h3 id="日志和调试选项"><a href="#日志和调试选项" class="headerlink" title="日志和调试选项:"></a>日志和调试选项:</h3><pre><code>––metrics            启用metrics收集和报告
+––fakepow            禁用proof-of-work验证
+––verbosity value    日志详细度:0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=detail (default: 3)
+––vmodule value      每个模块详细度:以 &lt;pattern&gt;=&lt;level&gt;的逗号分隔列表 (比如 eth/*=6,p2p=5)
+––backtrace value    请求特定日志记录堆栈跟踪 (比如 “block.go:271”)
+--debug                     突出显示调用位置日志(文件名及行号)
+––pprof                     启用pprof HTTP服务器
+––pprofaddr value           pprof HTTP服务器监听接口(默认值:127.0.0.1)
+––pprofport value           pprof HTTP服务器监听端口(默认值:6060)
+––memprofilerate value      按指定频率打开memory profiling    (默认:524288)
+––blockprofilerate value    按指定频率打开block profiling    (默认值:0)
+––cpuprofile value          将CPU profile写入指定文件
+––trace value               将execution trace写入指定文件
+</code></pre><h3 id="WHISPER实验选项"><a href="#WHISPER实验选项" class="headerlink" title="WHISPER实验选项:"></a>WHISPER实验选项:</h3><p>   -–shh                        启用Whisper<br>   –shh.maxmessagesize value   可接受的最大的消息大小 (默认值: 1048576)<br>   –shh.pow value              可接受的最小的POW (默认值: 0.2)</p>
+<h3 id="启用选项："><a href="#启用选项：" class="headerlink" title="启用选项："></a>启用选项：</h3><pre><code>-–fast     开快速同步通过下载状态
+-–light    启用轻客户端模式
+</code></pre><h3 id="其他选项"><a href="#其他选项" class="headerlink" title="其他选项:"></a>其他选项:</h3><pre><code>–help, -h    显示帮助
+</code></pre><h3 id="版权："><a href="#版权：" class="headerlink" title="版权："></a>版权：</h3><pre><code>Copyright 2013-2017 The go-ethereum Authors
+</code></pre><h2 id="翻译说明"><a href="#翻译说明" class="headerlink" title="翻译说明"></a>翻译说明</h2><p>   有些参数我本人也没有使用过，可能存在理解不准确的地方，请指正。<br>   原文会尽量随geth升级保持更新，原始链接：<a href="https://learnblockchain.cn/2017/11/29/geth_cmd_options">https://learnblockchain.cn/2017/11/29/geth_cmd_options/</a></p>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="Tiny熊 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信号：区块链技术剖析，欢迎订阅</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>博主辛苦，赞赏下</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/qr_pay.jpg" alt="Tiny熊 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Tiny熊
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://learnblockchain.cn/2017/11/29/geth_cmd_options/" title="以太坊客户端Geth命令用法-参数详解">https://learnblockchain.cn/2017/11/29/geth_cmd_options/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Geth命令用法/" rel="tag"># Geth命令用法</a>
+          
+            <a href="/tags/Geth命令参数详解/" rel="tag"># Geth命令参数详解</a>
+          
+            <a href="/tags/geth-help/" rel="tag"># geth help</a>
+          
+            <a href="/tags/geth-手册/" rel="tag"># geth 手册</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/24/init-env/" rel="next" title="智能合约开发环境搭建及Hello World合约">
+                <i class="fa fa-chevron-left"></i> 智能合约开发环境搭建及Hello World合约
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/xilibi2003" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiong-li-bing/activities" target="_blank" title="ZhiHu">
+                    
+                      <i class="fa fa-fw fa-globe"></i>ZhiHu</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="我的小专栏" target="_blank">我的小专栏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://t.xiaomiquan.com/RfAu7uj" title="技术交流-知识星球" target="_blank">技术交流-知识星球</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bitshuo.com" title="区块链技术中文社区" target="_blank">区块链技术中文社区</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令用法"><span class="nav-number">1.</span> <span class="nav-text">命令用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#版本："><span class="nav-number">1.1.</span> <span class="nav-text">版本：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令"><span class="nav-number">1.2.</span> <span class="nav-text">命令:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ETHEREUM选项"><span class="nav-number">1.3.</span> <span class="nav-text">ETHEREUM选项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开发者（模式）选项"><span class="nav-number">1.4.</span> <span class="nav-text">开发者（模式）选项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ETHASH-选项"><span class="nav-number">1.5.</span> <span class="nav-text">ETHASH 选项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交易池选项"><span class="nav-number">1.6.</span> <span class="nav-text">交易池选项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性能调优的选项"><span class="nav-number">1.7.</span> <span class="nav-text">性能调优的选项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#帐户选项"><span class="nav-number">1.8.</span> <span class="nav-text">帐户选项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#API和控制台选项"><span class="nav-number">1.9.</span> <span class="nav-text">API和控制台选项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络选项"><span class="nav-number">1.10.</span> <span class="nav-text">网络选项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#矿工选项"><span class="nav-number">1.11.</span> <span class="nav-text">矿工选项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GAS价格选项"><span class="nav-number">1.12.</span> <span class="nav-text">GAS价格选项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟机的选项"><span class="nav-number">1.13.</span> <span class="nav-text">虚拟机的选项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志和调试选项"><span class="nav-number">1.14.</span> <span class="nav-text">日志和调试选项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WHISPER实验选项"><span class="nav-number">1.15.</span> <span class="nav-text">WHISPER实验选项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启用选项："><span class="nav-number">1.16.</span> <span class="nav-text">启用选项：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他选项"><span class="nav-number">1.17.</span> <span class="nav-text">其他选项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#版权："><span class="nav-number">1.18.</span> <span class="nav-text">版权：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#翻译说明"><span class="nav-number">2.</span> <span class="nav-text">翻译说明</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+  <div class="footer-custom"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17140514号-1</a></div>
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

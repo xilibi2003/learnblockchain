@@ -97,7 +97,7 @@
 <meta property="og:image" content="https://learnblockchain.cn/images/geth_accounts_3.jpg">
 <meta property="og:image" content="https://learnblockchain.cn/images/eth_code_hello_step1.jpeg">
 <meta property="og:image" content="https://learnblockchain.cn/images/eth_code_hello_step2.jpeg">
-<meta property="og:updated_time" content="2017-11-26T03:40:24.000Z">
+<meta property="og:updated_time" content="2017-11-28T15:50:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="智能合约开发环境搭建及Hello World合约">
 <meta name="twitter:description" content="如果你对于以太坊智能合约开发还没有概念（本文会假设你已经知道这些概念），建议先阅读入门篇。就先学习任何编程语言一样，入门的第一个程序都是Hello World。今天我们来一步一步从搭建以太坊智能合约开发环境开始，讲解智能合约的Hello World如何编写。">
@@ -385,7 +385,7 @@
 <h2 id="启动环境"><a href="#启动环境" class="headerlink" title="启动环境"></a>启动环境</h2><p>在入门篇讲过，geth是一个以太坊客户端，现在利用geth启动一个以太坊（开发者）网络节点。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">geth --datadir testNet --dev console 2&gt;&gt; test.log</div></pre></td></tr></table></figure>
 <p>执行命名后，会进入geth控制台，这时光标停在一个向右的箭头处，像这样：<br><img src="https://learnblockchain.cn/images/open_geth_eth.jpg" alt=""></p>
-<p>命令参数说明:<br><strong>–dev</strong> 启用开发者网络（模式），开发者网络会使用POA共识，默认预分配一个开发者账户并且会自动开启挖矿。<br><strong>–datadir</strong> 后面的参数是区块数据及秘钥存放目录。<br>第一次输入命令后，它会放在当前目录下新建一个testNet目录来存放数据。<br><strong>console</strong> 进入控制台<br><strong>2&gt;&gt; test.log</strong> 表示把控制台日志输出到test.log文件</p>
+<p>命令参数说明（更多命令详解可阅读<a href="https://learnblockchain.cn/2017/11/29/geth_cmd_options/">Geth命令用法-参数详解篇</a>）:<br><strong>–dev</strong> 启用开发者网络（模式），开发者网络会使用POA共识，默认预分配一个开发者账户并且会自动开启挖矿。<br><strong>–datadir</strong> 后面的参数是区块数据及秘钥存放目录。<br>第一次输入命令后，它会放在当前目录下新建一个testNet目录来存放数据。<br><strong>console</strong> 进入控制台<br><strong>2&gt;&gt; test.log</strong> 表示把控制台日志输出到test.log文件</p>
 <p>为了更好的理解，建议新开一个命令行终端，实时显示日志：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tail -f test.log</div></pre></td></tr></table></figure></p>
 <h2 id="准备账户"><a href="#准备账户" class="headerlink" title="准备账户"></a>准备账户</h2><p>部署智能合约需要一个外部账户，我们先来看看分配的开发者账户，在控制台使用以下命令查看账户：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; eth.accounts</div></pre></td></tr></table></figure></p>
 <p>回车后，返回一个账户数组，里面有一个默认账户，如：<br><img src="https://learnblockchain.cn/images/geth_accounts_1.jpg" alt=""></p>
@@ -523,6 +523,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2017/11/29/geth_cmd_options/" rel="prev" title="以太坊客户端Geth命令用法-参数详解">
+                以太坊客户端Geth命令用法-参数详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -598,7 +602,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -609,7 +613,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -620,7 +624,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
