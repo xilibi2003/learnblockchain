@@ -91,7 +91,7 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="Geth在以太坊智能合约开发中最常用的工具（必备开发工具），一个多用途的命令行工具。熟悉Geth可以让我们有更好的效率，大家可收藏起来作为Geth命令用法手册。 本文主要是对geth help的翻译，基于最新的geth 1.7.3-stable版本。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-29T01:36:18.000Z">
+<meta property="og:updated_time" content="2017-11-29T02:20:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="以太坊客户端Geth命令用法-参数详解">
 <meta name="twitter:description" content="Geth在以太坊智能合约开发中最常用的工具（必备开发工具），一个多用途的命令行工具。熟悉Geth可以让我们有更好的效率，大家可收藏起来作为Geth命令用法手册。 本文主要是对geth help的翻译，基于最新的geth 1.7.3-stable版本。">
@@ -104,7 +104,7 @@
     root: '/',
     scheme: 'Pisces',
     version: '5.1.3',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -113,9 +113,9 @@
       author: '博主'
     },
     algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
+      applicationID: 'ERVKOTY9C3',
+      apiKey: '145d6b00595f05cb28bf9c6e3c5bdbc3',
+      indexName: 'your indexName',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -246,9 +246,47 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
   
 </nav>
 
@@ -312,7 +350,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-11-29T10:20:13+08:00">
+                2017-11-29
+              </time>
             
           </span>
 
@@ -391,11 +441,11 @@ version    打印版本号
 wallet     管理Ethereum预售钱包
 help,h     显示一个命令或帮助一个命令列表
 </code></pre><h3 id="ETHEREUM选项"><a href="#ETHEREUM选项" class="headerlink" title="ETHEREUM选项:"></a>ETHEREUM选项:</h3><pre><code>--config value          TOML 配置文件
-–-datadir “xxx”         数据库和keystore密钥的数据目录
-–-keystore              keystore存放目录(默认在datadir内)
+--datadir “xxx”         数据库和keystore密钥的数据目录
+--keystore              keystore存放目录(默认在datadir内)
 --nousb                 禁用监控和管理USB硬件钱包
-–-networkid value       网络标识符(整型, 1=Frontier, 2=Morden (弃用), 3=Ropsten, 4=Rinkeby) (默认: 1)
-–-testnet               Ropsten网络:预先配置的POW(proof-of-work)测试网络
+--networkid value       网络标识符(整型, 1=Frontier, 2=Morden (弃用), 3=Ropsten, 4=Rinkeby) (默认: 1)
+--testnet               Ropsten网络:预先配置的POW(proof-of-work)测试网络
 --rinkeby               Rinkeby网络: 预先配置的POA(proof-of-authority)测试网络
 --syncmode &quot;fast&quot;       同步模式 (&quot;fast&quot;, &quot;full&quot;, or &quot;light&quot;)
 --ethstats value        上报ethstats service  URL (nodename:secret@host:port)
@@ -421,63 +471,63 @@ help,h     显示一个命令或帮助一个命令列表
 --txpool.accountqueue value  每个帐户允许的最多非可执行交易槽数量 (默认: 64)
 --txpool.globalqueue value   所有帐户非可执行交易最大槽数量  (默认: 1024)
 --txpool.lifetime value      非可执行交易最大入队时间(默认: 3小时)
-</code></pre><h3 id="性能调优的选项"><a href="#性能调优的选项" class="headerlink" title="性能调优的选项:"></a>性能调优的选项:</h3><pre><code>––cache value                分配给内部缓存的内存MB数量，缓存值(最低16 mb /数据库强制要求)(默认:128)
-––trie-cache-gens value      保持在内存中产生的trie node数量(默认:120)
-</code></pre><h3 id="帐户选项"><a href="#帐户选项" class="headerlink" title="帐户选项:"></a>帐户选项:</h3><pre><code>––unlock value              需解锁账户用逗号分隔
-––password value            用于非交互式密码输入的密码文件
-</code></pre><h3 id="API和控制台选项"><a href="#API和控制台选项" class="headerlink" title="API和控制台选项:"></a>API和控制台选项:</h3><pre><code>––rpc                       启用HTTP-RPC服务器
-––rpcaddr value             HTTP-RPC服务器接口地址(默认值:“localhost”)
-––rpcport value             HTTP-RPC服务器监听端口(默认值:8545)
-––rpcapi value              基于HTTP-RPC接口提供的API
-––ws                        启用WS-RPC服务器
-––wsaddr value              WS-RPC服务器监听接口地址(默认值:“localhost”)
-––wsport value              WS-RPC服务器监听端口(默认值:8546)
-––wsapi  value              基于WS-RPC的接口提供的API
-––wsorigins value           websockets请求允许的源
-––ipcdisable                禁用IPC-RPC服务器
-––ipcpath                   包含在datadir里的IPC socket/pipe文件名(转义过的显式路径)
-––rpccorsdomain value       允许跨域请求的域名列表(逗号分隔)(浏览器强制)
-––jspath loadScript         JavaScript加载脚本的根路径(默认值:“.”)
-––exec value                执行JavaScript语句(只能结合console/attach使用)
-––preload value             预加载到控制台的JavaScript文件列表(逗号分隔)
-</code></pre><h3 id="网络选项"><a href="#网络选项" class="headerlink" title="网络选项:"></a>网络选项:</h3><pre><code>––bootnodes value    用于P2P发现引导的enode urls(逗号分隔)(对于light servers用v4+v5代替)
+</code></pre><h3 id="性能调优的选项"><a href="#性能调优的选项" class="headerlink" title="性能调优的选项:"></a>性能调优的选项:</h3><pre><code>--cache value                分配给内部缓存的内存MB数量，缓存值(最低16 mb /数据库强制要求)(默认:128)
+--trie-cache-gens value      保持在内存中产生的trie node数量(默认:120)
+</code></pre><h3 id="帐户选项"><a href="#帐户选项" class="headerlink" title="帐户选项:"></a>帐户选项:</h3><pre><code>--unlock value              需解锁账户用逗号分隔
+--password value            用于非交互式密码输入的密码文件
+</code></pre><h3 id="API和控制台选项"><a href="#API和控制台选项" class="headerlink" title="API和控制台选项:"></a>API和控制台选项:</h3><pre><code>--rpc                       启用HTTP-RPC服务器
+--rpcaddr value             HTTP-RPC服务器接口地址(默认值:“localhost”)
+--rpcport value             HTTP-RPC服务器监听端口(默认值:8545)
+--rpcapi value              基于HTTP-RPC接口提供的API
+--ws                        启用WS-RPC服务器
+--wsaddr value              WS-RPC服务器监听接口地址(默认值:“localhost”)
+--wsport value              WS-RPC服务器监听端口(默认值:8546)
+--wsapi  value              基于WS-RPC的接口提供的API
+--wsorigins value           websockets请求允许的源
+--ipcdisable                禁用IPC-RPC服务器
+--ipcpath                   包含在datadir里的IPC socket/pipe文件名(转义过的显式路径)
+--rpccorsdomain value       允许跨域请求的域名列表(逗号分隔)(浏览器强制)
+--jspath loadScript         JavaScript加载脚本的根路径(默认值:“.”)
+--exec value                执行JavaScript语句(只能结合console/attach使用)
+--preload value             预加载到控制台的JavaScript文件列表(逗号分隔)
+</code></pre><h3 id="网络选项"><a href="#网络选项" class="headerlink" title="网络选项:"></a>网络选项:</h3><pre><code>--bootnodes value    用于P2P发现引导的enode urls(逗号分隔)(对于light servers用v4+v5代替)
 --bootnodesv4 value  用于P2P v4发现引导的enode urls(逗号分隔) (light server, 全节点)
 --bootnodesv5 value  用于P2P v5发现引导的enode urls(逗号分隔) (light server, 轻节点)
--–port value         网卡监听端口(默认值:30303)
--–maxpeers value     最大的网络节点数量(如果设置为0，网络将被禁用)(默认值:25)
--–maxpendpeers value    最大尝试连接的数量(如果设置为0，则将使用默认值)(默认值:0)
--–nat value             NAT端口映射机制 (any|none|upnp|pmp|extip:&lt;IP&gt;) (默认: “any”)
--–nodiscover            禁用节点发现机制(手动添加节点)
--–v5disc                启用实验性的RLPx V5(Topic发现)机制
--–nodekey value         P2P节点密钥文件
--–nodekeyhex value      十六进制的P2P节点密钥(用于测试)
-</code></pre><h3 id="矿工选项"><a href="#矿工选项" class="headerlink" title="矿工选项:"></a>矿工选项:</h3><pre><code>––mine                  打开挖矿
-––minerthreads value    挖矿使用的CPU线程数量(默认值:8)
-––etherbase value       挖矿奖励地址(默认=第一个创建的帐户)(默认值:“0”)
-––targetgaslimit value  目标gas限制：设置最低gas限制（低于这个不会被挖？） (默认值:“4712388”)
-––gasprice value        挖矿接受交易的最低gas价格
-––extradata value       矿工设置的额外块数据(默认=client version)
+--port value         网卡监听端口(默认值:30303)
+--maxpeers value     最大的网络节点数量(如果设置为0，网络将被禁用)(默认值:25)
+--maxpendpeers value    最大尝试连接的数量(如果设置为0，则将使用默认值)(默认值:0)
+--nat value             NAT端口映射机制 (any|none|upnp|pmp|extip:&lt;IP&gt;) (默认: “any”)
+--nodiscover            禁用节点发现机制(手动添加节点)
+--v5disc                启用实验性的RLPx V5(Topic发现)机制
+--nodekey value         P2P节点密钥文件
+--nodekeyhex value      十六进制的P2P节点密钥(用于测试)
+</code></pre><h3 id="矿工选项"><a href="#矿工选项" class="headerlink" title="矿工选项:"></a>矿工选项:</h3><pre><code>--mine                  打开挖矿
+--minerthreads value    挖矿使用的CPU线程数量(默认值:8)
+--etherbase value       挖矿奖励地址(默认=第一个创建的帐户)(默认值:“0”)
+--targetgaslimit value  目标gas限制：设置最低gas限制（低于这个不会被挖？） (默认值:“4712388”)
+--gasprice value        挖矿接受交易的最低gas价格
+--extradata value       矿工设置的额外块数据(默认=client version)
 </code></pre><h3 id="GAS价格选项"><a href="#GAS价格选项" class="headerlink" title="GAS价格选项:"></a>GAS价格选项:</h3><pre><code>--gpoblocks value      用于检查gas价格的最近块的个数  (默认: 10)
 --gpopercentile value  建议gas价参考最近交易的gas价的百分位数，(默认: 50)
-</code></pre><h3 id="虚拟机的选项"><a href="#虚拟机的选项" class="headerlink" title="虚拟机的选项:"></a>虚拟机的选项:</h3><pre><code>––vmdebug        记录VM及合约调试信息
-</code></pre><h3 id="日志和调试选项"><a href="#日志和调试选项" class="headerlink" title="日志和调试选项:"></a>日志和调试选项:</h3><pre><code>––metrics            启用metrics收集和报告
-––fakepow            禁用proof-of-work验证
-––verbosity value    日志详细度:0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=detail (default: 3)
-––vmodule value      每个模块详细度:以 &lt;pattern&gt;=&lt;level&gt;的逗号分隔列表 (比如 eth/*=6,p2p=5)
-––backtrace value    请求特定日志记录堆栈跟踪 (比如 “block.go:271”)
+</code></pre><h3 id="虚拟机的选项"><a href="#虚拟机的选项" class="headerlink" title="虚拟机的选项:"></a>虚拟机的选项:</h3><pre><code>--vmdebug        记录VM及合约调试信息
+</code></pre><h3 id="日志和调试选项"><a href="#日志和调试选项" class="headerlink" title="日志和调试选项:"></a>日志和调试选项:</h3><pre><code>--metrics            启用metrics收集和报告
+--fakepow            禁用proof-of-work验证
+--verbosity value    日志详细度:0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=detail (default: 3)
+--vmodule value      每个模块详细度:以 &lt;pattern&gt;=&lt;level&gt;的逗号分隔列表 (比如 eth/*=6,p2p=5)
+--backtrace value    请求特定日志记录堆栈跟踪 (比如 “block.go:271”)
 --debug                     突出显示调用位置日志(文件名及行号)
-––pprof                     启用pprof HTTP服务器
-––pprofaddr value           pprof HTTP服务器监听接口(默认值:127.0.0.1)
-––pprofport value           pprof HTTP服务器监听端口(默认值:6060)
-––memprofilerate value      按指定频率打开memory profiling    (默认:524288)
-––blockprofilerate value    按指定频率打开block profiling    (默认值:0)
-––cpuprofile value          将CPU profile写入指定文件
-––trace value               将execution trace写入指定文件
-</code></pre><h3 id="WHISPER实验选项"><a href="#WHISPER实验选项" class="headerlink" title="WHISPER实验选项:"></a>WHISPER实验选项:</h3><pre><code>––shh                        启用Whisper
-––shh.maxmessagesize value   可接受的最大的消息大小 (默认值: 1048576)
-––shh.pow value              可接受的最小的POW (默认值: 0.2)
-</code></pre><h3 id="弃用选项："><a href="#弃用选项：" class="headerlink" title="弃用选项："></a>弃用选项：</h3><pre><code>-–fast     开启快速同步
--–light    启用轻客户端模式
+--pprof                     启用pprof HTTP服务器
+--pprofaddr value           pprof HTTP服务器监听接口(默认值:127.0.0.1)
+--pprofport value           pprof HTTP服务器监听端口(默认值:6060)
+--memprofilerate value      按指定频率打开memory profiling    (默认:524288)
+--blockprofilerate value    按指定频率打开block profiling    (默认值:0)
+--cpuprofile value          将CPU profile写入指定文件
+--trace value               将execution trace写入指定文件
+</code></pre><h3 id="WHISPER实验选项"><a href="#WHISPER实验选项" class="headerlink" title="WHISPER实验选项:"></a>WHISPER实验选项:</h3><pre><code>--shh                        启用Whisper
+--shh.maxmessagesize value   可接受的最大的消息大小 (默认值: 1048576)
+--shh.pow value              可接受的最小的POW (默认值: 0.2)
+</code></pre><h3 id="弃用选项："><a href="#弃用选项：" class="headerlink" title="弃用选项："></a>弃用选项：</h3><pre><code>--fast     开启快速同步
+--light    启用轻客户端模式
 </code></pre><h3 id="其他选项"><a href="#其他选项" class="headerlink" title="其他选项:"></a>其他选项:</h3><pre><code>–help, -h    显示帮助
 </code></pre><h3 id="版权："><a href="#版权：" class="headerlink" title="版权："></a>版权：</h3><pre><code>Copyright 2013-2017 The go-ethereum Authors
 </code></pre><h2 id="翻译说明"><a href="#翻译说明" class="headerlink" title="翻译说明"></a>翻译说明</h2><p>   有些参数翻译可能有不准确的地方，请大家指正。<br>   原文会尽量随geth升级保持更新，原始链接：<a href="https://learnblockchain.cn/2017/11/29/geth_cmd_options">https://learnblockchain.cn/2017/11/29/geth_cmd_options/</a></p>
@@ -502,7 +552,7 @@ help,h     显示一个命令或帮助一个命令列表
     
       <div>
         <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div>博主辛苦，赞赏下</div>
+  <div>有收获，赞赏下</div>
   <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
     <span>打赏</span>
   </button>
@@ -767,6 +817,11 @@ help,h     显示一个命令或帮助一个命令列表
       
 
       
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
 
     </div>
   </aside>
@@ -821,11 +876,6 @@ help,h     显示一个命令或帮助一个命令列表
       </div>
     </footer>
 
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
     
 
     
@@ -966,6 +1016,19 @@ help,h     显示一个命令或帮助一个命令列表
   
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
 
 
 
