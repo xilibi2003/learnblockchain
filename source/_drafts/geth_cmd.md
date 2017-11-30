@@ -1,60 +1,80 @@
 ---
-title: geth使用详解
+title: Geth控制台使用实战篇
 date: 2017-11-23 19:41:53
-categories: BlockChain
+categories: Geth
 tags:
-    - geth
+    - Geth使用
 author: Tiny熊
 ---
 
+Geth控制台（REPL）实现了所有的[web3 API](http://web3js.readthedocs.io/en/1.0/index.html)和[admin api]()，
+使用实战，请结合[Geth命令用法](https://learnblockchain.cn/2017/11/29/geth_cmd_options/)阅读。
 
+结合应用场景
 <!-- more -->
 
-## 开发环境搭建
+Geth控制台（REPL）
 
-### Solidity安装
 
-强烈建议新手使用[Browser-Solidity](https://ethereum.github.io/browser-solidity)来进行开发。
-Browser-Solidity是一个基于浏览器的Solidity，就可以不用安装Solidity。
-
-Solidity安装方法如下，在命令行中输入：
+## geth控制台初探 - 启动、退出
+安装参考[智能合约开发环境搭建](https://learnblockchain.cn/2017/11/24/init-env/)
+最简单启动方式如下：
 ```
-npm install -g solc
+$ geth console
 ```
-> npm是Node.js包管理器，没有npm命令，请先安装[Node.js](https://nodejs.org/en/)
+geth控制台启动成功之后，可以看到**>**提示符。
+退出输入exit
 
-我本人使用Mac，其他平台请查看[Solidity安装指引](https://solidity.readthedocs.io/en/develop/installing-solidity.html）。
-
-### geth 安装
-[](https://github.com/ethereum/go-ethereum)
-[geth官方安装指引](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum)
+## geth 日志控制
+### 重定向日志到文件
+使用**geth console**启动是，会在当前的交互界面下时不时出现日志。
+可以使用以下方式把日志输出到文件。
 ```
-brew tap ethereum/ethereum
-brew install ethereum
-```
-> brew 是 Mac 下的包管理工具，和Ubuntu里的apt-get类似
-
-
-
-### ganache-cli 安装
-testrpc 并入Truffle框架后，更名为：ganache-cli 
-[ganache-cli](https://github.com/trufflesuite/ganache-cli)
-```
-npm install -g ganache-cli
-```
-运行
-```
-ganache-cli
+$ geth console 2>>geth.log
 ```
 
+可以新开一个命令行终端输入以下命令查看日志：
+```
+$ tail -f geth.log
+```
+
+### 重定向另一个终端
+也可以把日志重定向到另一个终端，先在想要看日志的终端输入：
+```
+$ tty
+```
+就可以获取到终端编号，如：/dev/ttys003
+然后另一个终端使用：
+```
+$ geth console 2>> /dev/ttys003
+```
+启动geth, 这是日志就输出到另一个终端。
+如果不想看到日志还可以重定向到空终端：
+```
+$ geth console 2>> /dev/null
+```
+
+### 日志级别控制
+使用**--verbosity**可以控制日志级别，如不想看到日志还可以使用：
+```
+$ geth --verbosity 0 console
+```
 
 
-### truffle安装
-[官方安装指引](https://github.com/trufflesuite/truffle)
+## 连接geth节点
+另外一个启动geth的方法是连接到一个geth节点：
+```
+$ geth attach ipc:/some/custom/path
+$ geth attach http://191.168.1.1:8545
+$ geth attach ws://191.168.1.1:8546
+```
+
+## 启动多节点(集群)
+https://ethereum.gitbooks.io/frontier-guide/content/cluster.html
+```
 
 ```
-npm install -g truffle
-```
+
 
 ## 在本地创建一个测试网络
 
