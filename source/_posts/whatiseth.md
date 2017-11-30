@@ -37,8 +37,9 @@ author: Tiny熊
 
 ### 编程语言：Solidity
 智能合约的默认的编程语言是Solidity，文件扩展名以.sol结尾。
-Solidity是和JavaScript相似的语言，用它来开发合约并编译成以太坊虚拟机字节代码。
-> 还有长得像Python的智能合约开发语言：Serpent，不过建议大家还是使用Solidity。
+Solidity语言和JavaScript很相似，用它来开发合约并编译成以太坊虚拟机字节代码。
+> 还有Viper，Serpent，LLL及Bamboo，建议大家还是使用Solidity。
+更新：Serpent官方已经不再推荐，建议Serpent的用户转换到Viper，他们都是类Python语言。
 
 [Browser-Solidity](https://ethereum.github.io/browser-solidity)是一个浏览器的Solidity IDE, 大家可以点进去看看，以后我们更多文章介绍Solidity这个语言。
 
@@ -47,7 +48,7 @@ Solidity是和JavaScript相似的语言，用它来开发合约并编译成以�
 EVM（Ethereum Virtual Machine）以太坊虚拟机是以太坊中智能合约的运行环境。
 
 > Solidity之于EVM，就像之于跟JVM的关系一样，这样大家就容易理解了。
-> 以太坊虚拟机是一个隔离的环境，在EVM内部运行的代码不能跟外部有联系。
+> 以太坊虚拟机是一个隔离的环境，外部无法接触到在EVM内部运行的代码。
 
 而EVM运行在以太坊节点上，当我们把合约部署到以太坊网络上之后，合约就可以在以太坊网络中运行了。
 

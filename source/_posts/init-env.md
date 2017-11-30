@@ -42,7 +42,7 @@ geth --datadir testNet --dev console 2>> test.log
 执行命名后，会进入geth控制台，这时光标停在一个向右的箭头处，像这样：
 ![](https://learnblockchain.cn/images/open_geth_eth.jpg)
 
-命令参数说明:
+命令参数说明（更多命令详解可阅读[Geth命令用法-参数详解篇](https://learnblockchain.cn/2017/11/29/geth_cmd_options/)）:
 **--dev** 启用开发者网络（模式），开发者网络会使用POA共识，默认预分配一个开发者账户并且会自动开启挖矿。
 **--datadir** 后面的参数是区块数据及秘钥存放目录。
 第一次输入命令后，它会放在当前目录下新建一个testNet目录来存放数据。
