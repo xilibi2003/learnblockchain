@@ -83,18 +83,18 @@
 
 
 
-<meta name="description" content="在开发以太坊去中心化应用，免不了和以太坊进行交互，那就离不开Web3。Geth控制台（REPL）实现了所有的web3 API及Admin API，使用好Geth就是必修课。结合Geth命令用法阅读效果更佳。">
+<meta name="description" content="在开发以太坊去中心化应用，免不了和以太坊进行交互，那就离不开Web3。Geth 控制台（REPL）实现了所有的web3 API及Admin API，使用好 Geth 就是必修课。结合Geth命令用法阅读效果更佳。">
 <meta name="keywords" content="Geth使用,Web3.js">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Geth控制台使用实战及Web3.js使用">
+<meta property="og:title" content="Geth 控制台使用及 Web3.js 使用实战">
 <meta property="og:url" content="https://learnblockchain.cn/2017/12/01/geth_cmd_short/index.html">
 <meta property="og:site_name" content="深入浅出区块链">
-<meta property="og:description" content="在开发以太坊去中心化应用，免不了和以太坊进行交互，那就离不开Web3。Geth控制台（REPL）实现了所有的web3 API及Admin API，使用好Geth就是必修课。结合Geth命令用法阅读效果更佳。">
+<meta property="og:description" content="在开发以太坊去中心化应用，免不了和以太坊进行交互，那就离不开Web3。Geth 控制台（REPL）实现了所有的web3 API及Admin API，使用好 Geth 就是必修课。结合Geth命令用法阅读效果更佳。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-01T15:14:14.000Z">
+<meta property="og:updated_time" content="2017-12-01T15:54:32.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Geth控制台使用实战及Web3.js使用">
-<meta name="twitter:description" content="在开发以太坊去中心化应用，免不了和以太坊进行交互，那就离不开Web3。Geth控制台（REPL）实现了所有的web3 API及Admin API，使用好Geth就是必修课。结合Geth命令用法阅读效果更佳。">
+<meta name="twitter:title" content="Geth 控制台使用及 Web3.js 使用实战">
+<meta name="twitter:description" content="在开发以太坊去中心化应用，免不了和以太坊进行交互，那就离不开Web3。Geth 控制台（REPL）实现了所有的web3 API及Admin API，使用好 Geth 就是必修课。结合Geth命令用法阅读效果更佳。">
 
 
 
@@ -130,7 +130,7 @@
 
 
 
-  <title>Geth控制台使用实战及Web3.js使用 | 深入浅出区块链</title>
+  <title>Geth 控制台使用及 Web3.js 使用实战 | 深入浅出区块链</title>
   
 
 
@@ -294,7 +294,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Geth控制台使用实战及Web3.js使用</h2>
+          <h2 class="post-title" itemprop="name headline">Geth 控制台使用及 Web3.js 使用实战</h2>
         
 
         <div class="post-meta">
@@ -322,7 +322,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-12-01T23:14:14+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-01T23:54:32+08:00">
                 2017-12-01
               </time>
             
@@ -378,7 +378,7 @@
       
 
       
-        <p>在开发以太坊去中心化应用，免不了和以太坊进行交互，那就离不开Web3。<br>Geth控制台（REPL）实现了所有的<a href="http://web3js.readthedocs.io/en/1.0/index.html" target="_blank" rel="external">web3 API</a>及<a href="https://github.com/ethereum/go-ethereum/wiki/Management-APIs#admin" target="_blank" rel="external">Admin API</a>，<br>使用好Geth就是必修课。结合<a href="https://learnblockchain.cn/2017/11/29/geth_cmd_options/">Geth命令用法</a>阅读效果更佳。</p>
+        <p>在开发以太坊去中心化应用，免不了和以太坊进行交互，那就离不开Web3。<br>Geth 控制台（REPL）实现了所有的<a href="http://web3js.readthedocs.io/en/1.0/index.html" target="_blank" rel="external">web3 API</a>及<a href="https://github.com/ethereum/go-ethereum/wiki/Management-APIs#admin" target="_blank" rel="external">Admin API</a>，<br>使用好 Geth 就是必修课。结合<a href="https://learnblockchain.cn/2017/11/29/geth_cmd_options/">Geth命令用法</a>阅读效果更佳。</p>
 <a id="more"></a>
 <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>阅读本文之前，你需要对以太坊（区块链）有初步的了解，如果你不知道以太坊是什么，请先阅读<a href="https://learnblockchain.cn/2017/11/20/whatiseth/">以太坊是什么</a>。<br>如果你在我的小专栏之外的地方阅读到本文，你可能只能阅读本文的节选，阅读完整全文请订阅小专栏<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="external">区块链技术</a></p>
 <h2 id="geth控制台初探-启动、退出"><a href="#geth控制台初探-启动、退出" class="headerlink" title="geth控制台初探 - 启动、退出"></a>geth控制台初探 - 启动、退出</h2><p>安装参考<a href="https://learnblockchain.cn/2017/11/24/init-env/">智能合约开发环境搭建</a><br>最简单启动方式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ geth console</div></pre></td></tr></table></figure></p>
@@ -448,7 +448,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://learnblockchain.cn/2017/12/01/geth_cmd_short/" title="Geth控制台使用实战及Web3.js使用">https://learnblockchain.cn/2017/12/01/geth_cmd_short/</a>
+    <a href="https://learnblockchain.cn/2017/12/01/geth_cmd_short/" title="Geth 控制台使用及 Web3.js 使用实战">https://learnblockchain.cn/2017/12/01/geth_cmd_short/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>

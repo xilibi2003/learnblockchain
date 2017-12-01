@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://learnblockchain.cn/2017/12/01/geth_cmd_short/</loc>
+    
+    <lastmod>2017-12-01T15:54:32.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://learnblockchain.cn/2017/11/10/bitcoin-script/</loc>
     
     <lastmod>2017-12-01T15:43:54.000Z</lastmod>
@@ -72,13 +79,6 @@
   </url>
   
   <url>
-    <loc>https://learnblockchain.cn/2017/12/01/geth_cmd_short/</loc>
-    
-    <lastmod>2017-12-01T15:14:14.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://learnblockchain.cn/2017/11/24/init-env/</loc>
     
     <lastmod>2017-11-28T15:50:57.000Z</lastmod>
@@ -107,14 +107,14 @@
   </url>
   
   <url>
-    <loc>https://learnblockchain.cn/categories/index.html</loc>
+    <loc>https://learnblockchain.cn/tags/index.html</loc>
     
     <lastmod>2017-11-03T05:31:44.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://learnblockchain.cn/tags/index.html</loc>
+    <loc>https://learnblockchain.cn/categories/index.html</loc>
     
     <lastmod>2017-11-03T05:31:44.000Z</lastmod>
     
