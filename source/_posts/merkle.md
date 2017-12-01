@@ -1,7 +1,7 @@
 ---
 title: 比特币区块结构Merkle树及简单支付验证分析
 date: 2017-11-09 10:03:36
-categories: Bitcoin
+categories: 比特币
 tags:
     - 比特币
     - 区块结构

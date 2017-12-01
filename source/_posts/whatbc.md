@@ -1,7 +1,7 @@
 ---
 title: 区块链记账原理
 date: 2017-10-25 23:26:04
-categories: BlockChain
+categories: 比特币
 tags:
     - 区块链
     - 原理
