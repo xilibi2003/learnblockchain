@@ -1,7 +1,7 @@
 ---
 title: 分析比特币网络：一种去中心化、点对点的网络架构
 date: 2017-11-07 11:25:30
-categories: Bitcoin
+categories: 比特币
 tags:
     - p2p
     - 去中心化

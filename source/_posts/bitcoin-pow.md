@@ -1,7 +1,7 @@
 ---
 title:  比特币如何挖矿（挖矿原理）-工作量证明
 date: 2017-11-04 16:12:29
-categories: Bitcoin
+categories: 比特币
 tags:
     - 比特币
     - 挖矿
