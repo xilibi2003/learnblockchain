@@ -160,5 +160,11 @@ algolia:
   applicationID: 'ERVKOTY9C3'
   apiKey: '145d6b00595f05cb28bf9c6e3c5bdbc3'
   adminApiKey: 'dd88cfd44148585bff97b7de2999f9e1'
-  indexName: 'your indexName'
+  indexName: 'learnblockchain'
   chunkSize: 5000
+
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
