@@ -273,22 +273,26 @@
   
     <div class="site-search">
       
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
     <span class="popup-btn-close">
       <i class="fa fa-times-circle"></i>
     </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
   </div>
-  <div id="local-search-result"></div>
-</div>
+
 
 
 
@@ -438,7 +442,7 @@
 <p>如最为常见类型的比特币交易脚本（支付到公钥哈希：P2PKH（Pay-to-Public-Key-Hash））组合是这样：<br><img src="/images/script.jpeg" alt="script"></p>
 <h3 id="常见交易脚本验证过程"><a href="#常见交易脚本验证过程" class="headerlink" title="常见交易脚本验证过程"></a>常见交易脚本验证过程</h3><p>比特币交易脚本语言是一种基于逆波兰表示法的基于栈的执行语言（不知道逆波兰和栈的同学去翻大学数据结构课本，你也可跳过这个部分）。</p>
 <blockquote>
-<p>比特币脚本语言包含基本算数计算、基本逻辑(比如if…then)、报错以及返回结果和一些加密指令，不支持循环。想了解更多语言细节可参考:<a href="http://www.8btc.com/bitcoin_scripts" target="_blank" rel="external">比特币脚本</a></p>
+<p>比特币脚本语言包含基本算数计算、基本逻辑(比如if…then)、报错以及返回结果和一些加密指令，不支持循环。想了解更多语言细节可参考:<a href="http://www.8btc.com/bitcoin_scripts" target="_blank" rel="noopener">比特币脚本</a></p>
 </blockquote>
 <p>脚本语言通过从左至右地处理每个项目的方式执行脚本。</p>
 <p>下面用两个图说明下常见类型的比特币交易脚本验证执行过程：<br><img src="/images/script_run1.jpeg" alt="script_run1"><br>上图为解锁脚本运行过程（主要是入栈）<br><img src="/images/script_run2.jpeg" alt="script_run2"><br>上图为锁定脚本运行过程（主要是出栈），最后的结果为真，说明交易有效。</p>
@@ -454,13 +458,13 @@
 <h3 id="交易输入结构"><a href="#交易输入结构" class="headerlink" title="交易输入结构"></a>交易输入结构</h3><p>刚刚我们提过输入需要提供一个解锁脚本，现在来看看一个交易的输入结构：<br><img src="/images/tx_input_struce.jpeg" alt=""></p>
 <p>我们结合整个交易的结构里看输入结构就是这样子：<br><img src="/images/tx_input_overview.jpeg" alt=""></p>
 <h3 id="交易输出结构"><a href="#交易输出结构" class="headerlink" title="交易输出结构"></a>交易输出结构</h3><p>刚刚我们提过输出是指向一个解锁脚本，具体交易的输出结构为：<br><img src="/images/tx_output_struce.jpeg" alt=""><br>我们结合整个交易的结构里看输出结构就是这样子：<br><img src="/images/tx_output_overview.jpeg" alt=""></p>
-<h3 id="交易哈希计算"><a href="#交易哈希计算" class="headerlink" title="交易哈希计算"></a>交易哈希计算</h3><p>在<a href="https://xiaozhuanlan.com/topic/1402935768" target="_blank" rel="external">比特币区块结构Merkle 树及简单支付验证分析</a> 讲到区块结构，区块结构包含多个交易的哈希。<br>那么交易哈希是怎么计算的呢？</p>
+<h3 id="交易哈希计算"><a href="#交易哈希计算" class="headerlink" title="交易哈希计算"></a>交易哈希计算</h3><p>在<a href="https://xiaozhuanlan.com/topic/1402935768" target="_blank" rel="noopener">比特币区块结构Merkle 树及简单支付验证分析</a> 讲到区块结构，区块结构包含多个交易的哈希。<br>那么交易哈希是怎么计算的呢？</p>
 <ol>
 <li>交易结构各字段序列化为字节数组</li>
 <li>把字节数组拼接为支付串</li>
 <li>对支付串计算两次SHA256 得到交易hash</li>
 </ol>
-<p>了解详情可进一步参考<a href="https://bitcoin.stackexchange.com/questions/2859/how-are-transaction-hashes-calculated" target="_blank" rel="external">如何计算交易Hash?</a>及<a href="https://bitcointalk.org/index.php?topic=54451.msg649253#msg649253" target="_blank" rel="external">如何创建Hash?</a></p>
+<p>了解详情可进一步参考<a href="https://bitcoin.stackexchange.com/questions/2859/how-are-transaction-hashes-calculated" target="_blank" rel="noopener">如何计算交易Hash?</a>及<a href="https://bitcointalk.org/index.php?topic=54451.msg649253#msg649253" target="_blank" rel="noopener">如何创建Hash?</a></p>
 <p>现在是不是对完整的交易到区块有了更清晰的认识。</p>
 <h2 id="智能合约雏形-应用场景说明"><a href="#智能合约雏形-应用场景说明" class="headerlink" title="智能合约雏形 - 应用场景说明"></a>智能合约雏形 - 应用场景说明</h2><p>由于交易是通过脚本来实现，脚本语言可以表达出无数的条件变种。</p>
 <p>比特币的脚本目前常用的主要分为两种，一种是常见的P2PKH（支付给公钥哈希），另一种是P2SH（Pay-to-Script-Hash支付脚本哈希）。<br>P2SH支付中，锁定脚本被密码学哈希所取代，当一笔交易试图支付UTXO时，要解锁支付脚本，它必须含有与哈希相匹配的脚本。</p>
@@ -475,9 +479,9 @@
 </ul>
 <p>相信随着区块链的普及，会对未来的交易模式和商业结构带来巨大的影响。不过由于比特币的脚本语言不是图灵完备的，交易模式依旧有限，以太坊就是为解决这一问题而出现，后面我们会有大量介绍以太坊的文章。</p>
 <h2 id="参考文献-amp-补充阅读"><a href="#参考文献-amp-补充阅读" class="headerlink" title="参考文献 &amp; 补充阅读"></a>参考文献 &amp; 补充阅读</h2><ol>
-<li><a href="http://book.8btc.com/master_bitcoin" target="_blank" rel="external">精通比特币</a></li>
-<li>廖雪峰的<a href="http://www.infoq.com/cn/articles/deep-understanding-of-bitcoin-transaction-script" target="_blank" rel="external">深入理解比特币交易的脚本</a></li>
-<li><a href="http://www.8btc.com/bitcoin_contracts" target="_blank" rel="external">比特币合同</a></li>
+<li><a href="http://book.8btc.com/master_bitcoin" target="_blank" rel="noopener">精通比特币</a></li>
+<li>廖雪峰的<a href="http://www.infoq.com/cn/articles/deep-understanding-of-bitcoin-transaction-script" target="_blank" rel="noopener">深入理解比特币交易的脚本</a></li>
+<li><a href="http://www.8btc.com/bitcoin_contracts" target="_blank" rel="noopener">比特币合同</a></li>
 </ol>
 <p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客</p>
 
@@ -963,324 +967,20 @@
 
   
 
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
 
 
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
 
 
 

@@ -263,22 +263,26 @@
   
     <div class="site-search">
       
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
     <span class="popup-btn-close">
       <i class="fa fa-times-circle"></i>
     </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
   </div>
-  <div id="local-search-result"></div>
-</div>
+
 
 
 
@@ -421,29 +425,29 @@
 </ol>
 <p>同时银行会对账户信息进行保密（这点其实不能保证）。</p>
 <h2 id="匿名账本"><a href="#匿名账本" class="headerlink" title="匿名账本"></a>匿名账本</h2><p>那么比特币如何在没有第三方银行的参与下，在确保隐私的同时如何确定账户所有权的呢？</p>
-<p>实际上比特币的账户是用地址来表示，账本上不显示个人信息，转账是把比特币从一个地址转移到另一个地址。<br>转账记录如这样：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    "付款地址"："2A39CBa2390FDe"</div><div class="line">    "收款地址"："AAC9CBa239aFcc"</div><div class="line">    "金额"："0.2btc"</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>实际上比特币的账户是用地址来表示，账本上不显示个人信息，转账是把比特币从一个地址转移到另一个地址。<br>转账记录如这样：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    "付款地址"："2A39CBa2390FDe"</span><br><span class="line">    "收款地址"："AAC9CBa239aFcc"</span><br><span class="line">    "金额"："0.2btc"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>接下来问题就变为了 谁有权用某个地址进行付款。</p>
 <blockquote>
 <p>支付和所有权 实际是同一个问题，如果此比特币只有我可以用来支付，那么说明我拥有所有权</p>
 </blockquote>
 <h2 id="地址与私钥"><a href="#地址与私钥" class="headerlink" title="地址与私钥"></a>地址与私钥</h2><p>比特币的解决方案是，谁拥有某个地址的私钥(如果完全没有加密概念的人，可以简单的把私钥当作密码)，谁就能用这个地址进行支付。（所以私钥一定保管好，如果私钥泄漏，比特币就可能丢失）</p>
-<p>比特币地址和私钥是一个非对称的关系,私钥经过一序列运算（其中有两次Hash）之后，可以得到地址, 但是无法从地址反推得到私钥。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">地址： 2A39CBa2390FDe</div><div class="line">私钥： sdgHsdniNIhdsgaKIhkgnakgaihNKHIskdgal</div><div class="line"></div><div class="line">Hash(Hash(fun(sdgHsdniNIhdsgaKIhkgnakgaihNKHIskdgal)))  -&gt; 2A39CBa2390FDe</div></pre></td></tr></table></figure></p>
+<p>比特币地址和私钥是一个非对称的关系,私钥经过一序列运算（其中有两次Hash）之后，可以得到地址, 但是无法从地址反推得到私钥。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">地址： 2A39CBa2390FDe</span><br><span class="line">私钥： sdgHsdniNIhdsgaKIhkgnakgaihNKHIskdgal</span><br><span class="line"></span><br><span class="line">Hash(Hash(fun(sdgHsdniNIhdsgaKIhkgnakgaihNKHIskdgal)))  -&gt; 2A39CBa2390FDe</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>银行系统银行账号和密码是完全独立的，无法互相推导，转出时需要同时验证账号和密码</p>
 </blockquote>
-<p>还是上面交易的例子：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    "付款地址"："2A39CBa2390FDe",</div><div class="line">    "收款地址"："AAC9CBa239aFcc",</div><div class="line">    "金额"："0.2btc"</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>还是上面交易的例子：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    "付款地址"："2A39CBa2390FDe",</span><br><span class="line">    "收款地址"："AAC9CBa239aFcc",</span><br><span class="line">    "金额"："0.2btc"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>只有拥有地址2A39CBa2390FDe的私钥才能进行支付。</p>
 <h2 id="非对称加密技术"><a href="#非对称加密技术" class="headerlink" title="非对称加密技术"></a>非对称加密技术</h2><p>这个时候问题就变为了，如何证明你拥有某个地址的私钥（在不泄漏私钥的情况下）。</p>
 <h3 id="对交易信息进行签名"><a href="#对交易信息进行签名" class="headerlink" title="对交易信息进行签名"></a>对交易信息进行签名</h3><p>实际在签名之前，会先对交易信息进行Hash运算的到摘要信息，然后对摘要信息进行签名。过程大概是这样：<br>1.对交易进行hash， 得到一个摘要信息（Hash值）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">hash(&apos;</div><div class="line">    &#123;&quot;付款地址&quot;：&quot;2A39CBa2390FDe&quot;,</div><div class="line">    &quot;收款地址&quot;：&quot;AAC9CBa239aFcc&quot;,</div><div class="line">    &quot;金额&quot;：&quot;0.2btc&quot;</div><div class="line">    &#125;&apos;) -&gt; 8aDB23CDEA6</div></pre></td></tr></table></figure>
-<p>2.用私钥对交易摘要进行签名（付款方在安全的环境下进行，以避免私钥泄密）, 用代码表示大概是这样。<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#参数1为交易摘要</span></div><div class="line"><span class="comment">#参数2为私钥</span></div><div class="line"><span class="comment">#返回签名信息</span></div><div class="line">sign("8aDB23CDEA6", "J78sknJhidhLIqdngalket") -&gt; "3cdferdadgadg"</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hash(&apos;</span><br><span class="line">    &#123;&quot;付款地址&quot;：&quot;2A39CBa2390FDe&quot;,</span><br><span class="line">    &quot;收款地址&quot;：&quot;AAC9CBa239aFcc&quot;,</span><br><span class="line">    &quot;金额&quot;：&quot;0.2btc&quot;</span><br><span class="line">    &#125;&apos;) -&gt; 8aDB23CDEA6</span><br></pre></td></tr></table></figure>
+<p>2.用私钥对交易摘要进行签名（付款方在安全的环境下进行，以避免私钥泄密）, 用代码表示大概是这样。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#参数1为交易摘要</span></span><br><span class="line"><span class="comment">#参数2为私钥</span></span><br><span class="line"><span class="comment">#返回签名信息</span></span><br><span class="line">sign("8aDB23CDEA6", "J78sknJhidhLIqdngalket") -&gt; "3cdferdadgadg"</span><br></pre></td></tr></table></figure></p>
 <h3 id="广播"><a href="#广播" class="headerlink" title="广播"></a>广播</h3><p>在签名运算之后，付款节点就开始在全网进行广播：我支付了0.2btc到AAC9CBa239aFcc,签名信息是3cdferdadgadg，你们来确认一下吧。</p>
 <p>广播过程实际上是发信息到相连的其它节点，其它节点在验证通过后再转发到与之相连的节点，这样的扩散过程。</p>
 <p>广播的信息包含了交易原始信息和签名信息</p>
 <h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>其它节点在收到广播信息之后，会验证签名信息是不是付款方用私钥对交易原始信息签名产生的，如果验证通过说明确实是付款方本人发出的交易，说明交易有效，才会记录到账本中去。<br>（实际还会验证付款账号有没有足够的余额，我们暂时忽略这点）<br>验证过程实际是签名过程的逆运算，用代码表示大概过程是这样的：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#参数1为签名信息</span></div><div class="line"><span class="comment">#参数2为付款方地址</span></div><div class="line"><span class="comment">#返回交易摘要</span></div><div class="line">verify("3cdferdadgadg", "2A39CBa2390FDe") -&gt; "8aDB23CDEA6"</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#参数1为签名信息</span></span><br><span class="line"><span class="comment">#参数2为付款方地址</span></span><br><span class="line"><span class="comment">#返回交易摘要</span></span><br><span class="line">verify("3cdferdadgadg", "2A39CBa2390FDe") -&gt; "8aDB23CDEA6"</span><br></pre></td></tr></table></figure>
 <p>如果验证输出的信息和原始交易信息的hash一致，则验证通过，记录账本，用代码表示大概是这样：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(verify(<span class="string">"3cdferdadgadg"</span>, <span class="string">"2A39CBa2390FDe"</span>)</div><div class="line">    == hash(<span class="string">'&#123;"付款地址"："2A39CBa2390FDe",</span></div><div class="line"><span class="string">              "收款地址"："AAC9CBa239aFcc",</span></div><div class="line"><span class="string">              "金额"："0.2btc"&#125;'</span>)) :</div><div class="line">    <span class="comment"># 写入账本 </span></div><div class="line">    <span class="comment"># 广播</span></div><div class="line"><span class="keyword">else</span>:</div><div class="line">   <span class="comment"># donothing</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(verify(<span class="string">"3cdferdadgadg"</span>, <span class="string">"2A39CBa2390FDe"</span>)</span><br><span class="line">    == hash(<span class="string">'&#123;"付款地址"："2A39CBa2390FDe",</span></span><br><span class="line"><span class="string">              "收款地址"："AAC9CBa239aFcc",</span></span><br><span class="line"><span class="string">              "金额"："0.2btc"&#125;'</span>)) :</span><br><span class="line">    <span class="comment"># 写入账本 </span></span><br><span class="line">    <span class="comment"># 广播</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">   <span class="comment"># donothing</span></span><br></pre></td></tr></table></figure>
 <p>大家可以理解为付款地址为公钥，签名过程即为用私钥对交易摘要的加密过程，验证过程为用公钥解密的过程(为方便大家理解，严格来讲是不准确的)。</p>
 <h3 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h3><p>上面为了更好的理解，我对一些信息进行了简化。</p>
 <p>比特币系统使用了椭圆曲线签名算法，算法的私钥由32个字节随机数组成，通过私钥可以计算出公钥，公钥经过一序列哈希算法和编码算法得到比特币地址，地址也可以理解为公钥的摘要。</p>
@@ -935,324 +939,20 @@
 
   
 
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
 
 
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
 
 
 

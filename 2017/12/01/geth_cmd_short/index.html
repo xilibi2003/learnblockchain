@@ -263,22 +263,26 @@
   
     <div class="site-search">
       
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
     <span class="popup-btn-close">
       <i class="fa fa-times-circle"></i>
     </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
   </div>
-  <div id="local-search-result"></div>
-</div>
+
 
 
 
@@ -412,24 +416,24 @@
       
 
       
-        <p>在开发以太坊去中心化应用，免不了和以太坊进行交互，那就离不开Web3。<br>Geth 控制台（REPL）实现了所有的<a href="http://web3js.readthedocs.io/en/1.0/index.html" target="_blank" rel="external">web3 API</a>及<a href="https://github.com/ethereum/go-ethereum/wiki/Management-APIs#admin" target="_blank" rel="external">Admin API</a>，<br>使用好 Geth 就是必修课。结合<a href="https://learnblockchain.cn/2017/11/29/geth_cmd_options/">Geth命令用法</a>阅读效果更佳。</p>
+        <p>在开发以太坊去中心化应用，免不了和以太坊进行交互，那就离不开Web3。<br>Geth 控制台（REPL）实现了所有的<a href="http://web3js.readthedocs.io/en/1.0/index.html" target="_blank" rel="noopener">web3 API</a>及<a href="https://github.com/ethereum/go-ethereum/wiki/Management-APIs#admin" target="_blank" rel="noopener">Admin API</a>，<br>使用好 Geth 就是必修课。结合<a href="https://learnblockchain.cn/2017/11/29/geth_cmd_options/">Geth命令用法</a>阅读效果更佳。</p>
 <a id="more"></a>
-<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>阅读本文之前，你需要对以太坊（区块链）有初步的了解，如果你不知道以太坊是什么，请先阅读<a href="https://learnblockchain.cn/2017/11/20/whatiseth/">以太坊是什么</a>。<br>如果你在我的小专栏之外的地方阅读到本文，你可能只能阅读本文的节选，阅读完整全文请订阅小专栏<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="external">区块链技术</a></p>
-<h2 id="geth控制台初探-启动、退出"><a href="#geth控制台初探-启动、退出" class="headerlink" title="geth控制台初探 - 启动、退出"></a>geth控制台初探 - 启动、退出</h2><p>安装参考<a href="https://learnblockchain.cn/2017/11/24/init-env/">智能合约开发环境搭建</a><br>最简单启动方式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ geth console</div></pre></td></tr></table></figure></p>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>阅读本文之前，你需要对以太坊（区块链）有初步的了解，如果你不知道以太坊是什么，请先阅读<a href="https://learnblockchain.cn/2017/11/20/whatiseth/">以太坊是什么</a>。<br>如果你在我的小专栏之外的地方阅读到本文，你可能只能阅读本文的节选，阅读完整全文请订阅小专栏<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">区块链技术</a></p>
+<h2 id="geth控制台初探-启动、退出"><a href="#geth控制台初探-启动、退出" class="headerlink" title="geth控制台初探 - 启动、退出"></a>geth控制台初探 - 启动、退出</h2><p>安装参考<a href="https://learnblockchain.cn/2017/11/24/init-env/">智能合约开发环境搭建</a><br>最简单启动方式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ geth console</span><br></pre></td></tr></table></figure></p>
 <p>geth控制台启动成功之后，可以看到<strong>&gt;</strong>提示符。<br>退出输入exit</p>
-<h2 id="geth-日志控制"><a href="#geth-日志控制" class="headerlink" title="geth 日志控制"></a>geth 日志控制</h2><h3 id="重定向日志到文件"><a href="#重定向日志到文件" class="headerlink" title="重定向日志到文件"></a>重定向日志到文件</h3><p>使用<strong>geth console</strong>启动是，会在当前的交互界面下时不时出现日志。<br>可以使用以下方式把日志输出到文件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ geth console 2&gt;&gt;geth.log</div></pre></td></tr></table></figure></p>
-<p>可以新开一个命令行终端输入以下命令查看日志：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ tail -f geth.log</div></pre></td></tr></table></figure></p>
-<h3 id="重定向另一个终端"><a href="#重定向另一个终端" class="headerlink" title="重定向另一个终端"></a>重定向另一个终端</h3><p>也可以把日志重定向到另一个终端，先在想要看日志的终端输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ tty</div></pre></td></tr></table></figure></p>
-<p>就可以获取到终端编号，如：/dev/ttys003<br>然后另一个终端使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ geth console 2&gt;&gt; /dev/ttys003</div></pre></td></tr></table></figure></p>
-<p>启动geth, 这是日志就输出到另一个终端。<br>如果不想看到日志还可以重定向到空终端：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ geth console 2&gt;&gt; /dev/null</div></pre></td></tr></table></figure></p>
-<h3 id="日志级别控制"><a href="#日志级别控制" class="headerlink" title="日志级别控制"></a>日志级别控制</h3><p>使用<strong>–verbosity</strong>可以控制日志级别，如不想看到日志还可以使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ geth --verbosity 0 console</div></pre></td></tr></table></figure></p>
-<h2 id="启动一个开发模式测试节点"><a href="#启动一个开发模式测试节点" class="headerlink" title="启动一个开发模式测试节点"></a>启动一个开发模式测试节点</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">geth --datadir /home/xxx/testNet --dev console</div></pre></td></tr></table></figure>
+<h2 id="geth-日志控制"><a href="#geth-日志控制" class="headerlink" title="geth 日志控制"></a>geth 日志控制</h2><h3 id="重定向日志到文件"><a href="#重定向日志到文件" class="headerlink" title="重定向日志到文件"></a>重定向日志到文件</h3><p>使用<strong>geth console</strong>启动是，会在当前的交互界面下时不时出现日志。<br>可以使用以下方式把日志输出到文件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ geth console 2&gt;&gt;geth.log</span><br></pre></td></tr></table></figure></p>
+<p>可以新开一个命令行终端输入以下命令查看日志：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tail -f geth.log</span><br></pre></td></tr></table></figure></p>
+<h3 id="重定向另一个终端"><a href="#重定向另一个终端" class="headerlink" title="重定向另一个终端"></a>重定向另一个终端</h3><p>也可以把日志重定向到另一个终端，先在想要看日志的终端输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tty</span><br></pre></td></tr></table></figure></p>
+<p>就可以获取到终端编号，如：/dev/ttys003<br>然后另一个终端使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ geth console 2&gt;&gt; /dev/ttys003</span><br></pre></td></tr></table></figure></p>
+<p>启动geth, 这是日志就输出到另一个终端。<br>如果不想看到日志还可以重定向到空终端：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ geth console 2&gt;&gt; /dev/null</span><br></pre></td></tr></table></figure></p>
+<h3 id="日志级别控制"><a href="#日志级别控制" class="headerlink" title="日志级别控制"></a>日志级别控制</h3><p>使用<strong>–verbosity</strong>可以控制日志级别，如不想看到日志还可以使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ geth --verbosity 0 console</span><br></pre></td></tr></table></figure></p>
+<h2 id="启动一个开发模式测试节点"><a href="#启动一个开发模式测试节点" class="headerlink" title="启动一个开发模式测试节点"></a>启动一个开发模式测试节点</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">geth --datadir /home/xxx/testNet --dev console</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>技巧：如果我们经常使用一个方式来启动，可以把命令存为一个bash脚本。<br>~/bin你可以放一些常用的脚本，并把~/bin加入到环境变量PATH里。</p>
 </blockquote>
-<h2 id="连接geth节点"><a href="#连接geth节点" class="headerlink" title="连接geth节点"></a>连接geth节点</h2><p>另外一个启动geth的方法是连接到一个geth节点：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ geth attach ipc:/some/custom/path</div><div class="line">$ geth attach http://191.168.1.1:8545</div><div class="line">$ geth attach ws://191.168.1.1:8546</div></pre></td></tr></table></figure></p>
-<p>如连接刚刚打开的开发模式节点使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">geth attach ipc:testNet/geth.ipc</div></pre></td></tr></table></figure></p>
-<p>更多内容请前往区块链技术小专栏查看<a href="https://xiaozhuanlan.com/topic/5617843029" target="_blank" rel="external">全文链接</a>。<br><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客</p>
+<h2 id="连接geth节点"><a href="#连接geth节点" class="headerlink" title="连接geth节点"></a>连接geth节点</h2><p>另外一个启动geth的方法是连接到一个geth节点：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ geth attach ipc:/some/custom/path</span><br><span class="line">$ geth attach http://191.168.1.1:8545</span><br><span class="line">$ geth attach ws://191.168.1.1:8546</span><br></pre></td></tr></table></figure></p>
+<p>如连接刚刚打开的开发模式节点使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">geth attach ipc:testNet/geth.ipc</span><br></pre></td></tr></table></figure></p>
+<p>更多内容请前往区块链技术小专栏查看<a href="https://xiaozhuanlan.com/topic/5617843029" target="_blank" rel="noopener">全文链接</a>。<br><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客</p>
 
       
     </div>
@@ -909,324 +913,20 @@
 
   
 
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
 
 
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
 
 
 
