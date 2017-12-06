@@ -1,9 +1,9 @@
 ---
-title: Solidity语法详解 - 类型
+title: Solidity语法详解 - 类型介绍1
 date: 2017-12-05 15:25:59
 categories: 以太坊
 tags:
-    - Solidity
+    - Solidity手册
 author: Tiny熊
 ---
 
@@ -14,17 +14,15 @@ author: Tiny熊
 
 ## 写在前面
 
-Solidity是以太坊智能合约编程语言，阅读本文前，你应该对以太坊、智能合约有所了解，如果你还不知道这些概念欢迎订阅我的专栏系统学习[区块链技术](https://xiaozhuanlan.com/blockchaincore)
+Solidity是以太坊智能合约编程语言，阅读本文前，你应该对以太坊、智能合约有所了解，如果你还不知道这些概念欢迎订阅专栏：[区块链技术](https://xiaozhuanlan.com/blockchaincore)
 Solidity语法的介绍会是一系列文章，本文是第一篇：介绍Solidity的变量类型。
 
-本文前半部分是参考Solidity0.4.20版本官方文档（当前最新版本）进行翻译，然后是实际合约代码实例说明类型的使用。
-如果你在我的专栏之外的地方阅读到本文，你只能阅读到文档翻译部分，代码实例部分请订阅小专栏[区块链技术](https://xiaozhuanlan.com/blockchaincore)。
-
+本文前半部分是参考Solidity官方文档（当前最新版本：0.4.20）进行翻译，前半部分是实际合约代码实例说明类型的使用（仅针对[专栏](https://xiaozhuanlan.com/blockchaincore)订阅用户）。
 
 ## 类型 
 Solidity是一种静态类型语言，意味着每个变量（本地或状态变量）需要在编译时指定变量的类型（或至少可以推倒出类型）。Solidity提供了一些基本类型可以用来组合成复杂类型。
 
-Solidity类型分为两类
+Solidity类型分为两类：
 * 值类型(Value Type) - 变量在赋值或传参是，总是进行值拷贝。
 * 引用类型(Reference Types)
 
@@ -38,10 +36,10 @@ Solidity类型分为两类
 * 字符串常量（String literals）
 * 十六进制常量（Hexadecimal literals）
 * 枚举(Enums)
-
 * 函数(Function Types)
 * 地址(Address)
 * 地址常量(Address Literals)
+> 函数和地址讲解会在之后的文章。
 
 ## 布尔类型(Booleans)
 **布尔(bool)**:可能的取值为常量值**true**和**false**。
@@ -71,12 +69,13 @@ Solidity类型分为两类
 4. 不能进行负移位，即操作符右边的数不可以为负数，否则会抛出运行时异常。
 
 
-> 注意：Solidity中，右移位是和除等价的，因此右移位一个负数，向下取整时会为0，而不像其他语言里为无限负小数。
+注意：Solidity中，右移位是和除等价的，因此右移位一个负数，向下取整时会为0，而不像其他语言里为无限负小数。
 
 
 ## 定长浮点型（Fixed Point Numbers）
 
-> 注意：定长浮点型 Solidity（发文时）还不完全支持，它可以用来声明变量，但不可以用来赋值。
+注意：定长浮点型 Solidity（发文时）还不完全支持，它可以用来声明变量，但不可以用来赋值。
+
 **fixed**/**ufixed**: 表示有符号和无符号的固定位浮点数。关键字为**ufixedMxN** 和 **ufixedMxN**。
 **M**表示这个类型要占用的位数，以8步进，可为8到256位。
 **N**表示小数点的个数，可为0到80之前
@@ -84,7 +83,7 @@ Solidity类型分为两类
 支持的运算符：
 * 比较运算符： <=, < , ==, !=, >=, > (返回布尔值：true 或 false)
 * 算术操作符：+，-，一元运算-，一元运算+，*，/, %(取余数)
-> 注意：它和大多数语言的float和double不一样，**M**是表示整个数占用的固定位数，包含整数部分和小数部分。因此用一个小位数（M较小）来表示一个浮点数时，小数部分会几乎占用整个空间。
+注意：它和大多数语言的float和double不一样，**M**是表示整个数占用的固定位数，包含整数部分和小数部分。因此用一个小位数（M较小）来表示一个浮点数时，小数部分会几乎占用整个空间。
 
 ## 定长字节数组(Fixed-size byte arrays)
 关键字有：bytes1, bytes2, bytes3, ..., bytes32。（以步长1递增）
@@ -181,6 +180,15 @@ contract test {
 ```
 
 ## 代码实例
+通过合约代码实例说明类型的使用，请前往区块链技术小专栏查看[全文链接](https://xiaozhuanlan.com/topic/7518269403)。
+
+## 参考文档
+[Solidity官方文档-类型](https://solidity.readthedocs.io/en/develop/types.html)
+
+
+[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客
+
+<!---
 下面我们用一个真实的合约代码来理解下各个类型及操作符。
 ```js
 pragma solidity ^0.4.18;
@@ -220,13 +228,11 @@ contract testType{
 3. 传参数调用
 4. 点Details 查看结果
 上一张截图大家就明白了。
-![](/images/testtype.jpg)
+![]((https://diycode.b0.upaiyun.com/photo/2017/b2b5529012ae930f5ae3e9a700247cbe.jpg)
 
 建议根据自己对类型的理解，修改代码，使用不同的参数进行调用以增强对类型的理解。
 如：运行hexLiteralBytes()查看输出结果，十六进制常量可转化为字节数组。
-![](/images/testtype2.jpg)
+![](https://diycode.b0.upaiyun.com/photo/2017/e28c82c8442eca12422d32b9d6563dfa.jpg)
 
+-->
 
-
-## 参考文档
-[Solidity官方文档-类型](https://solidity.readthedocs.io/en/develop/types.html)
