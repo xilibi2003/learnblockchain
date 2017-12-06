@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://learnblockchain.cn/2017/12/05/solidity1/</loc>
+    <lastmod>2017-12-06T13:45:02.000Z</lastmod>
+    <data>
+        <display>
+        <title>Solidity语法详解 - 类型</title>
+        <pubTime>2017-12-05T07:25:59.000Z</pubTime>
+        
+        <tag>Solidity</tag>
+         
+         
+           
+             
+              <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/%E4%BB%A5%E5%A4%AA%E5%9D%8A/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://learnblockchain.cn/2017/11/20/whatiseth/</loc>
     <lastmod>2017-12-04T14:05:04.000Z</lastmod>
     <data>
@@ -219,13 +239,13 @@
         <title>比特币所有权及隐私问题-非对称加密应用</title>
         <pubTime>2017-11-02T09:19:29.000Z</pubTime>
         
-        <tag>非对称加密</tag>
-         
         <tag>比特币</tag>
          
         <tag>所有权问题</tag>
          
         <tag>隐私问题</tag>
+         
+        <tag>非对称加密</tag>
          
          
            
