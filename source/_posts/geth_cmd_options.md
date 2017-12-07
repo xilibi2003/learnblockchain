@@ -1,7 +1,9 @@
 ---
 title: 以太坊客户端Geth命令用法-参数详解
 date: 2017-11-29 11:51:52
-categories: 以太坊
+categories: 
+    - 以太坊
+    - geth
 tags:
     - Geth命令用法
     - Geth命令参数详解

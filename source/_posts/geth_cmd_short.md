@@ -1,7 +1,9 @@
 ---
 title: Geth 控制台使用及 Web3.js 使用实战
 date: 2017-12-01 19:41:53
-categories: 以太坊
+categories: 
+    - 以太坊
+    - geth
 tags:
     - Geth使用
     - Web3.js

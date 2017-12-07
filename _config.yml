@@ -99,6 +99,10 @@ index_generator:
 # Category & Tag
 default_category: uncategorized
 category_map:
+  以太坊: ethereum
+  比特币: bitcoin
+  密码学: cryptography
+  其他: other
 tag_map:
 
 # Date / Time format
@@ -131,7 +135,7 @@ theme: next
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, question icon will be loaded.
 menu:
   home: / || home
-  Wiki: https://wiki.learnblockchain.cn
+  Wiki: https://wiki.learnblockchain.cn || book
   about: /about/ || user
   tags: /tags/ || tags
   categories: /categories/ || th
@@ -143,7 +147,6 @@ menu:
 # Enable/Disable menu icons.
 menu_icons:
   enable: true
-  Wiki: book
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
