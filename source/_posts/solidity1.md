@@ -1,5 +1,5 @@
 ---
-title: Solidity语法详解 - 类型介绍1
+title: Solidity教程系列1 - 类型介绍  
 date: 2017-12-05 15:25:59
 categories: 以太坊
 tags:
@@ -14,10 +14,11 @@ author: Tiny熊
 
 ## 写在前面
 
-Solidity是以太坊智能合约编程语言，阅读本文前，你应该对以太坊、智能合约有所了解，如果你还不知道这些概念欢迎订阅专栏：[区块链技术](https://xiaozhuanlan.com/blockchaincore)
-Solidity语法的介绍会是一系列文章，本文是第一篇：介绍Solidity的变量类型。
+Solidity是以太坊智能合约编程语言，阅读本文前，你应该对以太坊、智能合约有所了解，
+如果你还不了解，建议你先看[以太坊是什么](https://learnblockchain.cn/2017/11/20/whatiseth/)
+Solidity教程会是一系列文章，本文是第一篇：介绍Solidity的变量类型。
 
-本文前半部分是参考Solidity官方文档（当前最新版本：0.4.20）进行翻译，前半部分是实际合约代码实例说明类型的使用（仅针对[专栏](https://xiaozhuanlan.com/blockchaincore)订阅用户）。
+本文前半部分是参考Solidity官方文档（当前最新版本：0.4.20）进行翻译，后半部分是结合实际合约代码实例说明类型的使用（仅针对[专栏](https://xiaozhuanlan.com/blockchaincore)订阅用户）。
 
 ## 类型 
 Solidity是一种静态类型语言，意味着每个变量（本地或状态变量）需要在编译时指定变量的类型（或至少可以推倒出类型）。Solidity提供了一些基本类型可以用来组合成复杂类型。
@@ -180,7 +181,7 @@ contract test {
 ```
 
 ## 代码实例
-通过合约代码实例说明类型的使用，请前往区块链技术小专栏查看[全文链接](https://xiaozhuanlan.com/topic/7518269403)。
+通过合约代码实例说明类型的使用，请订阅[区块链技术](https://xiaozhuanlan.com/topic/7518269403)查看。
 
 ## 参考文档
 [Solidity官方文档-类型](https://solidity.readthedocs.io/en/develop/types.html)
