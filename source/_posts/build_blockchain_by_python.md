@@ -1,7 +1,7 @@
 ---
 title: 用Python从零开始创建区块链
 date: 2017-10-27 10:15:28
-categories: BlockChain
+categories: 其他
 tags:
     - python
     - 创建区块链

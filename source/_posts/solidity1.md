@@ -1,7 +1,9 @@
 ---
 title: Solidity教程系列1 - 类型介绍  
 date: 2017-12-05 15:25:59
-categories: 以太坊
+categories: 
+    - 以太坊
+    - Solidity
 tags:
     - Solidity手册
 author: Tiny熊
