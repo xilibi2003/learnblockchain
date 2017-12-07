@@ -86,14 +86,14 @@
 <meta name="description" content="现在的Solidity中文文档，要么翻译的太烂，要么太旧，决定重新翻译下。尤其点名批评极客学院名为《Solidity官方文档中文版》的翻译，机器翻译的都比它好，大家还是别看了。">
 <meta name="keywords" content="Solidity手册">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Solidity语法详解 - 类型介绍1">
+<meta property="og:title" content="Solidity教程系列1 - 类型介绍">
 <meta property="og:url" content="https://learnblockchain.cn/2017/12/05/solidity1/index.html">
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="现在的Solidity中文文档，要么翻译的太烂，要么太旧，决定重新翻译下。尤其点名批评极客学院名为《Solidity官方文档中文版》的翻译，机器翻译的都比它好，大家还是别看了。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-06T14:13:15.000Z">
+<meta property="og:updated_time" content="2017-12-07T02:34:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Solidity语法详解 - 类型介绍1">
+<meta name="twitter:title" content="Solidity教程系列1 - 类型介绍">
 <meta name="twitter:description" content="现在的Solidity中文文档，要么翻译的太烂，要么太旧，决定重新翻译下。尤其点名批评极客学院名为《Solidity官方文档中文版》的翻译，机器翻译的都比它好，大家还是别看了。">
 
 
@@ -130,7 +130,7 @@
 
 
 
-  <title>Solidity语法详解 - 类型介绍1 | 深入浅出区块链</title>
+  <title>Solidity教程系列1 - 类型介绍 | 深入浅出区块链</title>
   
 
 
@@ -332,7 +332,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Solidity语法详解 - 类型介绍1</h2>
+          <h2 class="post-title" itemprop="name headline">Solidity教程系列1 - 类型介绍</h2>
         
 
         <div class="post-meta">
@@ -360,8 +360,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-12-06T22:13:15+08:00">
-                2017-12-06
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-07T10:34:12+08:00">
+                2017-12-07
               </time>
             
           </span>
@@ -418,8 +418,8 @@
       
         <p>现在的Solidity中文文档，要么翻译的太烂，要么太旧，决定重新翻译下。<br>尤其点名批评极客学院名为《Solidity官方文档中文版》的翻译，机器翻译的都比它好，大家还是别看了。</p>
 <a id="more"></a>
-<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>Solidity是以太坊智能合约编程语言，阅读本文前，你应该对以太坊、智能合约有所了解，如果你还不知道这些概念欢迎订阅专栏：<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">区块链技术</a><br>Solidity语法的介绍会是一系列文章，本文是第一篇：介绍Solidity的变量类型。</p>
-<p>本文前半部分是参考Solidity官方文档（当前最新版本：0.4.20）进行翻译，前半部分是实际合约代码实例说明类型的使用（仅针对<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">专栏</a>订阅用户）。</p>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>Solidity是以太坊智能合约编程语言，阅读本文前，你应该对以太坊、智能合约有所了解，<br>如果你还不了解，建议你先看<a href="https://learnblockchain.cn/2017/11/20/whatiseth/">以太坊是什么</a><br>Solidity教程会是一系列文章，本文是第一篇：介绍Solidity的变量类型。</p>
+<p>本文前半部分是参考Solidity官方文档（当前最新版本：0.4.20）进行翻译，后半部分是结合实际合约代码实例说明类型的使用（仅针对<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">专栏</a>订阅用户）。</p>
 <h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><p>Solidity是一种静态类型语言，意味着每个变量（本地或状态变量）需要在编译时指定变量的类型（或至少可以推倒出类型）。Solidity提供了一些基本类型可以用来组合成复杂类型。</p>
 <p>Solidity类型分为两类：</p>
 <ul>
@@ -506,7 +506,7 @@
 <h2 id="十六进制常量（Hexadecimal-literals）"><a href="#十六进制常量（Hexadecimal-literals）" class="headerlink" title="十六进制常量（Hexadecimal literals）"></a>十六进制常量（Hexadecimal literals）</h2><p>十六进制常量，以关键字hex打头，后面紧跟用单或双引号包裹的字符串，内容是十六进制字符串，如hex”001122ff”。<br>它的值会用二进制来表示。</p>
 <p>十六进制常量和字符串常量类似，也可以转换为字节数组。</p>
 <h2 id="枚举（Enums）"><a href="#枚举（Enums）" class="headerlink" title="枚举（Enums）"></a>枚举（Enums）</h2><p>在Solidity中，枚举可以用来自定义类型。它可以显示的转换与整数进行转换，但不能进行隐式转换。显示的转换会在运行时检查数值范围，如果不匹配，将会引起异常。枚举类型应至少有一名成员。下面是一个枚举的例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^0.4.0;</span><br><span class="line"></span><br><span class="line">contract test &#123;</span><br><span class="line">    enum ActionChoices &#123; GoLeft, GoRight, GoStraight, SitStill &#125;</span><br><span class="line">    ActionChoices choice;</span><br><span class="line">    ActionChoices constant defaultChoice = ActionChoices.GoStraight;</span><br><span class="line"></span><br><span class="line">    function setGoStraight() &#123;</span><br><span class="line">        choice = ActionChoices.GoStraight;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Since enum types are not part of the ABI, the signature of &quot;getChoice&quot;</span><br><span class="line">    // will automatically be changed to &quot;getChoice() returns (uint8)&quot;</span><br><span class="line">    // for all matters external to Solidity. The integer type used is just</span><br><span class="line">    // large enough to hold all enum values, i.e. if you have more values,</span><br><span class="line">    // `uint16` will be used and so on.</span><br><span class="line">    function getChoice() returns (ActionChoices) &#123;</span><br><span class="line">        return choice;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function getDefaultChoice() returns (uint) &#123;</span><br><span class="line">        return uint(defaultChoice);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="代码实例"><a href="#代码实例" class="headerlink" title="代码实例"></a>代码实例</h2><p>通过合约代码实例说明类型的使用，请前往区块链技术小专栏查看<a href="https://xiaozhuanlan.com/topic/7518269403" target="_blank" rel="noopener">全文链接</a>。</p>
+<h2 id="代码实例"><a href="#代码实例" class="headerlink" title="代码实例"></a>代码实例</h2><p>通过合约代码实例说明类型的使用，请订阅<a href="https://xiaozhuanlan.com/topic/7518269403" target="_blank" rel="noopener">区块链技术</a>查看。</p>
 <h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://solidity.readthedocs.io/en/develop/types.html" target="_blank" rel="noopener">Solidity官方文档-类型</a></p>
 <p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客</p>
 <!---
@@ -572,7 +572,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://learnblockchain.cn/2017/12/05/solidity1/" title="Solidity语法详解 - 类型介绍1">https://learnblockchain.cn/2017/12/05/solidity1/</a>
+    <a href="https://learnblockchain.cn/2017/12/05/solidity1/" title="Solidity教程系列1 - 类型介绍">https://learnblockchain.cn/2017/12/05/solidity1/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
