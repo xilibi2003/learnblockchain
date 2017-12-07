@@ -14,7 +14,8 @@ author: Tiny熊
 <!-- more -->
 
 ## 写在前面
-阅读本文前，你应该大概了解区块链是什么，如果你还不了解，建议先阅读[区块链技术学习指引](https://wiki.learnblockchain.cn/myblog.html)
+阅读本文前，你应该大概了解区块链是什么，如果你还不了解，欢迎订阅专栏：[区块链技术](https://xiaozhuanlan.com/blockchaincore)
+指引你从头开始学区块链技术。
 
 ## 以太坊是什么
 
