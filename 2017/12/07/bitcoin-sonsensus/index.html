@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="Geth使用,Web3.js," />
+  <meta name="keywords" content="比特币,共识协议," />
 
 
 
@@ -83,18 +83,21 @@
 
 
 
-<meta name="description" content="在开发以太坊去中心化应用，免不了和以太坊进行交互，那就离不开Web3。Geth 控制台（REPL）实现了所有的web3 API及Admin API，使用好 Geth 就是必修课。结合Geth命令用法阅读效果更佳。">
-<meta name="keywords" content="Geth使用,Web3.js">
+<meta name="description" content="比特币没有中心机构，几乎所有的完整节点都有一份公共总帐本，那么大家如何达成共识：确认哪一份才是公认权威的总账本呢？">
+<meta name="keywords" content="比特币,共识协议">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Geth 控制台使用及 Web3.js 使用实战">
-<meta property="og:url" content="https://learnblockchain.cn/2017/12/01/geth_cmd_short/index.html">
+<meta property="og:title" content="比特币如何达成共识 - 最长链的选择">
+<meta property="og:url" content="https://learnblockchain.cn/2017/12/07/bitcoin-sonsensus/index.html">
 <meta property="og:site_name" content="深入浅出区块链">
-<meta property="og:description" content="在开发以太坊去中心化应用，免不了和以太坊进行交互，那就离不开Web3。Geth 控制台（REPL）实现了所有的web3 API及Admin API，使用好 Geth 就是必修课。结合Geth命令用法阅读效果更佳。">
+<meta property="og:description" content="比特币没有中心机构，几乎所有的完整节点都有一份公共总帐本，那么大家如何达成共识：确认哪一份才是公认权威的总账本呢？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-07T09:37:36.000Z">
+<meta property="og:image" content="https://learnblockchain.cn/images/block_branch.jpg">
+<meta property="og:image" content="https://learnblockchain.cn/images/block_branch2.jpg">
+<meta property="og:updated_time" content="2017-12-08T06:49:53.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Geth 控制台使用及 Web3.js 使用实战">
-<meta name="twitter:description" content="在开发以太坊去中心化应用，免不了和以太坊进行交互，那就离不开Web3。Geth 控制台（REPL）实现了所有的web3 API及Admin API，使用好 Geth 就是必修课。结合Geth命令用法阅读效果更佳。">
+<meta name="twitter:title" content="比特币如何达成共识 - 最长链的选择">
+<meta name="twitter:description" content="比特币没有中心机构，几乎所有的完整节点都有一份公共总帐本，那么大家如何达成共识：确认哪一份才是公认权威的总账本呢？">
+<meta name="twitter:image" content="https://learnblockchain.cn/images/block_branch.jpg">
 
 
 
@@ -124,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="https://learnblockchain.cn/2017/12/01/geth_cmd_short/"/>
+  <link rel="canonical" href="https://learnblockchain.cn/2017/12/07/bitcoin-sonsensus/"/>
 
 
 
 
 
-  <title>Geth 控制台使用及 Web3.js 使用实战 | 深入浅出区块链</title>
+  <title>比特币如何达成共识 - 最长链的选择 | 深入浅出区块链</title>
   
 
 
@@ -315,7 +318,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2017/12/01/geth_cmd_short/">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2017/12/07/bitcoin-sonsensus/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Tiny熊">
@@ -332,7 +335,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Geth 控制台使用及 Web3.js 使用实战</h2>
+          <h2 class="post-title" itemprop="name headline">比特币如何达成共识 - 最长链的选择</h2>
         
 
         <div class="post-meta">
@@ -344,8 +347,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-01T19:41:53+08:00">
-                2017-12-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-07T16:12:29+08:00">
+                2017-12-07
               </time>
             
 
@@ -360,8 +363,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-12-07T17:37:36+08:00">
-                2017-12-07
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-08T14:49:53+08:00">
+                2017-12-08
               </time>
             
           </span>
@@ -379,19 +382,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ethereum/" itemprop="url" rel="index">
-                    <span itemprop="name">以太坊</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ethereum/geth/" itemprop="url" rel="index">
-                    <span itemprop="name">geth</span>
+                  <a href="/categories/bitcoin/" itemprop="url" rel="index">
+                    <span itemprop="name">比特币</span>
                   </a>
                 </span>
 
@@ -427,24 +419,30 @@
       
 
       
-        <p>在开发以太坊去中心化应用，免不了和以太坊进行交互，那就离不开Web3。<br>Geth 控制台（REPL）实现了所有的<a href="http://web3js.readthedocs.io/en/1.0/index.html" target="_blank" rel="noopener">web3 API</a>及<a href="https://github.com/ethereum/go-ethereum/wiki/Management-APIs#admin" target="_blank" rel="noopener">Admin API</a>，<br>使用好 Geth 就是必修课。结合<a href="https://learnblockchain.cn/2017/11/29/geth_cmd_options/">Geth命令用法</a>阅读效果更佳。</p>
+        <p>比特币没有中心机构，几乎所有的完整节点都有一份公共总帐本，那么大家如何达成共识：确认哪一份才是公认权威的总账本呢？</p>
 <a id="more"></a>
-<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>阅读本文之前，你需要对以太坊（区块链）有初步的了解，如果你不知道以太坊是什么，请先阅读<a href="https://learnblockchain.cn/2017/11/20/whatiseth/">以太坊是什么</a>。<br>如果你在我的小专栏之外的地方阅读到本文，你可能只能阅读本文的节选，阅读完整全文请订阅小专栏<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">区块链技术</a></p>
-<h2 id="geth控制台初探-启动、退出"><a href="#geth控制台初探-启动、退出" class="headerlink" title="geth控制台初探 - 启动、退出"></a>geth控制台初探 - 启动、退出</h2><p>安装参考<a href="https://learnblockchain.cn/2017/11/24/init-env/">智能合约开发环境搭建</a><br>最简单启动方式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ geth console</span><br></pre></td></tr></table></figure></p>
-<p>geth控制台启动成功之后，可以看到<strong>&gt;</strong>提示符。<br>退出输入exit</p>
-<h2 id="geth-日志控制"><a href="#geth-日志控制" class="headerlink" title="geth 日志控制"></a>geth 日志控制</h2><h3 id="重定向日志到文件"><a href="#重定向日志到文件" class="headerlink" title="重定向日志到文件"></a>重定向日志到文件</h3><p>使用<strong>geth console</strong>启动是，会在当前的交互界面下时不时出现日志。<br>可以使用以下方式把日志输出到文件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ geth console 2&gt;&gt;geth.log</span><br></pre></td></tr></table></figure></p>
-<p>可以新开一个命令行终端输入以下命令查看日志：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tail -f geth.log</span><br></pre></td></tr></table></figure></p>
-<h3 id="重定向另一个终端"><a href="#重定向另一个终端" class="headerlink" title="重定向另一个终端"></a>重定向另一个终端</h3><p>也可以把日志重定向到另一个终端，先在想要看日志的终端输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tty</span><br></pre></td></tr></table></figure></p>
-<p>就可以获取到终端编号，如：/dev/ttys003<br>然后另一个终端使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ geth console 2&gt;&gt; /dev/ttys003</span><br></pre></td></tr></table></figure></p>
-<p>启动geth, 这是日志就输出到另一个终端。<br>如果不想看到日志还可以重定向到空终端：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ geth console 2&gt;&gt; /dev/null</span><br></pre></td></tr></table></figure></p>
-<h3 id="日志级别控制"><a href="#日志级别控制" class="headerlink" title="日志级别控制"></a>日志级别控制</h3><p>使用<strong>–verbosity</strong>可以控制日志级别，如不想看到日志还可以使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ geth --verbosity 0 console</span><br></pre></td></tr></table></figure></p>
-<h2 id="启动一个开发模式测试节点"><a href="#启动一个开发模式测试节点" class="headerlink" title="启动一个开发模式测试节点"></a>启动一个开发模式测试节点</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">geth --datadir /home/xxx/testNet --dev console</span><br></pre></td></tr></table></figure>
+<h2 id="为什么要遵守协议"><a href="#为什么要遵守协议" class="headerlink" title="为什么要遵守协议"></a>为什么要遵守协议</h2><p>这其实是一个经济问题，在经济活动中的每个人都是自私自利的，追求的是利益的最大化，一个节点工作量只有在其他的节点认同其是有效的（打包的新区块，其他的节点只有验证通过才会加入到区块链中，并在网络上传播），才能够过得收益，<br>而只有遵守规则才会得到其他的节点认同。<br>因此，基于逐利，节点就会自发的遵守协议。共识就是数以万计的独立节点遵守了简单的规则（通过异步交互）自发形成的。</p>
 <blockquote>
-<p>技巧：如果我们经常使用一个方式来启动，可以把命令存为一个bash脚本。<br>~/bin你可以放一些常用的脚本，并把~/bin加入到环境变量PATH里。</p>
+<p>共识：共同遵守的协议规范</p>
 </blockquote>
-<h2 id="连接geth节点"><a href="#连接geth节点" class="headerlink" title="连接geth节点"></a>连接geth节点</h2><p>另外一个启动geth的方法是连接到一个geth节点：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ geth attach ipc:/some/custom/path</span><br><span class="line">$ geth attach http://191.168.1.1:8545</span><br><span class="line">$ geth attach ws://191.168.1.1:8546</span><br></pre></td></tr></table></figure></p>
-<p>如连接刚刚打开的开发模式节点使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">geth attach ipc:testNet/geth.ipc</span><br></pre></td></tr></table></figure></p>
-<p>更多内容请前往区块链技术小专栏查看<a href="https://xiaozhuanlan.com/topic/5617843029" target="_blank" rel="noopener">全文链接</a>。<br><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客</p>
+<h2 id="去中心化共识"><a href="#去中心化共识" class="headerlink" title="去中心化共识"></a>去中心化共识</h2><p>在<a href="https://learnblockchain.cn/2017/11/04/bitcoin-pow/">工作量证明</a>一篇，我们了解通过工作量证明来竞争记账，权威的总帐本是怎么达到共识的，没有完全说清楚，今天补上，<br>实际上，比特币的共识由所有节点的4个<strong>独立过程</strong>相互作用而产生：</p>
+<ol>
+<li>每个节点（挖矿节点）依据标准对每个交易进行独立验证</li>
+<li>挖矿节点通过完成工作量证明，将交易记录独立打包进新区块</li>
+<li>每个节点独立的对新区块进行校验并组装进区块链</li>
+<li>每个节点对区块链进行独立选择，在工作量证明机制下选择累计工作量最大的区块链</li>
+</ol>
+<p>共识最终目的是保证比特币不停的在工作量最大的区块链上运转，工作量最大的区块链就是权威的公共总帐本。</p>
+<p>第1 2 3步在<a href="https://learnblockchain.cn/2017/11/04/bitcoin-pow/">比特币如何挖矿-工作量证明</a>一篇有提到过，下面着重讲第4步。</p>
+<h2 id="最长链的选择"><a href="#最长链的选择" class="headerlink" title="最长链的选择"></a>最长链的选择</h2><p>先来一个定义，把累计了最多难度的区块链。在一般情况下，也是包含最多区块的那个链称为<strong>主链</strong><br>每一个（挖矿）节点总是选择并尝试延长主链。</p>
+<h3 id="分叉"><a href="#分叉" class="headerlink" title="分叉"></a>分叉</h3><p>当有两名矿工在几乎在相同的时间内，各自都算得了工作量证明解，便立即传播自己的“获胜”区块到网络中，先是传播给邻近的节点而后传播到整个网络。每个收到有效区块的节点都会将其并入并延长区块链。<br>当这个两个区块传播时，一些节点首先收到#3458A, 一些节点首先收到#3458B，这两个候选区块（通常这两个候选区块会包含几乎相同的交易）都是主链的延伸，分叉就会产生，这时分叉出有竞争关系的两条链，如图：<br><img src="/images/block_branch.jpg" alt=""><br>两个块都收到的节点，会把其中有更多工作量的一条会继续作为主链，另一条作为<strong>备用链</strong>保存（保存是因为备用链将来可能会超过主链难度称为新主链）。</p>
+<h3 id="分叉解决"><a href="#分叉解决" class="headerlink" title="分叉解决"></a>分叉解决</h3><p>收到#3458A的（挖矿）节点，会立刻以这个区块为父区块来产生新的候选区块，并尝试寻找这个候选区块的工作量证明解。同样地，接受#3458B区块的节点会以这个区块为链的顶点开始生成新块，延长这个链（下面称为B链）。<br>这时总会有一方抢先发现工作量证明解并将其传播出去，假设以#3458B为父区块的工作量证明首先解出，如图：<br><img src="/images/block_branch2.jpg" alt=""></p>
+<p>当原本以#3458A为父区块求解的节点在收到#3458B, #3459B之后，会立刻将B链作为主链（因为#3458A为顶点的链已经不是最长链了）继续挖矿。</p>
+<blockquote>
+<p>节点也有可能先收到#3459B，再收到#3458B，收到#3459B时，会被认为是“孤块“（因为还找不到#3459B的父块#3458B）保存在孤块池中，一旦收到父块#3458B时，节点就会将孤块从孤块池中取出，并且连接到它的父区块，让它作为区块链的一部分。</p>
+</blockquote>
+<p>比特币将区块间隔设计为10分钟，是在更快速的交易确认和更低的分叉概率间作出的妥协。更短的区块产生间隔会让交易确认更快地完成，也会导致更加频繁地区块链分叉。与之相对地，长的间隔会减少分叉数量，却会导致更长的确认时间。</p>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客</p>
 
       
     </div>
@@ -497,7 +495,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://learnblockchain.cn/2017/12/01/geth_cmd_short/" title="Geth 控制台使用及 Web3.js 使用实战">https://learnblockchain.cn/2017/12/01/geth_cmd_short/</a>
+    <a href="https://learnblockchain.cn/2017/12/07/bitcoin-sonsensus/" title="比特币如何达成共识 - 最长链的选择">https://learnblockchain.cn/2017/12/07/bitcoin-sonsensus/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -512,9 +510,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Geth使用/" rel="tag"># Geth使用</a>
+            <a href="/tags/比特币/" rel="tag"># 比特币</a>
           
-            <a href="/tags/Web3-js/" rel="tag"># Web3.js</a>
+            <a href="/tags/共识协议/" rel="tag"># 共识协议</a>
           
         </div>
       
@@ -527,8 +525,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/29/geth_cmd_options/" rel="next" title="以太坊客户端Geth命令用法-参数详解">
-                <i class="fa fa-chevron-left"></i> 以太坊客户端Geth命令用法-参数详解
+              <a href="/2017/12/05/solidity1/" rel="next" title="Solidity教程系列1 - 类型介绍">
+                <i class="fa fa-chevron-left"></i> Solidity教程系列1 - 类型介绍
               </a>
             
           </div>
@@ -536,10 +534,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/05/solidity1/" rel="prev" title="Solidity教程系列1 - 类型介绍">
-                Solidity教程系列1 - 类型介绍 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -721,7 +715,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#geth控制台初探-启动、退出"><span class="nav-number">2.</span> <span class="nav-text">geth控制台初探 - 启动、退出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#geth-日志控制"><span class="nav-number">3.</span> <span class="nav-text">geth 日志控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重定向日志到文件"><span class="nav-number">3.1.</span> <span class="nav-text">重定向日志到文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重定向另一个终端"><span class="nav-number">3.2.</span> <span class="nav-text">重定向另一个终端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志级别控制"><span class="nav-number">3.3.</span> <span class="nav-text">日志级别控制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动一个开发模式测试节点"><span class="nav-number">4.</span> <span class="nav-text">启动一个开发模式测试节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连接geth节点"><span class="nav-number">5.</span> <span class="nav-text">连接geth节点</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要遵守协议"><span class="nav-number">1.</span> <span class="nav-text">为什么要遵守协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#去中心化共识"><span class="nav-number">2.</span> <span class="nav-text">去中心化共识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最长链的选择"><span class="nav-number">3.</span> <span class="nav-text">最长链的选择</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分叉"><span class="nav-number">3.1.</span> <span class="nav-text">分叉</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分叉解决"><span class="nav-number">3.2.</span> <span class="nav-text">分叉解决</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>https://learnblockchain.cn/2017/12/07/bitcoin-sonsensus/</loc>
+    <lastmod>2017-12-08T06:49:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>比特币如何达成共识 - 最长链的选择</title>
+        <pubTime>2017-12-07T08:12:29.000Z</pubTime>
+        
+        <tag>比特币</tag>
+         
+        <tag>共识协议</tag>
+         
+         
+           
+             
+              <breadCrumb title="比特币" url="https://learnblockchain.cn/categories/bitcoin/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://learnblockchain.cn/2017/10/27/build_blockchain_by_python/</loc>
     <lastmod>2017-12-07T09:37:57.000Z</lastmod>
     <data>
@@ -272,13 +294,13 @@
         <title>比特币所有权及隐私问题-非对称加密应用</title>
         <pubTime>2017-11-02T09:19:29.000Z</pubTime>
         
-        <tag>非对称加密</tag>
-         
         <tag>比特币</tag>
          
         <tag>所有权问题</tag>
          
         <tag>隐私问题</tag>
+         
+        <tag>非对称加密</tag>
          
          
            
