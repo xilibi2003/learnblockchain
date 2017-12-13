@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+  <meta name="msvalidate.01" content="914C9C1CBC7078C5E2AC612AD5C1CC6C" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Solidity," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Solidity教程系列第二篇 - Solidity地址类型介绍.">
+<meta name="keywords" content="Solidity">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Solidity教程系列2 - 地址类型介绍">
+<meta property="og:url" content="https://learnblockchain.cn/2017/12/12/solidity2/index.html">
+<meta property="og:site_name" content="深入浅出区块链">
+<meta property="og:description" content="Solidity教程系列第二篇 - Solidity地址类型介绍.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-13T02:43:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Solidity教程系列2 - 地址类型介绍">
+<meta name="twitter:description" content="Solidity教程系列第二篇 - Solidity地址类型介绍.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'ERVKOTY9C3',
+      apiKey: '145d6b00595f05cb28bf9c6e3c5bdbc3',
+      indexName: 'learnblockchain',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://learnblockchain.cn/2017/12/12/solidity2/"/>
+
+
+
+
+
+  <title>Solidity教程系列2 - 地址类型介绍 | 深入浅出区块链</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">系统学习区块链技术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wiki">
+          <a href="https://wiki.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Wiki
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2017/12/12/solidity2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Solidity教程系列2 - 地址类型介绍</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-12T15:25:59+08:00">
+                2017-12-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-13T10:43:16+08:00">
+                2017-12-13
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ethereum/" itemprop="url" rel="index">
+                    <span itemprop="name">以太坊</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Solidity教程系列第二篇 - Solidity地址类型介绍. </p>
+<a id="more"></a>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>Solidity是以太坊智能合约编程语言，阅读本文前，你应该对以太坊、智能合约有所了解，如果你还不了解，建议你先看<a href="https://learnblockchain.cn/2017/11/20/whatiseth/">以太坊是什么</a></p>
+<p>本文前半部分是参考Solidity官方文档（当前最新版本：0.4.20）进行翻译，后半部分是结合实际合约代码实例说明类型的使用（仅针对<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">专栏</a>订阅用户）。</p>
+<h2 id="地址类型（Address）"><a href="#地址类型（Address）" class="headerlink" title="地址类型（Address）"></a>地址类型（Address）</h2><p>地址类型<strong>address</strong>是一个值类型，</p>
+<p><strong>地址</strong>： 20字节（一个以太坊地址的长度），地址类型也有成员，地址是所有合约的基础<br>支持的运算符：</p>
+<ul>
+<li>&lt;=, &lt;, ==, !=, &gt;= 和 &gt;<blockquote>
+<p>注意：从0.5.0开始，合约不再继承自地址类型，但仍然可以显式转换为地址。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="地址类型的成员"><a href="#地址类型的成员" class="headerlink" title="地址类型的成员"></a>地址类型的成员</h3><ul>
+<li><p>balance 属性及transfer() 函数<br>这里是地址类型相关成员的<a href="https://solidity.readthedocs.io/en/develop/units-and-global-variables.html#address-related" target="_blank" rel="noopener">快速索引</a><br>  balance用来查询账户余额，transfer()用来发送以太币（以wei为单位）。<br>  如：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">address x = 0x123;</span><br><span class="line">address myAddress = this;</span><br><span class="line">if (x.balance &lt; 10 &amp;&amp; myAddress.balance &gt;= 10) x.transfer(10);</span><br></pre></td></tr></table></figure>
+<p> <strong>注解</strong>：如果x是合约地址，合约的回退函数（fallback 函数）会随<strong>transfer</strong>调用一起执行（这个是EVM特性），如果因gas耗光或其他原因失败，转移交易会还原并且合约会抛异常停止。</p>
+<blockquote>
+<p>关于回退函数（fallback 函数），简单来说它是合约中无函数名函数，下面代码事例中，进进一步讲解回退函数（fallback） 的使用。</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p>send() 函数<br>  send 与transfer对应，但更底层。如果执行失败，transfer不会因异常停止，而send会返回false。</p>
+<blockquote>
+<p><strong>警告</strong>：send() 执行有一些风险：如果调用栈的深度超过1024或gas耗光，交易都会失败。因此，为了保证安全，必须检查send的返回值，如果交易失败，会回退以太币。如果用transfer会更好。</p>
+</blockquote>
+</li>
+<li><p>call(), callcode() 和 delegatecall() 函数<br>  为了和非ABI协议的合约进行交互，可以使用call() 函数, 它用来向另一个合约发送原始数据，支持任何类型任意数量的参数，每个参数会按规则(ABI协议)打包成32字节并一一拼接到一起。一个例外是：如果第一个参数恰好4个字节，在这种情况下，会被认为根据ABI协议定义的函数器指定的函数签名而直接使用。如果仅想发送消息体，需要避免第一个参数是4个字节。如下面的例子：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">address nameReg = 0x72ba7d8e73fe8eb666ea66babc8116a41bfb10e2;</span><br><span class="line">nameReg.call(&quot;register&quot;, &quot;MyName&quot;);</span><br><span class="line">nameReg.call(bytes4(keccak256(&quot;fun(uint256)&quot;)), a);</span><br></pre></td></tr></table></figure>
+<p>  <strong>call</strong>函数返回一个bool值，以表明执行成功与否。正常结束返回true，异常终止返回false。但无法获取到结果数据，因为需要提前知道返回的数据的编码和数据大小（因不知道对方使用的协议格式，所以也不会知道返回的结果如何解析）。<br>  还可以提供<strong>.gas()</strong>修饰器进行调用：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">namReg.call.gas(1000000)(&quot;register&quot;, &quot;MyName&quot;);</span><br></pre></td></tr></table></figure>
+<p>  类似还可以提供附带以太币：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nameReg.call.value(1 ether)(&quot;register&quot;, &quot;MyName&quot;);</span><br></pre></td></tr></table></figure>
+<p>  修饰器可以混合使用，修饰器调用顺序无所谓。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nameReg.call.gas(1000000).value(1 ether)(&quot;register&quot;, &quot;MyName&quot;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注解：目前还不能在重载函数上使用gas或value修饰符，A workaround is to introduce a special case for gas and value and just re-check whether they are present at the point of overload resolution.（这句我怕翻译的不准确，引用原文）</p>
+</blockquote>
+<p>  同样我们也可以使用delegatecall()，它与call方法的区别在于，仅仅是代码会执行，而其它方面，如（存储，余额等）都是用的当前的合约的数据。delegatecall()方法的目的是用来执行另一个合约中的库代码。所以开发者需要保证两个合约中的存储变量能兼容，来保证delegatecall()能顺利执行。在homestead阶段之前，仅有一个受限的callcode()方法可用，但callcode未提供对msg.sender，msg.value的访问权限。</p>
+<p>  上面的这三个方法call()，delegatecall()，callcode()都是底层的消息传递调用，最好仅在万不得已才进行使用，因为他们破坏了Solidity的类型安全。<br>  .gas() 在call(), callcode() 和 delegatecall() 函数下都可以使用， delegatecall()不支持.value()</p>
+<blockquote>
+<p>注解：所有合约都继承了address的成员，因此可以使用this.balance查询余额。<br>callcode不鼓励使用，以后会移除。</p>
+<p>警告：上述的函数都是底层的函数，使用时要异常小心。当调用一个未知的，可能是恶意的合约时，当你把控制权交给它，它可能回调回你的合约，所以要准备好在调用返回时，应对你的状态变量可能被恶意篡改的情况。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="地址常量（Address-Literals）"><a href="#地址常量（Address-Literals）" class="headerlink" title="地址常量（Address Literals）"></a>地址常量（Address Literals）</h2><p>一个能通过地址合法性检查（address checksum test）十六进制常量就会被认为是地址，如0xdCad3a6d3569DF655070DEd06cb7A1b2Ccd1D3AF。而不能通过地址合法性检查的39到41位长的十六进制常量，会提示一个警告，被视为普通的有理数常量。</p>
+<blockquote>
+<p>地址合法性检查定义在<a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md" target="_blank" rel="noopener">EIP-55</a></p>
+</blockquote>
+<h2 id="合约事例讲解"><a href="#合约事例讲解" class="headerlink" title="合约事例讲解"></a>合约事例讲解</h2><h3 id="合约事例代码"><a href="#合约事例代码" class="headerlink" title="合约事例代码"></a>合约事例代码</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.0</span>;</span><br><span class="line"></span><br><span class="line">contract AddrTest&#123;</span><br><span class="line">    event logdata(bytes data);</span><br><span class="line">    <span class="function"><span class="keyword">function</span>(<span class="params"></span>) <span class="title">payable</span> </span>&#123;</span><br><span class="line">        logdata(msg.data);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">getBalance</span>(<span class="params"></span>) <span class="title">returns</span> (<span class="params">uint</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.balance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    uint score = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">setScore</span>(<span class="params">uint s</span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        score = s;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">getScore</span>(<span class="params"></span>) <span class="title">returns</span> (<span class="params"> uint</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> score;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">contract CallTest&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">deposit</span>(<span class="params"></span>) <span class="title">payable</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    event logSendEvent(address to, uint value);</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">transferEther</span>(<span class="params">address towho</span>) <span class="title">payable</span> </span>&#123;</span><br><span class="line">        towho.transfer(<span class="number">10</span>);</span><br><span class="line">        logSendEvent(towho, <span class="number">10</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">callNoFunc</span>(<span class="params">address addr</span>) <span class="title">returns</span> (<span class="params">bool</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> addr.call(<span class="string">"tinyxiong"</span>, <span class="number">1234</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">callfunc</span>(<span class="params">address addr</span>) <span class="title">returns</span> (<span class="params">bool</span>)</span>&#123;</span><br><span class="line">        bytes4 methodId = bytes4(keccak256(<span class="string">"setScore(uint256)"</span>));</span><br><span class="line">        <span class="keyword">return</span> addr.call(methodId, <span class="number">100</span>);</span><br><span class="line">    &#125;  </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">getBalance</span>(<span class="params"></span>) <span class="title">returns</span> (<span class="params">uint</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.balance;</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="代码运行及讲解"><a href="#代码运行及讲解" class="headerlink" title="代码运行及讲解"></a>代码运行及讲解</h3><p>代码运行及讲解，请订阅<a href="https://xiaozhuanlan.com/topic/7518269403" target="_blank" rel="noopener">区块链技术</a>查看。</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://solidity.readthedocs.io/en/develop/types.html" target="_blank" rel="noopener">Solidity官方文档-类型</a></p>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客</p>
+<!---
+和[类型介绍](https://xiaozhuanlan.com/topic/7518269403)篇一样，打开[Remix - Solidity IDE](https://ethereum.github.io/browser-solidity),帖入代码，依次创建合约AddrTest及CallTest，如图：
+![](/images/testaddr.jpg)
+
+创建合约后，可以看到，AddrTest合约内没有命令的函数，显示fallback。
+
+AddrTest合约主要是用来说明转入以太币及调用函数式回退函数的调用情况，CallTest合约是作为AddrTest合约的调用者。
+CallTest合约的函数说明：
+* transferEther(address towho):  用来给指定合约地址转账（如果一个函数需要进行货币操作，必须要带上payable关键字），转账时填入AddrTest的地址（加双引号）作为参数
+* deposit(): 函数上增加payable标识，可接收ether，并会把ether存在当前合约，（transferEther转账前需要先存款）。
+* callfunc() : 调用函数，使用指定的是函数签名。
+* callNoFunc(): 调用不存在的函数，这时被调用的合约的fallback函数会执行。
+
+关于fallback函数用法可进一步参考这一篇:[Ethereum-Development-Best-Practices][1]及[问答](https://ethereum.stackexchange.com/questions/7570/whats-a-fallback-function-when-using-address-send)
+下面截图演示下，存款和转账，其他的调用请读者动手练习。
+存款操作如图：
+![](/images/testaddr1.jpg)
+完成后，可以在左下角区域查看日志Details->value。
+然后进行转账，如图：
+![](/images/testaddr2.jpg)
+
+完成后，可以在左下角区域查看日志Details->logs数据，可以看到fallback函数被调用。
+还可以调用AddrTest的getBalance查看余额数据。
+
+[1]: https://github.com/ConsenSys/Ethereum-Development-Best-Practices/wiki/Fallback-functions-and-the-fundamental-limitations-of-using-send()-in-Ethereum-&-Solidity
+-->
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="Tiny熊 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信号：区块链技术剖析，欢迎订阅</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有收获，赞赏下</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/qr_pay.jpg" alt="Tiny熊 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Tiny熊
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://learnblockchain.cn/2017/12/12/solidity2/" title="Solidity教程系列2 - 地址类型介绍">https://learnblockchain.cn/2017/12/12/solidity2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Solidity/" rel="tag"># Solidity</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/07/bitcoin-sonsensus/" rel="next" title="比特币如何达成共识 - 最长链的选择">
+                <i class="fa fa-chevron-left"></i> 比特币如何达成共识 - 最长链的选择
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/xilibi2003" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiong-li-bing/activities" target="_blank" title="ZhiHu">
+                    
+                      <i class="fa fa-fw fa-globe"></i>ZhiHu</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="我的小专栏" target="_blank">我的小专栏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://t.xiaomiquan.com/RfAu7uj" title="技术交流-知识星球" target="_blank">技术交流-知识星球</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bitshuo.com" title="区块链技术中文社区" target="_blank">区块链技术中文社区</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#地址类型（Address）"><span class="nav-number">2.</span> <span class="nav-text">地址类型（Address）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#地址类型的成员"><span class="nav-number">2.1.</span> <span class="nav-text">地址类型的成员</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#地址常量（Address-Literals）"><span class="nav-number">3.</span> <span class="nav-text">地址常量（Address Literals）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合约事例讲解"><span class="nav-number">4.</span> <span class="nav-text">合约事例讲解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#合约事例代码"><span class="nav-number">4.1.</span> <span class="nav-text">合约事例代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码运行及讲解"><span class="nav-number">4.2.</span> <span class="nav-text">代码运行及讲解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文档"><span class="nav-number">5.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+  <div class="footer-custom"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17140514号-1</a></div>
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

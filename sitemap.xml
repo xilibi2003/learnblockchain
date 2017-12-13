@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://learnblockchain.cn/2017/12/12/solidity2/</loc>
+    
+    <lastmod>2017-12-13T02:43:16.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://learnblockchain.cn/2017/12/05/solidity1/</loc>
+    
+    <lastmod>2017-12-11T08:55:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://learnblockchain.cn/2017/11/04/bitcoin-pow/</loc>
+    
+    <lastmod>2017-12-08T08:00:56.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://learnblockchain.cn/2017/12/07/bitcoin-sonsensus/</loc>
     
     <lastmod>2017-12-08T07:04:36.000Z</lastmod>
@@ -37,13 +58,6 @@
   </url>
   
   <url>
-    <loc>https://learnblockchain.cn/2017/12/05/solidity1/</loc>
-    
-    <lastmod>2017-12-07T09:35:56.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://learnblockchain.cn/2017/11/20/whatiseth/</loc>
     
     <lastmod>2017-12-07T03:21:21.000Z</lastmod>
@@ -68,13 +82,6 @@
     <loc>https://learnblockchain.cn/2017/11/09/merkle/</loc>
     
     <lastmod>2017-12-01T15:40:39.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://learnblockchain.cn/2017/11/04/bitcoin-pow/</loc>
-    
-    <lastmod>2017-12-01T15:40:29.000Z</lastmod>
     
   </url>
   
