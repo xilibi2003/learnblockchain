@@ -26,7 +26,7 @@ Solidity教程会是一系列文章，本文是第一篇：介绍Solidity的变�
 Solidity是一种静态类型语言，意味着每个变量（本地或状态变量）需要在编译时指定变量的类型（或至少可以推倒出类型）。Solidity提供了一些基本类型可以用来组合成复杂类型。
 
 Solidity类型分为两类：
-* 值类型(Value Type) - 变量在赋值或传参是，总是进行值拷贝。
+* 值类型(Value Type) - 变量在赋值或传参时，总是进行值拷贝。
 * 引用类型(Reference Types)
 
 ### 值类型(Value Type)
