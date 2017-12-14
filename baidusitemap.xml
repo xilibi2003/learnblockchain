@@ -4,11 +4,11 @@
 
     
   <url>
-    <loc>https://learnblockchain.cn/2017/12/12/solidity2/</loc>
-    <lastmod>2017-12-13T02:43:16.000Z</lastmod>
+    <loc>https://learnblockchain.cn/2017/12/12/solidity_func/</loc>
+    <lastmod>2017-12-14T12:06:55.000Z</lastmod>
     <data>
         <display>
-        <title>Solidity教程系列2 - 地址类型介绍</title>
+        <title>Solidity 教程系列3 - 函数类型</title>
         <pubTime>2017-12-12T07:25:59.000Z</pubTime>
         
         <tag>Solidity</tag>
@@ -18,6 +18,32 @@
              
               <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
           
+             
+              <breadCrumb title="Solidity" url="https://learnblockchain.cn/categories/ethereum/Solidity/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://learnblockchain.cn/2017/12/12/solidity2/</loc>
+    <lastmod>2017-12-14T12:00:34.000Z</lastmod>
+    <data>
+        <display>
+        <title>Solidity 教程系列2 - 地址类型介绍</title>
+        <pubTime>2017-12-12T07:25:59.000Z</pubTime>
+        
+        <tag>Solidity</tag>
+         
+         
+           
+             
+              <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
+          
+             
+              <breadCrumb title="Solidity" url="https://learnblockchain.cn/categories/ethereum/Solidity/"/>
+          
         </display>
     </data>
     </url>
@@ -25,10 +51,10 @@
     
   <url>
     <loc>https://learnblockchain.cn/2017/12/05/solidity1/</loc>
-    <lastmod>2017-12-11T08:55:23.000Z</lastmod>
+    <lastmod>2017-12-14T12:00:33.000Z</lastmod>
     <data>
         <display>
-        <title>Solidity教程系列1 - 类型介绍</title>
+        <title>Solidity 教程系列1 - 类型介绍</title>
         <pubTime>2017-12-05T07:25:59.000Z</pubTime>
         
         <tag>Solidity手册</tag>
