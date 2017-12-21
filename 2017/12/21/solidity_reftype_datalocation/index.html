@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="Geth命令用法,Geth命令参数详解,Geth手册," />
+  <meta name="keywords" content="Solidity手册," />
 
 
 
@@ -83,18 +83,18 @@
 
 
 
-<meta name="description" content="Geth在以太坊智能合约开发中最常用的工具（必备开发工具），一个多用途的命令行工具。熟悉Geth可以让我们有更好的效率，大家可收藏起来作为Geth命令用法手册。 本文主要是对geth help的翻译，基于最新的geth 1.7.3-stable版本。">
-<meta name="keywords" content="Geth命令用法,Geth命令参数详解,Geth手册">
+<meta name="description" content="Solidity教程系列第4篇 - Solidity数据位置分析。">
+<meta name="keywords" content="Solidity手册">
 <meta property="og:type" content="article">
-<meta property="og:title" content="以太坊客户端Geth命令用法-参数详解">
-<meta property="og:url" content="https://learnblockchain.cn/2017/11/29/geth_cmd_options/index.html">
+<meta property="og:title" content="Solidity 教程系列4 - 数据存储位置分析">
+<meta property="og:url" content="https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/index.html">
 <meta property="og:site_name" content="深入浅出区块链">
-<meta property="og:description" content="Geth在以太坊智能合约开发中最常用的工具（必备开发工具），一个多用途的命令行工具。熟悉Geth可以让我们有更好的效率，大家可收藏起来作为Geth命令用法手册。 本文主要是对geth help的翻译，基于最新的geth 1.7.3-stable版本。">
+<meta property="og:description" content="Solidity教程系列第4篇 - Solidity数据位置分析。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-07T09:37:47.000Z">
+<meta property="og:updated_time" content="2017-12-21T14:22:35.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="以太坊客户端Geth命令用法-参数详解">
-<meta name="twitter:description" content="Geth在以太坊智能合约开发中最常用的工具（必备开发工具），一个多用途的命令行工具。熟悉Geth可以让我们有更好的效率，大家可收藏起来作为Geth命令用法手册。 本文主要是对geth help的翻译，基于最新的geth 1.7.3-stable版本。">
+<meta name="twitter:title" content="Solidity 教程系列4 - 数据存储位置分析">
+<meta name="twitter:description" content="Solidity教程系列第4篇 - Solidity数据位置分析。">
 
 
 
@@ -124,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="https://learnblockchain.cn/2017/11/29/geth_cmd_options/"/>
+  <link rel="canonical" href="https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/"/>
 
 
 
 
 
-  <title>以太坊客户端Geth命令用法-参数详解 | 深入浅出区块链</title>
+  <title>Solidity 教程系列4 - 数据存储位置分析 | 深入浅出区块链</title>
   
 
 
@@ -322,7 +322,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2017/11/29/geth_cmd_options/">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Tiny熊">
@@ -339,7 +339,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">以太坊客户端Geth命令用法-参数详解</h2>
+          <h2 class="post-title" itemprop="name headline">Solidity 教程系列4 - 数据存储位置分析</h2>
         
 
         <div class="post-meta">
@@ -351,8 +351,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-29T11:51:52+08:00">
-                2017-11-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-21T11:51:02+08:00">
+                2017-12-21
               </time>
             
 
@@ -367,8 +367,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-12-07T17:37:47+08:00">
-                2017-12-07
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-21T22:22:35+08:00">
+                2017-12-21
               </time>
             
           </span>
@@ -397,8 +397,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ethereum/geth/" itemprop="url" rel="index">
-                    <span itemprop="name">geth</span>
+                  <a href="/categories/ethereum/Solidity/" itemprop="url" rel="index">
+                    <span itemprop="name">Solidity</span>
                   </a>
                 </span>
 
@@ -434,123 +434,54 @@
       
 
       
-        <p>Geth在以太坊智能合约开发中最常用的工具（必备开发工具），一个多用途的命令行工具。<br>熟悉Geth可以让我们有更好的效率，大家可收藏起来作为Geth命令用法手册。 本文主要是对geth help的翻译，基于最新的geth 1.7.3-stable版本。</p>
+        <p>Solidity教程系列第4篇 - Solidity数据位置分析。</p>
 <a id="more"></a>
-<p>如果你还不知道geth是什么，请先阅读<a href="https://learnblockchain.cn/2017/11/20/whatiseth/">入门篇：以太坊是什么</a>。<br>更多geth实战使用方法请参考<a href="https://learnblockchain.cn/2017/12/01/geth_cmd_short/">Geth控制台使用实战及Web3.js使用</a><br>以下开始正文。</p>
-<h2 id="命令用法"><a href="#命令用法" class="headerlink" title="命令用法"></a>命令用法</h2><pre><code>geth [选项] 命令 [命令选项] [参数…]
-</code></pre><h3 id="版本："><a href="#版本：" class="headerlink" title="版本："></a>版本：</h3><pre><code>1.7.3-stable
-</code></pre><h3 id="命令"><a href="#命令" class="headerlink" title="命令:"></a>命令:</h3><pre><code>account    管理账户
-attach     启动交互式JavaScript环境（连接到节点）
-bug        上报bug Issues
-console    启动交互式JavaScript环境
-copydb     从文件夹创建本地链
-dump       Dump（分析）一个特定的块存储
-dumpconfig 显示配置值
-export     导出区块链到文件
-import     导入一个区块链文件
-init       启动并初始化一个新的创世纪块
-js         执行指定的JavaScript文件(多个)
-license    显示许可信息
-makecache  生成ethash验证缓存(用于测试)
-makedag    生成ethash 挖矿DAG(用于测试)
-monitor    监控和可视化节点指标
-removedb   删除区块链和状态数据库
-version    打印版本号
-wallet     管理Ethereum预售钱包
-help,h     显示一个命令或帮助一个命令列表
-</code></pre><h3 id="ETHEREUM选项"><a href="#ETHEREUM选项" class="headerlink" title="ETHEREUM选项:"></a>ETHEREUM选项:</h3><pre><code>--config value          TOML 配置文件
---datadir “xxx”         数据库和keystore密钥的数据目录
---keystore              keystore存放目录(默认在datadir内)
---nousb                 禁用监控和管理USB硬件钱包
---networkid value       网络标识符(整型, 1=Frontier, 2=Morden (弃用), 3=Ropsten, 4=Rinkeby) (默认: 1)
---testnet               Ropsten网络:预先配置的POW(proof-of-work)测试网络
---rinkeby               Rinkeby网络: 预先配置的POA(proof-of-authority)测试网络
---syncmode &quot;fast&quot;       同步模式 (&quot;fast&quot;, &quot;full&quot;, or &quot;light&quot;)
---ethstats value        上报ethstats service  URL (nodename:secret@host:port)
---identity value        自定义节点名
---lightserv value       允许LES请求时间最大百分比(0 – 90)(默认值:0) 
---lightpeers value      最大LES client peers数量(默认值:20)
---lightkdf              在KDF强度消费时降低key-derivation RAM&amp;CPU使用
-</code></pre><h3 id="开发者（模式）选项"><a href="#开发者（模式）选项" class="headerlink" title="开发者（模式）选项:"></a>开发者（模式）选项:</h3><pre><code>--dev               使用POA共识网络，默认预分配一个开发者账户并且会自动开启挖矿。
---dev.period value  开发者模式下挖矿周期 (0 = 仅在交易时) (默认: 0)
-</code></pre><h3 id="ETHASH-选项"><a href="#ETHASH-选项" class="headerlink" title="ETHASH 选项:"></a>ETHASH 选项:</h3><pre><code>--ethash.cachedir                        ethash验证缓存目录(默认 = datadir目录内)
---ethash.cachesinmem value               在内存保存的最近的ethash缓存个数  (每个缓存16MB ) (默认: 2)
---ethash.cachesondisk value              在磁盘保存的最近的ethash缓存个数 (每个缓存16MB) (默认: 3)
---ethash.dagdir &quot;&quot;                       存ethash DAGs目录 (默认 = 用户hom目录)
---ethash.dagsinmem value                 在内存保存的最近的ethash DAGs 个数 (每个1GB以上) (默认: 1)
---ethash.dagsondisk value                在磁盘保存的最近的ethash DAGs 个数 (每个1GB以上) (默认: 2)
-</code></pre><h3 id="交易池选项"><a href="#交易池选项" class="headerlink" title="交易池选项:"></a>交易池选项:</h3><pre><code>--txpool.nolocals            为本地提交交易禁用价格豁免
---txpool.journal value       本地交易的磁盘日志：用于节点重启 (默认: &quot;transactions.rlp&quot;)
---txpool.rejournal value     重新生成本地交易日志的时间间隔 (默认: 1小时)
---txpool.pricelimit value    加入交易池的最小的gas价格限制(默认: 1)
---txpool.pricebump value     价格波动百分比（相对之前已有交易） (默认: 10)
---txpool.accountslots value  每个帐户保证可执行的最少交易槽数量  (默认: 16)
---txpool.globalslots value   所有帐户可执行的最大交易槽数量 (默认: 4096)
---txpool.accountqueue value  每个帐户允许的最多非可执行交易槽数量 (默认: 64)
---txpool.globalqueue value   所有帐户非可执行交易最大槽数量  (默认: 1024)
---txpool.lifetime value      非可执行交易最大入队时间(默认: 3小时)
-</code></pre><h3 id="性能调优的选项"><a href="#性能调优的选项" class="headerlink" title="性能调优的选项:"></a>性能调优的选项:</h3><pre><code>--cache value                分配给内部缓存的内存MB数量，缓存值(最低16 mb /数据库强制要求)(默认:128)
---trie-cache-gens value      保持在内存中产生的trie node数量(默认:120)
-</code></pre><h3 id="帐户选项"><a href="#帐户选项" class="headerlink" title="帐户选项:"></a>帐户选项:</h3><pre><code>--unlock value              需解锁账户用逗号分隔
---password value            用于非交互式密码输入的密码文件
-</code></pre><h3 id="API和控制台选项"><a href="#API和控制台选项" class="headerlink" title="API和控制台选项:"></a>API和控制台选项:</h3><pre><code>--rpc                       启用HTTP-RPC服务器
---rpcaddr value             HTTP-RPC服务器接口地址(默认值:“localhost”)
---rpcport value             HTTP-RPC服务器监听端口(默认值:8545)
---rpcapi value              基于HTTP-RPC接口提供的API
---ws                        启用WS-RPC服务器
---wsaddr value              WS-RPC服务器监听接口地址(默认值:“localhost”)
---wsport value              WS-RPC服务器监听端口(默认值:8546)
---wsapi  value              基于WS-RPC的接口提供的API
---wsorigins value           websockets请求允许的源
---ipcdisable                禁用IPC-RPC服务器
---ipcpath                   包含在datadir里的IPC socket/pipe文件名(转义过的显式路径)
---rpccorsdomain value       允许跨域请求的域名列表(逗号分隔)(浏览器强制)
---jspath loadScript         JavaScript加载脚本的根路径(默认值:“.”)
---exec value                执行JavaScript语句(只能结合console/attach使用)
---preload value             预加载到控制台的JavaScript文件列表(逗号分隔)
-</code></pre><h3 id="网络选项"><a href="#网络选项" class="headerlink" title="网络选项:"></a>网络选项:</h3><pre><code>--bootnodes value    用于P2P发现引导的enode urls(逗号分隔)(对于light servers用v4+v5代替)
---bootnodesv4 value  用于P2P v4发现引导的enode urls(逗号分隔) (light server, 全节点)
---bootnodesv5 value  用于P2P v5发现引导的enode urls(逗号分隔) (light server, 轻节点)
---port value         网卡监听端口(默认值:30303)
---maxpeers value     最大的网络节点数量(如果设置为0，网络将被禁用)(默认值:25)
---maxpendpeers value    最大尝试连接的数量(如果设置为0，则将使用默认值)(默认值:0)
---nat value             NAT端口映射机制 (any|none|upnp|pmp|extip:&lt;IP&gt;) (默认: “any”)
---nodiscover            禁用节点发现机制(手动添加节点)
---v5disc                启用实验性的RLPx V5(Topic发现)机制
---nodekey value         P2P节点密钥文件
---nodekeyhex value      十六进制的P2P节点密钥(用于测试)
-</code></pre><h3 id="矿工选项"><a href="#矿工选项" class="headerlink" title="矿工选项:"></a>矿工选项:</h3><pre><code>--mine                  打开挖矿
---minerthreads value    挖矿使用的CPU线程数量(默认值:8)
---etherbase value       挖矿奖励地址(默认=第一个创建的帐户)(默认值:“0”)
---targetgaslimit value  目标gas限制：设置最低gas限制（低于这个不会被挖？） (默认值:“4712388”)
---gasprice value        挖矿接受交易的最低gas价格
---extradata value       矿工设置的额外块数据(默认=client version)
-</code></pre><h3 id="GAS价格选项"><a href="#GAS价格选项" class="headerlink" title="GAS价格选项:"></a>GAS价格选项:</h3><pre><code>--gpoblocks value      用于检查gas价格的最近块的个数  (默认: 10)
---gpopercentile value  建议gas价参考最近交易的gas价的百分位数，(默认: 50)
-</code></pre><h3 id="虚拟机的选项"><a href="#虚拟机的选项" class="headerlink" title="虚拟机的选项:"></a>虚拟机的选项:</h3><pre><code>--vmdebug        记录VM及合约调试信息
-</code></pre><h3 id="日志和调试选项"><a href="#日志和调试选项" class="headerlink" title="日志和调试选项:"></a>日志和调试选项:</h3><pre><code>--metrics            启用metrics收集和报告
---fakepow            禁用proof-of-work验证
---verbosity value    日志详细度:0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=detail (default: 3)
---vmodule value      每个模块详细度:以 &lt;pattern&gt;=&lt;level&gt;的逗号分隔列表 (比如 eth/*=6,p2p=5)
---backtrace value    请求特定日志记录堆栈跟踪 (比如 “block.go:271”)
---debug                     突出显示调用位置日志(文件名及行号)
---pprof                     启用pprof HTTP服务器
---pprofaddr value           pprof HTTP服务器监听接口(默认值:127.0.0.1)
---pprofport value           pprof HTTP服务器监听端口(默认值:6060)
---memprofilerate value      按指定频率打开memory profiling    (默认:524288)
---blockprofilerate value    按指定频率打开block profiling    (默认值:0)
---cpuprofile value          将CPU profile写入指定文件
---trace value               将execution trace写入指定文件
-</code></pre><h3 id="WHISPER实验选项"><a href="#WHISPER实验选项" class="headerlink" title="WHISPER实验选项:"></a>WHISPER实验选项:</h3><pre><code>--shh                        启用Whisper
---shh.maxmessagesize value   可接受的最大的消息大小 (默认值: 1048576)
---shh.pow value              可接受的最小的POW (默认值: 0.2)
-</code></pre><h3 id="弃用选项："><a href="#弃用选项：" class="headerlink" title="弃用选项："></a>弃用选项：</h3><pre><code>--fast     开启快速同步
---light    启用轻客户端模式
-</code></pre><h3 id="其他选项"><a href="#其他选项" class="headerlink" title="其他选项:"></a>其他选项:</h3><pre><code>–help, -h    显示帮助
-</code></pre><h3 id="版权："><a href="#版权：" class="headerlink" title="版权："></a>版权：</h3><pre><code>Copyright 2013-2017 The go-ethereum Authors
-</code></pre><h2 id="翻译说明"><a href="#翻译说明" class="headerlink" title="翻译说明"></a>翻译说明</h2><p>   有些参数翻译可能有不准确的地方，请大家指正。<br>   原文会尽量随geth升级保持更新，原始链接：<a href="https://learnblockchain.cn/2017/11/29/geth_cmd_options">https://learnblockchain.cn/2017/11/29/geth_cmd_options/</a></p>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>Solidity 是以太坊智能合约编程语言，阅读本文前，你应该对以太坊、智能合约有所了解，<br>如果你还不了解，建议你先看<a href="https://learnblockchain.cn/2017/11/20/whatiseth/">以太坊是什么</a></p>
+<p>这部分的内容官方英文文档讲的不是很透，因此我在参考Solidity官方文档（当前最新版本：0.4.20）的同时加入了深入分析部分，欢迎订阅<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">专栏</a>。</p>
+<h2 id="数据位置-Data-location"><a href="#数据位置-Data-location" class="headerlink" title="数据位置(Data location)"></a>数据位置(Data location)</h2><p>在系列第一篇，我们提到 Solidity 类型分为两类：<br><strong>值类型(Value Type)</strong> 及 <strong>引用类型(Reference Types)</strong>，<br>前面我们已经介绍完了值类型，接下来会介绍引用类型。</p>
+<p>引用类型是一个复杂类型，占用的空间通常超过256位， 拷贝时开销很大，因此我们需要考虑将它们存储在什么位置，是<strong>memory</strong>（内存中，数据不是永久存在）还是<strong>storage</strong>（永久存储在区块链中）<br>所有的复杂类型如数组(arrays)和数据结构(struct)有一个额外的属性：<strong>数据的存储位置（data location）</strong>。可为<strong>memory</strong>和<strong>storage</strong>。</p>
+<p>根据上下文的不同，大多数时候数据位置有默认值，也通过指定关键字storage和memory修改它。</p>
+<p>函数参数（包含返回的参数）默认是<strong>memory</strong>。<br>局部复杂类型变量（local variables）和 状态变量（state variables） 默认是<strong>storage</strong>。</p>
+<blockquote>
+<p>局部变量：局部作用域（越过作用域即不可被访问，等待被回收）的变量，如函数内的变量。状态变量：合约内声明的公有变量</p>
+</blockquote>
+<p>还有一个存储位置是：<strong>calldata</strong>，用来存储函数参数，是只读的，不会永久存储的一个数据位置。外部函数的参数（不包括返回参数）被强制指定为calldata。效果与memory差不多。</p>
+<p>数据位置指定非常重要，因为他们影响着赋值行为。<br>在memory和storage之间或与状态变量之间相互赋值，总是会创建一个完全独立的拷贝。<br>而将一个storage的状态变量，赋值给一个storage的局部变量，是通过引用传递。所以对于局部变量的修改，同时修改关联的状态变量。<br>另一方面，将一个memory的引用类型赋值给另一个memory的引用，不会创建拷贝（即：memory之间是引用传递）。</p>
+<blockquote>
+<ol>
+<li>注意：不能将memory赋值给局部变量。</li>
+<li>对于值类型，总是会进行拷贝。</li>
+</ol>
+</blockquote>
+<p>下面看一段代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^0.4.0;</span><br><span class="line"></span><br><span class="line">contract C &#123;</span><br><span class="line">    uint[] x; //  x的存储位置是storage</span><br><span class="line"></span><br><span class="line">    // memoryArray的存储位置是 memory</span><br><span class="line">    function f(uint[] memoryArray) public &#123;</span><br><span class="line">        x = memoryArray;    // 从 memory 复制到 storage</span><br><span class="line">        var y = x;          // storage 引用传递局部变量y（y 是一个 storage 引用）</span><br><span class="line">        y[7];               // 返回第8个元素</span><br><span class="line">        y.length = 2;       // x同样会被修改</span><br><span class="line">        delete x;           // y同样会被修改</span><br><span class="line"></span><br><span class="line">        // 错误， 不能将memory赋值给局部变量</span><br><span class="line">        // y = memoryArray;  </span><br><span class="line"></span><br><span class="line">        // 错误，不能通过引用销毁storage</span><br><span class="line">        // delete y;        </span><br><span class="line"></span><br><span class="line">        g(x);               // 引用传递， g可以改变x的内容</span><br><span class="line">        h(x);               // 拷贝到memory， h无法改变x的内容</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function g(uint[] storage storageArray) internal &#123;&#125;</span><br><span class="line">    function h(uint[] memoryArray) public &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><h4 id="强制的数据位置-Forced-data-location"><a href="#强制的数据位置-Forced-data-location" class="headerlink" title="强制的数据位置(Forced data location)"></a>强制的数据位置(Forced data location)</h4><ul>
+<li>外部函数(External function)的参数(不包括返回参数)强制为：calldata</li>
+<li>状态变量(State variables)强制为: storage</li>
+</ul>
+<h4 id="默认数据位置（Default-data-location）"><a href="#默认数据位置（Default-data-location）" class="headerlink" title="默认数据位置（Default data location）"></a>默认数据位置（Default data location）</h4><ul>
+<li>函数参数及返回参数：memory</li>
+<li>复杂类型的局部变量：storage</li>
+</ul>
+<h2 id="深入分析"><a href="#深入分析" class="headerlink" title="深入分析"></a>深入分析</h2><p>storage 存储结构是在合约创建的时候就确定好了的，它取决于合约所声明状态变量。但是内容可以被（交易）调用改变。</p>
+<blockquote>
+<p>Solidity 称这个为状态改变，这也是合约级变量称为<strong>状态变量</strong>的原因。也可以更好的理解为什么状态变量都是storage存储。</p>
+</blockquote>
+<p>memory 只能用于函数内部，memory 声明用来告知EVM在运行时创建一块（固定大小）内存区域给变量使用。</p>
+<blockquote>
+<p>storage 在区块链中是用key/value的形式存储，而memory则表现为字节数组</p>
+</blockquote>
+<h3 id="关于栈（stack）"><a href="#关于栈（stack）" class="headerlink" title="关于栈（stack）"></a>关于栈（stack）</h3><p>EVM是一个基于栈的语言，栈实际是在内存(memory)的一个数据结构，每个栈元素占为256位，栈最大长度为1024。<br>值类型的局部变量是存储在栈上。</p>
+<h3 id="不同存储的消耗（gas消耗）"><a href="#不同存储的消耗（gas消耗）" class="headerlink" title="不同存储的消耗（gas消耗）"></a>不同存储的消耗（gas消耗）</h3><ul>
+<li>storage 会永久保存合约状态变量，开销最大</li>
+<li>memory 仅保存临时变量，函数调用之后释放，开销很小</li>
+<li>stack  保存很小的局部变量，几乎免费使用，但有数量限制。</li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://solidity.readthedocs.io/en/develop/types.html#data-location" target="_blank" rel="noopener">Solidity官方文档-类型</a></p>
 <p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客</p>
+<!---
 
+[1](https://stackoverflow.com/questions/33839154/in-ethereum-solidity-what-is-the-purpose-of-the-memory-keyword)
+[2](https://ethereum.stackexchange.com/questions/17964/why-are-local-variables-allocated-to-storage-instead-of-memory) -->
       
     </div>
     
@@ -602,7 +533,7 @@ help,h     显示一个命令或帮助一个命令列表
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://learnblockchain.cn/2017/11/29/geth_cmd_options/" title="以太坊客户端Geth命令用法-参数详解">https://learnblockchain.cn/2017/11/29/geth_cmd_options/</a>
+    <a href="https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/" title="Solidity 教程系列4 - 数据存储位置分析">https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -617,11 +548,7 @@ help,h     显示一个命令或帮助一个命令列表
       
         <div class="post-tags">
           
-            <a href="/tags/Geth命令用法/" rel="tag"># Geth命令用法</a>
-          
-            <a href="/tags/Geth命令参数详解/" rel="tag"># Geth命令参数详解</a>
-          
-            <a href="/tags/Geth手册/" rel="tag"># Geth手册</a>
+            <a href="/tags/Solidity手册/" rel="tag"># Solidity手册</a>
           
         </div>
       
@@ -634,8 +561,8 @@ help,h     显示一个命令或帮助一个命令列表
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/24/init-env/" rel="next" title="智能合约开发环境搭建及Hello World合约">
-                <i class="fa fa-chevron-left"></i> 智能合约开发环境搭建及Hello World合约
+              <a href="/2017/12/12/solidity2/" rel="next" title="Solidity 教程系列2 - 地址类型介绍">
+                <i class="fa fa-chevron-left"></i> Solidity 教程系列2 - 地址类型介绍
               </a>
             
           </div>
@@ -643,10 +570,6 @@ help,h     显示一个命令或帮助一个命令列表
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/01/geth_cmd_short/" rel="prev" title="Geth 控制台使用及 Web3.js 使用实战">
-                Geth 控制台使用及 Web3.js 使用实战 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -828,7 +751,7 @@ help,h     显示一个命令或帮助一个命令列表
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令用法"><span class="nav-number">1.</span> <span class="nav-text">命令用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#版本："><span class="nav-number">1.1.</span> <span class="nav-text">版本：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令"><span class="nav-number">1.2.</span> <span class="nav-text">命令:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ETHEREUM选项"><span class="nav-number">1.3.</span> <span class="nav-text">ETHEREUM选项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开发者（模式）选项"><span class="nav-number">1.4.</span> <span class="nav-text">开发者（模式）选项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ETHASH-选项"><span class="nav-number">1.5.</span> <span class="nav-text">ETHASH 选项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交易池选项"><span class="nav-number">1.6.</span> <span class="nav-text">交易池选项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性能调优的选项"><span class="nav-number">1.7.</span> <span class="nav-text">性能调优的选项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#帐户选项"><span class="nav-number">1.8.</span> <span class="nav-text">帐户选项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#API和控制台选项"><span class="nav-number">1.9.</span> <span class="nav-text">API和控制台选项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络选项"><span class="nav-number">1.10.</span> <span class="nav-text">网络选项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#矿工选项"><span class="nav-number">1.11.</span> <span class="nav-text">矿工选项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GAS价格选项"><span class="nav-number">1.12.</span> <span class="nav-text">GAS价格选项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟机的选项"><span class="nav-number">1.13.</span> <span class="nav-text">虚拟机的选项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志和调试选项"><span class="nav-number">1.14.</span> <span class="nav-text">日志和调试选项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WHISPER实验选项"><span class="nav-number">1.15.</span> <span class="nav-text">WHISPER实验选项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#弃用选项："><span class="nav-number">1.16.</span> <span class="nav-text">弃用选项：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他选项"><span class="nav-number">1.17.</span> <span class="nav-text">其他选项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#版权："><span class="nav-number">1.18.</span> <span class="nav-text">版权：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#翻译说明"><span class="nav-number">2.</span> <span class="nav-text">翻译说明</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据位置-Data-location"><span class="nav-number">2.</span> <span class="nav-text">数据位置(Data location)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">2.1.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#强制的数据位置-Forced-data-location"><span class="nav-number">2.1.1.</span> <span class="nav-text">强制的数据位置(Forced data location)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#默认数据位置（Default-data-location）"><span class="nav-number">2.1.2.</span> <span class="nav-text">默认数据位置（Default data location）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深入分析"><span class="nav-number">3.</span> <span class="nav-text">深入分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于栈（stack）"><span class="nav-number">3.1.</span> <span class="nav-text">关于栈（stack）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不同存储的消耗（gas消耗）"><span class="nav-number">3.2.</span> <span class="nav-text">不同存储的消耗（gas消耗）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
             
 
           </div>

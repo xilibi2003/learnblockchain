@@ -2,23 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://learnblockchain.cn/2017/12/05/solidity1/</loc>
+    <loc>https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/</loc>
     
-    <lastmod>2017-12-14T12:29:24.000Z</lastmod>
+    <lastmod>2017-12-21T14:22:35.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://learnblockchain.cn/2017/12/12/solidity_func/</loc>
+    <loc>https://learnblockchain.cn/2017/12/05/solidity1/</loc>
     
-    <lastmod>2017-12-14T12:06:55.000Z</lastmod>
+    <lastmod>2017-12-21T09:02:42.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://learnblockchain.cn/2017/12/12/solidity2/</loc>
     
-    <lastmod>2017-12-14T12:00:34.000Z</lastmod>
+    <lastmod>2017-12-21T09:02:30.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://learnblockchain.cn/2017/12/12/solidity_func/</loc>
+    
+    <lastmod>2017-12-21T09:02:16.000Z</lastmod>
     
   </url>
   
