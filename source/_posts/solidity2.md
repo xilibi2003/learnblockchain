@@ -1,7 +1,9 @@
 ---
-title: Solidity教程系列2 - 地址类型介绍  
+title: Solidity 教程系列2 - 地址类型介绍  
 date: 2017-12-12 15:25:59
-categories: 以太坊
+categories: 
+    - 以太坊
+    - Solidity
 tags:
     - Solidity
 author: Tiny熊
