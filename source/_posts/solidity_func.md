@@ -151,7 +151,7 @@ contract OracleUser {
 * external - 仅外部访问（在内部也只能用外部访问方式访问）
 
 ### public 还是 external 最佳实践
-请订阅[区块链技术](https://xiaozhuanlan.com/topic/7518269403)查看。
+请订阅[区块链技术](https://xiaozhuanlan.com/blockchaincore)查看。
 
 ## 参考文档
 [Solidity官方文档-类型](https://solidity.readthedocs.io/en/develop/types.html)
