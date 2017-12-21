@@ -183,7 +183,7 @@ contract test {
 ```
 
 ## 代码实例
-通过合约代码实例说明类型的使用，请订阅[区块链技术](https://xiaozhuanlan.com/topic/7518269403)查看。
+通过合约代码实例说明类型的使用，请订阅[区块链技术](https://xiaozhuanlan.com/blockchaincore)查看。
 
 ## 参考文档
 [Solidity官方文档-类型](https://solidity.readthedocs.io/en/develop/types.html)
