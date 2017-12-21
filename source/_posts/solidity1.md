@@ -1,5 +1,5 @@
 ---
-title: Solidity教程系列1 - 类型介绍  
+title: Solidity 教程系列1 - 类型介绍  
 date: 2017-12-05 15:25:59
 categories: 
     - 以太坊
@@ -39,10 +39,10 @@ Solidity类型分为两类：
 * 字符串常量（String literals）
 * 十六进制常量（Hexadecimal literals）
 * 枚举(Enums)
-* 函数(Function Types)
-* 地址(Address)
+* [函数类型](https://learnblockchain.cn/2017/12/12/solidity_func/)(Function Types)
+* [地址类型](https://learnblockchain.cn/2017/12/12/solidity2/)(Address)
 * 地址常量(Address Literals)
-> 函数和地址讲解会在之后的文章。
+> [函数类型](https://learnblockchain.cn/2017/12/12/solidity_func/)及[地址类型](https://learnblockchain.cn/2017/12/12/solidity2/)(Address)有单独的博文，请点击查看。
 
 ## 布尔类型(Booleans)
 **布尔(bool)**:可能的取值为常量值**true**和**false**。
