@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+  <meta name="msvalidate.01" content="914C9C1CBC7078C5E2AC612AD5C1CC6C" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Solidity手册," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Solidity 教程系列第5篇 - Solidity 数组介绍。">
+<meta name="keywords" content="Solidity手册">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Solidity 教程系列5 - 数组介绍">
+<meta property="og:url" content="https://learnblockchain.cn/2017/12/21/solidity-arrays/index.html">
+<meta property="og:site_name" content="深入浅出区块链">
+<meta property="og:description" content="Solidity 教程系列第5篇 - Solidity 数组介绍。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-23T14:46:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Solidity 教程系列5 - 数组介绍">
+<meta name="twitter:description" content="Solidity 教程系列第5篇 - Solidity 数组介绍。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'ERVKOTY9C3',
+      apiKey: '145d6b00595f05cb28bf9c6e3c5bdbc3',
+      indexName: 'learnblockchain',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://learnblockchain.cn/2017/12/21/solidity-arrays/"/>
+
+
+
+
+
+  <title>Solidity 教程系列5 - 数组介绍 | 深入浅出区块链</title>
+  
+
+
+
+
+
+
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6273382609469378",
+        enable_page_level_ads: true
+    });
+</script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">系统学习区块链技术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wiki">
+          <a href="https://wiki.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Wiki
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2017/12/21/solidity-arrays/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Solidity 教程系列5 - 数组介绍</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-21T11:55:18+08:00">
+                2017-12-21
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-23T22:46:31+08:00">
+                2017-12-23
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ethereum/" itemprop="url" rel="index">
+                    <span itemprop="name">以太坊</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ethereum/Solidity/" itemprop="url" rel="index">
+                    <span itemprop="name">Solidity</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Solidity 教程系列第5篇 - Solidity 数组介绍。</p>
+<a id="more"></a>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>Solidity 是以太坊智能合约编程语言，阅读本文前，你应该对以太坊、智能合约有所了解，<br>如果你还不了解，建议你先看<a href="https://learnblockchain.cn/2017/11/20/whatiseth/">以太坊是什么</a></p>
+<p>本文前半部分是参考Solidity官方文档（当前最新版本：0.4.20）进行翻译，后半部分对官方文档中没有提供代码的知识点补充代码说明（订阅<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">专栏</a>阅读）。</p>
+<h2 id="数组（Arrays）"><a href="#数组（Arrays）" class="headerlink" title="数组（Arrays）"></a>数组（Arrays）</h2><p>数组可以声明时指定长度，也可以是动态变长。对storage存储的数组来说，元素类型可以是任意的，类型可以是数组，映射类型，结构体等。但对于memory的数组来说。如果作为public函数的参数，它不能是映射类型的数组，只能是支持<a href="https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI#types" target="_blank" rel="noopener">ABI的类型</a>。</p>
+<p>一个元素类型为T，固定长度为k的数组，可以声明为<strong>T[k]</strong>，而一个动态大小（变长）的数组则声明为<strong>T[]</strong>。<br>还可以声明一个多维数组，如声明一个类型为uint的数组长度为5的变长数组（5个元素都是变长数组），可以声明为uint[][5]。（注意，相比非区块链语言，多维数组的长度声明是反的。）</p>
+<p>要访问第三个动态数组的第二个元素，使用x[2][1]。数组的序号是从0开始的，序号顺序与定义相反。</p>
+<p><strong>bytes</strong>和<strong>string</strong>是一种特殊的数组。<strong>bytes</strong>类似<strong>byte[]</strong>，但在外部函数作为参数调用中，<strong>bytes</strong>会进行压缩打包。<strong>string</strong>类似<strong>bytes</strong>，但不提供长度和按序号的访问方式（目前）。<br>所以应该尽量使用<strong>bytes</strong>而不是<strong>byte[]</strong>。</p>
+<blockquote>
+<p>可以将字符串s通过bytes(s)转为一个bytes，可以通过<strong>bytes(s).length</strong>获取长度，<strong>bytes(s)[n]</strong>获取对应的UTF-8编码。通过下标访问获取到的不是对应字符，而是UTF-8编码，比如中文编码是多字节，变长的，所以下标访问到的只是其中的一个编码。<br>类型为数组的状态变量，可以标记为<strong>public</strong>，从而让Solidity创建一个访问器，如果要访问数组的某个元素，指定数字下标就好了。（稍后代码事例）</p>
+</blockquote>
+<h2 id="创建内存数组"><a href="#创建内存数组" class="headerlink" title="创建内存数组"></a>创建内存数组</h2><p>可使用new关键字创建一个memory的数组。与stroage数组不同的是，你不能通过.length的长度来修改数组大小属性。我们来看看下面的例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.16</span>;</span><br><span class="line"></span><br><span class="line">contract C &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">uint len</span>) <span class="title">public</span> <span class="title">pure</span> </span>&#123;</span><br><span class="line">        uint[] memory a = <span class="keyword">new</span> uint[](<span class="number">7</span>);</span><br><span class="line">                </span><br><span class="line">        <span class="comment">//a.length = 100;  // 错误</span></span><br><span class="line">        bytes memory b = <span class="keyword">new</span> bytes(len);</span><br><span class="line">        <span class="comment">// Here we have a.length == 7 and b.length == len</span></span><br><span class="line">        a[<span class="number">6</span>] = <span class="number">8</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="数组常量及内联数组"><a href="#数组常量及内联数组" class="headerlink" title="数组常量及内联数组"></a>数组常量及内联数组</h2><p>数组常量，是一个数组表达式（还没有赋值到变量）。下面是一个简单的例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.16</span>;</span><br><span class="line"></span><br><span class="line">contract C &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) <span class="title">public</span> <span class="title">pure</span> </span>&#123;</span><br><span class="line">        g([uint(<span class="number">1</span>), <span class="number">2</span>, <span class="number">3</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">g</span>(<span class="params">uint[<span class="number">3</span>] _data</span>) <span class="title">public</span> <span class="title">pure</span> </span>&#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>通过数组常量，创建的数组是memory的，同时还是定长的。元素类型则是使用刚好能存储的元素的能用类型，比如[1, 2, 3]，只需要uint8即可存储，它的类型是<strong>uint8[3] memory</strong>。</p>
+<p>由于g()方法的参数需要的是uint（默认的uint表示的其实是uint256），所以需要对第一个元素进行类型转换，使用uint(1)来进行这个转换。</p>
+<p>还需注意的一点是，定长数组，不能与变长数组相互赋值，我们来看下面的代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  无法编译</span></span><br><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.0</span>;</span><br><span class="line"></span><br><span class="line">contract C &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        <span class="comment">// The next line creates a type error because uint[3] memory</span></span><br><span class="line">        <span class="comment">// cannot be converted to uint[] memory.</span></span><br><span class="line">        uint[] x = [uint(<span class="number">1</span>), <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>已经计划在未来移除这样的限制。当前因为ABI传递数组还有些问题。</p>
+<h2 id="成员"><a href="#成员" class="headerlink" title="成员"></a>成员</h2><h3 id="length属性"><a href="#length属性" class="headerlink" title="length属性"></a>length属性</h3><p>数组有一个.length属性，表示当前的数组长度。storage的变长数组，可以通过给.length赋值调整数组长度。memory的变长数组不支持。<br>不能通过访问超出当前数组的长度的方式，来自动实现改变数组长度。memory数组虽然可以通过参数，灵活指定大小，但一旦创建，大小不可调整。</p>
+<h3 id="push方法"><a href="#push方法" class="headerlink" title="push方法"></a>push方法</h3><p>storage的变长数组和bytes都有一个<strong>push</strong>方法（string没有），用于附加新元素到数据末端，返回值为新的长度。</p>
+<h2 id="限制情况"><a href="#限制情况" class="headerlink" title="限制情况"></a>限制情况</h2><p>当前在external函数中，不能使用多维数组。</p>
+<p>另外，基于EVM的限制，不能通过外部函数返回动态的内容。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">contract C &#123;</span><br><span class="line">     <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) <span class="title">returns</span> (<span class="params">uint[]</span>) </span>&#123; ... &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure></p>
+<p>在这个的例子中，如果通过web.js调用能返回数据，但从Solidity中调用不能返回数据。一种绕过这个问题的办法是使用一个非常大的静态数组。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.16</span>;</span><br><span class="line"></span><br><span class="line">contract ArrayContract &#123;</span><br><span class="line">    uint[<span class="number">2</span>**<span class="number">20</span>] m_aLotOfIntegers;</span><br><span class="line">    <span class="comment">// 这里不是两个动态数组的数组，而是一个动态数组里，每个元素是长度为二的数组。</span></span><br><span class="line">    bool[<span class="number">2</span>][] m_pairsOfFlags;</span><br><span class="line">    <span class="comment">// newPairs 存在 memory里，因为是函数参数</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">setAllFlagPairs</span>(<span class="params">bool[<span class="number">2</span>][] newPairs</span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        m_pairsOfFlags = newPairs;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">setFlagPair</span>(<span class="params">uint index, bool flagA, bool flagB</span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 访问不存在的index会抛出异常</span></span><br><span class="line">        m_pairsOfFlags[index][<span class="number">0</span>] = flagA;</span><br><span class="line">        m_pairsOfFlags[index][<span class="number">1</span>] = flagB;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">changeFlagArraySize</span>(<span class="params">uint newSize</span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 如果新size更小, 移除的元素会被销毁</span></span><br><span class="line">        m_pairsOfFlags.length = newSize;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">clear</span>(<span class="params"></span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 销毁</span></span><br><span class="line">        <span class="keyword">delete</span> m_pairsOfFlags;</span><br><span class="line">        <span class="keyword">delete</span> m_aLotOfIntegers;</span><br><span class="line">        <span class="comment">// 同销毁一样的效果</span></span><br><span class="line">        m_pairsOfFlags.length = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    bytes m_byteData;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">byteArrays</span>(<span class="params">bytes data</span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        <span class="comment">// byte arrays ("bytes") are different as they are stored without padding,</span></span><br><span class="line">        <span class="comment">// but can be treated identical to "uint8[]"</span></span><br><span class="line">        m_byteData = data;</span><br><span class="line">        m_byteData.length += <span class="number">7</span>;</span><br><span class="line">        m_byteData[<span class="number">3</span>] = byte(<span class="number">8</span>);</span><br><span class="line">        <span class="keyword">delete</span> m_byteData[<span class="number">2</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">addFlag</span>(<span class="params">bool[<span class="number">2</span>] flag</span>) <span class="title">public</span> <span class="title">returns</span> (<span class="params">uint</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> m_pairsOfFlags.push(flag);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">createMemoryArray</span>(<span class="params">uint size</span>) <span class="title">public</span> <span class="title">pure</span> <span class="title">returns</span> (<span class="params">bytes</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// Dynamic memory arrays are created using `new`:</span></span><br><span class="line">        uint[<span class="number">2</span>][] memory arrayOfPairs = <span class="keyword">new</span> uint[<span class="number">2</span>][](size);</span><br><span class="line">        <span class="comment">// Create a dynamic byte array:</span></span><br><span class="line">        bytes memory b = <span class="keyword">new</span> bytes(<span class="number">200</span>);</span><br><span class="line">        <span class="keyword">for</span> (uint i = <span class="number">0</span>; i &lt; b.length; i++)</span><br><span class="line">            b[i] = byte(i);</span><br><span class="line">        <span class="keyword">return</span> b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="补充事例说明"><a href="#补充事例说明" class="headerlink" title="补充事例说明"></a>补充事例说明</h2><p>代码运行及讲解，请订阅<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">区块链技术</a>查看。</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://solidity.readthedocs.io/en/develop/types.html#arrays" target="_blank" rel="noopener">Solidity官方文档-数组</a></p>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客</p>
+<!---
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.0</span>;</span><br><span class="line"></span><br><span class="line">contract C &#123;</span><br><span class="line">    </span><br><span class="line">    uint [] public u = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];    <span class="comment">// 生成访问器</span></span><br><span class="line">    string  s = <span class="string">"abcdefg"</span>;</span><br><span class="line"></span><br><span class="line">    uint[] c;  <span class="comment">//storage</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">g</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        c = <span class="keyword">new</span> uint[](<span class="number">7</span>);</span><br><span class="line">        c.length = <span class="number">10</span>;   <span class="comment">//可以修改storage的数组</span></span><br><span class="line">        c[<span class="number">9</span>] = <span class="number">100</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">h</span>(<span class="params"></span>) <span class="title">public</span>  <span class="title">returns</span> (<span class="params">uint</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> bytes(s).length;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) <span class="title">public</span>  <span class="title">returns</span> (<span class="params">byte</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> bytes(s)[<span class="number">1</span>];     <span class="comment">// 转为数组访问</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>打开<a href="https://ethereum.github.io/browser-solidity">Remix - Solidity IDE</a>,帖入代码，依次创建合约，如图：<br><img src="/images/testarray.jpg" alt=""></p>
+<p>创建合约后，可以看到public的数组u，生成了对应访问器，可直接访问。</p>
+<p>–&gt;</p>
+-->
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="Tiny熊 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信号：区块链技术剖析，欢迎订阅</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有收获，赞赏下</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/qr_pay.jpg" alt="Tiny熊 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Tiny熊
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://learnblockchain.cn/2017/12/21/solidity-arrays/" title="Solidity 教程系列5 - 数组介绍">https://learnblockchain.cn/2017/12/21/solidity-arrays/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Solidity手册/" rel="tag"># Solidity手册</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/21/solidity_reftype_datalocation/" rel="next" title="Solidity 教程系列4 - 数据存储位置分析">
+                <i class="fa fa-chevron-left"></i> Solidity 教程系列4 - 数据存储位置分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/xilibi2003" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiong-li-bing/activities" target="_blank" title="ZhiHu">
+                    
+                      <i class="fa fa-fw fa-globe"></i>ZhiHu</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="我的小专栏" target="_blank">我的小专栏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://t.xiaomiquan.com/RfAu7uj" title="技术交流-知识星球" target="_blank">技术交流-知识星球</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bitshuo.com" title="区块链技术中文社区" target="_blank">区块链技术中文社区</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组（Arrays）"><span class="nav-number">2.</span> <span class="nav-text">数组（Arrays）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建内存数组"><span class="nav-number">3.</span> <span class="nav-text">创建内存数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组常量及内联数组"><span class="nav-number">4.</span> <span class="nav-text">数组常量及内联数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#成员"><span class="nav-number">5.</span> <span class="nav-text">成员</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#length属性"><span class="nav-number">5.1.</span> <span class="nav-text">length属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#push方法"><span class="nav-number">5.2.</span> <span class="nav-text">push方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#限制情况"><span class="nav-number">6.</span> <span class="nav-text">限制情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充事例说明"><span class="nav-number">7.</span> <span class="nav-text">补充事例说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文档"><span class="nav-number">8.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+  <div class="footer-custom"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17140514号-1</a></div>
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

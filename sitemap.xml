@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://learnblockchain.cn/2017/12/21/solidity-arrays/</loc>
+    
+    <lastmod>2017-12-23T14:46:31.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/</loc>
     
     <lastmod>2017-12-21T14:22:35.000Z</lastmod>
