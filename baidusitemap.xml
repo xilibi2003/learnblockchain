@@ -4,12 +4,35 @@
 
     
   <url>
-    <loc>https://learnblockchain.cn/2017/12/21/solidity-arrays/</loc>
-    <lastmod>2017-12-23T14:46:31.000Z</lastmod>
+    <loc>https://learnblockchain.cn/2017/12/12/solidity_func/</loc>
+    <lastmod>2017-12-25T01:44:16.000Z</lastmod>
     <data>
         <display>
-        <title>Solidity 教程系列5 - 数组介绍</title>
-        <pubTime>2017-12-21T03:55:18.000Z</pubTime>
+        <title>智能合约语言 Solidity 教程系列3 - 函数类型</title>
+        <pubTime>2017-12-12T07:25:59.000Z</pubTime>
+        
+        <tag>Solidity</tag>
+         
+         
+           
+             
+              <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
+          
+             
+              <breadCrumb title="Solidity" url="https://learnblockchain.cn/categories/ethereum/Solidity/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/</loc>
+    <lastmod>2017-12-25T01:44:07.000Z</lastmod>
+    <data>
+        <display>
+        <title>智能合约语言 Solidity 教程系列4 - 数据存储位置分析</title>
+        <pubTime>2017-12-21T03:51:02.000Z</pubTime>
         
         <tag>Solidity手册</tag>
          
@@ -27,12 +50,35 @@
 
     
   <url>
-    <loc>https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/</loc>
-    <lastmod>2017-12-21T14:22:35.000Z</lastmod>
+    <loc>https://learnblockchain.cn/2017/12/12/solidity2/</loc>
+    <lastmod>2017-12-25T01:43:57.000Z</lastmod>
     <data>
         <display>
-        <title>Solidity 教程系列4 - 数据存储位置分析</title>
-        <pubTime>2017-12-21T03:51:02.000Z</pubTime>
+        <title>智能合约语言 Solidity 教程系列2 - 地址类型介绍</title>
+        <pubTime>2017-12-12T07:25:59.000Z</pubTime>
+        
+        <tag>Solidity</tag>
+         
+         
+           
+             
+              <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
+          
+             
+              <breadCrumb title="Solidity" url="https://learnblockchain.cn/categories/ethereum/Solidity/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://learnblockchain.cn/2017/12/21/solidity-arrays/</loc>
+    <lastmod>2017-12-25T01:41:25.000Z</lastmod>
+    <data>
+        <display>
+        <title>Solidity 教程系列5 - 数组介绍</title>
+        <pubTime>2017-12-21T03:55:18.000Z</pubTime>
         
         <tag>Solidity手册</tag>
          
@@ -58,52 +104,6 @@
         <pubTime>2017-12-05T07:25:59.000Z</pubTime>
         
         <tag>Solidity手册</tag>
-         
-         
-           
-             
-              <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
-          
-             
-              <breadCrumb title="Solidity" url="https://learnblockchain.cn/categories/ethereum/Solidity/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://learnblockchain.cn/2017/12/12/solidity2/</loc>
-    <lastmod>2017-12-21T09:02:30.000Z</lastmod>
-    <data>
-        <display>
-        <title>Solidity 教程系列2 - 地址类型介绍</title>
-        <pubTime>2017-12-12T07:25:59.000Z</pubTime>
-        
-        <tag>Solidity</tag>
-         
-         
-           
-             
-              <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
-          
-             
-              <breadCrumb title="Solidity" url="https://learnblockchain.cn/categories/ethereum/Solidity/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://learnblockchain.cn/2017/12/12/solidity_func/</loc>
-    <lastmod>2017-12-21T09:02:16.000Z</lastmod>
-    <data>
-        <display>
-        <title>Solidity 教程系列3 - 函数类型</title>
-        <pubTime>2017-12-12T07:25:59.000Z</pubTime>
-        
-        <tag>Solidity</tag>
          
          
            
