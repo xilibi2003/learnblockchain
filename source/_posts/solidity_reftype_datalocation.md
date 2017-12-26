@@ -1,5 +1,5 @@
 ---
-title: Solidity 教程系列4 - 数据存储位置分析 
+title: 智能合约语言 Solidity 教程系列4 - 数据存储位置分析 
 date: 2017-12-21 11:51:02
 categories: 
     - 以太坊
