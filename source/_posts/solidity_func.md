@@ -1,5 +1,5 @@
 ---
-title: Solidity 教程系列3 - 函数类型  
+title: 智能合约语言 Solidity 教程系列3 - 函数类型  
 date: 2017-12-12 15:25:59
 categories: 
     - 以太坊
