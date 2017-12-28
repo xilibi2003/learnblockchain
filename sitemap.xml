@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://learnblockchain.cn/2017/12/27/solidity-structs/</loc>
+    
+    <lastmod>2017-12-28T12:46:14.657Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/</loc>
+    
+    <lastmod>2017-12-27T13:02:33.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://learnblockchain.cn/2017/12/21/solidity-arrays/</loc>
+    
+    <lastmod>2017-12-27T13:01:45.316Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://learnblockchain.cn/2017/12/05/solidity1/</loc>
+    
+    <lastmod>2017-12-25T02:08:53.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://learnblockchain.cn/2017/12/12/solidity_func/</loc>
     
     <lastmod>2017-12-25T01:44:16.000Z</lastmod>
@@ -9,30 +37,9 @@
   </url>
   
   <url>
-    <loc>https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/</loc>
-    
-    <lastmod>2017-12-25T01:44:07.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://learnblockchain.cn/2017/12/12/solidity2/</loc>
     
     <lastmod>2017-12-25T01:43:57.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://learnblockchain.cn/2017/12/21/solidity-arrays/</loc>
-    
-    <lastmod>2017-12-25T01:41:25.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://learnblockchain.cn/2017/12/05/solidity1/</loc>
-    
-    <lastmod>2017-12-21T09:02:42.000Z</lastmod>
     
   </url>
   
