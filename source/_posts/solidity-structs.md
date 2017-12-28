@@ -9,7 +9,7 @@ tags:
 author: Tiny熊
 ---
 
-Solidity 教程系列第6篇 - Solidity 结构体。
+Solidity 教程系列第6篇 - Solidity 结构体与映射。
 
 <!-- more -->
 ## 写在前面
@@ -80,18 +80,19 @@ contract CrowdFunding {
 
 ## 映射(Mappings)
 
-Mapping types are declared as mapping(_KeyType => _ValueType). Here _KeyType can be almost any type except for a mapping, a dynamically sized array, a contract, an enum and a struct. _ValueType can actually be any type, including mappings.
+映射类型，一种键值对的映射关系存储结构。定义方式为mapping(_KeyType => _KeyValue)。键类型允许除映射、变长数组、合约、枚举、结构体外的几乎所有类型（）。值类型没有任何限制，可以为任何类型包括映射类型。
 
-Mappings can be seen as hash tables which are virtually initialized such that every possible key exists and is mapped to a value whose byte-representation is all zeros: a type’s default value. The similarity ends here, though: The key data is not actually stored in a mapping, only its keccak256 hash used to look up the value.
+**映射**可以被视作为一个哈希表，所有可能的键会被虚拟化的创建，映射到一个类型的默认值（二进制的全零表示）。在映射表中，并不存储键的数据，仅仅存储它的keccak256哈希值，这个哈希值在查找值时需要用到。
+正因为此，**映射**是没有长度的，也没有键集合或值集合的概念。
 
-Because of this, mappings do not have a length or a concept of a key or value being “set”.
+**映射类型**，仅能用来作为状态变量，或在内部函数中作为**storage**类型的引用。
 
-Mappings are only allowed for state variables (or as storage reference types in internal functions).
+可以通过将映射标记为public，来让Solidity创建一个访问器。通过提供一个键值做为参数来访问它，将返回对应的值。
+映射的值类型也可以是映射，使用访问器访问时，要提供这个映射值所对应的键，不断重复这个过程。
+来看一个例子：
 
-It is possible to mark mappings public and have Solidity create a getter. The _KeyType will become a required parameter for the getter and it will return _ValueType.
 
-The _ValueType can be a mapping too. The getter will have one parameter for each _KeyType, recursively.
-
+```js
 pragma solidity ^0.4.0;
 
 contract MappingExample {
@@ -109,7 +110,12 @@ contract MappingUser {
         return m.balances(this);
     }
 }
+```
 
-Note
+注意：
+映射并未提供迭代输出的方法，可以自行实现一个这样的数据结构。参考[iterable mapping](https://github.com/ethereum/dapp-bin/blob/master/library/iterable_mapping.sol)
 
-Mappings are not iterable, but it is possible to implement a data structure on top of them. For an example, see iterable mapping.
+## 参考文档
+[Solidity官方文档](https://solidity.readthedocs.io/en/develop/types.html#mappings)
+
+[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客
