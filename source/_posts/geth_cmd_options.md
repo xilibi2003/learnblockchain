@@ -175,4 +175,5 @@ Geth在以太坊智能合约开发中最常用的工具（必备开发工具）�
    有些参数翻译可能有不准确的地方，请大家指正。
    原文会尽量随geth升级保持更新，原始链接：[https://learnblockchain.cn/2017/11/29/geth_cmd_options/](https://learnblockchain.cn/2017/11/29/geth_cmd_options)
 
-[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客
+[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
+我的**[知识星球](https://t.xiaomiquan.com/RfAu7uj)**为各位解答区块链技术问题，欢迎加入讨论。

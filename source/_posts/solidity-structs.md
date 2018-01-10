@@ -17,7 +17,7 @@ Solidity 教程系列第6篇 - Solidity 结构体与映射。
 Solidity 是以太坊智能合约编程语言，阅读本文前，你应该对以太坊、智能合约有所了解，
 如果你还不了解，建议你先看[以太坊是什么](https://learnblockchain.cn/2017/11/20/whatiseth/)
 
-本文前半部分是参考Solidity官方文档（当前最新版本：0.4.20）进行翻译，后半部分对官方文档中没有提供代码的知识点补充代码说明（订阅[专栏](https://xiaozhuanlan.com/blockchaincore)阅读）。
+本系列文章一部分是参考Solidity官方文档（当前最新版本：0.4.20）进行翻译，另一部分是Solidity深入分析，这部分请订阅[区块链技术专栏](https://xiaozhuanlan.com/blockchaincore)阅读。
 
 ## 结构体(Structs)
 
@@ -118,4 +118,5 @@ contract MappingUser {
 ## 参考文档
 [Solidity官方文档](https://solidity.readthedocs.io/en/develop/types.html#mappings)
 
-[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客
+[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
+我的**[知识星球](https://t.xiaomiquan.com/RfAu7uj)**为各位解答区块链技术问题，欢迎加入讨论。
