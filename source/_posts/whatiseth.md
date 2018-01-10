@@ -138,4 +138,5 @@ Truffle是Dapp开发框架，他可以帮我们处理掉大量无关紧要的小
 本文完，这些概念你都明白了么？现在你可以开始开发了，看看[智能合约开发环境搭建及Hello World合约](https://learnblockchain.cn/2017/11/24/init-env/)
 
 
-[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客
+[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
+我的**[知识星球](https://t.xiaomiquan.com/RfAu7uj)**为各位解答区块链技术问题，欢迎加入讨论。

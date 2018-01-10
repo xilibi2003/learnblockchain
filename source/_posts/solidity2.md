@@ -145,7 +145,8 @@ contract CallTest{
 ## 参考文档
 [Solidity官方文档-类型](https://solidity.readthedocs.io/en/develop/types.html)
 
-[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客
+[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
+我的**[知识星球](https://t.xiaomiquan.com/RfAu7uj)**为各位解答区块链技术问题，欢迎加入讨论。
 
 
 <!---

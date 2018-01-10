@@ -88,4 +88,5 @@ geth attach ipc:testNet/geth.ipc
 ```
 
 更多内容请前往区块链技术小专栏查看[全文链接](https://xiaozhuanlan.com/topic/5617843029)。
-[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客
+[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
+我的**[知识星球](https://t.xiaomiquan.com/RfAu7uj)**为各位解答区块链技术问题，欢迎加入讨论。
