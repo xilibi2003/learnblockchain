@@ -94,7 +94,7 @@
 <meta property="og:image" content="https://learnblockchain.cn/images/block_info_493050.jpg">
 <meta property="og:image" content="https://learnblockchain.cn/images/block_structure.jpeg">
 <meta property="og:image" content="https://learnblockchain.cn/images/ex_check_file.jpeg">
-<meta property="og:updated_time" content="2017-12-01T15:40:39.000Z">
+<meta property="og:updated_time" content="2018-01-10T08:11:16.136Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="比特币区块结构Merkle树及简单支付验证分析">
 <meta name="twitter:description" content="在比特币网络中，不是每个节点都有能力储存完整的区块链数据，受限于存储空间的的限制，很多节点是以SPV（Simplified Payment Verification简单支付验证）钱包接入比特币网络，通过简单支付验证可以在不必存储完整区块链下对交易进行验证，本文将分析区块结构Merkle树及如何进行交易验证。">
@@ -371,8 +371,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-12-01T23:40:39+08:00">
-                2017-12-01
+              <time title="更新于" itemprop="dateModified" datetime="2018-01-10T16:11:16+08:00">
+                2018-01-10
               </time>
             
           </span>
@@ -450,7 +450,7 @@
 <h3 id="简化支付验证"><a href="#简化支付验证" class="headerlink" title="简化支付验证"></a>简化支付验证</h3><p>SPV节点不保存所有交易也不会下载整个区块，仅仅保存区块头，我们来看看它是如何对交易数据进行验证的。</p>
 <p>假如要验证区块结构图中交易6，SPV节点会通过向相邻节点索要（通过Merkleblock消息）包括从交易6哈希值沿Merkle树上溯至区块头根哈希处的哈希序列 (即哈希节点6, 5, 56, 78, 5678, 1234 1~8 - 称为认证路径) 来确认交易的存在性和正确性。（在N个交易组成的区块中确认任一交易只需要计算log2(N)个字节的哈希值，非常快速高效）</p>
 <p>大家明白了吗？</p>
-<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客</p>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。<br>我的<strong><a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">知识星球</a></strong>为各位解答区块链技术问题，欢迎加入讨论。</p>
 
       
     </div>
@@ -756,7 +756,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
