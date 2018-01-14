@@ -83,13 +83,13 @@
 
 
 
-<meta name="description" content="今天我们来编写一个完整的去中心化应用（Dapps）, 本文可以和编写智能合约结合起来看。">
+<meta name="description" content="今天我们来编写一个完整的去中心化（区块链）应用（Dapps）, 本文可以和编写智能合约结合起来看。">
 <meta name="keywords" content="Dapp入门,以太坊概念">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一步步教你开发、部署第一个Dapp应用 - 宠物商店">
+<meta property="og:title" content="一步步教你开发、部署第一个去中心化应用(Dapp) - 宠物商店">
 <meta property="og:url" content="https://learnblockchain.cn/2018/01/12/first-dapp/index.html">
 <meta property="og:site_name" content="深入浅出区块链">
-<meta property="og:description" content="今天我们来编写一个完整的去中心化应用（Dapps）, 本文可以和编写智能合约结合起来看。">
+<meta property="og:description" content="今天我们来编写一个完整的去中心化（区块链）应用（Dapps）, 本文可以和编写智能合约结合起来看。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://learnblockchain.cn/images/Petshop.jpg">
 <meta property="og:image" content="https://learnblockchain.cn/images/ganache-initial.png">
@@ -99,10 +99,10 @@
 <meta property="og:image" content="https://learnblockchain.cn/images/metamask-account1.png">
 <meta property="og:image" content="https://learnblockchain.cn/images/metamask-transactionconfirm.png">
 <meta property="og:image" content="https://learnblockchain.cn/images/metamask-transactionsuccess.png">
-<meta property="og:updated_time" content="2018-01-14T14:41:50.000Z">
+<meta property="og:updated_time" content="2018-01-14T15:21:04.694Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一步步教你开发、部署第一个Dapp应用 - 宠物商店">
-<meta name="twitter:description" content="今天我们来编写一个完整的去中心化应用（Dapps）, 本文可以和编写智能合约结合起来看。">
+<meta name="twitter:title" content="一步步教你开发、部署第一个去中心化应用(Dapp) - 宠物商店">
+<meta name="twitter:description" content="今天我们来编写一个完整的去中心化（区块链）应用（Dapps）, 本文可以和编写智能合约结合起来看。">
 <meta name="twitter:image" content="https://learnblockchain.cn/images/Petshop.jpg">
 
 
@@ -139,7 +139,7 @@
 
 
 
-  <title>一步步教你开发、部署第一个Dapp应用 - 宠物商店 | 深入浅出区块链</title>
+  <title>一步步教你开发、部署第一个去中心化应用(Dapp) - 宠物商店 | 深入浅出区块链</title>
   
 
 
@@ -348,7 +348,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">一步步教你开发、部署第一个Dapp应用 - 宠物商店</h2>
+          <h2 class="post-title" itemprop="name headline">一步步教你开发、部署第一个去中心化应用(Dapp) - 宠物商店</h2>
         
 
         <div class="post-meta">
@@ -376,7 +376,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-01-14T22:41:50+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-01-14T23:21:04+08:00">
                 2018-01-14
               </time>
             
@@ -443,7 +443,7 @@
       
 
       
-        <p>今天我们来编写一个完整的去中心化应用（Dapps）, 本文可以和<a href="https://learnblockchain.cn/2017/11/24/init-env/">编写智能合约</a>结合起来看。</p>
+        <p>今天我们来编写一个完整的去中心化（区块链）应用（Dapps）, 本文可以和<a href="https://learnblockchain.cn/2017/11/24/init-env/">编写智能合约</a>结合起来看。</p>
 <a id="more"></a>
 <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>阅读本文前，你应该对以太坊、智能合约有所了解，如果你还不了解，建议你先看<a href="https://learnblockchain.cn/2017/11/20/whatiseth/">以太坊是什么</a><br>除此之外，你最好还了解一些HTML及JavaScript知识。</p>
 <p>本文通过实例教大家来开发去中心化应用，应用效果如图：<br><img src="https://learnblockchain.cn/images/Petshop.jpg" alt=""></p>
@@ -468,10 +468,10 @@
 </blockquote>
 <h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><ol>
 <li><p>建立项目目录并进入</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> mkdir pet-shop-tutorial</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> <span class="built_in">cd</span> pet-shop-tutorial</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span> mkdir pet-shop-tutorial</span><br><span class="line"><span class="meta">&gt;</span> cd pet-shop-tutorial</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>使用truffle unbox 创建项目</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"> &gt;</span><span class="bash"> truffle unbox pet-shop</span></span><br><span class="line"> Downloading...</span><br><span class="line"> Unpacking...</span><br><span class="line"> Setting up...</span><br><span class="line"> Unbox successful. Sweet!</span><br><span class="line"></span><br><span class="line">Commands:</span><br><span class="line"></span><br><span class="line">  Compile:        truffle compile</span><br><span class="line">  Migrate:        truffle migrate</span><br><span class="line">  Test contracts: truffle test</span><br><span class="line">  Run dev server: npm run dev</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"> &gt;</span> truffle unbox pet-shop</span><br><span class="line"> Downloading...</span><br><span class="line"> Unpacking...</span><br><span class="line"> Setting up...</span><br><span class="line"> Unbox successful. Sweet!</span><br><span class="line"></span><br><span class="line">Commands:</span><br><span class="line"></span><br><span class="line">  Compile:        truffle compile</span><br><span class="line">  Migrate:        truffle migrate</span><br><span class="line">  Test contracts: truffle test</span><br><span class="line">  Run dev server: npm run dev</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>这一步需要等待一会</p>
@@ -483,7 +483,7 @@
 <h2 id="编写智能合约"><a href="#编写智能合约" class="headerlink" title="编写智能合约"></a>编写智能合约</h2><p>智能合约承担着分布式应用的后台逻辑和存储。智能合约使用solidity编写，可阅读<br>[solidity系列文章]（<a href="https://learnblockchain.cn/categories/ethereum/Solidity/）">https://learnblockchain.cn/categories/ethereum/Solidity/）</a></p>
 <p>在contracts目录下，添加合约文件Adoption.sol<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.17</span>;</span><br><span class="line"></span><br><span class="line">contract Adoption &#123;</span><br><span class="line"></span><br><span class="line">  address[<span class="number">16</span>] public adopters;  <span class="comment">// 保存领养者的地址</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 领养宠物</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">adopt</span>(<span class="params">uint petId</span>) <span class="title">public</span> <span class="title">returns</span> (<span class="params">uint</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">require</span>(petId &gt;= <span class="number">0</span> &amp;&amp; petId &lt;= <span class="number">15</span>);  <span class="comment">// 确保id在数组长度内</span></span><br><span class="line"></span><br><span class="line">    adopters[petId] = msg.sender;        <span class="comment">// 保存调用这地址 </span></span><br><span class="line">    <span class="keyword">return</span> petId;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 返回领养者</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">getAdopters</span>(<span class="params"></span>) <span class="title">public</span> <span class="title">view</span> <span class="title">returns</span> (<span class="params">address[<span class="number">16</span>]</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> adopters;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="编译部署智能合约"><a href="#编译部署智能合约" class="headerlink" title="编译部署智能合约"></a>编译部署智能合约</h2><p>Truffle集成了一个开发者控制台，可用来生成一个开发链用来测试和部署智能合约。</p>
-<h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><p>Solidity是编译型语言，需要把可读的Solidity代码编译为EVM字节码才能运行。<br>dapp的根目录pet-shop-tutorial下，<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> truffle compile</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><p>Solidity是编译型语言，需要把可读的Solidity代码编译为EVM字节码才能运行。<br>dapp的根目录pet-shop-tutorial下，<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span> truffle compile</span><br></pre></td></tr></table></figure></p>
 <p>输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Compiling ./contracts/Adoption.sol...</span><br><span class="line">Writing artifacts to ./build/contracts</span><br></pre></td></tr></table></figure></p>
 <h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>编译之后，就可以部署到区块链上。<br>在migrations文件夹下已经有一个1_initial_migration.js部署脚本，用来部署Migrations.sol合约。<br>Migrations.sol 用来确保不会部署相同的合约。</p>
 <p>现在我们来创建一个自己的部署脚本<code>2_deploy_contracts.js</code></p>
@@ -521,7 +521,7 @@
 <p><img src="https://learnblockchain.cn/images/metamask-transactionconfirm.png" alt=""></p>
 <p>点击Submit确认后，就可以看到成功领养了这次宠物。</p>
 <p>在MetaMask中，也可以看到交易的清单：<br><img src="https://learnblockchain.cn/images/metamask-transactionsuccess.png" alt=""></p>
-<p>好了，恭喜你，即将成为一名去中心化式应用开发者的你已经成为迈出了坚实的一步。<br>有问题来我的<strong><a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">知识星球</a></strong>交流吧。</p>
+<p>好了，恭喜你，即将成为一名去中心化式应用开发者的你已经成为迈出了坚实的一步。<br>如果学习中遇到问题，欢迎来我的<strong><a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">知识星球</a></strong>交流。</p>
 <h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
 <li><a href="http://truffleframework.com/tutorials/pet-shop" target="_blank" rel="noopener">Truffle手册</a></li>
 </ul>
@@ -578,7 +578,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://learnblockchain.cn/2018/01/12/first-dapp/" title="一步步教你开发、部署第一个Dapp应用 - 宠物商店">https://learnblockchain.cn/2018/01/12/first-dapp/</a>
+    <a href="https://learnblockchain.cn/2018/01/12/first-dapp/" title="一步步教你开发、部署第一个去中心化应用(Dapp) - 宠物商店">https://learnblockchain.cn/2018/01/12/first-dapp/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
