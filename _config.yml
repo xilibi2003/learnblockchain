@@ -40,7 +40,6 @@ links:
   我的小专栏: https://xiaozhuanlan.com/blockchaincore
   技术交流-知识星球: https://t.xiaomiquan.com/RfAu7uj
   区块链技术中文社区: https://bitshuo.com
-  
 
 
 # Site
@@ -171,3 +170,9 @@ search:
   field: post
   format: html
   limit: 10000
+
+  
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
