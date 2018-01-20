@@ -158,10 +158,19 @@ sitemap:
   path: sitemap.xml
   template: ./sitemap_template.xml
 
+# algolia:
+#   applicationID: 'ERVKOTY9C3'
+#   apiKey: '145d6b00595f05cb28bf9c6e3c5bdbc3'
+#   adminApiKey: 'dd88cfd44148585bff97b7de2999f9e1'
+#   indexName: 'learnblockchain'
+#   chunkSize: 5000
+
+# https://github.com/iissnan/theme-next-docs/issues/162
+
 algolia:
-  applicationID: 'ERVKOTY9C3'
-  apiKey: '145d6b00595f05cb28bf9c6e3c5bdbc3'
-  adminApiKey: 'dd88cfd44148585bff97b7de2999f9e1'
+  applicationID: 'UT2K1ZRSWK'
+  apiKey: '0bbb261dfad58df8f8a657a1ed3255cd'
+  adminApiKey: '8bc1e78669a4ae726c48a0ac5e20b39d'
   indexName: 'learnblockchain'
   chunkSize: 5000
 
