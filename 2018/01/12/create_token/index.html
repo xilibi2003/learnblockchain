@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+  <meta name="msvalidate.01" content="914C9C1CBC7078C5E2AC612AD5C1CC6C" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Dapp入门,以太坊概念," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深入浅出区块链" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="本文从技术角度详细介绍如何基于以太坊ERC20创建代币的流程.">
+<meta name="keywords" content="Dapp入门,以太坊概念">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一步步教你创建自己的数字货币Token进行ICO">
+<meta property="og:url" content="https://learnblockchain.cn/2018/01/12/create_token/index.html">
+<meta property="og:site_name" content="深入浅出区块链">
+<meta property="og:description" content="本文从技术角度详细介绍如何基于以太坊ERC20创建代币的流程.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://learnblockchain.cn/images/token_info.jpeg">
+<meta property="og:image" content="https://learnblockchain.cn/images/metamask_main.png">
+<meta property="og:image" content="https://learnblockchain.cn/images/token_create_remix.jpeg">
+<meta property="og:image" content="https://learnblockchain.cn/images/metamask_add_token.png">
+<meta property="og:image" content="https://learnblockchain.cn/images/metamask_token_added.png">
+<meta property="og:image" content="https://learnblockchain.cn/images/myetherwaller.jpeg">
+<meta property="og:image" content="https://learnblockchain.cn/images/myetherwaller_connected.jpeg">
+<meta property="og:image" content="https://learnblockchain.cn/images/myetherwaller_transfer.jpeg">
+<meta property="og:image" content="https://learnblockchain.cn/images/metamask_token_tansfered.png">
+<meta property="og:updated_time" content="2018-01-20T17:17:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一步步教你创建自己的数字货币Token进行ICO">
+<meta name="twitter:description" content="本文从技术角度详细介绍如何基于以太坊ERC20创建代币的流程.">
+<meta name="twitter:image" content="https://learnblockchain.cn/images/token_info.jpeg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'UT2K1ZRSWK',
+      apiKey: '0bbb261dfad58df8f8a657a1ed3255cd',
+      indexName: 'learnblockchain',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://learnblockchain.cn/2018/01/12/create_token/"/>
+
+
+
+
+
+  <title>一步步教你创建自己的数字货币Token进行ICO | 深入浅出区块链</title>
+  
+
+
+
+
+
+
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6273382609469378",
+        enable_page_level_ads: true
+    });
+</script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">系统学习区块链技术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wiki">
+          <a href="https://wiki.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Wiki
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2018/01/12/create_token/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">一步步教你创建自己的数字货币Token进行ICO</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-12T22:36:39+08:00">
+                2018-01-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-01-21T01:17:58+08:00">
+                2018-01-21
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ethereum/" itemprop="url" rel="index">
+                    <span itemprop="name">以太坊</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ethereum/Dapp/" itemprop="url" rel="index">
+                    <span itemprop="name">Dapp</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文从技术角度详细介绍如何基于以太坊ERC20创建代币的流程.</p>
+<a id="more"></a>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>本文所讲的代币是使用以太坊智能合约创建，阅读本文前，你应该对以太坊、智能合约有所了解，如果你还不了解，建议你先看<a href="https://learnblockchain.cn/2017/11/20/whatiseth/">以太坊是什么</a></p>
+<h2 id="代币Token"><a href="#代币Token" class="headerlink" title="代币Token"></a>代币Token</h2><p>如果不那么追求精确的定义，代币就是数字货币，比特币、以太币就是一个代币。<br>利用以太坊的智能合约可以轻松编写出属于自己的代币，代币可以代表任何可以交易的东西，如：积分、财产、证书等等。<br>因此不管是出于商业，还是学习很多人想创建一个自己的代币，先贴一个图看看创建的代币是什么样子。<br><img src="/images/token_info.jpeg" alt=""></p>
+<p>今天我们就来详细讲一讲怎样创建一个这样的代币。</p>
+<h3 id="ERC20-Token"><a href="#ERC20-Token" class="headerlink" title="ERC20 Token"></a>ERC20 Token</h3><p>也许你经常看到ERC20和代币一同出现， ERC20是以太坊定义的一个<a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md" target="_blank" rel="noopener">代币标准</a>。<br>要求我们在实现代币的时候必须要遵守的协议，如指定代币名称、总量、实现代币交易函数等，只有支持了协议才能被以太坊钱包支持。<br>其接口如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">contract ERC20Interface &#123;</span><br><span class="line"></span><br><span class="line">    string public constant name = <span class="string">"Token Name"</span>;</span><br><span class="line">    string public constant symbol = <span class="string">"SYM"</span>;</span><br><span class="line">    uint8 public constant decimals = <span class="number">18</span>;  <span class="comment">// 18 is the most common number of decimal places</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">totalSupply</span>(<span class="params"></span>) <span class="title">public</span> <span class="title">constant</span> <span class="title">returns</span> (<span class="params">uint</span>);</span></span><br><span class="line"><span class="function">    <span class="title">function</span> <span class="title">balanceOf</span>(<span class="params">address tokenOwner</span>) <span class="title">public</span> <span class="title">constant</span> <span class="title">returns</span> (<span class="params">uint balance</span>);</span></span><br><span class="line"><span class="function">    <span class="title">function</span> <span class="title">allowance</span>(<span class="params">address tokenOwner, address spender</span>) <span class="title">public</span> <span class="title">constant</span> <span class="title">returns</span> (<span class="params">uint remaining</span>);</span></span><br><span class="line"><span class="function">    <span class="title">function</span> <span class="title">transfer</span>(<span class="params">address to, uint tokens</span>) <span class="title">public</span> <span class="title">returns</span> (<span class="params">bool success</span>);</span></span><br><span class="line"><span class="function">    <span class="title">function</span> <span class="title">approve</span>(<span class="params">address spender, uint tokens</span>) <span class="title">public</span> <span class="title">returns</span> (<span class="params">bool success</span>);</span></span><br><span class="line"><span class="function">    <span class="title">function</span> <span class="title">transferFrom</span>(<span class="params">address from, address to, uint tokens</span>) <span class="title">public</span> <span class="title">returns</span> (<span class="params">bool success</span>);</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">    <span class="title">event</span> <span class="title">Transfer</span>(<span class="params">address indexed from, address indexed to, uint tokens</span>);</span></span><br><span class="line"><span class="function">    <span class="title">event</span> <span class="title">Approval</span>(<span class="params">address indexed tokenOwner, address indexed spender, uint tokens</span>);</span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>简单说明一下：<br>name ：  代币名称<br>symbol： 代币符号<br>decimals： 代币小数点位数，代币的最小单位， 18表示我们可以拥有 .0000000000000000001单位个代币。<br>totalSupply() : 发行代币总量。<br>balanceOf(): 查看对应账号的代币余额。<br>transfer(): 实现代币交易，用于给用户发送代币（从我们的账户里）。<br>transferFrom():  实现代币用户之间的交易。<br>allowance(): 控制代币的交易，如可交易账号及资产。<br>approve():  允许用户可花费的代币数。</p>
+<h2 id="编写代币合约代码"><a href="#编写代币合约代码" class="headerlink" title="编写代币合约代码"></a>编写代币合约代码</h2><p>代币合约代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.16</span>;</span><br><span class="line"></span><br><span class="line">interface tokenRecipient &#123; <span class="function"><span class="keyword">function</span> <span class="title">receiveApproval</span>(<span class="params">address _from, uint256 _value, address _token, bytes _extraData</span>) <span class="title">public</span>; &#125;</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">contract</span> <span class="title">TokenERC20</span> </span>&#123;</span><br><span class="line">    string public name;</span><br><span class="line">    string public symbol;</span><br><span class="line">    uint8 public decimals = <span class="number">18</span>;  <span class="comment">// 18 是建议的默认值</span></span><br><span class="line">    uint256 public totalSupply;</span><br><span class="line"></span><br><span class="line">    mapping (<span class="function"><span class="params">address</span> =&gt;</span> uint256) public balanceOf;  <span class="comment">// </span></span><br><span class="line">    mapping (<span class="function"><span class="params">address</span> =&gt;</span> mapping (<span class="function"><span class="params">address</span> =&gt;</span> uint256)) public allowance;</span><br><span class="line"></span><br><span class="line">    event Transfer(address indexed <span class="keyword">from</span>, address indexed to, uint256 value);</span><br><span class="line"></span><br><span class="line">    event Burn(address indexed <span class="keyword">from</span>, uint256 value);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">TokenERC20</span>(<span class="params">uint256 initialSupply, string tokenName, string tokenSymbol</span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        totalSupply = initialSupply * <span class="number">10</span> ** uint256(decimals);</span><br><span class="line">        balanceOf[msg.sender] = totalSupply;</span><br><span class="line">        name = tokenName;</span><br><span class="line">        symbol = tokenSymbol;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">_transfer</span>(<span class="params">address _from, address _to, uint _value</span>) <span class="title">internal</span> </span>&#123;</span><br><span class="line">        <span class="built_in">require</span>(_to != <span class="number">0x0</span>);</span><br><span class="line">        <span class="built_in">require</span>(balanceOf[_from] &gt;= _value);</span><br><span class="line">        <span class="built_in">require</span>(balanceOf[_to] + _value &gt; balanceOf[_to]);</span><br><span class="line">        uint previousBalances = balanceOf[_from] + balanceOf[_to];</span><br><span class="line">        balanceOf[_from] -= _value;</span><br><span class="line">        balanceOf[_to] += _value;</span><br><span class="line">        Transfer(_from, _to, _value);</span><br><span class="line">        assert(balanceOf[_from] + balanceOf[_to] == previousBalances);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">transfer</span>(<span class="params">address _to, uint256 _value</span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        _transfer(msg.sender, _to, _value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">transferFrom</span>(<span class="params">address _from, address _to, uint256 _value</span>) <span class="title">public</span> <span class="title">returns</span> (<span class="params">bool success</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">require</span>(_value &lt;= allowance[_from][msg.sender]);     <span class="comment">// Check allowance</span></span><br><span class="line">        allowance[_from][msg.sender] -= _value;</span><br><span class="line">        _transfer(_from, _to, _value);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">approve</span>(<span class="params">address _spender, uint256 _value</span>) <span class="title">public</span></span></span><br><span class="line"><span class="function">        <span class="title">returns</span> (<span class="params">bool success</span>) </span>&#123;</span><br><span class="line">        allowance[msg.sender][_spender] = _value;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">approveAndCall</span>(<span class="params">address _spender, uint256 _value, bytes _extraData</span>) <span class="title">public</span> <span class="title">returns</span> (<span class="params">bool success</span>) </span>&#123;</span><br><span class="line">        tokenRecipient spender = tokenRecipient(_spender);</span><br><span class="line">        <span class="keyword">if</span> (approve(_spender, _value)) &#123;</span><br><span class="line">            spender.receiveApproval(msg.sender, _value, <span class="keyword">this</span>, _extraData);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">burn</span>(<span class="params">uint256 _value</span>) <span class="title">public</span> <span class="title">returns</span> (<span class="params">bool success</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">require</span>(balanceOf[msg.sender] &gt;= _value);</span><br><span class="line">        balanceOf[msg.sender] -= _value;</span><br><span class="line">        totalSupply -= _value;</span><br><span class="line">        Burn(msg.sender, _value);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">burnFrom</span>(<span class="params">address _from, uint256 _value</span>) <span class="title">public</span> <span class="title">returns</span> (<span class="params">bool success</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">require</span>(balanceOf[_from] &gt;= _value);</span><br><span class="line">        <span class="built_in">require</span>(_value &lt;= allowance[_from][msg.sender]);</span><br><span class="line">        balanceOf[_from] -= _value;</span><br><span class="line">        allowance[_from][msg.sender] -= _value;</span><br><span class="line">        totalSupply -= _value;</span><br><span class="line">        Burn(_from, _value);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码的详细解读，请订阅我的<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">小专栏</a>下载源码。</p>
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><p>在开发测试智能合约时，<a href="https://metamask.io/" target="_blank" rel="noopener">MetaMask</a>和<a href="https://remix.ethereum.org" target="_blank" rel="noopener">Remix Solidity IDE</a>是两个非常好用的工具，今天就用他们来完成部署。</p>
+<ol>
+<li><p>安装和配置MetaMask请参考<a href="https://learnblockchain.cn/2018/01/12/first-dapp">开发、部署第一个去中心化应用</a>，不同的上本文选择了以太坊的测试网络Ropsten，如果你没有余额请点击购买buy，进入的网站可以送一些测试以太币给你，配置好之后，界面应该如下：<br><img src="/images/metamask_main.png" alt=""></p>
+</li>
+<li><p>浏览器打开Remix Solidity IDE，复制以上源码粘贴上，在右侧选项参考如图的设置：<br><img src="/images/token_create_remix.jpeg" alt=""><br>注意Environment和Account和MetaMask保持一致，然后选择合约TokenERC20，填入你想要的发行量，名称及代号，就可以创建合约了。<br>这时MetaMask会弹出一个交易确认框，点SUBMIT。待合约部署交易确认之后，复制合约地址。</p>
+</li>
+<li><p>打开Metamask界面，切换到TOKENS，点添加合约，出现如下对话框：<br><img src="/images/metamask_add_token.png" alt=""><br>填入刚刚复制的地址，点ADD，这时你就可以看到你创建的代币了，如图：<br><img src="/images/metamask_token_added.png" alt=""></p>
+</li>
+</ol>
+<p>哈哈，你已经完成了代币的创建和部署(正式网络和测试网络部署方法一样)，可以在<a href="https://ropsten.etherscan.io/token/0x1f0c085ad323bb69758111cf9ecdc32a32d9a5bb" target="_blank" rel="noopener">Etherscan</a>查询到我们刚刚部署的代币。可以用它进行ICO了，从此走上人生巅峰。</p>
+<h2 id="代币交易"><a href="#代币交易" class="headerlink" title="代币交易"></a>代币交易</h2><p>由于MetaMask插件没有提供代币交易功能，同时考虑到很多人并没有以太坊钱包或是被以太坊钱包网络同步问题折磨，今天我用<a href="https://www.myetherwallet.com" target="_blank" rel="noopener">网页钱包</a>来讲解代币交易。</p>
+<ol>
+<li>进入<a href="https://www.myetherwallet.com/#send-transaction" target="_blank" rel="noopener">网页钱包地址</a>, 第一次进入有一些安全提示需要用户确认。</li>
+<li>进入之后，按照下图进行设置：<br><img src="/images/myetherwaller.jpeg" alt=""></li>
+<li>连接上之后，如图<br><img src="/images/myetherwaller_connected.jpeg" alt=""><br>需要添加代币，填入代币合约地址。</li>
+<li>进行代币转账交易<br><img src="/images/myetherwaller_transfer.jpeg" alt=""><br>在接下来的交易确认也，点击确认即可。</li>
+<li>交易完成后，可以看到MetaMask中代币余额减少了，如图：<br><img src="/images/metamask_token_tansfered.png" alt=""></li>
+</ol>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://theethereum.wiki/w/index.php/ERC20_Token_Standard" target="_blank" rel="noopener">https://theethereum.wiki/w/index.php/ERC20_Token_Standard</a><br><a href="https://ethereum.org/token" target="_blank" rel="noopener">https://ethereum.org/token</a></p>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="Tiny熊 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信号：区块链技术剖析，欢迎订阅</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有收获，赞赏下</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/qr_pay.jpg" alt="Tiny熊 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Tiny熊
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://learnblockchain.cn/2018/01/12/create_token/" title="一步步教你创建自己的数字货币Token进行ICO">https://learnblockchain.cn/2018/01/12/create_token/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Dapp入门/" rel="tag"># Dapp入门</a>
+          
+            <a href="/tags/以太坊概念/" rel="tag"># 以太坊概念</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/12/first-dapp/" rel="next" title="一步步教你开发、部署第一个去中心化应用(Dapp) - 宠物商店">
+                <i class="fa fa-chevron-left"></i> 一步步教你开发、部署第一个去中心化应用(Dapp) - 宠物商店
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/xilibi2003" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiong-li-bing/activities" target="_blank" title="ZhiHu">
+                    
+                      <i class="fa fa-fw fa-globe"></i>ZhiHu</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="我的小专栏" target="_blank">我的小专栏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://t.xiaomiquan.com/RfAu7uj" title="技术交流-知识星球" target="_blank">技术交流-知识星球</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bitshuo.com" title="区块链技术中文社区" target="_blank">区块链技术中文社区</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代币Token"><span class="nav-number">2.</span> <span class="nav-text">代币Token</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ERC20-Token"><span class="nav-number">2.1.</span> <span class="nav-text">ERC20 Token</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写代币合约代码"><span class="nav-number">3.</span> <span class="nav-text">编写代币合约代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署"><span class="nav-number">4.</span> <span class="nav-text">部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代币交易"><span class="nav-number">5.</span> <span class="nav-text">代币交易</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文档"><span class="nav-number">6.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+  <div class="footer-custom"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17140514号-1</a></div>
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
