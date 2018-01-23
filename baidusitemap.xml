@@ -3,6 +3,29 @@
 
 
     
+    
+  <url>
+    <loc>https://learnblockchain.cn/2018/01/11/guide/</loc>
+    <lastmod>2018-01-23T08:44:07.000Z</lastmod>
+    <data>
+        <display>
+        <title>区块链技术学习指引</title>
+        <pubTime>2018-01-11T07:03:36.000Z</pubTime>
+        
+        <tag>如何学习</tag>
+         
+        <tag>目录</tag>
+         
+         
+           
+             
+              <breadCrumb title="目录" url="https://learnblockchain.cn/categories/%E7%9B%AE%E5%BD%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
   <url>
     <loc>https://learnblockchain.cn/2018/01/12/first-dapp/</loc>
     <lastmod>2018-01-22T08:33:54.881Z</lastmod>
@@ -47,28 +70,6 @@
           
              
               <breadCrumb title="Dapp" url="https://learnblockchain.cn/categories/ethereum/Dapp/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://learnblockchain.cn/2018/01/11/guide/</loc>
-    <lastmod>2018-01-13T17:23:45.077Z</lastmod>
-    <data>
-        <display>
-        <title>区块链技术学习指引</title>
-        <pubTime>2018-01-11T07:03:36.000Z</pubTime>
-        
-        <tag>如何学习</tag>
-         
-        <tag>目录</tag>
-         
-         
-           
-             
-              <breadCrumb title="目录" url="https://learnblockchain.cn/categories/%E7%9B%AE%E5%BD%95/"/>
           
         </display>
     </data>
@@ -572,7 +573,6 @@
     </data>
     </url>
 
-    
     
     
 </urlset>

@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://learnblockchain.cn/about/index.html</loc>
+    
+    <lastmod>2018-01-23T08:50:29.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://learnblockchain.cn/2018/01/11/guide/</loc>
+    
+    <lastmod>2018-01-23T08:44:07.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://learnblockchain.cn/2018/01/12/first-dapp/</loc>
     
     <lastmod>2018-01-22T08:33:54.881Z</lastmod>
@@ -12,13 +26,6 @@
     <loc>https://learnblockchain.cn/2018/01/12/create_token/</loc>
     
     <lastmod>2018-01-22T08:33:39.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://learnblockchain.cn/2018/01/11/guide/</loc>
-    
-    <lastmod>2018-01-13T17:23:45.077Z</lastmod>
     
   </url>
   
@@ -166,13 +173,6 @@
     <loc>https://learnblockchain.cn/2017/10/20/%E5%89%8D%E8%A8%80/</loc>
     
     <lastmod>2017-12-07T09:36:53.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://learnblockchain.cn/about/index.html</loc>
-    
-    <lastmod>2017-11-22T09:57:09.000Z</lastmod>
     
   </url>
   
