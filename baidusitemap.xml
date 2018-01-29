@@ -4,33 +4,11 @@
 
     
   <url>
-    <loc>https://learnblockchain.cn/2018/01/11/guide/</loc>
-    <lastmod>2018-01-29T04:59:16.233Z</lastmod>
-    <data>
-        <display>
-        <title>区块链技术学习指引</title>
-        <pubTime>2018-01-11T07:03:36.000Z</pubTime>
-        
-        <tag>如何学习</tag>
-         
-        <tag>目录</tag>
-         
-         
-           
-             
-              <breadCrumb title="目录" url="https://learnblockchain.cn/categories/%E7%9B%AE%E5%BD%95/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://learnblockchain.cn/2018/01/27/create-token2/</loc>
-    <lastmod>2018-01-29T04:54:57.000Z</lastmod>
+    <lastmod>2018-01-29T12:06:24.563Z</lastmod>
     <data>
         <display>
-        <title>给代币添加高级功能-代币管理、增发、兑换、冻结等</title>
+        <title>实现一个可管理、增发、兑换、冻结等高级功能的代币</title>
         <pubTime>2018-01-27T09:04:13.000Z</pubTime>
         
         <tag>Dapp入门</tag>
@@ -44,6 +22,28 @@
           
              
               <breadCrumb title="Dapp" url="https://learnblockchain.cn/categories/ethereum/Dapp/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://learnblockchain.cn/2018/01/11/guide/</loc>
+    <lastmod>2018-01-29T11:52:08.954Z</lastmod>
+    <data>
+        <display>
+        <title>区块链技术学习指引</title>
+        <pubTime>2018-01-11T07:03:36.000Z</pubTime>
+        
+        <tag>如何学习</tag>
+         
+        <tag>目录</tag>
+         
+         
+           
+             
+              <breadCrumb title="目录" url="https://learnblockchain.cn/categories/%E7%9B%AE%E5%BD%95/"/>
           
         </display>
     </data>
@@ -537,13 +537,13 @@
         <title>比特币所有权及隐私问题-非对称加密应用</title>
         <pubTime>2017-11-02T09:19:29.000Z</pubTime>
         
+        <tag>非对称加密</tag>
+         
         <tag>比特币</tag>
          
         <tag>所有权问题</tag>
          
         <tag>隐私问题</tag>
-         
-        <tag>非对称加密</tag>
          
          
            
