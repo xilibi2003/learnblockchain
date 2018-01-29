@@ -4,6 +4,53 @@
 
     
   <url>
+    <loc>https://learnblockchain.cn/2018/01/11/guide/</loc>
+    <lastmod>2018-01-29T04:59:16.233Z</lastmod>
+    <data>
+        <display>
+        <title>区块链技术学习指引</title>
+        <pubTime>2018-01-11T07:03:36.000Z</pubTime>
+        
+        <tag>如何学习</tag>
+         
+        <tag>目录</tag>
+         
+         
+           
+             
+              <breadCrumb title="目录" url="https://learnblockchain.cn/categories/%E7%9B%AE%E5%BD%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://learnblockchain.cn/2018/01/27/create-token2/</loc>
+    <lastmod>2018-01-29T04:54:57.000Z</lastmod>
+    <data>
+        <display>
+        <title>给代币添加高级功能-代币管理、增发、兑换、冻结等</title>
+        <pubTime>2018-01-27T09:04:13.000Z</pubTime>
+        
+        <tag>Dapp入门</tag>
+         
+        <tag>以太坊概念</tag>
+         
+         
+           
+             
+              <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
+          
+             
+              <breadCrumb title="Dapp" url="https://learnblockchain.cn/categories/ethereum/Dapp/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://learnblockchain.cn/2018/01/12/first-dapp/</loc>
     <lastmod>2018-01-24T12:39:59.701Z</lastmod>
     <data>
@@ -28,28 +75,6 @@
     </url>
 
     
-    
-  <url>
-    <loc>https://learnblockchain.cn/2018/01/11/guide/</loc>
-    <lastmod>2018-01-23T08:44:07.000Z</lastmod>
-    <data>
-        <display>
-        <title>区块链技术学习指引</title>
-        <pubTime>2018-01-11T07:03:36.000Z</pubTime>
-        
-        <tag>如何学习</tag>
-         
-        <tag>目录</tag>
-         
-         
-           
-             
-              <breadCrumb title="目录" url="https://learnblockchain.cn/categories/%E7%9B%AE%E5%BD%95/"/>
-          
-        </display>
-    </data>
-    </url>
-
     
   <url>
     <loc>https://learnblockchain.cn/2018/01/12/create_token/</loc>
