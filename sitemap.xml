@@ -2,16 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://learnblockchain.cn/2018/01/12/create_token/</loc>
+    
+    <lastmod>2018-02-02T13:44:18.943Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://learnblockchain.cn/2018/01/27/create-token2/</loc>
     
-    <lastmod>2018-01-29T12:06:24.563Z</lastmod>
+    <lastmod>2018-02-02T13:42:57.806Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://learnblockchain.cn/2018/01/11/guide/</loc>
     
-    <lastmod>2018-01-29T11:52:08.954Z</lastmod>
+    <lastmod>2018-02-02T13:42:18.499Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://learnblockchain.cn/2018/02/02/solidity-unit/</loc>
+    
+    <lastmod>2018-02-02T13:16:11.260Z</lastmod>
     
   </url>
   
@@ -26,13 +40,6 @@
     <loc>https://learnblockchain.cn/about/index.html</loc>
     
     <lastmod>2018-01-23T08:50:29.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://learnblockchain.cn/2018/01/12/create_token/</loc>
-    
-    <lastmod>2018-01-22T08:33:39.000Z</lastmod>
     
   </url>
   
