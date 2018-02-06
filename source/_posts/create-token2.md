@@ -1,5 +1,5 @@
 ---
-title: 给代币添加高级功能-代币管理、增发、兑换、冻结等
+title: 实现一个可管理、增发、兑换、冻结等高级功能的代币
 date: 2018-01-27 17:04:13
 categories: 
     - 以太坊
@@ -169,13 +169,13 @@ finney 是货币单位 1 finney = 0.001eth
 
 ## 代码部署
 
-高级功能完整代码请前往我的[小专栏](https://xiaozhuanlan.com/blockchaincore)， 项目的完整的部署方法参考[上一篇](https://learnblockchain.cn/2018/01/12/create_token/)，不同的创建合约是，需要预存余额，如图：
+高级功能完整代码请前往我的[小专栏](https://xiaozhuanlan.com/blockchaincore)， 项目的完整的部署方法参考[上一篇](https://learnblockchain.cn/2018/01/12/create_token/)，不同的是创建合约时需要预存余额，如图：
 
-![](/images/create_adv_token.jpg)
+![](https://learnblockchain.cn/images/create_adv_token.jpg)
 
 专栏已经有多篇文章介绍Remix Solidity IDE的使用，这里就不一一截图演示了，请大家自己测试验证。
 
-如果你在创建代币的过程中遇到问题，欢迎到我的**[知识星球](https://t.xiaomiquan.com/RfAu7uj)**提问。
+如果你在创建代币的过程中遇到问题，欢迎到我的**[知识星球](https://t.xiaomiquan.com/RfAu7uj)**提问，作为星球成员福利，成员可加入区块链技术付费交流群。
 
 ## 参考文档
 * [Create your own crypto-currency with ethereum](https://ethereum.org/token)

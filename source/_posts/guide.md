@@ -45,10 +45,10 @@ author: Tiny熊
 * [以太坊客户端Geth命令用法-参数详解](https://learnblockchain.cn/2017/11/29/geth_cmd_options)
 * [Geth控制台使用实战及Web3.js使用](https://learnblockchain.cn/2017/12/01/geth_cmd_short/)
 
-### 智能合约开发
+### 智能合约及应用开发
 * [一步步教你开发、部署第一个Dapp应用](https://learnblockchain.cn/2018/01/12/first-dapp/)
 * [一步步教你创建自己的数字货币（代币）进行ICO](https://learnblockchain.cn/2018/01/12/create_token/)
-* [给代币添加高级功能-代币管理、增发、兑换、冻结等](https://learnblockchain.cn/2018/01/27/create_token2/)
+* [实现一个可管理、增发、兑换、冻结等高级功能的代币](https://learnblockchain.cn/2018/01/27/create_token2/)
 
 ### Solidity语言教程
 Solidity语言是开发智能合约最广泛的语言，本专栏应该是国内最深度介绍Solidity的文章了。
@@ -58,8 +58,12 @@ Solidity语言是开发智能合约最广泛的语言，本专栏应该是国内
 * [Solidity 教程系列4 - 数据存储位置分析](https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/)
 * [Solidity 教程系列5 - 数组介绍](https://learnblockchain.cn/2017/12/21/solidity-arrays/)
 * [Solidity 教程系列6 - 结构体与映射](https://learnblockchain.cn/2017/12/27/solidity-structs/)
+* [Solidity 教程系列7 - 以太单位及时间单位](https://learnblockchain.cn/2018/02/02/solidity-unit/)
 
+## 说明
 区块链技术付费交流群已建立，有需要加入的同学请加微信：xlbxiong
+交流群和我的[知识星球](https://t.xiaomiquan.com/RfAu7uj)同价，目前129，星球成员可选择加入交流群不另收费用。
 
+微信不提供免费解答服务（实在没有那么多的精力），不愿付费的请勿加微信，感谢理解。
 
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
