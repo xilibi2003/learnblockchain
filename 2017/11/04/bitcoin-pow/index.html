@@ -94,7 +94,7 @@
 <meta property="og:description" content="在区块链记账原理 一篇，我们了解到记账是把交易记录、交易时间、账本序号、上一个Hash值等信息计算Hash打包的过程。我们知道所有的计算和存贮是需要消耗计算机资源的，既然要付出成本，那节点为什么还要参与记账呢？在中本聪（比特币之父）的设计里，完成记账的节点可以获得系统给与的一定数量的比特币奖励，这个奖励的过程也就是比特币的发行过程，因此大家形象的把记账称为“挖矿”，本文将详细讨论这个过程。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://learnblockchain.cn/images/block_info_493050.jpg">
-<meta property="og:updated_time" content="2018-01-10T08:10:29.562Z">
+<meta property="og:updated_time" content="2018-02-06T14:19:43.231Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="比特币如何挖矿（挖矿原理）-工作量证明">
 <meta name="twitter:description" content="在区块链记账原理 一篇，我们了解到记账是把交易记录、交易时间、账本序号、上一个Hash值等信息计算Hash打包的过程。我们知道所有的计算和存贮是需要消耗计算机资源的，既然要付出成本，那节点为什么还要参与记账呢？在中本聪（比特币之父）的设计里，完成记账的节点可以获得系统给与的一定数量的比特币奖励，这个奖励的过程也就是比特币的发行过程，因此大家形象的把记账称为“挖矿”，本文将详细讨论这个过程。">
@@ -371,8 +371,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-01-10T16:10:29+08:00">
-                2018-01-10
+              <time title="更新于" itemprop="dateModified" datetime="2018-02-06T22:19:43+08:00">
+                2018-02-06
               </time>
             
           </span>
@@ -444,7 +444,7 @@
 <li>添加一个奖励交易：给自己的地址增加12.5比特币</li>
 </ul>
 <p>如果节点争夺记账权成功的话，就可以得到12.5比特币的奖励。</p>
-<h2 id="工作量证明"><a href="#工作量证明" class="headerlink" title="工作量证明"></a>工作量证明</h2><a href="/2017/10/25/whatbc/" title="区块链记账原理">区块链记账原理</a>我们了解到，每次记账的时候回把上一个块的Hash值和当前的账页信息一起作为原始信息进行Hash。<br>如果仅仅是这样，显然每个人都可以很轻松的完成记账。<br>为了保证10分钟左右只有一个人可以记账，就必须要提高记账的难度，使得Hash的结果必须以若干个0开头。同是为了满足这个条件，在进行Hash时引入一个随机数变量。<br><br>用伪代码表示一下：<br><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 没有难度时为：Hash(上一个Hash值，交易记录集) = 456635BCD</span></span><br><span class="line">Hash(上一个Hash值，交易记录集，随机数) = <span class="number">0000</span>aFD635BCD</span><br></pre></td></tr></table></figure>
+<h2 id="工作量证明"><a href="#工作量证明" class="headerlink" title="工作量证明"></a>工作量证明</h2><a href="/2017/10/25/whatbc/" title="区块链记账原理">区块链记账原理</a>我们了解到，每次记账的时候会把上一个块的Hash值和当前的账页信息一起作为原始信息进行Hash。<br>如果仅仅是这样，显然每个人都可以很轻松的完成记账。<br>为了保证10分钟左右只有一个人可以记账，就必须要提高记账的难度，使得Hash的结果必须以若干个0开头。同是为了满足这个条件，在进行Hash时引入一个随机数变量。<br><br>用伪代码表示一下：<br><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 没有难度时为：Hash(上一个Hash值，交易记录集) = 456635BCD</span></span><br><span class="line">Hash(上一个Hash值，交易记录集，随机数) = <span class="number">0000</span>aFD635BCD</span><br></pre></td></tr></table></figure>
 <p>我们知道改变Hash的原始信息的任何一部分，Hash值也会随之不断的变化，因此在运算Hash时，不断的改变随机数的值，总可以找的一个随机数使的Hash的结果以若干个0开头（下文把这个过程称为猜谜），率先找到随机数的节点就获得此次记账的唯一记账权。</p>
 <h3 id="计算量分析"><a href="#计算量分析" class="headerlink" title="计算量分析"></a>计算量分析</h3><p>（这部分可选阅读）我们简单分析下记账难度有多大，<br>Hash值是由数字和大小写字母构成的字符串，每一位有62种可能性（可能为26个大写字母、26个小写字母，10个数字中任一个），假设任何一个字符出现的概率是均等的，那么第一位为0的概率是1/62（其他位出现什么字符先不管），理论上需要尝试62次Hash运算才会出现一次第一位为0的情况，如果前两2位为0，就得尝试62的平方次Hash运算，以n个0开头就需要尝试62的n次方次运算。我们结合当前实际区块#493050信息来看看：</p>
 <p><img src="/images/block_info_493050.jpg" alt="区块#493050"></p>
@@ -634,7 +634,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
