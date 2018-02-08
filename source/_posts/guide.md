@@ -28,6 +28,8 @@ author: Tiny熊
    通过这篇了解工作量证明
 * [比特币如何达成共识 - 最长链的选择](https://learnblockchain.cn/2017/12/07/bitcoin-sonsensus/)
    通过这篇可以了解共识机制。
+### 补充阅读
+* [什么是拜占庭将军问题](https://learnblockchain.cn/2018/02/05/bitcoin-byzantine/)
 
 ### 进阶
 在基础入门之后，可以进一步阅读以下几篇，理解分布式网络，交易验证。
