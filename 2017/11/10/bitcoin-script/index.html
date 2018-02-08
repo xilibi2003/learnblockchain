@@ -102,7 +102,7 @@
 <meta property="og:image" content="https://learnblockchain.cn/images/tx_input_overview.jpeg">
 <meta property="og:image" content="https://learnblockchain.cn/images/tx_output_struce.jpeg">
 <meta property="og:image" content="https://learnblockchain.cn/images/tx_output_overview.jpeg">
-<meta property="og:updated_time" content="2018-01-10T08:10:40.795Z">
+<meta property="og:updated_time" content="2018-02-08T12:24:30.319Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="比特币脚本及交易分析 - 智能合约雏形">
 <meta name="twitter:description" content="大家都有转过账，每笔交易是这样的：张三账上减￥200，李四账上加￥200。在比特币区块链中，交易不是这么简单，交易实际是通过脚本来完成，以承载更多的功能个，这也是为什么比特币被称为是一种“可编程的货币”。本文就来分析一下交易是如何实现可编程的。">
@@ -379,8 +379,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-01-10T16:10:40+08:00">
-                2018-01-10
+              <time title="更新于" itemprop="dateModified" datetime="2018-02-08T20:24:30+08:00">
+                2018-02-08
               </time>
             
           </span>
@@ -440,7 +440,7 @@
 <h2 id="未花费的交易输出-UTXO"><a href="#未花费的交易输出-UTXO" class="headerlink" title="未花费的交易输出(UTXO)"></a>未花费的交易输出(UTXO)</h2><p>先引入一个概念：未花费的交易输出——UTXO（Unspent Transaction Output）</p>
 <p>其实比特币的交易都是基于UTXO上的，即交易的输入是之前交易未花费的输出，这笔交易的输出可以被当做下一笔新交易的输入。</p>
 <blockquote>
-<p>挖矿奖励属于一个特殊的交易（称为coinbase交易），可以没有输入。<br>UTXO是交易的基本单元，不能在分割。<br>在比特币没有余额概念，只有分散到区块链里的UTXO</p>
+<p>挖矿奖励属于一个特殊的交易（称为coinbase交易），可以没有输入。<br>UTXO是交易的基本单元，不能再分割。<br>在比特币没有余额概念，只有分散到区块链里的UTXO</p>
 </blockquote>
 <p>随着钱从一个地址被移动到另一个地址的同时形成了一条所有权链，像这样：<br><img src="/images/own_chain.jpeg" alt="own_chain"></p>
 <h2 id="比特币脚本"><a href="#比特币脚本" class="headerlink" title="比特币脚本"></a>比特币脚本</h2><p>比特币交易是首先要提供一个用于解锁UTXO（用私钥去匹配锁定脚本）的脚本（常称为解锁脚本：Signature script)，这也叫交易输入，<br>交易的输出则是指向一个脚本（称为锁定脚本：PubKey script），这个脚本表达了：谁的签名（签名是常见形式，并不一定必须是签名）能匹配这个输出地址，钱就支付给谁。</p>
@@ -664,7 +664,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
