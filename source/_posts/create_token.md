@@ -3,10 +3,10 @@ title:  一步步教你创建自己的数字货币（代币）进行ICO
 date: 2018-01-12 22:36:39
 categories: 
     - 以太坊
-    - Dapp
+    - 智能合约
 tags:
-    - Dapp入门
-    - 以太坊概念
+    - Token
+    - 智能合约
 author: Tiny熊
 ---
 
