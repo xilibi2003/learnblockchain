@@ -3,10 +3,10 @@ title: 实现一个可管理、增发、兑换、冻结等高级功能的代币
 date: 2018-01-27 17:04:13
 categories: 
     - 以太坊
-    - Dapp
+    - 智能合约
 tags:
-    - Dapp入门
-    - 以太坊概念
+    - Token
+    - 智能合约
 author: Tiny熊
 ---
 
