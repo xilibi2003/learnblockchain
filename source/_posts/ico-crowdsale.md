@@ -1,16 +1,17 @@
 ---
 title: 如何通过以太坊智能合约来进行众筹（ICO）
-date: 2018-02-08 20:30:42
+date: 2018-02-28 20:30:42
 categories: 
     - 以太坊
     - 智能合约
 tags:
     - Token
+    - ICO
     - 智能合约
 author: Tiny熊
 ---
 
-前面我们有两遍文章写了如何发行代币，今天我们讲一下如何使用代币来公开募资。
+前面我们有两遍文章写了如何发行代币，今天我们讲一下如何使用代币来公开募资，即编写一个募资合约。
 
 <!-- more -->
 
@@ -18,14 +19,21 @@ author: Tiny熊
 本文所讲的代币是使用以太坊智能合约创建，阅读本文前，你应该对以太坊、智能合约有所了解，如果你还不了解，建议你先看[以太坊是什么](https://learnblockchain.cn/2017/11/20/whatiseth/)
 
 ## 众筹
+先简单说下众筹的概念：一般是这样的，我一个非常好的想法，但是我没有钱来做这事，于是我把这个想法发给大家看，说：我做这件事需要5百万，大家有没有兴趣投些钱，如果大家在30天内投够了5百万我就开始做，到时大家都是原始股东，如果募资额不到5百万，大家投的钱就还给大家。
 
-一个正常的众筹是这样的：我一个非常好的想法，但是我没有钱来做这事，于是我把这个想法发给大家看，说：我做这件事需要5百万，大家有没有兴趣投些钱，如果大家在30天内投够了5百万我就开始做，到时大家都是原始股东，如果募资额不到5百万，大家投的钱就还给大家。
+现在ICO众筹已经被各路大佬拿来割韭菜而被玩坏了（不管有无达标，都把钱卷走）。
 
-尽管现在很不幸，众筹已经被各种割韭菜的ICO玩坏了（不管有没有募到指定额，都把钱卷走），不过还是要讲：区块链非常适合解决众筹的信任问题，借助于智能合约，可以实现当募资额完成时，募资款自动打到指定账户，当募资额未完成时，自动退款。这个过程不需要看众筹这的人品，也不用依靠第三方信用担保。
+其实区块链技术本事非常适合解决众筹的信任问题，借助于智能合约，可以实现当募资额完成时，募资款自动打到指定账户，当募资额未完成时，可退款。这个过程不需要看众筹大佬的人品，不用依靠第三方平台信用担保。
 
 
-## TOKENS、DAOS
+## 代币
+传统的众筹在参与之后通常不容易交易（参与之后无法转给其他人），而通过用代币来参与众筹，则很容易进行交易，众筹的参与人可随时进行买卖，待众筹项目实施完成的时候，完全根据代币持有量进行回馈。
 
+举个例子说明下，大家会更容易理解，有这一个众筹：A有技术做一个能监测健康的指环，为此向公众募资200百万，募资时100块对应一个代币，约定在指环上市之后，代币的持有人可以用一个代币来兑换一个指环。而指环的研发周期是一年，因此在指环还未上市的一年里，众筹的参与人可以随时交易所持有的代币。
+
+
+## 众筹智能合约代码
+接下来就看看如何实现一个众筹智能合约。
 
 ```js
 
@@ -43,40 +51,37 @@ contract Crowdsale {
 
     uint public price;    //  token 与以太坊的汇率 , token卖多少钱
     token public tokenReward;   // 要卖的token
+
     mapping(address => uint256) public balanceOf;
 
-    bool fundingGoalReached = false;  // 是否达标
-    bool crowdsaleClosed = false;   // 售卖是否结束
+    bool fundingGoalReached = false;  // 众筹是否达到目标
+    bool crowdsaleClosed = false;   //  众筹是否结束
 
     /**
-    * 事件可以用来记录信息，每次调用事件方法时都能将相关信息存入区块链中
-    * 可以用作凭证，也可以在你的 Dapp 中查询使用这些数据
+    * 事件可以用来跟踪信息
     **/
     event GoalReached(address recipient, uint totalAmountRaised);
     event FundTransfer(address backer, uint amount, bool isContribution);
 
     /**
-     * Constrctor function
-     *
-     * Setup the owner
+     * 构造函数, 设置相关属性
      */
     function Crowdsale(
         address ifSuccessfulSendTo,
         uint fundingGoalInEthers,
         uint durationInMinutes,
-        uint etherCostOfEachToken,
-        address addressOfTokenUsedAsReward
-    ) {
-        beneficiary = ifSuccessfulSendTo;
-        fundingGoal = fundingGoalInEthers * 1 ether;
-        deadline = now + durationInMinutes * 1 minutes;
-        price = etherCostOfEachToken * 1 ether;
-        tokenReward = token(addressOfTokenUsedAsReward);   // 传入已发布的 token 合约的地址来创建实例
+        uint finneyCostOfEachToken,
+        address addressOfTokenUsedAsReward) {
+            beneficiary = ifSuccessfulSendTo;
+            fundingGoal = fundingGoalInEthers * 1 ether;
+            deadline = now + durationInMinutes * 1 minutes;
+            price = finneyCostOfEachToken * 1 finney;
+            tokenReward = token(addressOfTokenUsedAsReward);   // 传入已发布的 token 合约的地址来创建实例
     }
 
     /**
-     * Fallback function
-     * 向合约付款时调用的方法
+     * 无函数名的Fallback函数，
+     * 在向合约转账时，这个函数会被调用
      */
     function () payable {
         require(!crowdsaleClosed);
@@ -88,19 +93,18 @@ contract Crowdsale {
     }
 
     /**
-    * modifier 函数修改器（作用和Python的装饰器很相似）
+    *  定义函数修改器modifier（作用和Python的装饰器很相似）
     * 用于在函数执行前检查某种前置条件（判断通过之后才会继续执行该方法）
     * _ 表示继续执行之后的代码
     **/
     modifier afterDeadline() { if (now >= deadline) _; }
 
     /**
-     * Check if goal was reached
+     * 判断众筹是否完成融资目标， 这个方法使用了afterDeadline函数修改器
      *
-     * Checks if the goal or time limit has been reached and ends the campaign
      */
     function checkGoalReached() afterDeadline {
-        if (amountRaised >= fundingGoal){
+        if (amountRaised >= fundingGoal) {
             fundingGoalReached = true;
             GoalReached(beneficiary, amountRaised);
         }
@@ -109,11 +113,9 @@ contract Crowdsale {
 
 
     /**
-     * Withdraw the funds
+     * 完成融资目标时，融资款发送到收款方
+     * 未完成融资目标时，执行退款
      *
-     * Checks to see if goal or time limit has been reached, and if so, and the funding goal was reached,
-     * sends the entire amount to the beneficiary. If goal was not reached, each contributor can withdraw
-     * the amount they contributed.
      */
     function safeWithdrawal() afterDeadline {
         if (!fundingGoalReached) {
@@ -140,10 +142,70 @@ contract Crowdsale {
 }
 ```
 
+## 部署及说明
+在部署这个合约之前，我们需要先部署一个代币合约，请参考[一步步教你创建自己的数字货币](https://learnblockchain.cn/2018/01/12/create_token/)。
 
-接下来就看看如何实现一个众筹智能合约。
+1. 创建众筹合约我们需要提供一下几个参数：
+ifSuccessfulSendTo： 募资成功后的收款方（其实这里可以默认为合约创建者）
+fundingGoalInEthers： 募资额度， 为了方便我们仅募3个ether
+durationInMinutes： 募资时间
+finneyCostOfEachToken 每个代币的价格, 这里为了方便使用了[单位finney](https://learnblockchain.cn/2018/02/02/solidity-unit/)及值为：1 （1 ether =  1000 finney）
+addressOfTokenUsedAsReward： 代币合约地址。
+如：
+![](https://learnblockchain.cn/images/crowdsale_create.jpeg)
+本文使用的参数为：
+```
+"0xc6f9ea59d424733e8e1902c7837ea75e20abfb49",3, 100, 1,"0xad8972e2b583f580fc52f737b98327eb65d08f8c"
+```
+
+2. 参与人投资的时候实际购买众筹合约代币，所有需要先向合约预存代币，代币的数量为：募资额度 / 代币的价格 ， 这里为：3 * 1000/1 = 3000 （当能也可以大于3000）。
+向合约预存代币可以使用[myetherwallet](https://www.myetherwallet.com/#send-transaction)钱包，或在remix中重新加载代币合约，执行代币合约tranfer()函数进行代币转账。如使用myetherwallet转账如图：
+![](https://learnblockchain.cn//images/crowdsale_send_token.jpeg)
+
+3. 参与人投资行为即是向买众筹合约转账，转账时，会执行Fallback回退函数（即无名函数）向其账户打回相应的代币。
+
+4. safeWithdrawl() 可以被参与人或收益人执行，如果融资不达标参与人可收回之前投资款，如果融资达标收益人可以拿到所有的融资款。
+
+## 扩展
+
+上面是一个很正规的募资合约。接下来讲两个募资合约的扩展，如果实现无限募资合约及割韭菜合约。
+
+### 无限募资合约
+上面合约中，募资额度和相应的代币都是固定的，一旦达到募资目标后，就无法再继续投资。
+如果我们想实现一个可无限募资（指募资达标后，仍然可以继续募资，不是指可一直募资）的合约，步骤如下：
+1. 先参考[实现一个可管理、增发、兑换、冻结等高级功能的代币](https://xiaozhuanlan.com/topic/4651027893)，部署一个可增发代币合约
+
+2. 更改Fallback函数：
+    ```
+    tokenReward.transfer(msg.sender, amount / price);
+    修改为：
+    tokenReward.mintToken(msg.sender, amount / price);
+    ```
+3. 在无限募资合约部署之后，调用高级代币合约的transferOwnership，把无限募资合约设置为代币合约的Owner，以便合约能执行mintToken()函数。
+
+### 割韭菜合约
+在上面的合约中，如果募资未达标，参与人则能够取回自己的投资，这是想割韭菜的大佬们不愿看到的。
+他们会这样改合约：
+```js
+function () payable {
+  require(!crowdsaleClosed);
+  uint amount = msg.value;
+  balanceOf[msg.sender] += amount;
+  amountRaised += amount;
+  tokenReward.transfer(msg.sender, amount / price);
+  FundTransfer(msg.sender, amount, true);
+
+    // 当有人付款直接取走筹资
+  beneficiary.send(amount);
+
+}
+```
+
+如果你在学习中遇到问题，欢迎到我的**[知识星球](https://t.xiaomiquan.com/RfAu7uj)**提问，作为星球成员福利，成员可加入区块链技术付费交流群。
+
+## 参考文档
+* [Create a crowdsale](https://ethereum.org/token)
+
+[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
 
 
-
-
-[](https://www.ethereum.org/crowdsale)
