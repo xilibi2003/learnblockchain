@@ -99,7 +99,8 @@
 <meta property="og:image" content="https://learnblockchain.cn/images/geth_accounts_3.jpg">
 <meta property="og:image" content="https://learnblockchain.cn/images/eth_code_hello_step1.jpeg">
 <meta property="og:image" content="https://learnblockchain.cn/images/eth_code_hello_step2.jpeg">
-<meta property="og:updated_time" content="2018-01-10T08:11:10.051Z">
+<meta property="og:image" content="https://learnblockchain.cn/images/init_example_show.jpg">
+<meta property="og:updated_time" content="2018-02-26T13:45:22.990Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="智能合约开发环境搭建及Hello World合约">
 <meta name="twitter:description" content="如果你对于以太坊智能合约开发还没有概念（本文会假设你已经知道这些概念），建议先阅读入门篇。就先学习任何编程语言一样，入门的第一个程序都是Hello World。今天我们来一步一步从搭建以太坊智能合约开发环境开始，讲解智能合约的Hello World如何编写。">
@@ -376,8 +377,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-01-10T16:11:10+08:00">
-                2018-01-10
+              <time title="更新于" itemprop="dateModified" datetime="2018-02-26T21:45:22+08:00">
+                2018-02-26
               </time>
             
           </span>
@@ -476,7 +477,7 @@
 <h2 id="部署合约"><a href="#部署合约" class="headerlink" title="部署合约"></a>部署合约</h2><p>Browser-Solidity生成的代码，拷贝到编辑器里修改后的代码如下：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> _greeting = <span class="string">"Hello World"</span> ;</span><br><span class="line"><span class="keyword">var</span> helloContract = web3.eth.contract([&#123;<span class="string">"constant"</span>:<span class="literal">true</span>,<span class="string">"inputs"</span>:[],<span class="string">"name"</span>:<span class="string">"say"</span>,<span class="string">"outputs"</span>:[&#123;<span class="string">"name"</span>:<span class="string">""</span>,<span class="string">"type"</span>:<span class="string">"string"</span>&#125;],<span class="string">"payable"</span>:<span class="literal">false</span>,<span class="string">"stateMutability"</span>:<span class="string">"view"</span>,<span class="string">"type"</span>:<span class="string">"function"</span>&#125;,&#123;<span class="string">"inputs"</span>:[&#123;<span class="string">"name"</span>:<span class="string">"_greeting"</span>,<span class="string">"type"</span>:<span class="string">"string"</span>&#125;],<span class="string">"payable"</span>:<span class="literal">false</span>,<span class="string">"stateMutability"</span>:<span class="string">"nonpayable"</span>,<span class="string">"type"</span>:<span class="string">"constructor"</span>&#125;]);</span><br><span class="line"><span class="keyword">var</span> hello = helloContract.new(</span><br><span class="line">   _greeting,</span><br><span class="line">   &#123;</span><br><span class="line">     <span class="keyword">from</span>: web3.eth.accounts[<span class="number">1</span>], </span><br><span class="line">     data: <span class="string">'0x6060604052341561000f57600080fd5b6040516102b83803806102b8833981016040528080518201919050508060009080519060200190610041929190610048565b50506100ed565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061008957805160ff19168380011785556100b7565b828001600101855582156100b7579182015b828111156100b657825182559160200191906001019061009b565b5b5090506100c491906100c8565b5090565b6100ea91905b808211156100e65760008160009055506001016100ce565b5090565b90565b6101bc806100fc6000396000f300606060405260043610610041576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063954ab4b214610046575b600080fd5b341561005157600080fd5b6100596100d4565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561009957808201518184015260208101905061007e565b50505050905090810190601f1680156100c65780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b6100dc61017c565b60008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156101725780601f1061014757610100808354040283529160200191610172565b820191906000526020600020905b81548152906001019060200180831161015557829003601f168201915b5050505050905090565b6020604051908101604052806000815250905600a165627a7a723058204a5577bb3ad30e02f7a3bdd90eedcc682700d67fc8ed6604d38bb739c0655df90029'</span>, </span><br><span class="line">     gas: <span class="string">'4700000'</span></span><br><span class="line">   &#125;, <span class="function"><span class="keyword">function</span> (<span class="params">e, contract</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(e, contract);</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> contract.address !== <span class="string">'undefined'</span>) &#123;</span><br><span class="line">         <span class="built_in">console</span>.log(<span class="string">'Contract mined! address: '</span> + contract.address + <span class="string">' transactionHash: '</span> + contract.transactionHash);</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
 <p>第1行：修改字符串为Hello World<br>第2行：修改合约变量名<br>第3行：修改合约实例变量名，之后可以直接用实例调用函数。<br>第6行：修改部署账户为新账户索引，即使用新账户来部署合约。<br>第8行：准备付的gas费用，IDE已经帮我们预估好了。<br>第9行：设置部署回调函数。</p>
-<p>拷贝会geth控制台里，回车后，看到输出如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Contract mined! address: 0x79544078dcd9d560ec3f6eff0af42a9fc84c7d19 transactionHash: 0xe2caab22102e93434888a0b8013a7ae7e804b132e4a8bfd2318356f6cf0480b3</span><br></pre></td></tr></table></figure></p>
+<p>拷贝回geth控制台里，回车后，看到输出如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Contract mined! address: 0x79544078dcd9d560ec3f6eff0af42a9fc84c7d19 transactionHash: 0xe2caab22102e93434888a0b8013a7ae7e804b132e4a8bfd2318356f6cf0480b3</span><br></pre></td></tr></table></figure></p>
 <p>说明合约已经部署成功。</p>
 <blockquote>
 <p>在打开的<strong>tail -f test.log</strong>日志终端里，可以同时看到挖矿记录</p>
@@ -485,6 +486,7 @@
 <p>是不是比之前转账的余额少呀！</p>
 <h2 id="运行合约"><a href="#运行合约" class="headerlink" title="运行合约"></a>运行合约</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; hello.say()</span><br><span class="line">&quot;Hello World&quot;</span><br></pre></td></tr></table></figure>
 <p>输出Hello World，我们第一个合约Hello World，成功运行了。</p>
+<p>运行截图如下：<br><img src="/images/init_example_show.jpg" alt=""></p>
 <p>本文会随geth，solidity语言版本升级保持更新，查看本文原始链接：<a href="https://learnblockchain.cn/2017/11/24/init-env/">https://learnblockchain.cn/2017/11/24/init-env/</a></p>
 <p>第一个合约的意义更重要的是体验智能合约开发流程，对于初学者一些可以选择先放弃一些细节，开发流程打通之后，可以增强信心进行下一步的学习。<br>有问题就加入<a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">深入浅出区块链群</a>一起来交流吧。</p>
 <p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。<br>我的<strong><a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">知识星球</a></strong>为各位解答区块链技术问题，欢迎加入讨论。</p>
@@ -661,7 +663,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -672,7 +674,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -683,7 +685,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

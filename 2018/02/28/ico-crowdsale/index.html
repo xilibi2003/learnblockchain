@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+  <meta name="msvalidate.01" content="914C9C1CBC7078C5E2AC612AD5C1CC6C" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Token,智能合约,ICO," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深入浅出区块链" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前面我们有两遍文章写了如何发行代币，今天我们讲一下如何使用代币来公开募资，即编写一个募资合约。">
+<meta name="keywords" content="Token,智能合约,ICO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何通过以太坊智能合约来进行众筹（ICO）">
+<meta property="og:url" content="https://learnblockchain.cn/2018/02/28/ico-crowdsale/index.html">
+<meta property="og:site_name" content="深入浅出区块链">
+<meta property="og:description" content="前面我们有两遍文章写了如何发行代币，今天我们讲一下如何使用代币来公开募资，即编写一个募资合约。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://learnblockchain.cn/images/crowdsale_create.jpeg">
+<meta property="og:image" content="https://learnblockchain.cn//images/crowdsale_send_token.jpeg">
+<meta property="og:updated_time" content="2018-02-28T16:07:31.389Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何通过以太坊智能合约来进行众筹（ICO）">
+<meta name="twitter:description" content="前面我们有两遍文章写了如何发行代币，今天我们讲一下如何使用代币来公开募资，即编写一个募资合约。">
+<meta name="twitter:image" content="https://learnblockchain.cn/images/crowdsale_create.jpeg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'UT2K1ZRSWK',
+      apiKey: '0bbb261dfad58df8f8a657a1ed3255cd',
+      indexName: 'learnblockchain',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://learnblockchain.cn/2018/02/28/ico-crowdsale/"/>
+
+
+
+
+
+  <title>如何通过以太坊智能合约来进行众筹（ICO） | 深入浅出区块链</title>
+  
+
+
+
+
+
+
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6273382609469378",
+        enable_page_level_ads: true
+    });
+</script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">系统学习区块链技术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wiki">
+          <a href="https://wiki.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Wiki
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2018/02/28/ico-crowdsale/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">如何通过以太坊智能合约来进行众筹（ICO）</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-28T20:30:42+08:00">
+                2018-02-28
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-03-01T00:07:31+08:00">
+                2018-03-01
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ethereum/" itemprop="url" rel="index">
+                    <span itemprop="name">以太坊</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ethereum/智能合约/" itemprop="url" rel="index">
+                    <span itemprop="name">智能合约</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前面我们有两遍文章写了如何发行代币，今天我们讲一下如何使用代币来公开募资，即编写一个募资合约。</p>
+<a id="more"></a>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>本文所讲的代币是使用以太坊智能合约创建，阅读本文前，你应该对以太坊、智能合约有所了解，如果你还不了解，建议你先看<a href="https://learnblockchain.cn/2017/11/20/whatiseth/">以太坊是什么</a></p>
+<h2 id="众筹"><a href="#众筹" class="headerlink" title="众筹"></a>众筹</h2><p>先简单说下众筹的概念：一般是这样的，我一个非常好的想法，但是我没有钱来做这事，于是我把这个想法发给大家看，说：我做这件事需要5百万，大家有没有兴趣投些钱，如果大家在30天内投够了5百万我就开始做，到时大家都是原始股东，如果募资额不到5百万，大家投的钱就还给大家。</p>
+<p>现在ICO众筹已经被各路大佬拿来割韭菜而被玩坏了（不管有无达标，都把钱卷走）。</p>
+<p>其实区块链技术本事非常适合解决众筹的信任问题，借助于智能合约，可以实现当募资额完成时，募资款自动打到指定账户，当募资额未完成时，可退款。这个过程不需要看众筹大佬的人品，不用依靠第三方平台信用担保。</p>
+<h2 id="代币"><a href="#代币" class="headerlink" title="代币"></a>代币</h2><p>传统的众筹在参与之后通常不容易交易（参与之后无法转给其他人），而通过用代币来参与众筹，则很容易进行交易，众筹的参与人可随时进行买卖，待众筹项目实施完成的时候，完全根据代币持有量进行回馈。</p>
+<p>举个例子说明下，大家会更容易理解，有这一个众筹：A有技术做一个能监测健康的指环，为此向公众募资200百万，募资时100块对应一个代币，约定在指环上市之后，代币的持有人可以用一个代币来兑换一个指环。而指环的研发周期是一年，因此在指环还未上市的一年里，众筹的参与人可以随时交易所持有的代币。</p>
+<h2 id="众筹智能合约代码"><a href="#众筹智能合约代码" class="headerlink" title="众筹智能合约代码"></a>众筹智能合约代码</h2><p>接下来就看看如何实现一个众筹智能合约。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.16</span>;</span><br><span class="line"></span><br><span class="line">interface token &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">transfer</span>(<span class="params">address receiver, uint amount</span>);</span></span><br><span class="line"><span class="function">&#125;</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">contract</span> <span class="title">Crowdsale</span> </span>&#123;</span><br><span class="line">    address public beneficiary;  <span class="comment">// 募资成功后的收款方</span></span><br><span class="line">    uint public fundingGoal;   <span class="comment">// 募资额度</span></span><br><span class="line">    uint public amountRaised;   <span class="comment">// 参与数量</span></span><br><span class="line">    uint public deadline;      <span class="comment">// 募资截止期</span></span><br><span class="line"></span><br><span class="line">    uint public price;    <span class="comment">//  token 与以太坊的汇率 , token卖多少钱</span></span><br><span class="line">    token public tokenReward;   <span class="comment">// 要卖的token</span></span><br><span class="line"></span><br><span class="line">    mapping(<span class="function"><span class="params">address</span> =&gt;</span> uint256) public balanceOf;</span><br><span class="line"></span><br><span class="line">    bool fundingGoalReached = <span class="literal">false</span>;  <span class="comment">// 众筹是否达到目标</span></span><br><span class="line">    bool crowdsaleClosed = <span class="literal">false</span>;   <span class="comment">//  众筹是否结束</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 事件可以用来跟踪信息</span></span><br><span class="line"><span class="comment">    **/</span></span><br><span class="line">    event GoalReached(address recipient, uint totalAmountRaised);</span><br><span class="line">    event FundTransfer(address backer, uint amount, bool isContribution);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 构造函数, 设置相关属性</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Crowdsale</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">        address ifSuccessfulSendTo,</span></span></span><br><span class="line"><span class="function"><span class="params">        uint fundingGoalInEthers,</span></span></span><br><span class="line"><span class="function"><span class="params">        uint durationInMinutes,</span></span></span><br><span class="line"><span class="function"><span class="params">        uint finneyCostOfEachToken,</span></span></span><br><span class="line"><span class="function"><span class="params">        address addressOfTokenUsedAsReward</span>) </span>&#123;</span><br><span class="line">            beneficiary = ifSuccessfulSendTo;</span><br><span class="line">            fundingGoal = fundingGoalInEthers * <span class="number">1</span> ether;</span><br><span class="line">            deadline = now + durationInMinutes * <span class="number">1</span> minutes;</span><br><span class="line">            price = finneyCostOfEachToken * <span class="number">1</span> finney;</span><br><span class="line">            tokenReward = token(addressOfTokenUsedAsReward);   <span class="comment">// 传入已发布的 token 合约的地址来创建实例</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 无函数名的Fallback函数，</span></span><br><span class="line"><span class="comment">     * 在向合约转账时，这个函数会被调用</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> (<span class="params"></span>) <span class="title">payable</span> </span>&#123;</span><br><span class="line">        <span class="built_in">require</span>(!crowdsaleClosed);</span><br><span class="line">        uint amount = msg.value;</span><br><span class="line">        balanceOf[msg.sender] += amount;</span><br><span class="line">        amountRaised += amount;</span><br><span class="line">        tokenReward.transfer(msg.sender, amount / price);</span><br><span class="line">        FundTransfer(msg.sender, amount, <span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    *  定义函数修改器modifier（作用和Python的装饰器很相似）</span></span><br><span class="line"><span class="comment">    * 用于在函数执行前检查某种前置条件（判断通过之后才会继续执行该方法）</span></span><br><span class="line"><span class="comment">    * _ 表示继续执行之后的代码</span></span><br><span class="line"><span class="comment">    **/</span></span><br><span class="line">    modifier afterDeadline() &#123; <span class="keyword">if</span> (now &gt;= deadline) _; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 判断众筹是否完成融资目标， 这个方法使用了afterDeadline函数修改器</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">checkGoalReached</span>(<span class="params"></span>) <span class="title">afterDeadline</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (amountRaised &gt;= fundingGoal) &#123;</span><br><span class="line">            fundingGoalReached = <span class="literal">true</span>;</span><br><span class="line">            GoalReached(beneficiary, amountRaised);</span><br><span class="line">        &#125;</span><br><span class="line">        crowdsaleClosed = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 完成融资目标时，融资款发送到收款方</span></span><br><span class="line"><span class="comment">     * 未完成融资目标时，执行退款</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">safeWithdrawal</span>(<span class="params"></span>) <span class="title">afterDeadline</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!fundingGoalReached) &#123;</span><br><span class="line">            uint amount = balanceOf[msg.sender];</span><br><span class="line">            balanceOf[msg.sender] = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span> (amount &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (msg.sender.send(amount)) &#123;</span><br><span class="line">                    FundTransfer(msg.sender, amount, <span class="literal">false</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    balanceOf[msg.sender] = amount;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (fundingGoalReached &amp;&amp; beneficiary == msg.sender) &#123;</span><br><span class="line">            <span class="keyword">if</span> (beneficiary.send(amountRaised)) &#123;</span><br><span class="line">                FundTransfer(beneficiary, amountRaised, <span class="literal">false</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//If we fail to send the funds to beneficiary, unlock funders balance</span></span><br><span class="line">                fundingGoalReached = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="部署及说明"><a href="#部署及说明" class="headerlink" title="部署及说明"></a>部署及说明</h2><p>在部署这个合约之前，我们需要先部署一个代币合约，请参考<a href="https://learnblockchain.cn/2018/01/12/create_token/">一步步教你创建自己的数字货币</a>。</p>
+<ol>
+<li><p>创建众筹合约我们需要提供一下几个参数：<br>ifSuccessfulSendTo： 募资成功后的收款方（其实这里可以默认为合约创建者）<br>fundingGoalInEthers： 募资额度， 为了方便我们仅募3个ether<br>durationInMinutes： 募资时间<br>finneyCostOfEachToken 每个代币的价格, 这里为了方便使用了<a href="https://learnblockchain.cn/2018/02/02/solidity-unit/">单位finney</a>及值为：1 （1 ether =  1000 finney）<br>addressOfTokenUsedAsReward： 代币合约地址。<br>如：<br><img src="https://learnblockchain.cn/images/crowdsale_create.jpeg" alt=""><br>本文使用的参数为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;0xc6f9ea59d424733e8e1902c7837ea75e20abfb49&quot;,3, 100, 1,&quot;0xad8972e2b583f580fc52f737b98327eb65d08f8c&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>参与人投资的时候实际购买众筹合约代币，所有需要先向合约预存代币，代币的数量为：募资额度 / 代币的价格 ， 这里为：3 * 1000/1 = 3000 （当能也可以大于3000）。<br>向合约预存代币可以使用<a href="https://www.myetherwallet.com/#send-transaction" target="_blank" rel="noopener">myetherwallet</a>钱包，或在remix中重新加载代币合约，执行代币合约tranfer()函数进行代币转账。如使用myetherwallet转账如图：<br><img src="https://learnblockchain.cn//images/crowdsale_send_token.jpeg" alt=""></p>
+</li>
+<li><p>参与人投资行为即是向买众筹合约转账，转账时，会执行Fallback回退函数（即无名函数）向其账户打回相应的代币。</p>
+</li>
+<li><p>safeWithdrawl() 可以被参与人或收益人执行，如果融资不达标参与人可收回之前投资款，如果融资达标收益人可以拿到所有的融资款。</p>
+</li>
+</ol>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>上面是一个很正规的募资合约。接下来讲两个募资合约的扩展，如果实现无限募资合约及割韭菜合约。</p>
+<h3 id="无限募资合约"><a href="#无限募资合约" class="headerlink" title="无限募资合约"></a>无限募资合约</h3><p>上面合约中，募资额度和相应的代币都是固定的，一旦达到募资目标后，就无法再继续投资。<br>如果我们想实现一个可无限募资（指募资达标后，仍然可以继续募资，不是指可一直募资）的合约，步骤如下：</p>
+<ol>
+<li><p>先参考<a href="https://xiaozhuanlan.com/topic/4651027893" target="_blank" rel="noopener">实现一个可管理、增发、兑换、冻结等高级功能的代币</a>，部署一个可增发代币合约</p>
+</li>
+<li><p>更改Fallback函数：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tokenReward.transfer(msg.sender, amount / price);</span><br><span class="line">修改为：</span><br><span class="line">tokenReward.mintToken(msg.sender, amount / price);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在无限募资合约部署之后，调用高级代币合约的transferOwnership，把无限募资合约设置为代币合约的Owner，以便合约能执行mintToken()函数。</p>
+</li>
+</ol>
+<h3 id="割韭菜合约"><a href="#割韭菜合约" class="headerlink" title="割韭菜合约"></a>割韭菜合约</h3><p>在上面的合约中，如果募资未达标，参与人则能够取回自己的投资，这是想割韭菜的大佬们不愿看到的。<br>他们会这样改合约：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> (<span class="params"></span>) <span class="title">payable</span> </span>&#123;</span><br><span class="line">  <span class="built_in">require</span>(!crowdsaleClosed);</span><br><span class="line">  uint amount = msg.value;</span><br><span class="line">  balanceOf[msg.sender] += amount;</span><br><span class="line">  amountRaised += amount;</span><br><span class="line">  tokenReward.transfer(msg.sender, amount / price);</span><br><span class="line">  FundTransfer(msg.sender, amount, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 当有人付款直接取走筹资</span></span><br><span class="line">  beneficiary.send(amount);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果你在学习中遇到问题，欢迎到我的<strong><a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">知识星球</a></strong>提问，作为星球成员福利，成员可加入区块链技术付费交流群。</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><a href="https://ethereum.org/token" target="_blank" rel="noopener">Create a crowdsale</a></li>
+</ul>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="Tiny熊 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信号：区块链技术剖析，欢迎订阅</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有收获，赞赏下</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/qr_pay.jpg" alt="Tiny熊 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Tiny熊
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://learnblockchain.cn/2018/02/28/ico-crowdsale/" title="如何通过以太坊智能合约来进行众筹（ICO）">https://learnblockchain.cn/2018/02/28/ico-crowdsale/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Token/" rel="tag"># Token</a>
+          
+            <a href="/tags/智能合约/" rel="tag"># 智能合约</a>
+          
+            <a href="/tags/ICO/" rel="tag"># ICO</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/05/bitcoin-byzantine/" rel="next" title="什么是拜占庭将军问题">
+                <i class="fa fa-chevron-left"></i> 什么是拜占庭将军问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/xilibi2003" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiong-li-bing/activities" target="_blank" title="ZhiHu">
+                    
+                      <i class="fa fa-fw fa-globe"></i>ZhiHu</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="区块链技术专栏" target="_blank">区块链技术专栏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://t.xiaomiquan.com/RfAu7uj" title="技术交流-知识星球" target="_blank">技术交流-知识星球</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bitshuo.com" title="区块链技术中文社区" target="_blank">区块链技术中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://news.tangwen.org" title="汤问资讯" target="_blank">汤问资讯</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitask.org" title="币问" target="_blank">币问</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#众筹"><span class="nav-number">2.</span> <span class="nav-text">众筹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代币"><span class="nav-number">3.</span> <span class="nav-text">代币</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#众筹智能合约代码"><span class="nav-number">4.</span> <span class="nav-text">众筹智能合约代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署及说明"><span class="nav-number">5.</span> <span class="nav-text">部署及说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展"><span class="nav-number">6.</span> <span class="nav-text">扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#无限募资合约"><span class="nav-number">6.1.</span> <span class="nav-text">无限募资合约</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#割韭菜合约"><span class="nav-number">6.2.</span> <span class="nav-text">割韭菜合约</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文档"><span class="nav-number">7.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+  <div class="footer-custom"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17140514号-1</a></div>
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
