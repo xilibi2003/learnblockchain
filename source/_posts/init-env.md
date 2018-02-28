@@ -169,7 +169,7 @@ var hello = helloContract.new(
 第8行：准备付的gas费用，IDE已经帮我们预估好了。
 第9行：设置部署回调函数。
 
-拷贝会geth控制台里，回车后，看到输出如：
+拷贝回geth控制台里，回车后，看到输出如：
 ```
 Contract mined! address: 0x79544078dcd9d560ec3f6eff0af42a9fc84c7d19 transactionHash: 0xe2caab22102e93434888a0b8013a7ae7e804b132e4a8bfd2318356f6cf0480b3
 ```
@@ -189,6 +189,9 @@ Contract mined! address: 0x79544078dcd9d560ec3f6eff0af42a9fc84c7d19 transactionH
 "Hello World"
 ```
 输出Hello World，我们第一个合约Hello World，成功运行了。
+
+运行截图如下：
+![](/images/init_example_show.jpg)
 
 本文会随geth，solidity语言版本升级保持更新，查看本文原始链接：[https://learnblockchain.cn/2017/11/24/init-env/](https://learnblockchain.cn/2017/11/24/init-env/)
 
