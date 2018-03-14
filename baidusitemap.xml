@@ -4,6 +4,52 @@
 
     
   <url>
+    <loc>https://learnblockchain.cn/2018/03/14/solidity-api/</loc>
+    <lastmod>2018-03-14T15:14:12.230Z</lastmod>
+    <data>
+        <display>
+        <title>智能合约语言 Solidity 教程系列 - Solidity API</title>
+        <pubTime>2018-03-14T15:04:43.000Z</pubTime>
+        
+        <tag>Solidity手册</tag>
+         
+         
+           
+             
+              <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
+          
+             
+              <breadCrumb title="Solidity" url="https://learnblockchain.cn/categories/ethereum/Solidity/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://learnblockchain.cn/2017/12/05/solidity1/</loc>
+    <lastmod>2018-03-13T13:25:58.879Z</lastmod>
+    <data>
+        <display>
+        <title>智能合约语言 Solidity 教程系列1 - 类型介绍</title>
+        <pubTime>2017-12-05T07:25:59.000Z</pubTime>
+        
+        <tag>Solidity手册</tag>
+         
+         
+           
+             
+              <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
+          
+             
+              <breadCrumb title="Solidity" url="https://learnblockchain.cn/categories/ethereum/Solidity/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://learnblockchain.cn/2018/01/11/guide/</loc>
     <lastmod>2018-03-01T03:31:27.846Z</lastmod>
     <data>
@@ -372,29 +418,6 @@
         <pubTime>2017-12-12T07:25:59.000Z</pubTime>
         
         <tag>Solidity</tag>
-         
-         
-           
-             
-              <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
-          
-             
-              <breadCrumb title="Solidity" url="https://learnblockchain.cn/categories/ethereum/Solidity/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://learnblockchain.cn/2017/12/05/solidity1/</loc>
-    <lastmod>2018-01-10T08:11:59.145Z</lastmod>
-    <data>
-        <display>
-        <title>智能合约语言 Solidity 教程系列1 - 类型介绍</title>
-        <pubTime>2017-12-05T07:25:59.000Z</pubTime>
-        
-        <tag>Solidity手册</tag>
          
          
            

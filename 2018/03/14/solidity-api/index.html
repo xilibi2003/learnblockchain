@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="p2p,去中心化,比特币网络," />
+  <meta name="keywords" content="Solidity手册," />
 
 
 
@@ -85,21 +85,18 @@
 
 
 
-<meta name="description" content="比特币采用了基于互联网的点对点（P2P：peer-to-peer）分布式网络架构。比特币网络可以认为是按照比特币P2P协议运行的一系列节点的集合。本文来分析下比特币网络，了解它跟传统中心化网络的区别，以及比特币网络是如何发现相邻节点的。">
-<meta name="keywords" content="p2p,去中心化,比特币网络">
+<meta name="description" content="这是Solidity教程系列文章第8篇介绍Solidity API，它们主要表现为内置的特殊的变量及函数，存在于全局命名空间里。">
+<meta name="keywords" content="Solidity手册">
 <meta property="og:type" content="article">
-<meta property="og:title" content="分析比特币网络：一种去中心化、点对点的网络架构">
-<meta property="og:url" content="https://learnblockchain.cn/2017/11/07/bitcoin-p2p/index.html">
+<meta property="og:title" content="智能合约语言 Solidity 教程系列 - Solidity API">
+<meta property="og:url" content="https://learnblockchain.cn/2018/03/14/solidity-api/index.html">
 <meta property="og:site_name" content="深入浅出区块链">
-<meta property="og:description" content="比特币采用了基于互联网的点对点（P2P：peer-to-peer）分布式网络架构。比特币网络可以认为是按照比特币P2P协议运行的一系列节点的集合。本文来分析下比特币网络，了解它跟传统中心化网络的区别，以及比特币网络是如何发现相邻节点的。">
+<meta property="og:description" content="这是Solidity教程系列文章第8篇介绍Solidity API，它们主要表现为内置的特殊的变量及函数，存在于全局命名空间里。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://learnblockchain.cn/images/cs_network.jpeg">
-<meta property="og:image" content="https://learnblockchain.cn/images/p2p_network.jpeg">
-<meta property="og:updated_time" content="2018-01-10T08:10:25.199Z">
+<meta property="og:updated_time" content="2018-03-14T15:14:12.230Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="分析比特币网络：一种去中心化、点对点的网络架构">
-<meta name="twitter:description" content="比特币采用了基于互联网的点对点（P2P：peer-to-peer）分布式网络架构。比特币网络可以认为是按照比特币P2P协议运行的一系列节点的集合。本文来分析下比特币网络，了解它跟传统中心化网络的区别，以及比特币网络是如何发现相邻节点的。">
-<meta name="twitter:image" content="https://learnblockchain.cn/images/cs_network.jpeg">
+<meta name="twitter:title" content="智能合约语言 Solidity 教程系列 - Solidity API">
+<meta name="twitter:description" content="这是Solidity教程系列文章第8篇介绍Solidity API，它们主要表现为内置的特殊的变量及函数，存在于全局命名空间里。">
 
 
 
@@ -129,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="https://learnblockchain.cn/2017/11/07/bitcoin-p2p/"/>
+  <link rel="canonical" href="https://learnblockchain.cn/2018/03/14/solidity-api/"/>
 
 
 
 
 
-  <title>分析比特币网络：一种去中心化、点对点的网络架构 | 深入浅出区块链</title>
+  <title>智能合约语言 Solidity 教程系列 - Solidity API | 深入浅出区块链</title>
   
 
 
@@ -327,7 +324,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2017/11/07/bitcoin-p2p/">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2018/03/14/solidity-api/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Tiny熊">
@@ -344,7 +341,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">分析比特币网络：一种去中心化、点对点的网络架构</h2>
+          <h2 class="post-title" itemprop="name headline">智能合约语言 Solidity 教程系列 - Solidity API</h2>
         
 
         <div class="post-meta">
@@ -356,8 +353,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-07T11:25:30+08:00">
-                2017-11-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-14T23:04:43+08:00">
+                2018-03-14
               </time>
             
 
@@ -372,8 +369,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-01-10T16:10:25+08:00">
-                2018-01-10
+              <time title="更新于" itemprop="dateModified" datetime="2018-03-14T23:14:12+08:00">
+                2018-03-14
               </time>
             
           </span>
@@ -391,8 +388,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/bitcoin/" itemprop="url" rel="index">
-                    <span itemprop="name">比特币</span>
+                  <a href="/categories/ethereum/" itemprop="url" rel="index">
+                    <span itemprop="name">以太坊</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ethereum/Solidity/" itemprop="url" rel="index">
+                    <span itemprop="name">Solidity</span>
                   </a>
                 </span>
 
@@ -428,33 +436,89 @@
       
 
       
-        <p>比特币采用了基于互联网的点对点（P2P：peer-to-peer）分布式网络架构。<br>比特币网络可以认为是按照比特币P2P协议运行的一系列节点的集合。<br>本文来分析下比特币网络，了解它跟传统中心化网络的区别，以及比特币网络是如何发现相邻节点的。</p>
+        <p>这是Solidity教程系列文章第8篇介绍Solidity API，它们主要表现为内置的特殊的变量及函数，存在于全局命名空间里。</p>
 <a id="more"></a>
-<h2 id="中心化网络"><a href="#中心化网络" class="headerlink" title="中心化网络"></a>中心化网络</h2><p>为了更好的理解P2P网络，我们先来看看传统的中心化模型：<br><img src="/images/cs_network.jpeg" alt="中心化网络模型"></p>
-<p>这是一种典型的星型（“中心化”）结构，我们常见B/S及C/S网络架构就是这种模型，C1 、C2 、C3等之间没法直接的连接，C节点如果要连接必须要通过中心化S节点做为桥梁。<br>中心化节点充当服务者、中介作用，比如我们没有办法把资金直接从一个人转移给另一个人，必须通过银行这个中介。</p>
-<h2 id="P2P网络"><a href="#P2P网络" class="headerlink" title="P2P网络"></a>P2P网络</h2><p>P2P网络是指位于同一网络中的每台计算机都彼此对等，各个节点共同提供网络服务，不存在任何“特殊”节点，每个网络节点以扁平（flat）的拓扑结构相互连通。<br><img src="/images/p2p_network.jpeg" alt="p2p网络模型"></p>
-<p>对比中心化网络，在P2P网络中不存在任何服务端（server）、中央化的服务。<br>P2P网络的节点之间交互连接、协同，每个节点在对外提供服务的同时也使用网络中其他节点所提供的服务，每个节点即是服务端又是客户端。<br>P2P网络模型除应用于比特币网络，使用广泛的BT下载就是基于P2P网络。</p>
-<p>P2P网络不仅仅去除了中心化带来的风险（中心化可能作恶），还可以提高传输的效率。（中心化网络当能也有优点）</p>
-<h2 id="如何发现节点"><a href="#如何发现节点" class="headerlink" title="如何发现节点"></a>如何发现节点</h2><p>既然每个网络节点都是平等的（是指在网络层面上节点是平等的，但各节点在功能上可以有不同的分工, 如钱包节点、挖矿节点等），不存在任何“特殊”中心节点，那么当新的网络节点启动后，它是如何跟其他的节点建立连接，从而加入到比特币网络呢？</p>
-<blockquote>
-<p>在中心化网络中，新加入的节点只要连接“特殊”的中心节点就可以加入网络。</p>
-</blockquote>
-<p>为了能够加入到比特币网络，比特币客户端会做一下几件事情：</p>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>Solidity 是以太坊智能合约编程语言，阅读本文前，你应该对以太坊、智能合约有所了解，<br>如果你还不了解，建议你先看<a href="https://learnblockchain.cn/2017/11/20/whatiseth/">以太坊是什么</a></p>
+<p>欢迎订阅<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">区块链技术专栏</a>阅读更全面的分析文章。</p>
+<p>Solidity API 主要表现为Solidity 内置的特殊的变量及函数，他们存在于全局命名空间里，主要分为以下几类：</p>
 <ol>
-<li><p>节点会记住它最近成功连接的网络节点，当重新启动后它可以迅速与先前的对等节点网络重新建立连接。</p>
-</li>
-<li><p>节点会在失去已有连接时尝试发现新节点。</p>
-</li>
-<li><p>当建立一个或多个连接后，节点将一条包含自身IP地址消息发送给其相邻节点。相邻节点再将此消息依次转发给它们各自的相邻节点，从而保证节点信息被多个节点所接收、保证连接更稳定。</p>
-</li>
-<li><p>新接入的节点可以向它的相邻节点发送获取地址getaddr消息，要求它们返回其已知对等节点的IP地址列表。节点可以找到需连接到的对等节点。</p>
-</li>
-<li><p>在节点启动时，可以给节点指定一个正活跃节点IP, 如果没有，客户端也维持一个列表，列出了那些长期稳定运行的节点。这样的节点也被称为种子节点（其实和BT下载的种子文件道理是一样的），就可以通过种子节点来快速发现网络中的其他节点。</p>
-</li>
+<li>有关区块和交易的属性</li>
+<li>有关错误处理</li>
+<li>有关数学及加密功能</li>
+<li>地址相关</li>
+<li>合约相关</li>
 </ol>
-<h2 id="节点通信简述"><a href="#节点通信简述" class="headerlink" title="节点通信简述"></a>节点通信简述</h2><p>比特币节点通常采用TCP协议、使用8333端口与相邻节点建立连接, 建立连接时也会有认证“握手”的通信过程，用来确定协议版本，软件版本，节点IP，区块高度等。</p>
-<p>当节点连接到相邻节点后，接着就开始跟相邻节点同步区块链数据（轻量级钱包应用其实不会同步所有区块数据），节点们会交换一个getblocks消息，它包含本地区块链最顶端的哈希值。如果某个节点识别出它接收到的哈希值并不属于顶端区块，而是属于一个非顶端区块的旧区块，就说其自身的本地区块链比其他节点的区块链更长，并告诉其他节点需要补充区块，其他节点发送getdata消息来请求区块，验证后更新到本地区块链中。</p>
-<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客<br>我的<strong><a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">知识星球</a></strong>为各位解答区块链技术问题，欢迎加入讨论。</p>
+<p>下面详细讲解下</p>
+<h2 id="区块和交易的属性（Block-And-Transaction-Properties）"><a href="#区块和交易的属性（Block-And-Transaction-Properties）" class="headerlink" title="区块和交易的属性（Block And Transaction Properties）"></a>区块和交易的属性（Block And Transaction Properties）</h2><p>用来提供一些区块链当前的信息。</p>
+<ul>
+<li>block.blockhash(uint blockNumber) returns (bytes32)：返回给定区块号的哈希值，只支持最近256个区块，且不包含当前区块。</li>
+<li>block.coinbase (address): 当前块矿工的地址。</li>
+<li>block.difficulty (uint):当前块的难度。</li>
+<li>block.gaslimit (uint):当前块的gaslimit。</li>
+<li>block.number (uint):当前区块的块号。</li>
+<li>block.timestamp (uint): 当前块的Unix时间戳（从1970/1/1 00:00:00 UTC开始所经过的秒数）</li>
+<li>msg.data (bytes): 完整的调用数据（calldata）。</li>
+<li>msg.gas (uint): 当前还剩的gas。</li>
+<li>msg.sender (address): 当前调用发起人的地址。</li>
+<li>msg.sig (bytes4):调用数据(calldata)的前四个字节（例如为：函数标识符）。</li>
+<li>msg.value (uint): 这个消息所附带的以太币，单位为wei。</li>
+<li>now (uint): 当前块的时间戳(block.timestamp的别名)</li>
+<li>tx.gasprice (uint) : 交易的gas价格。</li>
+<li>tx.origin (address): 交易的发送者（全调用链）</li>
+</ul>
+<p>注意：<br>msg的所有成员值，如msg.sender,msg.value的值可以因为每一次外部函数调用，或库函数调用发生变化（因为msg就是和调用相关的全局变量）。</p>
+<p>不应该依据 block.timestamp, now 和 block.blockhash来产生一个随机数（除非你确实需要这样做），这几个值在一定程度上被矿工影响（比如在赌博合约里，不诚实的矿工可能会重试去选择一个对自己有利的hash）。</p>
+<p>对于同一个链上连续的区块来说，当前区块的时间戳（timestamp）总是会大于上一个区块的时间戳。</p>
+<p>为了可扩展性的原因，你只能查最近256个块，所有其它的将返回0.</p>
+<h2 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h2><ul>
+<li>assert(bool condition)<br>用于判断内部错误，条件不满足时抛出异常</li>
+<li>require(bool condition):<br>用于判断输入或外部组件错误，条件不满足时抛出异常</li>
+<li>revert():<br>终止执行并还原改变的状态</li>
+</ul>
+<h2 id="数学及加密功能"><a href="#数学及加密功能" class="headerlink" title="数学及加密功能"></a>数学及加密功能</h2><ul>
+<li>addmod(uint x, uint y, uint k) returns (uint):<br>计算(x + y) % k，加法支持任意的精度且不会在2**256处溢出，从0.5.0版本开始断言k != 0。</li>
+<li>mulmod(uint x, uint y, uint k) returns (uint):<br>计算 (x <em> y) % k， 乘法支持任意的精度且不会在2*</em>256处溢出， 从0.5.0版本开始断言k != 0。</li>
+<li>keccak256(…) returns (bytes32):<br>使用以太坊的（Keccak-256）计算HASH值。紧密打包参数。</li>
+<li>sha256(…) returns (bytes32):<br>使用SHA-256计算hash值，紧密打包参数。</li>
+<li>sha3(…) returns (bytes32):<br>keccak256的别名</li>
+<li>ripemd160(…) returns (bytes20):<br>使用RIPEMD-160计算HASH值。紧密打包参数。</li>
+<li>ecrecover(bytes32 hash, uint8 v, bytes32 r, bytes32 s) returns (address):<br>通过椭圆曲线签名来恢复与公钥关联的地址，或者在错误时返回零。可用于签名数据的校验，如果返回结果是签名者的公匙地址，那么说明数据是正确的。<blockquote>
+<p>ecrecover函数需要四个参数，需要被签名数据的哈希结果值，r，s，v分别来自签名结果串。<br>r = signature[0:64]<br>s = signature[64:128]<br>v = signature[128:130]<br>其中v取出来的值或者是00或01。要使用时，我们先要将其转为整型，再加上27，所以我们将得到27或28。在调用函数时v将填入27或28。</p>
+</blockquote>
+</li>
+</ul>
+<p>用javascript表达如下,这里是一个<a href="https://ethereum.stackexchange.com/questions/1777/workflow-on-signing-a-string-with-private-key-followed-by-signature-verificatio" target="_blank" rel="noopener">例子</a>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> msg = <span class="string">'0x8CbaC5e4d803bE2A3A5cd3DbE7174504c6DD0c1C'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> hash = web3.sha3(msg)</span><br><span class="line"><span class="keyword">var</span> sig = web3.eth.sign(address, h).slice(<span class="number">2</span>)</span><br><span class="line"><span class="keyword">var</span> r = <span class="string">`0x<span class="subst">$&#123;sig.slice(<span class="number">0</span>, <span class="number">64</span>)&#125;</span>`</span></span><br><span class="line"><span class="keyword">var</span> s = <span class="string">`0x<span class="subst">$&#123;sig.slice(<span class="number">64</span>, <span class="number">128</span>)&#125;</span>`</span></span><br><span class="line"><span class="keyword">var</span> v = web3.toDecimal(sig.slice(<span class="number">128</span>, <span class="number">130</span>)) + <span class="number">27</span></span><br></pre></td></tr></table></figure></p>
+<p>紧密打包参数（tightly packed）意思是说参数不会补位，是直接连接在一起的，下面几个是相等的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">keccak256(&quot;ab&quot;, &quot;c&quot;)</span><br><span class="line">keccak256(&quot;abc&quot;)</span><br><span class="line"></span><br><span class="line">keccak256(0x616263)  // hex</span><br><span class="line">keccak256(6382179)</span><br><span class="line">keccak256(97, 98, 99)   //ascii</span><br></pre></td></tr></table></figure>
+<p>如果需要填充，可以使用显式类型转换：keccak256(“\x00\x12”) 与keccak256(uint16(0x12))相同。</p>
+<p>注意，常量将使用存储它们所需的最少字节数来打包，例如keccak256(0) == keccak256(uint8(0))和keccak256(0x12345678) == keccak256(uint32(0x12345678))</p>
+<p>在私链(private blockchain)上运行sha256,ripemd160或ecrecover可能会出现Out-Of-Gas报错。因为私链实现了一种预编译合约，合约要在收到第一个消息后才会真正存在（虽然他们的合约代码是硬编码的）。而向一个不存在的合约发送消息，所以才会导致Out-Of-Gas的问题。一种解决办法（workaround）是每个在你真正使用它们之前先发送1 wei到这些合约上来完成初始化。在官方和测试链上没有这个问题。</p>
+<h2 id="地址相关"><a href="#地址相关" class="headerlink" title="地址相关"></a>地址相关</h2><ul>
+<li><p><address>.balance (uint256):<br>Address的余额，以wei为单位。</address></p>
+</li>
+<li><p><address>.transfer(uint256 amount):<br>发送给定数量的ether到某个地址，以wei为单位。失败时抛出异常。</address></p>
+</li>
+<li><p><address>.send(uint256 amount) returns (bool):<br>发送给定数量的ether到某个地址，以wei为单位, 失败时返回false。</address></p>
+</li>
+<li><p><address>.call(…) returns (bool):<br>发起底层的call调用。失败时返回false。</address></p>
+</li>
+<li><p><address>.callcode(…) returns (bool):<br>发起底层的callcode调用，失败时返回false。<br>不鼓励使用，未来可能会移除。</address></p>
+</li>
+<li><p><address>.delegatecall(…) returns (bool):<br>发起底层的delegatecall调用，失败时返回false</address></p>
+</li>
+</ul>
+<p>更多信息参考<a href="https://xiaozhuanlan.com/topic/7921803456" target="_blank" rel="noopener">地址篇</a>。</p>
+<p><strong>警告</strong>：send() 执行有一些风险：如果调用栈的深度超过1024或gas耗光，交易都会失败。因此，为了保证安全，必须检查send的返回值，如果交易失败，会回退以太币。如果用transfer会更好。</p>
+<h2 id="合约相关"><a href="#合约相关" class="headerlink" title="合约相关"></a>合约相关</h2><ul>
+<li>this（当前合约的类型）:<br>表示当前合约，可以显式的转换为Address</li>
+<li>selfdestruct(address recipient):<br>销毁当前合约，并把它所有资金发送到给定的地址。</li>
+<li>suicide(address recipient):<br>selfdestruct的别名</li>
+</ul>
+<p>另外，当前合约里的所有函数均可支持调用，包括当前函数本身。</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><a href="https://solidity.readthedocs.io/en/develop/units-and-global-variables.html#units-and-globally-available-variables" target="_blank" rel="noopener">Special Variables and Functions</a></li>
+</ul>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。<br>如果想与我有更密切的交流可以选择加入我的<a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">知识星球</a>（星球成员可加入微信技术交流群）</p>
 
       
     </div>
@@ -507,7 +571,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://learnblockchain.cn/2017/11/07/bitcoin-p2p/" title="分析比特币网络：一种去中心化、点对点的网络架构">https://learnblockchain.cn/2017/11/07/bitcoin-p2p/</a>
+    <a href="https://learnblockchain.cn/2018/03/14/solidity-api/" title="智能合约语言 Solidity 教程系列 - Solidity API">https://learnblockchain.cn/2018/03/14/solidity-api/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -522,11 +586,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/p2p/" rel="tag"># p2p</a>
-          
-            <a href="/tags/去中心化/" rel="tag"># 去中心化</a>
-          
-            <a href="/tags/比特币网络/" rel="tag"># 比特币网络</a>
+            <a href="/tags/Solidity手册/" rel="tag"># Solidity手册</a>
           
         </div>
       
@@ -539,8 +599,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/04/bitcoin-pow/" rel="next" title="比特币如何挖矿（挖矿原理）-工作量证明">
-                <i class="fa fa-chevron-left"></i> 比特币如何挖矿（挖矿原理）-工作量证明
+              <a href="/2018/02/28/ico-crowdsale/" rel="next" title="如何通过以太坊智能合约来进行众筹（ICO）">
+                <i class="fa fa-chevron-left"></i> 如何通过以太坊智能合约来进行众筹（ICO）
               </a>
             
           </div>
@@ -548,10 +608,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/09/merkle/" rel="prev" title="比特币区块结构Merkle树及简单支付验证分析">
-                比特币区块结构Merkle树及简单支付验证分析 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -756,7 +812,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#中心化网络"><span class="nav-number">1.</span> <span class="nav-text">中心化网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P2P网络"><span class="nav-number">2.</span> <span class="nav-text">P2P网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何发现节点"><span class="nav-number">3.</span> <span class="nav-text">如何发现节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#节点通信简述"><span class="nav-number">4.</span> <span class="nav-text">节点通信简述</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区块和交易的属性（Block-And-Transaction-Properties）"><span class="nav-number">2.</span> <span class="nav-text">区块和交易的属性（Block And Transaction Properties）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误处理"><span class="nav-number">3.</span> <span class="nav-text">错误处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数学及加密功能"><span class="nav-number">4.</span> <span class="nav-text">数学及加密功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#地址相关"><span class="nav-number">5.</span> <span class="nav-text">地址相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合约相关"><span class="nav-number">6.</span> <span class="nav-text">合约相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文档"><span class="nav-number">7.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
             
 
           </div>
