@@ -51,6 +51,7 @@ author: Tiny熊
 * [一步步教你开发、部署第一个Dapp应用](https://learnblockchain.cn/2018/01/12/first-dapp/)
 * [一步步教你创建自己的数字货币（代币）进行ICO](https://learnblockchain.cn/2018/01/12/create_token/)
 * [实现一个可管理、增发、兑换、冻结等高级功能的代币](https://learnblockchain.cn/2018/01/27/create_token2/)
+* [如何通过以太坊智能合约来进行众筹（ICO）](https://learnblockchain.cn/2018/02/28/ico-crowdsale/)
 
 ### Solidity语言教程
 Solidity语言是开发智能合约最广泛的语言，本专栏应该是国内最深度介绍Solidity的文章了。
@@ -63,8 +64,9 @@ Solidity语言是开发智能合约最广泛的语言，本专栏应该是国内
 * [Solidity 教程系列7 - 以太单位及时间单位](https://learnblockchain.cn/2018/02/02/solidity-unit/)
 
 ## 说明
-区块链技术付费交流群已建立，有需要加入的同学请加微信：xlbxiong
-交流群和我的[知识星球](https://t.xiaomiquan.com/RfAu7uj)同价，目前129，星球成员可选择加入交流群不另收费用。
+
+知识星球[《深入浅出区块链》](https://t.xiaomiquan.com/RfAu7uj)及微信技术交流群, 主要用来提供一个学习的问答及交流平台，问答交流内容不限于博客文章。
+目前定价149，有需要加入的同学请加微信：xlbxiong
 
 微信不提供免费解答服务（实在没有那么多的精力），不愿付费的请勿加微信，感谢理解。
 
