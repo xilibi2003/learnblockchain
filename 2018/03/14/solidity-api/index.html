@@ -93,7 +93,7 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="这是Solidity教程系列文章第8篇介绍Solidity API，它们主要表现为内置的特殊的变量及函数，存在于全局命名空间里。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-14T15:14:12.230Z">
+<meta property="og:updated_time" content="2018-03-15T07:26:02.752Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="智能合约语言 Solidity 教程系列 - Solidity API">
 <meta name="twitter:description" content="这是Solidity教程系列文章第8篇介绍Solidity API，它们主要表现为内置的特殊的变量及函数，存在于全局命名空间里。">
@@ -369,8 +369,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-03-14T23:14:12+08:00">
-                2018-03-14
+              <time title="更新于" itemprop="dateModified" datetime="2018-03-15T15:26:02+08:00">
+                2018-03-15
               </time>
             
           </span>
@@ -487,7 +487,10 @@
 </blockquote>
 </li>
 </ul>
-<p>用javascript表达如下,这里是一个<a href="https://ethereum.stackexchange.com/questions/1777/workflow-on-signing-a-string-with-private-key-followed-by-signature-verificatio" target="_blank" rel="noopener">例子</a>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> msg = <span class="string">'0x8CbaC5e4d803bE2A3A5cd3DbE7174504c6DD0c1C'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> hash = web3.sha3(msg)</span><br><span class="line"><span class="keyword">var</span> sig = web3.eth.sign(address, h).slice(<span class="number">2</span>)</span><br><span class="line"><span class="keyword">var</span> r = <span class="string">`0x<span class="subst">$&#123;sig.slice(<span class="number">0</span>, <span class="number">64</span>)&#125;</span>`</span></span><br><span class="line"><span class="keyword">var</span> s = <span class="string">`0x<span class="subst">$&#123;sig.slice(<span class="number">64</span>, <span class="number">128</span>)&#125;</span>`</span></span><br><span class="line"><span class="keyword">var</span> v = web3.toDecimal(sig.slice(<span class="number">128</span>, <span class="number">130</span>)) + <span class="number">27</span></span><br></pre></td></tr></table></figure></p>
+<p>用javascript表达如下:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> msg = <span class="string">'0x8CbaC5e4d803bE2A3A5cd3DbE7174504c6DD0c1C'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> hash = web3.sha3(msg)</span><br><span class="line"><span class="keyword">var</span> sig = web3.eth.sign(address, h).slice(<span class="number">2</span>)</span><br><span class="line"><span class="keyword">var</span> r = <span class="string">`0x<span class="subst">$&#123;sig.slice(<span class="number">0</span>, <span class="number">64</span>)&#125;</span>`</span></span><br><span class="line"><span class="keyword">var</span> s = <span class="string">`0x<span class="subst">$&#123;sig.slice(<span class="number">64</span>, <span class="number">128</span>)&#125;</span>`</span></span><br><span class="line"><span class="keyword">var</span> v = web3.toDecimal(sig.slice(<span class="number">128</span>, <span class="number">130</span>)) + <span class="number">27</span></span><br></pre></td></tr></table></figure></p>
+<p>订阅<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">区块链技术专栏</a>可以参考到完整的使用例子。<br><!-- 
+[例子](https://ethereum.stackexchange.com/questions/1777/workflow-on-signing-a-string-with-private-key-followed-by-signature-verificatio)： 
+--></p>
 <p>紧密打包参数（tightly packed）意思是说参数不会补位，是直接连接在一起的，下面几个是相等的。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">keccak256(&quot;ab&quot;, &quot;c&quot;)</span><br><span class="line">keccak256(&quot;abc&quot;)</span><br><span class="line"></span><br><span class="line">keccak256(0x616263)  // hex</span><br><span class="line">keccak256(6382179)</span><br><span class="line">keccak256(97, 98, 99)   //ascii</span><br></pre></td></tr></table></figure>
 <p>如果需要填充，可以使用显式类型转换：keccak256(“\x00\x12”) 与keccak256(uint16(0x12))相同。</p>
