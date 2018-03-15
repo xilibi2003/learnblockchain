@@ -496,7 +496,13 @@ contract Purchase {
 
 
 # 特殊的变量及函数
-内置函数 API
+Solidity API 主要表现为Solidity 内置的特殊的变量及函数，他们存在于全局命名空间里，主要分为以下几类：
+1. 有关区块和交易的属性
+2. 有关错误处理
+3. 有关数学及加密功能
+4. 地址相关
+5. 合约相关
+
 
 
 有一些特殊的变量和函数存在于全局命名空间里，用来提供一些区块链当前的信息。
@@ -550,9 +556,27 @@ keccak256的别名
 使用RIPEMD-160计算HASH值。紧密打包参数。
 * ecrecover(bytes32 hash, uint8 v, bytes32 r, bytes32 s) returns (address):
 通过椭圆曲线签名来恢复与公钥关联的地址，或者在错误时返回零。
+用于签名数据的校验，如果返回结果是签名者的公匙地址，那么说明数据是正确的。
+。
+> ecrecover函数需要四个参数，需要被签名数据的哈希结果值，r，s，v分别来自签名结果串。
+> r = signature[0:64]
+> s = signature[64:128]
+> v = signature[128:130]
+> 其中v取出来的值或者是00或01。要使用时，我们先要将其转为整型，再加上27，所以我们将得到27或28。在调用函数时v将填入27或28。
+用javascript表达如下,这里是一个[例子](https://ethereum.stackexchange.com/questions/1777/workflow-on-signing-a-string-with-private-key-followed-by-signature-verificatio)： 
+```js
+    var msg = '0x8CbaC5e4d803bE2A3A5cd3DbE7174504c6DD0c1C'
 
-通过签名信息恢复非对称加密算法公匙地址。如果出错会返回0，附录提供了一个例子
-recover the address associated with the public key from elliptic curve signature or return zero on error (example usage)
+    var hash = web3.sha3(msg)
+    var sig = web3.eth.sign(address, h).slice(2)
+    var r = `0x${sig.slice(0, 64)}`
+    var s = `0x${sig.slice(64, 128)}`
+    var v = web3.toDecimal(sig.slice(128, 130)) + 27
+```
+
+
+
+
 紧密打包参数（tightly packed）意思是说参数不会补位，是直接连接在一起的，下面几个是相等的。
 
 ```
@@ -565,7 +589,7 @@ keccak256(97, 98, 99)   //ascii
 ```
 如果需要填充，可以使用显式类型转换：keccak256("\x00\x12") 与keccak256(uint16(0x12))相同。
 
-注意，常量将使用存储它们所需的最少字节数来打包。 这意味着，例如keccak256(0) == keccak256(uint8(0))和keccak256(0x12345678) == keccak256(uint32(0x12345678))
+注意，常量将使用存储它们所需的最少字节数来打包，例如keccak256(0) == keccak256(uint8(0))和keccak256(0x12345678) == keccak256(uint32(0x12345678))
 
 在私链(private blockchain)上运行sha256,ripemd160或ecrecover可能会出现Out-Of-Gas报错。因为它们实现了一种预编译合约，合约要在收到第一个消息后才会真正存在（虽然他们的合约代码是硬编码的）。向一个不存在的合约发送消息，非常昂贵，所以才会导致Out-Of-Gas的问题。一种解决办法（workaround）是每个在你真正使用它们之前先发送1 wei到这些合约上来完成初始化。在官方和测试链上没有这个问题。
 
@@ -886,6 +910,169 @@ contract C {
 ```
 
 ## 错误处理
+Solidity是通过回退状态的方式来处理错误。发生异常时会撤消当前调用（及其所有子调用）所改变的状态，同时给调用者返回一个错误标识。
+可以使用函数assert和require来进行条件检查，如果条件不满足则抛出异常。 assert函数通常用来检查（测试）内部错误，而require函数来检查输入变量或合同状态变量是否满足条件以及验证调用外部合约返回值。
+
+如果我们正确使用assert，分析工具就可以帮我们分析出智能合约中的错误。
+这时说明合约中有逻辑错误的bug。
+
+还有两种其他的方式来触发异常：
+1. **revert**函数可以用来标记错误并回退当前调用
+2. 使用**throw**关键字抛出异常（从0.4.13版本，throw关键字已被弃用，将来会被淘汰。）
+
+当子调用中发生异常时，异常会自动向上“冒泡”。 不过也有一些例外：send，和底层的函数调用call,delegatecall，callcode，当发生异常时，这些函数返回false。
+
+注意：在一个不存在的地址上调用底层的函数call,delegatecall，callcode 也会返回成功，应该总是优先进行存在性检查。
+
+**捕捉异常是不可能的**
+
+在下面通过一个示例来说明如何使用require来检查输入条件，以及assert用于内部错误检查：
+```js
+pragma solidity ^0.4.0;
+
+contract Sharer {
+    function sendHalf(address addr) public payable returns (uint balance) {
+        require(msg.value % 2 == 0); // 仅允许偶数
+        uint balanceBeforeTransfer = this.balance;
+        addr.transfer(msg.value / 2);  // 如果失败，会抛出异常，下面的代码就不是执行
+        assert(this.balance == balanceBeforeTransfer - msg.value / 2);
+        return this.balance;
+    }
+}
+```
+在下述场景中自动产生assert类型的异常:
+1. 如果越界，或负的序号值访问数组，如i >= x.length 或 i < 0时访问x[i]
+2. 如果序号越界，或负的序号值时访问一个定长的bytesN。
+3. 被除数为0， 如5/0 或 23 % 0。
+4. 对一个二进制移动一个负的值。如:5<<i; i为-1时。
+5. 整数进行可以显式转换为枚举时，如果将过大值，负值转为枚举类型则抛出异常
+6. 如果调用内部函数类型的零初始化变量(If you call a zero-initialized variable of internal function type)。
+7. 如果调用**assert**的参数为false
+
+在下述场景中自动产生require类型的异常:
+1. 调用**throw**
+2. 如果调用**require**的参数为false
+3. 如果你通过消息调用一个函数，但在调用的过程中，并没有正确结束(gas不足，没有匹配到对应的函数，或被调用的函数出现异常)。底层操作如call,send,delegatecall或callcode除外，它们不会抛出异常，但它们会通过返回false来表示失败。
+4. 如果在使用new创建一个新合约时出现第3条的原因没有正常完成。
+5. 如果调用外部函数调用时，被调用的对象不包含代码。
+6. 如果合约没有payable修饰符的public的函数在接收以太币时（包括构造函数，和回退函数）。
+7. 如果合约通过一个public的getter函数（public getter funciton）接收以太币。
+8. 如果**.transfer()**执行失败
+
+当发生require类型的异常时，Solidity会执行一个回退操作（指令0xfd）。
+当发生assert类型的异常时，Solidity会执行一个无效操作（指令0xfe）。
+在上述的两种情况下，EVM都会撤回所有的状态改变。是因为期望的结果没有发生，就没法继续安全执行。必须保证交易的原子性（一致性，要么全部执行，要么一点改变都没有，不能只改变一部分），所以需要撤销所有操作，让整个交易没有任何影响。
+
+注意assert类型的异常会消耗掉所有的gas, 而require从大都会版本起不会消耗gas.
+
+# 合约
+Solidity中合约和面向对象语言中的类差不多。合约包含状态变量（数据保存在链上）及函数。
+调用另一个合约实例的函数时，会执行一个EVM函数调用，这个操作会切换执行时的上下文，这时上一个合约的状态变量就无法访问。
+
+## 创建合约
+合约可以通过发起交易来创建（通过web3）或是通过solidity创建。
+
+在以太坊上动态的创建合约可以使用JavaScript API web3.js，使用web3.eth.Contract来创建合约。
+当合约创建时，合约的构造函数（函数名与合约同名）会被调用，用于初始化。构造器函数是可选的，但仅能有一个构造函数，因此构造函数不支持重载。
+
+如果一个合约想创建另一个合约，必须要提前知道源码，因此不支持嵌套创建。
+
+下面是使用Web3.js API来创建合约的代码:
+```js
+var source = "contract A { function A(uint a) {} }";
+// 下面的代码可以使用编译器:如remix 生成
+
+var a = 10;
+var aContract = web3.eth.contract([{"inputs":[{"name":"a","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]);
+var a = aContract.new(
+   a,
+   {
+     from: web3.eth.accounts[0], 
+     data: '0x60606040523415600e57600080fd5b604051602080606c833981016040528080519060200190919050505060358060376000396000f3006060604052600080fd00a165627a7a723058207bb3515740fd13f73ddf67e9a7be34568648fff52fc7e50a3fd7af0df72d34730029', 
+     gas: '4700000'
+   }, function (e, contract){
+    console.log(e, contract);
+    if (typeof contract.address !== 'undefined') {
+         console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
+    }
+ })
+
+```
+使用solidity创建合约代码如下：
+```js
+pragma solidity ^0.4.16;
+
+contract OwnedToken {
+    // TokenCreator 是一个合约类型，在下面定义
+    // 应用它是安全的，只要没有拥它去创建合约
+    TokenCreator creator;
+    address owner;
+    bytes32 name;
+
+    // This is the constructor which registers the
+    // creator and the assigned name.
+    function OwnedToken(bytes32 _name) public {
+        // State variables are accessed via their name
+        // and not via e.g. this.owner. This also applies
+        // to functions and especially in the constructors,
+        // you can only call them like that ("internally"),
+        // because the contract itself does not exist yet.
+        owner = msg.sender;
+        // We do an explicit type conversion from `address`
+        // to `TokenCreator` and assume that the type of
+        // the calling contract is TokenCreator, there is
+        // no real way to check that.
+        creator = TokenCreator(msg.sender);
+        name = _name;
+    }
+
+    function changeName(bytes32 newName) public {
+        // 只有创建这能改名
+        if (msg.sender == address(creator))
+            name = newName;
+    }
+
+    function transfer(address newOwner) public {
+        // Only the current owner can transfer the token.
+        if (msg.sender != owner) return;
+        // We also want to ask the creator if the transfer
+        // is fine. Note that this calls a function of the
+        // contract defined below. If the call fails (e.g.
+        // due to out-of-gas), the execution here stops
+        // immediately.
+        if (creator.isTokenTransferOK(owner, newOwner))
+            owner = newOwner;
+    }
+}
+
+// 用来创建合约
+contract TokenCreator {
+    function createToken(bytes32 name)
+       public
+       returns (OwnedToken tokenAddress)
+    {
+        // 创建token合约，返回合约地址
+        // From the JavaScript side, the return type is simply
+        // `address`, as this is the closest type available in
+        // the ABI.
+        return new OwnedToken(name);
+    }
+
+    function changeName(OwnedToken tokenAddress, bytes32 name)  public {
+        tokenAddress.changeName(name);
+    }
+
+    function isTokenTransferOK(address currentOwner, address newOwner) public
+        view
+        returns (bool ok)
+    {
+        // Check some arbitrary condition.
+        address tokenAddress = msg.sender;
+        return (keccak256(newOwner) & 0xff) == (bytes20(tokenAddress) & 0xff);
+    }
+}
+```
+
 
 
 http://blog.csdn.net/diandianxiyu_geek/article/details/77964409

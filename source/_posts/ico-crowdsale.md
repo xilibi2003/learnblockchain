@@ -168,43 +168,14 @@ addressOfTokenUsedAsReward： 代币合约地址。
 
 ## 扩展
 
-上面是一个很正规的募资合约。接下来讲两个募资合约的扩展，如果实现无限募资合约及割韭菜合约。
+上面是一个很正规的募资合约。接下来讲两个募资合约的扩展，如何实现无限募资合约及割韭菜合约。
+这部分内容独家发布在我的小专栏[区块链技术](https://xiaozhuanlan.com/blockchaincore)
 
-### 无限募资合约
-上面合约中，募资额度和相应的代币都是固定的，一旦达到募资目标后，就无法再继续投资。
-如果我们想实现一个可无限募资（指募资达标后，仍然可以继续募资，不是指可一直募资）的合约，步骤如下：
-1. 先参考[实现一个可管理、增发、兑换、冻结等高级功能的代币](https://xiaozhuanlan.com/topic/4651027893)，部署一个可增发代币合约
-
-2. 更改Fallback函数：
-    ```
-    tokenReward.transfer(msg.sender, amount / price);
-    修改为：
-    tokenReward.mintToken(msg.sender, amount / price);
-    ```
-3. 在无限募资合约部署之后，调用高级代币合约的transferOwnership，把无限募资合约设置为代币合约的Owner，以便合约能执行mintToken()函数。
-
-### 割韭菜合约
-在上面的合约中，如果募资未达标，参与人则能够取回自己的投资，这是想割韭菜的大佬们不愿看到的。
-他们会这样改合约：
-```js
-function () payable {
-  require(!crowdsaleClosed);
-  uint amount = msg.value;
-  balanceOf[msg.sender] += amount;
-  amountRaised += amount;
-  tokenReward.transfer(msg.sender, amount / price);
-  FundTransfer(msg.sender, amount, true);
-
-    // 当有人付款直接取走筹资
-  beneficiary.send(amount);
-
-}
-```
 
 如果你在学习中遇到问题，欢迎到我的**[知识星球](https://t.xiaomiquan.com/RfAu7uj)**提问，作为星球成员福利，成员可加入区块链技术付费交流群。
 
 ## 参考文档
-* [Create a crowdsale](https://ethereum.org/token)
+* [Create a crowdsale](https://ethereum.org/crowdsale)
 
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
 
