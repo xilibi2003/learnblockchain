@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="比特币,非对称加密,所有权问题,隐私问题," />
+  <meta name="keywords" content="非对称加密,比特币,所有权问题,隐私问题," />
 
 
 
@@ -86,14 +86,14 @@
 
 
 <meta name="description" content="比特币系统是如何确定某个账户的比特币是属于谁的？谁可以支付这个账户比特币？ 如果你对这个问题还不是很明白，那就一起来看看吧。">
-<meta name="keywords" content="比特币,非对称加密,所有权问题,隐私问题">
+<meta name="keywords" content="非对称加密,比特币,所有权问题,隐私问题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="比特币所有权及隐私问题-非对称加密应用">
 <meta property="og:url" content="https://learnblockchain.cn/2017/11/02/bitcoin-own/index.html">
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="比特币系统是如何确定某个账户的比特币是属于谁的？谁可以支付这个账户比特币？ 如果你对这个问题还不是很明白，那就一起来看看吧。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-10T08:10:07.579Z">
+<meta property="og:updated_time" content="2018-03-17T14:01:01.950Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="比特币所有权及隐私问题-非对称加密应用">
 <meta name="twitter:description" content="比特币系统是如何确定某个账户的比特币是属于谁的？谁可以支付这个账户比特币？ 如果你对这个问题还不是很明白，那就一起来看看吧。">
@@ -369,8 +369,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-01-10T16:10:07+08:00">
-                2018-01-10
+              <time title="更新于" itemprop="dateModified" datetime="2018-03-17T22:01:01+08:00">
+                2018-03-17
               </time>
             
           </span>
@@ -440,14 +440,14 @@
 <p>支付和所有权 实际是同一个问题，如果此比特币只有我可以用来支付，那么说明我拥有所有权</p>
 </blockquote>
 <h2 id="地址与私钥"><a href="#地址与私钥" class="headerlink" title="地址与私钥"></a>地址与私钥</h2><p>比特币的解决方案是，谁拥有某个地址的私钥(如果完全没有加密概念的人，可以简单的把私钥当作密码)，谁就能用这个地址进行支付。（所以私钥一定保管好，如果私钥泄漏，比特币就可能丢失）</p>
-<p>比特币地址和私钥是一个非对称的关系,私钥经过一序列运算（其中有两次Hash）之后，可以得到地址, 但是无法从地址反推得到私钥。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">地址： 2A39CBa2390FDe</span><br><span class="line">私钥： sdgHsdniNIhdsgaKIhkgnakgaihNKHIskdgal</span><br><span class="line"></span><br><span class="line">Hash(Hash(fun(sdgHsdniNIhdsgaKIhkgnakgaihNKHIskdgal)))  -&gt; 2A39CBa2390FDe</span><br></pre></td></tr></table></figure></p>
+<p>比特币地址和私钥是一个非对称的关系，私钥经过一系列运算（其中有两次Hash）之后，可以得到地址, 但是无法从地址反推得到私钥。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">地址： 2A39CBa2390FDe</span><br><span class="line">私钥： sdgHsdniNIhdsgaKIhkgnakgaihNKHIskdgal</span><br><span class="line"></span><br><span class="line">Hash(Hash(fun(sdgHsdniNIhdsgaKIhkgnakgaihNKHIskdgal)))  -&gt; 2A39CBa2390FDe</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>银行系统银行账号和密码是完全独立的，无法互相推导，转出时需要同时验证账号和密码</p>
 </blockquote>
 <p>还是上面交易的例子：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    "付款地址"："2A39CBa2390FDe",</span><br><span class="line">    "收款地址"："AAC9CBa239aFcc",</span><br><span class="line">    "金额"："0.2btc"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>只有拥有地址2A39CBa2390FDe的私钥才能进行支付。</p>
 <h2 id="非对称加密技术"><a href="#非对称加密技术" class="headerlink" title="非对称加密技术"></a>非对称加密技术</h2><p>这个时候问题就变为了，如何证明你拥有某个地址的私钥（在不泄漏私钥的情况下）。</p>
-<h3 id="对交易信息进行签名"><a href="#对交易信息进行签名" class="headerlink" title="对交易信息进行签名"></a>对交易信息进行签名</h3><p>实际在签名之前，会先对交易信息进行Hash运算的到摘要信息，然后对摘要信息进行签名。过程大概是这样：<br>1.对交易进行hash， 得到一个摘要信息（Hash值）</p>
+<h3 id="对交易信息进行签名"><a href="#对交易信息进行签名" class="headerlink" title="对交易信息进行签名"></a>对交易信息进行签名</h3><p>实际在签名之前，会先对交易信息进行Hash运算得到摘要信息，然后对摘要信息进行签名。过程大概是这样：<br>1.对交易进行hash， 得到一个摘要信息（Hash值）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hash(&apos;</span><br><span class="line">    &#123;&quot;付款地址&quot;：&quot;2A39CBa2390FDe&quot;,</span><br><span class="line">    &quot;收款地址&quot;：&quot;AAC9CBa239aFcc&quot;,</span><br><span class="line">    &quot;金额&quot;：&quot;0.2btc&quot;</span><br><span class="line">    &#125;&apos;) -&gt; 8aDB23CDEA6</span><br></pre></td></tr></table></figure>
 <p>2.用私钥对交易摘要进行签名（付款方在安全的环境下进行，以避免私钥泄密）, 用代码表示大概是这样。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#参数1为交易摘要</span></span><br><span class="line"><span class="comment">#参数2为私钥</span></span><br><span class="line"><span class="comment">#返回签名信息</span></span><br><span class="line">sign("8aDB23CDEA6", "J78sknJhidhLIqdngalket") -&gt; "3cdferdadgadg"</span><br></pre></td></tr></table></figure></p>
 <h3 id="广播"><a href="#广播" class="headerlink" title="广播"></a>广播</h3><p>在签名运算之后，付款节点就开始在全网进行广播：我支付了0.2btc到AAC9CBa239aFcc,签名信息是3cdferdadgadg，你们来确认一下吧。</p>
@@ -528,9 +528,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/比特币/" rel="tag"># 比特币</a>
-          
             <a href="/tags/非对称加密/" rel="tag"># 非对称加密</a>
+          
+            <a href="/tags/比特币/" rel="tag"># 比特币</a>
           
             <a href="/tags/所有权问题/" rel="tag"># 所有权问题</a>
           
@@ -636,7 +636,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

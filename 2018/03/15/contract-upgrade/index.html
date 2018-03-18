@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="非对称加密,数学,RSA算法," />
+  <meta name="keywords" content="区块链技术,Learn BlockChain,系统学习区块链,区块链Wiki" />
 
 
 
@@ -85,20 +85,18 @@
 
 
 
-<meta name="description" content="非对称加密技术，在现在网络中，有非常广泛应用。加密技术更是数字货币的基础。 所谓非对称，就是指该算法需要一对密钥，使用其中一个（公钥）加密，则需要用另一个（私钥）才能解密。但是对于其原理大部分同学应该都是一知半解，今天就来分析下经典的非对称加密算法 - RSA算法。通过本文的分析，可以更好的理解非对称加密原理，可以让我">
-<meta name="keywords" content="非对称加密,数学,RSA算法">
+<meta name="description" content="区块链信任基础的数据不可修改的特性，让它传统应用程序有一个很大的不同的地方是一经发布于区块链上就无法修改（不能直接在原有的合约上直接修改再重新发布）。">
+<meta name="keywords" content="区块链技术,Learn BlockChain,系统学习区块链,区块链Wiki">
 <meta property="og:type" content="article">
-<meta property="og:title" content="非对称加密技术- RSA算法数学原理分析">
-<meta property="og:url" content="https://learnblockchain.cn/2017/11/15/asy-encryption/index.html">
+<meta property="og:title" content="如何编写一个可升级的智能合约">
+<meta property="og:url" content="https://learnblockchain.cn/2018/03/15/contract-upgrade/index.html">
 <meta property="og:site_name" content="深入浅出区块链">
-<meta property="og:description" content="非对称加密技术，在现在网络中，有非常广泛应用。加密技术更是数字货币的基础。 所谓非对称，就是指该算法需要一对密钥，使用其中一个（公钥）加密，则需要用另一个（私钥）才能解密。但是对于其原理大部分同学应该都是一知半解，今天就来分析下经典的非对称加密算法 - RSA算法。通过本文的分析，可以更好的理解非对称加密原理，可以让我们更好的使用非对称加密技术。">
+<meta property="og:description" content="区块链信任基础的数据不可修改的特性，让它传统应用程序有一个很大的不同的地方是一经发布于区块链上就无法修改（不能直接在原有的合约上直接修改再重新发布）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://learnblockchain.cn/images/aes_mod.png">
-<meta property="og:updated_time" content="2018-02-08T12:22:22.000Z">
+<meta property="og:updated_time" content="2018-03-18T03:41:54.417Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="非对称加密技术- RSA算法数学原理分析">
-<meta name="twitter:description" content="非对称加密技术，在现在网络中，有非常广泛应用。加密技术更是数字货币的基础。 所谓非对称，就是指该算法需要一对密钥，使用其中一个（公钥）加密，则需要用另一个（私钥）才能解密。但是对于其原理大部分同学应该都是一知半解，今天就来分析下经典的非对称加密算法 - RSA算法。通过本文的分析，可以更好的理解非对称加密原理，可以让我们更好的使用非对称加密技术。">
-<meta name="twitter:image" content="https://learnblockchain.cn/images/aes_mod.png">
+<meta name="twitter:title" content="如何编写一个可升级的智能合约">
+<meta name="twitter:description" content="区块链信任基础的数据不可修改的特性，让它传统应用程序有一个很大的不同的地方是一经发布于区块链上就无法修改（不能直接在原有的合约上直接修改再重新发布）。">
 
 
 
@@ -128,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="https://learnblockchain.cn/2017/11/15/asy-encryption/"/>
+  <link rel="canonical" href="https://learnblockchain.cn/2018/03/15/contract-upgrade/"/>
 
 
 
 
 
-  <title>非对称加密技术- RSA算法数学原理分析 | 深入浅出区块链</title>
+  <title>如何编写一个可升级的智能合约 | 深入浅出区块链</title>
   
 
 
@@ -326,7 +324,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2017/11/15/asy-encryption/">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2018/03/15/contract-upgrade/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Tiny熊">
@@ -343,7 +341,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">非对称加密技术- RSA算法数学原理分析</h2>
+          <h2 class="post-title" itemprop="name headline">如何编写一个可升级的智能合约</h2>
         
 
         <div class="post-meta">
@@ -355,8 +353,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-15T10:53:27+08:00">
-                2017-11-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-15T16:14:01+08:00">
+                2018-03-15
               </time>
             
 
@@ -371,34 +369,12 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-02-08T20:22:22+08:00">
-                2018-02-08
+              <time title="更新于" itemprop="dateModified" datetime="2018-03-18T11:41:54+08:00">
+                2018-03-18
               </time>
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/cryptography/" itemprop="url" rel="index">
-                    <span itemprop="name">密码学</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -427,60 +403,29 @@
       
 
       
-        <p>非对称加密技术，在现在网络中，有非常广泛应用。加密技术更是数字货币的基础。</p>
-<p>所谓非对称，就是指该算法需要一对密钥，使用其中一个（公钥）加密，则需要用另一个（私钥）才能解密。<br>但是对于其原理大部分同学应该都是一知半解，今天就来分析下经典的非对称加密算法 - RSA算法。<br>通过本文的分析，可以更好的理解非对称加密原理，可以让我们更好的使用非对称加密技术。</p>
+        <p>区块链信任基础的数据不可修改的特性，让它传统应用程序有一个很大的不同的地方是一经发布于区块链上就无法修改（不能直接在原有的合约上直接修改再重新发布）。</p>
 <a id="more"></a>
-<p>题外话:<br>本博客一直有打算写一系列文章通俗的密码学，昨天给站点上https, 因其中使用了RSA算法，就查了一下，发现现在网上介绍RSA算法的文章都写的太难理解了，反正也准备写密码学，就先写RSA算法吧，下面开始正文。</p>
-<h2 id="RSA算法原理"><a href="#RSA算法原理" class="headerlink" title="RSA算法原理"></a>RSA算法原理</h2><p>RSA算法的基于这样的数学事实：两个大质数相乘得到的大数难以被因式分解。<br>如：有很大质数p跟q，很容易算出N，使得 N = p * q，<br>但给出N, 比较难找p q（没有很好的方式， 只有不停的尝试）</p>
-<blockquote>
-<p>这其实也是单向函数的概念</p>
-</blockquote>
-<p>下面来看看<strong>数学演算过程</strong>：</p>
+<p>##写在前面<br>阅读本文前，你应该对以太坊、智能合约及Solidity语言有所了解，如果你还不了解，建议你先看<a href="https://learnblockchain.cn/2017/11/20/whatiseth/">以太坊是什么</a></p>
+<h2 id="当智能合约出现bug"><a href="#当智能合约出现bug" class="headerlink" title="当智能合约出现bug"></a>当智能合约出现bug</h2><p>一方面正式由于智能合约的不可修改的特性，因为只要规则确定之后，没人能够修改它，大家才能够信任它。但另一方面，如果规则的实现有Bug, 可能会造成代币被盗，或是调用消耗大量的gas。这时就需要我们去修复错误。</p>
+<p>我们知道一个智能合约包含两部分： 代码逻辑和数据，而代码逻辑又是最容易出问题的部分, 如在实现如下合约时，由于手抖在写addTen()时，10写成了11。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.18</span>;</span><br><span class="line"></span><br><span class="line">contract MyContract &#123;</span><br><span class="line">    mapping (<span class="function"><span class="params">address</span> =&gt;</span> uint256) public balanceOf;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">setBlance</span>(<span class="params">address _address,uint256 v</span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        balanceOf[_address] = v;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">addTen</span>(<span class="params">address addr</span>) <span class="title">public</span> <span class="title">returns</span> (<span class="params">uint</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> balanceOf[addr] + <span class="number">11</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>假如我们在部署之后发现了这个问题，想要修复这个bug的话，只好重新部署合约，可是这时会有一个尴尬的问题，原来的合约已经有很多人使用，如果部署新的合约，老合约的数据将会丢失。</p>
+<h2 id="数据合约及控制合约"><a href="#数据合约及控制合约" class="headerlink" title="数据合约及控制合约"></a>数据合约及控制合约</h2><p>那么如何解决上面的问题了，一个解决方案是分离合约中的数据，使用一个单独的合约来存储数据（下文称数据合约），使用一个单独的合约写业务逻辑（下文称控制合约）。<br>我们来看看代码如何实现。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.18</span>;</span><br><span class="line"></span><br><span class="line">contract DataContract &#123;</span><br><span class="line">    mapping (<span class="function"><span class="params">address</span> =&gt;</span> uint256) public balanceOf;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">setBlance</span>(<span class="params">address _address,uint256 v</span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        balanceOf[_address] = v;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">contract ControlContract &#123;</span><br><span class="line"></span><br><span class="line">    DataContract dataContract;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">ControlContract</span>(<span class="params">address _dataContractAddr</span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        dataContract = DataContract(_dataContractAddr);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">addTen</span>(<span class="params">address addr</span>) <span class="title">public</span> <span class="title">returns</span> (<span class="params">uint</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> dataContract.balanceOf(addr) + <span class="number">11</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在我们有两个合约DataContract 专门用来存数据，ControlContract用来处理逻辑，并利用DataContract来读写数据。通过这样的设计，可以在更新控制合约后保持数据合约不变，这样就不会丢失数据，也不用迁移数据。</p>
+<h2 id="读写控制"><a href="#读写控制" class="headerlink" title="读写控制"></a>读写控制</h2><p>通过DataContract我们可以单独更新合约逻辑，不过你也许发现了一个新的问题，DataContract的数据不仅仅可以被ControlContract读写，还可以被其他的合约读写，因此需要对DataContract添加读写控制。我们给DataContract添加一个mapping, 用来控制哪些地址可以访问数据，同时添加了修饰器及设置访问的方法，代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.18</span>;</span><br><span class="line"></span><br><span class="line">contract DataContract &#123;</span><br><span class="line">    mapping (<span class="function"><span class="params">address</span> =&gt;</span> uint256) public balanceOf;</span><br><span class="line">    mapping (<span class="function"><span class="params">address</span> =&gt;</span> bool) accessAllowed;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">DataContract</span>(<span class="params"></span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        accessAllowed[msg.sender] = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">setBlance</span>(<span class="params">address _address,uint256 v</span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        balanceOf[_address] = v;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    modifier platform() &#123;</span><br><span class="line">        <span class="built_in">require</span>(accessAllowed[msg.sender] == <span class="literal">true</span>);</span><br><span class="line">        _;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">allowAccess</span>(<span class="params">address _addr</span>) <span class="title">platform</span> <span class="title">public</span> </span>&#123;</span><br><span class="line">        accessAllowed[_addr] = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">denyAccess</span>(<span class="params">address _addr</span>) <span class="title">platform</span> <span class="title">public</span> </span>&#123;</span><br><span class="line">        accessAllowed[_addr] = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>订阅我的<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">小专栏</a>可参看合约的完整代码。</p>
+<p>部署方法如下：</p>
 <ol>
-<li><p>选取两个大质数p，q，计算N = p <em> q 及 φ ( N ) = φ (p) </em> φ (q)  = (p-1) * (q-1)</p>
-<blockquote>
-<p>三个数学概念：<br><strong>质数</strong>(prime numbe)：又称素数，为在大于1的自然数中，除了1和它本身以外不再有其他因数。<br><strong>互质关系</strong>：如果两个正整数，除了1以外，没有其他公因子，我们就称这两个数是<strong>互质关系</strong>（coprime）。<br><strong>φ(N)</strong>：叫做<strong>欧拉函数</strong>，是指任意给定正整数N，在小于等于N的正整数之中，有多少个与N构成互质关系。</p>
-<blockquote>
-<p>如果n是质数，则 φ(n)=n-1。<br>如果n可以分解成两个互质的整数之积， φ(n) = φ(p1p2) = φ(p1)φ(p2)。即积的欧拉函数等于各个因子的欧拉函数之积。</p>
-</blockquote>
-</blockquote>
-</li>
-<li><p>选择一个大于1 小于φ(N)的数e，使得 e 和 φ(N)互质</p>
-<blockquote>
-<p>e其实是1和φ(N)之前的一个质数</p>
-</blockquote>
-</li>
-<li><p>计算d，使得d<em>e=1 mod φ(N) 等价于方程式 ed-1 = k </em> φ(N) 求一组解。</p>
-<blockquote>
-<p>d 称为e的模反元素，e 和 φ(N)互质就肯定存在d。</p>
-<blockquote>
-<p><strong>模反元素</strong>是指如果两个正整数a和n互质，那么一定可以找到整数b，使得ab被n除的余数是1，则b称为a的模反元素。<br>可根据欧拉定理证明模反元素存在，<strong>欧拉定理</strong>是指若n,a互质，则：<img src="/images/aes_mod.png" alt=""><br>a^φ(n) ≡ 1(mod n)  及 a^φ(n) = a * a^（φ(n) - 1）， 可得a的 φ(n)-1 次方，就是a的模反元素。</p>
-</blockquote>
-</blockquote>
-</li>
-<li><p>(N, e)封装成公钥，(N, d)封装成私钥。<br>假设m为明文，加密就是算出密文c:<br> m^e mod N = c (明文m用公钥e加密并和随机数N取余得到密文c)<br>解密则是：<br> c^d mod N = m　(密文c用密钥解密并和随机数N取余得到明文m)</p>
-<blockquote>
-<p>私钥解密这个是可以证明的，这里不展开了。</p>
-</blockquote>
-</li>
+<li>先部署DataContract合约</li>
+<li>使用DataContract合约地址作为部署ControlContract合约的参数</li>
+<li>用ControlContract合约地址作为参数调用DataContract合约的allowAccess方法。<br>如果需要更新控制合约(如修复了addTen)则重新执行第2-3步，同时对老的控制合约执行denyAccess()。</li>
 </ol>
-<h2 id="加解密步骤"><a href="#加解密步骤" class="headerlink" title="加解密步骤"></a>加解密步骤</h2><p>具体还是来看看步骤，举个例子，假设Alice和Bob又要相互通信。</p>
-<ol>
-<li>Alice 随机取大质数P1=53，P2=59，那N=53*59=3127，φ(N)=3016</li>
-<li>取一个e=3，计算出d=2011。</li>
-<li>只将N=3127，e=3 作为公钥传给Bob（公钥公开）</li>
-<li>假设Bob需要加密的明文m=89，c = 89^3 mod 3127=1394，于是Bob传回c=1394。 （公钥加密过程）</li>
-<li>Alice使用c^d mod N = 1394^2011 mod 3127，就能得到明文m=89。 （私钥解密过程）</li>
-</ol>
-<p>假如攻击者能截取到公钥n=3127，e=3及密文c=1394，是仍然无法不通过d来进行密文解密的。</p>
-<h2 id="安全性分析"><a href="#安全性分析" class="headerlink" title="安全性分析"></a>安全性分析</h2><p>那么，有无可能在已知n和e的情况下，推导出d？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">　　1. ed≡1 (mod φ(n))。只有知道e和φ(n)，才能算出d。</span><br><span class="line">　　2. φ(n)=(p-1)(q-1)。只有知道p和q，才能算出φ(n)。</span><br><span class="line">　　3. n=pq。只有将n因数分解，才能算出p和q。</span><br></pre></td></tr></table></figure></p>
-<p>如果n可以被因数分解，d就可以算出，因此RSA安全性建立在N的因式分解上。大整数的因数分解，是一件非常困难的事情。<br>只要密钥长度足够长，用RSA加密的信息实际上是不能被解破的。</p>
-<h2 id="补充模运算规则"><a href="#补充模运算规则" class="headerlink" title="补充模运算规则"></a>补充模运算规则</h2><ol>
-<li>模运算加减法：<br> (a + b) mod p = (a mod p + b mod p) mod p<br> (a - b) mod p = (a mod p - b mod p) mod p</li>
-<li>模运算乘法：<br> (a <em> b) mod p = (a mod p </em> b mod p) mod p</li>
-<li>模运算幂<br> a ^ b mod p = ((a mod p)^b) mod p</li>
-</ol>
-<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。<br>我的<strong><a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">知识星球</a></strong>为各位解答区块链技术问题，欢迎加入讨论。</p>
+<h2 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h2><p>当我们在实现数据合约时，它包含的逻辑应该越少越好，并且应该是严格测试过的，因为一旦数据合约部署之后，就没法更改。<br>大多数情况下，和用户交互的是DApp， 因此当控制合约升级之后，需要升级DApp，使之关联新的控制合约。</p>
+<p>尽管合约可以通过本文的方式升级，但我们依然要谨慎升级，因为升级表示你可以重写逻辑，会降低用户对你的信任度。<br>本文介绍升级方法更多的是一种思路，实际项目中可能会对应多个控制合约及数据合约。</p>
+<p>欢迎来我的<strong><a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">知识星球</a></strong>讨论区块链技术。</p>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
 
       
     </div>
@@ -533,7 +478,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://learnblockchain.cn/2017/11/15/asy-encryption/" title="非对称加密技术- RSA算法数学原理分析">https://learnblockchain.cn/2017/11/15/asy-encryption/</a>
+    <a href="https://learnblockchain.cn/2018/03/15/contract-upgrade/" title="如何编写一个可升级的智能合约">https://learnblockchain.cn/2018/03/15/contract-upgrade/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -546,16 +491,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/非对称加密/" rel="tag"># 非对称加密</a>
-          
-            <a href="/tags/数学/" rel="tag"># 数学</a>
-          
-            <a href="/tags/RSA算法/" rel="tag"># RSA算法</a>
-          
-        </div>
-      
 
       
       
@@ -565,8 +500,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/10/bitcoin-script/" rel="next" title="比特币脚本及交易分析 - 智能合约雏形">
-                <i class="fa fa-chevron-left"></i> 比特币脚本及交易分析 - 智能合约雏形
+              <a href="/2018/03/14/solidity-api/" rel="next" title="智能合约语言 Solidity 教程系列8 - Solidity API">
+                <i class="fa fa-chevron-left"></i> 智能合约语言 Solidity 教程系列8 - Solidity API
               </a>
             
           </div>
@@ -574,10 +509,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/20/whatiseth/" rel="prev" title="以太坊是什么 - 以太坊开发入门指南">
-                以太坊是什么 - 以太坊开发入门指南 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -782,7 +713,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RSA算法原理"><span class="nav-number">1.</span> <span class="nav-text">RSA算法原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加解密步骤"><span class="nav-number">2.</span> <span class="nav-text">加解密步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安全性分析"><span class="nav-number">3.</span> <span class="nav-text">安全性分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充模运算规则"><span class="nav-number">4.</span> <span class="nav-text">补充模运算规则</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#当智能合约出现bug"><span class="nav-number">1.</span> <span class="nav-text">当智能合约出现bug</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据合约及控制合约"><span class="nav-number">2.</span> <span class="nav-text">数据合约及控制合约</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读写控制"><span class="nav-number">3.</span> <span class="nav-text">读写控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更多"><span class="nav-number">4.</span> <span class="nav-text">更多</span></a></li></ol></div>
             
 
           </div>

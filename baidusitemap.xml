@@ -4,6 +4,47 @@
 
     
   <url>
+    <loc>https://learnblockchain.cn/2018/03/15/contract-upgrade/</loc>
+    <lastmod>2018-03-18T03:41:54.417Z</lastmod>
+    <data>
+        <display>
+        <title>如何编写一个可升级的智能合约</title>
+        <pubTime>2018-03-15T08:14:01.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://learnblockchain.cn/2017/11/02/bitcoin-own/</loc>
+    <lastmod>2018-03-17T14:01:01.950Z</lastmod>
+    <data>
+        <display>
+        <title>比特币所有权及隐私问题-非对称加密应用</title>
+        <pubTime>2017-11-02T09:19:29.000Z</pubTime>
+        
+        <tag>非对称加密</tag>
+         
+        <tag>比特币</tag>
+         
+        <tag>所有权问题</tag>
+         
+        <tag>隐私问题</tag>
+         
+         
+           
+             
+              <breadCrumb title="比特币" url="https://learnblockchain.cn/categories/bitcoin/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://learnblockchain.cn/2018/03/14/solidity-api/</loc>
     <lastmod>2018-03-15T07:29:22.954Z</lastmod>
     <data>
@@ -637,32 +678,6 @@
         <tag>去中心化</tag>
          
         <tag>比特币网络</tag>
-         
-         
-           
-             
-              <breadCrumb title="比特币" url="https://learnblockchain.cn/categories/bitcoin/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://learnblockchain.cn/2017/11/02/bitcoin-own/</loc>
-    <lastmod>2018-01-10T08:10:07.579Z</lastmod>
-    <data>
-        <display>
-        <title>比特币所有权及隐私问题-非对称加密应用</title>
-        <pubTime>2017-11-02T09:19:29.000Z</pubTime>
-        
-        <tag>比特币</tag>
-         
-        <tag>非对称加密</tag>
-         
-        <tag>所有权问题</tag>
-         
-        <tag>隐私问题</tag>
          
          
            
