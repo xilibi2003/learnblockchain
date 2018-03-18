@@ -1,5 +1,5 @@
 ---
-title: mac上以太坊私有链搭建
+title: 如何搭建以太坊私有链
 date: 2018-03-18 20:05:59
 categories: 
     - 以太坊
@@ -10,9 +10,11 @@ tags:
 author: 被打劫的强盗
 ---
 
-mac上以太坊私有链搭建
+在开发以太坊时，很多时候需要搭建一条以太坊私有链，通过本文一起看看如何在Mac上进行搭建。
 
 <!-- more -->
+## 写在前面
+阅读本文前，你应该对以太坊语言有所了解，如果你还不了解，建议你先看[以太坊是什么](https://learnblockchain.cn/2017/11/20/whatiseth/)
 
 ## go-ethereum客户端安装
 Go-ethereum客户端通常被称为Geth，它是个命令行界面，执行在Go上实现的完整以太坊节点。Geth得益于Go语言的多平台特性，支持在多个平台上使用(比如Windows、Linux、Mac)。Geth是以太坊协议的具体落地实现，通过Geth，你可以实现以太坊的各种功能，如账户的新建编辑删除，开启挖矿，ether币的转移，智能合约的部署和执行等等。所以，我们选择geth工具来进行开发。由于本人是mac，所以优先使用mac进行开发啦。mac中geth安装如下：
@@ -28,7 +30,8 @@ brew install ethereum
 geth --help
 ```
 
-如果输出一些帮助提示命令，则说明安装成功.
+如果输出一些帮助提示命令，则说明安装成功。
+其他平台可参考[Geth 安装](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum)
 ## 搭建私有链
 以太坊支持自定义创世区块，要运行私有链，我们就需要定义自己的创世区块，创世区块信息写在一个json格式的配置文件中。首先将下面的内容保存到一个json文件中，例如genesis.json。
 json文件内容如下:
@@ -348,3 +351,6 @@ eth对象封装了查看交易和区块信息的方法。
   value: 10000000000000000000
 }
 ```
+
+
+[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
