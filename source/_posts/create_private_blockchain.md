@@ -50,7 +50,7 @@ geth --datadir data0 init genesis.json
 
 上面的命令的主体是 geth init，表示初始化区块链，命令可以带有选项和参数，其中--datadir选项后面跟一个目录名，这里为 data0，表示指定数据存放目录为 data0， genesis.json是init命令的参数。
 
-运行上面的命令，会读取genesis.json文件，根据其中的内容，将创世区块写入到区块链中。如果看到log信息中含有```Successfully wrote genesis state```字样，说明初始化成功。
+运行上面的命令，会读取genesis.json文件，根据其中的内容，将创世区块写入到区块链中。如果看到log信息中含有`Successfully wrote genesis state`字样，说明初始化成功。
 
 初始化成功后的目录如下：
 ![](../images/create_private_blockchain_2.png)
