@@ -2,65 +2,79 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://learnblockchain.cn/2017/12/12/solidity_func/</loc>
+    <loc>https://learnblockchain.cn/about/index.html</loc>
     
-    <lastmod>2018-03-18T09:02:41.956Z</lastmod>
+    <lastmod>2018-03-18T15:32:41.024Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://learnblockchain.cn/2018/03/18/create_private_blockchain/</loc>
+    
+    <lastmod>2018-03-18T13:55:40.809Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/</loc>
     
-    <lastmod>2018-03-18T09:02:32.403Z</lastmod>
+    <lastmod>2018-03-18T13:55:32.198Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://learnblockchain.cn/2017/12/12/solidity2/</loc>
+    <loc>https://learnblockchain.cn/2017/12/12/solidity_func/</loc>
     
-    <lastmod>2018-03-18T09:02:23.000Z</lastmod>
+    <lastmod>2018-03-18T13:55:32.197Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://learnblockchain.cn/2017/12/05/solidity1/</loc>
     
-    <lastmod>2018-03-18T09:02:12.549Z</lastmod>
+    <lastmod>2018-03-18T13:55:32.196Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://learnblockchain.cn/2018/03/14/solidity-api/</loc>
+    <loc>https://learnblockchain.cn/2017/12/12/solidity2/</loc>
     
-    <lastmod>2018-03-18T09:02:00.423Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://learnblockchain.cn/2017/12/21/solidity-arrays/</loc>
-    
-    <lastmod>2018-03-18T09:01:36.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://learnblockchain.cn/2017/12/27/solidity-structs/</loc>
-    
-    <lastmod>2018-03-18T09:01:26.000Z</lastmod>
+    <lastmod>2018-03-18T13:55:32.196Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://learnblockchain.cn/2018/02/02/solidity-unit/</loc>
     
-    <lastmod>2018-03-18T08:58:23.503Z</lastmod>
+    <lastmod>2018-03-18T13:55:32.195Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://learnblockchain.cn/2017/12/21/solidity-arrays/</loc>
+    
+    <lastmod>2018-03-18T13:55:32.194Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://learnblockchain.cn/2017/12/27/solidity-structs/</loc>
+    
+    <lastmod>2018-03-18T13:55:32.194Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://learnblockchain.cn/2018/03/14/solidity-api/</loc>
+    
+    <lastmod>2018-03-18T13:55:32.193Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://learnblockchain.cn/2018/03/15/contract-upgrade/</loc>
     
-    <lastmod>2018-03-18T08:56:00.000Z</lastmod>
+    <lastmod>2018-03-18T13:55:32.192Z</lastmod>
     
   </url>
   
@@ -145,13 +159,6 @@
     <loc>https://learnblockchain.cn/2018/01/12/first-dapp/</loc>
     
     <lastmod>2018-01-24T12:39:59.701Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://learnblockchain.cn/about/index.html</loc>
-    
-    <lastmod>2018-01-23T08:50:29.000Z</lastmod>
     
   </url>
   
