@@ -93,7 +93,7 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="区块链信任基础的数据不可修改的特性，让它传统应用程序有一个很大的不同的地方是一经发布于区块链上就无法修改（不能直接在原有的合约上直接修改再重新发布）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-18T08:46:27.222Z">
+<meta property="og:updated_time" content="2018-03-18T08:56:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何编写一个可升级的智能合约">
 <meta name="twitter:description" content="区块链信任基础的数据不可修改的特性，让它传统应用程序有一个很大的不同的地方是一经发布于区块链上就无法修改（不能直接在原有的合约上直接修改再重新发布）。">
@@ -369,7 +369,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-03-18T16:46:27+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-03-18T16:56:00+08:00">
                 2018-03-18
               </time>
             
@@ -438,7 +438,7 @@
       
         <p>区块链信任基础的数据不可修改的特性，让它传统应用程序有一个很大的不同的地方是一经发布于区块链上就无法修改（不能直接在原有的合约上直接修改再重新发布）。</p>
 <a id="more"></a>
-<p>##写在前面<br>阅读本文前，你应该对以太坊、智能合约及Solidity语言有所了解，如果你还不了解，建议你先看<a href="https://learnblockchain.cn/2017/11/20/whatiseth/">以太坊是什么</a></p>
+<p>##写在前面<br>阅读本文前，你应该对以太坊、智能合约及<a href="https://learnblockchain.cn/categories/ethereum/Solidity/">Solidity语言</a>有所了解，如果你还不了解，建议你先看<a href="https://learnblockchain.cn/2017/11/20/whatiseth/">以太坊是什么</a></p>
 <h2 id="当智能合约出现bug"><a href="#当智能合约出现bug" class="headerlink" title="当智能合约出现bug"></a>当智能合约出现bug</h2><p>一方面正式由于智能合约的不可修改的特性，因为只要规则确定之后，没人能够修改它，大家才能够信任它。但另一方面，如果规则的实现有Bug, 可能会造成代币被盗，或是调用消耗大量的gas。这时就需要我们去修复错误。</p>
 <p>我们知道一个智能合约包含两部分： 代码逻辑和数据，而代码逻辑又是最容易出问题的部分, 如在实现如下合约时，由于手抖在写addTen()时，10写成了11。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.18</span>;</span><br><span class="line"></span><br><span class="line">contract MyContract &#123;</span><br><span class="line">    mapping (<span class="function"><span class="params">address</span> =&gt;</span> uint256) public balanceOf;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">setBlance</span>(<span class="params">address _address,uint256 v</span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        balanceOf[_address] = v;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">addTen</span>(<span class="params">address addr</span>) <span class="title">public</span> <span class="title">returns</span> (<span class="params">uint</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> balanceOf[addr] + <span class="number">11</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
