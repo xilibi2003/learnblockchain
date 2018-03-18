@@ -12,6 +12,7 @@ author: Tiny熊
 现在的Solidity中文文档，要么翻译的太烂，要么太旧，决定重新翻译下。
 尤其点名批评极客学院名为《Solidity官方文档中文版》的翻译，机器翻译的都比它好，大家还是别看了。
 
+
 <!-- more -->
 
 ## 写在前面
@@ -19,6 +20,7 @@ author: Tiny熊
 Solidity是以太坊智能合约编程语言，阅读本文前，你应该对以太坊、智能合约有所了解，
 如果你还不了解，建议你先看[以太坊是什么](https://learnblockchain.cn/2017/11/20/whatiseth/)
 Solidity教程会是一系列文章，本文是第一篇：介绍Solidity的变量类型。
+Solidity 系列完整的文章列表请查看[分类-Solidity](https://learnblockchain.cn/categories/ethereum/Solidity/)。
 
 本文前半部分是参考Solidity官方文档（当前最新版本：0.4.20）进行翻译，后半部分是结合实际合约代码实例说明类型的使用（仅针对[专栏](https://xiaozhuanlan.com/blockchaincore)订阅用户）。
 

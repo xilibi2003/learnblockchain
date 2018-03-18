@@ -10,6 +10,7 @@ author: Tiny熊
 ---
 
 这是Solidity教程系列文章第7篇介绍以太单位及时间单位，系列带你全面深入理解Solidity语言。
+Solidity 系列完整的文章列表请移步到[分类-Solidity](https://learnblockchain.cn/categories/ethereum/Solidity/)。
 
 <!-- more -->
 ## 写在前面

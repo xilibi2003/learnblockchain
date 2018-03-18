@@ -10,6 +10,8 @@ author: Tiny熊
 ---
 这是Solidity教程系列文章第8篇介绍Solidity API，它们主要表现为内置的特殊的变量及函数，存在于全局命名空间里。
 
+Solidity 系列完整的文章列表请查看[分类-Solidity](https://learnblockchain.cn/categories/ethereum/Solidity/)。
+
 <!-- more -->
 ## 写在前面
 

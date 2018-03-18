@@ -10,6 +10,7 @@ author: Tiny熊
 ---
 
 Solidity 教程系列第三篇 - Solidity 函数类型介绍。
+Solidity 系列完整的文章列表请查看[分类-Solidity](https://learnblockchain.cn/categories/ethereum/Solidity/)。
 
 <!-- more -->
 

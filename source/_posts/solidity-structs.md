@@ -10,6 +10,7 @@ author: Tiny熊
 ---
 
 Solidity 教程系列第6篇 - Solidity 结构体与映射。
+Solidity 系列完整的文章列表请查看[分类-Solidity](https://learnblockchain.cn/categories/ethereum/Solidity/)。
 
 <!-- more -->
 ## 写在前面
