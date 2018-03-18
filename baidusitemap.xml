@@ -5,14 +5,22 @@
     
   <url>
     <loc>https://learnblockchain.cn/2018/03/15/contract-upgrade/</loc>
-    <lastmod>2018-03-18T03:41:54.417Z</lastmod>
+    <lastmod>2018-03-18T08:46:27.222Z</lastmod>
     <data>
         <display>
         <title>如何编写一个可升级的智能合约</title>
         <pubTime>2018-03-15T08:14:01.000Z</pubTime>
         
+        <tag>智能合约</tag>
+         
          
            
+             
+              <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
+          
+             
+              <breadCrumb title="智能合约" url="https://learnblockchain.cn/categories/ethereum/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/"/>
+          
         </display>
     </data>
     </url>
@@ -120,9 +128,9 @@
         <title>如何通过以太坊智能合约来进行众筹（ICO）</title>
         <pubTime>2018-02-28T12:30:42.000Z</pubTime>
         
-        <tag>Token</tag>
-         
         <tag>智能合约</tag>
+         
+        <tag>Token</tag>
          
         <tag>ICO</tag>
          
@@ -194,9 +202,9 @@
         <title>实现一个可管理、增发、兑换、冻结等高级功能的代币</title>
         <pubTime>2018-01-27T09:04:13.000Z</pubTime>
         
-        <tag>Token</tag>
-         
         <tag>智能合约</tag>
+         
+        <tag>Token</tag>
          
          
            
@@ -219,9 +227,9 @@
         <title>一步步教你创建自己的数字货币（代币）进行ICO</title>
         <pubTime>2018-01-12T14:36:39.000Z</pubTime>
         
-        <tag>Token</tag>
-         
         <tag>智能合约</tag>
+         
+        <tag>Token</tag>
          
          
            
