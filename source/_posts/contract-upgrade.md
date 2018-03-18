@@ -1,7 +1,12 @@
 ---
 title: 如何编写一个可升级的智能合约
 date: 2018-03-15 16:14:01
+categories: 
+    - 以太坊
+    - 智能合约
 tags:
+    - 智能合约
+author: Tiny熊
 ---
 
 区块链信任基础的数据不可修改的特性，让它传统应用程序有一个很大的不同的地方是一经发布于区块链上就无法修改（不能直接在原有的合约上直接修改再重新发布）。
@@ -9,7 +14,7 @@ tags:
 <!-- more -->
 
 ##写在前面
-阅读本文前，你应该对以太坊、智能合约及Solidity语言有所了解，如果你还不了解，建议你先看[以太坊是什么](https://learnblockchain.cn/2017/11/20/whatiseth/)
+阅读本文前，你应该对以太坊、智能合约及[Solidity语言](https://learnblockchain.cn/categories/ethereum/Solidity/)有所了解，如果你还不了解，建议你先看[以太坊是什么](https://learnblockchain.cn/2017/11/20/whatiseth/)
 
 
 ## 当智能合约出现bug

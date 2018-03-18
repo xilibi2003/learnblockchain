@@ -10,7 +10,7 @@ author: Tiny熊
 ---
 
 Solidity教程系列第二篇 - Solidity地址类型介绍. 
-
+Solidity 系列完整的文章列表请查看[分类-Solidity](https://learnblockchain.cn/categories/ethereum/Solidity/)。
 <!-- more -->
 
 ## 写在前面
