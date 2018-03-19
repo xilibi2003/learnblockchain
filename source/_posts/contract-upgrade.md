@@ -13,7 +13,7 @@ author: Tiny熊
 
 <!-- more -->
 
-##写在前面
+## 写在前面
 阅读本文前，你应该对以太坊、智能合约及[Solidity语言](https://learnblockchain.cn/categories/ethereum/Solidity/)有所了解，如果你还不了解，建议你先看[以太坊是什么](https://learnblockchain.cn/2017/11/20/whatiseth/)
 
 
@@ -127,29 +127,3 @@ contract DataContract {
 欢迎来我的**[知识星球](https://t.xiaomiquan.com/RfAu7uj)**讨论区块链技术。
 
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
