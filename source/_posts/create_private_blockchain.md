@@ -7,7 +7,7 @@ categories:
 tags:
     -  以太坊 
     -  私有链
-author: 被打劫的强盗
+author: 罗小辉
 ---
 
 mac上以太坊私有链搭建
