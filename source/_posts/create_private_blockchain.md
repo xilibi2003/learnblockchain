@@ -59,7 +59,7 @@ json文件内容如下:
 ## 初始化：写入创世区块
 准备好创世区块json配置文件后，需要初始化区块链，将上面的创世区块信息写入到区块链中。首先要新建一个目录data0用来存放区块链数据(其实，这个目录data0就相当于一个根节点。当我们基于genesis.json生成根节点后，其他人就可以来连接此根节点，从而能进行交易)。data0目录结构如图所示：
 
-![](../images/create_private_blockchain_1.png)
+![](/images/create_private_blockchain_1.png)
 
 接下来进入privatechain目录中，执行初始化命令：
 
@@ -73,7 +73,7 @@ geth --datadir data0 init genesis.json
 运行上面的命令，会读取genesis.json文件，根据其中的内容，将创世区块写入到区块链中。如果看到log信息中含有`Successfully wrote genesis state`字样，说明初始化成功。
 
 初始化成功后的目录如下：
-![](../images/create_private_blockchain_2.png)
+![](/images/create_private_blockchain_2.png)
 其中geth/chaindata中存放的是区块数据，keystore中存放的是账户数据。
 
 ## 启动私有链节点
@@ -86,7 +86,7 @@ geth --datadir data0 --networkid 1108 console
 上面命令的主体是geth console，表示启动节点并进入交互式控制台，--datadir选项指定使用data0作为数据目录，--networkid选项后面跟一个数字，这里是1108，表示指定这个私有链的网络id为1108。网络id在连接到其他节点的时候会用到，以太坊公网的网络id是1，为了不与公有链网络冲突，运行私有链节点的时候要指定自己的网络id(上面命令可能会运行失败，我直接重启mac，再进入到privateChain目录中，简单粗暴)。
 
 运行上面的命令后，就启动了区块链节点并进入了Javascript Console：
-![](../images/create_private_blockchain_3.png)
+![](/images/create_private_blockchain_3.png)
 这是一个交互式的Javascript执行环境，在这里面可以执行Javascript代码，其中>是命令提示符。在这个环境里也内置了一些用来操作以太坊的Javascript对象，可以直接使用这些对象。这些对象主要包括：
 
 **eth：**包含一些跟操作区块链相关的方法
@@ -135,7 +135,7 @@ Passphrase其实就是密码的意思，输入两次密码后，就创建了一�
 
 账户默认会保存在数据目录的keystore文件夹中。查看目录结构，发现data0/keystore中多了两个文件，这两个文件就对应刚才创建的两个账户，这是json格式的文本文件，可以打开查看，里面存的是私钥经过密码加密后的信息。
 
-![](../images/create_private_blockchain_4.png)
+![](/images/create_private_blockchain_4.png)
 json文件中信息格式如下：
 
 ```
