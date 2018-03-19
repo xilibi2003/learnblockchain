@@ -4,32 +4,8 @@
 
     
   <url>
-    <loc>https://learnblockchain.cn/2018/03/15/contract-upgrade/</loc>
-    <lastmod>2018-03-19T01:31:21.000Z</lastmod>
-    <data>
-        <display>
-        <title>如何编写一个可升级的智能合约</title>
-        <pubTime>2018-03-15T08:14:01.000Z</pubTime>
-        
-        <tag>智能合约</tag>
-         
-         
-           
-             
-              <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
-          
-             
-              <breadCrumb title="智能合约" url="https://learnblockchain.cn/categories/ethereum/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-    
-  <url>
     <loc>https://learnblockchain.cn/2018/03/18/create_private_blockchain/</loc>
-    <lastmod>2018-03-18T13:55:40.809Z</lastmod>
+    <lastmod>2018-03-19T02:13:22.401Z</lastmod>
     <data>
         <display>
         <title>如何搭建以太坊私有链</title>
@@ -51,6 +27,30 @@
     </data>
     </url>
 
+    
+  <url>
+    <loc>https://learnblockchain.cn/2018/03/15/contract-upgrade/</loc>
+    <lastmod>2018-03-19T02:07:02.499Z</lastmod>
+    <data>
+        <display>
+        <title>如何编写一个可升级的智能合约</title>
+        <pubTime>2018-03-15T08:14:01.000Z</pubTime>
+        
+        <tag>智能合约</tag>
+         
+         
+           
+             
+              <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
+          
+             
+              <breadCrumb title="智能合约" url="https://learnblockchain.cn/categories/ethereum/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/</loc>
@@ -244,13 +244,13 @@
         <title>比特币所有权及隐私问题-非对称加密应用</title>
         <pubTime>2017-11-02T09:19:29.000Z</pubTime>
         
+        <tag>非对称加密</tag>
+         
         <tag>比特币</tag>
          
         <tag>所有权问题</tag>
          
         <tag>隐私问题</tag>
-         
-        <tag>非对称加密</tag>
          
          
            

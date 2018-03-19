@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://learnblockchain.cn/2018/03/18/create_private_blockchain/</loc>
+    
+    <lastmod>2018-03-19T02:13:22.401Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://learnblockchain.cn/2018/03/15/contract-upgrade/</loc>
     
-    <lastmod>2018-03-19T01:31:21.000Z</lastmod>
+    <lastmod>2018-03-19T02:07:02.499Z</lastmod>
     
   </url>
   
@@ -12,13 +19,6 @@
     <loc>https://learnblockchain.cn/about/index.html</loc>
     
     <lastmod>2018-03-18T15:32:41.024Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://learnblockchain.cn/2018/03/18/create_private_blockchain/</loc>
-    
-    <lastmod>2018-03-18T13:55:40.809Z</lastmod>
     
   </url>
   

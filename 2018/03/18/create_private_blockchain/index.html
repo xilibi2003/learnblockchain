@@ -93,15 +93,15 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="在开发以太坊时，很多时候需要搭建一条以太坊私有链，通过本文一起看看如何在Mac上进行搭建。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://learnblockchain.cn/2018/03/18/images/create_private_blockchain_1.png">
-<meta property="og:image" content="https://learnblockchain.cn/2018/03/18/images/create_private_blockchain_2.png">
-<meta property="og:image" content="https://learnblockchain.cn/2018/03/18/images/create_private_blockchain_3.png">
-<meta property="og:image" content="https://learnblockchain.cn/2018/03/18/images/create_private_blockchain_4.png">
-<meta property="og:updated_time" content="2018-03-18T13:55:40.809Z">
+<meta property="og:image" content="https://learnblockchain.cn/images/create_private_blockchain_1.png">
+<meta property="og:image" content="https://learnblockchain.cn/images/create_private_blockchain_2.png">
+<meta property="og:image" content="https://learnblockchain.cn/images/create_private_blockchain_3.png">
+<meta property="og:image" content="https://learnblockchain.cn/images/create_private_blockchain_4.png">
+<meta property="og:updated_time" content="2018-03-19T02:13:22.401Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何搭建以太坊私有链">
 <meta name="twitter:description" content="在开发以太坊时，很多时候需要搭建一条以太坊私有链，通过本文一起看看如何在Mac上进行搭建。">
-<meta name="twitter:image" content="https://learnblockchain.cn/2018/03/18/images/create_private_blockchain_1.png">
+<meta name="twitter:image" content="https://learnblockchain.cn/images/create_private_blockchain_1.png">
 
 
 
@@ -374,8 +374,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-03-18T21:55:40+08:00">
-                2018-03-18
+              <time title="更新于" itemprop="dateModified" datetime="2018-03-19T10:13:22+08:00">
+                2018-03-19
               </time>
             
           </span>
@@ -452,16 +452,16 @@
 <h2 id="搭建私有链"><a href="#搭建私有链" class="headerlink" title="搭建私有链"></a>搭建私有链</h2><p>以太坊支持自定义创世区块，要运行私有链，我们就需要定义自己的创世区块，创世区块信息写在一个json格式的配置文件中。首先将下面的内容保存到一个json文件中，例如genesis.json。<br>json文件内容如下:</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"config"</span>: &#123;</span><br><span class="line">        <span class="attr">"chainId"</span>: <span class="number">10</span>, </span><br><span class="line">        <span class="attr">"homesteadBlock"</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="attr">"eip155Block"</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="attr">"eip158Block"</span>: <span class="number">0</span></span><br><span class="line">    &#125;,</span><br><span class="line">  <span class="attr">"alloc"</span>      : &#123;&#125;,</span><br><span class="line">  <span class="attr">"coinbase"</span>   : <span class="string">"0x0000000000000000000000000000000000000000"</span>,</span><br><span class="line">  <span class="attr">"difficulty"</span> : <span class="string">"0x20000"</span>,</span><br><span class="line">  <span class="attr">"extraData"</span>  : <span class="string">""</span>,</span><br><span class="line">  <span class="attr">"gasLimit"</span>   : <span class="string">"0x2fefd8"</span>,</span><br><span class="line">  <span class="attr">"nonce"</span>      : <span class="string">"0x0000000000000042"</span>,</span><br><span class="line">  <span class="attr">"mixhash"</span>    : <span class="string">"0x0000000000000000000000000000000000000000000000000000000000000000"</span>,</span><br><span class="line">  <span class="attr">"parentHash"</span> : <span class="string">"0x0000000000000000000000000000000000000000000000000000000000000000"</span>,</span><br><span class="line">  <span class="attr">"timestamp"</span>  : <span class="string">"0x00"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="初始化：写入创世区块"><a href="#初始化：写入创世区块" class="headerlink" title="初始化：写入创世区块"></a>初始化：写入创世区块</h2><p>准备好创世区块json配置文件后，需要初始化区块链，将上面的创世区块信息写入到区块链中。首先要新建一个目录data0用来存放区块链数据(其实，这个目录data0就相当于一个根节点。当我们基于genesis.json生成根节点后，其他人就可以来连接此根节点，从而能进行交易)。data0目录结构如图所示：</p>
-<p><img src="../images/create_private_blockchain_1.png" alt=""></p>
+<p><img src="/images/create_private_blockchain_1.png" alt=""></p>
 <p>接下来进入privatechain目录中，执行初始化命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd privatechain</span><br><span class="line">geth --datadir data0 init genesis.json</span><br></pre></td></tr></table></figure>
 <p>上面的命令的主体是 geth init，表示初始化区块链，命令可以带有选项和参数，其中–datadir选项后面跟一个目录名，这里为 data0，表示指定数据存放目录为 data0， genesis.json是init命令的参数。</p>
 <p>运行上面的命令，会读取genesis.json文件，根据其中的内容，将创世区块写入到区块链中。如果看到log信息中含有<code>Successfully wrote genesis state</code>字样，说明初始化成功。</p>
-<p>初始化成功后的目录如下：<br><img src="../images/create_private_blockchain_2.png" alt=""><br>其中geth/chaindata中存放的是区块数据，keystore中存放的是账户数据。</p>
+<p>初始化成功后的目录如下：<br><img src="/images/create_private_blockchain_2.png" alt=""><br>其中geth/chaindata中存放的是区块数据，keystore中存放的是账户数据。</p>
 <h2 id="启动私有链节点"><a href="#启动私有链节点" class="headerlink" title="启动私有链节点"></a>启动私有链节点</h2><p>初始化完成后，就有了一条自己的私有链，之后就可以启动自己的私有链节点并做一些操作，在终端中输入以下命令即可启动节点：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">geth --datadir data0 --networkid 1108 console</span><br></pre></td></tr></table></figure>
 <p>上面命令的主体是geth console，表示启动节点并进入交互式控制台，–datadir选项指定使用data0作为数据目录，–networkid选项后面跟一个数字，这里是1108，表示指定这个私有链的网络id为1108。网络id在连接到其他节点的时候会用到，以太坊公网的网络id是1，为了不与公有链网络冲突，运行私有链节点的时候要指定自己的网络id(上面命令可能会运行失败，我直接重启mac，再进入到privateChain目录中，简单粗暴)。</p>
-<p>运行上面的命令后，就启动了区块链节点并进入了Javascript Console：<br><img src="../images/create_private_blockchain_3.png" alt=""><br>这是一个交互式的Javascript执行环境，在这里面可以执行Javascript代码，其中&gt;是命令提示符。在这个环境里也内置了一些用来操作以太坊的Javascript对象，可以直接使用这些对象。这些对象主要包括：</p>
+<p>运行上面的命令后，就启动了区块链节点并进入了Javascript Console：<br><img src="/images/create_private_blockchain_3.png" alt=""><br>这是一个交互式的Javascript执行环境，在这里面可以执行Javascript代码，其中&gt;是命令提示符。在这个环境里也内置了一些用来操作以太坊的Javascript对象，可以直接使用这些对象。这些对象主要包括：</p>
 <p><strong>eth：</strong>包含一些跟操作区块链相关的方法<br><strong>net：</strong>包含以下查看p2p网络状态的方法<br><strong>admin：</strong>包含一些与管理节点相关的方法<br><strong>miner：</strong>包含启动&amp;停止挖矿的一些方法<br><strong>personal：</strong>主要包含一些管理账户的方法<br><strong>txpool：</strong>包含一些查看交易内存池的方法<br><strong>web3：</strong>包含了以上对象，还包含一些单位换算的方法</p>
 <h2 id="玩转Javascript-Console"><a href="#玩转Javascript-Console" class="headerlink" title="玩转Javascript Console"></a>玩转Javascript Console</h2><p>进入以太坊Javascript Console后，就可以使用里面的内置对象做一些操作，这些内置对象提供的功能很丰富，比如查看区块和交易、创建账户、挖矿、发送交易、部署智能合约等。接下来介绍几个常用功能，下面的操作中，前面带&gt;的表示在Javascript Console中执行的命令。</p>
 <h3 id="创建账户"><a href="#创建账户" class="headerlink" title="创建账户"></a>创建账户</h3><p>前面只是搭建了私有链，并没有自己的账户，可以在js console中输入eth.accounts来验证：</p>
@@ -473,7 +473,7 @@
 <p>这时候再去看账户，就有两个了。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; eth.accounts</span><br><span class="line">[&quot;0x4a3b0216e1644c1bbabda527a6da7fc5d178b58f&quot;, &quot;0x46b24d04105551498587e3c6ce2c3341d5988938&quot;]</span><br></pre></td></tr></table></figure>
 <p>账户默认会保存在数据目录的keystore文件夹中。查看目录结构，发现data0/keystore中多了两个文件，这两个文件就对应刚才创建的两个账户，这是json格式的文本文件，可以打开查看，里面存的是私钥经过密码加密后的信息。</p>
-<p><img src="../images/create_private_blockchain_4.png" alt=""><br>json文件中信息格式如下：</p>
+<p><img src="/images/create_private_blockchain_4.png" alt=""><br>json文件中信息格式如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;address&quot;: &quot;4a3b0216e1644c1bbabda527a6da7fc5d178b58f&quot;,</span><br><span class="line">  &quot;crypto&quot;: &#123;</span><br><span class="line">    &quot;cipher&quot;: &quot;aes-128-ctr&quot;,</span><br><span class="line">    &quot;ciphertext&quot;: &quot;238d6d48126b762c8f13e84622b1bbb7713f7244c2f24555c99b76396fae8355&quot;,</span><br><span class="line">    &quot;cipherparams&quot;: &#123;</span><br><span class="line">      &quot;iv&quot;: &quot;d0f5a3d3e6c1eeec77bf631bc938725d&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;kdf&quot;: &quot;scrypt&quot;,</span><br><span class="line">    &quot;kdfparams&quot;: &#123;</span><br><span class="line">      &quot;dklen&quot;: 32,</span><br><span class="line">      &quot;n&quot;: 262144,</span><br><span class="line">      &quot;p&quot;: 1,</span><br><span class="line">      &quot;r&quot;: 8,</span><br><span class="line">      &quot;salt&quot;: &quot;70dc72c4eb63bea50f7637d9ff85bb53f6ca8ace17f4245feae9c0bc9abaad82&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;mac&quot;: &quot;bd7fc0c937c39f1cbbf1ca654c33b53d7f9c644c6dacfeefe1641d2f3decea04&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;id&quot;: &quot;57803d82-0cd4-4a78-9c29-9f9252fdcf60&quot;,</span><br><span class="line">  &quot;version&quot;: 3</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="查看账户余额"><a href="#查看账户余额" class="headerlink" title="查看账户余额"></a>查看账户余额</h3><p>eth对象提供了查看账户余额的方法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; eth.getBalance(eth.accounts[0])</span><br><span class="line">0</span><br><span class="line">&gt; eth.getBalance(eth.accounts[1])</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
