@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>https://learnblockchain.cn/2018/01/11/guide/</loc>
+    <lastmod>2018-03-26T01:17:01.036Z</lastmod>
+    <data>
+        <display>
+        <title>区块链技术学习指引</title>
+        <pubTime>2018-01-11T07:03:36.000Z</pubTime>
+        
+        <tag>如何学习</tag>
+         
+        <tag>目录</tag>
+         
+         
+           
+             
+              <breadCrumb title="目录" url="https://learnblockchain.cn/categories/%E7%9B%AE%E5%BD%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://learnblockchain.cn/2018/03/23/token-erc721/</loc>
     <lastmod>2018-03-26T01:06:07.954Z</lastmod>
     <data>
@@ -24,28 +46,6 @@
           
              
               <breadCrumb title="智能合约" url="https://learnblockchain.cn/categories/ethereum/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://learnblockchain.cn/2018/01/11/guide/</loc>
-    <lastmod>2018-03-25T16:23:35.000Z</lastmod>
-    <data>
-        <display>
-        <title>区块链技术学习指引</title>
-        <pubTime>2018-01-11T07:03:36.000Z</pubTime>
-        
-        <tag>如何学习</tag>
-         
-        <tag>目录</tag>
-         
-         
-           
-             
-              <breadCrumb title="目录" url="https://learnblockchain.cn/categories/%E7%9B%AE%E5%BD%95/"/>
           
         </display>
     </data>
