@@ -4,6 +4,29 @@
 
     
   <url>
+    <loc>https://learnblockchain.cn/2018/04/07/solidity-errorhandler/</loc>
+    <lastmod>2018-04-07T14:09:01.394Z</lastmod>
+    <data>
+        <display>
+        <title>智能合约语言 Solidity 教程系列9 - 错误处理</title>
+        <pubTime>2018-04-07T12:35:47.000Z</pubTime>
+        
+        <tag>Solidity手册</tag>
+         
+         
+           
+             
+              <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
+          
+             
+              <breadCrumb title="Solidity" url="https://learnblockchain.cn/categories/ethereum/Solidity/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://learnblockchain.cn/2018/03/23/token-erc721/</loc>
     <lastmod>2018-03-26T01:58:47.076Z</lastmod>
     <data>

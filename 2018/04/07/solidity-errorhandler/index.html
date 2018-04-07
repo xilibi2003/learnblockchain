@@ -85,18 +85,21 @@
 
 
 
-<meta name="description" content="Solidity教程系列第4篇 - Solidity数据位置分析。Solidity 系列完整的文章列表请查看分类-Solidity。">
+<meta name="description" content="这是Solidity教程系列文章第9篇介绍Solidity 错误处理。Solidity系列完整的文章列表请查看分类-Solidity。">
 <meta name="keywords" content="Solidity手册">
 <meta property="og:type" content="article">
-<meta property="og:title" content="智能合约语言 Solidity 教程系列4 - 数据存储位置分析">
-<meta property="og:url" content="https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/index.html">
+<meta property="og:title" content="智能合约语言 Solidity 教程系列9 - 错误处理">
+<meta property="og:url" content="https://learnblockchain.cn/2018/04/07/solidity-errorhandler/index.html">
 <meta property="og:site_name" content="深入浅出区块链">
-<meta property="og:description" content="Solidity教程系列第4篇 - Solidity数据位置分析。Solidity 系列完整的文章列表请查看分类-Solidity。">
+<meta property="og:description" content="这是Solidity教程系列文章第9篇介绍Solidity 错误处理。Solidity系列完整的文章列表请查看分类-Solidity。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-18T13:55:32.198Z">
+<meta property="og:image" content="https://learnblockchain.cn/images/solidity_error1.jpg">
+<meta property="og:image" content="https://learnblockchain.cn/images/solidity_error2.jpg">
+<meta property="og:updated_time" content="2018-04-07T14:09:01.394Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="智能合约语言 Solidity 教程系列4 - 数据存储位置分析">
-<meta name="twitter:description" content="Solidity教程系列第4篇 - Solidity数据位置分析。Solidity 系列完整的文章列表请查看分类-Solidity。">
+<meta name="twitter:title" content="智能合约语言 Solidity 教程系列9 - 错误处理">
+<meta name="twitter:description" content="这是Solidity教程系列文章第9篇介绍Solidity 错误处理。Solidity系列完整的文章列表请查看分类-Solidity。">
+<meta name="twitter:image" content="https://learnblockchain.cn/images/solidity_error1.jpg">
 
 
 
@@ -126,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/"/>
+  <link rel="canonical" href="https://learnblockchain.cn/2018/04/07/solidity-errorhandler/"/>
 
 
 
 
 
-  <title>智能合约语言 Solidity 教程系列4 - 数据存储位置分析 | 深入浅出区块链</title>
+  <title>智能合约语言 Solidity 教程系列9 - 错误处理 | 深入浅出区块链</title>
   
 
 
@@ -324,7 +327,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2018/04/07/solidity-errorhandler/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Tiny熊">
@@ -341,7 +344,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">智能合约语言 Solidity 教程系列4 - 数据存储位置分析</h2>
+          <h2 class="post-title" itemprop="name headline">智能合约语言 Solidity 教程系列9 - 错误处理</h2>
         
 
         <div class="post-meta">
@@ -353,8 +356,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-21T11:51:02+08:00">
-                2017-12-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-07T20:35:47+08:00">
+                2018-04-07
               </time>
             
 
@@ -369,8 +372,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-03-18T21:55:32+08:00">
-                2018-03-18
+              <time title="更新于" itemprop="dateModified" datetime="2018-04-07T22:09:01+08:00">
+                2018-04-07
               </time>
             
           </span>
@@ -436,53 +439,59 @@
       
 
       
-        <p>Solidity教程系列第4篇 - Solidity数据位置分析。<br>Solidity 系列完整的文章列表请查看<a href="https://learnblockchain.cn/categories/ethereum/Solidity/">分类-Solidity</a>。<br><a id="more"></a></p>
+        <p>这是Solidity教程系列文章第9篇介绍Solidity 错误处理。<br>Solidity系列完整的文章列表请查看<a href="https://learnblockchain.cn/categories/ethereum/Solidity/">分类-Solidity</a>。</p>
+<a id="more"></a>
 <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>Solidity 是以太坊智能合约编程语言，阅读本文前，你应该对以太坊、智能合约有所了解，<br>如果你还不了解，建议你先看<a href="https://learnblockchain.cn/2017/11/20/whatiseth/">以太坊是什么</a></p>
-<p>这部分的内容官方英文文档讲的不是很透，因此我在参考Solidity官方文档（当前最新版本：0.4.20）的同时加入了深入分析部分，欢迎订阅<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">专栏</a>。</p>
-<h2 id="数据位置-Data-location"><a href="#数据位置-Data-location" class="headerlink" title="数据位置(Data location)"></a>数据位置(Data location)</h2><p>在系列第一篇，我们提到 Solidity 类型分为两类：<br><strong>值类型(Value Type)</strong> 及 <strong>引用类型(Reference Types)</strong>，<br>前面我们已经介绍完了值类型，接下来会介绍引用类型。</p>
-<p>引用类型是一个复杂类型，占用的空间通常超过256位， 拷贝时开销很大，因此我们需要考虑将它们存储在什么位置，是<strong>memory</strong>（内存中，数据不是永久存在）还是<strong>storage</strong>（永久存储在区块链中）<br>所有的复杂类型如数组(arrays)和结构体(struct)有一个额外的属性：<strong>数据的存储位置（data location）</strong>。可为<strong>memory</strong>和<strong>storage</strong>。</p>
-<p>根据上下文的不同，大多数时候数据位置有默认值，也通过指定关键字storage和memory修改它。</p>
-<p>函数参数（包含返回的参数）默认是<strong>memory</strong>。<br>局部复杂类型变量（local variables）和 状态变量（state variables） 默认是<strong>storage</strong>。</p>
-<blockquote>
-<p>局部变量：局部作用域（越过作用域即不可被访问，等待被回收）的变量，如函数内的变量。状态变量：合约内声明的公有变量</p>
-</blockquote>
-<p>还有一个存储位置是：<strong>calldata</strong>，用来存储函数参数，是只读的，不会永久存储的一个数据位置。外部函数的参数（不包括返回参数）被强制指定为calldata。效果与memory差不多。</p>
-<p>数据位置指定非常重要，因为他们影响着赋值行为。<br>在memory和storage之间或与状态变量之间相互赋值，总是会创建一个完全独立的拷贝。<br>而将一个storage的状态变量，赋值给一个storage的局部变量，是通过引用传递。所以对于局部变量的修改，同时修改关联的状态变量。<br>另一方面，将一个memory的引用类型赋值给另一个memory的引用，不会创建拷贝（即：memory之间是引用传递）。</p>
-<blockquote>
+<p>欢迎订阅<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">区块链技术专栏</a>阅读更全面的分析文章。</p>
+<h2 id="什么是错误处理"><a href="#什么是错误处理" class="headerlink" title="什么是错误处理"></a>什么是错误处理</h2><p>错误处理是指在程序发生错误时的处理方式，Solidity处理错误和我们常见的语言不一样，Solidity是通过回退状态的方式来处理错误。发生异常时会撤消当前调用（及其所有子调用）所改变的状态，同时给调用者返回一个错误标识。注意<strong>捕捉异常是不可能的</strong>，因此没有try … catch…。</p>
+<p>为什么Solidity处理错误要这样设计呢？<br>我们可以把区块链理解为是全球共享的分布式事务性数据库。<strong>全球共享</strong>意味着参与这个网络的每一个人都可以读写其中的记录。如果想修改这个数据库中的内容，就必须创建一个事务，<strong>事务</strong>意味着要做的修改（假如我们想同时修改两个值）只能被完全的应用或者一点都没有进行。<br>学习过数据库的同学，应该理解事务的含义，如果你对事务一词不是很理解，建议你搜索一下“数据库事务“。<br>Solidity错误处理就是要保证每次调用都是事务性的。</p>
+<h2 id="如何处理"><a href="#如何处理" class="headerlink" title="如何处理"></a>如何处理</h2><p>Solidity提供了两个函数assert和require来进行条件检查，如果条件不满足则抛出异常。assert函数通常用来检查（测试）内部错误，而require函数来检查输入变量或合同状态变量是否满足条件以及验证调用外部合约返回值。<br>另外，如果我们正确使用assert，有一个Solidity分析工具就可以帮我们分析出智能合约中的错误，帮助我们发现合约中有逻辑错误的bug。</p>
+<p>除了可以两个函数assert和require来进行条件检查，另外还有两种方式来触发异常：</p>
 <ol>
-<li>注意：不能将memory赋值给局部变量。</li>
-<li>对于值类型，总是会进行拷贝。</li>
+<li><strong>revert</strong>函数可以用来标记错误并回退当前调用</li>
+<li>使用<strong>throw</strong>关键字抛出异常（从0.4.13版本，throw关键字已被弃用，将来会被淘汰。）</li>
 </ol>
-</blockquote>
-<p>下面看一段代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^0.4.0;</span><br><span class="line"></span><br><span class="line">contract C &#123;</span><br><span class="line">    uint[] x; //  x的存储位置是storage</span><br><span class="line"></span><br><span class="line">    // memoryArray的存储位置是 memory</span><br><span class="line">    function f(uint[] memoryArray) public &#123;</span><br><span class="line">        x = memoryArray;    // 从 memory 复制到 storage</span><br><span class="line">        var y = x;          // storage 引用传递局部变量y（y 是一个 storage 引用）</span><br><span class="line">        y[7];               // 返回第8个元素</span><br><span class="line">        y.length = 2;       // x同样会被修改</span><br><span class="line">        delete x;           // y同样会被修改</span><br><span class="line"></span><br><span class="line">        // 错误， 不能将memory赋值给局部变量</span><br><span class="line">        // y = memoryArray;  </span><br><span class="line"></span><br><span class="line">        // 错误，不能通过引用销毁storage</span><br><span class="line">        // delete y;        </span><br><span class="line"></span><br><span class="line">        g(x);               // 引用传递， g可以改变x的内容</span><br><span class="line">        h(x);               // 拷贝到memory， h无法改变x的内容</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function g(uint[] storage storageArray) internal &#123;&#125;</span><br><span class="line">    function h(uint[] memoryArray) public &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><h4 id="强制的数据位置-Forced-data-location"><a href="#强制的数据位置-Forced-data-location" class="headerlink" title="强制的数据位置(Forced data location)"></a>强制的数据位置(Forced data location)</h4><ul>
-<li>外部函数(External function)的参数(不包括返回参数)强制为：calldata</li>
-<li>状态变量(State variables)强制为: storage</li>
-</ul>
-<h4 id="默认数据位置（Default-data-location）"><a href="#默认数据位置（Default-data-location）" class="headerlink" title="默认数据位置（Default data location）"></a>默认数据位置（Default data location）</h4><ul>
-<li>函数参数及返回参数：memory</li>
-<li>复杂类型的局部变量：storage</li>
-</ul>
-<h2 id="深入分析"><a href="#深入分析" class="headerlink" title="深入分析"></a>深入分析</h2><p>storage 存储结构是在合约创建的时候就确定好了的，它取决于合约所声明状态变量。但是内容可以被（交易）调用改变。</p>
-<blockquote>
-<p>Solidity 称这个为状态改变，这也是合约级变量称为<strong>状态变量</strong>的原因。也可以更好的理解为什么状态变量都是storage存储。</p>
-</blockquote>
-<p>memory 只能用于函数内部，memory 声明用来告知EVM在运行时创建一块（固定大小）内存区域给变量使用。</p>
-<blockquote>
-<p>storage 在区块链中是用key/value的形式存储，而memory则表现为字节数组</p>
-</blockquote>
-<h3 id="关于栈（stack）"><a href="#关于栈（stack）" class="headerlink" title="关于栈（stack）"></a>关于栈（stack）</h3><p>EVM是一个基于栈的语言，栈实际是在内存(memory)的一个数据结构，每个栈元素占为256位，栈最大长度为1024。<br>值类型的局部变量是存储在栈上。</p>
-<h3 id="不同存储的消耗（gas消耗）"><a href="#不同存储的消耗（gas消耗）" class="headerlink" title="不同存储的消耗（gas消耗）"></a>不同存储的消耗（gas消耗）</h3><ul>
-<li>storage 会永久保存合约状态变量，开销最大</li>
-<li>memory 仅保存临时变量，函数调用之后释放，开销很小</li>
-<li>stack  保存很小的局部变量，几乎免费使用，但有数量限制。</li>
-</ul>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://solidity.readthedocs.io/en/develop/types.html#data-location" target="_blank" rel="noopener">Solidity官方文档-类型</a></p>
-<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。<br>我的<strong><a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">知识星球</a></strong>为各位解答区块链技术问题，欢迎加入讨论。</p>
-<!---
+<p>当子调用中发生异常时，异常会自动向上“冒泡”。 不过也有一些例外：send，和底层的函数调用call, delegatecall，callcode，当发生异常时，这些函数返回false。</p>
+<p>注意：在一个不存在的地址上调用底层的函数call，delegatecall，callcode 也会返回成功，所以我们在进行调用时，应该总是优先进行函数存在性检查。</p>
+<p>在下面通过一个示例来说明如何使用require来检查输入条件，以及assert用于内部错误检查：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.0</span>;</span><br><span class="line"></span><br><span class="line">contract Sharer &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">sendHalf</span>(<span class="params">address addr</span>) <span class="title">public</span> <span class="title">payable</span> <span class="title">returns</span> (<span class="params">uint balance</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">require</span>(msg.value % <span class="number">2</span> == <span class="number">0</span>); <span class="comment">// 仅允许偶数</span></span><br><span class="line">        uint balanceBeforeTransfer = <span class="keyword">this</span>.balance;</span><br><span class="line">        addr.transfer(msg.value / <span class="number">2</span>);  <span class="comment">// 如果失败，会抛出异常，下面的代码就不是执行</span></span><br><span class="line">        assert(<span class="keyword">this</span>.balance == balanceBeforeTransfer - msg.value / <span class="number">2</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.balance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们实际运行下，看看异常是如何发生的：</p>
+<ol>
+<li><p>首先打开<a href="https://remix.ethereum.org" target="_blank" rel="noopener">Remix</a>，贴入代码，点击创建合约。如下图：<br><img src="/images/solidity_error1.jpg" alt=""></p>
+</li>
+<li><p>运行测试1：附加1wei (奇数)去调用sendHalf，这时会发生异常，如下图:</p>
+</li>
+</ol>
+<p><img src="/images/solidity_error2.jpg" alt=""></p>
+<ol>
+<li>运行测试2：附加2wei 去调用sendHalf，运行正常。</li>
+<li>运行测试3：附加2wei以及sendHalf参数为当前合约本身，在转账是发生异常，因为合约无法接收转账，错误提示上图类似。</li>
+</ol>
+<h2 id="assert类型异常"><a href="#assert类型异常" class="headerlink" title="assert类型异常"></a>assert类型异常</h2><p>在下述场景中自动产生assert类型的异常:</p>
+<ol>
+<li>如果越界，或负的序号值访问数组，如i &gt;= x.length 或 i &lt; 0时访问x[i]</li>
+<li>如果序号越界，或负的序号值时访问一个定长的bytesN。</li>
+<li>被除数为0， 如5/0 或 23 % 0。</li>
+<li>对一个二进制移动一个负的值。如:5&lt;&lt;i; i为-1时。</li>
+<li>整数进行可以显式转换为枚举时，如果将过大值，负值转为枚举类型则抛出异常</li>
+<li>如果调用内部函数类型的零初始化变量(If you call a zero-initialized variable of internal function type)。</li>
+<li>如果调用<strong>assert</strong>的参数为false</li>
+</ol>
+<h2 id="require类型异常"><a href="#require类型异常" class="headerlink" title="require类型异常"></a>require类型异常</h2><p>在下述场景中自动产生require类型的异常:</p>
+<ol>
+<li>调用<strong>throw</strong></li>
+<li>如果调用<strong>require</strong>的参数为false</li>
+<li>如果你通过消息调用一个函数，但在调用的过程中，并没有正确结束(gas不足，没有匹配到对应的函数，或被调用的函数出现异常)。底层操作如call,send,delegatecall或callcode除外，它们不会抛出异常，但它们会通过返回false来表示失败。</li>
+<li>如果在使用new创建一个新合约时出现第3条的原因没有正常完成。</li>
+<li>如果调用外部函数调用时，被调用的对象不包含代码。</li>
+<li>如果合约没有payable修饰符的public的函数在接收以太币时（包括构造函数，和回退函数）。</li>
+<li>如果合约通过一个public的getter函数（public getter funciton）接收以太币。</li>
+<li>如果<strong>.transfer()</strong>执行失败</li>
+</ol>
+<p>当发生require类型的异常时，Solidity会执行一个回退操作（指令0xfd）。<br>当发生assert类型的异常时，Solidity会执行一个无效操作（指令0xfe）。<br>在上述的两种情况下，EVM都会撤回所有的状态改变。是因为期望的结果没有发生，就没法继续安全执行。必须保证交易的原子性（一致性，要么全部执行，要么一点改变都没有，不能只改变一部分），所以需要撤销所有操作，让整个交易没有任何影响。</p>
+<p>注意assert类型的异常会消耗掉所有的gas, 而require从大都会版本（Metropolis， 即目前主网所在的版本）起不会消耗gas。</p>
+<p>欢迎来我的知识星球<a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener"><strong>深入浅出区块链</strong></a>讨论区块链，作为星友福利，星友可加入区块链技术付费交流群。<br><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
 
-[1](https://stackoverflow.com/questions/33839154/in-ethereum-solidity-what-is-the-purpose-of-the-memory-keyword)
-[2](https://ethereum.stackexchange.com/questions/17964/why-are-local-variables-allocated-to-storage-instead-of-memory) -->
       
     </div>
     
@@ -534,7 +543,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/" title="智能合约语言 Solidity 教程系列4 - 数据存储位置分析">https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/</a>
+    <a href="https://learnblockchain.cn/2018/04/07/solidity-errorhandler/" title="智能合约语言 Solidity 教程系列9 - 错误处理">https://learnblockchain.cn/2018/04/07/solidity-errorhandler/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -562,8 +571,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/12/solidity_func/" rel="next" title="智能合约语言 Solidity 教程系列3 - 函数类型">
-                <i class="fa fa-chevron-left"></i> 智能合约语言 Solidity 教程系列3 - 函数类型
+              <a href="/2018/03/23/token-erc721/" rel="next" title="剖析非同质化代币ERC721-全面解析ERC721标准">
+                <i class="fa fa-chevron-left"></i> 剖析非同质化代币ERC721-全面解析ERC721标准
               </a>
             
           </div>
@@ -571,10 +580,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/21/solidity-arrays/" rel="prev" title="智能合约语言 Solidity 教程系列5 - 数组介绍">
-                智能合约语言 Solidity 教程系列5 - 数组介绍 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -783,7 +788,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据位置-Data-location"><span class="nav-number">2.</span> <span class="nav-text">数据位置(Data location)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">2.1.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#强制的数据位置-Forced-data-location"><span class="nav-number">2.1.1.</span> <span class="nav-text">强制的数据位置(Forced data location)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#默认数据位置（Default-data-location）"><span class="nav-number">2.1.2.</span> <span class="nav-text">默认数据位置（Default data location）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深入分析"><span class="nav-number">3.</span> <span class="nav-text">深入分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于栈（stack）"><span class="nav-number">3.1.</span> <span class="nav-text">关于栈（stack）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不同存储的消耗（gas消耗）"><span class="nav-number">3.2.</span> <span class="nav-text">不同存储的消耗（gas消耗）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是错误处理"><span class="nav-number">2.</span> <span class="nav-text">什么是错误处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何处理"><span class="nav-number">3.</span> <span class="nav-text">如何处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#assert类型异常"><span class="nav-number">4.</span> <span class="nav-text">assert类型异常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#require类型异常"><span class="nav-number">5.</span> <span class="nav-text">require类型异常</span></a></li></ol></div>
             
 
           </div>
