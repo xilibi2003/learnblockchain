@@ -95,7 +95,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://learnblockchain.cn/images/solidity_error1.jpg">
 <meta property="og:image" content="https://learnblockchain.cn/images/solidity_error2.jpg">
-<meta property="og:updated_time" content="2018-04-07T14:09:01.394Z">
+<meta property="og:updated_time" content="2018-04-07T14:36:48.915Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="智能合约语言 Solidity 教程系列9 - 错误处理">
 <meta name="twitter:description" content="这是Solidity教程系列文章第9篇介绍Solidity 错误处理。Solidity系列完整的文章列表请查看分类-Solidity。">
@@ -372,7 +372,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-04-07T22:09:01+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-04-07T22:36:48+08:00">
                 2018-04-07
               </time>
             
@@ -474,7 +474,7 @@
 <li>被除数为0， 如5/0 或 23 % 0。</li>
 <li>对一个二进制移动一个负的值。如:5&lt;&lt;i; i为-1时。</li>
 <li>整数进行可以显式转换为枚举时，如果将过大值，负值转为枚举类型则抛出异常</li>
-<li>如果调用内部函数类型的零初始化变量(If you call a zero-initialized variable of internal function type)。</li>
+<li>如果调用未初始化内部<a href="https://learnblockchain.cn/2017/12/12/solidity_func/">函数类型</a>的变量。</li>
 <li>如果调用<strong>assert</strong>的参数为false</li>
 </ol>
 <h2 id="require类型异常"><a href="#require类型异常" class="headerlink" title="require类型异常"></a>require类型异常</h2><p>在下述场景中自动产生require类型的异常:</p>
@@ -490,7 +490,10 @@
 </ol>
 <p>当发生require类型的异常时，Solidity会执行一个回退操作（指令0xfd）。<br>当发生assert类型的异常时，Solidity会执行一个无效操作（指令0xfe）。<br>在上述的两种情况下，EVM都会撤回所有的状态改变。是因为期望的结果没有发生，就没法继续安全执行。必须保证交易的原子性（一致性，要么全部执行，要么一点改变都没有，不能只改变一部分），所以需要撤销所有操作，让整个交易没有任何影响。</p>
 <p>注意assert类型的异常会消耗掉所有的gas, 而require从大都会版本（Metropolis， 即目前主网所在的版本）起不会消耗gas。</p>
-<p>欢迎来我的知识星球<a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener"><strong>深入浅出区块链</strong></a>讨论区块链，作为星友福利，星友可加入区块链技术付费交流群。<br><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a href="https://solidity.readthedocs.io/en/v0.4.21/control-structures.html#error-handling-assert-require-revert-and-exceptions" target="_blank" rel="noopener">Solidity 错误处理</a></li>
+</ul>
+<p>欢迎来我的知识星球<a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener"><strong>深入浅出区块链</strong></a>讨论区块链，同时我也会为大家提供区块链技术解答，作为星友福利，星友可加入区块链技术付费交流群。<br><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
 
       
     </div>
@@ -792,7 +795,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是错误处理"><span class="nav-number">2.</span> <span class="nav-text">什么是错误处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何处理"><span class="nav-number">3.</span> <span class="nav-text">如何处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#assert类型异常"><span class="nav-number">4.</span> <span class="nav-text">assert类型异常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#require类型异常"><span class="nav-number">5.</span> <span class="nav-text">require类型异常</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是错误处理"><span class="nav-number">2.</span> <span class="nav-text">什么是错误处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何处理"><span class="nav-number">3.</span> <span class="nav-text">如何处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#assert类型异常"><span class="nav-number">4.</span> <span class="nav-text">assert类型异常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#require类型异常"><span class="nav-number">5.</span> <span class="nav-text">require类型异常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">6.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
