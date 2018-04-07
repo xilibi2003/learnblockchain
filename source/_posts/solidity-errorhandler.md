@@ -62,6 +62,7 @@ contract Sharer {
     }
 }
 ```
+
 我们实际运行下，看看异常是如何发生的：
 
 1. 首先打开[Remix](https://remix.ethereum.org)，贴入代码，点击创建合约。如下图：
@@ -84,7 +85,7 @@ contract Sharer {
 3. 被除数为0， 如5/0 或 23 % 0。
 4. 对一个二进制移动一个负的值。如:5<<i; i为-1时。
 5. 整数进行可以显式转换为枚举时，如果将过大值，负值转为枚举类型则抛出异常
-6. 如果调用内部函数类型的零初始化变量(If you call a zero-initialized variable of internal function type)。
+6. 如果调用未初始化内部[函数类型](https://learnblockchain.cn/2017/12/12/solidity_func/)的变量。
 7. 如果调用**assert**的参数为false
 
 ## require类型异常
@@ -106,8 +107,10 @@ contract Sharer {
 
 注意assert类型的异常会消耗掉所有的gas, 而require从大都会版本（Metropolis， 即目前主网所在的版本）起不会消耗gas。
 
+## 参考文献
+* [Solidity 错误处理](https://solidity.readthedocs.io/en/v0.4.21/control-structures.html#error-handling-assert-require-revert-and-exceptions)
 
-欢迎来我的知识星球[**深入浅出区块链**](https://t.xiaomiquan.com/RfAu7uj)讨论区块链，作为星友福利，星友可加入区块链技术付费交流群。
+欢迎来我的知识星球[**深入浅出区块链**](https://t.xiaomiquan.com/RfAu7uj)讨论区块链技术，同时我也会为大家提供区块链技术解答，作为星友福利，星友可加入区块链技术付费交流群。
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
 
 
