@@ -1098,13 +1098,4 @@ http://www.tryblockchain.org/Solidity-Exceptions-%E5%BC%82%E5%B8%B8.html
 
 
 
-
-
-
-
-
-
-
-
-
 https://medium.com/@preethikasireddy/how-does-ethereum-work-anyway-22d1df50636* 9
