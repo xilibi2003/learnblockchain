@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>https://learnblockchain.cn/2018/01/11/guide/</loc>
+    <lastmod>2018-04-07T14:33:31.212Z</lastmod>
+    <data>
+        <display>
+        <title>区块链技术学习指引</title>
+        <pubTime>2018-01-11T07:03:36.000Z</pubTime>
+        
+        <tag>如何学习</tag>
+         
+        <tag>目录</tag>
+         
+         
+           
+             
+              <breadCrumb title="目录" url="https://learnblockchain.cn/categories/%E7%9B%AE%E5%BD%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://learnblockchain.cn/2018/04/07/solidity-errorhandler/</loc>
     <lastmod>2018-04-07T14:09:01.394Z</lastmod>
     <data>
@@ -47,28 +69,6 @@
           
              
               <breadCrumb title="智能合约" url="https://learnblockchain.cn/categories/ethereum/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://learnblockchain.cn/2018/01/11/guide/</loc>
-    <lastmod>2018-03-26T01:17:01.036Z</lastmod>
-    <data>
-        <display>
-        <title>区块链技术学习指引</title>
-        <pubTime>2018-01-11T07:03:36.000Z</pubTime>
-        
-        <tag>如何学习</tag>
-         
-        <tag>目录</tag>
-         
-         
-           
-             
-              <breadCrumb title="目录" url="https://learnblockchain.cn/categories/%E7%9B%AE%E5%BD%95/"/>
           
         </display>
     </data>
@@ -194,14 +194,14 @@
 
     
   <url>
-    <loc>https://learnblockchain.cn/2017/12/05/solidity1/</loc>
+    <loc>https://learnblockchain.cn/2017/12/12/solidity2/</loc>
     <lastmod>2018-03-18T13:55:32.196Z</lastmod>
     <data>
         <display>
-        <title>智能合约语言 Solidity 教程系列1 - 类型介绍</title>
-        <pubTime>2017-12-05T07:25:59.000Z</pubTime>
+        <title>智能合约语言 Solidity 教程系列2 - 地址类型介绍</title>
+        <pubTime>2017-12-12T07:25:59.000Z</pubTime>
         
-        <tag>Solidity手册</tag>
+        <tag>Solidity</tag>
          
          
            
@@ -217,14 +217,14 @@
 
     
   <url>
-    <loc>https://learnblockchain.cn/2017/12/12/solidity2/</loc>
+    <loc>https://learnblockchain.cn/2017/12/05/solidity1/</loc>
     <lastmod>2018-03-18T13:55:32.196Z</lastmod>
     <data>
         <display>
-        <title>智能合约语言 Solidity 教程系列2 - 地址类型介绍</title>
-        <pubTime>2017-12-12T07:25:59.000Z</pubTime>
+        <title>智能合约语言 Solidity 教程系列1 - 类型介绍</title>
+        <pubTime>2017-12-05T07:25:59.000Z</pubTime>
         
-        <tag>Solidity</tag>
+        <tag>Solidity手册</tag>
          
          
            
@@ -316,9 +316,9 @@
         <title>比特币所有权及隐私问题-非对称加密应用</title>
         <pubTime>2017-11-02T09:19:29.000Z</pubTime>
         
-        <tag>非对称加密</tag>
-         
         <tag>比特币</tag>
+         
+        <tag>非对称加密</tag>
          
         <tag>所有权问题</tag>
          
