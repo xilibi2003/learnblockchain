@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://learnblockchain.cn/2018/04/09/solidity-modify/</loc>
+    
+    <lastmod>2018-04-09T14:44:37.870Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://learnblockchain.cn/2018/04/07/solidity-errorhandler/</loc>
     
     <lastmod>2018-04-07T14:37:06.216Z</lastmod>
@@ -65,14 +72,14 @@
   </url>
   
   <url>
-    <loc>https://learnblockchain.cn/2017/12/12/solidity2/</loc>
+    <loc>https://learnblockchain.cn/2017/12/05/solidity1/</loc>
     
     <lastmod>2018-03-18T13:55:32.196Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://learnblockchain.cn/2017/12/05/solidity1/</loc>
+    <loc>https://learnblockchain.cn/2017/12/12/solidity2/</loc>
     
     <lastmod>2018-03-18T13:55:32.196Z</lastmod>
     
@@ -240,14 +247,14 @@
   </url>
   
   <url>
-    <loc>https://learnblockchain.cn/categories/index.html</loc>
+    <loc>https://learnblockchain.cn/tags/index.html</loc>
     
     <lastmod>2017-11-03T05:31:44.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://learnblockchain.cn/tags/index.html</loc>
+    <loc>https://learnblockchain.cn/categories/index.html</loc>
     
     <lastmod>2017-11-03T05:31:44.000Z</lastmod>
     
