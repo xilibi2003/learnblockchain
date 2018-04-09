@@ -94,7 +94,7 @@
 <meta property="og:description" content="本文主要介绍代币高级功能的实现: 代币管理、代币增发、代币兑换、资产冻结、Gas自动补充。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://learnblockchain.cn/images/create_adv_token.jpg">
-<meta property="og:updated_time" content="2018-02-08T12:34:25.998Z">
+<meta property="og:updated_time" content="2018-04-09T14:52:20.592Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="实现一个可管理、增发、兑换、冻结等高级功能的代币">
 <meta name="twitter:description" content="本文主要介绍代币高级功能的实现: 代币管理、代币增发、代币兑换、资产冻结、Gas自动补充。">
@@ -371,8 +371,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-02-08T20:34:25+08:00">
-                2018-02-08
+              <time title="更新于" itemprop="dateModified" datetime="2018-04-09T22:52:20+08:00">
+                2018-04-09
               </time>
             
           </span>
@@ -443,7 +443,7 @@
 <h2 id="实现代币的管理者"><a href="#实现代币的管理者" class="headerlink" title="实现代币的管理者"></a>实现代币的管理者</h2><p>虽然区块链是去中心化的，但是实现对代币（合约）的管理，也在许多应用中有需求，为了对代币进行管理，首先需要给合约添加一个管理者。</p>
 <p>我们来看看如果实现，先创建一个<strong>owned</strong>合约。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">contract owned &#123;</span><br><span class="line">    address public owner;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">owned</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        owner = msg.sender;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    modifier onlyOwner &#123;</span><br><span class="line">        <span class="built_in">require</span>(msg.sender == owner);</span><br><span class="line">        _;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 实现所有权转移</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">transferOwnership</span>(<span class="params">address newOwner</span>) <span class="title">onlyOwner</span> </span>&#123;</span><br><span class="line">        owner = newOwner;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这个合约重要的是加入了一个函数修改器（Function Modifiers）<strong>onlyOwner</strong>，函数修改器是一个合约属性，可以被继承，还能被重写。它用于在函数执行前检查某种前置条件。</p>
+<p>这个合约重要的是加入了一个函数修改器（Function Modifiers）<strong>onlyOwner</strong>，函数修改器是一个合约属性，可以被继承，还能被重写。它用于在函数执行前检查某种前置条件。<br>关于函数修改器可进一步阅读<a href="https://learnblockchain.cn/2018/04/09/solidity-modify/">Solidity 教程系列10 - 完全理解函数修改器</a></p>
 <blockquote>
 <p>如果熟悉Python的同学，会发现函数修改器的作用和Python的装饰器很相似。</p>
 </blockquote>
