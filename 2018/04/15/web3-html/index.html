@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+  <meta name="msvalidate.01" content="914C9C1CBC7078C5E2AC612AD5C1CC6C" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="智能合约,以太坊,Web3," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深入浅出区块链" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Web3与智能合约交互实战">
+<meta name="keywords" content="智能合约,以太坊,Web3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web3与智能合约交互实战">
+<meta property="og:url" content="https://learnblockchain.cn/2018/04/15/web3-html/index.html">
+<meta property="og:site_name" content="深入浅出区块链">
+<meta property="og:description" content="Web3与智能合约交互实战">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://learnblockchain.cn/images/Communication_Model.jpg">
+<meta property="og:image" content="https://learnblockchain.cn/images/Ganache.png">
+<meta property="og:image" content="https://learnblockchain.cn/images/ABI.png">
+<meta property="og:image" content="https://learnblockchain.cn/images/page.png">
+<meta property="og:updated_time" content="2018-04-15T13:52:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web3与智能合约交互实战">
+<meta name="twitter:description" content="Web3与智能合约交互实战">
+<meta name="twitter:image" content="https://learnblockchain.cn/images/Communication_Model.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'UT2K1ZRSWK',
+      apiKey: '0bbb261dfad58df8f8a657a1ed3255cd',
+      indexName: 'learnblockchain',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://learnblockchain.cn/2018/04/15/web3-html/"/>
+
+
+
+
+
+  <title>Web3与智能合约交互实战 | 深入浅出区块链</title>
+  
+
+
+
+
+
+
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6273382609469378",
+        enable_page_level_ads: true
+    });
+</script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">系统学习区块链技术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wiki">
+          <a href="https://wiki.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Wiki
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2018/04/15/web3-html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Web3与智能合约交互实战</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-15T21:24:16+08:00">
+                2018-04-15
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-04-15T21:52:22+08:00">
+                2018-04-15
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ethereum/" itemprop="url" rel="index">
+                    <span itemprop="name">以太坊</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Web3与智能合约交互实战</p>
+<a id="more"></a>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>在最初学习以太坊的时候，很多人都是自己创建以太坊节点后，使用geth与之交互。这种使用命令行交互的方法虽然让很多程序员感到兴奋（黑客帝国的既视感？），但不可能指望普通用户通过命令行使用Dapp。因此，我们需要一种友好的方式（比如一个web页面）来与智能合约交互，于是问题的答案就是<code>web3.js</code>。</p>
+<h2 id="Web3-js"><a href="#Web3-js" class="headerlink" title="Web3.js"></a>Web3.js</h2><p><a href="https://web3js.readthedocs.io/en/1.0/" target="_blank" rel="noopener">Web3.js</a>是以太坊官方的Javascript API，可以帮助智能合约开发者使用HTTP或者IPC与本地的或者远程的以太坊节点交互。实际上就是一个库的集合，主要包括下面几个库：</p>
+<ul>
+<li><code>web3-eth</code>用来与以太坊区块链和智能合约交互</li>
+<li><code>web3-shh</code>用来控制whisper协议与p2p通信以及广播</li>
+<li><code>web3-bzz</code>用来与swarm协议交互</li>
+<li><code>web3-utils</code>包含了一些Dapp开发有用的功能</li>
+</ul>
+<p>Web3与geth通信使用的是 <a href="https://github.com/ethereum/wiki/wiki/JSON-RPC" target="_blank" rel="noopener">JSON-RPC</a> ，这是一种轻量级的RPC（Remote Procedure Call）协议，整个通信的模型可以抽象为下图。</p>
+<p><img src="/images/Communication_Model.jpg" alt="Web3 Communication Model"></p>
+<h2 id="搭建测试链"><a href="#搭建测试链" class="headerlink" title="搭建测试链"></a>搭建测试链</h2><p>在开发初期，我们并没有必要使用真实的公链，为了开发效率，一般选择在本地搭建测试链。在本文我们选择的<a href="http://truffleframework.com/ganache/" target="_blank" rel="noopener">Ganache</a>（在此之前使用的是testrpc，Ganache属于它的升级版），一个图形化测试软件（也有命令行版本），可以一键在本地搭建以太坊区块链测试环境，并且将区块链的状态通过图形界面显示出来，Ganache的运行界面如下图所示。</p>
+<p><img src="/images/Ganache.png" alt="Ganache"></p>
+<p>从图中可以看到Ganache会默认创建10个账户，监听地址是<code>http://127.0.0.1:7545</code>，可以实时看到<code>Current Block</code>、<code>Gas Price</code>、<code>Gas Limit</code>等信息。</p>
+<h2 id="创建智能合约"><a href="#创建智能合约" class="headerlink" title="创建智能合约"></a>创建智能合约</h2><p>目前以太坊官方全力支持的智能合约开发环境是<a href="https://remix.ethereum.org" target="_blank" rel="noopener">Remix IDE</a>，我们在合约编辑页面编写如下代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.21</span>;</span><br><span class="line"></span><br><span class="line">contract InfoContract &#123;</span><br><span class="line">    </span><br><span class="line">   string fName;</span><br><span class="line">   uint age;</span><br><span class="line">   </span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">setInfo</span>(<span class="params">string _fName, uint _age</span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">       fName = _fName;</span><br><span class="line">       age = _age;</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">getInfo</span>(<span class="params"></span>) <span class="title">public</span> <span class="title">constant</span> <span class="title">returns</span> (<span class="params">string, uint</span>) </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> (fName, age);</span><br><span class="line">   &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码很简单，就是简单的给<code>name</code>和<code>age</code>变量赋值与读取，接下来切换到 run 的 tab 下，将<code>Environment</code>切换成<code>Web3 Provider</code>，并输入我们的测试链的地址<code>http://127.0.0.1:7545</code>，这里对这三个选项做一简单说明：</p>
+<ul>
+<li><code>Javascript VM</code>：简单的Javascript虚拟机环境，纯粹练习智能合约编写的时候可以选择</li>
+<li><code>Injected Web3</code>：会连接到以太坊官方的测试网络，如<code>Ropsten Test Network</code></li>
+<li><code>Web3 Provider</code>：连接到私有的测试网络。</li>
+</ul>
+<p>如果连接成功，那么在下面的<code>Account</code>的选项会默认选择 Ganache 创建的第一个账户地址。接下来我们点击<code>Create</code>就会将我们的智能合约部署到我们的测试网中。接下来 Remix 的页面不要关闭，在后面编写前端代码时还要用到合约的地址以及<code>ABI</code>信息。</p>
+<h2 id="安装Web3"><a href="#安装Web3" class="headerlink" title="安装Web3"></a>安装Web3</h2><p>在这之前，先在终端创建我们的项目：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; mkdir info</span><br><span class="line">&gt; <span class="built_in">cd</span> info</span><br></pre></td></tr></table></figure>
+<p>接下来使用 node.js 的包管理工具 npm 初始化项目，创建<code>package.json</code> 文件，其中保存了项目需要的相关依赖环境。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; npm init</span><br></pre></td></tr></table></figure>
+<p>一路按回车直到项目创建完成。最后，运行下面命令安装web.js：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; npm install web3</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>   <em>注意：</em> 在实际安装过程中我发现web3在安装完成后并没有 <code>/node_modules/web3/dist/we3.min.js</code> 文件，这个问题在 <a href="https://github.com/ethereum/web3.js/issues/1041" target="_blank" rel="noopener">issue#1041</a>中有体现，但官方好像一直没解决。不过可以在这里<a href="https://codeload.github.com/ethereum/web3.js/zip/develop" target="_blank" rel="noopener">下载</a>所需的文件，解压后将<code>dist</code>文件夹的内容拷贝到 <code>/node_modules/web3</code>路径下。</p>
+</blockquote>
+<h2 id="创建-UI"><a href="#创建-UI" class="headerlink" title="创建 UI"></a>创建 UI</h2><p>在项目目录下创建<code>index.html</code>，在这里我们将创建基础的 UI，功能包括<code>name</code>和<code>age</code>的输入框，以及一个按钮，这些将通过 jQuery 实现：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">href</span>=<span class="string">"main.css"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./node_modules/web3/dist/web3.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Info Contract<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">h2</span> <span class="attr">id</span>=<span class="string">"info"</span>&gt;</span><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"name"</span> <span class="attr">class</span>=<span class="string">"col-lg-2 control-label"</span>&gt;</span>Name<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"name"</span> <span class="attr">type</span>=<span class="string">"text"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"name"</span> <span class="attr">class</span>=<span class="string">"col-lg-2 control-label"</span>&gt;</span>Age<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"age"</span> <span class="attr">type</span>=<span class="string">"text"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"button"</span>&gt;</span>Update Info<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://code.jquery.com/jquery-3.2.1.slim.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">       <span class="comment">// Our future code here..</span></span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>接下来需要编写<code>main.css</code>文件设定基本的样式：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>:<span class="number">#F0F0F0</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">2em</span>;</span><br><span class="line">    <span class="attribute">font-family</span>: <span class="string">'Raleway'</span>,<span class="string">'Source Sans Pro'</span>, <span class="string">'Arial'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">label</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>:block;</span><br><span class="line">    <span class="attribute">margin-bottom</span>:<span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">input</span> &#123;</span><br><span class="line">    <span class="attribute">padding</span>:<span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">margin-bottom</span>: <span class="number">1em</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">button</span> &#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">2em</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">1em</span> <span class="number">4em</span>;</span><br><span class="line">    <span class="attribute">display</span>:block;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#info</span> &#123;</span><br><span class="line">    <span class="attribute">padding</span>:<span class="number">1em</span>;</span><br><span class="line">    <span class="attribute">background-color</span>:<span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">1em</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>##使用Web3与智能合约交互<br>UI 创建好之后，在<code>&lt;script&gt;</code>标签中间编写<code>web.js</code>的代码与智能合约交互。首先创建<code>web3</code>实例，并与我们的测试环境连接：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> web3 !== <span class="string">'undefined'</span>) &#123;</span><br><span class="line">        web3 = <span class="keyword">new</span> Web3(web3.currentProvider);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// set the provider you want from Web3.providers</span></span><br><span class="line">        web3 = <span class="keyword">new</span> Web3(<span class="keyword">new</span> Web3.providers.HttpProvider(<span class="string">"http://localhost:7545"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这段代码是<a href="https://github.com/ethereum/web3.js/" target="_blank" rel="noopener">web3.js Github</a>提供的样例，意思是如果<code>web3</code>已经被定义，那么就可以直接当作我们的 provider 使用。如果没有定义，则我们手动指定 provider。</p>
+<blockquote>
+<p>这里可能会存在疑问：为什么 web3 会被事先定义呢？实际上，如果你使用类似 <a href="https://metamask.io/" target="_blank" rel="noopener">MetaMask</a>（一个 Chrome 上的插件，迷你型以太坊钱包）这样的软件，provider 就会被自动植入。</p>
+</blockquote>
+<p>在上面代码的基础上，接下来设置默认的以太坊账户：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">web3.eth.defaultAccount = web3.eth.accounts[<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
+<p>在上文中我们使用 Ganache 已经创建了 10 个账户了，这里我们选择第一个账户当作默认账户。</p>
+<p>接下来需要让我们的<code>web3</code>知道我们的合约是什么样的，这里需要用到合约的 <a href="https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI" target="_blank" rel="noopener">ABI（Application Binary Interface）</a>。<code>ABI</code>可以使我们调用合约的函数，并且从合约中获取数据。</p>
+<p>在上文中我们已经在 Remix 中创建了我们的合约，这时重新回到 Remix，在 Compile 的 tab 下我们点击<code>Details</code> 出现的页面中我们可以拷贝合约的<code>ABI</code>，如下图所示。<br><img src="/images/ABI.png" alt=""><br>将其复制到代码中：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> infoContract = web3.eth.contract(PASTE ABI HERE!);</span><br></pre></td></tr></table></figure>
+<p>接下来转到 run 的tab，拷贝合约的地址，将其复制到下面的代码中：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> info = InfoContract.at(<span class="string">'PASTE CONTRACT ADDRESS HERE'</span>);</span><br></pre></td></tr></table></figure>
+<p>完成这些我们就可以调用合约中的函数了，下面我们使用 jQuery 与我们的合约进行交互：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">info.getInfo(<span class="function"><span class="keyword">function</span>(<span class="params">error, result</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!error)</span><br><span class="line">        &#123;</span><br><span class="line">            $(<span class="string">"#info"</span>).html(result[<span class="number">0</span>]+<span class="string">' ('</span>+result[<span class="number">1</span>]+<span class="string">' years old)'</span>);</span><br><span class="line">            <span class="built_in">console</span>.log(result);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">console</span>.error(error);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$(<span class="string">"#button"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    info.setInfo($(<span class="string">"#name"</span>).val(), $(<span class="string">"#age"</span>).val());</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>以上的代码就简单地实现了对合约中两个函数的调用，分别读取和显示<code>name</code>和<code>age</code>变量。</p>
+<p>到此我们就完成了全部的代码，完整代码可以在 <a href="https://github.com/gitferry/InfoContract" target="_blank" rel="noopener">https://github.com/gitferry/InfoContract</a> 中找到。在浏览器中打开<code>index.html</code>测试效果如下图（输入名字和年龄后刷新）。</p>
+<p><img src="/images/page.png" alt=""></p>
+<p>本文的作者是盖盖，他的微信公众号: chainlab</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a href="https://coursetro.com/posts/code/99/Interacting-with-a-Smart-Contract-through-Web3.js-(Tutorial" target="_blank" rel="noopener">Interacting with a Smart Contract through Web3.js (Tutorial)</a>)</li>
+</ul>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。<br>如果你想和我有密切的联系，欢迎加入知识星球<a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">深入浅出区块链</a>，我会在星球为大家解答技术问题，作为星友福利，星友可加入我创建的区块链技术群，群内已经聚集了150多位区块链技术牛人和爱好者。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="Tiny熊 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信号：深入浅出区块链技术，欢迎订阅</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有收获，赞赏下</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/qr_pay.jpg" alt="Tiny熊 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    盖盖
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://learnblockchain.cn/2018/04/15/web3-html/" title="Web3与智能合约交互实战">https://learnblockchain.cn/2018/04/15/web3-html/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/智能合约/" rel="tag"># 智能合约</a>
+          
+            <a href="/tags/以太坊/" rel="tag"># 以太坊</a>
+          
+            <a href="/tags/Web3/" rel="tag"># Web3</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/09/solidity-modify/" rel="next" title="智能合约语言 Solidity 教程系列10 - 完全理解函数修改器">
+                <i class="fa fa-chevron-left"></i> 智能合约语言 Solidity 教程系列10 - 完全理解函数修改器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/xilibi2003" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiong-li-bing/activities" target="_blank" title="ZhiHu">
+                    
+                      <i class="fa fa-fw fa-globe"></i>ZhiHu</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="区块链技术专栏" target="_blank">区块链技术专栏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://t.xiaomiquan.com/RfAu7uj" title="技术交流-知识星球" target="_blank">技术交流-知识星球</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bitshuo.com" title="区块链技术中文社区" target="_blank">区块链技术中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://news.tangwen.org" title="汤问资讯" target="_blank">汤问资讯</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitask.org" title="币问" target="_blank">币问</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.hubwiz.com/course?affid＝lbc" title="汇智网互动课程中心" target="_blank">汇智网互动课程中心</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://hiblock.net/" title="区块链社区" target="_blank">区块链社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eosfans.io/" title="EOS中文社区" target="_blank">EOS中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blockflow.net/" title="BlockFlow" target="_blank">BlockFlow</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web3-js"><span class="nav-number">2.</span> <span class="nav-text">Web3.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建测试链"><span class="nav-number">3.</span> <span class="nav-text">搭建测试链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建智能合约"><span class="nav-number">4.</span> <span class="nav-text">创建智能合约</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Web3"><span class="nav-number">5.</span> <span class="nav-text">安装Web3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建-UI"><span class="nav-number">6.</span> <span class="nav-text">创建 UI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">7.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+  <div class="footer-custom"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17140514号-1</a></div>
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

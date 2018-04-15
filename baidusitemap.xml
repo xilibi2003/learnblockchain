@@ -4,6 +4,79 @@
 
     
   <url>
+    <loc>https://learnblockchain.cn/2018/04/15/web3-html/</loc>
+    <lastmod>2018-04-15T13:52:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>Web3与智能合约交互实战</title>
+        <pubTime>2018-04-15T13:24:16.000Z</pubTime>
+        
+        <tag>智能合约</tag>
+         
+        <tag>以太坊</tag>
+         
+        <tag>Web3</tag>
+         
+         
+           
+             
+              <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://learnblockchain.cn/2017/12/05/solidity1/</loc>
+    <lastmod>2018-04-12T13:05:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>智能合约语言 Solidity 教程系列1 - 类型介绍</title>
+        <pubTime>2017-12-05T07:25:59.000Z</pubTime>
+        
+        <tag>Solidity手册</tag>
+         
+         
+           
+             
+              <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
+          
+             
+              <breadCrumb title="Solidity" url="https://learnblockchain.cn/categories/ethereum/Solidity/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://learnblockchain.cn/2017/11/04/bitcoin-pow/</loc>
+    <lastmod>2018-04-11T14:40:08.228Z</lastmod>
+    <data>
+        <display>
+        <title>比特币如何挖矿（挖矿原理）-工作量证明</title>
+        <pubTime>2017-11-04T08:12:29.000Z</pubTime>
+        
+        <tag>比特币</tag>
+         
+        <tag>挖矿</tag>
+         
+        <tag>工作量证明</tag>
+         
+        <tag>共识机制</tag>
+         
+         
+           
+             
+              <breadCrumb title="比特币" url="https://learnblockchain.cn/categories/bitcoin/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://learnblockchain.cn/2018/01/27/create-token2/</loc>
     <lastmod>2018-04-09T14:52:20.592Z</lastmod>
     <data>
@@ -265,29 +338,6 @@
 
     
   <url>
-    <loc>https://learnblockchain.cn/2017/12/05/solidity1/</loc>
-    <lastmod>2018-03-18T13:55:32.196Z</lastmod>
-    <data>
-        <display>
-        <title>智能合约语言 Solidity 教程系列1 - 类型介绍</title>
-        <pubTime>2017-12-05T07:25:59.000Z</pubTime>
-        
-        <tag>Solidity手册</tag>
-         
-         
-           
-             
-              <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
-          
-             
-              <breadCrumb title="Solidity" url="https://learnblockchain.cn/categories/ethereum/Solidity/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://learnblockchain.cn/2017/12/21/solidity-arrays/</loc>
     <lastmod>2018-03-18T13:55:32.194Z</lastmod>
     <data>
@@ -364,13 +414,13 @@
         <title>比特币所有权及隐私问题-非对称加密应用</title>
         <pubTime>2017-11-02T09:19:29.000Z</pubTime>
         
+        <tag>非对称加密</tag>
+         
         <tag>比特币</tag>
          
         <tag>所有权问题</tag>
          
         <tag>隐私问题</tag>
-         
-        <tag>非对称加密</tag>
          
          
            
@@ -539,32 +589,6 @@
         <tag>比特币</tag>
          
         <tag>共识协议</tag>
-         
-         
-           
-             
-              <breadCrumb title="比特币" url="https://learnblockchain.cn/categories/bitcoin/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://learnblockchain.cn/2017/11/04/bitcoin-pow/</loc>
-    <lastmod>2018-02-06T14:19:43.231Z</lastmod>
-    <data>
-        <display>
-        <title>比特币如何挖矿（挖矿原理）-工作量证明</title>
-        <pubTime>2017-11-04T08:12:29.000Z</pubTime>
-        
-        <tag>比特币</tag>
-         
-        <tag>挖矿</tag>
-         
-        <tag>工作量证明</tag>
-         
-        <tag>共识机制</tag>
          
          
            
