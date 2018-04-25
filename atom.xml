@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://learnblockchain.cn/"/>
-  <updated>2018-04-15T13:52:22.000Z</updated>
+  <updated>2018-04-25T16:01:05.000Z</updated>
   <id>https://learnblockchain.cn/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>美链BEC合约漏洞技术分析</title>
+    <link href="https://learnblockchain.cn/2018/04/25/bec-overflow/"/>
+    <id>https://learnblockchain.cn/2018/04/25/bec-overflow/</id>
+    <published>2018-04-25T02:13:07.000Z</published>
+    <updated>2018-04-25T16:01:05.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>这两天币圈链圈被美链BEC智能合约的漏洞导致代币价值几乎归零的事件刷遍朋友圈。这篇文章就来分析下BEC智能合约的漏洞</p><a id="more"></a><h2 id="漏洞攻击交易"><a href="#漏洞攻击交易" class="headerlink" title="漏洞攻击交易"></a>漏洞攻击交易</h2><p>我们先来还原下攻击交易，这个交易可以在这个<a href="https://etherscan.io/tx/0xad89ff16fd1ebe3a0a7cf4ed282302c06626c1af33221ebe0d3a470aba4a660f" target="_blank" rel="noopener">链接</a>查询到。<br>我截图给大家看一下：<br><img src="/images/BEC_transfer.jpg" alt=""></p><p>攻击者向两个账号转移57896044618…000.792003956564819968个BEC，相当于BEC凭空进行了一个巨大的增发，几乎导致BEC价格瞬间归零。<br>下面我们来分析下这个攻击过程。</p><h2 id="合约漏洞分析"><a href="#合约漏洞分析" class="headerlink" title="合约漏洞分析"></a>合约漏洞分析</h2><p>我们先来看看<a href="https://etherscan.io/address/0xc5d105e63711398af9bbff092d4b6769c82f793d#code" target="_blank" rel="noopener">BEC智能合约的代码</a>，<br>BEC在合约中加入一个批量转账的函数，它的实现如下：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">batchTransfer</span>(<span class="params">address[] _receivers, uint256 _value</span>) <span class="title">public</span> <span class="title">whenNotPaused</span> <span class="title">returns</span> (<span class="params">bool</span>) </span>&#123;</span><br><span class="line">    uint cnt = _receivers.length;</span><br><span class="line">    uint256 amount = uint256(cnt) * _value;</span><br><span class="line">    <span class="built_in">require</span>(cnt &gt; <span class="number">0</span> &amp;&amp; cnt &lt;= <span class="number">20</span>);</span><br><span class="line">    <span class="built_in">require</span>(_value &gt; <span class="number">0</span> &amp;&amp; balances[msg.sender] &gt;= amount);</span><br><span class="line"></span><br><span class="line">    balances[msg.sender] = balances[msg.sender].sub(amount);</span><br><span class="line">    <span class="keyword">for</span> (uint i = <span class="number">0</span>; i &lt; cnt; i++) &#123;</span><br><span class="line">        balances[_receivers[i]] = balances[_receivers[i]].add(_value);</span><br><span class="line">        Transfer(msg.sender, _receivers[i], _value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br></pre></td></tr></table></figure><p>这个函数的作用是，调用者传入若干个地址和转账金额，在经过一些条件检查之后，对msg.sender的余额进行减操作，对每一个对每一个传入的地址进行加操作，以实现BEC的转移。<br>问题出在 <code>uint256 amount = uint256(cnt) * _value;</code> 这句代码，当传入值<code>_value</code>过大时（接近uint256的取值范围的最大值），<code>uint256 amount = uint256(cnt) * _value</code>计算时会发生溢出，导致amount实际的值是一个非常小的数（此时amount不再是<code>cnt * _value</code>的实际值），amount很小，也使得后面对调用者余额校验可正常通过（即<code>require(_value &gt; 0 &amp;&amp; balances[msg.sender] &gt;= amount)</code>语句通过）。</p><p>我们来结合实际攻击交易使用的参数来分析一下：</p><p><img src="/images/BEC_transfer_params.jpg" alt=""></p><p><code>batchTransfer</code>的参数<code>_value</code>值为16进制的<code>800000000000000000000...</code>，参数<code>_receivers</code>数组的大小为2，相乘之后刚好可超过uint256所能表示的整数大小上限，引发溢出问题<code>amount</code>实际的值为0，后面的转账操作实际上msg.sender的余额减0， 而对两个账号进行了加16进制的<code>800000000000000000000...</code>，最终的结果是相当于增发了2 * 16进制的<code>800000000000000000000...</code>。</p><p>实际上对于这种整数溢出漏洞，最简单的方法是采用 SafeMath 数学计算库来避免。有趣的是BEC智能合约代码中，其实其他的都使用了SafeMath， 而关键的<code>uint256 amount = uint256(cnt) * _value</code>却没有使用。<br>心痛程序员，也心痛韭菜。这句代码改为<code>uint256 amount = _value.mul(uint256(cnt));</code>就可以防止溢出问题</p><p>所以在做加减乘除的时候请记得一定使用：SafeMath，代码在<a href="https://github.com/OpenZeppelin/zeppelin-solidity/blob/master/contracts/math/SafeMath.sol" target="_blank" rel="noopener">这里</a></p><h2 id="溢出补充说明"><a href="#溢出补充说明" class="headerlink" title="溢出补充说明"></a>溢出补充说明</h2><p>溢出补充说明为小专栏订阅用户福利，这部分请前往我的<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">小专栏</a>阅读。</p><p>知识星球<strong><a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">深入浅出区块链</a></strong>做好的区块链技术问答社区，欢迎来提问，作为星球成员福利，成员可加入区块链技术付费交流群。<br><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p><!--Solidity最大可以处理256位数字, 最大值为 2\**256 - 1, 对(2\**256 - 1) 加1的结果会溢出归0。2\**255 乘2也同样会溢出归0。对无符号类型最小值是零，对零做减1会得到 (2**256 - 1)。我们用一段代码验证一下：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity <span class="number">0.4</span><span class="number">.20</span>;</span><br><span class="line">contract TestFlow &#123;</span><br><span class="line">    uint256 public zero = <span class="number">0</span>;</span><br><span class="line">    uint256 public max = <span class="number">2</span>**<span class="number">256</span> - <span class="number">1</span>;</span><br><span class="line">    uint256 public mm = <span class="number">2</span>**<span class="number">255</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">subUnderFlow</span>(<span class="params"></span>) <span class="title">public</span> <span class="title">constant</span> <span class="title">returns</span> (<span class="params">uint</span>) </span>&#123;</span><br><span class="line">        uint256 a =  zero - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">addOverFlow</span>(<span class="params"></span>) <span class="title">public</span> <span class="title">constant</span> <span class="title">returns</span> (<span class="params">uint</span>) </span>&#123;</span><br><span class="line">        uint256 a =  max + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">mulOverFlow</span>(<span class="params"></span>) <span class="title">public</span> <span class="title">constant</span> <span class="title">returns</span> (<span class="params">uint</span>) </span>&#123;</span><br><span class="line">        uint256 a =  mm * <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>合约部署和运行，之前已经经过很多次，我直接贴运行结果：<br><img src="/images/BEC_transfer_flow.jpg" alt=""></p><p>–&gt;</p>-->]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这两天币圈链圈被美链BEC智能合约的漏洞导致代币价值几乎归零的事件刷遍朋友圈。这篇文章就来分析下BEC智能合约的漏洞&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="以太坊" scheme="https://learnblockchain.cn/categories/ethereum/"/>
+    
+      <category term="智能合约" scheme="https://learnblockchain.cn/categories/ethereum/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/"/>
+    
+    
+      <category term="智能合约" scheme="https://learnblockchain.cn/tags/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/"/>
+    
+  </entry>
   
   <entry>
     <title>Web3与智能合约交互实战</title>
@@ -488,30 +512,6 @@
     
     
       <category term="Solidity" scheme="https://learnblockchain.cn/tags/Solidity/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>比特币如何达成共识 - 最长链的选择</title>
-    <link href="https://learnblockchain.cn/2017/12/07/bitcoin-sonsensus/"/>
-    <id>https://learnblockchain.cn/2017/12/07/bitcoin-sonsensus/</id>
-    <published>2017-12-07T08:12:29.000Z</published>
-    <updated>2018-01-10T08:10:46.598Z</updated>
-    
-    <content type="html"><![CDATA[<p>比特币没有中心机构，几乎所有的完整节点都有一份公共总帐本，那么大家如何达成共识：确认哪一份才是公认权威的总账本呢？</p><a id="more"></a><h2 id="为什么要遵守协议"><a href="#为什么要遵守协议" class="headerlink" title="为什么要遵守协议"></a>为什么要遵守协议</h2><p>这其实是一个经济问题，在经济活动中的每个人都是自私自利的，追求的是利益的最大化，一个节点工作量只有在其他的节点认同其是有效的（打包的新区块，其他的节点只有验证通过才会加入到区块链中，并在网络上传播），才能够过得收益，<br>而只有遵守规则才会得到其他的节点认同。<br>因此，基于逐利，节点就会自发的遵守协议。共识就是数以万计的独立节点遵守了简单的规则（通过异步交互）自发形成的。</p><blockquote><p>共识：共同遵守的协议规范</p></blockquote><h2 id="去中心化共识"><a href="#去中心化共识" class="headerlink" title="去中心化共识"></a>去中心化共识</h2><p>在<a href="https://learnblockchain.cn/2017/11/04/bitcoin-pow/">工作量证明</a>一篇，我们了解通过工作量证明来竞争记账，权威的总帐本是怎么达到共识的，没有完全说清楚，今天补上，<br>实际上，比特币的共识由所有节点的4个<strong>独立过程</strong>相互作用而产生：</p><ol><li>每个节点（挖矿节点）依据标准对每个交易进行独立验证</li><li>挖矿节点通过完成工作量证明，将交易记录独立打包进新区块</li><li>每个节点独立的对新区块进行校验并组装进区块链</li><li>每个节点对区块链进行独立选择，在工作量证明机制下选择累计工作量最大的区块链</li></ol><p>共识最终目的是保证比特币不停的在工作量最大的区块链上运转，工作量最大的区块链就是权威的公共总帐本。</p><p>第1 2 3步在<a href="https://learnblockchain.cn/2017/11/04/bitcoin-pow/">比特币如何挖矿-工作量证明</a>一篇有提到过，下面着重讲第4步。</p><h2 id="最长链的选择"><a href="#最长链的选择" class="headerlink" title="最长链的选择"></a>最长链的选择</h2><p>先来一个定义，把累计了最多难度的区块链。在一般情况下，也是包含最多区块的那个链称为<strong>主链</strong><br>每一个（挖矿）节点总是选择并尝试延长主链。</p><h3 id="分叉"><a href="#分叉" class="headerlink" title="分叉"></a>分叉</h3><p>当有两名矿工在几乎在相同的时间内，各自都算得了工作量证明解，便立即传播自己的“获胜”区块到网络中，先是传播给邻近的节点而后传播到整个网络。每个收到有效区块的节点都会将其并入并延长区块链。<br>当这个两个区块传播时，一些节点首先收到#3458A, 一些节点首先收到#3458B，这两个候选区块（通常这两个候选区块会包含几乎相同的交易）都是主链的延伸，分叉就会产生，这时分叉出有竞争关系的两条链，如图：<br><img src="/images/block_branch.jpg" alt=""><br>两个块都收到的节点，会把其中有更多工作量的一条会继续作为主链，另一条作为<strong>备用链</strong>保存（保存是因为备用链将来可能会超过主链难度称为新主链）。</p><h3 id="分叉解决"><a href="#分叉解决" class="headerlink" title="分叉解决"></a>分叉解决</h3><p>收到#3458A的（挖矿）节点，会立刻以这个区块为父区块来产生新的候选区块，并尝试寻找这个候选区块的工作量证明解。同样地，接受#3458B区块的节点会以这个区块为链的顶点开始生成新块，延长这个链（下面称为B链）。<br>这时总会有一方抢先发现工作量证明解并将其传播出去，假设以#3458B为父区块的工作量证明首先解出，如图：<br><img src="/images/block_branch2.jpg" alt=""></p><p>当原本以#3458A为父区块求解的节点在收到#3458B, #3459B之后，会立刻将B链作为主链（因为#3458A为顶点的链已经不是最长链了）继续挖矿。</p><blockquote><p>节点也有可能先收到#3459B，再收到#3458B，收到#3459B时，会被认为是“孤块“（因为还找不到#3459B的父块#3458B）保存在孤块池中，一旦收到父块#3458B时，节点就会将孤块从孤块池中取出，并且连接到它的父区块，让它作为区块链的一部分。</p></blockquote><p>比特币将区块间隔设计为10分钟，是在更快速的交易确认和更低的分叉概率间作出的妥协。更短的区块产生间隔会让交易确认更快地完成，也会导致更加频繁地区块链分叉。与之相对地，长的间隔会减少分叉数量，却会导致更长的确认时间。</p><p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。<br>我的<strong><a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">知识星球</a></strong>为各位解答区块链技术问题，欢迎加入讨论。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;比特币没有中心机构，几乎所有的完整节点都有一份公共总帐本，那么大家如何达成共识：确认哪一份才是公认权威的总账本呢？&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="比特币" scheme="https://learnblockchain.cn/categories/bitcoin/"/>
-    
-    
-      <category term="比特币" scheme="https://learnblockchain.cn/tags/%E6%AF%94%E7%89%B9%E5%B8%81/"/>
-    
-      <category term="共识协议" scheme="https://learnblockchain.cn/tags/%E5%85%B1%E8%AF%86%E5%8D%8F%E8%AE%AE/"/>
     
   </entry>
   

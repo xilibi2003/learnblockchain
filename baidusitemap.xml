@@ -4,6 +4,29 @@
 
     
   <url>
+    <loc>https://learnblockchain.cn/2018/04/25/bec-overflow/</loc>
+    <lastmod>2018-04-25T16:01:05.000Z</lastmod>
+    <data>
+        <display>
+        <title>美链BEC合约漏洞技术分析</title>
+        <pubTime>2018-04-25T02:13:07.000Z</pubTime>
+        
+        <tag>智能合约</tag>
+         
+         
+           
+             
+              <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
+          
+             
+              <breadCrumb title="智能合约" url="https://learnblockchain.cn/categories/ethereum/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://learnblockchain.cn/2018/04/15/web3-html/</loc>
     <lastmod>2018-04-15T13:52:22.000Z</lastmod>
     <data>

@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://learnblockchain.cn/2018/04/25/bec-overflow/</loc>
+    
+    <lastmod>2018-04-25T16:01:05.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://learnblockchain.cn/2018/04/15/web3-html/</loc>
     
     <lastmod>2018-04-15T13:52:22.000Z</lastmod>
@@ -107,14 +114,14 @@
   </url>
   
   <url>
-    <loc>https://learnblockchain.cn/2017/12/21/solidity-arrays/</loc>
+    <loc>https://learnblockchain.cn/2017/12/27/solidity-structs/</loc>
     
     <lastmod>2018-03-18T13:55:32.194Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://learnblockchain.cn/2017/12/27/solidity-structs/</loc>
+    <loc>https://learnblockchain.cn/2017/12/21/solidity-arrays/</loc>
     
     <lastmod>2018-03-18T13:55:32.194Z</lastmod>
     
