@@ -44,6 +44,7 @@ author: Tiny熊
 ```
 
 这个合约重要的是加入了一个函数修改器（Function Modifiers）**onlyOwner**，函数修改器是一个合约属性，可以被继承，还能被重写。它用于在函数执行前检查某种前置条件。
+关于函数修改器可进一步阅读[Solidity 教程系列10 - 完全理解函数修改器](https://learnblockchain.cn/2018/04/09/solidity-modify/)
 
 > 如果熟悉Python的同学，会发现函数修改器的作用和Python的装饰器很相似。
 
