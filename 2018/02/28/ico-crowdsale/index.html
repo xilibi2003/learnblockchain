@@ -95,7 +95,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://learnblockchain.cn/images/crowdsale_create.jpeg">
 <meta property="og:image" content="https://learnblockchain.cn//images/crowdsale_send_token.jpeg">
-<meta property="og:updated_time" content="2018-02-28T16:33:01.740Z">
+<meta property="og:updated_time" content="2018-05-03T02:26:43.864Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何通过以太坊智能合约来进行众筹（ICO）">
 <meta name="twitter:description" content="前面我们有两遍文章写了如何发行代币，今天我们讲一下如何使用代币来公开募资，即编写一个募资合约。">
@@ -372,8 +372,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-03-01T00:33:01+08:00">
-                2018-03-01
+              <time title="更新于" itemprop="dateModified" datetime="2018-05-03T10:26:43+08:00">
+                2018-05-03
               </time>
             
           </span>
@@ -454,11 +454,11 @@
 <li><p>创建众筹合约我们需要提供一下几个参数：<br>ifSuccessfulSendTo： 募资成功后的收款方（其实这里可以默认为合约创建者）<br>fundingGoalInEthers： 募资额度， 为了方便我们仅募3个ether<br>durationInMinutes： 募资时间<br>finneyCostOfEachToken 每个代币的价格, 这里为了方便使用了<a href="https://learnblockchain.cn/2018/02/02/solidity-unit/">单位finney</a>及值为：1 （1 ether =  1000 finney）<br>addressOfTokenUsedAsReward： 代币合约地址。<br>如：<br><img src="https://learnblockchain.cn/images/crowdsale_create.jpeg" alt=""><br>本文使用的参数为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;0xc6f9ea59d424733e8e1902c7837ea75e20abfb49&quot;,3, 100, 1,&quot;0xad8972e2b583f580fc52f737b98327eb65d08f8c&quot;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>参与人投资的时候实际购买众筹合约代币，所有需要先向合约预存代币，代币的数量为：募资额度 / 代币的价格 ， 这里为：3 * 1000/1 = 3000 （当能也可以大于3000）。<br>向合约预存代币可以使用<a href="https://www.myetherwallet.com/#send-transaction" target="_blank" rel="noopener">myetherwallet</a>钱包，或在remix中重新加载代币合约，执行代币合约tranfer()函数进行代币转账。如使用myetherwallet转账如图：<br><img src="https://learnblockchain.cn//images/crowdsale_send_token.jpeg" alt=""></p>
+<li><p>参与人投资的时候实际购买众筹合约代币，所以需要先向合约预存代币，代币的数量为：募资额度 / 代币的价格 ， 这里为：3 * 1000/1 = 3000 （当能也可以大于3000）。<br>向合约预存代币可以使用<a href="https://www.myetherwallet.com/#send-transaction" target="_blank" rel="noopener">myetherwallet</a>钱包，或在remix中重新加载代币合约，执行代币合约tranfer()函数进行代币转账，转账的地址就是我们创建合约的地址。如使用myetherwallet转账如图：<br><img src="https://learnblockchain.cn//images/crowdsale_send_token.jpeg" alt=""></p>
 </li>
-<li><p>参与人投资行为即是向买众筹合约转账，转账时，会执行Fallback回退函数（即无名函数）向其账户打回相应的代币。</p>
+<li><p>投资人向众筹合约转账（发送以太币）即是参与众筹行为，转账时，会执行Fallback回退函数（即无名函数）向其账户打回相应的代币。</p>
 </li>
-<li><p>safeWithdrawl() 可以被参与人或收益人执行，如果融资不达标参与人可收回之前投资款，如果融资达标收益人可以拿到所有的融资款。</p>
+<li><p>safeWithdrawl() 可以被参与人或收益人调用，如果融资不达标参与人可收回之前投资款，如果融资达标收益人可以拿到所有的融资款。</p>
 </li>
 </ol>
 <h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>上面是一个很正规的募资合约。接下来讲两个募资合约的扩展，如何实现无限募资合约及割韭菜合约。<br>这部分内容独家发布在我的小专栏<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">区块链技术</a></p>

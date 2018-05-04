@@ -95,7 +95,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://learnblockchain.cn/images/BEC_transfer.jpg">
 <meta property="og:image" content="https://learnblockchain.cn/images/BEC_transfer_params.jpg">
-<meta property="og:updated_time" content="2018-04-25T16:10:49.475Z">
+<meta property="og:updated_time" content="2018-04-26T01:49:16.484Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="美链BEC合约漏洞技术分析">
 <meta name="twitter:description" content="这两天币圈链圈被美链BEC智能合约的漏洞导致代币价值几乎归零的事件刷遍朋友圈。这篇文章就来分析下BEC智能合约的漏洞">
@@ -372,7 +372,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-04-26T00:10:49+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-04-26T09:49:16+08:00">
                 2018-04-26
               </time>
             
@@ -454,8 +454,8 @@
 <h2 id="溢出补充说明"><a href="#溢出补充说明" class="headerlink" title="溢出补充说明"></a>溢出补充说明</h2><p>溢出补充说明为小专栏订阅用户福利，小专栏的文章内介绍了什么时候会发生上溢，什么时候会发生下溢，并且给出了代码事例。<br>大家可请前往我的<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">小专栏</a>阅读。</p>
 <p>知识星球<strong><a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">深入浅出区块链</a></strong>做好的区块链技术问答社区，欢迎来提问，作为星球成员福利，成员可加入区块链技术付费交流群。<br><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
 <!--
-Solidity最大可以处理256位数字, 最大值为 2\**256 - 1, 对(2\**256 - 1) 加1的结果会溢出归0。2\**255 乘2也同样会溢出归0。
-对无符号类型最小值是零，对零做减1会得到 (2**256 - 1)。
+Solidity最大可以处理256位数字, 最大值为 `2**256 - 1`, 对(`2**256 - 1`) 加1的结果会溢出归0。`2**255` 乘2也同样会溢出归0。
+对无符号类型最小值是零，对零做减1会得到 (`2**256 - 1`)。
 
 我们用一段代码验证一下：
 
