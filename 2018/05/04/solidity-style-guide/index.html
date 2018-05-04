@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="区块链技术,Learn BlockChain,系统学习区块链,区块链Wiki,以太坊,solidity,比特币" />
+  <meta name="keywords" content="Solidity手册," />
 
 
 
@@ -85,18 +85,18 @@
 
 
 
-<meta name="description" content="打造最好的区块链技术博客">
-<meta name="keywords" content="区块链技术,Learn BlockChain,系统学习区块链,区块链Wiki,以太坊,solidity,比特币">
+<meta name="description" content="每一门语言都有其相应的编码规范， Solidity 也一样， 下面官方推荐的规范及我的总结，供大家参考，希望可以帮助大家写出更好规范的智能合约。">
+<meta name="keywords" content="Solidity手册">
 <meta property="og:type" content="article">
 <meta property="og:title" content="智能合约最佳实践 之 Solidity 编码规范">
 <meta property="og:url" content="https://learnblockchain.cn/2018/05/04/solidity-style-guide/index.html">
 <meta property="og:site_name" content="深入浅出区块链">
-<meta property="og:description" content="打造最好的区块链技术博客">
+<meta property="og:description" content="每一门语言都有其相应的编码规范， Solidity 也一样， 下面官方推荐的规范及我的总结，供大家参考，希望可以帮助大家写出更好规范的智能合约。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-04T02:29:07.461Z">
+<meta property="og:updated_time" content="2018-05-04T03:01:43.152Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="智能合约最佳实践 之 Solidity 编码规范">
-<meta name="twitter:description" content="打造最好的区块链技术博客">
+<meta name="twitter:description" content="每一门语言都有其相应的编码规范， Solidity 也一样， 下面官方推荐的规范及我的总结，供大家参考，希望可以帮助大家写出更好规范的智能合约。">
 
 
 
@@ -369,12 +369,45 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-05-04T10:29:07+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-05-04T11:01:43+08:00">
                 2018-05-04
               </time>
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ethereum/" itemprop="url" rel="index">
+                    <span itemprop="name">以太坊</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ethereum/Solidity/" itemprop="url" rel="index">
+                    <span itemprop="name">Solidity</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -403,7 +436,119 @@
       
 
       
-        
+        <p>每一门语言都有其相应的编码规范， Solidity 也一样， 下面官方推荐的规范及我的总结，供大家参考，希望可以帮助大家写出更好规范的智能合约。</p>
+<a id="more"></a>
+<h2 id="命名规范"><a href="#命名规范" class="headerlink" title="命名规范"></a>命名规范</h2><h3 id="避免使用"><a href="#避免使用" class="headerlink" title="避免使用"></a>避免使用</h3><p>小写的l，大写的I，大写的O 应该避免在命名中单独出现，因为很容易产生混淆。</p>
+<h3 id="合约、库、事件、枚举及结构体命名"><a href="#合约、库、事件、枚举及结构体命名" class="headerlink" title="合约、库、事件、枚举及结构体命名"></a>合约、库、事件、枚举及结构体命名</h3><p>  合约、库、事件及结构体命名应该使用单词首字母大写的方式，这个方式也称为：帕斯卡命名法或大驼峰式命名法，比如：SimpleToken， SmartBank， CertificateHashRepository，Player。</p>
+<h3 id="函数、参数、变量及修饰器"><a href="#函数、参数、变量及修饰器" class="headerlink" title="函数、参数、变量及修饰器"></a>函数、参数、变量及修饰器</h3><p>函数、参数、变量及修饰器应该使用首单词小写后面单词大写的方式，这个方式也称为：（小）驼峰式命名法，是一种混合大小写的方式，如：</p>
+<ul>
+<li>函数名应该如：getBalance，transfer，verifyOwner，addMember。</li>
+<li>参数和变量应该如：initialSupply，senderAddress，account，isPreSale。</li>
+<li>修饰器应该如：onlyAfter，onlyOwner。</li>
+</ul>
+<h2 id="代码格式相关"><a href="#代码格式相关" class="headerlink" title="代码格式相关"></a>代码格式相关</h2><h3 id="缩进"><a href="#缩进" class="headerlink" title="缩进"></a>缩进</h3><p>使用空格（spaces）而不是Tab, 缩进应该是4个空格</p>
+<h3 id="空行"><a href="#空行" class="headerlink" title="空行"></a>空行</h3><p>合约之间应该有空行，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">contract A &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">contract B &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">contract C &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而不是使用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">contract A &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">contract B &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">contract C &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>函数之间应该有空行，例如：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">contract A &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">spam</span>(<span class="params"></span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">ham</span>(<span class="params"></span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>没有实现的话，空行可以省去，如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">contract A &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">spam</span>(<span class="params"></span>) <span class="title">public</span>;</span></span><br><span class="line"><span class="function">    <span class="title">function</span> <span class="title">ham</span>(<span class="params"></span>) <span class="title">public</span>;</span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>而不是：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">contract A &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">spam</span>(<span class="params"></span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">ham</span>(<span class="params"></span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="左括号应该跟定义在一行"><a href="#左括号应该跟定义在一行" class="headerlink" title="左括号应该跟定义在一行"></a>左括号应该跟定义在一行</h3><p>定义包括合约定义、函数定义、库定义、结构体定义等等，例如推荐使用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> contract Coin &#123;</span><br><span class="line">    struct Bank &#123;</span><br><span class="line">        address owner;</span><br><span class="line">        uint balance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而不是：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">contract Coin</span><br><span class="line">&#123;</span><br><span class="line">    struct Bank &#123;</span><br><span class="line">        address owner;</span><br><span class="line">        uint balance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="左括号应该跟条件控制在一行"><a href="#左括号应该跟条件控制在一行" class="headerlink" title="左括号应该跟条件控制在一行"></a>左括号应该跟条件控制在一行</h3><p>在使用if, else, while, for 时，推荐的写法是：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (...) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (...) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而不是：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (...)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(...)&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (...) &#123;</span><br><span class="line">    ...;&#125;</span><br></pre></td></tr></table></figure>
+<p>如果控制语句内只有一行，括号可省略，如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (x &lt; <span class="number">10</span>)</span><br><span class="line">    x += <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<p>但像下面一个语句有多方就不能省略，如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (x &lt; <span class="number">10</span>)</span><br><span class="line">    someArray.push(Coin(&#123;</span><br><span class="line">        name: <span class="string">'spam'</span>,</span><br><span class="line">        value: <span class="number">42</span></span><br><span class="line">    &#125;));</span><br></pre></td></tr></table></figure>
+<h3 id="表达式内的空格"><a href="#表达式内的空格" class="headerlink" title="表达式内的空格"></a>表达式内的空格</h3><ul>
+<li><p>一个单行的表达里，在小括号、中括号、大括号里应该避免不必要的空格，例如推荐使用：</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spam(ham[<span class="number">1</span>], Coin(&#123;<span class="attr">name</span>: <span class="string">"ham"</span>&#125;));</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<pre><code>而不是：
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spam( ham[ <span class="number">1</span> ], Coin( &#123; <span class="attr">name</span>: <span class="string">"ham"</span> &#125; ) );</span><br></pre></td></tr></table></figure>
+
+
+有一种例外是，结尾的括号跟在结束的分号后面， 应该加一个空格，如下面的方式也是推荐的：
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">singleLine</span>(<span class="params"></span>) <span class="title">public</span> </span>&#123; spam(); &#125;</span><br></pre></td></tr></table></figure>
+</code></pre><ul>
+<li><p>分号；前不应该有空格，例如推荐使用：</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">spam</span>(<span class="params">uint i, Coin coin</span>) <span class="title">public</span>;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<pre><code>而不是：
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">spam</span>(<span class="params">uint i , Coin coin</span>) <span class="title">public</span> ;</span></span><br></pre></td></tr></table></figure>
+</code></pre><ul>
+<li><p>不要为对齐添加不必要的空格，例如推荐使用：</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">1</span>;</span><br><span class="line">y = <span class="number">2</span>;</span><br><span class="line">long_variable = <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<pre><code>而不是：
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x             = <span class="number">1</span>;</span><br><span class="line">y             = <span class="number">2</span>;</span><br><span class="line">long_variable = <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+</code></pre><ul>
+<li><p>回退函数不应该有空格，例如推荐使用：</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">``</span><span class="string">` </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">而不是：</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>js</span><br><span class="line"><span class="function"><span class="keyword">function</span> (<span class="params"></span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="控制每一行长度"><a href="#控制每一行长度" class="headerlink" title="控制每一行长度"></a>控制每一行长度</h3><p>每行不应该太长，最好在79（或99）个字符以内，函数的参数应该是单独的行，且只有一个缩进，例如推荐的方式是：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">thisFunctionCallIsReallyLong(</span><br><span class="line">    longArgument1,</span><br><span class="line">    longArgument2,</span><br><span class="line">    longArgument3</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>而不是：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">thisFunctionCallIsReallyLong(longArgument1,</span><br><span class="line">                              longArgument2,</span><br><span class="line">                              longArgument3</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">thisFunctionCallIsReallyLong(longArgument1,</span><br><span class="line">    longArgument2,</span><br><span class="line">    longArgument3</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">thisFunctionCallIsReallyLong(</span><br><span class="line">    longArgument1, longArgument2,</span><br><span class="line">    longArgument3</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">thisFunctionCallIsReallyLong(</span><br><span class="line">longArgument1,</span><br><span class="line">longArgument2,</span><br><span class="line">longArgument3</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">thisFunctionCallIsReallyLong(</span><br><span class="line">    longArgument1,</span><br><span class="line">    longArgument2,</span><br><span class="line">    longArgument3);</span><br></pre></td></tr></table></figure>
+<p>对应的赋值语句应该是这样写：</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> thisIsALongNestedMapping[being][set][to_some_value] = someFunction(</span><br><span class="line">    argument1,</span><br><span class="line">    argument2,</span><br><span class="line">    argument3,</span><br><span class="line">    argument4</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>而不是：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">thisIsALongNestedMapping[being][set][to_some_value] = someFunction(argument1,</span><br><span class="line">                                                                   argument2,</span><br><span class="line">                                                                   argument3,</span><br><span class="line">                                                                   argument4);</span><br></pre></td></tr></table></figure>
+<p>事件定义也应该遵循同样的原则，例如应该使用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">event LongAndLotsOfArgs(</span><br><span class="line">    adress sender,</span><br><span class="line">    adress recipient,</span><br><span class="line">    uint256 publicKey,</span><br><span class="line">    uint256 amount,</span><br><span class="line">    bytes32[] options</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">LongAndLotsOfArgs(</span><br><span class="line">    sender,</span><br><span class="line">    recipient,</span><br><span class="line">    publicKey,</span><br><span class="line">    amount,</span><br><span class="line">    options</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>而不是：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">event LongAndLotsOfArgs(adress sender,</span><br><span class="line">                        adress recipient,</span><br><span class="line">                        uint256 publicKey,</span><br><span class="line">                        uint256 amount,</span><br><span class="line">                        bytes32[] options);</span><br><span class="line"></span><br><span class="line">LongAndLotsOfArgs(sender,</span><br><span class="line">                  recipient,</span><br><span class="line">                  publicKey,</span><br><span class="line">                  amount,</span><br><span class="line">                  options);</span><br></pre></td></tr></table></figure>
+<h3 id="文件编码格式"><a href="#文件编码格式" class="headerlink" title="文件编码格式"></a>文件编码格式</h3><p>推荐使用utf-8 及 ASCII 编码</p>
+<h3 id="引入文件应该在最上方"><a href="#引入文件应该在最上方" class="headerlink" title="引入文件应该在最上方"></a>引入文件应该在最上方</h3><p>建议使用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">"owned"</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">contract A &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">contract B is owned &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而不是：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">contract A &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"owned"</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">contract B is owned &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="函数编写规范"><a href="#函数编写规范" class="headerlink" title="函数编写规范"></a>函数编写规范</h2><h3 id="函数的顺序"><a href="#函数的顺序" class="headerlink" title="函数的顺序"></a>函数的顺序</h3><p>在编写函数的时候，应该让大家容易找到构造函数，回退函数，官方推荐的的函数顺序是：</p>
+<ol>
+<li>构造函数</li>
+<li>回退函数 (如果有)</li>
+<li>外部函数（external）</li>
+<li>公有函数(public)</li>
+<li>内部函数(internal)</li>
+<li>私有函数（private）</li>
+</ol>
+<p>同一类函数时，constant函数放在后面， 例如推荐方式为：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"> contract A &#123;</span><br><span class="line">    <span class="comment">// 构造函数</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 回退函数</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span>(<span class="params"></span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 外部函数</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 带有constant 外部函数 </span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 公有函数</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 内部函数</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 私有函数</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而不是下面的函数顺序：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"> contract A &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 外部函数</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 公有函数</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 内部函数</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span>(<span class="params"></span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 私有函数</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="明确函数的可见性"><a href="#明确函数的可见性" class="headerlink" title="明确函数的可见性"></a>明确函数的可见性</h3><p>所有的函数（包括构造函数）应该在定义的时候明确函数的可见性，例如应该使用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">explicitlyPublic</span>(<span class="params">uint val</span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">    doSomething();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而不是</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">implicitlyPublic</span>(<span class="params">uint val</span>) </span>&#123;</span><br><span class="line">    doSomething();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="可见性应该在修饰符前面"><a href="#可见性应该在修饰符前面" class="headerlink" title="可见性应该在修饰符前面"></a>可见性应该在修饰符前面</h3><p>函数的可见性应该写在自定义的函数修饰符前面，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">kill</span>(<span class="params"></span>) <span class="title">public</span> <span class="title">onlyowner</span> </span>&#123;</span><br><span class="line">    selfdestruct(owner);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而不是</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">kill</span>(<span class="params"></span>) <span class="title">onlyowner</span> <span class="title">public</span> </span>&#123;</span><br><span class="line">    selfdestruct(owner);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="区分函数和事件"><a href="#区分函数和事件" class="headerlink" title="区分函数和事件"></a>区分函数和事件</h3><p>为了防止函数和事件（Event）产生混淆，声明一个事件使用大写并加入前缀（可使用LOG）。对于函数， 始终以小写字母开头，构造函数除外。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不建议</span></span><br><span class="line">event Transfer() &#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">transfer</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 建议</span></span><br><span class="line">event LogTransfer() &#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">transfer</span>(<span class="params"></span>) <span class="title">external</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><p>常量应该使用全大写及下划线分割大词的方式，如：MAX_BLOCKS，TOKEN_NAME， CONTRACT_VERSION。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="https://solidity.readthedocs.io/en/v0.4.23/style-guide.html" target="_blank" rel="noopener">Solidity style-guide</a></p>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。<br>如果你想和我有密切的联系，欢迎加入知识星球<a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">深入浅出区块链</a>，我会在星球为大家解答技术问题，作为星友福利，星友可加入我创建的区块链技术群，群内已经聚集了150多位区块链技术牛人和爱好者。</p>
+
       
     </div>
     
@@ -467,6 +612,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Solidity手册/" rel="tag"># Solidity手册</a>
+          
+        </div>
       
 
       
@@ -537,8 +688,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -679,6 +839,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#命名规范"><span class="nav-number">1.</span> <span class="nav-text">命名规范</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#避免使用"><span class="nav-number">1.1.</span> <span class="nav-text">避免使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#合约、库、事件、枚举及结构体命名"><span class="nav-number">1.2.</span> <span class="nav-text">合约、库、事件、枚举及结构体命名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数、参数、变量及修饰器"><span class="nav-number">1.3.</span> <span class="nav-text">函数、参数、变量及修饰器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码格式相关"><span class="nav-number">2.</span> <span class="nav-text">代码格式相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#缩进"><span class="nav-number">2.1.</span> <span class="nav-text">缩进</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空行"><span class="nav-number">2.2.</span> <span class="nav-text">空行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#左括号应该跟定义在一行"><span class="nav-number">2.3.</span> <span class="nav-text">左括号应该跟定义在一行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#左括号应该跟条件控制在一行"><span class="nav-number">2.4.</span> <span class="nav-text">左括号应该跟条件控制在一行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表达式内的空格"><span class="nav-number">2.5.</span> <span class="nav-text">表达式内的空格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制每一行长度"><span class="nav-number">2.6.</span> <span class="nav-text">控制每一行长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件编码格式"><span class="nav-number">2.7.</span> <span class="nav-text">文件编码格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引入文件应该在最上方"><span class="nav-number">2.8.</span> <span class="nav-text">引入文件应该在最上方</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数编写规范"><span class="nav-number">3.</span> <span class="nav-text">函数编写规范</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数的顺序"><span class="nav-number">3.1.</span> <span class="nav-text">函数的顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#明确函数的可见性"><span class="nav-number">3.2.</span> <span class="nav-text">明确函数的可见性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可见性应该在修饰符前面"><span class="nav-number">3.3.</span> <span class="nav-text">可见性应该在修饰符前面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#区分函数和事件"><span class="nav-number">3.4.</span> <span class="nav-text">区分函数和事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常量"><span class="nav-number">3.5.</span> <span class="nav-text">常量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
