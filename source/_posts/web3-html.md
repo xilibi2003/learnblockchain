@@ -228,7 +228,7 @@ $("#button").click(function() {
 ```
 以上的代码就简单地实现了对合约中两个函数的调用，分别读取和显示``name``和``age``变量。
 
-到此我们就完成了全部的代码，完整代码可以在 [https://github.com/gitferry/InfoContract](https://github.com/gitferry/InfoContract) 中找到。在浏览器中打开``index.html``测试效果如下图（输入名字和年龄后刷新）。
+到此我们就完成了全部的代码，完整代码可以在 [InfoContract](https://github.com/xilibi2003/InfoContract) 中找到。在浏览器中打开``index.html``测试效果如下图（输入名字和年龄后刷新）。
 
 ![](/images/page.png)
 
@@ -239,7 +239,7 @@ $("#button").click(function() {
 
 
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
-如果你想和我有密切的联系，欢迎加入知识星球[深入浅出区块链](https://t.xiaomiquan.com/RfAu7uj)，我会在星球为大家解答技术问题，作为星友福利，星友可加入我创建的区块链技术群，群内已经聚集了150多位区块链技术牛人和爱好者。
+如果你想和我有密切的联系，欢迎加入知识星球[深入浅出区块链](https://t.xiaomiquan.com/RfAu7uj)，我会在星球为大家解答技术问题，作为星友福利，星友可加入我创建的区块链技术群，群内已经聚集了200多位区块链技术牛人和爱好者。
 
 
 
