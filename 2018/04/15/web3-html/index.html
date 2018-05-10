@@ -97,7 +97,7 @@
 <meta property="og:image" content="https://learnblockchain.cn/images/Ganache.png">
 <meta property="og:image" content="https://learnblockchain.cn/images/ABI.png">
 <meta property="og:image" content="https://learnblockchain.cn/images/page.png">
-<meta property="og:updated_time" content="2018-05-03T13:44:22.717Z">
+<meta property="og:updated_time" content="2018-05-09T13:29:16.070Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Web3与智能合约交互实战">
 <meta name="twitter:description" content="Web3与智能合约交互实战">
@@ -374,8 +374,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-05-03T21:44:22+08:00">
-                2018-05-03
+              <time title="更新于" itemprop="dateModified" datetime="2018-05-09T21:29:16+08:00">
+                2018-05-09
               </time>
             
           </span>
@@ -484,13 +484,13 @@
 <p>完成这些我们就可以调用合约中的函数了，下面我们使用 jQuery 与我们的合约进行交互：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">info.getInfo(<span class="function"><span class="keyword">function</span>(<span class="params">error, result</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!error)</span><br><span class="line">        &#123;</span><br><span class="line">            $(<span class="string">"#info"</span>).html(result[<span class="number">0</span>]+<span class="string">' ('</span>+result[<span class="number">1</span>]+<span class="string">' years old)'</span>);</span><br><span class="line">            <span class="built_in">console</span>.log(result);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">console</span>.error(error);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$(<span class="string">"#button"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    info.setInfo($(<span class="string">"#name"</span>).val(), $(<span class="string">"#age"</span>).val());</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>以上的代码就简单地实现了对合约中两个函数的调用，分别读取和显示<code>name</code>和<code>age</code>变量。</p>
-<p>到此我们就完成了全部的代码，完整代码可以在 <a href="https://github.com/gitferry/InfoContract" target="_blank" rel="noopener">https://github.com/gitferry/InfoContract</a> 中找到。在浏览器中打开<code>index.html</code>测试效果如下图（输入名字和年龄后刷新）。</p>
+<p>到此我们就完成了全部的代码，完整代码可以在 <a href="https://github.com/xilibi2003/InfoContract" target="_blank" rel="noopener">InfoContract</a> 中找到。在浏览器中打开<code>index.html</code>测试效果如下图（输入名字和年龄后刷新）。</p>
 <p><img src="/images/page.png" alt=""></p>
 <p>本文的作者是盖盖，他的微信公众号: chainlab</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
 <li><a href="https://coursetro.com/posts/code/99/Interacting-with-a-Smart-Contract-through-Web3.js-(Tutorial" target="_blank" rel="noopener">Interacting with a Smart Contract through Web3.js (Tutorial)</a>)</li>
 </ul>
-<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。<br>如果你想和我有密切的联系，欢迎加入知识星球<a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">深入浅出区块链</a>，我会在星球为大家解答技术问题，作为星友福利，星友可加入我创建的区块链技术群，群内已经聚集了150多位区块链技术牛人和爱好者。</p>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。<br>如果你想和我有密切的联系，欢迎加入知识星球<a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">深入浅出区块链</a>，我会在星球为大家解答技术问题，作为星友福利，星友可加入我创建的区块链技术群，群内已经聚集了200多位区块链技术牛人和爱好者。</p>
 
       
     </div>
@@ -664,7 +664,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -686,7 +686,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
