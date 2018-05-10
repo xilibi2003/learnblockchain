@@ -94,7 +94,7 @@
 <meta property="og:description" content="很多同学对Solidity 中的Event有疑问，这篇文章就来详细的看看Solidity 中Event到底有什么用？">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://learnblockchain.cn/images/solidity_event.jpg">
-<meta property="og:updated_time" content="2018-05-10T03:40:57.802Z">
+<meta property="og:updated_time" content="2018-05-10T03:43:05.647Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="详解 Solidity 事件Event - 完全搞懂事件的使用">
 <meta name="twitter:description" content="很多同学对Solidity 中的Event有疑问，这篇文章就来详细的看看Solidity 中Event到底有什么用？">
@@ -371,7 +371,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-05-10T11:40:57+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-05-10T11:43:05+08:00">
                 2018-05-10
               </time>
             
@@ -466,7 +466,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">instructorEvent.watch(<span class="function"><span class="keyword">function</span>(<span class="params">error, result</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!error)</span><br><span class="line">            &#123;</span><br><span class="line">                $(<span class="string">"#info"</span>).html(result.args.name + <span class="string">' ('</span> + result.args.age + <span class="string">' years old)'</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(error);</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
 <p>代码更新之后，可以在浏览器查看效果，这是点击”Updata Info”按钮之后，会及时更新界面，如图：<br><img src="/images/solidity_event.jpg" alt=""></p>
 <p>完整的代码请订阅小专栏<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">区块链技术</a>查看。</p>
-<h2 id="事件高级用法-过滤器"><a href="#事件高级用法-过滤器" class="headerlink" title="事件高级用法-过滤器"></a>事件高级用法-过滤器</h2><p>有时我们会有这样的需求：获取当前所有姓名及年龄记录，或者是，要过滤出年龄28岁的记录，应该如何做呢？<br>以及另外一个常见的场景：想要获取到代币合约中所有的转账记录，也同样需要使用事件过滤器功能，请大家订阅小专栏<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">区块链技术</a>。</p>
+<h2 id="事件高级用法-过滤器"><a href="#事件高级用法-过滤器" class="headerlink" title="事件高级用法-过滤器"></a>事件高级用法-过滤器</h2><p>有时我们会有这样的需求：获取当前所有姓名及年龄记录，或者是，要过滤出年龄28岁的记录，应该如何做呢？<br>以及另外一个常见的场景：想要获取到代币合约中所有的转账记录，也同样需要使用事件过滤器功能，这部分内容请大家订阅小专栏<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">区块链技术</a>阅读。</p>
 <!-- 
 有时我们会有这样的需求：获取当前所有姓名及年龄记录，应该如何做呢？
 实际上事件支持过滤器，可以从所有的区块中过滤出符合要求的事件，如：
