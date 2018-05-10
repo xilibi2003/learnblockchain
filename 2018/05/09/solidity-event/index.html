@@ -94,7 +94,7 @@
 <meta property="og:description" content="很多同学对Solidity 中的Event有疑问，这篇文章就来详细的看看Solidity 中Event到底有什么用？">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://learnblockchain.cn/images/solidity_event.jpg">
-<meta property="og:updated_time" content="2018-05-10T03:43:05.647Z">
+<meta property="og:updated_time" content="2018-05-10T13:49:31.287Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="详解 Solidity 事件Event - 完全搞懂事件的使用">
 <meta name="twitter:description" content="很多同学对Solidity 中的Event有疑问，这篇文章就来详细的看看Solidity 中Event到底有什么用？">
@@ -371,7 +371,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-05-10T11:43:05+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-05-10T21:49:31+08:00">
                 2018-05-10
               </time>
             
@@ -467,6 +467,8 @@
 <p>代码更新之后，可以在浏览器查看效果，这是点击”Updata Info”按钮之后，会及时更新界面，如图：<br><img src="/images/solidity_event.jpg" alt=""></p>
 <p>完整的代码请订阅小专栏<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">区块链技术</a>查看。</p>
 <h2 id="事件高级用法-过滤器"><a href="#事件高级用法-过滤器" class="headerlink" title="事件高级用法-过滤器"></a>事件高级用法-过滤器</h2><p>有时我们会有这样的需求：获取当前所有姓名及年龄记录，或者是，要过滤出年龄28岁的记录，应该如何做呢？<br>以及另外一个常见的场景：想要获取到代币合约中所有的转账记录，也同样需要使用事件过滤器功能，这部分内容请大家订阅小专栏<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">区块链技术</a>阅读。</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://coursetro.com/posts/code/100/Solidity-Events-Tutorial---Using-Web3.js-to-Listen-for-Smart-Contract-Events" target="_blank" rel="noopener">https://coursetro.com/posts/code/100/Solidity-Events-Tutorial---Using-Web3.js-to-Listen-for-Smart-Contract-Events</a><br><a href="https://github.com/ethereum/wiki/wiki/JavaScript-API#contract-events" target="_blank" rel="noopener">https://github.com/ethereum/wiki/wiki/JavaScript-API#contract-events</a></p>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。<br>如果你想和我有密切的联系，欢迎加入知识星球<a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">深入浅出区块链</a>，我会在星球为大家解答技术问题，作为星友福利，星友可加入我创建的区块链技术群，群内已经聚集了200多位区块链技术牛人和爱好者。</p>
 <!-- 
 有时我们会有这样的需求：获取当前所有姓名及年龄记录，应该如何做呢？
 实际上事件支持过滤器，可以从所有的区块中过滤出符合要求的事件，如：
@@ -477,8 +479,6 @@
 <p>比如，我们要获取到代币合约中，所有的转账记录， 就可以使用：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> transferEvent = token.Transfer(&#123;&#125;, &#123;<span class="attr">fromBlock</span>: <span class="number">0</span>, <span class="attr">toBlock</span>: <span class="string">'latest'</span>&#125;)</span><br><span class="line"><span class="keyword">var</span> transferEvent.watch(<span class="function"><span class="keyword">function</span>(<span class="params">error, result</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// handle result.args.from  result.args.to</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p> –&gt;</p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://coursetro.com/posts/code/100/Solidity-Events-Tutorial---Using-Web3.js-to-Listen-for-Smart-Contract-Events">https://coursetro.com/posts/code/100/Solidity-Events-Tutorial---Using-Web3.js-to-Listen-for-Smart-Contract-Events</a><br><a href="https://github.com/ethereum/wiki/wiki/JavaScript-API#contract-events">https://github.com/ethereum/wiki/wiki/JavaScript-API#contract-events</a></p>
-<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。<br>如果你想和我有密切的联系，欢迎加入知识星球<a href="https://t.xiaomiquan.com/RfAu7uj">深入浅出区块链</a>，我会在星球为大家解答技术问题，作为星友福利，星友可加入我创建的区块链技术群，群内已经聚集了200多位区块链技术牛人和爱好者。</p>
 -->
       
     </div>
@@ -786,7 +786,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是事件Evnet"><span class="nav-number">2.</span> <span class="nav-text">什么是事件Evnet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#监听事件"><span class="nav-number">3.</span> <span class="nav-text">监听事件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改合约，定义事件及触发事件"><span class="nav-number">3.1.</span> <span class="nav-text">修改合约，定义事件及触发事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Web3监听事件，刷新UI"><span class="nav-number">3.2.</span> <span class="nav-text">使用Web3监听事件，刷新UI</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事件高级用法-过滤器"><span class="nav-number">4.</span> <span class="nav-text">事件高级用法-过滤器</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是事件Evnet"><span class="nav-number">2.</span> <span class="nav-text">什么是事件Evnet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#监听事件"><span class="nav-number">3.</span> <span class="nav-text">监听事件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改合约，定义事件及触发事件"><span class="nav-number">3.1.</span> <span class="nav-text">修改合约，定义事件及触发事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Web3监听事件，刷新UI"><span class="nav-number">3.2.</span> <span class="nav-text">使用Web3监听事件，刷新UI</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事件高级用法-过滤器"><span class="nav-number">4.</span> <span class="nav-text">事件高级用法-过滤器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文章"><span class="nav-number">5.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
             
 
           </div>
