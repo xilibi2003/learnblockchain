@@ -45,6 +45,7 @@ author: Tiny熊
 
 * [以太坊开发入门](https://learnblockchain.cn/2017/11/20/whatiseth/)
 * [智能合约开发环境搭建及Hello World合约](https://learnblockchain.cn/2017/11/24/init-env/)
+* [搭建智能合约开发环境Remix IDE及使用](https://learnblockchain.cn/2018/06/07/remix-ide/)
 * [以太坊客户端Geth命令用法-参数详解](https://learnblockchain.cn/2017/11/29/geth_cmd_options)
 * [Geth控制台使用实战及Web3.js使用](https://learnblockchain.cn/2017/12/01/geth_cmd_short/)
 * [如何搭建以太坊私有链](https://learnblockchain.cn/2018/03/18/create_private_blockchain/)
@@ -52,7 +53,7 @@ author: Tiny熊
 ### 智能合约及应用开发
 * [一步步教你开发、部署第一个Dapp应用](https://learnblockchain.cn/2018/01/12/first-dapp/)
 * [一步步教你创建自己的数字货币（代币）进行ICO](https://learnblockchain.cn/2018/01/12/create_token/)
-* [实现一个可管理、增发、兑换、冻结等高级功能的代币](https://learnblockchain.cn/2018/01/27/create_token2/)
+* [实现一个可管理、增发、兑换、冻结等高级功能的代币](https://learnblockchain.cn/2018/01/27/create-token2/)
 * [如何通过以太坊智能合约来进行众筹（ICO）](https://learnblockchain.cn/2018/02/28/ico-crowdsale/)
 * [剖析非同质化代币ERC721--全面解析ERC721标准](https://learnblockchain.cn/2018/03/23/token-erc721/)
 * [Web3与智能合约交互实战](https://learnblockchain.cn/2018/04/15/web3-html/)

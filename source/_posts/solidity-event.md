@@ -174,6 +174,17 @@ instructorEvent.watch(function(error, result) {
 有时我们会有这样的需求：获取当前所有姓名及年龄记录，或者是，要过滤出年龄28岁的记录，应该如何做呢？
 以及另外一个常见的场景：想要获取到代币合约中所有的转账记录，也同样需要使用事件过滤器功能，这部分内容请大家订阅小专栏[区块链技术](https://xiaozhuanlan.com/blockchaincore)阅读。
 
+
+
+## 参考文章
+
+https://coursetro.com/posts/code/100/Solidity-Events-Tutorial---Using-Web3.js-to-Listen-for-Smart-Contract-Events
+https://github.com/ethereum/wiki/wiki/JavaScript-API#contract-events
+
+[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
+如果你想和我有密切的联系，欢迎加入知识星球[深入浅出区块链](https://t.xiaomiquan.com/RfAu7uj)，我会在星球为大家解答技术问题，作为星友福利，星友可加入我创建的区块链技术群，群内已经聚集了200多位区块链技术牛人和爱好者。
+
+
 <!-- 
 有时我们会有这样的需求：获取当前所有姓名及年龄记录，应该如何做呢？
 实际上事件支持过滤器，可以从所有的区块中过滤出符合要求的事件，如：
@@ -197,11 +208,3 @@ var transferEvent.watch(function(error, result){
 });
 ```
  -->
-
-## 参考文章
-
-https://coursetro.com/posts/code/100/Solidity-Events-Tutorial---Using-Web3.js-to-Listen-for-Smart-Contract-Events
-https://github.com/ethereum/wiki/wiki/JavaScript-API#contract-events
-
-[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
-如果你想和我有密切的联系，欢迎加入知识星球[深入浅出区块链](https://t.xiaomiquan.com/RfAu7uj)，我会在星球为大家解答技术问题，作为星友福利，星友可加入我创建的区块链技术群，群内已经聚集了200多位区块链技术牛人和爱好者。

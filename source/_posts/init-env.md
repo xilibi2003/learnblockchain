@@ -18,10 +18,11 @@ author: Tiny熊
 
 ### Solidity安装
 
-强烈建议新手使用[Browser-Solidity](https://ethereum.github.io/browser-solidity)来进行开发。
-Browser-Solidity是一个基于浏览器的Solidity，就可以不用安装Solidity，本文的Hello World教程也将基于Browser-Solidity来进行。
+强烈建议新手使用[Remix -Solidity IDE](http://remix.ethereum.org/)来进行开发。
+Remix 是一个基于浏览器的Solidity，就可以不用安装Solidity，本文的Hello World教程也将基于Remix Solidity IDE来进行。
 
 如果你想自己安装请参考[Solidity安装指引](https://solidity.readthedocs.io/en/develop/installing-solidity.html)。
+> 更新，开发环境搭建还可以看另一篇文章: [搭建智能合约开发环境Remix IDE及使用](https://learnblockchain.cn/2018/06/07/remix-ide/)。
 
 ### geth 安装
 Mac下安装命令如下：其他平台参考：[geth官方安装指引](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum)
