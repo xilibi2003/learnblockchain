@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+  <meta name="msvalidate.01" content="914C9C1CBC7078C5E2AC612AD5C1CC6C" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="IDE," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深入浅出区块链" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="目前开发智能的IDE， 首推还是Remix, 而Remix官网, 总是由于各种各样的（网络）原因无法使用，本文就来介绍一下如何在本地搭建智能合约开发环境remix-ide并介绍Remix的使用。">
+<meta name="keywords" content="IDE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建智能合约开发环境Remix IDE及使用">
+<meta property="og:url" content="https://learnblockchain.cn/2018/06/07/remix-ide/index.html">
+<meta property="og:site_name" content="深入浅出区块链">
+<meta property="og:description" content="目前开发智能的IDE， 首推还是Remix, 而Remix官网, 总是由于各种各样的（网络）原因无法使用，本文就来介绍一下如何在本地搭建智能合约开发环境remix-ide并介绍Remix的使用。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://learnblockchain.cn/images/remix-setup.jpg">
+<meta property="og:image" content="https://learnblockchain.cn/images/remixd_connectionok.png">
+<meta property="og:image" content="https://learnblockchain.cn/images/remix-debug-console.png">
+<meta property="og:image" content="https://learnblockchain.cn/images/remix-debug-panel.png">
+<meta property="og:image" content="https://learnblockchain.cn/images/remix-debug-buttons.png">
+<meta property="og:image" content="https://learnblockchain.cn/images/remix-debug-locals.png">
+<meta property="og:image" content="https://learnblockchain.cn/images/remix-debug-state.png">
+<meta property="og:image" content="https://learnblockchain.cn/images/remix-debug-gas.png">
+<meta property="og:updated_time" content="2018-06-15T08:35:54.708Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="搭建智能合约开发环境Remix IDE及使用">
+<meta name="twitter:description" content="目前开发智能的IDE， 首推还是Remix, 而Remix官网, 总是由于各种各样的（网络）原因无法使用，本文就来介绍一下如何在本地搭建智能合约开发环境remix-ide并介绍Remix的使用。">
+<meta name="twitter:image" content="https://learnblockchain.cn/images/remix-setup.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'UT2K1ZRSWK',
+      apiKey: '0bbb261dfad58df8f8a657a1ed3255cd',
+      indexName: 'learnblockchain',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://learnblockchain.cn/2018/06/07/remix-ide/"/>
+
+
+
+
+
+  <title>搭建智能合约开发环境Remix IDE及使用 | 深入浅出区块链</title>
+  
+
+
+
+
+
+
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6273382609469378",
+        enable_page_level_ads: true
+    });
+</script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">系统学习区块链技术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wiki">
+          <a href="https://wiki.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Wiki
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2018/06/07/remix-ide/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">搭建智能合约开发环境Remix IDE及使用</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-07T10:56:04+08:00">
+                2018-06-07
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-06-15T16:35:54+08:00">
+                2018-06-15
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ethereum/" itemprop="url" rel="index">
+                    <span itemprop="name">以太坊</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ethereum/智能合约/" itemprop="url" rel="index">
+                    <span itemprop="name">智能合约</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>目前开发智能的IDE， 首推还是Remix, 而Remix<a href="https://remix.ethereum.org/" target="_blank" rel="noopener">官网</a>, 总是由于各种各样的（网络）原因无法使用，本文就来介绍一下如何在本地搭建智能合约开发环境remix-ide并介绍Remix的使用。</p>
+<a id="more"></a>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>Remix 是以太坊智能合约编程语言Solidity IDE，阅读本文前，你应该对以太坊、智能合约有所了解，<br>如果还不了解，建议先看<a href="https://learnblockchain.cn/2017/11/20/whatiseth/">以太坊是什么</a>。</p>
+<h2 id="Remix-IDE-介绍"><a href="#Remix-IDE-介绍" class="headerlink" title="Remix IDE 介绍"></a>Remix IDE 介绍</h2><p>Remix IDE 是一款基于浏览器的IDE，跟有些开发聊的时候，发现有一些同学对浏览器的IDE，有一些偏见，其实Atom编辑器就是基于web技术开发的一款编辑器（Atom可以看做一个没有地址栏的浏览器），其实基于浏览器的IDE，有一个很大的好处就是不用安装，打开即用。</p>
+<p>Remix IDE的功能全面（传统IDE有的功能这里都有），比如：</p>
+<ol>
+<li>代码提示补全，代码高亮</li>
+<li>代码警告、错误提示</li>
+<li>运行日志输出</li>
+<li>代码调试</li>
+<li>…</li>
+</ol>
+<h2 id="Remix-IDE-安装"><a href="#Remix-IDE-安装" class="headerlink" title="Remix IDE 安装"></a>Remix IDE 安装</h2><blockquote>
+<p>更新： Remix 现在提供了一个APP, 叫Remix APP， 如果是Mac 电脑，可以直接使用其提供的发布包，地址为：<a href="https://github.com/horizon-games/remix-app/releases" target="_blank" rel="noopener">https://github.com/horizon-games/remix-app/releases</a></p>
+</blockquote>
+<p>如果你有很好的网络环境，可以直接访问Remix<a href="https://remix.ethereum.org/" target="_blank" rel="noopener">官网</a>。<br>要不能还是还是像我一样老老实实把Remix IDE安装在本地，我发现要想成功安装选择对应的版本很关键，具体的版本要求如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ node --version</span><br><span class="line">v7<span class="number">.10</span><span class="number">.1</span></span><br><span class="line">$ npm --version</span><br><span class="line"><span class="number">4.2</span><span class="number">.0</span></span><br><span class="line">$ nvm --version</span><br><span class="line"><span class="number">0.33</span><span class="number">.11</span></span><br></pre></td></tr></table></figure>
+<h3 id="nvm-安装"><a href="#nvm-安装" class="headerlink" title="nvm 安装"></a>nvm 安装</h3><p>nvm 是一个node 版本工具，我们可以使用nvm来安装不同版本的node。<br>nvm 官方<a href="https://github.com/creationix/nvm/blob/master/README.md" target="_blank" rel="noopener">安装方法</a>如下：</p>
+<ol>
+<li><p>命令行中输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在当前用户profile文件，如（~/.bash_profile, ~/.zshrc, ~/.profile, or ~/.bashrc）添加加载nvm的脚本：</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> NVM_DIR=<span class="string">"<span class="variable">$HOME</span>/.nvm"</span></span><br><span class="line">[ -s <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span> ] &amp;&amp; \. <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>重启下命令行，输入nvm 试试，应该可以看到 nvm 命令的帮助</li>
+</ol>
+<h3 id="使用nvm-安装node"><a href="#使用nvm-安装node" class="headerlink" title="使用nvm 安装node"></a>使用nvm 安装node</h3><p>因为Remix IDE 要求使用node 7.10.1, 命令行输入一下命令进行安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm install 7</span><br></pre></td></tr></table></figure>
+<p>安装完成之后，使用node –version 和 npm –version检查下版本号，是否和刚刚列出版本要求一致，在版本一值的qing</p>
+<h3 id="命令行安装Remix-ide"><a href="#命令行安装Remix-ide" class="headerlink" title="命令行安装Remix ide"></a>命令行安装Remix ide</h3><p><strong>方法1</strong><br>直接使用npm安装，这也是我安装使用的方法。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install remix-ide -g</span><br><span class="line">remix-ide</span><br></pre></td></tr></table></figure></p>
+<p>如果出现错误：<br>Error: EACCES: permission denied, access ‘/usr/local/lib/node_modules’<br>可以尝试用以下方法解决：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R $(whoami) $(npm config get prefix)/&#123;lib/node_modules,bin,share&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果我们使用的是正确的node 和npm 版本的话，应该都可以安装成功，安装成功之后，remix-ide命令用来启动ide.</p>
+<p><strong>方法2</strong><br>remix-ide的github 上还提供了另一个方法进行安装，通过clone 代码来安装，方法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/ethereum/remix-ide.git</span><br><span class="line"><span class="built_in">cd</span> remix-ide</span><br><span class="line">npm install</span><br><span class="line">npm run setupremix  <span class="comment"># this will clone https://github.com/ethereum/remix for you and link it to remix-ide</span></span><br><span class="line">npm start</span><br></pre></td></tr></table></figure>
+<h2 id="Remix-ide-使用"><a href="#Remix-ide-使用" class="headerlink" title="Remix ide 使用"></a>Remix ide 使用</h2><p>Remix IDE 默认是使用8080端口启动的，启动之后在浏览器打开：<code>http://localhost:8080/</code>, 如图：</p>
+<p><img src="/images/remix-setup.jpg" alt=""></p>
+<p>和大多数IDE一样，最左边是文件浏览，中间是代码编辑区域，右边是功能区域，下边是日志区域。<br>在右侧的功能区域，常用的是<code>Compile</code>、<code>Run</code>及<code>Debuger</code>几个标签页（Tab）。</p>
+<p>在<code>Compile</code>页，会动态的显示当前编辑区域合约的编译信息，如显示错误和警告。编译的直接码信息及ABI接口可以通过点击<code>Details</code>查看到。<br>在<a href="https://learnblockchain.cn/2017/11/24/init-env/">这篇文章里</a> 也有截图说明。<br>在<code>Run</code>页，可以部署合约，以及调用合约函数等，使用非常简单，我们前面也有多篇文章讲解。<br><code>Debuger</code>页在下面调试一节单独讲解。</p>
+<h3 id="Remix-ide-加载本地磁盘文件"><a href="#Remix-ide-加载本地磁盘文件" class="headerlink" title="Remix ide 加载本地磁盘文件"></a>Remix ide 加载本地磁盘文件</h3><p>这是一个非常用的功能，但发现使用的人非常少，通过加载本地磁盘文件，就可以方便代码管理工具（如 git）管理我们的合约代码。<br>我详细介绍下如何这个功能怎么使用？</p>
+<blockquote>
+<p>使用在线版本的Remix可以使用这个功能， 不过需要安装一下<a href="https://github.com/ethereum/remixd" target="_blank" rel="noopener">remixd</a>, 安装使用命令<code>npm install -g remixd</code>。</p>
+<ol>
+<li>在需要的本地合约代码的目录下启动<code>remix-ide</code>, Remix IDE 会自动把当前目录做为共享目录。<br>如果是使用在线的Remix，需要使用命令<code>remixd -s shared-folder</code> 来指定共享目录。</li>
+<li>加载共享目录，在文件浏览区域上有，有这样一个图标，他用来加载本地共享目录，如图：<br><img src="/images/remixd_connectionok.png" alt=""></li>
+</ol>
+</blockquote>
+<h2 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h2><p>在合约编写过程中，合约调试是必不可少的一部分，为了模拟调试的过程，我故意在代码中加入一ge错误的逻辑代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.0</span>;</span><br><span class="line">​</span><br><span class="line">contract SimpleStorage &#123;</span><br><span class="line">    </span><br><span class="line">    uint storedData;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">set</span>(<span class="params">uint x</span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        storedData += x;    <span class="comment">// 错误的，多加了一个加号</span></span><br><span class="line">    &#125;</span><br><span class="line">​</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">get</span>(<span class="params"></span>) <span class="title">public</span> <span class="title">constant</span> <span class="title">returns</span> (<span class="params">uint</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> storedData;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>加入了错误的逻辑之后，我第2次调用set函数，合约状态变量的值，可能会出错（如果第一次不是用参数0去调用的话）。<br>注意如果需要调试合约，在部署合约的环境应该选择：JavaScript VM。</p>
+<h3 id="开始调试"><a href="#开始调试" class="headerlink" title="开始调试"></a>开始调试</h3><p>在我们每次执行一个交易（不管是方式调用还是函数执行）的时候，在日志都会输出一条记录，如图：<br><img src="/images/remix-debug-console.png" alt=""></p>
+<p>点击上图中的“Debug”按钮，在Remix右侧的功能区域会切换到调试面板，如下图：<br><img src="/images/remix-debug-panel.png" alt=""><br>调试过程过程中，有下面几项需要重点关注：</p>
+<ul>
+<li><p>Transactions: 可以查看交易及交易的执行过程，并且提供了7个调试的按钮，如下图：<br><img src="/images/remix-debug-buttons.png" alt=""></p>
+<p>  为了方便介绍，我为每个按钮编了号，每个按钮的含义是：</p>
+<ol>
+<li>后退一步（不进入函数内部）</li>
+<li>后退一步（进入函数内部）</li>
+<li>前进一步（进入函数内部）</li>
+<li>前进一步（不进入函数内部）</li>
+<li>跳到上一个断点</li>
+<li>跳出当前调用</li>
+<li>跳到下一个断点</li>
+</ol>
+</li>
+<li>Solidity Locals：显示当前上下文的局部变量的值， 如图：</li>
+</ul>
+<p><img src="/images/remix-debug-locals.png" alt=""></p>
+<ul>
+<li>Solidity State： 显示当前执行合约的状态变量，如下图:<br><img src="/images/remix-debug-state.png" alt=""></li>
+</ul>
+<p>在本例中，我们跟踪运行步骤的时候，可以看到局部变量的值为2，赋值给状态变量之后，状态变量的值更改为了3，所以可以判断运行当前语句的时候出错了。</p>
+<ul>
+<li>Step detail： 显示当前步骤的gas详情等，如下图:<br><img src="/images/remix-debug-gas.png" alt=""></li>
+</ul>
+<h3 id="设置断点"><a href="#设置断点" class="headerlink" title="设置断点"></a>设置断点</h3><p>这部分为小专栏读者准备，欢迎订阅小专栏<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">区块链技术</a>查看。</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ol>
+<li><a href="https://github.com/ethereum/remix-ide" target="_blank" rel="noopener">remix-ide github</a></li>
+<li><a href="http://remix.readthedocs.io/en/latest/index.html" target="_blank" rel="noopener">Remix Document</a></li>
+</ol>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。<br>如果你学习区块链中遇到问题，欢迎加入知识星球<a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">深入浅出区块链</a>问答社区，作为星友福利，星友可加入我创建的区块链技术群，群内已经聚集了200多位区块链技术牛人和爱好者。</p>
+<!---
+在本例中，我们的代码比较简单，执行的不多，可以不用设置断点，如果代码比较多，这可以设置断点，利用上面介绍的第7个按钮快速的调转到断点处，设置断点的方法很简单，在编辑区域，点击代码的行号，就可以在当前行设置一个断点，如下图：
+![](/images/remix-debug-break.png)
+
+上图在第8行出设置了一个断点，成功设置断点会在行号处，加上一个色块来标示断点。取消断点的方式是，再次点击断点处。
+有一点需要注意一下，如果在声明变量的地方设置断点，这断点可能会触发两次，第一次是初始化为0，第二次是赋实际的值。
+
+-->
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="Tiny熊 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信号：深入浅出区块链技术，欢迎订阅</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有收获，赞赏下</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/qr_pay.jpg" alt="Tiny熊 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Tiny熊
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://learnblockchain.cn/2018/06/07/remix-ide/" title="搭建智能合约开发环境Remix IDE及使用">https://learnblockchain.cn/2018/06/07/remix-ide/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/IDE/" rel="tag"># IDE</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/17/solidity-functions/" rel="next" title="Solidity 教程系列11 - 视图函数、虚函数讲解">
+                <i class="fa fa-chevron-left"></i> Solidity 教程系列11 - 视图函数、虚函数讲解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/xilibi2003" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiong-li-bing/activities" target="_blank" title="ZhiHu">
+                    
+                      <i class="fa fa-fw fa-globe"></i>ZhiHu</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="区块链技术专栏" target="_blank">区块链技术专栏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://t.xiaomiquan.com/RfAu7uj" title="技术交流-知识星球" target="_blank">技术交流-知识星球</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bitshuo.com" title="区块链技术中文社区" target="_blank">区块链技术中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://news.tangwen.org" title="汤问资讯" target="_blank">汤问资讯</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitask.org" title="币问" target="_blank">币问</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.hubwiz.com/course?affid＝lbc" title="汇智网互动课程中心" target="_blank">汇智网互动课程中心</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://hiblock.net/" title="HiBlock区块链社区" target="_blank">HiBlock区块链社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eosfans.io/" title="EOS中文社区" target="_blank">EOS中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blockflow.net/" title="BlockFlow" target="_blank">BlockFlow</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Remix-IDE-介绍"><span class="nav-number">2.</span> <span class="nav-text">Remix IDE 介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Remix-IDE-安装"><span class="nav-number">3.</span> <span class="nav-text">Remix IDE 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nvm-安装"><span class="nav-number">3.1.</span> <span class="nav-text">nvm 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用nvm-安装node"><span class="nav-number">3.2.</span> <span class="nav-text">使用nvm 安装node</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令行安装Remix-ide"><span class="nav-number">3.3.</span> <span class="nav-text">命令行安装Remix ide</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Remix-ide-使用"><span class="nav-number">4.</span> <span class="nav-text">Remix ide 使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Remix-ide-加载本地磁盘文件"><span class="nav-number">4.1.</span> <span class="nav-text">Remix ide 加载本地磁盘文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调试"><span class="nav-number">5.</span> <span class="nav-text">调试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开始调试"><span class="nav-number">5.1.</span> <span class="nav-text">开始调试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置断点"><span class="nav-number">5.2.</span> <span class="nav-text">设置断点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">6.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+  <div class="footer-custom"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17140514号-1</a></div>
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
