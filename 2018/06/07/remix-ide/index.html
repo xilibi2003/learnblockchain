@@ -101,7 +101,7 @@
 <meta property="og:image" content="https://learnblockchain.cn/images/remix-debug-locals.png">
 <meta property="og:image" content="https://learnblockchain.cn/images/remix-debug-state.png">
 <meta property="og:image" content="https://learnblockchain.cn/images/remix-debug-gas.png">
-<meta property="og:updated_time" content="2018-06-15T08:35:54.708Z">
+<meta property="og:updated_time" content="2018-06-21T01:32:19.673Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建智能合约开发环境Remix IDE及使用">
 <meta name="twitter:description" content="目前开发智能的IDE， 首推还是Remix, 而Remix官网, 总是由于各种各样的（网络）原因无法使用，本文就来介绍一下如何在本地搭建智能合约开发环境remix-ide并介绍Remix的使用。">
@@ -378,8 +378,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-06-15T16:35:54+08:00">
-                2018-06-15
+              <time title="更新于" itemprop="dateModified" datetime="2018-06-21T09:32:19+08:00">
+                2018-06-21
               </time>
             
           </span>
@@ -465,14 +465,13 @@
 <h3 id="nvm-安装"><a href="#nvm-安装" class="headerlink" title="nvm 安装"></a>nvm 安装</h3><p>nvm 是一个node 版本工具，我们可以使用nvm来安装不同版本的node。<br>nvm 官方<a href="https://github.com/creationix/nvm/blob/master/README.md" target="_blank" rel="noopener">安装方法</a>如下：</p>
 <ol>
 <li><p>命令行中输入：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash</span><br></pre></td></tr></table></figure>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在当前用户profile文件，如（~/.bash_profile, ~/.zshrc, ~/.profile, or ~/.bashrc）添加加载nvm的脚本：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> NVM_DIR=<span class="string">"<span class="variable">$HOME</span>/.nvm"</span></span><br><span class="line">[ -s <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span> ] &amp;&amp; \. <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span></span><br></pre></td></tr></table></figure>
 </li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> NVM_DIR=<span class="string">"<span class="variable">$HOME</span>/.nvm"</span></span><br><span class="line">[ -s <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span> ] &amp;&amp; \. <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span></span><br></pre></td></tr></table></figure>
-<ol>
-<li>重启下命令行，输入nvm 试试，应该可以看到 nvm 命令的帮助</li>
+<li><p>重启下命令行，输入nvm 试试，应该可以看到 nvm 命令的帮助</p>
+</li>
 </ol>
 <h3 id="使用nvm-安装node"><a href="#使用nvm-安装node" class="headerlink" title="使用nvm 安装node"></a>使用nvm 安装node</h3><p>因为Remix IDE 要求使用node 7.10.1, 命令行输入一下命令进行安装：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm install 7</span><br></pre></td></tr></table></figure>
@@ -489,18 +488,20 @@
 <h3 id="Remix-ide-加载本地磁盘文件"><a href="#Remix-ide-加载本地磁盘文件" class="headerlink" title="Remix ide 加载本地磁盘文件"></a>Remix ide 加载本地磁盘文件</h3><p>这是一个非常用的功能，但发现使用的人非常少，通过加载本地磁盘文件，就可以方便代码管理工具（如 git）管理我们的合约代码。<br>我详细介绍下如何这个功能怎么使用？</p>
 <blockquote>
 <p>使用在线版本的Remix可以使用这个功能， 不过需要安装一下<a href="https://github.com/ethereum/remixd" target="_blank" rel="noopener">remixd</a>, 安装使用命令<code>npm install -g remixd</code>。</p>
-<ol>
-<li>在需要的本地合约代码的目录下启动<code>remix-ide</code>, Remix IDE 会自动把当前目录做为共享目录。<br>如果是使用在线的Remix，需要使用命令<code>remixd -s shared-folder</code> 来指定共享目录。</li>
-<li>加载共享目录，在文件浏览区域上有，有这样一个图标，他用来加载本地共享目录，如图：<br><img src="/images/remixd_connectionok.png" alt=""></li>
-</ol>
 </blockquote>
+<ol>
+<li><p>在需要的本地合约代码的目录下启动<code>remix-ide</code>, Remix IDE 会自动把当前目录做为共享目录。如果是使用在线的Remix，需要使用命令<code>remixd -s shared-folder</code> 来指定共享目录。</p>
+</li>
+<li><p>加载共享目录，在文件浏览区域上有，有这样一个图标，他用来加载本地共享目录，如图：<br><img src="https://learnblockchain.cn/images/remixd_connectionok.png" alt=""></p>
+</li>
+</ol>
 <h2 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h2><p>在合约编写过程中，合约调试是必不可少的一部分，为了模拟调试的过程，我故意在代码中加入一ge错误的逻辑代码如下：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.0</span>;</span><br><span class="line">​</span><br><span class="line">contract SimpleStorage &#123;</span><br><span class="line">    </span><br><span class="line">    uint storedData;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">set</span>(<span class="params">uint x</span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        storedData += x;    <span class="comment">// 错误的，多加了一个加号</span></span><br><span class="line">    &#125;</span><br><span class="line">​</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">get</span>(<span class="params"></span>) <span class="title">public</span> <span class="title">constant</span> <span class="title">returns</span> (<span class="params">uint</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> storedData;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>加入了错误的逻辑之后，我第2次调用set函数，合约状态变量的值，可能会出错（如果第一次不是用参数0去调用的话）。<br>注意如果需要调试合约，在部署合约的环境应该选择：JavaScript VM。</p>
-<h3 id="开始调试"><a href="#开始调试" class="headerlink" title="开始调试"></a>开始调试</h3><p>在我们每次执行一个交易（不管是方式调用还是函数执行）的时候，在日志都会输出一条记录，如图：<br><img src="/images/remix-debug-console.png" alt=""></p>
+<h3 id="开始调试"><a href="#开始调试" class="headerlink" title="开始调试"></a>开始调试</h3><p>在我们每次执行一个交易（不管是方式调用还是函数执行）的时候，在日志都会输出一条记录，如图：<br><img src="https://learnblockchain.cn/images/remix-debug-console.png" alt=""></p>
 <p>点击上图中的“Debug”按钮，在Remix右侧的功能区域会切换到调试面板，如下图：<br><img src="/images/remix-debug-panel.png" alt=""><br>调试过程过程中，有下面几项需要重点关注：</p>
 <ul>
-<li><p>Transactions: 可以查看交易及交易的执行过程，并且提供了7个调试的按钮，如下图：<br><img src="/images/remix-debug-buttons.png" alt=""></p>
+<li><p>Transactions: 可以查看交易及交易的执行过程，并且提供了7个调试的按钮，如下图：<br><img src="https://learnblockchain.cn/images/remix-debug-buttons.png" alt=""></p>
 <p>  为了方便介绍，我为每个按钮编了号，每个按钮的含义是：</p>
 <ol>
 <li>后退一步（不进入函数内部）</li>
@@ -514,13 +515,13 @@
 </li>
 <li>Solidity Locals：显示当前上下文的局部变量的值， 如图：</li>
 </ul>
-<p><img src="/images/remix-debug-locals.png" alt=""></p>
+<p><img src="https://learnblockchain.cn/images/remix-debug-locals.png" alt=""></p>
 <ul>
-<li>Solidity State： 显示当前执行合约的状态变量，如下图:<br><img src="/images/remix-debug-state.png" alt=""></li>
+<li>Solidity State： 显示当前执行合约的状态变量，如下图:<br><img src="https://learnblockchain.cn/images/remix-debug-state.png" alt=""></li>
 </ul>
 <p>在本例中，我们跟踪运行步骤的时候，可以看到局部变量的值为2，赋值给状态变量之后，状态变量的值更改为了3，所以可以判断运行当前语句的时候出错了。</p>
 <ul>
-<li>Step detail： 显示当前步骤的gas详情等，如下图:<br><img src="/images/remix-debug-gas.png" alt=""></li>
+<li>Step detail： 显示当前步骤的gas详情等，如下图:<br><img src="https://learnblockchain.cn/images/remix-debug-gas.png" alt=""></li>
 </ul>
 <h3 id="设置断点"><a href="#设置断点" class="headerlink" title="设置断点"></a>设置断点</h3><p>这部分为小专栏读者准备，欢迎订阅小专栏<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">区块链技术</a>查看。</p>
 <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ol>
