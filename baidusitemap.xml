@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>https://learnblockchain.cn/2018/02/05/bitcoin-byzantine/</loc>
+    <lastmod>2018-07-16T04:44:51.302Z</lastmod>
+    <data>
+        <display>
+        <title>什么是拜占庭将军问题</title>
+        <pubTime>2018-02-04T16:00:00.000Z</pubTime>
+        
+        <tag>比特币</tag>
+         
+        <tag>共识协议</tag>
+         
+         
+           
+             
+              <breadCrumb title="比特币" url="https://learnblockchain.cn/categories/bitcoin/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://learnblockchain.cn/2018/06/07/remix-ide/</loc>
     <lastmod>2018-06-21T01:32:19.673Z</lastmod>
     <data>
@@ -698,28 +720,6 @@
            
              
               <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://learnblockchain.cn/2018/02/05/bitcoin-byzantine/</loc>
-    <lastmod>2018-02-07T03:46:38.920Z</lastmod>
-    <data>
-        <display>
-        <title>什么是拜占庭将军问题</title>
-        <pubTime>2018-02-04T16:00:00.000Z</pubTime>
-        
-        <tag>比特币</tag>
-         
-        <tag>共识协议</tag>
-         
-         
-           
-             
-              <breadCrumb title="比特币" url="https://learnblockchain.cn/categories/bitcoin/"/>
           
         </display>
     </data>

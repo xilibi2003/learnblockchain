@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://learnblockchain.cn/2018/02/05/bitcoin-byzantine/</loc>
+    
+    <lastmod>2018-07-16T04:44:51.302Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://learnblockchain.cn/2018/06/07/remix-ide/</loc>
     
     <lastmod>2018-06-21T01:32:19.673Z</lastmod>
@@ -208,13 +215,6 @@
     <loc>https://learnblockchain.cn/2017/11/20/whatiseth/</loc>
     
     <lastmod>2018-02-08T08:46:01.400Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://learnblockchain.cn/2018/02/05/bitcoin-byzantine/</loc>
-    
-    <lastmod>2018-02-07T03:46:38.920Z</lastmod>
     
   </url>
   
