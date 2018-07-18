@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+  <meta name="msvalidate.01" content="914C9C1CBC7078C5E2AC612AD5C1CC6C" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="EOS入门,柚子," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深入浅出区块链" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="是时候给写写EOS了，现在EOS主网已经上线，尽管我个人不是很喜欢EOS项目（不过也一直在关注EOS），但是不可否认EOS这个争议性很大的项目给区块链世界带来的变化。">
+<meta name="keywords" content="EOS入门,柚子">
+<meta property="og:type" content="article">
+<meta property="og:title" content="什么是EOS（柚子）">
+<meta property="og:url" content="https://learnblockchain.cn/2018/07/17/whatiseos/index.html">
+<meta property="og:site_name" content="深入浅出区块链">
+<meta property="og:description" content="是时候给写写EOS了，现在EOS主网已经上线，尽管我个人不是很喜欢EOS项目（不过也一直在关注EOS），但是不可否认EOS这个争议性很大的项目给区块链世界带来的变化。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-18T07:58:41.376Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="什么是EOS（柚子）">
+<meta name="twitter:description" content="是时候给写写EOS了，现在EOS主网已经上线，尽管我个人不是很喜欢EOS项目（不过也一直在关注EOS），但是不可否认EOS这个争议性很大的项目给区块链世界带来的变化。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'UT2K1ZRSWK',
+      apiKey: '0bbb261dfad58df8f8a657a1ed3255cd',
+      indexName: 'learnblockchain',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://learnblockchain.cn/2018/07/17/whatiseos/"/>
+
+
+
+
+
+  <title>什么是EOS（柚子） | 深入浅出区块链</title>
+  
+
+
+
+
+
+
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6273382609469378",
+        enable_page_level_ads: true
+    });
+</script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">系统学习区块链技术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wiki">
+          <a href="https://wiki.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Wiki
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2018/07/17/whatiseos/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">什么是EOS（柚子）</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-17T14:25:44+08:00">
+                2018-07-17
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-07-18T15:58:41+08:00">
+                2018-07-18
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/EOS/" itemprop="url" rel="index">
+                    <span itemprop="name">EOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>是时候给写写EOS了，现在EOS主网已经上线，尽管我个人不是很喜欢EOS项目（不过也一直在关注EOS），但是不可否认EOS这个争议性很大的项目给区块链世界带来的变化。</p>
+<a id="more"></a>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>阅读本文前，如果了解过比特币及以太坊，可以更好的理解本文。欢迎订阅专栏：<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">区块链技术</a><br>指引你从头开始学区块链技术。</p>
+<p>本文出现EOS是指EOS.io公链项目，不是指以太坊上的EOS Token。</p>
+<h2 id="EOS-简介"><a href="#EOS-简介" class="headerlink" title="EOS 简介"></a>EOS 简介</h2><p>EOS: Enterprise Operation System 中文意思为：商业级区块链操作系统。</p>
+<p>尽管以太坊创造性引入智能合约概念，极大的简化了区块链应用的开发，但以太坊平台依然有一个很大的限制，就是交易确认时间及交易吞吐量比较小，从而严重影响了以太坊进行商业应用。</p>
+<blockquote>
+<p>交易吞吐量有一个专门的词：TPS （transaction per second 每秒的交易量） 比特币的TPS 是大概7，并且最少几十分钟交易才能被确认，以太坊的TPS大概是20左右，交易的确认一般需要几分钟的时间。<br>不过比特币以太坊也在不断进化以提高TPS，比如比特币的闪电网络，以太坊的Sharding技术（分片）以及Plasma技术（分层）。</p>
+</blockquote>
+<p>EOS 项目的目标是建立可以承载商业级智能合约与应用的区块链基础设施，成为区块链世界的“底层操作系统”。<br>EOS通过<strong>石墨烯技术</strong>解决延迟和数据吞吐量问题，TPS可达到数千，交易的确认时间也只有数秒。同时声称未来使用并行链的方式，最高可以达到数百万TPS。</p>
+<p>EOS 设计了一套账户权限管理系统，EOS不再使用的地址作为账户，可以直接使用字符作为账户名，并设计了一套的账户权限体系。</p>
+<p>此外，在 EOS 上转账交易及运行智能合约不需要消耗 EOS代币。而是EOS 系统当中，抵押代币获取对应的资源，来执行相应交易，在EOS运行程序完全免费的说是不准确的。</p>
+<blockquote>
+<p>值的一提的是EOS项目其ICO也是基于以太坊<a href="https://learnblockchain.cn/2018/01/12/create_token/">ERC20 Token</a>进行的，其ICO 时间长达355天，作为一个当时还未上线的项目，融资额达到40亿美元是前所未有。</p>
+</blockquote>
+<h3 id="充满争议的技术天才BM"><a href="#充满争议的技术天才BM" class="headerlink" title="充满争议的技术天才BM"></a>充满争议的技术天才BM</h3><p>EOS的主要开发者为丹尼尔·拉瑞莫（Daniel Larimer）, 绰号BM(GitHub的昵称：ByteMaster), 它是EOS的项目方，BlockOne公司的CTO。<br>和V神一样，也是一个神奇的人物，网络上两人因理念不合有多次论战。BM有一句牛B 轰轰的话：我终生的使命，是致力于找到一些加密经济的解决方案，给所有人的财产、自由、平等带来保障。</p>
+<p>BM成功创立过三个区块链项目：BitShares、Steem 以及EOS，是一个技术天才，也是一个多变的人。<br>2009年的BM也准备的数字货币一展身手，在其研究比特币之后，2010年BM提出了一些比特币的问题，并想要改进，结果比特币的创始人中本聪（Satoshi Nakamoto）怼会了他“If you don’t believe me or don’t get it, I don’t have time to try to convince you, sorry.”（懂不懂随你，我可没时间理你）。<br>于是BM开始着手创建自己的区块链项目，这就是2013年发布的 BitShares 比特股，世界上第一个数字货币去中心化交易所。</p>
+<p>BitShares在2014年上线时，是当时的明星项目，也由于bug太多、糟糕的体验以及BM在进行个别版本升级的时候都不提供向下兼容，用户逐渐流失，更要命的是，BM利用自己超过1/3的记账节点，在没有达成社区共识的情况下，强行分叉增发了BitShares发行总量。尽管BM在技术提供了改进，发布了石墨烯工具集，不过最终社区投票决定让BM离开了BitShares。</p>
+<p>离开BitShares的BM，于2016年创立了区块链项目Steem，去中心化社交网站Steemit就是基于Steem创建，在Steemit的运营期间，BM和Steemit的CEO Ned有过多次口水战。<br>在2017年，BM离开了自己创建的Steem项目（也许除了BM自己，没有人能知道他离开Steem的真实原因），选择与布鲁默联合创办了BlockOne公司打造EOS项目。</p>
+<h2 id="石墨烯（Graphene）与-DPOS"><a href="#石墨烯（Graphene）与-DPOS" class="headerlink" title="石墨烯（Graphene）与 DPOS"></a>石墨烯（Graphene）与 DPOS</h2><p>和BitShares、Steem 一样，EOS底层使用的也是石墨烯技术，石墨烯是一个开源的区块链底层库，也出自BM之手，它采用的是 DPOS（Delegated Proof-of-Stake 股份授权证明机制 ）的共识机制。<br>在比特币及以太坊网络中，任何人都可以参与记账，而DPOS为了提高出块速度TPS，限制了参与记账了人数，在DPOS中，记账者不在称为矿工，而是改称为见证人 Witness，现在EOS中，又有一个新词：Block Producer，简称BP，大家翻译为超级节点（本文中依旧会使用见证人这个词，超级节点更像是一个市场营销用词）。</p>
+<p>在EOS中，见证人的个数是21个，BitShares中是101个，BitShares的出块时间打开是 1.5秒，在EOS中，出块时间提高到了0.5秒。</p>
+<p>和Pow及Pos共识机制矿工可以自由选择参与挖矿不同，DPOS下节点需要参与见证人选举，只有赢得选举的节点才能负责出块，在EOS中，赢得选举21个节点见证人轮流出块。<br>另外还有100个备用见证人（候选节点），在21个见证人出现问题后做替补。EOS的发行总量是10亿， 见证人在完成打包交易区块后，可以领取到区块的奖励，区块的奖励来自对发行量的通胀增发，通胀率每年接近5%。</p>
+<h2 id="BM特色的去中心化"><a href="#BM特色的去中心化" class="headerlink" title="BM特色的去中心化"></a>BM特色的去中心化</h2><p>我个人理解的区块链，它最大的革命性就是他的中立性，其运行不应该受到任何人的干扰，在POW共识中，矿工、项目方（开发者）以及交易方他们是相互独立的存在。</p>
+<p>在EOS中，BM本人拥有巨量的选票，他可以在一定程度上左右见证人的选举，同时BM还为EOS制定了宪法，要求所有的见证人必须遵照宪法。因此BM某种程度上可以左右EOS系统的运行。</p>
+<p>本文是个人对EOS的理解，受我自己视野局限也许理解有偏差，欢迎大家批准指正，我的微信： xlbxiong。</p>
+<h2 id="EOS相关资料："><a href="#EOS相关资料：" class="headerlink" title="EOS相关资料："></a>EOS相关资料：</h2><ul>
+<li><a href="https://developers.eos.io/" target="_blank" rel="noopener">EOS开发者资源</a></li>
+<li><a href="https://eos.io" target="_blank" rel="noopener">官方网站</a></li>
+<li><a href="https://github.com/EOSIO" target="_blank" rel="noopener">Github 代码</a></li>
+</ul>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。<br>我的<strong><a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">知识星球</a></strong>为各位解答区块链技术问题，欢迎加入讨论。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="Tiny熊 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信号：深入浅出区块链技术，欢迎订阅</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有收获，赞赏下</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/qr_pay.jpg" alt="Tiny熊 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Tiny熊
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://learnblockchain.cn/2018/07/17/whatiseos/" title="什么是EOS（柚子）">https://learnblockchain.cn/2018/07/17/whatiseos/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/EOS入门/" rel="tag"># EOS入门</a>
+          
+            <a href="/tags/柚子/" rel="tag"># 柚子</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/07/remix-ide/" rel="next" title="搭建智能合约开发环境Remix IDE及使用">
+                <i class="fa fa-chevron-left"></i> 搭建智能合约开发环境Remix IDE及使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/xilibi2003" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiong-li-bing/activities" target="_blank" title="ZhiHu">
+                    
+                      <i class="fa fa-fw fa-globe"></i>ZhiHu</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="区块链技术专栏" target="_blank">区块链技术专栏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://t.xiaomiquan.com/RfAu7uj" title="技术交流-知识星球" target="_blank">技术交流-知识星球</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bitshuo.com" title="区块链技术中文社区" target="_blank">区块链技术中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://news.tangwen.org" title="汤问资讯" target="_blank">汤问资讯</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitask.org" title="币问" target="_blank">币问</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.hubwiz.com/course?affid＝lbc" title="汇智网互动课程中心" target="_blank">汇智网互动课程中心</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://hiblock.net/" title="HiBlock区块链社区" target="_blank">HiBlock区块链社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eosfans.io/" title="EOS中文社区" target="_blank">EOS中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blockflow.net/" title="BlockFlow" target="_blank">BlockFlow</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EOS-简介"><span class="nav-number">2.</span> <span class="nav-text">EOS 简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#充满争议的技术天才BM"><span class="nav-number">2.1.</span> <span class="nav-text">充满争议的技术天才BM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#石墨烯（Graphene）与-DPOS"><span class="nav-number">3.</span> <span class="nav-text">石墨烯（Graphene）与 DPOS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BM特色的去中心化"><span class="nav-number">4.</span> <span class="nav-text">BM特色的去中心化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EOS相关资料："><span class="nav-number">5.</span> <span class="nav-text">EOS相关资料：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+  <div class="footer-custom"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17140514号-1</a></div>
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
