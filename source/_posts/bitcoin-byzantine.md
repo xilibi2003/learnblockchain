@@ -15,7 +15,7 @@ author: Tiny熊
 ## 什么是拜占庭将军问题
 
 也被称为“拜占庭容错”、“拜占庭将军问题”。
-拜占庭将军问题是Leslie Lamport（2013年的图灵讲得住）用来为描述**分布式系统一致性问题**（Distributed Consensus）在[论文](http://lamport.azurewebsites.net/pubs/byz.pdf)中抽象出来一个著名的例子。
+拜占庭将军问题是Leslie Lamport（2013年的图灵讲得主）用来为描述**分布式系统一致性问题**（Distributed Consensus）在[论文](http://lamport.azurewebsites.net/pubs/byz.pdf)中抽象出来一个著名的例子。
 
 这个例子大意是这样的：
 
