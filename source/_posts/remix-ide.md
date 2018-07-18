@@ -53,16 +53,18 @@ $ nvm --version
 ### nvm 安装
 nvm 是一个node 版本工具，我们可以使用nvm来安装不同版本的node。
 nvm 官方[安装方法](https://github.com/creationix/nvm/blob/master/README.md)如下：
+
 1. 命令行中输入：
-```bash
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
-```
+
+    ```bash
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+    ```
 2. 在当前用户profile文件，如（~/.bash_profile, ~/.zshrc, ~/.profile, or ~/.bashrc）添加加载nvm的脚本：
 
-```bash
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-```
+    ```bash
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    ```
 
 3. 重启下命令行，输入nvm 试试，应该可以看到 nvm 命令的帮助
 
@@ -124,11 +126,13 @@ Remix IDE 默认是使用8080端口启动的，启动之后在浏览器打开：
 
 这是一个非常用的功能，但发现使用的人非常少，通过加载本地磁盘文件，就可以方便代码管理工具（如 git）管理我们的合约代码。
 我详细介绍下如何这个功能怎么使用？
+
 > 使用在线版本的Remix可以使用这个功能， 不过需要安装一下[remixd](https://github.com/ethereum/remixd), 安装使用命令`npm install -g remixd`。
-1. 在需要的本地合约代码的目录下启动`remix-ide`, Remix IDE 会自动把当前目录做为共享目录。
-> 如果是使用在线的Remix，需要使用命令`remixd -s shared-folder` 来指定共享目录。
+
+1. 在需要的本地合约代码的目录下启动`remix-ide`, Remix IDE 会自动把当前目录做为共享目录。如果是使用在线的Remix，需要使用命令`remixd -s shared-folder` 来指定共享目录。
+
 2. 加载共享目录，在文件浏览区域上有，有这样一个图标，他用来加载本地共享目录，如图：
-![](/images/remixd_connectionok.png)
+![](https://learnblockchain.cn/images/remixd_connectionok.png)
 
 
 ## 调试
@@ -154,16 +158,18 @@ contract SimpleStorage {
 
 加入了错误的逻辑之后，我第2次调用set函数，合约状态变量的值，可能会出错（如果第一次不是用参数0去调用的话）。
 注意如果需要调试合约，在部署合约的环境应该选择：JavaScript VM。
+
 ### 开始调试
+
 在我们每次执行一个交易（不管是方式调用还是函数执行）的时候，在日志都会输出一条记录，如图：
-![](/images/remix-debug-console.png)
+![](https://learnblockchain.cn/images/remix-debug-console.png)
 
 点击上图中的“Debug”按钮，在Remix右侧的功能区域会切换到调试面板，如下图：
 ![](/images/remix-debug-panel.png)
 调试过程过程中，有下面几项需要重点关注：
 
 * Transactions: 可以查看交易及交易的执行过程，并且提供了7个调试的按钮，如下图：
-![](/images/remix-debug-buttons.png)
+![](https://learnblockchain.cn/images/remix-debug-buttons.png)
 
     为了方便介绍，我为每个按钮编了号，每个按钮的含义是：
     1. 后退一步（不进入函数内部）
@@ -175,16 +181,16 @@ contract SimpleStorage {
     7. 跳到下一个断点
 * Solidity Locals：显示当前上下文的局部变量的值， 如图：
 
-![](/images/remix-debug-locals.png)
+![](https://learnblockchain.cn/images/remix-debug-locals.png)
 
 
 * Solidity State： 显示当前执行合约的状态变量，如下图:
-![](/images/remix-debug-state.png)
+![](https://learnblockchain.cn/images/remix-debug-state.png)
 
 在本例中，我们跟踪运行步骤的时候，可以看到局部变量的值为2，赋值给状态变量之后，状态变量的值更改为了3，所以可以判断运行当前语句的时候出错了。
 
 * Step detail： 显示当前步骤的gas详情等，如下图:
-![](/images/remix-debug-gas.png)
+![](https://learnblockchain.cn/images/remix-debug-gas.png)
 
 
 ###  设置断点
