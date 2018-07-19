@@ -4,6 +4,52 @@
 
     
   <url>
+    <loc>https://learnblockchain.cn/2018/01/11/guide/</loc>
+    <lastmod>2018-07-19T09:59:54.657Z</lastmod>
+    <data>
+        <display>
+        <title>区块链技术学习指引</title>
+        <pubTime>2018-01-11T07:03:36.000Z</pubTime>
+        
+        <tag>如何学习</tag>
+         
+        <tag>目录</tag>
+         
+         
+           
+             
+              <breadCrumb title="目录" url="https://learnblockchain.cn/categories/%E7%9B%AE%E5%BD%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://learnblockchain.cn/2017/11/20/whatiseth/</loc>
+    <lastmod>2018-07-19T09:52:55.358Z</lastmod>
+    <data>
+        <display>
+        <title>以太坊是什么 - 以太坊开发入门指南</title>
+        <pubTime>2017-11-20T03:51:52.000Z</pubTime>
+        
+        <tag>以太坊概念</tag>
+         
+        <tag>以太坊入门</tag>
+         
+        <tag>ethereum</tag>
+         
+         
+           
+             
+              <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://learnblockchain.cn/2018/07/17/whatiseos/</loc>
     <lastmod>2018-07-18T07:58:41.376Z</lastmod>
     <data>
@@ -88,28 +134,6 @@
            
              
               <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://learnblockchain.cn/2018/01/11/guide/</loc>
-    <lastmod>2018-06-15T08:42:40.817Z</lastmod>
-    <data>
-        <display>
-        <title>区块链技术学习指引</title>
-        <pubTime>2018-01-11T07:03:36.000Z</pubTime>
-        
-        <tag>如何学习</tag>
-         
-        <tag>目录</tag>
-         
-         
-           
-             
-              <breadCrumb title="目录" url="https://learnblockchain.cn/categories/%E7%9B%AE%E5%BD%95/"/>
           
         </display>
     </data>
@@ -718,30 +742,6 @@
            
              
               <breadCrumb title="密码学" url="https://learnblockchain.cn/categories/cryptography/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://learnblockchain.cn/2017/11/20/whatiseth/</loc>
-    <lastmod>2018-02-08T08:46:01.400Z</lastmod>
-    <data>
-        <display>
-        <title>以太坊是什么 - 以太坊开发入门指南</title>
-        <pubTime>2017-11-20T03:51:52.000Z</pubTime>
-        
-        <tag>以太坊概念</tag>
-         
-        <tag>以太坊入门</tag>
-         
-        <tag>ethereum</tag>
-         
-         
-           
-             
-              <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
           
         </display>
     </data>
