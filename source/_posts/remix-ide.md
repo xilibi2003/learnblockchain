@@ -203,7 +203,7 @@ contract SimpleStorage {
 2. [Remix Document](http://remix.readthedocs.io/en/latest/index.html)
 
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
-如果你学习区块链中遇到问题，欢迎加入知识星球[深入浅出区块链](https://t.xiaomiquan.com/RfAu7uj)问答社区，作为星友福利，星友可加入我创建的区块链技术群，群内已经聚集了200多位区块链技术牛人和爱好者。
+如果你学习区块链中遇到问题，欢迎加入知识星球[深入浅出区块链](https://t.xiaomiquan.com/RfAu7uj)问答社区，作为星友福利，星友可加入我创建的区块链技术群，群内已经聚集了300多位区块链技术牛人和爱好者。
 
 
 <!---
