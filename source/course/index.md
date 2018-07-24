@@ -9,14 +9,14 @@ Tiny熊和朋友们成立了**登链学院**（公众号同名），为了更好
 
 我们现在推出的视频课程，有：
 * **区块链入门-零基础搞懂区块链**
-  这是0基础入门课，还不懂区块链是什么的同学可以从这个课开始学。课程可以在登链学院公众号回复“01”获取，PC可以点击[视频链接](http://edu.51cto.com/course/14291.html)直接前往学习，也可先看看[课程介绍](https://wiki.learnblockchain.cn/class/beginner.html)。
+  这是0基础入门课，还不懂区块链是什么的同学可以从这个课开始学。课程可以在登链学院公众号回复“01”获取，PC可以点击[视频链接](http://edu.51cto.com/course/14291.html)直接前往学习，也可先看看[课程介绍](https://wiki.learnblockchain.cn/course/beginner.html)。
 
 * **深入详解以太坊智能合约语言Solidity**
   正在录制中，这门课将会是市面上最深入的讲解智能合约语言Solidity的视频教程。
 
 * **通过代币学以太坊智能合约开发**
   这门课程囊括发行代币（token），众筹的所有知识点，同时通过代币的开发，引申出了很多智能合约开发知识点，不管是想要发行代币还是学习智能合约都是不可多得好教程。
-  课程可以在登链学院公众号回复“ECR20”获取，PC可以点击[视频链接](http://edu.51cto.com/course/14173.html)直接前往学习，也可先看看[课程介绍](https://wiki.learnblockchain.cn/class/token.html)。
+  课程可以在登链学院公众号回复“ECR20”获取，PC可以点击[视频链接](http://edu.51cto.com/course/14173.html)直接前往学习，也可先看看[课程介绍](https://wiki.learnblockchain.cn/course/token.html)。
 
   更多课程请期待...
 
