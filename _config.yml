@@ -12,7 +12,7 @@
 social:
   GitHub: https://github.com/xilibi2003 || github
   Weibo: http://weibo.com/xilibi2003 || weibo
-  ZhiHu: https://www.zhihu.com/people/xiong-li-bing/activities
+  知乎: https://www.zhihu.com/people/xiong-li-bing/activities
   E-Mail: mailto:xilibi2003@gmail.com || envelope
   #Google: https://plus.google.com/yourname || google
   #Twitter: https://twitter.com/yourname || twitter
@@ -25,8 +25,7 @@ social:
 
 social_icons:
   enable: true
-  
-  ZhiHu: zhihu
+  知乎: zhihu
   icons_only: false
   transition: false
 
@@ -145,6 +144,7 @@ menu:
   tags: /tags/ || tags
   categories: /categories/ || th
   archives: /archives/ || archive
+  course: /course/ || spinner
   #schedule: /schedule/ || calendar
   #sitemap: /sitemap.xml || sitemap
   #commonweal: /404/ || heartbeat
@@ -152,6 +152,7 @@ menu:
 # Enable/Disable menu icons.
 menu_icons:
   enable: true
+  course: spinner
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
