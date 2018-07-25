@@ -516,14 +516,14 @@
 
     
   <url>
-    <loc>https://learnblockchain.cn/2017/12/12/solidity_func/</loc>
+    <loc>https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/</loc>
     <lastmod>2018-03-18T13:55:32.197Z</lastmod>
     <data>
         <display>
-        <title>智能合约语言 Solidity 教程系列3 - 函数类型</title>
-        <pubTime>2017-12-12T07:25:59.000Z</pubTime>
+        <title>智能合约语言 Solidity 教程系列4 - 数据存储位置分析</title>
+        <pubTime>2017-12-21T03:51:02.000Z</pubTime>
         
-        <tag>Solidity</tag>
+        <tag>Solidity手册</tag>
          
          
            
@@ -539,14 +539,14 @@
 
     
   <url>
-    <loc>https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/</loc>
+    <loc>https://learnblockchain.cn/2017/12/12/solidity_func/</loc>
     <lastmod>2018-03-18T13:55:32.197Z</lastmod>
     <data>
         <display>
-        <title>智能合约语言 Solidity 教程系列4 - 数据存储位置分析</title>
-        <pubTime>2017-12-21T03:51:02.000Z</pubTime>
+        <title>智能合约语言 Solidity 教程系列3 - 函数类型</title>
+        <pubTime>2017-12-12T07:25:59.000Z</pubTime>
         
-        <tag>Solidity手册</tag>
+        <tag>Solidity</tag>
          
          
            
