@@ -176,6 +176,8 @@ finney 是货币单位 1 finney = 0.001eth
 
 专栏已经有多篇文章介绍Remix Solidity IDE的使用，这里就不一一截图演示了，请大家自己测试验证。
 
+如何创建代币发行代币，现在也录制了对应的**[视频教程:通过代币学以太坊智能合约开发](https://wiki.learnblockchain.cn/course/token.html)**，现在我们在**招募体验师**，可以点击[链接](https://learnblockchain.cn/course)了解详情。
+
 如果你在创建代币的过程中遇到问题，欢迎到我的**[知识星球](https://t.xiaomiquan.com/RfAu7uj)**提问，作为星球成员福利，成员可加入区块链技术付费交流群。
 
 ## 参考文档
