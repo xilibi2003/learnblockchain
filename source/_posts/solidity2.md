@@ -142,6 +142,7 @@ contract CallTest{
 ### 代码运行及讲解
 代码运行及讲解，请订阅[区块链技术](https://xiaozhuanlan.com/blockchaincore)查看。
 
+本文现在有对应的视频教程，如果文章没看明白，可以选择观看视频学习，戳[视频介绍](https://wiki.learnblockchain.cn/course/solidity.html)。
 ## 参考文档
 [Solidity官方文档-类型](https://solidity.readthedocs.io/en/develop/types.html)
 

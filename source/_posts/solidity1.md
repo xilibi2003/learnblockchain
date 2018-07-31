@@ -22,7 +22,7 @@ Solidity是以太坊智能合约编程语言，阅读本文前，你应该对以
 Solidity教程会是一系列文章，本文是第一篇：介绍Solidity的变量类型。
 Solidity 系列完整的文章列表请查看[分类-Solidity](https://learnblockchain.cn/categories/ethereum/Solidity/)。
 
-本文前半部分是参考Solidity官方文档（当前最新版本：0.4.20）进行翻译，后半部分是结合实际合约代码实例说明类型的使用（仅针对[专栏](https://xiaozhuanlan.com/blockchaincore)订阅用户）。
+本文前半部分是参考Solidity官方文档（当前最新版本：0.4.24）进行翻译，后半部分是结合实际合约代码实例说明类型的使用（仅针对[专栏](https://xiaozhuanlan.com/blockchaincore)订阅用户）。
 
 ## 类型 
 Solidity是一种静态类型语言，意味着每个变量（本地或状态变量）需要在编译时指定变量的类型（或至少可以推倒出类型）。Solidity提供了一些基本类型可以用来组合成复杂类型。
@@ -188,6 +188,7 @@ contract test {
 ## 代码实例
 通过合约代码实例说明类型的使用，请订阅[区块链技术](https://xiaozhuanlan.com/blockchaincore)查看。
 
+本文现在有对应的视频教程，如果文章没看明白，可以选择观看视频学习。
 ## 参考文档
 [Solidity官方文档-类型](https://solidity.readthedocs.io/en/develop/types.html)
 
