@@ -82,5 +82,7 @@ Hash值是由数字和大小写字母构成的字符串，每一位有62种可�
 
 本文中有提到共识协议，比特币共识协议主要是由工作量证明和最长链机制 两部分组成，请阅读[比特币如何达成共识 - 最长链的选择](https://xiaozhuanlan.com/topic/0298513746)。
 
+我们还为初学者提供了系统的区块链视频教程，觉得文章学习不过瘾的同学可以戳[入门视频教程](https://wiki.learnblockchain.cn/course/beginner.html)。
+
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客
 我的**[知识星球](https://t.xiaomiquan.com/RfAu7uj)**为各位解答区块链技术问题，欢迎加入讨论。
