@@ -419,4 +419,4 @@ go语言的实现感觉要更好理解一点，也显得要优雅一点。这也
 # 参考
 - https://medium.com/@mycoralhealth/code-your-own-proof-of-stake-blockchain-in-go-610cd99aa658
   
-我的**[知识专栏](https://xiaozhuanlan.com/eosio)**专注区块链底层技术开发，P2P网络、加密技术、MerkleTree、DAG、DHT等等，另外对于分布式系统的学习也很有帮助。欢迎大家交流。
+我的**[专栏](https://xiaozhuanlan.com/eosio)**专注区块链底层技术开发，P2P网络、加密技术、MerkleTree、DAG、DHT等等，另外对于分布式系统的学习也很有帮助。欢迎大家交流。
