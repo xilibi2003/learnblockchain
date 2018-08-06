@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://learnblockchain.cn/about/index.html</loc>
+    
+    <lastmod>2018-08-06T09:33:04.185Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://learnblockchain.cn/2017/10/25/whatbc/</loc>
     
     <lastmod>2018-07-31T02:41:10.473Z</lastmod>
@@ -170,13 +177,6 @@
   </url>
   
   <url>
-    <loc>https://learnblockchain.cn/about/index.html</loc>
-    
-    <lastmod>2018-03-25T13:47:28.702Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://learnblockchain.cn/2018/02/02/solidity-unit/</loc>
     
     <lastmod>2018-03-19T03:26:58.537Z</lastmod>
@@ -198,14 +198,14 @@
   </url>
   
   <url>
-    <loc>https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/</loc>
+    <loc>https://learnblockchain.cn/2017/12/12/solidity_func/</loc>
     
     <lastmod>2018-03-18T13:55:32.197Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://learnblockchain.cn/2017/12/12/solidity_func/</loc>
+    <loc>https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/</loc>
     
     <lastmod>2018-03-18T13:55:32.197Z</lastmod>
     
