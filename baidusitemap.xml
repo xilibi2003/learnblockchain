@@ -3,6 +3,33 @@
 
 
     
+  <url>
+    <loc>https://learnblockchain.cn/2018/08/07/python-blockchain-with-pos/</loc>
+    <lastmod>2018-08-07T01:56:31.911Z</lastmod>
+    <data>
+        <display>
+        <title>Python实现一条基于POS算法的区块链</title>
+        <pubTime>2018-08-07T12:44:00.000Z</pubTime>
+        
+        <tag>区块链</tag>
+         
+        <tag>权益证明</tag>
+         
+        <tag>Python</tag>
+         
+         
+           
+             
+              <breadCrumb title="区块链" url="https://learnblockchain.cn/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+          
+             
+              <breadCrumb title="比特币" url="https://learnblockchain.cn/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/bitcoin/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>https://learnblockchain.cn/2017/10/25/whatbc/</loc>
@@ -633,14 +660,14 @@
 
     
   <url>
-    <loc>https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/</loc>
+    <loc>https://learnblockchain.cn/2017/12/12/solidity_func/</loc>
     <lastmod>2018-03-18T13:55:32.197Z</lastmod>
     <data>
         <display>
-        <title>智能合约语言 Solidity 教程系列4 - 数据存储位置分析</title>
-        <pubTime>2017-12-21T03:51:02.000Z</pubTime>
+        <title>智能合约语言 Solidity 教程系列3 - 函数类型</title>
+        <pubTime>2017-12-12T07:25:59.000Z</pubTime>
         
-        <tag>Solidity手册</tag>
+        <tag>Solidity</tag>
          
          
            
@@ -656,14 +683,14 @@
 
     
   <url>
-    <loc>https://learnblockchain.cn/2017/12/12/solidity_func/</loc>
+    <loc>https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/</loc>
     <lastmod>2018-03-18T13:55:32.197Z</lastmod>
     <data>
         <display>
-        <title>智能合约语言 Solidity 教程系列3 - 函数类型</title>
-        <pubTime>2017-12-12T07:25:59.000Z</pubTime>
+        <title>智能合约语言 Solidity 教程系列4 - 数据存储位置分析</title>
+        <pubTime>2017-12-21T03:51:02.000Z</pubTime>
         
-        <tag>Solidity</tag>
+        <tag>Solidity手册</tag>
          
          
            

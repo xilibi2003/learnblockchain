@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+  <meta name="msvalidate.01" content="914C9C1CBC7078C5E2AC612AD5C1CC6C" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="区块链,权益证明,Python," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深入浅出区块链" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="[TOC] 区块链中的共识算法在比特币公链架构解析中，就曾提到过为了实现去中介化的设计，比特币设计了一套共识协议，并通过此协议来保证系统的稳定性和防攻击性。 并且我们知道，截止目前使用最广泛，也是最被大家接受的共识算法，是我们先前介绍过的POW(proof of work)工作量证明算法。目前市值排名前二的比特币">
+<meta name="keywords" content="区块链,权益证明,Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python实现一条基于POS算法的区块链">
+<meta property="og:url" content="https://learnblockchain.cn/2018/08/07/python-blockchain-with-pos/index.html">
+<meta property="og:site_name" content="深入浅出区块链">
+<meta property="og:description" content="[TOC] 区块链中的共识算法在比特币公链架构解析中，就曾提到过为了实现去中介化的设计，比特币设计了一套共识协议，并通过此协议来保证系统的稳定性和防攻击性。 并且我们知道，截止目前使用最广泛，也是最被大家接受的共识算法，是我们先前介绍过的POW(proof of work)工作量证明算法。目前市值排名前二的比特币和以太坊也是采用的此算法。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://diycode.b0.upaiyun.com/photo/2018/de1ec95397b1f627c1ded8fc3ac256e1.png">
+<meta property="og:image" content="https://diycode.b0.upaiyun.com/photo/2018/4eee010dfd46e7672d48d063b08cae47.png">
+<meta property="og:image" content="https://diycode.b0.upaiyun.com/photo/2018/1e5f93c93cc2bc5443902b89abd4ac02.png">
+<meta property="og:updated_time" content="2018-08-07T01:56:31.911Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python实现一条基于POS算法的区块链">
+<meta name="twitter:description" content="[TOC] 区块链中的共识算法在比特币公链架构解析中，就曾提到过为了实现去中介化的设计，比特币设计了一套共识协议，并通过此协议来保证系统的稳定性和防攻击性。 并且我们知道，截止目前使用最广泛，也是最被大家接受的共识算法，是我们先前介绍过的POW(proof of work)工作量证明算法。目前市值排名前二的比特币和以太坊也是采用的此算法。">
+<meta name="twitter:image" content="https://diycode.b0.upaiyun.com/photo/2018/de1ec95397b1f627c1ded8fc3ac256e1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'UT2K1ZRSWK',
+      apiKey: '0bbb261dfad58df8f8a657a1ed3255cd',
+      indexName: 'learnblockchain',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://learnblockchain.cn/2018/08/07/python-blockchain-with-pos/"/>
+
+
+
+
+
+  <title>Python实现一条基于POS算法的区块链 | 深入浅出区块链</title>
+  
+
+
+
+
+
+
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6273382609469378",
+        enable_page_level_ads: true
+    });
+</script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">系统学习区块链技术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wiki">
+          <a href="https://wiki.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Wiki
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-course">
+          <a href="/course/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-spinner"></i> <br />
+            
+            视频教程
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2018/08/07/python-blockchain-with-pos/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Python实现一条基于POS算法的区块链</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-07T20:44:00+08:00">
+                2018-08-07
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-07T09:56:31+08:00">
+                2018-08-07
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/区块链/" itemprop="url" rel="index">
+                    <span itemprop="name">区块链</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/区块链/bitcoin/" itemprop="url" rel="index">
+                    <span itemprop="name">比特币</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[TOC]</p>
+<h1 id="区块链中的共识算法"><a href="#区块链中的共识算法" class="headerlink" title="区块链中的共识算法"></a>区块链中的共识算法</h1><p>在比特币公链架构解析中，就曾提到过为了实现去中介化的设计，比特币设计了一套共识协议，并通过此协议来保证系统的稳定性和防攻击性。 并且我们知道，截止目前使用最广泛，也是最被大家接受的共识算法，是我们先前介绍过的POW(proof of work)工作量证明算法。目前市值排名前二的比特币和以太坊也是采用的此算法。</p>
+<a id="more"></a>
+<p>虽然POW共识算法取得了巨大的成功，但对它的质疑也从来未曾停止过。 其中最主要的一个原因就是电力消耗。据不完全统计，基于POW的挖矿机制所消耗的电量是非常巨大的，甚至比绝大多数国家耗电量还要多。这对我们的资源造成了极大的浪费，此外随着比特大陆等公司的强势崛起，造成了算力的高度集中。</p>
+<p>基于以上种种原因，更多的共识算法被提出来 POS、DPOS、BPFT等等。 今天我们就来认识POS(proof of stake)算法。</p>
+<p>Proof of stake，译为权益证明。你可以已经猜到了，权益证明简单理解就是拥有更多token的人，有更大的概率获得记账权利，然后获得奖励。 这个概率具体有多大呢？ 下面我们在代码实现中会展示，分析也放在后面。 当然，POS是会比POW更好吗？ 会更去中心化吗？ 现在看来未必，所以我们这里也不去对比谁优谁劣。 我们站在中立的角度，单纯的来讨论讨论POS这种算法。</p>
+<h1 id="代码实战"><a href="#代码实战" class="headerlink" title="代码实战"></a>代码实战</h1><h2 id="生成一个Block"><a href="#生成一个Block" class="headerlink" title="生成一个Block"></a>生成一个Block</h2><p>既然要实现POS算法，那么就难免要生成一条链，链又是由一个个Block生成的，所以下面我们首先来看看如何生成Block，当然在前面的内容里面，关于如何生成Block，以及交易、UTXO等等都已经介绍过了。由于今天我们的核心是实现POS，所以关于Block的生成，我们就用最简单的实现方式，好让大家把目光聚焦在核心的内容上面。</p>
+<p>我们用三个方法来实现生成一个合法的区块</p>
+<ul>
+<li>calculate_hash  计算区块的hash值</li>
+<li>is_block_valid  校验区块是否合法</li>
+<li>generate_block  生成一个区块</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> sha256</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_block</span><span class="params">(oldblock, bpm, address)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    :param oldblock:</span></span><br><span class="line"><span class="string">    :param bpm:</span></span><br><span class="line"><span class="string">    :param address:</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    newblock = &#123;</span><br><span class="line">        <span class="string">"Index"</span>: oldblock[<span class="string">"Index"</span>] + <span class="number">1</span>,</span><br><span class="line">        <span class="string">"BPM"</span>: bpm,</span><br><span class="line">        <span class="string">"Timestamp"</span>: str(datetime.now()),</span><br><span class="line">        <span class="string">"PrevHash"</span>: oldblock[<span class="string">"Hash"</span>],</span><br><span class="line">        <span class="string">"Validator"</span>: address</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    newblock[<span class="string">"Hash"</span>] = calculate_hash(newblock)</span><br><span class="line">    <span class="keyword">return</span> newblock</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calculate_hash</span><span class="params">(block)</span>:</span></span><br><span class="line">    record = <span class="string">""</span>.join([</span><br><span class="line">        str(block[<span class="string">"Index"</span>]),</span><br><span class="line">        str(block[<span class="string">"BPM"</span>]),</span><br><span class="line">        block[<span class="string">"Timestamp"</span>],</span><br><span class="line">        block[<span class="string">"PrevHash"</span>]</span><br><span class="line">    ])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> sha256(record.encode()).hexdigest()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_block_valid</span><span class="params">(newblock, oldblock)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    :param newblock:</span></span><br><span class="line"><span class="string">    :param oldblock:</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> oldblock[<span class="string">"Index"</span>] + <span class="number">1</span> != newblock[<span class="string">"Index"</span>]:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> oldblock[<span class="string">"Hash"</span>] != newblock[<span class="string">"PrevHash"</span>]:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> calculate_hash(newblock) != newblock[<span class="string">"Hash"</span>]:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">True</span></span><br></pre></td></tr></table></figure>
+<p>这里为了更灵活，我们没有用类的实现方式，直接采用函数来实现了Block生成，相信很容易看懂。</p>
+<h2 id="创建一个TCP服务器"><a href="#创建一个TCP服务器" class="headerlink" title="创建一个TCP服务器"></a>创建一个TCP服务器</h2><p>由于我们需要用权益证明算法来选择记账人，所以需要从很多Node(节点)中选择记账人，也就是需要一个server让节点链接上来，同时要同步信息给节点。因此需要一个TCP长链接。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> socketserver <span class="keyword">import</span> BaseRequestHandler, ThreadingTCPServer</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># start a tcp server</span></span><br><span class="line">    serv = ThreadingTCPServer((<span class="string">''</span>, <span class="number">9090</span>), HandleConn)</span><br><span class="line">    serv.serve_forever()</span><br></pre></td></tr></table></figure>
+<p>在这里我们用了python内库socketserver来创建了一个TCPServer。 需要注意的是，这里我们是采用的多线程的创建方式，这样可以保证有多个客户端同时连接上来，而不至于被阻塞。当然，这里这个server也是存在问题的，那就是有多少个客户端连接，就会创建多少个线程，更好的方式是创建一个线程池。由于这里是测试，所以就采用更简单的方式了。</p>
+<p>相信大家已经看到了，在我们创建TCPServer的时候，使用到了HandleConn，但是我们还没有定义，所以接下来我们就来定义一个HandleConn</p>
+<p>##消息处理器<br>下面我们来实现Handler函数，Handler函数在跟Client Node通信的时候，需要我们的Node实现下面的功能</p>
+<ul>
+<li>Node可以输入balance（token数量）  也就是股权数目</li>
+<li>Node需要能够接收广播，方便Server同步区块以及记账人信息</li>
+<li>添加自己到候选人名单 （候选人为持有token的人）</li>
+<li>输入BPM生成Block</li>
+<li>验证一个区块的合法性</li>
+</ul>
+<p>感觉任务还是蛮多的，接下来我们看代码实现</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">from</span> queue <span class="keyword">import</span> Queue, Empty</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义变量</span></span><br><span class="line">block_chain = []</span><br><span class="line">temp_blocks = []</span><br><span class="line">candidate_blocks = Queue()  <span class="comment"># 创建队列，用于线程间通信</span></span><br><span class="line">announcements = Queue()</span><br><span class="line">validators = &#123;&#125;</span><br><span class="line"></span><br><span class="line">My_Lock = threading.Lock()</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HandleConn</span><span class="params">(BaseRequestHandler)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">handle</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"Got connection from"</span>, self.client_address)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># validator address</span></span><br><span class="line">        self.request.send(<span class="string">b"Enter token balance:"</span>)</span><br><span class="line">        balance = self.request.recv(<span class="number">8192</span>)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            balance = int(balance)</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            print(e)</span><br><span class="line"></span><br><span class="line">        t = str(datetime.now())</span><br><span class="line">        address = sha256(t.encode()).hexdigest()</span><br><span class="line">        validators[address] = balance</span><br><span class="line">        print(validators)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">            announce_winner_t = threading.Thread(target=annouce_winner, args=(announcements, self.request,),</span><br><span class="line">                                                 daemon=<span class="keyword">True</span>)</span><br><span class="line">            announce_winner_t.start()</span><br><span class="line"></span><br><span class="line">            self.request.send(<span class="string">b"\nEnter a new BPM:"</span>)</span><br><span class="line">            bpm = self.request.recv(<span class="number">8192</span>)</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                bpm = int(bpm)</span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                print(e)</span><br><span class="line">                <span class="keyword">del</span> validators[address]</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># with My_Lock:</span></span><br><span class="line">            last_block = block_chain[<span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line">            new_block = generate_block(last_block, bpm, address)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> is_block_valid(new_block, last_block):</span><br><span class="line">                print(<span class="string">"new block is valid!"</span>)</span><br><span class="line">                candidate_blocks.put(new_block)</span><br><span class="line"></span><br><span class="line">            self.request.send(<span class="string">b"\nEnter a new BPM:\n"</span>)</span><br><span class="line"></span><br><span class="line">            annouce_blockchain_t = threading.Thread(target=annouce_blockchain, args=(self.request,), daemon=<span class="keyword">True</span>)</span><br><span class="line">            annouce_blockchain_t.start()</span><br></pre></td></tr></table></figure>
+<p>这段代码，可能对大多数同学来说是有难度的，在这里我们采用了多线程的方式，同时为了能够让消息在线程间通信，我们使用了队列。 这里使用队列，也是为了我们的系统可以更好的拓展，后面如果可能，这一节的程序很容易拓展为分布式系统。 将多线程里面处理的任务拆分出去成独立的服务，然后用消息队列进行通信，就是一个简单的分布式系统啦。（是不是很激动？）</p>
+<p>由于这里有难度，所以代码还是讲一讲吧</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># validator address</span></span><br><span class="line">    self.request.send(<span class="string">b"Enter token balance:"</span>)</span><br><span class="line">    balance = self.request.recv(<span class="number">8192</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        balance = int(balance)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        print(e)</span><br><span class="line"></span><br><span class="line">    t = str(datetime.now())</span><br><span class="line">    address = sha256(t.encode()).hexdigest()</span><br><span class="line">    validators[address] = balance</span><br><span class="line">    print(validators)</span><br></pre></td></tr></table></figure>
+<p>这一段就是我们提到的Node 客户端添加自己到候选人的代码，每链接一个客户端，就会添加一个候选人。 这里我们用添加的时间戳的hash来记录候选人。 当然也可以用其他的方式，比如我们代码里面的client_address </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">announce_winner_t = threading.Thread(target=annouce_winner, args=(announcements, self.request,),</span><br><span class="line">                                                daemon=<span class="keyword">True</span>)</span><br><span class="line">        announce_winner_t.start()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">annouce_winner</span><span class="params">(announcements, request)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    :param announcements:</span></span><br><span class="line"><span class="string">    :param request:</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            msg = announcements.get(block=<span class="keyword">False</span>)</span><br><span class="line">            request.send(msg.encode())</span><br><span class="line">            request.send(<span class="string">b'\n'</span>)</span><br><span class="line">        <span class="keyword">except</span> Empty:</span><br><span class="line">            time.sleep(<span class="number">3</span>)</span><br><span class="line">            <span class="keyword">continue</span></span><br></pre></td></tr></table></figure>
+<p>然后接下来我们起了一个线程去广播获得记账权的节点信息到所有节点。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">self.request.send(<span class="string">b"\nEnter a new BPM:"</span>)</span><br><span class="line">            bpm = self.request.recv(<span class="number">8192</span>)</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                bpm = int(bpm)</span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                print(e)</span><br><span class="line">                <span class="keyword">del</span> validators[address]</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># with My_Lock:</span></span><br><span class="line">            last_block = block_chain[<span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line">            new_block = generate_block(last_block, bpm, address)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> is_block_valid(new_block, last_block):</span><br><span class="line">                print(<span class="string">"new block is valid!"</span>)</span><br><span class="line">                candidate_blocks.put(new_block)</span><br></pre></td></tr></table></figure>
+<p>根据节点输入的BPM值生成一个区块，并校验区块的有效性。 将有效的区块放到候选区块当中，等待记账人将区块添加到链上。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">annouce_blockchain_t = threading.Thread(target=annouce_blockchain, args=(self.request,), daemon=<span class="keyword">True</span>)</span><br><span class="line">        annouce_blockchain_t.start()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">annouce_blockchain</span><span class="params">(request)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    :param request:</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        time.sleep(<span class="number">30</span>)</span><br><span class="line">        <span class="keyword">with</span> My_Lock:</span><br><span class="line">            output = json.dumps(block_chain)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            request.send(output.encode())</span><br><span class="line">            request.send(<span class="string">b'\n'</span>)</span><br><span class="line">        <span class="keyword">except</span> OSError:</span><br><span class="line">            <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p>最后起一个线程，同步区块链到所有节点。</p>
+<p>看完了，节点跟Server交互的部分，接下来是最重要的部分，</p>
+<h2 id="POS算法实现"><a href="#POS算法实现" class="headerlink" title="POS算法实现"></a>POS算法实现</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pick_winner</span><span class="params">(announcements)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    选择记账人</span></span><br><span class="line"><span class="string">    :param announcements:</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    time.sleep(<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        <span class="keyword">with</span> My_Lock:</span><br><span class="line">            temp = temp_blocks</span><br><span class="line"></span><br><span class="line">        lottery_pool = []  <span class="comment">#</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> temp:</span><br><span class="line">            <span class="keyword">for</span> block <span class="keyword">in</span> temp:</span><br><span class="line">                <span class="keyword">if</span> block[<span class="string">"Validator"</span>] <span class="keyword">not</span> <span class="keyword">in</span> lottery_pool:</span><br><span class="line">                    set_validators = validators</span><br><span class="line">                    k = set_validators.get(block[<span class="string">"Validator"</span>])</span><br><span class="line">                    <span class="keyword">if</span> k:</span><br><span class="line">                        <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</span><br><span class="line">                            lottery_pool.append(block[<span class="string">"Validator"</span>])</span><br><span class="line"></span><br><span class="line">            lottery_winner = choice(lottery_pool)</span><br><span class="line">            print(lottery_winner)</span><br><span class="line">            <span class="comment"># add block of winner to blockchain and let all the other nodes known</span></span><br><span class="line">            <span class="keyword">for</span> block <span class="keyword">in</span> temp:</span><br><span class="line">                <span class="keyword">if</span> block[<span class="string">"Validator"</span>] == lottery_winner:</span><br><span class="line">                    <span class="keyword">with</span> My_Lock:</span><br><span class="line">                        block_chain.append(block)</span><br><span class="line"></span><br><span class="line">                    <span class="comment"># write message in queue.</span></span><br><span class="line">                    msg = <span class="string">"\n&#123;0&#125; 赢得了记账权利\n"</span>.format(lottery_winner)</span><br><span class="line">                    announcements.put(msg)</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">with</span> My_Lock:</span><br><span class="line">            temp_blocks.clear()</span><br></pre></td></tr></table></figure>
+<p>这里我们用pick_winner 来选择记账权利，我们根据token数量构造了一个列表。 一个人获得记账权利的概率为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p = mount[&apos;NodeA&apos;]/mount[&apos;All&apos;]</span><br></pre></td></tr></table></figure></p>
+<p>文字描述就是其token数目在总数中的占比。 比如总数有100个，他有10个，那么其获得记账权的概率就是0.1， 到这里核心的部分就写的差不多了，接下来，我们来添加节点，开始测试吧 </p>
+<h1 id="测试POS的记账方式"><a href="#测试POS的记账方式" class="headerlink" title="测试POS的记账方式"></a>测试POS的记账方式</h1><p>在测试之前，起始还有一部分工作要做，前面我们的run方法需要完善下，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># create a genesis block</span></span><br><span class="line">    t = str(datetime.now())</span><br><span class="line">    genesis_block = &#123;</span><br><span class="line">        <span class="string">"Index"</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="string">"Timestamp"</span>: t,</span><br><span class="line">        <span class="string">"BPM"</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="string">"PrevHash"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="string">"Validator"</span>: <span class="string">""</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    genesis_block[<span class="string">"Hash"</span>] = calculate_hash(genesis_block)</span><br><span class="line">    print(genesis_block)</span><br><span class="line">    block_chain.append(genesis_block)</span><br><span class="line"></span><br><span class="line">    thread_canditate = threading.Thread(target=candidate, args=(candidate_blocks,), daemon=<span class="keyword">True</span>)</span><br><span class="line">    thread_pick = threading.Thread(target=pick_winner, args=(announcements,), daemon=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">    thread_canditate.start()</span><br><span class="line">    thread_pick.start()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># start a tcp server</span></span><br><span class="line">    serv = ThreadingTCPServer((<span class="string">''</span>, <span class="number">9090</span>), HandleConn)</span><br><span class="line">    serv.serve_forever()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">candidate</span><span class="params">(candidate_blocks)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    :param candidate_blocks:</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            candi = candidate_blocks.get(block=<span class="keyword">False</span>)</span><br><span class="line">        <span class="keyword">except</span> Empty:</span><br><span class="line">            time.sleep(<span class="number">5</span>)</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        temp_blocks.append(candi)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    run()</span><br></pre></td></tr></table></figure>
+<h1 id="添加节点连接到TCPServer"><a href="#添加节点连接到TCPServer" class="headerlink" title="添加节点连接到TCPServer"></a>添加节点连接到TCPServer</h1><p>为了充分减少程序的复杂性，tcp client我们这里就不实现了，可以放在后面拓展部分。 毕竟我们这个系统是很容易扩展的，后面我们拆分了多线程的部分，在实现tcp client就是一个完整的分布式系统了。</p>
+<p>所以，我们这里用linux自带的命令 nc，不知道nc怎么用的同学可以google或者 man nc<br><img src="https://diycode.b0.upaiyun.com/photo/2018/de1ec95397b1f627c1ded8fc3ac256e1.png" alt=""></p>
+<ul>
+<li>启动服务    运行 python pos.py  </li>
+<li>打开3个终端</li>
+<li>分别输入下面命令<ul>
+<li>nc localhost 9090</li>
+</ul>
+</li>
+</ul>
+<p>终端如果输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Enter token balance:</span><br></pre></td></tr></table></figure></p>
+<p>说明你client已经链接服务器ok啦.</p>
+<h1 id="测试POS的记账方式-1"><a href="#测试POS的记账方式-1" class="headerlink" title="测试POS的记账方式"></a>测试POS的记账方式</h1><p>接下来依次按照提示操作。 balance可以按心情来操作，因为这里是测试，我们输入100，<br>紧接着会提示输入BPM，我们前面提到过，输入BPM是为了生成Block，那么就输入吧，随便输入个9. ok， 接下来就稍等片刻，等待记账。<br>输出如同所示<br><img src="https://diycode.b0.upaiyun.com/photo/2018/4eee010dfd46e7672d48d063b08cae47.png" alt=""><br>依次在不同的终端，根据提示输入数字，等待消息同步。</p>
+<h1 id="生成区块链"><a href="#生成区块链" class="headerlink" title="生成区块链"></a>生成区块链</h1><p>下面是我这边获得的3个block信息。<br><img src="https://diycode.b0.upaiyun.com/photo/2018/1e5f93c93cc2bc5443902b89abd4ac02.png" alt=""></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>在上面的代码中，我们实现了一个完整的基于POS算法记账的链，当然这里有许多值得扩展与改进的地方。</p>
+<ul>
+<li>python中多线程开销比较大，可以改成协程的方式</li>
+<li>TCP建立的长链接是基于TCPServer，是中心化的方式，可以改成P2P对等网络</li>
+<li>链的信息不够完整</li>
+<li>系统可以拓展成分布式，让其更健壮</li>
+</ul>
+<p>大概列了以上几点，其他还有很多可以拓展的地方，感兴趣的朋友可以先玩玩， 后者等到我们后面的教程。 （广告打的措手不及，哈哈）</p>
+<p>当然了，语言不是重点，所以在这里，我也实现了go语言的版本<a href="https://github.com/csunny/argo/tree/master/src/pos" target="_blank" rel="noopener">源码地址</a></p>
+<p>go语言的实现感觉要更好理解一点，也显得要优雅一点。这也是为什么go语言在分布式领域要更抢手的原因之一吧！</p>
+<h1 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h1><ul>
+<li><a href="https://github.com/csunny/py-bitcoin/" target="_blank" rel="noopener">https://github.com/csunny/py-bitcoin/</a></li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://medium.com/@mycoralhealth/code-your-own-proof-of-stake-blockchain-in-go-610cd99aa658" target="_blank" rel="noopener">https://medium.com/@mycoralhealth/code-your-own-proof-of-stake-blockchain-in-go-610cd99aa658</a></li>
+</ul>
+<p>我的<strong><a href="https://xiaozhuanlan.com/eosio" target="_blank" rel="noopener">专栏</a></strong>专注区块链底层技术开发，P2P网络、加密技术、MerkleTree、DAG、DHT等等，另外对于分布式系统的学习也很有帮助。欢迎大家交流。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="Tiny熊 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信号：深入浅出区块链技术，欢迎订阅</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有收获，赞赏下</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/qr_pay.jpg" alt="Tiny熊 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Magic_陈
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://learnblockchain.cn/2018/08/07/python-blockchain-with-pos/" title="Python实现一条基于POS算法的区块链">https://learnblockchain.cn/2018/08/07/python-blockchain-with-pos/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/区块链/" rel="tag"># 区块链</a>
+          
+            <a href="/tags/权益证明/" rel="tag"># 权益证明</a>
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/17/whatiseos/" rel="next" title="什么是EOS（柚子）">
+                <i class="fa fa-chevron-left"></i> 什么是EOS（柚子）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/xilibi2003" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiong-li-bing/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="区块链技术专栏" target="_blank">区块链技术专栏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://t.xiaomiquan.com/RfAu7uj" title="技术交流-知识星球" target="_blank">技术交流-知识星球</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bitshuo.com" title="区块链技术中文社区" target="_blank">区块链技术中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://news.tangwen.org" title="汤问资讯" target="_blank">汤问资讯</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitask.org" title="币问" target="_blank">币问</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://hiblock.net/" title="HiBlock区块链社区" target="_blank">HiBlock区块链社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eosfans.io/" title="EOS中文社区" target="_blank">EOS中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blockflow.net/" title="BlockFlow" target="_blank">BlockFlow</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.liankexing.com/" title="链客区块链技术社区" target="_blank">链客区块链技术社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitool.cn/" title="币兔" target="_blank">币兔</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#区块链中的共识算法"><span class="nav-number">1.</span> <span class="nav-text">区块链中的共识算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码实战"><span class="nav-number">2.</span> <span class="nav-text">代码实战</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#生成一个Block"><span class="nav-number">2.1.</span> <span class="nav-text">生成一个Block</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建一个TCP服务器"><span class="nav-number">2.2.</span> <span class="nav-text">创建一个TCP服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#POS算法实现"><span class="nav-number">2.3.</span> <span class="nav-text">POS算法实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试POS的记账方式"><span class="nav-number">3.</span> <span class="nav-text">测试POS的记账方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加节点连接到TCPServer"><span class="nav-number">4.</span> <span class="nav-text">添加节点连接到TCPServer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试POS的记账方式-1"><span class="nav-number">5.</span> <span class="nav-text">测试POS的记账方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#生成区块链"><span class="nav-number">6.</span> <span class="nav-text">生成区块链</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#项目地址"><span class="nav-number">8.</span> <span class="nav-text">项目地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">9.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+  <div class="footer-custom"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17140514号-1</a></div>
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
