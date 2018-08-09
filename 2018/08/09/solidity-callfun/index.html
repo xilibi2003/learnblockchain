@@ -85,18 +85,18 @@
 
 
 
-<meta name="description" content="这是Solidity教程系列文章第13篇介绍函数调用， 本文会介绍函数使用元组返回多个值，通过命名方式进行参数调用以及如何省略函数参数名称。 Solidity 系列完整的文章列表请查看分类-Solidity。 写在前面Solidity 是以太坊智能合约编程语言，阅读本文前，你应该对以太坊、智能合约有所了解，如果你还不了">
+<meta name="description" content="这是Solidity教程系列文章第13篇介绍函数调用， 本文会介绍函数使用元组返回多个值，通过命名方式进行参数调用以及如何省略函数参数名称。 Solidity 系列完整的文章列表请查看分类-Solidity。">
 <meta name="keywords" content="Solidity手册">
 <meta property="og:type" content="article">
 <meta property="og:title" content="智能合约语言 Solidity 教程系列13 -  函数调用">
 <meta property="og:url" content="https://learnblockchain.cn/2018/08/09/solidity-callfun/index.html">
 <meta property="og:site_name" content="深入浅出区块链">
-<meta property="og:description" content="这是Solidity教程系列文章第13篇介绍函数调用， 本文会介绍函数使用元组返回多个值，通过命名方式进行参数调用以及如何省略函数参数名称。 Solidity 系列完整的文章列表请查看分类-Solidity。 写在前面Solidity 是以太坊智能合约编程语言，阅读本文前，你应该对以太坊、智能合约有所了解，如果你还不了解，建议你先看以太坊是什么 欢迎订阅区块链技术专栏阅读更全面的分析文章。 函数调">
+<meta property="og:description" content="这是Solidity教程系列文章第13篇介绍函数调用， 本文会介绍函数使用元组返回多个值，通过命名方式进行参数调用以及如何省略函数参数名称。 Solidity 系列完整的文章列表请查看分类-Solidity。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-09T03:18:35.019Z">
+<meta property="og:updated_time" content="2018-08-09T03:25:59.523Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="智能合约语言 Solidity 教程系列13 -  函数调用">
-<meta name="twitter:description" content="这是Solidity教程系列文章第13篇介绍函数调用， 本文会介绍函数使用元组返回多个值，通过命名方式进行参数调用以及如何省略函数参数名称。 Solidity 系列完整的文章列表请查看分类-Solidity。 写在前面Solidity 是以太坊智能合约编程语言，阅读本文前，你应该对以太坊、智能合约有所了解，如果你还不了解，建议你先看以太坊是什么 欢迎订阅区块链技术专栏阅读更全面的分析文章。 函数调">
+<meta name="twitter:description" content="这是Solidity教程系列文章第13篇介绍函数调用， 本文会介绍函数使用元组返回多个值，通过命名方式进行参数调用以及如何省略函数参数名称。 Solidity 系列完整的文章列表请查看分类-Solidity。">
 
 
 
@@ -379,7 +379,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-09T11:18:35+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-09T11:25:59+08:00">
                 2018-08-09
               </time>
             
@@ -448,6 +448,7 @@
       
         <p>这是Solidity教程系列文章第13篇介绍函数调用， 本文会介绍函数使用元组返回多个值，通过命名方式进行参数调用以及如何省略函数参数名称。</p>
 <p>Solidity 系列完整的文章列表请查看<a href="https://learnblockchain.cn/categories/ethereum/Solidity/">分类-Solidity</a>。</p>
+<a id="more"></a>
 <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>Solidity 是以太坊智能合约编程语言，阅读本文前，你应该对以太坊、智能合约有所了解，<br>如果你还不了解，建议你先看<a href="https://learnblockchain.cn/2017/11/20/whatiseth/">以太坊是什么</a></p>
 <p>欢迎订阅<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">区块链技术专栏</a>阅读更全面的分析文章。</p>
 <h2 id="函数调用及参数"><a href="#函数调用及参数" class="headerlink" title="函数调用及参数"></a>函数调用及参数</h2><p>在<a href="https://xiaozhuanlan.com/topic/1293405678" target="_blank" rel="noopener">函数类型</a>一节中，我们介绍过Solidity 中有两种函数调用方式：内部函数调用和外部函数调用，这一节我们进一步介绍。</p>
