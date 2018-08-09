@@ -381,8 +381,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-07-30T17:39:12+08:00">
-                2018-07-30
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-09T10:17:24+08:00">
+                2018-08-09
               </time>
             
           </span>
@@ -442,6 +442,380 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/01/11/guide/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2018/08/09/solidity-callfun/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/09/solidity-callfun/" itemprop="url">智能合约语言 Solidity 教程系列13 -  函数调用</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-09T11:17:17+08:00">
+                2018-08-09
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-09T11:18:35+08:00">
+                2018-08-09
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ethereum/" itemprop="url" rel="index">
+                    <span itemprop="name">以太坊</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ethereum/Solidity/" itemprop="url" rel="index">
+                    <span itemprop="name">Solidity</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这是Solidity教程系列文章第13篇介绍函数调用， 本文会介绍函数使用元组返回多个值，通过命名方式进行参数调用以及如何省略函数参数名称。</p>
+<p>Solidity 系列完整的文章列表请查看<a href="https://learnblockchain.cn/categories/ethereum/Solidity/">分类-Solidity</a>。</p>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>Solidity 是以太坊智能合约编程语言，阅读本文前，你应该对以太坊、智能合约有所了解，<br>如果你还不了解，建议你先看<a href="https://learnblockchain.cn/2017/11/20/whatiseth/">以太坊是什么</a></p>
+<p>欢迎订阅<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">区块链技术专栏</a>阅读更全面的分析文章。</p>
+<h2 id="函数调用及参数"><a href="#函数调用及参数" class="headerlink" title="函数调用及参数"></a>函数调用及参数</h2><p>在<a href="https://xiaozhuanlan.com/topic/1293405678" target="_blank" rel="noopener">函数类型</a>一节中，我们介绍过Solidity 中有两种函数调用方式：内部函数调用和外部函数调用，这一节我们进一步介绍。</p>
+<h2 id="内部函数调用（Internal-Function-Calls）"><a href="#内部函数调用（Internal-Function-Calls）" class="headerlink" title="内部函数调用（Internal Function Calls）"></a>内部函数调用（Internal Function Calls）</h2><p>内部调用，不会创建一个EVM消息调用。而是直接调用当前合约的函数，也可以递归调用。<br>如下面这个的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.16</span>;</span><br><span class="line"></span><br><span class="line">contract C &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">g</span>(<span class="params">uint a</span>) <span class="title">public</span> <span class="title">pure</span> <span class="title">returns</span> (<span class="params">uint ret</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> f();       <span class="comment">// 直接调用</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) <span class="title">internal</span> <span class="title">pure</span> <span class="title">returns</span> (<span class="params">uint ret</span>) </span>&#123;</span><br><span class="line">     <span class="keyword">return</span> g(<span class="number">7</span>) + f();    <span class="comment">// 直接调用及递归调用</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这些函数调用被转换为EVM内部的简单指令跳转（jumps）。 这样带来的一个好处是，当前的内存不会被回收。在一个内部调用时传递一个内存型引用效率将非常高的。当然，仅仅是同一个合约的函数之间才可通过内部的方式进行调用。</p>
+<h2 id="外部函数调用-External-Function-Calls"><a href="#外部函数调用-External-Function-Calls" class="headerlink" title="外部函数调用(External Function Calls)"></a>外部函数调用(External Function Calls)</h2><p>外部调用，会创建EVM<strong>消息调用</strong>。<br>表达式this.g(8);和c.g(2)（这里的c是一个合约实例）是外部调用函数的方式，它会发起一个消息调用，而不是EVM的指令跳转。需要注意的是，在合约的构造器中，不能使用this调用函数，因为当前合约还没有创建完成。</p>
+<p>其它合约的函数必须通过外部的方式调用。对于一个外部调用，所有函数的参数必须要拷贝到内存中。</p>
+<p>当调用其它合约的函数时，可以通过选项<strong>.value()</strong>，和<strong>.gas()</strong>来分别指定要发送的以太币（以wei为单位）和gas值，如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.0</span>;</span><br><span class="line"></span><br><span class="line">contract InfoFeed &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">info</span>(<span class="params"></span>) <span class="title">public</span> <span class="title">payable</span> <span class="title">returns</span> (<span class="params">uint ret</span>) </span>&#123; <span class="keyword">return</span> <span class="number">42</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">contract Consumer &#123;</span><br><span class="line">    InfoFeed feed;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">setFeed</span>(<span class="params">address addr</span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">      feed = InfoFeed(addr);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">callFeed</span>(<span class="params"></span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">      feed.info.value(<span class="number">10</span>).gas(<span class="number">800</span>)();  <span class="comment">// 附加以太币及gas来调用info</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>info()函数，必须使用payable关键字，否则不能通过value()来接收以太币。</p>
+<p>表达式InfoFeed(addr)进行了一个显示的类型转换，表示给定的地址是合约InfoFeed类型，这里并不会执行构造器的初始化。<br>在进行显式的类型强制转换时需要非常小心，不要调用一个我们不知道类型的合约函数。</p>
+<p>我们也可以使用<strong>function setFeed(InfoFeed _feed) { feed = _feed; }</strong>来直接进行赋值。<br>注意<strong>feed.info.value(10).gas(800)</strong>仅仅是对发送的以太币和gas值进行了设置，真正的调用是后面的括号()。<br>调用callFeed时，需要预先存入一定量的以太币，要不能会因余额不足报错。</p>
+<blockquote>
+<p>如果我们不知道被调用的合约源代码，和它们交互会有潜在的风险，即便被调用的合约继承自一个已知的父合约（继承仅仅要求正确实现接口，而不关注实现的内容）。<br>因为和他们交互，相当于把自己控制权交给被调用的合约，对方几乎可以利用它做任何事。<br>此外, 被调用的合约可以改变调用合约的状态变量，在编写函数时需要注意可重入性漏洞问题（可查看安全建议）。</p>
+</blockquote>
+<h2 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h2><p>与其他语言一样，函数可以提供参数作为输入（函数类型本身也可以作为参数）; 与Javascript和C不同的是，solidity还可以返回任意数量的参数作为输出。</p>
+<h3 id="输入参数"><a href="#输入参数" class="headerlink" title="输入参数"></a>输入参数</h3><p>输入参数的声明方式与变量相同， 未使用的参数可以省略变量名称。假设我们希望合约接受一种带有两个整数参数的外部调用，可以这样写：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.16</span>;</span><br><span class="line"></span><br><span class="line">contract Simple &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">taker</span>(<span class="params">uint _a, uint _b</span>) <span class="title">public</span> <span class="title">pure</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 使用 _a  _b</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="输出参数"><a href="#输出参数" class="headerlink" title="输出参数"></a>输出参数</h3><p>输出参数的声明和输入参数一样，只不过它接在returns 之后，假设我们希望返回两个结果：两个给定整数的和及积，可以这样写：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.16</span>;</span><br><span class="line"></span><br><span class="line">contract Simple &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">arithmetics</span>(<span class="params">uint _a, uint _b</span>)</span></span><br><span class="line"><span class="function">        <span class="title">public</span></span></span><br><span class="line"><span class="function">        <span class="title">pure</span></span></span><br><span class="line"><span class="function">        <span class="title">returns</span> (<span class="params">uint o_sum, uint o_product</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        o_sum = _a + _b;</span><br><span class="line">        o_product = _a * _b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以省略输出参数的名称，也可以使用return语句指定输出值，return可以返回多个值（见下文）。<br>返回一个没有赋值的参数，则默认为0。</p>
+<p>输入参数和输出参数可以在函数内表达式中使用，也可以作为被赋值的对象， 如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">contract Simple &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">taker</span>(<span class="params">uint _a, uint _b</span>) <span class="title">public</span> <span class="title">pure</span> <span class="title">returns</span> (<span class="params">uint _c</span>) </span>&#123;</span><br><span class="line">        _a = <span class="number">1</span>;</span><br><span class="line">        _b = <span class="number">2</span>;</span><br><span class="line">        _c = <span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="返回多个值"><a href="#返回多个值" class="headerlink" title="返回多个值"></a>返回多个值</h3><p>当一个函数有多个输出参数时, 可以使用元组(tuple)来返回多个值。元组(tuple)是一个数量固定，类型可以不同的元素组成的一个列表（用小括号表示），使用return (v0, v1, …, vn) 语句，就可以返回多个值，返回值的数量需要和输出参数声明的数量一致。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) <span class="title">public</span> <span class="title">pure</span> <span class="title">returns</span> (<span class="params">uint, bool, uint</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 使用元组返回多个值</span></span><br><span class="line">    <span class="keyword">return</span> (<span class="number">7</span>, <span class="literal">true</span>, <span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">callf</span>(<span class="params"></span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">    uint x;</span><br><span class="line">    bool y;</span><br><span class="line">    uint z;</span><br><span class="line">    <span class="comment">// 使用元组给多个变量赋值</span></span><br><span class="line">    (x, y , z)  = f();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="补充关于元组的介绍"><a href="#补充关于元组的介绍" class="headerlink" title="补充关于元组的介绍"></a>补充关于元组的介绍</h4><p>上面的代码中，使用了元组返回多个值及使用元组给多个变量赋值，给多个变量赋值通常也称为解构（解构的概念在函数式语言中较为常见），再来看看元组的一些用法，比如元组可以交换变量值，如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(x, y) = (y, x);</span><br></pre></td></tr></table></figure>
+<p>元组支持省略一些元素， 如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(x, y, ) = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+<p>开头的元素也可以省略，如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(, y, ) = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+<p>注意 (1,) 是一个一个元素的元组， (1) 只是1。</p>
+<h3 id="使用命名参数调用"><a href="#使用命名参数调用" class="headerlink" title="使用命名参数调用"></a>使用命名参数调用</h3><p>函数调用的参数，可以通过指定名称的方式调用，使用花括号{} 包起来，参数顺序任意，但参数的类型和数量要与定义一致。<br>如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.0</span>;</span><br><span class="line"></span><br><span class="line">contract C &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">uint key, uint value</span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">g</span>(<span class="params"></span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        f(&#123;<span class="attr">value</span>: <span class="number">2</span>, <span class="attr">key</span>: <span class="number">3</span>&#125;);  <span class="comment">// 命名参数</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="省略函数参数名称"><a href="#省略函数参数名称" class="headerlink" title="省略函数参数名称"></a>省略函数参数名称</h3><p>没有使用的参数名称可以省略(一般常见于返回值)。这些参数依然在栈(stack)上存在，但不可访问。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.16</span>;</span><br><span class="line"></span><br><span class="line">contract C &#123;</span><br><span class="line">    <span class="comment">// omitted name for parameter</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params">uint k, uint</span>) <span class="title">public</span> <span class="title">pure</span> <span class="title">returns</span>(<span class="params">uint</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> k;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。<br>如果想与我有更密切的交流可以选择加入我的<a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">知识星球</a>（星球成员可加入微信技术交流群）</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2018/08/09/solidity-library/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/09/solidity-library/" itemprop="url">智能合约语言 Solidity 教程系列12 -  库的使用</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-09T10:40:56+08:00">
+                2018-08-09
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-09T11:12:58+08:00">
+                2018-08-09
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ethereum/" itemprop="url" rel="index">
+                    <span itemprop="name">以太坊</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ethereum/Solidity/" itemprop="url" rel="index">
+                    <span itemprop="name">Solidity</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>这是Solidity教程系列文章第12篇介绍库的使用：库与合约的不同，使用库的正姿势。</p>
+<p>Solidity 系列完整的文章列表请查看<a href="https://learnblockchain.cn/categories/ethereum/Solidity/">分类-Solidity</a>。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/09/solidity-library/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1035,8 +1409,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-05-17T23:23:43+08:00">
-                2018-05-17
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-09T10:58:50+08:00">
+                2018-08-09
               </time>
             
           </span>
@@ -1662,333 +2036,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2018/04/15/web3-html/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Tiny熊">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="深入浅出区块链">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/15/web3-html/" itemprop="url">Web3与智能合约交互实战</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-15T21:24:16+08:00">
-                2018-04-15
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-05-10T11:46:26+08:00">
-                2018-05-10
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ethereum/" itemprop="url" rel="index">
-                    <span itemprop="name">以太坊</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Web3与智能合约交互实战</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/15/web3-html/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2018/04/09/solidity-modify/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Tiny熊">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="深入浅出区块链">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/09/solidity-modify/" itemprop="url">智能合约语言 Solidity 教程系列10 - 完全理解函数修改器</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-09T20:35:47+08:00">
-                2018-04-09
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-05-17T23:10:40+08:00">
-                2018-05-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ethereum/" itemprop="url" rel="index">
-                    <span itemprop="name">以太坊</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ethereum/Solidity/" itemprop="url" rel="index">
-                    <span itemprop="name">Solidity</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>这是Solidity教程系列文章第10篇，带大家完全理解Solidity的函数修改器。<br>Solidity系列完整的文章列表请查看<a href="https://learnblockchain.cn/categories/ethereum/Solidity/">分类-Solidity</a>。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/09/solidity-modify/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2039,7 +2086,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

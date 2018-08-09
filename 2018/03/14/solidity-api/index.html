@@ -93,7 +93,7 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="这是Solidity教程系列文章第8篇介绍Solidity API，它们主要表现为内置的特殊的变量及函数，存在于全局命名空间里。 Solidity 系列完整的文章列表请查看分类-Solidity。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-18T13:55:32.192Z">
+<meta property="og:updated_time" content="2018-08-09T02:12:29.971Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="智能合约语言 Solidity 教程系列8 - Solidity API">
 <meta name="twitter:description" content="这是Solidity教程系列文章第8篇介绍Solidity API，它们主要表现为内置的特殊的变量及函数，存在于全局命名空间里。 Solidity 系列完整的文章列表请查看分类-Solidity。">
@@ -379,8 +379,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-03-18T21:55:32+08:00">
-                2018-03-18
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-09T10:12:29+08:00">
+                2018-08-09
               </time>
             
           </span>
@@ -454,6 +454,7 @@
 <p>Solidity API 主要表现为Solidity 内置的特殊的变量及函数，他们存在于全局命名空间里，主要分为以下几类：</p>
 <ol>
 <li>有关区块和交易的属性</li>
+<li>ABI编码函数</li>
 <li>有关错误处理</li>
 <li>有关数学及加密功能</li>
 <li>地址相关</li>
@@ -462,14 +463,15 @@
 <p>下面详细讲解下</p>
 <h2 id="区块和交易的属性（Block-And-Transaction-Properties）"><a href="#区块和交易的属性（Block-And-Transaction-Properties）" class="headerlink" title="区块和交易的属性（Block And Transaction Properties）"></a>区块和交易的属性（Block And Transaction Properties）</h2><p>用来提供一些区块链当前的信息。</p>
 <ul>
-<li>block.blockhash(uint blockNumber) returns (bytes32)：返回给定区块号的哈希值，只支持最近256个区块，且不包含当前区块。</li>
+<li>blockhash(uint blockNumber) returns (bytes32)：返回给定区块号的哈希值，只支持最近256个区块，且不包含当前区块。</li>
 <li>block.coinbase (address): 当前块矿工的地址。</li>
 <li>block.difficulty (uint):当前块的难度。</li>
 <li>block.gaslimit (uint):当前块的gaslimit。</li>
 <li>block.number (uint):当前区块的块号。</li>
 <li>block.timestamp (uint): 当前块的Unix时间戳（从1970/1/1 00:00:00 UTC开始所经过的秒数）</li>
+<li>gasleft() (uint256):  获取剩余gas。</li>
 <li>msg.data (bytes): 完整的调用数据（calldata）。</li>
-<li>msg.gas (uint): 当前还剩的gas。</li>
+<li>msg.gas (uint): 当前还剩的gas（弃用）。</li>
 <li>msg.sender (address): 当前调用发起人的地址。</li>
 <li>msg.sig (bytes4):调用数据(calldata)的前四个字节（例如为：函数标识符）。</li>
 <li>msg.value (uint): 这个消息所附带的以太币，单位为wei。</li>
@@ -481,11 +483,21 @@
 <p>不应该依据 block.timestamp, now 和 block.blockhash来产生一个随机数（除非你确实需要这样做），这几个值在一定程度上被矿工影响（比如在赌博合约里，不诚实的矿工可能会重试去选择一个对自己有利的hash）。</p>
 <p>对于同一个链上连续的区块来说，当前区块的时间戳（timestamp）总是会大于上一个区块的时间戳。</p>
 <p>为了可扩展性的原因，你只能查最近256个块，所有其它的将返回0.</p>
+<h2 id="ABI编码函数"><a href="#ABI编码函数" class="headerlink" title="ABI编码函数"></a>ABI编码函数</h2><p>Solidity 提供了一下函数，用来直接得到ABI编码信息，这些函数有：</p>
+<pre><code>* abi.encode(...) returns (bytes)：计算参数的ABI编码。
+* abi.encodePacked(...) returns (bytes)：计算参数的紧密打包编码
+* abi. encodeWithSelector(bytes4 selector, ...) returns (bytes)： 计算函数选择器和参数的ABI编码
+* abi.encodeWithSignature(string signature, ...) returns (bytes): 等价于* abi.encodeWithSelector(bytes4(keccak256(signature), ...)
+</code></pre><p>通过ABI编码函数可以在不用调用函数的情况下，获得ABI编码值，下面通过一段代码来看看这些方式的使用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.24</span>;</span><br><span class="line"></span><br><span class="line">contract testABI &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">abiEncode</span>(<span class="params"></span>) <span class="title">public</span> <span class="title">constant</span> <span class="title">returns</span> (<span class="params">bytes</span>) </span>&#123;</span><br><span class="line">        abi.encode(<span class="number">1</span>);  <span class="comment">// 计算 1 的ABI编码</span></span><br><span class="line">        <span class="keyword">return</span> abi.encodeWithSignature(<span class="string">"set(uint256)"</span>, <span class="number">1</span>); <span class="comment">//计算函数set(uint256) 及参数1 的ABI 编码</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h2><ul>
 <li>assert(bool condition)<br>用于判断内部错误，条件不满足时抛出异常</li>
 <li>require(bool condition):<br>用于判断输入或外部组件错误，条件不满足时抛出异常</li>
+<li>require(bool condition, string message)<br>同上，多了一个错误信息。</li>
 <li>revert():<br>终止执行并还原改变的状态</li>
+<li>revert(string reason)<br>同上，提供一个错误信息。</li>
 </ul>
+<p>之前老的错误处理方式用throw 及 if … throw，这种方式会消耗掉所有剩余的gas。目前throw 的方式已经被弃用。</p>
 <h2 id="数学及加密功能"><a href="#数学及加密功能" class="headerlink" title="数学及加密功能"></a>数学及加密功能</h2><ul>
 <li>addmod(uint x, uint y, uint k) returns (uint):<br>计算(x + y) % k，加法支持任意的精度且不会在2**256处溢出，从0.5.0版本开始断言k != 0。</li>
 <li>mulmod(uint x, uint y, uint k) returns (uint):<br>计算 (x <em> y) % k， 乘法支持任意的精度且不会在2*</em>256处溢出， 从0.5.0版本开始断言k != 0。</li>
@@ -702,7 +714,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -842,7 +854,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区块和交易的属性（Block-And-Transaction-Properties）"><span class="nav-number">2.</span> <span class="nav-text">区块和交易的属性（Block And Transaction Properties）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误处理"><span class="nav-number">3.</span> <span class="nav-text">错误处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数学及加密功能"><span class="nav-number">4.</span> <span class="nav-text">数学及加密功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#地址相关"><span class="nav-number">5.</span> <span class="nav-text">地址相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合约相关"><span class="nav-number">6.</span> <span class="nav-text">合约相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文档"><span class="nav-number">7.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区块和交易的属性（Block-And-Transaction-Properties）"><span class="nav-number">2.</span> <span class="nav-text">区块和交易的属性（Block And Transaction Properties）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ABI编码函数"><span class="nav-number">3.</span> <span class="nav-text">ABI编码函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误处理"><span class="nav-number">4.</span> <span class="nav-text">错误处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数学及加密功能"><span class="nav-number">5.</span> <span class="nav-text">数学及加密功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#地址相关"><span class="nav-number">6.</span> <span class="nav-text">地址相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合约相关"><span class="nav-number">7.</span> <span class="nav-text">合约相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文档"><span class="nav-number">8.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
             
 
           </div>

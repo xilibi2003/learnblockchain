@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+  <meta name="msvalidate.01" content="914C9C1CBC7078C5E2AC612AD5C1CC6C" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Solidity手册," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深入浅出区块链" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="这是Solidity教程系列文章第12篇介绍库的使用：库与合约的不同，使用库的正姿势。 Solidity 系列完整的文章列表请查看分类-Solidity。">
+<meta name="keywords" content="Solidity手册">
+<meta property="og:type" content="article">
+<meta property="og:title" content="智能合约语言 Solidity 教程系列12 -  库的使用">
+<meta property="og:url" content="https://learnblockchain.cn/2018/08/09/solidity-library/index.html">
+<meta property="og:site_name" content="深入浅出区块链">
+<meta property="og:description" content="这是Solidity教程系列文章第12篇介绍库的使用：库与合约的不同，使用库的正姿势。 Solidity 系列完整的文章列表请查看分类-Solidity。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-08-09T03:12:58.810Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="智能合约语言 Solidity 教程系列12 -  库的使用">
+<meta name="twitter:description" content="这是Solidity教程系列文章第12篇介绍库的使用：库与合约的不同，使用库的正姿势。 Solidity 系列完整的文章列表请查看分类-Solidity。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'UT2K1ZRSWK',
+      apiKey: '0bbb261dfad58df8f8a657a1ed3255cd',
+      indexName: 'learnblockchain',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://learnblockchain.cn/2018/08/09/solidity-library/"/>
+
+
+
+
+
+  <title>智能合约语言 Solidity 教程系列12 -  库的使用 | 深入浅出区块链</title>
+  
+
+
+
+
+
+
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6273382609469378",
+        enable_page_level_ads: true
+    });
+</script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">系统学习区块链技术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wiki">
+          <a href="https://wiki.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Wiki
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-course">
+          <a href="/course/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-spinner"></i> <br />
+            
+            视频教程
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2018/08/09/solidity-library/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">智能合约语言 Solidity 教程系列12 -  库的使用</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-09T10:40:56+08:00">
+                2018-08-09
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-09T11:12:58+08:00">
+                2018-08-09
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ethereum/" itemprop="url" rel="index">
+                    <span itemprop="name">以太坊</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ethereum/Solidity/" itemprop="url" rel="index">
+                    <span itemprop="name">Solidity</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这是Solidity教程系列文章第12篇介绍库的使用：库与合约的不同，使用库的正姿势。</p>
+<p>Solidity 系列完整的文章列表请查看<a href="https://learnblockchain.cn/categories/ethereum/Solidity/">分类-Solidity</a>。</p>
+<a id="more"></a>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>Solidity 是以太坊智能合约编程语言，阅读本文前，你应该对以太坊、智能合约有所了解，<br>如果你还不了解，建议你先看<a href="https://learnblockchain.cn/2017/11/20/whatiseth/">以太坊是什么</a></p>
+<p>欢迎订阅<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">区块链技术专栏</a>阅读更全面的分析文章。</p>
+<h2 id="库"><a href="#库" class="headerlink" title="库"></a>库</h2><p>库与合约类似，它也部署在一个指定的地址上（仅被部署一次，当代码在不同的合约可反复使用），然后通过EVM的特性DELEGATECALL (Homestead之前是用CALLCODE)来复用代码。库函数在被调用时，库代码是在发起合约（下文称<strong>主调合约</strong>：主动发起DELEGATECALL调用的合约）的上下文中执行的，使用this将会指向到主调合约，而且库代码可以访问主调合约的存储(storage)。</p>
+<p>因为库合约是一个独立的代码，它仅可以访问主调合约明确提供的状态变量，否则，没办法法去知道这些状态变量。</p>
+<p>对比普通合约来说，库存在以下的限制（这些限制将来也可能在将来的版本被解除）：</p>
+<ol>
+<li>无状态变量(state variables)。</li>
+<li>不能继承或被继承</li>
+<li>不能接收以太币</li>
+<li>不能销毁一个库</li>
+</ol>
+<p>不会修改状态变量（例如被声明<strong>view</strong>或<strong>pure</strong>）库函数只能通过直接调用（如不用<strong>DELEGATECALL</strong>），是因为其被认为是状态无关的。</p>
+<p>库有许多使用场景。两个主要的场景如下：</p>
+<ol>
+<li><p>如果有许多合约，它们有一些共同代码，则可以把共同代码部署成一个库。这将节省gas，因为gas也依赖于合约的规模。因此，可以把库想象成使用其合约的父合约。使用父合约（而非库）切分共同代码不会节省gas，因为在Solidity中，继承通过复制代码工作。</p>
+</li>
+<li><p>库可用于给数据类型添加成员函数。（参见下一节Using for）</p>
+</li>
+</ol>
+<p>由于库被当作隐式的父合约（不过它们不会显式的出现在继承关系中，但调用库函数和调用父合约的方式是非常类似的，如库L有函数f()，使用L.f()即可访问）。库里面的内部（internal）函数被复制给使用它的合约；<br>同样按调用内部函数的调用方式，这意味着所有内部类型可以传进去，memory类型则通过引用传递，而不是拷贝的方式。 同样库里面的结构体structs和枚举enums也会被复制给使用它的合约。<br>因此，如果一个库里只包含内部函数或结构体或枚举，则不需要部署库，因为库里面的所有内容都被复制给使用它的合约。</p>
+<p>下面的例子展示了如何使用库。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.16</span>;</span><br><span class="line"></span><br><span class="line">library <span class="built_in">Set</span> &#123;</span><br><span class="line">  <span class="comment">// 定义了一个结构体，保存主调函数的数据（本身并未实际存储的数据）。</span></span><br><span class="line">  struct Data &#123; mapping(<span class="function"><span class="params">uint</span> =&gt;</span> bool) flags; &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// self是一个存储类型的引用（传入的会是一个引用，而不是拷贝的值），这是库函数的特点。</span></span><br><span class="line">  <span class="comment">// 参数名定为self 也是一个惯例，就像调用一个对象的方法一样.</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">insert</span>(<span class="params">Data storage self, uint value</span>)</span></span><br><span class="line"><span class="function">      <span class="title">public</span></span></span><br><span class="line"><span class="function">      <span class="title">returns</span> (<span class="params">bool</span>)</span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (self.flags[value])</span><br><span class="line">          <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 已存在</span></span><br><span class="line">      self.flags[value] = <span class="literal">true</span>;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">remove</span>(<span class="params">Data storage self, uint value</span>)</span></span><br><span class="line"><span class="function">      <span class="title">public</span></span></span><br><span class="line"><span class="function">      <span class="title">returns</span> (<span class="params">bool</span>)</span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (!self.flags[value])</span><br><span class="line">          <span class="keyword">return</span> <span class="literal">false</span>; </span><br><span class="line">      self.flags[value] = <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">contains</span>(<span class="params">Data storage self, uint value</span>)</span></span><br><span class="line"><span class="function">      <span class="title">public</span></span></span><br><span class="line"><span class="function">      <span class="title">view</span></span></span><br><span class="line"><span class="function">      <span class="title">returns</span> (<span class="params">bool</span>)</span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> self.flags[value];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">contract C &#123;</span><br><span class="line">    <span class="built_in">Set</span>.Data knownValues;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">register</span>(<span class="params">uint value</span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 库函数不需要实例化就可以调用，因为实例就是当前的合约</span></span><br><span class="line">        <span class="built_in">require</span>(<span class="built_in">Set</span>.insert(knownValues, value));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 在这个合约中，如果需要的话可以直接访问knownValues.flags，</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当然，我们也可以不按上面的方式来使用库函数，可以不定义结构体，可以不使用storage类型引用的参数，还可以在任何位置有多个storage的引用类型的参数。</p>
+<p>调用<strong>Set.contains</strong>，<strong>Set.remove</strong>，<strong>Set.insert</strong>都会编译为以DELEGATECALL的方式调用外部合约和库。如果使用库，需要注意的是一个真实的外部函数调用发生了。尽管msg.sender，msg.value，this还会保持它们在主调合约中的值（在Homestead之前，由于实际使用的是CALLCODE，msg.sender，msg.value会变化）。</p>
+<p>下面的例子演示了在库中如何使用memory类型和内部函数(inernal function)来实现一个自定义类型，而不会用到外部函数调用(external function)。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.16</span>;</span><br><span class="line"></span><br><span class="line">library BigInt &#123;</span><br><span class="line">    struct bigint &#123;</span><br><span class="line">        uint[] limbs;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fromUint</span>(<span class="params">uint x</span>) <span class="title">internal</span> <span class="title">pure</span> <span class="title">returns</span> (<span class="params">bigint r</span>) </span>&#123;</span><br><span class="line">        r.limbs = <span class="keyword">new</span> uint[](<span class="number">1</span>);</span><br><span class="line">        r.limbs[<span class="number">0</span>] = x;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">bigint _a, bigint _b</span>) <span class="title">internal</span> <span class="title">pure</span> <span class="title">returns</span> (<span class="params">bigint r</span>) </span>&#123;</span><br><span class="line">        r.limbs = <span class="keyword">new</span> uint[](max(_a.limbs.length, _b.limbs.length));</span><br><span class="line">        uint carry = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (uint i = <span class="number">0</span>; i &lt; r.limbs.length; ++i) &#123;</span><br><span class="line">            uint a = limb(_a, i);</span><br><span class="line">            uint b = limb(_b, i);</span><br><span class="line">            r.limbs[i] = a + b + carry;</span><br><span class="line">            <span class="keyword">if</span> (a + b &lt; a || (a + b == uint(<span class="number">-1</span>) &amp;&amp; carry &gt; <span class="number">0</span>))</span><br><span class="line">                carry = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                carry = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (carry &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// too bad, we have to add a limb</span></span><br><span class="line">            uint[] memory newLimbs = <span class="keyword">new</span> uint[](r.limbs.length + <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; r.limbs.length; ++i)</span><br><span class="line">                newLimbs[i] = r.limbs[i];</span><br><span class="line">            newLimbs[i] = carry;</span><br><span class="line">            r.limbs = newLimbs;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">limb</span>(<span class="params">bigint _a, uint _limb</span>) <span class="title">internal</span> <span class="title">pure</span> <span class="title">returns</span> (<span class="params">uint</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> _limb &lt; _a.limbs.length ? _a.limbs[_limb] : <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">max</span>(<span class="params">uint a, uint b</span>) <span class="title">private</span> <span class="title">pure</span> <span class="title">returns</span> (<span class="params">uint</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a &gt; b ? a : b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">contract C &#123;</span><br><span class="line">    using BigInt <span class="keyword">for</span> BigInt.bigint;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) <span class="title">public</span> <span class="title">pure</span> </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> x = BigInt.fromUint(<span class="number">7</span>);</span><br><span class="line">        <span class="keyword">var</span> y = BigInt.fromUint(uint(<span class="number">-1</span>));</span><br><span class="line">        <span class="keyword">var</span> z = x.add(y);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>合约的源码中不能添加库地址，它是在编译时向编译器以参数形式提供的（这些地址须由链接器（linker）填进最终的字节码中，使用命令行编译器来进行联接 TODO）。如果地址没有以参数的方式正确给到编译器，编译后的字节码将会仍包含一个这样格式的占们符<em>Set__</em>(其中Set是库的名称)。可以通过手动将所有的40个符号替换为库的十六进制地址。</p>
+<h2 id="Using-for-指令"><a href="#Using-for-指令" class="headerlink" title="Using for 指令"></a>Using for 指令</h2><p>指令<strong>using A for B;</strong>用来把库函数(从库A)关联到类型B。这些函数将会把调用函数的实例作为第一个参数。语法类似，python中的self变量一样。例如：A库有函数 <strong>add(B b1, B b2)</strong>，则使用<strong>Using A for B</strong>指令后，如果有B b1就可以使用<strong>b1.add(b2)</strong>。</p>
+<p>using A for *  表示库A中的函数可以关联到任意的类型上。</p>
+<p>在这两种情形中，所有函数，即使第一个参数的类型与调用函数的对象类型不匹配的，也会被关联上。类型检查是在函数被调用时执行，以及函数重载是也会执行检查。</p>
+<p><strong>using A for B;</strong> 指令仅在当前的作用域有效，且暂时仅仅支持当前的合约这个作用域，后续也非常有可能解除这个限制，允许作用到全局范围。如果能作用到全局范围，通过引入一些模块(module)，数据类型将能通过库函数扩展功能，而不需要每个地方都得写一遍类似的代码了。</p>
+<p>下面我们使用Using for 指令方式重写上一节Set的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"> pragma solidity ^<span class="number">0.4</span><span class="number">.16</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 库合约代码和上一节一样</span></span><br><span class="line">library <span class="built_in">Set</span> &#123;</span><br><span class="line">  struct Data &#123; mapping(<span class="function"><span class="params">uint</span> =&gt;</span> bool) flags; &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">insert</span>(<span class="params">Data storage self, uint value</span>)</span></span><br><span class="line"><span class="function">      <span class="title">public</span></span></span><br><span class="line"><span class="function">      <span class="title">returns</span> (<span class="params">bool</span>)</span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (self.flags[value])</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// already there</span></span><br><span class="line">      self.flags[value] = <span class="literal">true</span>;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">remove</span>(<span class="params">Data storage self, uint value</span>)</span></span><br><span class="line"><span class="function">      <span class="title">public</span></span></span><br><span class="line"><span class="function">      <span class="title">returns</span> (<span class="params">bool</span>)</span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (!self.flags[value])</span><br><span class="line">          <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// not there</span></span><br><span class="line">      self.flags[value] = <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">contains</span>(<span class="params">Data storage self, uint value</span>)</span></span><br><span class="line"><span class="function">      <span class="title">public</span></span></span><br><span class="line"><span class="function">      <span class="title">view</span></span></span><br><span class="line"><span class="function">      <span class="title">returns</span> (<span class="params">bool</span>)</span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> self.flags[value];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">contract C &#123;</span><br><span class="line">    using <span class="built_in">Set</span> <span class="keyword">for</span> <span class="built_in">Set</span>.Data; <span class="comment">// 这是一个关键的变化</span></span><br><span class="line">    <span class="built_in">Set</span>.Data knownValues;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">register</span>(<span class="params">uint value</span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 现在 Set.Data都对应的成员方法</span></span><br><span class="line">        <span class="comment">// 效果和Set.insert(knownValues, value)相同</span></span><br><span class="line">        <span class="built_in">require</span>(knownValues.insert(value));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>同样可以使用Using for的方式来对基本类型（elementary types）进行扩展： </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.16</span>;</span><br><span class="line"></span><br><span class="line">library Search &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">indexOf</span>(<span class="params">uint[] storage self, uint value</span>)</span></span><br><span class="line"><span class="function">        <span class="title">public</span></span></span><br><span class="line"><span class="function">        <span class="title">view</span></span></span><br><span class="line"><span class="function">        <span class="title">returns</span> (<span class="params">uint</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (uint i = <span class="number">0</span>; i &lt; self.length; i++)</span><br><span class="line">            <span class="keyword">if</span> (self[i] == value) <span class="keyword">return</span> i;</span><br><span class="line">        <span class="keyword">return</span> uint(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">contract C &#123;</span><br><span class="line">    using Search <span class="keyword">for</span> uint[];</span><br><span class="line">    uint[] data;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">append</span>(<span class="params">uint value</span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        data.push(value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">replace</span>(<span class="params">uint _old, uint _new</span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 进行库调用</span></span><br><span class="line">        uint index = data.indexOf(_old);</span><br><span class="line">        <span class="keyword">if</span> (index == uint(<span class="number">-1</span>))</span><br><span class="line">            data.push(_new);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            data[index] = _new;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要注意的是所有库调用都实际上是EVM函数调用。这意味着，如果传的是memory类型的，或者是值类型，那么进行一次拷贝，即使是self变量，解决方法是使用存储(storage)类型的引用来避免拷贝内容。</p>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。<br>如果想与我有更密切的交流可以选择加入我的<a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">知识星球</a>（星球成员可加入微信技术交流群）</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="Tiny熊 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信号：深入浅出区块链技术，欢迎订阅</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有收获，赞赏下</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/qr_pay.jpg" alt="Tiny熊 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Tiny熊
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://learnblockchain.cn/2018/08/09/solidity-library/" title="智能合约语言 Solidity 教程系列12 -  库的使用">https://learnblockchain.cn/2018/08/09/solidity-library/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Solidity手册/" rel="tag"># Solidity手册</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/07/python-blockchain-with-pos/" rel="next" title="Python实现一条基于POS算法的区块链">
+                <i class="fa fa-chevron-left"></i> Python实现一条基于POS算法的区块链
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/09/solidity-callfun/" rel="prev" title="智能合约语言 Solidity 教程系列13 -  函数调用">
+                智能合约语言 Solidity 教程系列13 -  函数调用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/xilibi2003" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiong-li-bing/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="区块链技术专栏" target="_blank">区块链技术专栏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://t.xiaomiquan.com/RfAu7uj" title="技术交流-知识星球" target="_blank">技术交流-知识星球</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bitshuo.com" title="区块链技术中文社区" target="_blank">区块链技术中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://news.tangwen.org" title="汤问资讯" target="_blank">汤问资讯</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitask.org" title="币问" target="_blank">币问</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://hiblock.net/" title="HiBlock区块链社区" target="_blank">HiBlock区块链社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eosfans.io/" title="EOS中文社区" target="_blank">EOS中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blockflow.net/" title="BlockFlow" target="_blank">BlockFlow</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.liankexing.com/" title="链客区块链问答社区" target="_blank">链客区块链问答社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitool.cn/" title="币兔" target="_blank">币兔</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#库"><span class="nav-number">2.</span> <span class="nav-text">库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Using-for-指令"><span class="nav-number">3.</span> <span class="nav-text">Using for 指令</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+  <div class="footer-custom"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17140514号-1</a></div>
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
