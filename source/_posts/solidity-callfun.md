@@ -13,6 +13,8 @@ author: Tiny熊
 
 Solidity 系列完整的文章列表请查看[分类-Solidity](https://learnblockchain.cn/categories/ethereum/Solidity/)。
 
+<!-- more -->
+
 ## 写在前面
 
 Solidity 是以太坊智能合约编程语言，阅读本文前，你应该对以太坊、智能合约有所了解，
