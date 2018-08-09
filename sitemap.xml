@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://learnblockchain.cn/2018/01/11/guide/</loc>
+    
+    <lastmod>2018-08-09T11:24:45.628Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://learnblockchain.cn/2018/08/09/understand-abi/</loc>
     
     <lastmod>2018-08-09T11:03:48.300Z</lastmod>
@@ -33,13 +40,6 @@
     <loc>https://learnblockchain.cn/2018/05/17/solidity-functions/</loc>
     
     <lastmod>2018-08-09T02:58:50.241Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://learnblockchain.cn/2018/01/11/guide/</loc>
-    
-    <lastmod>2018-08-09T02:17:24.339Z</lastmod>
     
   </url>
   
