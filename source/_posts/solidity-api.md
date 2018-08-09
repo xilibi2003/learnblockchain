@@ -73,8 +73,8 @@ pragma solidity ^0.4.24;
 
 contract testABI {
     function abiEncode() public constant returns (bytes) {
-        abi.encode("string");  // 计算string 的ABI编码
-        return abi.encode("baz(uint,address)"); //计算函数ABI编码
+        abi.encode(1);  // 计算 1 的ABI编码
+        return abi.encodeWithSignature("set(uint256)", 1); //计算函数set(uint256) 及参数1 的ABI 编码
     }
 }
 ```

@@ -232,6 +232,8 @@ $("#button").click(function() {
 
 ![](/images/page.png)
 
+本文中点击"Updata Info"按钮之后，虽然调用智能合约成功，但是当前的界面并没有得到更新，下一篇文章会介绍[Web3监听合约事件更新界面](https://learnblockchain.cn/2018/05/09/solidity-event/)。
+
 本文的作者是盖盖，他的微信公众号: chainlab
 
 ## 参考文献
@@ -239,7 +241,7 @@ $("#button").click(function() {
 
 
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
-如果你想和我有密切的联系，欢迎加入知识星球[深入浅出区块链](https://t.xiaomiquan.com/RfAu7uj)，我会在星球为大家解答技术问题，作为星友福利，星友可加入我创建的区块链技术群，群内已经聚集了200多位区块链技术牛人和爱好者。
+如果你想和我有密切的联系，欢迎加入知识星球[深入浅出区块链](https://t.xiaomiquan.com/RfAu7uj)，我会在星球为大家解答技术问题，作为星友福利，星友可加入我创建的区块链技术群，群内已经聚集了300多位区块链技术牛人和爱好者。
 
 
 
