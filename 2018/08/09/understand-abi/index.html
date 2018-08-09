@@ -95,8 +95,8 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://learnblockchain.cn/images/abi1.jpg">
 <meta property="og:image" content="https://learnblockchain.cn/images/abi2.jpg">
-<meta property="og:image" content="https://learnblockchain.cn/images/abi2.jpg">
-<meta property="og:updated_time" content="2018-08-09T11:03:48.300Z">
+<meta property="og:image" content="https://learnblockchain.cn/images/abi3.jpg">
+<meta property="og:updated_time" content="2018-08-09T13:15:18.213Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何理解以太坊ABI - 应用程序二进制接口">
 <meta name="twitter:description" content="很多同学不是很明白以太坊ABI是什么，他的作用是什么，读完本文就明白了。">
@@ -383,7 +383,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-09T19:03:48+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-09T21:15:18+08:00">
                 2018-08-09
               </time>
             
@@ -450,7 +450,7 @@
 <h3 id="演示调用函数"><a href="#演示调用函数" class="headerlink" title="演示调用函数"></a>演示调用函数</h3><p>以下面以个最简单的合约为例，我们看看用参数 1 调用<code>set(uint x)</code>，这个交易附带的数据是什么。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.0</span>;</span><br><span class="line"></span><br><span class="line">contract SimpleStorage &#123;</span><br><span class="line">    </span><br><span class="line">    uint storedData;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">set</span>(<span class="params">uint x</span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        storedData = x;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">get</span>(<span class="params"></span>) <span class="title">public</span> <span class="title">constant</span> <span class="title">returns</span> (<span class="params">uint</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> storedData;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>当然第一步需要先把合约部署到以太坊网络（其实部署也是一个）上，然后用 “1” 作为参数调用set，如下图:<br><img src="/images/abi2.jpg" alt=""></p>
-<p>然后我们打开etherscan查看<a href="https://ropsten.etherscan.io/tx/0xd773a6909808f99c5a26c0c890af8b0bb6d784f29a3af55e04fa35d44d7716e2" target="_blank" rel="noopener">交易详情数据</a>, 可以看到其附加数据如下图：<br><img src="/images/abi2.jpg" alt=""></p>
+<p>然后我们打开etherscan查看<a href="https://ropsten.etherscan.io/tx/0xd773a6909808f99c5a26c0c890af8b0bb6d784f29a3af55e04fa35d44d7716e2" target="_blank" rel="noopener">交易详情数据</a>, 可以看到其附加数据如下图：<br><img src="/images/abi3.jpg" alt=""></p>
 <p>这个数据就是ABI的编码数据：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x60fe47b10000000000000000000000000000000000000000000000000000000000000001</span><br></pre></td></tr></table></figure></p>
 <h2 id="ABI-编码分析"><a href="#ABI-编码分析" class="headerlink" title="ABI 编码分析"></a>ABI 编码分析</h2><p>我把上面交易的附加数据拷贝出来分析一下，这个数据可以分成两个子部分：</p>
 <ul>
