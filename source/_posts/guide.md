@@ -57,6 +57,7 @@ author: Tiny熊
 * [如何通过以太坊智能合约来进行众筹（ICO）](https://learnblockchain.cn/2018/02/28/ico-crowdsale/)
 * [剖析非同质化代币ERC721--全面解析ERC721标准](https://learnblockchain.cn/2018/03/23/token-erc721/)
 * [Web3与智能合约交互实战](https://learnblockchain.cn/2018/04/15/web3-html/)
+* [Web3监听合约事件](https://learnblockchain.cn/2018/05/09/solidity-event/)
 
 * [如何编写一个可升级的智能合约](https://learnblockchain.cn/2018/03/15/contract-upgrade/)
 * [美链BEC合约漏洞技术分析](https://learnblockchain.cn/2018/04/25/bec-overflow/)
