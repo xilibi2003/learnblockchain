@@ -9,6 +9,7 @@ author: Tiny熊
 ---
 
 很多同学不是很明白以太坊ABI是什么，他的作用是什么，读完本文就明白了。
+
 <!-- more -->
 
 ## 写在前面
@@ -54,7 +55,7 @@ contract SimpleStorage {
 ![](/images/abi2.jpg)
 
 然后我们打开etherscan查看[交易详情数据](https://ropsten.etherscan.io/tx/0xd773a6909808f99c5a26c0c890af8b0bb6d784f29a3af55e04fa35d44d7716e2), 可以看到其附加数据如下图：
-![](/images/abi2.jpg)
+![](/images/abi3.jpg)
 
 这个数据就是ABI的编码数据：
 ```
@@ -127,3 +128,4 @@ web3.eth.abi.encodeFunctionSignature('myMethod(uint256,string)');
 
 欢迎来[知识星球](https://t.xiaomiquan.com/RfAu7uj)提问，星球内已经聚集了300多位区块链技术爱好者。
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
+
