@@ -105,6 +105,9 @@ byte代表bytes1。
 成员变量：
 **.length**：表示这个字节数组的长度（只读）。
 
+> 补充小技巧: 如何在Remix中把内容传递给函数的定长字节数组参数，答案是使用16进制形式（0x1122）传递。
+> 如果参数是定长字节数组的数组 bytes32[]，则在Remix中参数内容传递形式为：["0x00","0x0a"]。
+
 ## 变长（动态分配大小）字节数组（Dynamically-sized byte array）
 * bytes:动态分配大小字节数组, 参见[Arrays](http://solidity.readthedocs.io/en/latest/types.html#arrays),不是值类型!
 * string:动态分配大小UTF8编码的字符类型,参看[Arrays](http://solidity.readthedocs.io/en/latest/types.html#arrays)。不是值类型!
