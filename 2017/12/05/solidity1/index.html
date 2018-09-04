@@ -93,7 +93,7 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="现在的Solidity中文文档，要么翻译的太烂，要么太旧，决定重新翻译下。尤其点名批评极客学院名为《Solidity官方文档中文版》的翻译，机器翻译的都比它好，大家还是别看了。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-31T02:23:12.649Z">
+<meta property="og:updated_time" content="2018-08-23T09:00:05.875Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="智能合约语言 Solidity 教程系列1 - 类型介绍">
 <meta name="twitter:description" content="现在的Solidity中文文档，要么翻译的太烂，要么太旧，决定重新翻译下。尤其点名批评极客学院名为《Solidity官方文档中文版》的翻译，机器翻译的都比它好，大家还是别看了。">
@@ -379,8 +379,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-07-31T10:23:12+08:00">
-                2018-07-31
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-23T17:00:05+08:00">
+                2018-08-23
               </time>
             
           </span>
@@ -514,6 +514,9 @@
 </ul>
 <p>移位运算和整数类似，移位运算的结果的正负取决于操作符左边的数，且不能进行负移位。<br>如可以-5&lt;&lt;1, 不可以5&lt;&lt;-1</p>
 <p>成员变量：<br><strong>.length</strong>：表示这个字节数组的长度（只读）。</p>
+<blockquote>
+<p>补充小技巧: 如何在Remix中把内容传递给函数的定长字节数组参数，答案是使用16进制形式（0x1122）传递。<br>如果参数是定长字节数组的数组 bytes32[]，则在Remix中参数内容传递形式为：[“0x00”,”0x0a”]。</p>
+</blockquote>
 <h2 id="变长（动态分配大小）字节数组（Dynamically-sized-byte-array）"><a href="#变长（动态分配大小）字节数组（Dynamically-sized-byte-array）" class="headerlink" title="变长（动态分配大小）字节数组（Dynamically-sized byte array）"></a>变长（动态分配大小）字节数组（Dynamically-sized byte array）</h2><ul>
 <li>bytes:动态分配大小字节数组, 参见<a href="http://solidity.readthedocs.io/en/latest/types.html#arrays" target="_blank" rel="noopener">Arrays</a>,不是值类型!</li>
 <li>string:动态分配大小UTF8编码的字符类型,参看<a href="http://solidity.readthedocs.io/en/latest/types.html#arrays" target="_blank" rel="noopener">Arrays</a>。不是值类型!</li>
@@ -720,7 +723,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">46</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
