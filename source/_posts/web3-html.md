@@ -236,6 +236,8 @@ $("#button").click(function() {
 
 本文的作者是盖盖，他的微信公众号: chainlab
 
+如果你想学习以太坊DApp开发，这门视频课程[以太坊DAPP开发实战](https://wiki.learnblockchain.cn/course/dapp.html)是你不错的选择。
+
 ## 参考文献
 * [Interacting with a Smart Contract through Web3.js (Tutorial)](https://coursetro.com/posts/code/99/Interacting-with-a-Smart-Contract-through-Web3.js-(Tutorial))
 
