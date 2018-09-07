@@ -174,7 +174,7 @@ instructorEvent.watch(function(error, result) {
 有时我们会有这样的需求：获取当前所有姓名及年龄记录，或者是，要过滤出年龄28岁的记录，应该如何做呢？
 以及另外一个常见的场景：想要获取到代币合约中所有的转账记录，也同样需要使用事件过滤器功能，这部分内容请大家订阅小专栏[区块链技术](https://xiaozhuanlan.com/blockchaincore)阅读。
 
-
+如果你想学习以太坊DApp开发，这门视频课程[以太坊DAPP开发实战](https://wiki.learnblockchain.cn/course/dapp.html)是你不错的选择。
 
 ## 参考文章
 

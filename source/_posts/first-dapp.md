@@ -416,6 +416,7 @@ candy maple cake sugar pudding cream honey rich smooth crumble sweet treat
 好了，恭喜你，即将成为一名去中心化式应用开发者的你已经成为迈出了坚实的一步。
 如果学习中遇到问题，欢迎来我的**[知识星球](https://t.xiaomiquan.com/RfAu7uj)**交流。
 
+想全面学习去中心化应用的同学可以学习我们的视频课程[区块链全栈-以太坊DAPP开发实战](https://wiki.learnblockchain.cn/course/dapp.html)。
 
 ## 参考文档
 

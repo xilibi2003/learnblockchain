@@ -147,6 +147,7 @@ menu:
   categories: /categories/ || th
   archives: /archives/ || archive
   course: /course/ || spinner
+  web3: https://web3.learnblockchain.cn || book
   #schedule: /schedule/ || calendar
   #sitemap: /sitemap.xml || sitemap
   #commonweal: /404/ || heartbeat
@@ -155,6 +156,7 @@ menu:
 menu_icons:
   enable: true
   course: spinner
+  web3: book
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

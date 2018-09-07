@@ -197,7 +197,7 @@ Contract mined! address: 0x79544078dcd9d560ec3f6eff0af42a9fc84c7d19 transactionH
 本文会随geth，solidity语言版本升级保持更新，查看本文原始链接：[https://learnblockchain.cn/2017/11/24/init-env/](https://learnblockchain.cn/2017/11/24/init-env/)
 
 第一个合约的意义更重要的是体验智能合约开发流程，对于初学者一些可以选择先放弃一些细节，开发流程打通之后，可以增强信心进行下一步的学习。
-有问题就加入[深入浅出区块链群](https://t.xiaomiquan.com/RfAu7uj)一起来交流吧。
+如果你想学习以太坊DApp开发，这门视频课程[以太坊DAPP开发实战](https://wiki.learnblockchain.cn/course/dapp.html)是你不错的选择。
 
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
 我的**[知识星球](https://t.xiaomiquan.com/RfAu7uj)**为各位解答区块链技术问题，欢迎加入讨论。
