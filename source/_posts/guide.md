@@ -21,7 +21,7 @@ author: Tiny熊
 如果你是还不知比特币是什么，那就看看[比特币是什么](https://learnblockchain.cn/2017/10/23/whatisbitcoin/)
 ### 基础入门
 接下来可以通过下面这几篇文章了解比特币大概的运行原理：
-* [区块链记账原理](https://learnblockchain.cn/2017/10/25/whatbc/) 
+* [区块链记账原理](https://learnblockchain.cn/2017/10/25/whatbc/)
    通过这篇可以了解到区块链是一个怎样的结构
 * [比特币所有权及隐私问题](https://learnblockchain.cn/2017/11/02/bitcoin-own/)
    通过这篇可以了解到地址私钥 非对称加密应用 等概念
@@ -62,6 +62,14 @@ author: Tiny熊
 
 * [如何编写一个可升级的智能合约](https://learnblockchain.cn/2018/03/15/contract-upgrade/)
 * [美链BEC合约漏洞技术分析](https://learnblockchain.cn/2018/04/25/bec-overflow/)
+
+### 钱包开发系列
+* [理解开发HD 钱包涉及的 BIP32、BIP44、BIP39](https://learnblockchain.cn/2018/09/28/hdwallet/)
+
+
+### 以太扩容
+* [深入理解Plasma（一）Plasma 框架](https://learnblockchain.cn/2018/10/20/plasma-framework/)
+
 
 ### Solidity语言教程
 Solidity语言是开发智能合约最广泛的语言，本专栏应该是国内最深度介绍Solidity的文章了。
@@ -115,5 +123,3 @@ Solidity语言是开发智能合约最广泛的语言，本专栏应该是国内
 我们会提供市场化的薪资待遇和远高于普通公司的成长机会（入职员工由我亲自带领，并且经常有技术培训）。
 
 如果你对我们感兴趣，欢迎提交简历（千万别忘改贴上你的github地址哦）至xlb@upchain.pro。目前所有职位均位于百岛之城珠海。
-
-
