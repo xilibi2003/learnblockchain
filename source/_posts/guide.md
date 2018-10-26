@@ -21,19 +21,25 @@ author: Tiny熊
 如果你是还不知比特币是什么，那就看看[比特币是什么](https://learnblockchain.cn/2017/10/23/whatisbitcoin/)
 ### 基础入门
 接下来可以通过下面这几篇文章了解比特币大概的运行原理：
+
 * [区块链记账原理](https://learnblockchain.cn/2017/10/25/whatbc/)
    通过这篇可以了解到区块链是一个怎样的结构
+   
 * [比特币所有权及隐私问题](https://learnblockchain.cn/2017/11/02/bitcoin-own/)
    通过这篇可以了解到地址私钥 非对称加密应用 等概念
+   
 * [比特币如何挖矿](https://learnblockchain.cn/2017/11/04/bitcoin-pow/)
    通过这篇了解工作量证明
+   
 * [比特币如何达成共识 - 最长链的选择](https://learnblockchain.cn/2017/12/07/bitcoin-sonsensus/)
    通过这篇可以了解共识机制。
+   
 ### 补充阅读
 * [什么是拜占庭将军问题](https://learnblockchain.cn/2018/02/05/bitcoin-byzantine/)
 
 ### 进阶
 在基础入门之后，可以进一步阅读以下几篇，理解分布式网络，交易验证。
+
 * [分析比特币网络：一种去中心化、点对点的网络架构](https://learnblockchain.cn/2017/11/07/bitcoin-p2p/)
 * [比特币区块结构 Merkle 树及简单支付验证分析](https://learnblockchain.cn/2017/11/10/bitcoin-script/)
 * [比特币脚本及交易分析 - 智能合约雏形](https://xiaozhuanlan.com/topic/1402935768)
@@ -65,14 +71,20 @@ author: Tiny熊
 
 ### 钱包开发系列
 * [理解开发HD 钱包涉及的 BIP32、BIP44、BIP39](https://learnblockchain.cn/2018/09/28/hdwallet/)
+* [以太坊钱包开发系列1 - 创建钱包账号](https://learnblockchain.cn/2018/10/25/eth-web-wallet_1/)
+* [以太坊钱包开发系列1 - 账号Keystore文件导入导出](https://learnblockchain.cn/2018/10/25/2018/10/25/eth-web-wallet_2/)
+* [以太坊钱包开发系列2 - 展示钱包信息及发起签名交易](https://learnblockchain.cn/2018/10/26/eth-web-wallet_3/)
+* [以太坊钱包开发系列3 - 发送Token(代币）](https://learnblockchain.cn/2018/10/26/eth-web-wallet_4/)
 
 
 ### 以太扩容
 * [深入理解Plasma（一）Plasma 框架](https://learnblockchain.cn/2018/10/20/plasma-framework/)
+* [深入理解Plasma（二）Plasma 细节](https://learnblockchain.cn/2018/10/24/plasma-in-detail/)
 
 
 ### Solidity语言教程
 Solidity语言是开发智能合约最广泛的语言，本专栏应该是国内最深度介绍Solidity的文章了。
+
 * [Solidity 教程系列1 - 类型介绍](https://learnblockchain.cn/2017/12/05/solidity1/)
 * [Solidity 教程系列2 - 地址类型介绍](https://learnblockchain.cn/2017/12/12/solidity2/)
 * [Solidity 教程系列3 - 函数类型介绍](https://learnblockchain.cn/2017/12/12/solidity_func/)
@@ -86,7 +98,6 @@ Solidity语言是开发智能合约最广泛的语言，本专栏应该是国内
 * [Solidity 教程系列11 - 视图函数、虚函数讲解](https://learnblockchain.cn/2018/05/17/solidity-functions/)
 * [Solidity 教程系列12 - 库的使用](https://learnblockchain.cn/2018/08/09/solidity-library/)
 * [Solidity 教程系列13 - 函数调用](https://learnblockchain.cn/2018/08/09/solidity-callfun/)
-
 * [智能合约最佳实践 之 Solidity 编码规范](https://learnblockchain.cn/2018/05/04/solidity-style-guide/)
 * [如何理解以太坊ABI - 应用程序二进制接口](https://learnblockchain.cn/2018/08/09/understand-abi/)
 
@@ -95,31 +106,18 @@ Solidity语言是开发智能合约最广泛的语言，本专栏应该是国内
 * [什么是EOS](https://learnblockchain.cn/2018/07/17/whatiseos/)
 
 
-## 更多实惠付费内容
+## 付费内容更精彩
 
-看文章不过过瘾的同学，还可以学习我们的视频课程，视频课程要比文章内容更丰富，也更容易理解，尤其适合初学者，同时课程的
-同时现在我们还在招募课程体验师，点此[查看视频教程](https://learnblockchain.cn/course)。
+首先强烈建议大家订阅[深入浅出区块链技术小专栏](https://xiaozhuanlan.com/blockchaincore)，目前仅需69元（时不时会进行涨价哦）， 部分源码和进阶内容仅在小专栏开放，订阅小专栏还有其他惊喜哦~。
 
-另外我们还建立了一个区块链学习的问答及交流社区：知识星球[《深入浅出区块链》](https://t.xiaomiquan.com/RfAu7uj), 大家在学习过程中问题可以星球里提，提问不限于博客文章内容。同时星友还有一个专属的微信技术交流群方便大家及时沟通，目前微信群已经聚集了300多位区块链技术牛人和爱好者，形成为非常好的积极氛围。目前知识星球问答社区定价149，有需要加入的同学请加微信：xlbxiong
+我们推出了高质量的视频课程，视频课程要比文章内容更丰富，也更容易理解。欢迎关注登链学院公众号: edupchain，同时招募课程体验师还有少量名额，[了解课程及体验师详情](https://learnblockchain.cn/course)
 
-温馨提示：微信不提供免费技术解答服务，感谢理解。
+如果在学习过程中遇到问题，欢迎来国内最专业的区块链问答及交流社区：知识星球[《深入浅出区块链》](https://t.xiaomiquan.com/RfAu7uj)，提问不限于博客文章内容。同时星友还有一个专属的微信技术交流群，目前微信群已经聚集了300多位区块链技术牛人和爱好者，形成为非常好的积极氛围。
+
+想围观我朋友圈的，可以加我微信：xlbxiong （温馨提示：微信不提供技术问答服务，提问请到知识星球社区感谢理解）。
+
+one more thing ：我们还承接智能合约、DAPP、公链开发等业余。
 
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
 
-### 以下为广告
-我和朋友一起创建了登链科技，是一家从事区块链技术服务与咨询的公司。旨在帮助企业更好的拥抱区块链。
-我们提供的服务包括（不限于）：
-0. 代币（Token）开发等完整的数字货币解决方案；
-1. 为游戏公司提供基于区块链的道具、角色等；
-2. 为公司提供基于区块链的股权激励方案；
-3. 为数字产品版权登记、交易平台；
-4. 各种公开透明场景下的服务，如：网络彩票发行、投票、众筹等等；
-5. 区块链技术培训（企业内训）与技术咨询服务。
 
-所有的服务均可以提供完整的解决方案：如提供面向用户的官方网站、苹果及安卓APP、微信公众号、小程序和企业内部使用的管理后台。
-业务咨询，请联系：xlb@upchain.pro
-
-另外，我们正在寻找那些热爱技术、愿意迎接挑战的小伙伴（含实习生和正式员工）。
-我们会提供市场化的薪资待遇和远高于普通公司的成长机会（入职员工由我亲自带领，并且经常有技术培训）。
-
-如果你对我们感兴趣，欢迎提交简历（千万别忘改贴上你的github地址哦）至xlb@upchain.pro。目前所有职位均位于百岛之城珠海。

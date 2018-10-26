@@ -1,7 +1,7 @@
 ---
 title: 理解开发HD 钱包涉及的 BIP32、BIP44、BIP39
 date: 2018-09-28 16:17:41
-categories: 
+categories:
     - 钱包
 tags:
     - 钱包
@@ -38,7 +38,7 @@ author: Tiny熊
 
 钱包也是一个私钥的容器，按照上面的方法，我们可以生成一堆私钥（一个人也有很多账号的需求，可以更好保护隐私），而每个私钥都需要备份就特别麻烦的。
 > 最早期的比特币钱包就是就是这样，还有一个昵称：“Just a Bunch Of Keys(一堆私钥)“
- 
+
 为了解决这种麻烦，就有了[BIP32 提议](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)： 根据一个随机数种子通过分层确定性推导的方式得到n个私钥，这样保存的时候，只需要保存一个种子就可以，私钥可以推导出来，如图：
 
 ![](/images/450b5358b96ef5b32ec775efed901f2a.png)
@@ -105,6 +105,16 @@ candy maple cake sugar pudding cream honey rich smooth crumble sweet treat
 ![](/images/71c0af9474a51296096c3c806ca8f1a1.png)
 （图来源于网络）
 
+下面是使用bip39生成生成助记词的一段代码：
+
+```js
+var bip39 = require('bip39')
+// 生成助记词
+var mnemonic = bip39.generateMnemonic()
+console.log(mnemonic)
+
+```
+
 ### 助记词推导出种子
 
 这个过程使用密钥拉伸（Key stretching）函数，被用来增强弱密钥的安全性，PBKDF2是常用的密钥拉伸算法中的一种。
@@ -115,6 +125,24 @@ PBKDF2基本原理是通过一个为随机函数(例如 HMAC 函数)，把助记
 ![](/images/d37f78f8f2d859369d99fc5e0a76c184.png)
 （图来源于网络）
 
+同样代码来表示一下：
+
+```js
+var hdkey = require('ethereumjs-wallet/hdkey')
+var util = require('ethereumjs-util')
+
+var seed = bip39.mnemonicToSeed(mnemonic, "pwd");
+var hdWallet = hdkey.fromMasterSeed(seed);
+
+var key1 = hdWallet.derivePath("m/44'/60'/0'/0/0");
+console.log("私钥："+util.bufferToHex(key1._hdkey._privateKey));
+
+var address1 = util.pubToAddress(key1._hdkey._publicKey, true);
+console.log("地址："+util.bufferToHex(address1));
+console.log("校验和地址："+ util.toChecksumAddress(address1.toString('hex')));
+```
+
+校验和地址是[EIP-55](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md)中定义的对大小写有要求的一种地址形式。
 
 密码可以作为一个额外的安全因子来保护种子，即使助记词的备份被窃取，也可以保证钱包的安全（也要求密码拥有足够的复杂度和长度），不过另外一方面，如果我们忘记密码，那么将无法恢复我们的数字资产。
 
@@ -132,3 +160,5 @@ BIP39则通过定义助记词让种子的备份更友好。
 
 欢迎来[知识星球](https://t.xiaomiquan.com/RfAu7uj)提问，星球内已经聚集了300多位区块链技术爱好者。
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
+
+
