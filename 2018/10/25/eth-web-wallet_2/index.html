@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+  <meta name="msvalidate.01" content="914C9C1CBC7078C5E2AC612AD5C1CC6C" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="比特币,以太坊,钱包," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深入浅出区块链" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="以太坊去中心化网页钱包开发系列，将从零开始开发出一个可以实际使用的钱包，本系列文章是理论与实战相结合，一共有四篇：创建钱包账号、账号Keystore文件导入导出、展示钱包信息及发起签名交易、发送Token(代币），这是第二篇，主要介绍钱包账号导出与导入，将对Keystore文件的生成的原理进行介绍。">
+<meta name="keywords" content="比特币,以太坊,钱包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="以太坊钱包开发系列2 - 账号Keystore文件导入导出">
+<meta property="og:url" content="https://learnblockchain.cn/2018/10/25/eth-web-wallet_2/index.html">
+<meta property="og:site_name" content="深入浅出区块链">
+<meta property="og:description" content="以太坊去中心化网页钱包开发系列，将从零开始开发出一个可以实际使用的钱包，本系列文章是理论与实战相结合，一共有四篇：创建钱包账号、账号Keystore文件导入导出、展示钱包信息及发起签名交易、发送Token(代币），这是第二篇，主要介绍钱包账号导出与导入，将对Keystore文件的生成的原理进行介绍。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://learnblockchain.cn/2018/10/25/eth-web-wallet_2/media/15402189467872.png">
+<meta property="og:image" content="https://learnblockchain.cn/media/15402194796574.png">
+<meta property="og:image" content="https://learnblockchain.cn/media/15402227441945.png">
+<meta property="og:image" content="https://learnblockchain.cn/media/15402229547319.png">
+<meta property="og:image" content="https://learnblockchain.cn/2018/10/25/eth-web-wallet_2/media/15402637447655.jpg">
+<meta property="og:image" content="https://learnblockchain.cn/media/15402647159310.jpg">
+<meta property="og:updated_time" content="2018-10-26T10:18:44.242Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="以太坊钱包开发系列2 - 账号Keystore文件导入导出">
+<meta name="twitter:description" content="以太坊去中心化网页钱包开发系列，将从零开始开发出一个可以实际使用的钱包，本系列文章是理论与实战相结合，一共有四篇：创建钱包账号、账号Keystore文件导入导出、展示钱包信息及发起签名交易、发送Token(代币），这是第二篇，主要介绍钱包账号导出与导入，将对Keystore文件的生成的原理进行介绍。">
+<meta name="twitter:image" content="https://learnblockchain.cn/2018/10/25/eth-web-wallet_2/media/15402189467872.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'UT2K1ZRSWK',
+      apiKey: '0bbb261dfad58df8f8a657a1ed3255cd',
+      indexName: 'learnblockchain',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://learnblockchain.cn/2018/10/25/eth-web-wallet_2/"/>
+
+
+
+
+
+  <title>以太坊钱包开发系列2 - 账号Keystore文件导入导出 | 深入浅出区块链</title>
+  
+
+
+
+
+
+
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6273382609469378",
+        enable_page_level_ads: true
+    });
+</script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">系统学习区块链技术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wiki">
+          <a href="https://wiki.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Wiki
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-course">
+          <a href="/course/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-spinner"></i> <br />
+            
+            视频教程
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-web3">
+          <a href="https://web3.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Web3文档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2018/10/25/eth-web-wallet_2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">以太坊钱包开发系列2 - 账号Keystore文件导入导出</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-25T20:34:44+08:00">
+                2018-10-25
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-26T18:18:44+08:00">
+                2018-10-26
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/钱包/" itemprop="url" rel="index">
+                    <span itemprop="name">钱包</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/钱包/ethereum/" itemprop="url" rel="index">
+                    <span itemprop="name">以太坊</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>以太坊去中心化网页钱包开发系列，将从零开始开发出一个可以实际使用的钱包，本系列文章是理论与实战相结合，一共有四篇：<a href="https://learnblockchain.cn/2018/10/25/eth-web-wallet_1/">创建钱包账号</a>、<a href="https://learnblockchain.cn/2018/10/25/2018/10/25/eth-web-wallet_2/">账号Keystore文件导入导出</a>、<a href="https://learnblockchain.cn/2018/10/26/eth-web-wallet_3/">展示钱包信息及发起签名交易</a>、<a href="https://learnblockchain.cn/2018/10/26/eth-web-wallet_4/">发送Token(代币）</a>，这是第二篇，主要介绍钱包账号导出与导入，将对Keystore文件的生成的原理进行介绍。</p>
+<a id="more"></a>
+<h2 id="如何导入Geth创建的账号？"><a href="#如何导入Geth创建的账号？" class="headerlink" title="如何导入Geth创建的账号？"></a>如何导入Geth创建的账号？</h2><p>在<a href="https://learnblockchain.cn/2018/10/20/eth-web-wallet_1/">上一篇文章</a>，介绍了如何使用私钥及助记词来创建账号，如果是使用已有的私钥及助记词，这其实也是账号导入的过程。</p>
+<p>有一些同学会问，我的账号是Geth生成的，如何导入到钱包呢？使用Geth的同学，应该知道Geth在创建账号时会生成一个对应keystore JSON文件，Keystore文件存储加密后的私钥信息，因此我们需要做的就是导入这个Keystore文件，这个文件通常在同步区块数据的目录下的keystore文件夹（如： ~/.ethereum/keystore）里。</p>
+<p>尽管在ethers.js 中，简单的使用一个函数就可以完成keystore文件的导入，不过理解Keystore 文件的作用及原理还是非常有必要的，当然如果你是在没有兴趣，可以直接跳到本文最后一节：使用ethers.js 实现账号导出导入。</p>
+<h2 id="详细解读-Keystore-文件"><a href="#详细解读-Keystore-文件" class="headerlink" title="详细解读 Keystore 文件"></a>详细解读 Keystore 文件</h2><h3 id="为什么需要-Keystore-文件"><a href="#为什么需要-Keystore-文件" class="headerlink" title="为什么需要 Keystore 文件"></a>为什么需要 Keystore 文件</h3><p>通过这篇文章<a href="https://learnblockchain.cn/2018/09/28/hdwallet/">理解开发HD 钱包涉及的 BIP32、BIP44、BIP39</a>，私钥其实就代表了一个账号，最简单的保管账号的方式就是直接把私钥保存起来，如果私钥文件被人盗取，我们的数字资产讲洗劫一空。</p>
+<p>Keystore 文件就是一种以加密的方式存储密钥的文件，这样的发起交易的时候，先从Keystore 文件是使用密码解密出私钥，然后进行签名交易。这样做之后就会安全的多，因为只有黑客同时盗取 keystore 文件和密码才能盗取我们的数字资产。</p>
+<h3 id="Keystore-文件如何生成的"><a href="#Keystore-文件如何生成的" class="headerlink" title="Keystore 文件如何生成的"></a>Keystore 文件如何生成的</h3><p> 以太坊是使用对称加密算法来加密私钥生成Keystore文件，因此对称加密秘钥(注意它其实也是发起交易时需要的解密秘钥)的选择就非常关键，这个秘钥是使用KDF算法推导派生而出。因此在完整介绍Keystore 文件如何生成前，有必要先介绍一下KDF。</p>
+<h4 id="使用-KDF-生成秘钥"><a href="#使用-KDF-生成秘钥" class="headerlink" title="使用 KDF 生成秘钥"></a>使用 KDF 生成秘钥</h4><p>密码学KDF（key derivation functions），其作用是通过一个密码派生出一个或多个秘钥，即从 password 生成加密用的 key。</p>
+<p>其实在<a href="https://learnblockchain.cn/2018/09/28/hdwallet/">理解开发HD 钱包涉及的 BIP32、BIP44、BIP39</a>中介绍助记词推导出种子的PBKDF2算法就是一种KDF函数，其原理是加盐以及增加哈希迭代次数。</p>
+<p>而在Keystore中，是用的是<a href="https://tools.ietf.org/html/rfc7914" target="_blank" rel="noopener">Scrypt算法</a>，用一个公式来表示的话，派生的Key生成方程为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DK = Scrypt(salt, dk_len, n, r, p)</span><br></pre></td></tr></table></figure>
+<p>其中的 salt 是一段随机的盐，dk_len 是输出的哈希值的长度。n 是 CPU/Memory 开销值，越高的开销值，计算就越困难。r 表示块大小，p 表示并行度。</p>
+<blockquote>
+<p> Litecoin 就使用 scrypt 作为它的 POW 算法</p>
+</blockquote>
+<p>实际使用中，还会加上一个密码进行计算，用一张图来表示这个过程就是：</p>
+<p><img src="media/15402189467872.png" alt=""></p>
+<h4 id="对私钥进行对称加密"><a href="#对私钥进行对称加密" class="headerlink" title="对私钥进行对称加密"></a>对私钥进行对称加密</h4><p>上面已经用KDF算法生成了一个秘钥，这个秘钥就是接着进行对称加密的秘钥，这里使用的对称加密算法是  aes-128-ctr，aes-128-ctr 加密算法还需要用到一个参数初始化向量 iv。</p>
+<h3 id="Keystore文件"><a href="#Keystore文件" class="headerlink" title="Keystore文件"></a>Keystore文件</h3><p>好了，我们现在结合具体 Keystore文件的内容，就很容易理解了Keystore 文件怎么产生的了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#123;  </span><br><span class="line">   <span class="string">"address"</span>:<span class="string">"856e604698f79cef417aab..."</span>,</span><br><span class="line">   <span class="string">"crypto"</span>:&#123;  </span><br><span class="line">      <span class="string">"cipher"</span>:<span class="string">"aes-128-ctr"</span>,</span><br><span class="line">      <span class="string">"ciphertext"</span>:<span class="string">"13a3ad2135bef1ff228e399dfc8d7757eb4bb1a81d1b31...."</span>,</span><br><span class="line">      <span class="string">"cipherparams"</span>:&#123;  </span><br><span class="line">         <span class="string">"iv"</span>:<span class="string">"92e7468e8625653f85322fb3c..."</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"kdf"</span>:<span class="string">"scrypt"</span>,</span><br><span class="line">      <span class="string">"kdfparams"</span>:&#123;  </span><br><span class="line">         <span class="string">"dklen"</span>:<span class="number">32</span>,</span><br><span class="line">         <span class="string">"n"</span>:<span class="number">262144</span>,</span><br><span class="line">         <span class="string">"p"</span>:<span class="number">1</span>,</span><br><span class="line">         <span class="string">"r"</span>:<span class="number">8</span>,</span><br><span class="line">         <span class="string">"salt"</span>:<span class="string">"3ca198ce53513ce01bd651aee54b16b6a...."</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"mac"</span>:<span class="string">"10423d837830594c18a91097d09b7f2316..."</span></span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="string">"id"</span>:<span class="string">"5346bac5-0a6f-4ac6-baba-e2f3ad464f3f"</span>,</span><br><span class="line">   <span class="string">"version"</span>:<span class="number">3</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>来解读一下各个字段：</p>
+<ul>
+<li>address: 账号地址</li>
+<li>version: Keystore文件的版本，目前为第3版，也称为V3 KeyStore。</li>
+<li>id : uuid </li>
+<li>crypto: 加密推倒的相关配置.<ul>
+<li>cipher 是用于加密以太坊私钥的对称加密算法。用的是 aes-128-ctr 。</li>
+<li>cipherparams 是 aes-128-ctr 加密算法需要的参数。在这里，用到的唯一的参数 iv。</li>
+<li>ciphertext 是加密算法输出的密文，也是将来解密时的需要的输入。</li>
+<li>kdf: 指定使用哪一个算法，这里使用的是 scrypt。</li>
+<li>kdfparams: scrypt函数需要的参数</li>
+<li>mac: 用来校验密码的正确性， mac= sha3(DK[16:32], ciphertext) 下面一个小节单独分析。</li>
+</ul>
+</li>
+</ul>
+<p>我们来完整梳理一下 Keystore 文件的产生：</p>
+<ol>
+<li>使用scrypt函数 （根据密码 和 相应的参数） 生成秘钥</li>
+<li>使用上一步生成的秘钥 + 账号私钥 + 参数 进行对称加密。</li>
+<li>把相关的参数 和 输出的密文 保存为以上格式的 JSON 文件</li>
+</ol>
+<h3 id="如何确保密码是对的？"><a href="#如何确保密码是对的？" class="headerlink" title="如何确保密码是对的？"></a>如何确保密码是对的？</h3><p>当我们在使用Keystore文件来还原私钥时，依然是使用kdf生成一个秘钥，然后用秘钥对ciphertext进行解密，其过程如下： </p>
+<p><img src="/media/15402194796574.png" alt=""></p>
+<p>此时细心的同学会发现，无论使用说明密码，来进行这个操作，都会生成一个私钥，但是最终计算的以太坊私钥到底是不是正确的，却不得而知。</p>
+<p>这就是 keystore 文件中 mac 值的作用。mac 值是 kdf输出 和 ciphertext 密文进行SHA3-256运算的结果，显然密码不同，计算的mac 值也不同，因此可以用来检验密码的正确性。检验过程用图表示如下：</p>
+<p><img src="/media/15402227441945.png" alt=""></p>
+<p>现在我们以解密的角度完整的梳理下流程，就可以得到以下图：</p>
+<p><img src="/media/15402229547319.png" alt=""></p>
+<h2 id="用ethers-js-实现账号导出导入"><a href="#用ethers-js-实现账号导出导入" class="headerlink" title="用ethers.js 实现账号导出导入"></a>用ethers.js 实现账号导出导入</h2><p>ethers.js 直接提供了加载keystore JSON来创建钱包对象以及加密生成keystore文件的方法，方法如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导入keystore Json</span></span><br><span class="line">    ethers.Wallet.fromEncryptedJson(json, password, [progressCallback]).then(<span class="function"><span class="keyword">function</span>(<span class="params">wallet</span>) </span>&#123;</span><br><span class="line">       <span class="comment">// wallet </span></span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 使用钱包对象 导出keystore Json</span></span><br><span class="line">    wallet.encrypt(pwd, [progressCallback].then(<span class="function"><span class="keyword">function</span>(<span class="params">json</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 保存json</span></span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<p>现在结合界面来完整的实现账号导出及导入，先看看导出，UI图如下：</p>
+<p><img src="media/15402637447655.jpg" alt=""></p>
+<p>HTML 代码如下： </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h3</span>&gt;</span>KeyStore 导出:<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span>密码:<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">placeholder</span>=<span class="string">"(password)"</span> <span class="attr">id</span>=<span class="string">"save-keystore-file-pwd"</span> /&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span> <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"save-keystore"</span> <span class="attr">class</span>=<span class="string">"submit"</span>&gt;</span>导出<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>上面主要定义了一个密码输入框和一个导出按钮，点击“导出”后，处理逻辑代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// "导出" 按钮，执行exportKeystore函数</span></span><br><span class="line">  $(<span class="string">'#save-keystore'</span>).click(exportKeystore);</span><br><span class="line"></span><br><span class="line">  exportKeystore: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 获取密码</span></span><br><span class="line">    <span class="keyword">var</span> pwd = $(<span class="string">'#save-keystore-file-pwd'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// wallet 是上一篇文章中生成的钱包对象</span></span><br><span class="line">    wallet.encrypt(pwd.val()).then(<span class="function"><span class="keyword">function</span>(<span class="params">json</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> blob = <span class="keyword">new</span> Blob([json], &#123;<span class="attr">type</span>: <span class="string">"text/plain;charset=utf-8"</span>&#125;);</span><br><span class="line">      </span><br><span class="line">      <span class="comment">// 使用了FileSaver.js 进行文件保存</span></span><br><span class="line">      saveAs(blob, <span class="string">"keystore.json"</span>);</span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://github.com/eligrey/FileSaver.js" target="_blank" rel="noopener">FileSaver.js</a> 是可以用来在页面保存文件的一个库。</p>
+<p>再来看看导入keystore 文件, UI图如下：</p>
+<p><img src="/media/15402647159310.jpg" alt=""></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">h2</span>&gt;</span>加载账号Keystore文件<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span>Keystore:<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"file"</span> <span class="attr">id</span>=<span class="string">"select-wallet-drop"</span>&gt;</span>把Json文件拖动到这里<span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">id</span>=<span class="string">"select-wallet-file"</span> /&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span>密码:<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">placeholder</span>=<span class="string">"(password)"</span> <span class="attr">id</span>=<span class="string">"select-wallet-password"</span> /&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span> <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"select-submit-wallet"</span> <span class="attr">class</span>=<span class="string">"submit disable"</span>&gt;</span>解密<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>上面主要定义了一个文件输入框、一个密码输入框及一个“解密“按钮，因此处理逻辑包含两部分，一是读取文件，二是解析加载账号，关键代码如下：</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// 使用FileReader读取文件，</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">var</span> fileReader = <span class="keyword">new</span> FileReader();</span><br><span class="line">  fileReader.onload = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> json = e.target.result;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 从加载</span></span><br><span class="line">    ethers.Wallet.fromEncryptedJson(json, password).then(<span class="function"><span class="keyword">function</span>(<span class="params">wallet</span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">    &#125;， <span class="function"><span class="keyword">function</span>（<span class="title">error</span>) </span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">  &#125;;</span><br><span class="line">fileReader.readAsText(inputFile.files[<span class="number">0</span>]);</span><br></pre></td></tr></table></figure>
+<p> 哈哈哈，有到了推广时间了，完整源码请订阅<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">深入浅出区块链技术小专栏</a>查看，赶紧订阅吧，走过路过，不容错过。</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://medium.com/@julien.maffre/what-is-an-ethereum-keystore-file-86c8c5917b97" target="_blank" rel="noopener">what-is-an-ethereum-keystore-file</a></p>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
+<p><a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">深入浅出区块链知识星球</a>最专业技术问答社区，加入社区还可以在微信群里和300多位区块链技术爱好者一起交流。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="Tiny熊 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信号：深入浅出区块链技术，欢迎订阅</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有收获，赞赏下</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/qr_pay.jpg" alt="Tiny熊 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Tiny熊
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://learnblockchain.cn/2018/10/25/eth-web-wallet_2/" title="以太坊钱包开发系列2 - 账号Keystore文件导入导出">https://learnblockchain.cn/2018/10/25/eth-web-wallet_2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/比特币/" rel="tag"># 比特币</a>
+          
+            <a href="/tags/以太坊/" rel="tag"># 以太坊</a>
+          
+            <a href="/tags/钱包/" rel="tag"># 钱包</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/25/eth-web-wallet_1/" rel="next" title="以太坊钱包开发系列1 - 创建钱包账号">
+                <i class="fa fa-chevron-left"></i> 以太坊钱包开发系列1 - 创建钱包账号
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/26/eth-web-wallet_3/" rel="prev" title="以太坊钱包开发系列3 - 展示钱包信息及发起签名交易">
+                以太坊钱包开发系列3 - 展示钱包信息及发起签名交易 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/xilibi2003" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiong-li-bing/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="区块链技术专栏" target="_blank">区块链技术专栏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://t.xiaomiquan.com/RfAu7uj" title="技术交流-知识星球" target="_blank">技术交流-知识星球</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bitshuo.com" title="区块链技术中文社区" target="_blank">区块链技术中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://news.tangwen.org" title="汤问资讯" target="_blank">汤问资讯</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitask.org" title="币问" target="_blank">币问</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://hiblock.net/" title="HiBlock区块链社区" target="_blank">HiBlock区块链社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eosfans.io/" title="EOS中文社区" target="_blank">EOS中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blockflow.net/" title="BlockFlow" target="_blank">BlockFlow</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.liankexing.com/" title="链客区块链问答社区" target="_blank">链客区块链问答社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitool.cn/" title="币兔" target="_blank">币兔</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wutui.pro/" title="无退社区" target="_blank">无退社区</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何导入Geth创建的账号？"><span class="nav-number">1.</span> <span class="nav-text">如何导入Geth创建的账号？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#详细解读-Keystore-文件"><span class="nav-number">2.</span> <span class="nav-text">详细解读 Keystore 文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么需要-Keystore-文件"><span class="nav-number">2.1.</span> <span class="nav-text">为什么需要 Keystore 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Keystore-文件如何生成的"><span class="nav-number">2.2.</span> <span class="nav-text">Keystore 文件如何生成的</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用-KDF-生成秘钥"><span class="nav-number">2.2.1.</span> <span class="nav-text">使用 KDF 生成秘钥</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对私钥进行对称加密"><span class="nav-number">2.2.2.</span> <span class="nav-text">对私钥进行对称加密</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Keystore文件"><span class="nav-number">2.3.</span> <span class="nav-text">Keystore文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何确保密码是对的？"><span class="nav-number">2.4.</span> <span class="nav-text">如何确保密码是对的？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用ethers-js-实现账号导出导入"><span class="nav-number">3.</span> <span class="nav-text">用ethers.js 实现账号导出导入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文档"><span class="nav-number">4.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+  <div class="footer-custom"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17140514号-1</a></div>
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

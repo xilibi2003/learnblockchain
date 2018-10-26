@@ -99,7 +99,7 @@
 <meta property="og:image" content="https://learnblockchain.cn/images/a9a6e6a31f39e812f579a4c8bdf09347.png">
 <meta property="og:image" content="https://learnblockchain.cn/images/71c0af9474a51296096c3c806ca8f1a1.png">
 <meta property="og:image" content="https://learnblockchain.cn/images/d37f78f8f2d859369d99fc5e0a76c184.png">
-<meta property="og:updated_time" content="2018-09-29T03:37:53.879Z">
+<meta property="og:updated_time" content="2018-10-22T09:09:19.570Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解开发HD 钱包涉及的 BIP32、BIP44、BIP39">
 <meta name="twitter:description" content="如果你还在被HD钱包、BIP32、BIP44、BIP39搞的一头雾水，来看看这边文章吧。">
@@ -396,8 +396,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-29T11:37:53+08:00">
-                2018-09-29
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-22T17:09:19+08:00">
+                2018-10-22
               </time>
             
           </span>
@@ -488,9 +488,14 @@
 <p>使用助记词作为种子其实包含2个部分：助记词生成及助记词推导出随机种子，下面分析下这个过程。</p>
 <h3 id="生成助记词"><a href="#生成助记词" class="headerlink" title="生成助记词"></a>生成助记词</h3><p>助记词生成的过程是这样的：先生成一个128位随机数，再加上对随机数做的校验4位，得到132位的一个数，然后按每11位做切分，这样就有了12个二进制数，然后用每个数去查<a href="https://github.com/bitcoin/bips/blob/master/bip-0039/bip-0039-wordlists.md" target="_blank" rel="noopener">BIP39定义的单词表</a>，这样就得到12个助记词，这个过程图示如下：</p>
 <p><img src="/images/71c0af9474a51296096c3c806ca8f1a1.png" alt=""><br>（图来源于网络）</p>
+<p>下面是使用bip39生成生成助记词的一段代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> bip39 = <span class="built_in">require</span>(<span class="string">'bip39'</span>)</span><br><span class="line"><span class="comment">// 生成助记词</span></span><br><span class="line"><span class="keyword">var</span> mnemonic = bip39.generateMnemonic()</span><br><span class="line"><span class="built_in">console</span>.log(mnemonic)</span><br></pre></td></tr></table></figure>
 <h3 id="助记词推导出种子"><a href="#助记词推导出种子" class="headerlink" title="助记词推导出种子"></a>助记词推导出种子</h3><p>这个过程使用密钥拉伸（Key stretching）函数，被用来增强弱密钥的安全性，PBKDF2是常用的密钥拉伸算法中的一种。<br>PBKDF2基本原理是通过一个为随机函数(例如 HMAC 函数)，把助记词明文和盐值作为输入参数，然后重复进行运算最终产生生成一个更长的（512 位）密钥种子。这个种子再构建一个确定性钱包并派生出它的密钥。</p>
 <p>密钥拉伸函数需要两个参数：助记词和盐。盐可以提高暴力破解的难度。 盐由常量字符串 “mnemonic” 及一个可选的密码组成，注意使用不同密码，则拉伸函数在使用同一个助记词的情况下会产生一个不同的种子，这个过程图示图下:</p>
 <p><img src="/images/d37f78f8f2d859369d99fc5e0a76c184.png" alt=""><br>（图来源于网络）</p>
+<p>同样代码来表示一下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> hdkey = <span class="built_in">require</span>(<span class="string">'ethereumjs-wallet/hdkey'</span>)</span><br><span class="line"><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">'ethereumjs-util'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> seed = bip39.mnemonicToSeed(mnemonic, <span class="string">"pwd"</span>);</span><br><span class="line"><span class="keyword">var</span> hdWallet = hdkey.fromMasterSeed(seed);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> key1 = hdWallet.derivePath(<span class="string">"m/44'/60'/0'/0/0"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"私钥："</span>+util.bufferToHex(key1._hdkey._privateKey));</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> address1 = util.pubToAddress(key1._hdkey._publicKey, <span class="literal">true</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"地址："</span>+util.bufferToHex(address1));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"校验和地址："</span>+ util.toChecksumAddress(address1.toString(<span class="string">'hex'</span>)));</span><br></pre></td></tr></table></figure>
+<p>校验和地址是<a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md" target="_blank" rel="noopener">EIP-55</a>中定义的对大小写有要求的一种地址形式。</p>
 <p>密码可以作为一个额外的安全因子来保护种子，即使助记词的备份被窃取，也可以保证钱包的安全（也要求密码拥有足够的复杂度和长度），不过另外一方面，如果我们忘记密码，那么将无法恢复我们的数字资产。</p>
 <p>一句话概括下BIP39就是：<strong>通过定义助记词让种子的备份更友好</strong></p>
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>HD钱包（Hierarchical Deterministic Wallets）是在BIP32中提出的为了避免管理一堆私钥的麻烦提出的分层推导方案。<br>而BIP44是给BIP32的分层增强了路径定义规范，同时增加了对多币种的支持。<br>BIP39则通过定义助记词让种子的备份更友好。</p>
@@ -670,7 +675,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -681,7 +686,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

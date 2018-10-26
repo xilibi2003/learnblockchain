@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+  <meta name="msvalidate.01" content="914C9C1CBC7078C5E2AC612AD5C1CC6C" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="以太坊,Plasma,扩容," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深入浅出区块链" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="这一系列文章将围绕以太坊的二层扩容框架，介绍其基本运行原理，具体操作细节，安全性讨论以及未来研究方向等。本篇文章主要对 Plasma 一些关键操作的细节进行剖析。">
+<meta name="keywords" content="以太坊,Plasma,扩容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解Plasma（二）Plasma 细节">
+<meta property="og:url" content="https://learnblockchain.cn/2018/10/24/plasma-in-detail/index.html">
+<meta property="og:site_name" content="深入浅出区块链">
+<meta property="og:description" content="这一系列文章将围绕以太坊的二层扩容框架，介绍其基本运行原理，具体操作细节，安全性讨论以及未来研究方向等。本篇文章主要对 Plasma 一些关键操作的细节进行剖析。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/gitferry/mastering-ethereum/master/Plasma-in-depth/images/Deposit.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/gitferry/mastering-ethereum/master/Plasma-in-depth/images/fraud-proofs.png">
+<meta property="og:updated_time" content="2018-10-26T09:50:08.561Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入理解Plasma（二）Plasma 细节">
+<meta name="twitter:description" content="这一系列文章将围绕以太坊的二层扩容框架，介绍其基本运行原理，具体操作细节，安全性讨论以及未来研究方向等。本篇文章主要对 Plasma 一些关键操作的细节进行剖析。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/gitferry/mastering-ethereum/master/Plasma-in-depth/images/Deposit.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'UT2K1ZRSWK',
+      apiKey: '0bbb261dfad58df8f8a657a1ed3255cd',
+      indexName: 'learnblockchain',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://learnblockchain.cn/2018/10/24/plasma-in-detail/"/>
+
+
+
+
+
+  <title>深入理解Plasma（二）Plasma 细节 | 深入浅出区块链</title>
+  
+
+
+
+
+
+
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6273382609469378",
+        enable_page_level_ads: true
+    });
+</script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">系统学习区块链技术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wiki">
+          <a href="https://wiki.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Wiki
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-course">
+          <a href="/course/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-spinner"></i> <br />
+            
+            视频教程
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-web3">
+          <a href="https://web3.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Web3文档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2018/10/24/plasma-in-detail/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">深入理解Plasma（二）Plasma 细节</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-24T20:54:17+08:00">
+                2018-10-24
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-26T17:50:08+08:00">
+                2018-10-26
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ethereum/" itemprop="url" rel="index">
+                    <span itemprop="name">以太坊</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ethereum/Plasma/" itemprop="url" rel="index">
+                    <span itemprop="name">Plasma</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p> 这一系列文章将围绕以太坊的二层扩容框架，介绍其基本运行原理，具体操作细节，安全性讨论以及未来研究方向等。本篇文章主要对 Plasma 一些关键操作的细节进行剖析。</p>
+<a id="more"></a>
+<p>在<a href="https://learnblockchain.cn/2018/10/20/plasma-framework/">上一篇</a>文章中我们已经理解了什么是 Plasma 框架以及它是如何运行的，这一篇文章将对其运行过程中的一些关键部分，包括 Plasma 提交区块的过程，当有恶意行为发生时如何构建防伪证明以及如何退出 Plasma 子链等进行剖析。需要注意的是，由于 Plasma 是一套框架，因此本文只剖析 Plasma 项目的共性，每一部分的实现细则还是需要参考实际的项目，例如 Plasma MVP（Minimal-Viable-Plasma）和 Plasma Cash 等。</p>
+<h2 id="存款（Deposit）"><a href="#存款（Deposit）" class="headerlink" title="存款（Deposit）"></a>存款（Deposit）</h2><p>Plasma 的主要思想就是将大部分计算过程都转移到链下进行，用户只有在进入和退出 Plasma Chain 的时候需要跟主链上的智能合约交互，这也是所有 Plasma 应用的标准流程。</p>
+<p>用户在将主链的资产（如以太币或者其它 ERC20 合约发布的 token）转移到 Plasma Chain 的过程称为存款（Deposit），具体做法是直接向主链上的 Plasma 合约发送以太币或 token。Plasma 合约收到 Deposit 交易后会在子链上创建跟 Deposit 数额一致的交易，并将其打包进区块中，作为存款确认的证明。这个过程如下图所示（来源自<a href="https://plasma.io/" target="_blank" rel="noopener">[1]</a>）。</p>
+<p><img src="https://raw.githubusercontent.com/gitferry/mastering-ethereum/master/Plasma-in-depth/images/Deposit.png" width="400" height="360" alt="Blockchains of Blockchain"></p>
+<p>当用户看到子链上自己之前存款的交易被确认后，就可以在子链上使用这笔资产（给子链上的其他用户发送交易或者退出子链等）。</p>
+<h2 id="状态确认（State-Commitment）"><a href="#状态确认（State-Commitment）" class="headerlink" title="状态确认（State Commitment）"></a>状态确认（State Commitment）</h2><p>当大部分都转移到链下进行时，需要某种机制确保链下状态的更新得到确认，这样才能保证当有恶意行为发生时，主链可以保证用户不会受到损失。这就是为什么需要状态确认（State Commitment），即子链周期性地将状态更新情况提交到主链进行共识。</p>
+<p>然而，将子链中的所有交易都同步到主链显然违反了 Plasma 的初衷，在 Plasma 中，实际向主链提交的是 Merkle Tree 的根哈希。因此子链中的实际交易情况被隐藏，在主链上只能看到子链区块的哈希值。</p>
+<p>当有恶意行为发生时，子链网络中的所有用户都可以向主链提交防伪证明，证明成立后，含有恶意交易的区块将被回滚。</p>
+<h2 id="防伪证明（Fraud-Proof）"><a href="#防伪证明（Fraud-Proof）" class="headerlink" title="防伪证明（Fraud Proof）"></a>防伪证明（Fraud Proof）</h2><p>Plasma 的一个关键设计之一就是允许用户构造防伪证明（Fraud Proof）。防伪证明的意义在于只要发布区块的节点构造了含有恶意交易的区块，那么就要承担被惩罚的风险。每当新的区块被提交到主链上时，会留出一段时间给用户提交防伪证明，如果在这段时间内没有证明被提交，则认为新的区块被验证合法。如果有防伪证明检测到区块中存在恶意交易，则该区块将被舍弃，回滚到上一个被验证合法的区块。Plasma 中的防伪证明主要有以下（但不限于）几种：</p>
+<ul>
+<li>资产可花费证明</li>
+<li>交易签名有效性证明</li>
+<li>存取款证明</li>
+</ul>
+<p>至于每种防伪证明的具体形式，则依赖于实际 Plasma 应用的实现细则。</p>
+<p>如下图所示（来源自<a href="https://plasma.io/" target="_blank" rel="noopener">[1]</a>），子链中每个节点都存有 1-4 个区块的数据。假设区块 1-3 已经被验证合法，而区块 4 中存在恶意交易，那么每个节点都可以使用 1-4 个区块中的数据构造防伪证明提交到主链，主链验证后将子链中的状态回滚到区块 1-3。</p>
+<p><img src="https://raw.githubusercontent.com/gitferry/mastering-ethereum/master/Plasma-in-depth/images/fraud-proofs.png" width="700" height="200" alt="Blockchains of Blockchain"></p>
+<p>防伪证明还可以使用零知识证明（zk-SNARKs 或者 STARKs）来构造，但由于目前通过零知识证明生成证明的时间和空间还有待优化，目前设计的 Plasma 并不依赖零知识证明。零知识证明在 Plasma 中的应用是一个很有前景的研究方向，感兴趣的读者可以参考以太坊研究团队关于这方面的研究<a href="https://ethresear.ch/t/plasma-is-plasma/2195" target="_blank" rel="noopener">[2]</a>)。</p>
+<h2 id="取款（Withdrawal）"><a href="#取款（Withdrawal）" class="headerlink" title="取款（Withdrawal）"></a>取款（Withdrawal）</h2><p>取款（Withdrawal），顾名思义，就是从子链中的资产取回到主链上，因此取款也被称为退出（Exit）。取款操作可以说是 Plasma 框架中最重要的一步，因为它确保用户可以安全地将子链上的资产转移到主链上。之前的存款以及状态确认步骤已经产生了一些交易数据，并在主链上得到同步，用户可以利用这些数据构造资产证明，之后执行简单取款（Simple Withdrawal）操作退出子链。当有扣留（Withholding）攻击发生（即子链上的矿工恶意扣留区块，意图双花攻击等）时，用户可能无法成功获取数据构造资产证明，这时需要执行批量取款（Mass Withdrawal）操作退出子链。</p>
+<p>需要注意的是，当子链中有取款操作发生时，跟这个取款操作相关的账号或者交易都将被禁止。</p>
+<h3 id="简单取款（Simple-Withdrawal）"><a href="#简单取款（Simple-Withdrawal）" class="headerlink" title="简单取款（Simple Withdrawal）"></a>简单取款（Simple Withdrawal）</h3><p>执行简单取款的条件是所要取回的资产已经在主链和子链上确认。</p>
+<p>一个简单取款的执行主要有以下几个步骤：</p>
+<ul>
+<li>向主链上的 Plasma 智能合约发送已签名的取款交易。取款的数额可以包含多个输出（UTXO模型），但所有输出必须在同一个子链当中，而且每个输出的余额必须全部取出，不能只取出一部分。取款数额的一部分还需要被当作押金，作为恶意行为的惩罚。</li>
+<li>当取款请求发送后，需要等待一段“争议期（Challenge Period）”，这期间其它节点可以构造证据证明该取款中的部分或全部数额已经被花费。如果争议期内有节点提供证明成功，那么取款被取消，而且押金被扣除。</li>
+<li>接下来可能还要等待一段时间，直到所有区块高度较低的取款操作都完成。这是为了保证所有取款操作按照“先来后到”的顺序执行。</li>
+<li>当争议期结束后，如果没有争议被提出，则认为取款操作成立，取款者将子链资产成功取回到主链。</li>
+</ul>
+<h3 id="快速取款（Fast-Withdrawal）"><a href="#快速取款（Fast-Withdrawal）" class="headerlink" title="快速取款（Fast Withdrawal）"></a>快速取款（Fast Withdrawal）</h3><p>快速取款（Fast Withdrawal）跟简单取款相比的差别主要是引入一个中间人，白皮书上称为 Liquidity Provider，这里简称为 LP。如果一个用户不想等待很长的争议期（目前的实现至少要一周），那么它可以选择从 LP 这里直接取款，只需要消耗一个交易确认的时间，代价是需要支付给 LP 一定的费用。由于 Plasma 白皮书上关于快速取款的描述太过晦涩，这里主要参考 kfichter 提出的 Simple Fast Withdrawal<a href="https://ethresear.ch/t/simple-fast-withdrawals/2128" target="_blank" rel="noopener">[3]</a> 来介绍快速取款是如何实现的。</p>
+<p>为了实现快速取款，取款方和 LP 可以利用一个流动合约（liquidity contract）。假设取款方是 Alice，她想要执行快速取款将 10 以太币从子链转移到主链。她首先向流动合约发送 10 以太币，注意这里的交易是在子链上进行的。当这个交易被子链打包成区块后，Alice 可以调用合约中的某个退出函数，这时 Alice 将获取一个代表她这笔资产的 token。Bob 作为 LP，他检查了子链上数据之后证明 Alice 的取款没有问题之后愿意以 9 以太币的价格购买这个 token。Alice 将 token 卖给 Bob，获得了 9 以太币，Bob 赚取了 1 以太币。</p>
+<p>需要注意的是，实现快速取款的前提条件是没有拜占庭行为发生，即没有扣留区块攻击发生，因为 LP 需要验证取款方的交易历史。</p>
+<h3 id="批量取款（Mass-Withdrawal）"><a href="#批量取款（Mass-Withdrawal）" class="headerlink" title="批量取款（Mass Withdrawal）"></a>批量取款（Mass Withdrawal）</h3><p>当子链中有拜占庭行为（例如，区块扣留攻击）发生时，将会影响以后生成防伪证明，因此网络中的每个用户都有责任快速退出子链。虽然批量取款（Mass Withdrawal）操作不是必要选择，但当大量用户执行取款时很可能会造成主链拥塞，也会消耗更多的 gas，因此批量取款是当子链受到攻击时更好的选择。</p>
+<p>批量取款操作由于所采用的模型（UTXO 模型或者账户模型）不同会有较大的差别，而且目前关于批量取款的操作细节也正在研讨当中，因此这里只对批量取款做简单介绍，想要了解目前研究状态可以参考<a href="https://ethresear.ch/t/basic-mass-exits-for-plasma-mvp/3316" target="_blank" rel="noopener">[4]</a>。</p>
+<p>当子链中有拜占庭行为发生时，用户之间可以共同协作执行批量取款。这时会有一个节点扮演取款处理人（Exit Processor）的角色，简称为 EP，负责当前某个批量操作（可以同时有多个批量取款操作发生，但同一个取款申请不能存在于多个批量取款），并且可以收取服务费作为报酬。EP 将构造一个位图（bitmap，即一串0/1）记录哪些资产要执行取款。之后 EP 将利用现有的区块数据检查每个取款是否合法，之后将构造一个批量退出初始化交易（Mass Exit Initiation Transaction，MEIT），并将其发送到主链上。在 MEIT 被主链确认之前，每个用户都可以对这个交易提出异议。当争议期结束，MEIT 被主链确认，批量取款成功。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文主要对 Plasma 框架中一些关键操作进行了比较详细的介绍，但如果不依托于某个实际的 Plasma 项目，对一些细节还是很难理解。因此在后面的文章中将会介绍 Plasma MVP 以及 Plasma Cash。</p>
+<h2 id="相关资源"><a href="#相关资源" class="headerlink" title="相关资源"></a>相关资源</h2><ol>
+<li><a href="https://plasma.io/" target="_blank" rel="noopener">https://plasma.io/</a></li>
+<li><a href="https://ethresear.ch/t/plasma-is-plasma/2195" target="_blank" rel="noopener">https://ethresear.ch/t/plasma-is-plasma/2195</a></li>
+<li><a href="https://ethresear.ch/t/simple-fast-withdrawals/2128" target="_blank" rel="noopener">https://ethresear.ch/t/simple-fast-withdrawals/2128</a></li>
+<li><a href="https://ethresear.ch/t/basic-mass-exits-for-plasma-mvp/3316" target="_blank" rel="noopener">https://ethresear.ch/t/basic-mass-exits-for-plasma-mvp/3316</a></li>
+</ol>
+<p>本文的作者是盖盖，他的微信公众号: chainlab</p>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="Tiny熊 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信号：深入浅出区块链技术，欢迎订阅</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有收获，赞赏下</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/qr_pay.jpg" alt="Tiny熊 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    盖盖
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://learnblockchain.cn/2018/10/24/plasma-in-detail/" title="深入理解Plasma（二）Plasma 细节">https://learnblockchain.cn/2018/10/24/plasma-in-detail/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/以太坊/" rel="tag"># 以太坊</a>
+          
+            <a href="/tags/Plasma/" rel="tag"># Plasma</a>
+          
+            <a href="/tags/扩容/" rel="tag"># 扩容</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/20/plasma-framework/" rel="next" title="深入理解Plasma（一）Plasma 框架">
+                <i class="fa fa-chevron-left"></i> 深入理解Plasma（一）Plasma 框架
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/25/eth-web-wallet_1/" rel="prev" title="以太坊钱包开发系列1 - 创建钱包账号">
+                以太坊钱包开发系列1 - 创建钱包账号 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/xilibi2003" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiong-li-bing/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="区块链技术专栏" target="_blank">区块链技术专栏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://t.xiaomiquan.com/RfAu7uj" title="技术交流-知识星球" target="_blank">技术交流-知识星球</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bitshuo.com" title="区块链技术中文社区" target="_blank">区块链技术中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://news.tangwen.org" title="汤问资讯" target="_blank">汤问资讯</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitask.org" title="币问" target="_blank">币问</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://hiblock.net/" title="HiBlock区块链社区" target="_blank">HiBlock区块链社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eosfans.io/" title="EOS中文社区" target="_blank">EOS中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blockflow.net/" title="BlockFlow" target="_blank">BlockFlow</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.liankexing.com/" title="链客区块链问答社区" target="_blank">链客区块链问答社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitool.cn/" title="币兔" target="_blank">币兔</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wutui.pro/" title="无退社区" target="_blank">无退社区</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#存款（Deposit）"><span class="nav-number">1.</span> <span class="nav-text">存款（Deposit）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态确认（State-Commitment）"><span class="nav-number">2.</span> <span class="nav-text">状态确认（State Commitment）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防伪证明（Fraud-Proof）"><span class="nav-number">3.</span> <span class="nav-text">防伪证明（Fraud Proof）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#取款（Withdrawal）"><span class="nav-number">4.</span> <span class="nav-text">取款（Withdrawal）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单取款（Simple-Withdrawal）"><span class="nav-number">4.1.</span> <span class="nav-text">简单取款（Simple Withdrawal）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速取款（Fast-Withdrawal）"><span class="nav-number">4.2.</span> <span class="nav-text">快速取款（Fast Withdrawal）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#批量取款（Mass-Withdrawal）"><span class="nav-number">4.3.</span> <span class="nav-text">批量取款（Mass Withdrawal）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关资源"><span class="nav-number">6.</span> <span class="nav-text">相关资源</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+  <div class="footer-custom"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17140514号-1</a></div>
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
