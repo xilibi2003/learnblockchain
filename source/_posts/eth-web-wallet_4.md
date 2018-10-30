@@ -12,7 +12,7 @@ tags:
 author: Tiny熊
 ---
 
-以太坊去中心化网页钱包开发系列，将从零开始开发出一个可以实际使用的钱包，本系列文章是理论与实战相结合，一共有四篇：[创建钱包账号](https://learnblockchain.cn/2018/10/25/eth-web-wallet_1/)、[账号Keystore文件导入导出](https://learnblockchain.cn/2018/10/25/2018/10/25/eth-web-wallet_2/)、[展示钱包信息及发起签名交易](https://learnblockchain.cn/2018/10/26/eth-web-wallet_3/)、[发送Token(代币）](https://learnblockchain.cn/2018/10/26/eth-web-wallet_4/)，本文是第四篇，Token（代币、通证）是以太坊的一大特色，既然开发钱包，则发送Token 功能必不可少。
+以太坊去中心化网页钱包开发系列，将从零开始开发出一个可以实际使用的钱包，本系列文章是理论与实战相结合，一共有四篇：[创建钱包账号](https://learnblockchain.cn/2018/10/25/eth-web-wallet_1/)、[账号Keystore文件导入导出](https://learnblockchain.cn/2018/10/25/eth-web-wallet_2/)、[展示钱包信息及发起签名交易](https://learnblockchain.cn/2018/10/26/eth-web-wallet_3/)、[发送Token(代币）](https://learnblockchain.cn/2018/10/26/eth-web-wallet_4/)，本文是第四篇，Token（代币、通证）是以太坊的一大特色，既然开发钱包，则发送Token 功能必不可少。
 
 <!-- more -->
 
@@ -27,7 +27,7 @@ contract ERC20Interface {
 
     string public constant name = "Token Name";
     string public constant symbol = "SYM";
-    uint8 public constant decimals = 0; 
+    uint8 public constant decimals = 0;
 
     function totalSupply() public constant returns (uint);
 
@@ -47,9 +47,9 @@ contract ERC20Interface {
 
 ABI 全称是 Application Binary Interface，它就是合约接口的描述，因此有了合约的接口定义，就可以很容易通过编译拿到ABI 信息，比如像下图在Remix 的编译选项卡就可以直接复制ABI。
 
-![](/media/15403775499051.jpg)
+![](https://learnblockchain.cn/media/15403775499051.jpg)
 
-生成的 ABI 描述大概长这样： 
+生成的 ABI 描述大概长这样：
 
 ```js
 [
@@ -110,11 +110,11 @@ ethers.js 构造合约对象很简单，仅需要提供三个参数给ethers.Con
 
 ```js
  var abi = [...];
- var addr = "0x..."; 
+ var addr = "0x...";
  var contract = new ethers.Contract(address, abi, provider);
- 
+
 ```
- 
+
 合约的地址在合约部署之后，可以获得，关于Token合约部署及ERC20相关的概念，这里不展开讲，不熟悉的同学，可以参考我另一篇文章[创建自己的数字货币](https://learnblockchain.cn/2018/01/12/create_token/)。
 
 只有就可以是使用 `contract` 对象来调用Token合约的函数。
@@ -123,9 +123,9 @@ ethers.js 构造合约对象很简单，仅需要提供三个参数给ethers.Con
 
 ### 获取Token余额
 
-结合UI来实现以下获取Token余额，UI如下： 
- 
- ![](/media/15405195250777.jpg)
+结合UI来实现以下获取Token余额，UI如下：
+
+ ![](https://learnblockchain.cn/media/15405195250777.jpg)
 
 在HTML里，定义的标签如下：
 
@@ -148,15 +148,15 @@ ethers.js 构造合约对象很简单，仅需要提供三个参数给ethers.Con
         tokenBalance.val(balance);
     });
 ```
- 
+
 ### 转移Token
- 
+
 转移Token的UI效果如下：
- 
- ![](/media/15405195493994.jpg)
+
+ ![](https://learnblockchain.cn/media/15405195493994.jpg)
 
 界面的HTML代码如下：
- 
+
 ```html
 <h3>转移代币:</h3>
 <table>
@@ -192,10 +192,10 @@ submit.click(function() {
 // 先计算transfer 需要的gas 消耗量，这一步有默认值，非必须。
     contract.estimate.transfer(targetAddress, amount)
       .then(function(gas) {
-      
+
           // 必须关联一个有过签名钱包对象
-          let contractWithSigner = contract.connect(activeWallet); 
-          
+          let contractWithSigner = contract.connect(activeWallet);
+
           //  发起交易，前面2个参数是函数的参数，第3个是交易参数
           contractWithSigner.transfer(targetAddress, amount, {
               gasLimit: gas,
@@ -230,6 +230,3 @@ ethers.js 的 Contract 提供了一个非常方便方法：`contract.estimate.fu
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
 
 [深入浅出区块链知识星球](https://t.xiaomiquan.com/RfAu7uj)最专业技术问答社区，加入社区还可以在微信群里和300多位区块链技术爱好者一起交流。
-
-
-

@@ -12,7 +12,7 @@ tags:
 author: Tiny熊
 ---
 
-以太坊去中心化网页钱包开发系列，将从零开始开发出一个可以实际使用的钱包，本系列文章是理论与实战相结合，一共有四篇：[创建钱包账号](https://learnblockchain.cn/2018/10/25/eth-web-wallet_1/)、[账号Keystore文件导入导出](https://learnblockchain.cn/2018/10/25/2018/10/25/eth-web-wallet_2/)、[展示钱包信息及发起签名交易](https://learnblockchain.cn/2018/10/26/eth-web-wallet_3/)、[发送Token(代币）](https://learnblockchain.cn/2018/10/26/eth-web-wallet_4/)，这是第三篇介绍使用ethers.js的钱包对象获取相关信息及发起你离线交易。
+以太坊去中心化网页钱包开发系列，将从零开始开发出一个可以实际使用的钱包，本系列文章是理论与实战相结合，一共有四篇：[创建钱包账号](https://learnblockchain.cn/2018/10/25/eth-web-wallet_1/)、[账号Keystore文件导入导出](https://learnblockchain.cn/2018/10/25/eth-web-wallet_2/)、[展示钱包信息及发起签名交易](https://learnblockchain.cn/2018/10/26/eth-web-wallet_3/)、[发送Token(代币）](https://learnblockchain.cn/2018/10/26/eth-web-wallet_4/)，这是第三篇介绍使用ethers.js的钱包对象获取相关信息及发起你离线交易。
 
 <!-- more -->
 
@@ -25,13 +25,13 @@ author: Tiny熊
 * Web3Provider: 使用一个已有的web3 兼容的Provider，如有MetaMask 或 Mist提供。
 
 * EtherscanProvider 及 InfuraProvider:  如果没有自己的节点，可以使用Etherscan 及 Infura 的Provider，他们都是以太坊的基础设施服务提供商，Ethers.js 还提供了一种更简单的方式：使用一个默认的provider, 他会自动帮我们连接Etherscan 及 Infura。
-    
+
     ```
     let defaultProvider = ethers.getDefaultProvider('ropsten');
     ```
 
     连接Provider, 通常有一个参数network网络名称，取值有： `homestead`, `rinkeby`, `ropsten`,  `kovan`, 关于Provider的更多用法，可以参考[Ethers.js Provider](https://docs.ethers.io/ethers.js/html/api-providers.html)。
-    
+
 * JsonRpcProvider 及 IpcProvider:  如果有自己的节点可以使用，可以连接主网，测试网络，私有网络或Ganache，这也是本系列文章使用的方式。
 
 
@@ -61,7 +61,7 @@ activeWallet.getTransactionCount().then(function(transactionCount) {
 
 activeWallet就是后面可以用来请求发送交易的对象
 
-![](/media/15402868832290.jpg)
+![](https://learnblockchain.cn/media/15402868832290.jpg)
 
 
 ```js
@@ -95,12 +95,12 @@ js处理的逻辑就是获取信息之后，填充相应的控件，代码如下
 ```js
 var inputBalance = $('#wallet-balance');
 var inputTransactionCount = $('#wallet-transaction-count');
-    
+
 $("#wallet-submit-refresh").click(function() {
 
 // 获取余额时， 包含当前正在打包的区块
    activeWallet.getBalance('pending').then(function(balance) {
-          // 单位转换 wei -> ether 
+          // 单位转换 wei -> ether
           inputBalance.val(ethers.utils.formatEther(balance, { commify: true }));
       }, function(error) {
       });
@@ -108,13 +108,13 @@ $("#wallet-submit-refresh").click(function() {
    activeWallet.getTransactionCount('pending').then(function(transactionCount) {
           inputTransactionCount.val(transactionCount);
       }, function(error) {
-      }); 
+      });
 });
 
 // 模拟一次点击获取数据
 $("#wallet-submit-refresh").click();
 ```
-  
+
 
 ## 发送签名交易
 
@@ -134,10 +134,10 @@ $("#wallet-submit-refresh").click();
 ```js
 const txParams = {
   nonce: '0x00',
-  gasPrice: '0x09184e72a000', 
+  gasPrice: '0x09184e72a000',
   gasLimit: '0x2710',
-  to: '0x0000000000000000000000000000000000000000', 
-  value: '0x00', 
+  to: '0x0000000000000000000000000000000000000000',
+  value: '0x00',
   data: '0x7f7465737432000000000000000000000000000000000000000000000000000000600057',
   // EIP 155 chainId - mainnet: 1, ropsten: 3
   chainId: 3
@@ -152,7 +152,7 @@ const txParams = {
 `chainId`:  链id，用来去区分不同的链（分叉链）id可在[EIP-55](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md#specification)查询。
 
 > `nonce` 和 `chainId` 有一个重要的作用就是防止重放攻击，如果没有nonce的活，收款人可能把这笔签名过的交易再次进行广播，没有chainId的话，以太坊上的交易可以拿到以太经典上再次进行广播。
-    
+
 `gasPrice`和`gasLimit`： Gas是以太坊的工作计费机制，是由交易发起者给矿工打包的费用。上面几个参数的设置比较固定，Gas的设置（尤其是gasPrice）则灵活的多。
 
 `gasLimit` 表示预计的指令和存储空间的工作量，如果工作量没有用完，会退回交易发起者，如果不够会发生*out-of-gas* 错误。
@@ -206,7 +206,7 @@ web3.eth.sendRawTransaction(serializedTx, function (err, transactionHash) {
 
 先来看看发送交易的UI界面：
 
-![](/media/15403685871339.jpg)
+![](https://learnblockchain.cn/media/15403685871339.jpg)
 
 
 ```html
@@ -232,7 +232,7 @@ web3.eth.sendRawTransaction(serializedTx, function (err, transactionHash) {
     var inputTargetAddress = $('#wallet-send-target-address');
     var inputAmount = $('#wallet-send-amount');
     var submit = $('#wallet-submit-send');
-    
+
     submit.click(function() {
     // 得到一个checksum 地址
         var targetAddress = ethers.utils.getAddress(inputTargetAddress.val());
@@ -261,6 +261,3 @@ web3.eth.sendRawTransaction(serializedTx, function (err, transactionHash) {
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
 
 [深入浅出区块链知识星球](https://t.xiaomiquan.com/RfAu7uj)最专业技术问答社区，加入社区还可以在微信群里和300多位区块链技术爱好者一起交流。
-
-
-

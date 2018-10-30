@@ -13,7 +13,7 @@ author: Tiny熊
 ---
 
 
-以太坊去中心化网页钱包开发系列，将从零开始开发出一个可以实际使用的钱包，本系列文章是理论与实战相结合，一共有四篇：[创建钱包账号](https://learnblockchain.cn/2018/10/25/eth-web-wallet_1/)、[账号Keystore文件导入导出](https://learnblockchain.cn/2018/10/25/2018/10/25/eth-web-wallet_2/)、[展示钱包信息及发起签名交易](https://learnblockchain.cn/2018/10/26/eth-web-wallet_3/)、[发送Token(代币）](https://learnblockchain.cn/2018/10/26/eth-web-wallet_4/)，这是第一篇，主要介绍钱包将实现哪些功能及怎么创建钱包账号，本钱包是基于[ethers.js](https://docs.ethers.io/ethers.js/html) 进行开发。
+以太坊去中心化网页钱包开发系列，将从零开始开发出一个可以实际使用的钱包，本系列文章是理论与实战相结合，一共有四篇：[创建钱包账号](https://learnblockchain.cn/2018/10/25/eth-web-wallet_1/)、[账号Keystore文件导入导出](https://learnblockchain.cn/2018/10/25/eth-web-wallet_2/)、[展示钱包信息及发起签名交易](https://learnblockchain.cn/2018/10/26/eth-web-wallet_3/)、[发送Token(代币）](https://learnblockchain.cn/2018/10/26/eth-web-wallet_4/)，这是第一篇，主要介绍钱包将实现哪些功能及怎么创建钱包账号，本钱包是基于[ethers.js](https://docs.ethers.io/ethers.js/html) 进行开发。
 
 <!-- more -->
 
@@ -69,7 +69,7 @@ console.log(randomNumber._hex);
 
 现在我们结合界面，完整的实现创建账号，其效果图如下，加载私钥时创建账号。
 
-![](media/15401942330046.jpg)
+![](https://learnblockchain.cn/media/15401942330046.jpg)
 
 界面代码（HTML）代码如下（主要是在表格中定义个一个输入框及一个按钮）：
 
@@ -133,7 +133,7 @@ ethers.Wallet.fromMnemonic(mnemonic, path);
 
 现在我们结合界面来实现一下通过助记词方式创建钱包账号，其效果图如下：
 
-![](/media/15401977091699.jpg)
+![](https://learnblockchain.cn/media/15401977091699.jpg)
 
 界面代码（HTML）代码如下（主要是在表格中定义个两个输入框及一个按钮）：
 
@@ -200,5 +200,3 @@ ethers.Wallet.fromMnemonic(mnemonic, path);
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
 
 [深入浅出区块链知识星球](https://t.xiaomiquan.com/RfAu7uj)最专业技术问答社区，加入社区还可以在微信群里和300多位区块链技术爱好者一起交流。
-
-
