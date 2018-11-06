@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://learnblockchain.cn/2018/01/11/guide/</loc>
+    
+    <lastmod>2018-11-06T07:13:12.591Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://learnblockchain.cn/2018/11/03/plasma-mvp/</loc>
+    
+    <lastmod>2018-11-06T07:12:35.678Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://learnblockchain.cn/2018/10/26/eth-web-wallet_3/</loc>
+    
+    <lastmod>2018-10-31T08:28:28.626Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://learnblockchain.cn/2018/10/25/eth-web-wallet_2/</loc>
+    
+    <lastmod>2018-10-31T06:25:41.497Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://learnblockchain.cn/2018/10/26/eth-web-wallet_4/</loc>
     
     <lastmod>2018-10-30T06:43:08.183Z</lastmod>
@@ -9,30 +37,9 @@
   </url>
   
   <url>
-    <loc>https://learnblockchain.cn/2018/10/26/eth-web-wallet_3/</loc>
-    
-    <lastmod>2018-10-30T06:43:00.341Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://learnblockchain.cn/2018/10/25/eth-web-wallet_2/</loc>
-    
-    <lastmod>2018-10-30T06:42:54.030Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://learnblockchain.cn/2018/10/25/eth-web-wallet_1/</loc>
     
     <lastmod>2018-10-30T06:42:43.655Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://learnblockchain.cn/2018/01/11/guide/</loc>
-    
-    <lastmod>2018-10-26T10:11:41.450Z</lastmod>
     
   </url>
   

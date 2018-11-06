@@ -99,7 +99,7 @@
 <meta property="og:image" content="https://learnblockchain.cn/media/15402229547319.png">
 <meta property="og:image" content="https://learnblockchain.cn/media/15402637447655.jpg">
 <meta property="og:image" content="https://learnblockchain.cn/media/15402647159310.jpg">
-<meta property="og:updated_time" content="2018-10-30T06:42:54.030Z">
+<meta property="og:updated_time" content="2018-10-31T06:25:41.497Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="以太坊钱包开发系列2 - 账号Keystore文件导入导出">
 <meta name="twitter:description" content="以太坊去中心化网页钱包开发系列，将从零开始开发出一个可以实际使用的钱包，本系列文章是理论与实战相结合，一共有四篇：创建钱包账号、账号Keystore文件导入导出、展示钱包信息及发起签名交易、发送Token(代币），这是第二篇，主要介绍钱包账号导出与导入，将对Keystore文件的生成的原理进行介绍。">
@@ -396,8 +396,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-30T14:42:54+08:00">
-                2018-10-30
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-31T14:25:41+08:00">
+                2018-10-31
               </time>
             
           </span>
@@ -483,7 +483,7 @@
 <p><img src="https://learnblockchain.cn/media/15402189467872.png" alt=""></p>
 <h4 id="对私钥进行对称加密"><a href="#对私钥进行对称加密" class="headerlink" title="对私钥进行对称加密"></a>对私钥进行对称加密</h4><p>上面已经用KDF算法生成了一个秘钥，这个秘钥就是接着进行对称加密的秘钥，这里使用的对称加密算法是  aes-128-ctr，aes-128-ctr 加密算法还需要用到一个参数初始化向量 iv。</p>
 <h3 id="Keystore文件"><a href="#Keystore文件" class="headerlink" title="Keystore文件"></a>Keystore文件</h3><p>好了，我们现在结合具体 Keystore文件的内容，就很容易理解了Keystore 文件怎么产生的了。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#123;  </span><br><span class="line">   <span class="string">"address"</span>:<span class="string">"856e604698f79cef417aab..."</span>,</span><br><span class="line">   <span class="string">"crypto"</span>:&#123;  </span><br><span class="line">      <span class="string">"cipher"</span>:<span class="string">"aes-128-ctr"</span>,</span><br><span class="line">      <span class="string">"ciphertext"</span>:<span class="string">"13a3ad2135bef1ff228e399dfc8d7757eb4bb1a81d1b31...."</span>,</span><br><span class="line">      <span class="string">"cipherparams"</span>:&#123;  </span><br><span class="line">         <span class="string">"iv"</span>:<span class="string">"92e7468e8625653f85322fb3c..."</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"kdf"</span>:<span class="string">"scrypt"</span>,</span><br><span class="line">      <span class="string">"kdfparams"</span>:&#123;  </span><br><span class="line">         <span class="string">"dklen"</span>:<span class="number">32</span>,</span><br><span class="line">         <span class="string">"n"</span>:<span class="number">262144</span>,</span><br><span class="line">         <span class="string">"p"</span>:<span class="number">1</span>,</span><br><span class="line">         <span class="string">"r"</span>:<span class="number">8</span>,</span><br><span class="line">         <span class="string">"salt"</span>:<span class="string">"3ca198ce53513ce01bd651aee54b16b6a...."</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"mac"</span>:<span class="string">"10423d837830594c18a91097d09b7f2316..."</span></span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="string">"id"</span>:<span class="string">"5346bac5-0a6f-4ac6-baba-e2f3ad464f3f"</span>,</span><br><span class="line">   <span class="string">"version"</span>:<span class="number">3</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#123;  </span><br><span class="line">   <span class="attr">"address"</span>:<span class="string">"856e604698f79cef417aab..."</span>,</span><br><span class="line">   <span class="attr">"crypto"</span>:&#123;  </span><br><span class="line">      <span class="attr">"cipher"</span>:<span class="string">"aes-128-ctr"</span>,</span><br><span class="line">      <span class="attr">"ciphertext"</span>:<span class="string">"13a3ad2135bef1ff228e399dfc8d7757eb4bb1a81d1b31...."</span>,</span><br><span class="line">      <span class="attr">"cipherparams"</span>:&#123;  </span><br><span class="line">         <span class="attr">"iv"</span>:<span class="string">"92e7468e8625653f85322fb3c..."</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">"kdf"</span>:<span class="string">"scrypt"</span>,</span><br><span class="line">      <span class="attr">"kdfparams"</span>:&#123;  </span><br><span class="line">         <span class="attr">"dklen"</span>:<span class="number">32</span>,</span><br><span class="line">         <span class="attr">"n"</span>:<span class="number">262144</span>,</span><br><span class="line">         <span class="attr">"p"</span>:<span class="number">1</span>,</span><br><span class="line">         <span class="attr">"r"</span>:<span class="number">8</span>,</span><br><span class="line">         <span class="attr">"salt"</span>:<span class="string">"3ca198ce53513ce01bd651aee54b16b6a...."</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">"mac"</span>:<span class="string">"10423d837830594c18a91097d09b7f2316..."</span></span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="attr">"id"</span>:<span class="string">"5346bac5-0a6f-4ac6-baba-e2f3ad464f3f"</span>,</span><br><span class="line">   <span class="attr">"version"</span>:<span class="number">3</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>来解读一下各个字段：</p>
 <ul>
 <li>address: 账号地址</li>
@@ -703,7 +703,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">55</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
