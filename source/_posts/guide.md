@@ -24,16 +24,16 @@ author: Tiny熊
 
 * [区块链记账原理](https://learnblockchain.cn/2017/10/25/whatbc/)
    通过这篇可以了解到区块链是一个怎样的结构
-   
+
 * [比特币所有权及隐私问题](https://learnblockchain.cn/2017/11/02/bitcoin-own/)
    通过这篇可以了解到地址私钥 非对称加密应用 等概念
-   
+
 * [比特币如何挖矿](https://learnblockchain.cn/2017/11/04/bitcoin-pow/)
    通过这篇了解工作量证明
-   
+
 * [比特币如何达成共识 - 最长链的选择](https://learnblockchain.cn/2017/12/07/bitcoin-sonsensus/)
    通过这篇可以了解共识机制。
-   
+
 ### 补充阅读
 * [什么是拜占庭将军问题](https://learnblockchain.cn/2018/02/05/bitcoin-byzantine/)
 
@@ -72,7 +72,7 @@ author: Tiny熊
 ### 钱包开发系列
 * [理解开发HD 钱包涉及的 BIP32、BIP44、BIP39](https://learnblockchain.cn/2018/09/28/hdwallet/)
 * [以太坊钱包开发系列1 - 创建钱包账号](https://learnblockchain.cn/2018/10/25/eth-web-wallet_1/)
-* [以太坊钱包开发系列1 - 账号Keystore文件导入导出](https://learnblockchain.cn/2018/10/25/2018/10/25/eth-web-wallet_2/)
+* [以太坊钱包开发系列1 - 账号Keystore文件导入导出](https://learnblockchain.cn/2018/10/25/eth-web-wallet_2/)
 * [以太坊钱包开发系列2 - 展示钱包信息及发起签名交易](https://learnblockchain.cn/2018/10/26/eth-web-wallet_3/)
 * [以太坊钱包开发系列3 - 发送Token(代币）](https://learnblockchain.cn/2018/10/26/eth-web-wallet_4/)
 
@@ -80,7 +80,7 @@ author: Tiny熊
 ### 以太扩容
 * [深入理解Plasma（一）Plasma 框架](https://learnblockchain.cn/2018/10/20/plasma-framework/)
 * [深入理解Plasma（二）Plasma 细节](https://learnblockchain.cn/2018/10/24/plasma-in-detail/)
-
+* [深入理解Plasma（三）Plasma MVP](https://learnblockchain.cn/2018/11/03/plasma-mvp/)
 
 ### Solidity语言教程
 Solidity语言是开发智能合约最广泛的语言，本专栏应该是国内最深度介绍Solidity的文章了。
@@ -119,5 +119,3 @@ Solidity语言是开发智能合约最广泛的语言，本专栏应该是国内
 one more thing ：我们还承接智能合约、DAPP、公链开发等业余。
 
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
-
-

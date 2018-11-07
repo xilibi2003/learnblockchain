@@ -156,7 +156,7 @@ const txParams = {
 `gasPrice`和`gasLimit`： Gas是以太坊的工作计费机制，是由交易发起者给矿工打包的费用。上面几个参数的设置比较固定，Gas的设置（尤其是gasPrice）则灵活的多。
 
 `gasLimit` 表示预计的指令和存储空间的工作量，如果工作量没有用完，会退回交易发起者，如果不够会发生*out-of-gas* 错误。
-**一个普通转账的交易，工作量是固定的，gasLimit为21000**，合约执行gasLimit则是变化的，也许有一些人会认为直接设置为高一点，反正会退回，但如果合约执行出错，就会吃掉所有的gas。幸运的是web3 和 ethers.js 都提供了测算Gas Limit的方法，下一遍[发送代币](https://learnblockchain.cn/2018/10/23/eth-web-wallet_4)
+**一个普通转账的交易，工作量是固定的，gasLimit为21000**，合约执行gasLimit则是变化的，也许有一些人会认为直接设置为高一点，反正会退回，但如果合约执行出错，就会吃掉所有的gas。幸运的是web3 和 ethers.js 都提供了测算Gas Limit的方法，下一遍[发送代币](https://learnblockchain.cn/2018/10/26/eth-web-wallet_4)
 
 
 `gasPrice`是交易发起者是愿意为工作量支付的**单位**费用，矿工在选择交易的时候，是按照gasPrice进行排序，先服务高出价者，因此如果出价过低会导致交易迟迟不能打包确认，出价过高对发起者又比较亏。
