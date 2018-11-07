@@ -67,7 +67,7 @@ DK = Scrypt(salt, dk_len, n, r, p)
 好了，我们现在结合具体 Keystore文件的内容，就很容易理解了Keystore 文件怎么产生的了。
 
 
-```js
+```json
 {  
    "address":"856e604698f79cef417aab...",
    "crypto":{  
