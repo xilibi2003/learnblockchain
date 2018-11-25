@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+  <meta name="msvalidate.01" content="914C9C1CBC7078C5E2AC612AD5C1CC6C" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Fabric," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深入浅出区块链" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="这篇文章对Fabric的网络环境启动过程进行讲解,也就是我们上节讲到的启动测试Fabric网络环境时运行network_setup.sh这个文件的执行流程">
+<meta name="keywords" content="Fabric">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fabric 网络环境启动过程详解">
+<meta property="og:url" content="https://learnblockchain.cn/2018/11/21/fabric_startup _process/index.html">
+<meta property="og:site_name" content="深入浅出区块链">
+<meta property="og:description" content="这篇文章对Fabric的网络环境启动过程进行讲解,也就是我们上节讲到的启动测试Fabric网络环境时运行network_setup.sh这个文件的执行流程">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://learnblockchain.cn/images/startup%20_process.png">
+<meta property="og:updated_time" content="2018-11-25T09:37:48.930Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fabric 网络环境启动过程详解">
+<meta name="twitter:description" content="这篇文章对Fabric的网络环境启动过程进行讲解,也就是我们上节讲到的启动测试Fabric网络环境时运行network_setup.sh这个文件的执行流程">
+<meta name="twitter:image" content="https://learnblockchain.cn/images/startup%20_process.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'UT2K1ZRSWK',
+      apiKey: '0bbb261dfad58df8f8a657a1ed3255cd',
+      indexName: 'learnblockchain',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://learnblockchain.cn/2018/11/21/fabric_startup _process/"/>
+
+
+
+
+
+  <title>Fabric 网络环境启动过程详解 | 深入浅出区块链</title>
+  
+
+
+
+
+
+
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6273382609469378",
+        enable_page_level_ads: true
+    });
+</script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">系统学习区块链技术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wiki">
+          <a href="https://wiki.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Wiki
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-course">
+          <a href="/course/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-spinner"></i> <br />
+            
+            视频教程
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-web3">
+          <a href="https://web3.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Web3文档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2018/11/21/fabric_startup _process/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Fabric 网络环境启动过程详解</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-21T17:30:27+08:00">
+                2018-11-21
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-25T17:37:48+08:00">
+                2018-11-25
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Fabric/" itemprop="url" rel="index">
+                    <span itemprop="name">Fabric</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Fabric/联盟链/" itemprop="url" rel="index">
+                    <span itemprop="name">联盟链</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这篇文章对Fabric的网络环境启动过程进行讲解,也就是我们<a href="https://learnblockchain.cn/2018/11/21/fabric_introduction/">上节</a>讲到的启动测试Fabric网络环境时运行network_setup.sh这个文件的执行流程</p>
+<a id="more"></a>
+<h2 id="Fabric网络环境启动过程详解"><a href="#Fabric网络环境启动过程详解" class="headerlink" title="Fabric网络环境启动过程详解"></a>Fabric网络环境启动过程详解</h2><p>上一节我们讲到 fabric网络环境的启动测试，主要是使用 <strong>./network_setup.sh  up</strong> 这个命令，所以fabric网络环境启动的重点就在network_setup.sh这个文件中。接下来我们就分析一下network_setup.sh这个文件。<br>network_setup.sh其中包括两个部分，一个是利用generateArtifacts.sh脚本文件配置组织关系和颁发证书、公/私钥、通道证书等，另一个是docker-compose-cli.yaml用于根据配置启动集群并测试chaincode的示例代码。下面是具体的流程图介绍：</p>
+<p><img src="/images/startup _process.png" alt=""></p>
+<p><strong>首先看下generateArtifacts.sh脚本文件，它包含三个函数，分别是：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1.generateCerts：</span><br><span class="line"> 该函数使用cryptogen工具根据crypto-config.yaml来生成公私钥和证书信息等。</span><br><span class="line"></span><br><span class="line">2.replacePrivateKey：</span><br><span class="line"> 将docker-compose-e2e-template.yaml文档中的ca私钥替换成具体的私钥。</span><br><span class="line"></span><br><span class="line">3.generateChannelArtifacts：</span><br><span class="line"> 使用configtxgen工具根据configtx.yaml文件来生成创世区块和通道相关信息，更新锚节点。</span><br></pre></td></tr></table></figure>
+<p><strong>接着是docker-compose-cli.yaml文件</strong></p>
+<p>docker-compose-cli.yaml文件根据组织关系启动docker集群，并在cli容器中执行command命令运行./scripts/script.sh脚本文件。 那./scripts/script.sh脚本具体做了什么呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. createChannel：创建channel。</span><br><span class="line">2. joinChannel：将每个peer节点加入channel。</span><br><span class="line">3. updateAnchorPeers：更新锚节点</span><br><span class="line">4. installChaincode：部署chaincode。</span><br><span class="line">5. instantiateChaincode：初始化chaincode。</span><br><span class="line">6. chaincodeQuery：chaincode查询</span><br></pre></td></tr></table></figure>
+<p>另外docker-compose-cli.yaml这个文件还有一个配置项是需要注意的地方，那就是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file:  base/docker-compose-base.yaml</span><br></pre></td></tr></table></figure>
+<p>这里的docker-compose-base.yaml其实就是Orderer和peer的基础配置文件，包括指定端口等。</p>
+<h3 id="几个重要的配置文件"><a href="#几个重要的配置文件" class="headerlink" title="几个重要的配置文件"></a>几个重要的配置文件</h3><h4 id="1-crypto-config-yaml"><a href="#1-crypto-config-yaml" class="headerlink" title="1.crypto-config.yaml"></a>1.crypto-config.yaml</h4><p>基于crypto-config.yaml（此文件在../fabric/examples/e2e_cli中）<strong>生成公、私钥和证书信息，并保存在crypto-config文件夹中</strong>。另外crypto-config.yaml还定义了组织成员以及组织下的peer节点个数。</p>
+<p><strong>crypto-config.yaml文件讲解：</strong></p>
+<p>字段Name和Domain就是关于这个组织的名字和域名，这主要是用于生成证书的时候，证书内会包含该信息。而Template.Count=2是说我们要生成2套公私钥和证书，一套是peer0.org1的，还有一套是peer1.org1的（也就指定了org中存在peer0和peer1两个节点）。最后Users.Count=1是说每个Template下面会有几个普通User（注意，Admin是Admin，不包含在这个计数中），这里配置了1，也就是说我们只需要一个普通用户User1@org1.example.com 我们可以根据实际需要调整这个配置文件，增删Org Users等。文件内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">  # ---------------------------------------------------------------------------</span><br><span class="line">  # Orderer</span><br><span class="line">  # ---------------------------------------------------------------------------</span><br><span class="line">  - Name: Orderer</span><br><span class="line">    Domain: example.com</span><br><span class="line">    # ---------------------------------------------------------------------------</span><br><span class="line">    # &quot;Specs&quot; - See PeerOrgs below for complete description</span><br><span class="line">    # ---------------------------------------------------------------------------</span><br><span class="line">    Specs:</span><br><span class="line">      - Hostname: orderer</span><br><span class="line"># ---------------------------------------------------------------------------</span><br><span class="line"># &quot;PeerOrgs&quot; - Definition of organizations managing peer nodes</span><br><span class="line"># ---------------------------------------------------------------------------</span><br><span class="line">PeerOrgs:</span><br><span class="line">  # ---------------------------------------------------------------------------</span><br><span class="line">  # Org1</span><br><span class="line">  # ---------------------------------------------------------------------------</span><br><span class="line">  - Name: Org1</span><br><span class="line">    Domain: org1.example.com</span><br><span class="line">    # ---------------------------------------------------------------------------</span><br><span class="line">    # &quot;Specs&quot;</span><br><span class="line">    # ---------------------------------------------------------------------------</span><br><span class="line">    # Uncomment this section to enable the explicit definition of hosts in your</span><br><span class="line">    # configuration.  Most users will want to use Template, below</span><br><span class="line">    #</span><br><span class="line">    # Specs is an array of Spec entries.  Each Spec entry consists of two fields:</span><br><span class="line">    #   - Hostname:   (Required) The desired hostname, sans the domain.</span><br><span class="line">    #   - CommonName: (Optional) Specifies the template or explicit override for</span><br><span class="line">    #                 the CN.  By default, this is the template:</span><br><span class="line">    #</span><br><span class="line">    #                              &quot;&#123;&#123;.Hostname&#125;&#125;.&#123;&#123;.Domain&#125;&#125;&quot;</span><br><span class="line">    #</span><br><span class="line">    #                 which obtains its values from the Spec.Hostname and</span><br><span class="line">    #                 Org.Domain, respectively.</span><br><span class="line">    # ---------------------------------------------------------------------------</span><br><span class="line">    # Specs:</span><br><span class="line">    #   - Hostname: foo # implicitly &quot;foo.org1.example.com&quot;</span><br><span class="line">    #     CommonName: foo27.org5.example.com # overrides Hostname-based FQDN set above</span><br><span class="line">    #   - Hostname: bar</span><br><span class="line">    #   - Hostname: baz</span><br><span class="line">    # ---------------------------------------------------------------------------</span><br><span class="line">    # &quot;Template&quot;</span><br><span class="line">    # ---------------------------------------------------------------------------</span><br><span class="line">    # Allows for the definition of 1 or more hosts that are created sequentially</span><br><span class="line">    # from a template. By default, this looks like &quot;peer%d&quot; from 0 to Count-1.</span><br><span class="line">    # You may override the number of nodes (Count), the starting index (Start)</span><br><span class="line">    # or the template used to construct the name (Hostname).</span><br><span class="line">    #</span><br><span class="line">    # Note: Template and Specs are not mutually exclusive.  You may define both</span><br><span class="line">    # sections and the aggregate nodes will be created for you.  Take care with</span><br><span class="line">    # name collisions</span><br><span class="line">    # ---------------------------------------------------------------------------</span><br><span class="line">    Template:</span><br><span class="line">      Count: 2</span><br><span class="line">      # Start: 5</span><br><span class="line">      # Hostname: &#123;&#123;.Prefix&#125;&#125;&#123;&#123;.Index&#125;&#125; # default</span><br><span class="line">    # ---------------------------------------------------------------------------</span><br><span class="line">    # &quot;Users&quot;</span><br><span class="line">    # ---------------------------------------------------------------------------</span><br><span class="line">    # Count: The number of user accounts _in addition_ to Admin</span><br><span class="line">    # ---------------------------------------------------------------------------</span><br><span class="line">    Users:</span><br><span class="line">      Count: 1</span><br><span class="line">  # ---------------------------------------------------------------------------</span><br><span class="line">  # Org2: See &quot;Org1&quot; for full specification</span><br><span class="line">  # ---------------------------------------------------------------------------</span><br><span class="line">  - Name: Org2</span><br><span class="line">    Domain: org2.example.com</span><br><span class="line">    Template:</span><br><span class="line">      Count: 2</span><br><span class="line">    Users:</span><br><span class="line">      Count: 1</span><br></pre></td></tr></table></figure>
+<p><strong>注：</strong><br>peer：<br>Fabric 网络中的节点，表现为一个运行着的docker容器。可以与网络中的其他peer进行通信，每个peer都在本地保留一份ledger的副本。它是org下的组织成员。<br>org:<br>一个组织，它可以由一个或多个peer组成。<br>Orderer :<br>联盟成员共享的中心化节点。用来对交易进行排序，是 Fabric 共识机制的重要组成部分。</p>
+<h4 id="2-configtx-yaml"><a href="#2-configtx-yaml" class="headerlink" title="2.configtx.yaml"></a>2.configtx.yaml</h4><p>基于configtx.yaml（此文件在../fabric/examples/e2e_cli中）<strong>生成创世区块和通道相关信息，并保存在channel-artifacts文件夹。还可以指定背书策略。</strong></p>
+<p><strong>configtx.yaml文件讲解：</strong></p>
+<ol>
+<li>官方提供的examples/e2e_cli/configtx.yaml这个文件里面配置了由2个Org参与的Orderer共识配置TwoOrgsOrdererGenesis，以及由2个Org参与的Channel配置：TwoOrgsChannel。</li>
+<li>另外我们可以在此文件的Orderer部分设置共识的算法是Solo还是Kafka，以及共识时区块大小，超时时间等，我们使用默认值即可，不用更改。而Peer节点的配置包含了MSP的配置，锚节点的配置。如果我们有更多的Org，或者有更多的Channel，那么就可以根据模板进行对应的修改。</li>
+<li>Policies配置也要特别注意，该配置项定义了不同角色的权限,Reader,Writer以及Admin分别对应读，写，以及admin权限,读权限角色只能从别的peer节点同步账本而不能发起交易，只有writer定义项下的角色才拥有发起交易的也就是调用chaincode的invoke方法的权限(不一定都是invoke方案，只要涉及到chaincode中状态修改的方法，都只有拥有writer权限或admin权限的角色才能调用)。以该配置的Organizations配置下的Org1配置为例,”OR(‘Org1MSP.admin’, ‘Org1MSP.client’)”,表示org1的msp服务中的admin或者client角色拥有发起交易的权限。文件内容如下：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br></pre></td><td class="code"><pre><span class="line"># Copyright IBM Corp. All Rights Reserved.</span><br><span class="line">#</span><br><span class="line"># SPDX-License-Identifier: Apache-2.0</span><br><span class="line">#</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">################################################################################</span><br><span class="line">#</span><br><span class="line">#   Profile</span><br><span class="line">#</span><br><span class="line">#   - Different configuration profiles may be encoded here to be specified</span><br><span class="line">#   as parameters to the configtxgen tool</span><br><span class="line">#</span><br><span class="line">################################################################################</span><br><span class="line">Profiles:</span><br><span class="line"></span><br><span class="line">    TwoOrgsOrdererGenesis:</span><br><span class="line">        Orderer:</span><br><span class="line">            &lt;&lt;: *OrdererDefaults</span><br><span class="line">            Organizations:</span><br><span class="line">                - *OrdererOrg</span><br><span class="line">        Consortiums:</span><br><span class="line">            SampleConsortium:</span><br><span class="line">                Organizations:</span><br><span class="line">                    - *Org1</span><br><span class="line">                    - *Org2</span><br><span class="line">    TwoOrgsChannel:</span><br><span class="line">        Consortium: SampleConsortium</span><br><span class="line">        Application:</span><br><span class="line">            &lt;&lt;: *ApplicationDefaults</span><br><span class="line">            Organizations:</span><br><span class="line">                - *Org1</span><br><span class="line">                - *Org2</span><br><span class="line"></span><br><span class="line">################################################################################</span><br><span class="line">#</span><br><span class="line">#   Section: Organizations</span><br><span class="line">#</span><br><span class="line">#   - This section defines the different organizational identities which will</span><br><span class="line">#   be referenced later in the configuration.</span><br><span class="line">#</span><br><span class="line">################################################################################</span><br><span class="line">Organizations:</span><br><span class="line"></span><br><span class="line">    # SampleOrg defines an MSP using the sampleconfig.  It should never be used</span><br><span class="line">    # in production but may be used as a template for other definitions</span><br><span class="line">    - &amp;OrdererOrg</span><br><span class="line">        # DefaultOrg defines the organization which is used in the sampleconfig</span><br><span class="line">        # of the fabric.git development environment</span><br><span class="line">        Name: OrdererOrg</span><br><span class="line"></span><br><span class="line">        # ID to load the MSP definition as</span><br><span class="line">        ID: OrdererMSP</span><br><span class="line"></span><br><span class="line">        # MSPDir is the filesystem path which contains the MSP configuration</span><br><span class="line">        MSPDir: crypto-config/ordererOrganizations/example.com/msp</span><br><span class="line"></span><br><span class="line">    - &amp;Org1</span><br><span class="line">        # DefaultOrg defines the organization which is used in the sampleconfig</span><br><span class="line">        # of the fabric.git development environment</span><br><span class="line">        Name: Org1MSP</span><br><span class="line"></span><br><span class="line">        # ID to load the MSP definition as</span><br><span class="line">        ID: Org1MSP</span><br><span class="line"></span><br><span class="line">        MSPDir: crypto-config/peerOrganizations/org1.example.com/msp</span><br><span class="line"></span><br><span class="line">        AnchorPeers:</span><br><span class="line">            # AnchorPeers defines the location of peers which can be used</span><br><span class="line">            # for cross org gossip communication.  Note, this value is only</span><br><span class="line">            # encoded in the genesis block in the Application section context</span><br><span class="line">            - Host: peer0.org1.example.com</span><br><span class="line">              Port: 7051</span><br><span class="line"></span><br><span class="line">    - &amp;Org2</span><br><span class="line">        # DefaultOrg defines the organization which is used in the sampleconfig</span><br><span class="line">        # of the fabric.git development environment</span><br><span class="line">        Name: Org2MSP</span><br><span class="line"></span><br><span class="line">        # ID to load the MSP definition as</span><br><span class="line">        ID: Org2MSP</span><br><span class="line"></span><br><span class="line">        MSPDir: crypto-config/peerOrganizations/org2.example.com/msp</span><br><span class="line"></span><br><span class="line">        AnchorPeers:</span><br><span class="line">            # AnchorPeers defines the location of peers which can be used</span><br><span class="line">            # for cross org gossip communication.  Note, this value is only</span><br><span class="line">            # encoded in the genesis block in the Application section context</span><br><span class="line">            - Host: peer0.org2.example.com</span><br><span class="line">              Port: 7051</span><br><span class="line"></span><br><span class="line">################################################################################</span><br><span class="line">#</span><br><span class="line">#   SECTION: Orderer</span><br><span class="line">#</span><br><span class="line">#   - This section defines the values to encode into a config transaction or</span><br><span class="line">#   genesis block for orderer related parameters</span><br><span class="line">#</span><br><span class="line">################################################################################</span><br><span class="line">Orderer: &amp;OrdererDefaults</span><br><span class="line"></span><br><span class="line">    # Orderer Type: The orderer implementation to start</span><br><span class="line">    # Available types are &quot;solo&quot; and &quot;kafka&quot;</span><br><span class="line">    OrdererType: solo</span><br><span class="line"></span><br><span class="line">    Addresses:</span><br><span class="line">        - orderer.example.com:7050</span><br><span class="line"></span><br><span class="line">    # Batch Timeout: The amount of time to wait before creating a batch</span><br><span class="line">    BatchTimeout: 2s</span><br><span class="line"></span><br><span class="line">    # Batch Size: Controls the number of messages batched into a block</span><br><span class="line">    BatchSize:</span><br><span class="line"></span><br><span class="line">        # Max Message Count: The maximum number of messages to permit in a batch</span><br><span class="line">        MaxMessageCount: 10</span><br><span class="line"></span><br><span class="line">        # Absolute Max Bytes: The absolute maximum number of bytes allowed for</span><br><span class="line">        # the serialized messages in a batch.</span><br><span class="line">        AbsoluteMaxBytes: 98 MB</span><br><span class="line"></span><br><span class="line">        # Preferred Max Bytes: The preferred maximum number of bytes allowed for</span><br><span class="line">        # the serialized messages in a batch. A message larger than the preferred</span><br><span class="line">        # max bytes will result in a batch larger than preferred max bytes.</span><br><span class="line">        PreferredMaxBytes: 512 KB</span><br><span class="line"></span><br><span class="line">    Kafka:</span><br><span class="line">        # Brokers: A list of Kafka brokers to which the orderer connects</span><br><span class="line">        # NOTE: Use IP:port notation</span><br><span class="line">        Brokers:</span><br><span class="line">            - 127.0.0.1:9092</span><br><span class="line"></span><br><span class="line">    # Organizations is the list of orgs which are defined as participants on</span><br><span class="line">    # the orderer side of the network</span><br><span class="line">    Organizations:</span><br><span class="line"></span><br><span class="line">################################################################################</span><br><span class="line">#</span><br><span class="line">#   SECTION: Application</span><br><span class="line">#</span><br><span class="line">#   - This section defines the values to encode into a config transaction or</span><br><span class="line">#   genesis block for application related parameters</span><br><span class="line">#</span><br><span class="line">################################################################################</span><br><span class="line">Application: &amp;ApplicationDefaults</span><br><span class="line"></span><br><span class="line">    # Organizations is the list of orgs which are defined as participants on</span><br><span class="line">    # the application side of the network</span><br><span class="line">    Organizations:</span><br></pre></td></tr></table></figure>
+<p>本文的作者是lgy</p>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="Tiny熊 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信号：深入浅出区块链技术，欢迎订阅</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有收获，赞赏下</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/qr_pay.jpg" alt="Tiny熊 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    lgy
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://learnblockchain.cn/2018/11/21/fabric_startup _process/" title="Fabric 网络环境启动过程详解">https://learnblockchain.cn/2018/11/21/fabric_startup _process/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Fabric/" rel="tag"># Fabric</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/21/fabric_transaction_process/" rel="next" title="Fabric1.0 交易流程">
+                <i class="fa fa-chevron-left"></i> Fabric1.0 交易流程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/xilibi2003" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiong-li-bing/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.upchain.pro/book.html" title="新书-精通智能合约" target="_blank">新书-精通智能合约</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="区块链技术专栏" target="_blank">区块链技术专栏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://t.xiaomiquan.com/RfAu7uj" title="技术交流-知识星球" target="_blank">技术交流-知识星球</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bitshuo.com" title="区块链技术中文社区" target="_blank">区块链技术中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://news.tangwen.org" title="汤问资讯" target="_blank">汤问资讯</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitask.org" title="币问" target="_blank">币问</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://hiblock.net/" title="HiBlock区块链社区" target="_blank">HiBlock区块链社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eosfans.io/" title="EOS中文社区" target="_blank">EOS中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blockflow.net/" title="BlockFlow" target="_blank">BlockFlow</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.liankexing.com/" title="链客区块链问答社区" target="_blank">链客区块链问答社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitool.cn/" title="币兔" target="_blank">币兔</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wutui.pro/" title="无退社区" target="_blank">无退社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blockgeek.org/" title="BG区块链技术论坛" target="_blank">BG区块链技术论坛</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hpb.io/" title="HPB芯链" target="_blank">HPB芯链</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Fabric网络环境启动过程详解"><span class="nav-number">1.</span> <span class="nav-text">Fabric网络环境启动过程详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#几个重要的配置文件"><span class="nav-number">1.1.</span> <span class="nav-text">几个重要的配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-crypto-config-yaml"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.crypto-config.yaml</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-configtx-yaml"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.configtx.yaml</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+  <div class="footer-custom"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17140514号-1</a></div>
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
