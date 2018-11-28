@@ -13,7 +13,7 @@ author: Tiny熊
 ---
 
 
-以太坊去中心化网页钱包开发系列，将从零开始开发出一个可以实际使用的钱包，本系列文章是理论与实战相结合，一共有四篇：[创建钱包账号](https://learnblockchain.cn/2018/10/25/eth-web-wallet_1/)、[账号Keystore文件导入导出](https://learnblockchain.cn/2018/10/25/eth-web-wallet_2/)、[展示钱包信息及发起签名交易](https://learnblockchain.cn/2018/10/26/eth-web-wallet_3/)、[发送Token(代币）](https://learnblockchain.cn/2018/10/26/eth-web-wallet_4/)，这是第一篇，主要介绍钱包将实现哪些功能及怎么创建钱包账号，本钱包是基于[ethers.js](https://docs.ethers.io/ethers.js/html) 进行开发。
+以太坊去中心化网页钱包开发系列，详细的[视频课程讲解直接戳链接](https://ke.qq.com/course/356068?tuin=bd898bbf)，本系列将从零开始开发出一个可以实际使用的钱包，本系列是理论与实战相结合，文章一共有四篇：[创建钱包账号](https://learnblockchain.cn/2018/10/25/eth-web-wallet_1/)、[账号Keystore文件导入导出](https://learnblockchain.cn/2018/10/25/eth-web-wallet_2/)、[展示钱包信息及发起签名交易](https://learnblockchain.cn/2018/10/26/eth-web-wallet_3/)、[发送Token(代币）](https://learnblockchain.cn/2018/10/26/eth-web-wallet_4/)，这是第一篇，主要介绍钱包将实现哪些功能及怎么创建钱包账号，本钱包是基于[ethers.js](https://docs.ethers.io/ethers.js/html) 进行开发。
 
 <!-- more -->
 
@@ -192,6 +192,7 @@ ethers.Wallet.fromMnemonic(mnemonic, path);
 ```
 
 完整源码请订阅[深入浅出区块链技术小专栏](https://xiaozhuanlan.com/blockchaincore)查看， 哈哈，是不是有一点鸡贼，创作不易呀。
+戳链接收看[详细的视频课程讲解](https://ke.qq.com/course/356068?tuin=bd898bbf)。
 
 参考文档:
 [ethers.js](https://docs.ethers.io/ethers.js/html)

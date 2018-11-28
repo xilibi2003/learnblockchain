@@ -148,6 +148,9 @@ console.log("校验和地址："+ util.toChecksumAddress(address1.toString('hex'
 
 一句话概括下BIP39就是：**通过定义助记词让种子的备份更友好**
 
+
+我为大家录制了一个视频：**[以太坊去中心化网页钱包开发](https://ke.qq.com/course/356068?tuin=bd898bbf)**，从如何创建账号开始，深入探索BIP32、BIP44、BIP39等提案，以及如何存储私钥、发送离线签名交易和Token。
+
 ## 小结
 
 HD钱包（Hierarchical Deterministic Wallets）是在BIP32中提出的为了避免管理一堆私钥的麻烦提出的分层推导方案。
@@ -160,5 +163,3 @@ BIP39则通过定义助记词让种子的备份更友好。
 
 欢迎来[知识星球](https://t.xiaomiquan.com/RfAu7uj)提问，星球内已经聚集了300多位区块链技术爱好者。
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
-
-

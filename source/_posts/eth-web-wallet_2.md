@@ -12,7 +12,7 @@ tags:
 author: Tiny熊
 ---
 
-以太坊去中心化网页钱包开发系列，将从零开始开发出一个可以实际使用的钱包，本系列文章是理论与实战相结合，一共有四篇：[创建钱包账号](https://learnblockchain.cn/2018/10/25/eth-web-wallet_1/)、[账号Keystore文件导入导出](https://learnblockchain.cn/2018/10/25/eth-web-wallet_2/)、[展示钱包信息及发起签名交易](https://learnblockchain.cn/2018/10/26/eth-web-wallet_3/)、[发送Token(代币）](https://learnblockchain.cn/2018/10/26/eth-web-wallet_4/)，这是第二篇，主要介绍钱包账号导出与导入，将对Keystore文件的生成的原理进行介绍。
+以太坊去中心化网页钱包开发系列，点链接[观看视频课程](https://ke.qq.com/course/356068?tuin=bd898bbf)，将从零开始开发出一个可以实际使用的钱包，本系列文章是理论与实战相结合，一共有四篇：[创建钱包账号](https://learnblockchain.cn/2018/10/25/eth-web-wallet_1/)、[账号Keystore文件导入导出](https://learnblockchain.cn/2018/10/25/eth-web-wallet_2/)、[展示钱包信息及发起签名交易](https://learnblockchain.cn/2018/10/26/eth-web-wallet_3/)、[发送Token(代币）](https://learnblockchain.cn/2018/10/26/eth-web-wallet_4/)，这是第二篇，主要介绍钱包账号导出与导入，将对Keystore文件的生成的原理进行介绍。
 
 <!-- more -->
 
@@ -238,10 +238,10 @@ var fileReader = new FileReader();
   };
 fileReader.readAsText(inputFile.files[0]);
 
- ```
+```
 
  哈哈哈，有到了推广时间了，完整源码请订阅[深入浅出区块链技术小专栏](https://xiaozhuanlan.com/blockchaincore)查看，赶紧订阅吧，走过路过，不容错过。
-
+ 戳链接收看[详细的视频课程讲解](https://ke.qq.com/course/356068?tuin=bd898bbf)。
 
 ## 参考文档
 
