@@ -78,12 +78,16 @@ author: Tiny熊
 
 
 ### 以太扩容
+
 * [深入理解Plasma（一）Plasma 框架](https://learnblockchain.cn/2018/10/20/plasma-framework/)
 * [深入理解Plasma（二）Plasma 细节](https://learnblockchain.cn/2018/10/24/plasma-in-detail/)
 * [深入理解Plasma（三）Plasma MVP](https://learnblockchain.cn/2018/11/03/plasma-mvp/)
+* [深入理解Plasma（四）Plasma Cash](https://learnblockchain.cn/2018/11/16/plasma-cash/)
 
 ### Solidity语言教程
 Solidity语言是开发智能合约最广泛的语言，本专栏应该是国内最深度介绍Solidity的文章了。
+当然还有一个选择是购买我的新书：[精通以太坊智能合约](http://www.upchain.pro/book.html)
+
 
 * [Solidity 教程系列1 - 类型介绍](https://learnblockchain.cn/2017/12/05/solidity1/)
 * [Solidity 教程系列2 - 地址类型介绍](https://learnblockchain.cn/2017/12/12/solidity2/)
@@ -106,7 +110,9 @@ Solidity语言是开发智能合约最广泛的语言，本专栏应该是国内
 * [什么是EOS](https://learnblockchain.cn/2018/07/17/whatiseos/)
 
 
-## 付费内容更精彩
+## 更多精彩内容
+
+想要系统学习以太坊智能合约，可以购买的新书：[精通以太坊智能合约](http://www.upchain.pro/book.html)
 
 首先强烈建议大家订阅[深入浅出区块链技术小专栏](https://xiaozhuanlan.com/blockchaincore)，目前仅需69元（时不时会进行涨价哦）， 部分源码和进阶内容仅在小专栏开放，订阅小专栏还有其他惊喜哦~。
 
