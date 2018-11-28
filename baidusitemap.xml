@@ -3,6 +3,30 @@
 
 
     
+    
+  <url>
+    <loc>https://learnblockchain.cn/2018/11/21/fabric_introduction/</loc>
+    <lastmod>2018-11-27T13:36:35.791Z</lastmod>
+    <data>
+        <display>
+        <title>联盟链初识以及Fabric环境搭建流程</title>
+        <pubTime>2018-11-21T09:30:27.000Z</pubTime>
+        
+        <tag>Fabric</tag>
+         
+         
+           
+             
+              <breadCrumb title="Fabric" url="https://learnblockchain.cn/categories/Fabric/"/>
+          
+             
+              <breadCrumb title="联盟链" url="https://learnblockchain.cn/categories/Fabric/%E8%81%94%E7%9B%9F%E9%93%BE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
   <url>
     <loc>https://learnblockchain.cn/2018/01/11/guide/</loc>
     <lastmod>2018-11-25T09:48:20.147Z</lastmod>
@@ -27,7 +51,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2018/11/21/fabric_startup%20_process/</loc>
-    <lastmod>2018-11-25T09:37:48.930Z</lastmod>
+    <lastmod>2018-11-25T09:37:48.931Z</lastmod>
     <data>
         <display>
         <title>Fabric 网络环境启动过程详解</title>
@@ -54,29 +78,6 @@
     <data>
         <display>
         <title>Fabric1.0 交易流程</title>
-        <pubTime>2018-11-21T09:30:27.000Z</pubTime>
-        
-        <tag>Fabric</tag>
-         
-         
-           
-             
-              <breadCrumb title="Fabric" url="https://learnblockchain.cn/categories/Fabric/"/>
-          
-             
-              <breadCrumb title="联盟链" url="https://learnblockchain.cn/categories/Fabric/%E8%81%94%E7%9B%9F%E9%93%BE/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://learnblockchain.cn/2018/11/21/fabric_introduction/</loc>
-    <lastmod>2018-11-25T09:37:31.368Z</lastmod>
-    <data>
-        <display>
-        <title>联盟链初识以及Fabric环境搭建流程</title>
         <pubTime>2018-11-21T09:30:27.000Z</pubTime>
         
         <tag>Fabric</tag>
@@ -558,7 +559,6 @@
     </data>
     </url>
 
-    
     
   <url>
     <loc>https://learnblockchain.cn/2018/08/31/devDapp/</loc>
@@ -1231,12 +1231,12 @@
 
     
   <url>
-    <loc>https://learnblockchain.cn/2017/12/21/solidity-arrays/</loc>
+    <loc>https://learnblockchain.cn/2017/12/27/solidity-structs/</loc>
     <lastmod>2018-03-18T13:55:32.194Z</lastmod>
     <data>
         <display>
-        <title>智能合约语言 Solidity 教程系列5 - 数组介绍</title>
-        <pubTime>2017-12-21T03:55:18.000Z</pubTime>
+        <title>智能合约语言 Solidity 教程系列6 - 结构体与映射</title>
+        <pubTime>2017-12-27T03:55:26.000Z</pubTime>
         
         <tag>Solidity手册</tag>
          
@@ -1254,12 +1254,12 @@
 
     
   <url>
-    <loc>https://learnblockchain.cn/2017/12/27/solidity-structs/</loc>
+    <loc>https://learnblockchain.cn/2017/12/21/solidity-arrays/</loc>
     <lastmod>2018-03-18T13:55:32.194Z</lastmod>
     <data>
         <display>
-        <title>智能合约语言 Solidity 教程系列6 - 结构体与映射</title>
-        <pubTime>2017-12-27T03:55:26.000Z</pubTime>
+        <title>智能合约语言 Solidity 教程系列5 - 数组介绍</title>
+        <pubTime>2017-12-21T03:55:18.000Z</pubTime>
         
         <tag>Solidity手册</tag>
          
