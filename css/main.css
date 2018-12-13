@@ -1908,7 +1908,7 @@ pre .javascript .function {
   color: #999;
 }
 .feed-link {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 .feed-link a {
   display: inline-block;
@@ -1929,7 +1929,7 @@ pre .javascript .function {
   color: #fff;
 }
 .links-of-author {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 .links-of-author a {
   display: inline-block;
@@ -1947,7 +1947,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #3dfff1;
+  background: #b9a4c4;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3232,9 +3232,7 @@ pre .javascript .function {
 }
 .links-of-blogroll {
   text-align: center;
-  margin-top: 20px;
-  padding: 3px 0 0;
-  border-top: 1px dotted #ccc;
+  padding: 20px 0 0;
 }
 .links-of-blogroll-title {
   margin-top: 0;
