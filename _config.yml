@@ -158,7 +158,7 @@ menu:
   tags: /tags/ || tags
   categories: /categories/ || th
   archives: /archives/ || archive
-  project: /categories/project/ || th
+  meeting: /categories/技术工坊/ || th
   course: /course/ || spinner
   web3: https://web3.learnblockchain.cn || book
   #schedule: /schedule/ || calendar
