@@ -1,8 +1,7 @@
 ---
 title: 理解开发HD 钱包涉及的 BIP32、BIP44、BIP39
 date: 2018-09-28 16:17:41
-categories:
-    - 钱包
+categories: 以太坊
 tags:
     - 钱包
     - 比特币

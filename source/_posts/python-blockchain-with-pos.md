@@ -1,9 +1,7 @@
 ---
 title: Python实现一条基于POS算法的区块链
 date: 2018-08-07 20:44:00
-categories: 
-    - 区块链
-    - 比特币
+categories: 比特币
 tags:
     - 区块链
     - 权益证明
