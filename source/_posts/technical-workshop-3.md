@@ -1,10 +1,10 @@
 ---
 title: 第三期 - 高TPS与去中心化存储带来的机遇 
 date: 2018-12-13 11:27:23
-categories: project
-project: true
-subscription: true
-reward: true
+categories: 技术工坊
+hide_in_home: true
+un_subscription: true
+un_reward: true
 tags:
     - project
 ---

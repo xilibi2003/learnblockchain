@@ -1,10 +1,10 @@
 ---
 title: 第一期 - 以太坊钱包开发
 date: 2018-12-13 11:25:59
-categories: project
-project: true
-subscription: true
-reward: true
+categories: 技术工坊
+hide_in_home: true
+un_subscription: true
+un_reward: true
 tags:
     - project
 ---
