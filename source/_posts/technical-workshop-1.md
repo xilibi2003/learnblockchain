@@ -1,8 +1,10 @@
 ---
-title: 区块链技术工坊 - 线下区块链技术分享  
+title: 第一期 - 以太坊钱包开发
 date: 2018-12-13 11:25:59
 categories: project
 project: true
+subscription: true
+reward: true
 tags:
     - project
 ---

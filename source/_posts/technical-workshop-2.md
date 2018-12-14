@@ -1,8 +1,10 @@
 ---
-title: 区块链技术工坊 - 线下区块链技术分享  
-date: 2018-12-13 11:41:23
+title: 第二期 - 深度探索以太坊智能合约
+date: 2018-12-13 11:26:23
 categories: project
 project: true
+subscription: true
+reward: true
 tags:
     - project
 ---
