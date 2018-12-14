@@ -1,9 +1,7 @@
 ---
 title: 以太坊钱包开发系列2 - 账号Keystore文件导入导出
 date: 2018-10-25 20:34:44
-categories:
-    - 钱包
-    - 以太坊
+categories: 以太坊
 tags:
     - 钱包
     - 比特币

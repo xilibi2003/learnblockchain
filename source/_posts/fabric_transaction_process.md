@@ -2,8 +2,8 @@
 title: Fabric1.0 交易流程
 date: 2018-11-21 17:30:27
 categories:
-  - Fabric
-  - 联盟链
+    - Fabric
+    - 联盟链
 tags:
     - Fabric
 author: lgy

@@ -52,6 +52,15 @@ links:
   HPB芯链: https://hpb.io/
 
 
+project:
+  比特币: /categories/bitcoin || false
+  以太坊: /categories/ethereum || false
+  EOS: /categories/EOS || false
+  Fabric: /categories/Fabric || false
+
+project_icons:
+  enable: true
+
 # Site
 title: 深入浅出区块链
 subtitle: 系统学习区块链技术
@@ -149,6 +158,7 @@ menu:
   tags: /tags/ || tags
   categories: /categories/ || th
   archives: /archives/ || archive
+  meeting: /categories/技术工坊/ || th
   course: /course/ || spinner
   web3: https://web3.learnblockchain.cn || book
   #schedule: /schedule/ || calendar
