@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://learnblockchain.cn/"/>
-  <updated>2018-12-17T12:47:07.341Z</updated>
+  <updated>2018-12-17T14:09:12.512Z</updated>
   <id>https://learnblockchain.cn/</id>
   
   <author>
@@ -17,19 +17,46 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>第四期 - 以太坊零手续费及其安全防御的实现</title>
-    <link href="https://learnblockchain.cn/2018/12/13/dev_meeting_4/"/>
-    <id>https://learnblockchain.cn/2018/12/13/dev_meeting_4/</id>
-    <published>2018-12-13T03:41:23.000Z</published>
-    <updated>2018-12-17T12:47:07.341Z</updated>
+    <title>第五期 - 搞明白以太坊DAPP开发</title>
+    <link href="https://learnblockchain.cn/2018/12/14/dev_meeting_5/"/>
+    <id>https://learnblockchain.cn/2018/12/14/dev_meeting_5/</id>
+    <published>2018-12-14T03:41:23.000Z</published>
+    <updated>2018-12-17T14:09:12.512Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="第四期-以太坊零手续费及其安全防御的实现"><a href="#第四期-以太坊零手续费及其安全防御的实现" class="headerlink" title="[第四期] 以太坊零手续费及其安全防御的实现"></a>[第四期] 以太坊零手续费及其安全防御的实现</h2><p>讲师：以太零CTO 钟瑞仙</p><p>主要内容：</p><pre><code>1. 以太坊⼿手续费简介2. 零⼿手续费的必要性  3. 零⼿手续费的实现4. 零⼿手续费带来的安全问题及其解决⽅方案5. 零⼿手续费的副作⽤</code></pre><p><a href="https://wiki.learnblockchain.cn/pdf/meetup_4.pdf" target="_blank" rel="noopener">点击下载PPT</a>及<a href="https://m.qlchat.com/wechat/page/channel-intro?channelId=2000002858537956" target="_blank" rel="noopener">完整课程视频</a></p>]]></content>
+    <content type="html"><![CDATA[<h4 id="讲师：登链学院-Tiny熊"><a href="#讲师：登链学院-Tiny熊" class="headerlink" title="讲师：登链学院 Tiny熊"></a>讲师：登链学院 Tiny熊</h4><p>分享大纲:</p><ol><li>DAPP与APP 的区别</li><li>智能合约开发简介</li><li>web3.js 与 合约交互</li><li>MetaMask, Remix , Truffle，Ganache 使用</li></ol><p><a href="https://wiki.learnblockchain.cn/pdf/meetup_5.pdf" target="_blank" rel="noopener">点击下载PPT</a> 及 <a href="https://m.qlchat.com/wechat/page/channel-intro?channelId=2000002953398745" target="_blank" rel="noopener">现场视频</a></p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h2 id=&quot;第四期-以太坊零手续费及其安全防御的实现&quot;&gt;&lt;a href=&quot;#第四期-以太坊零手续费及其安全防御的实现&quot; class=&quot;headerlink&quot; title=&quot;[第四期] 以太坊零手续费及其安全防御的实现&quot;&gt;&lt;/a&gt;[第四期] 以太坊零手续费及其安全防御的实现&lt;/
+        &lt;h4 id=&quot;讲师：登链学院-Tiny熊&quot;&gt;&lt;a href=&quot;#讲师：登链学院-Tiny熊&quot; class=&quot;headerlink&quot; title=&quot;讲师：登链学院 Tiny熊&quot;&gt;&lt;/a&gt;讲师：登链学院 Tiny熊&lt;/h4&gt;&lt;p&gt;分享大纲:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;DAPP与AP
+      
+    
+    </summary>
+    
+      <category term="技术工坊" scheme="https://learnblockchain.cn/categories/dev-meeting/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>第四期 - 以太坊零手续费及其安全防御的实现</title>
+    <link href="https://learnblockchain.cn/2018/12/13/dev_meeting_4/"/>
+    <id>https://learnblockchain.cn/2018/12/13/dev_meeting_4/</id>
+    <published>2018-12-13T03:41:23.000Z</published>
+    <updated>2018-12-17T14:09:21.706Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="讲师：以太零CTO-钟瑞仙"><a href="#讲师：以太零CTO-钟瑞仙" class="headerlink" title="讲师：以太零CTO 钟瑞仙"></a>讲师：以太零CTO 钟瑞仙</h4><p>主要内容:</p><ol><li>以太坊⼿手续费简介</li><li>零⼿手续费的必要性  </li><li>零⼿手续费的实现</li><li>零⼿手续费带来的安全问题及其解决⽅方案</li><li>零⼿手续费的副作⽤</li></ol><p><a href="https://wiki.learnblockchain.cn/pdf/meetup_4.pdf" target="_blank" rel="noopener">点击下载PPT</a>及<a href="https://m.qlchat.com/wechat/page/channel-intro?channelId=2000002858537956" target="_blank" rel="noopener">完整课程视频</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;讲师：以太零CTO-钟瑞仙&quot;&gt;&lt;a href=&quot;#讲师：以太零CTO-钟瑞仙&quot; class=&quot;headerlink&quot; title=&quot;讲师：以太零CTO 钟瑞仙&quot;&gt;&lt;/a&gt;讲师：以太零CTO 钟瑞仙&lt;/h4&gt;&lt;p&gt;主要内容:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;以太坊⼿手续费
       
     
     </summary>
@@ -44,15 +71,15 @@
     <link href="https://learnblockchain.cn/2018/12/13/dev_meeting_3/"/>
     <id>https://learnblockchain.cn/2018/12/13/dev_meeting_3/</id>
     <published>2018-12-13T03:27:23.000Z</published>
-    <updated>2018-12-17T12:47:02.298Z</updated>
+    <updated>2018-12-17T14:09:28.127Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="第三期-高TPS与去中心化存储带来的机遇"><a href="#第三期-高TPS与去中心化存储带来的机遇" class="headerlink" title="[第三期]高TPS与去中心化存储带来的机遇"></a>[第三期]高TPS与去中心化存储带来的机遇</h2><p>讲师：星际区块（深圳）CEO 谢建怀</p><p>主要内容：</p><pre><code>1. 高TPS能让我们做更多有意思的东西2. 第三代区块链技术能落地的思考   3. 去中心化存储能在工程上带来哪些应用4. 区块链应用的项目探索（基于EOS、FIBOS和IPFS 应用）</code></pre><p><a href="https://wiki.learnblockchain.cn/pdf/meeting_3.pdf" target="_blank" rel="noopener">点击下载PPT</a>及<a href="https://m.qlchat.com/live/channel/channelPage/2000002746846802.htm" target="_blank" rel="noopener">完整课程视频</a></p>]]></content>
+    <content type="html"><![CDATA[<h4 id="讲师：星际区块（深圳）CEO-谢建怀"><a href="#讲师：星际区块（深圳）CEO-谢建怀" class="headerlink" title="讲师：星际区块（深圳）CEO 谢建怀"></a>讲师：星际区块（深圳）CEO 谢建怀</h4><p>主要内容:</p><ol><li>高TPS能让我们做更多有意思的东西</li><li>第三代区块链技术能落地的思考   </li><li>去中心化存储能在工程上带来哪些应用</li><li>区块链应用的项目探索（基于EOS、FIBOS和IPFS 应用）</li></ol><p><a href="https://wiki.learnblockchain.cn/pdf/meeting_3.pdf" target="_blank" rel="noopener">点击下载PPT</a>及<a href="https://m.qlchat.com/live/channel/channelPage/2000002746846802.htm" target="_blank" rel="noopener">完整课程视频</a></p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h2 id=&quot;第三期-高TPS与去中心化存储带来的机遇&quot;&gt;&lt;a href=&quot;#第三期-高TPS与去中心化存储带来的机遇&quot; class=&quot;headerlink&quot; title=&quot;[第三期]高TPS与去中心化存储带来的机遇&quot;&gt;&lt;/a&gt;[第三期]高TPS与去中心化存储带来的机遇&lt;/h2
+        &lt;h4 id=&quot;讲师：星际区块（深圳）CEO-谢建怀&quot;&gt;&lt;a href=&quot;#讲师：星际区块（深圳）CEO-谢建怀&quot; class=&quot;headerlink&quot; title=&quot;讲师：星际区块（深圳）CEO 谢建怀&quot;&gt;&lt;/a&gt;讲师：星际区块（深圳）CEO 谢建怀&lt;/h4&gt;&lt;p&gt;主要内容:&lt;
       
     
     </summary>
@@ -67,15 +94,17 @@
     <link href="https://learnblockchain.cn/2018/12/13/dev_meeting_2/"/>
     <id>https://learnblockchain.cn/2018/12/13/dev_meeting_2/</id>
     <published>2018-12-13T03:26:23.000Z</published>
-    <updated>2018-12-17T12:46:57.632Z</updated>
+    <updated>2018-12-17T14:09:35.981Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="第二期-深度探索以太坊智能合约"><a href="#第二期-深度探索以太坊智能合约" class="headerlink" title="[第二期]深度探索以太坊智能合约"></a>[第二期]深度探索以太坊智能合约</h2><p>讲师：以太零CTO 钟瑞仙</p><p>主要内容包含：</p><pre><code>1. 以太坊账户介绍2. 交易数据⾥里data字段的编码规则3. 智能合约属性的索引和存储4. 预编译合约介绍及汇编调⽤</code></pre><p><a href="https://wiki.learnblockchain.cn/pdf/deep_smartcontract.pdf" target="_blank" rel="noopener">点击下载PPT</a>及<a href="https://m.qlchat.com/wechat/page/channel-intro?channelId=2000002631831830&amp;sourceNo=link" target="_blank" rel="noopener">完整课程视频</a></p>]]></content>
+    <content type="html"><![CDATA[<h4 id="讲师：以太零CTO-钟瑞仙"><a href="#讲师：以太零CTO-钟瑞仙" class="headerlink" title="讲师：以太零CTO 钟瑞仙"></a>讲师：以太零CTO 钟瑞仙</h4><p>主要内容包含:</p><ol><li>以太坊账户介绍</li><li>交易数据⾥里data字段的编码规则</li><li>智能合约属性的索引和存储</li><li>预编译合约介绍及汇编调⽤</li></ol><p><a href="https://wiki.learnblockchain.cn/pdf/deep_smartcontract.pdf" target="_blank" rel="noopener">点击下载PPT</a>及<a href="https://m.qlchat.com/wechat/page/channel-intro?channelId=2000002631831830&amp;sourceNo=link" target="_blank" rel="noopener">完整课程视频</a></p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h2 id=&quot;第二期-深度探索以太坊智能合约&quot;&gt;&lt;a href=&quot;#第二期-深度探索以太坊智能合约&quot; class=&quot;headerlink&quot; title=&quot;[第二期]深度探索以太坊智能合约&quot;&gt;&lt;/a&gt;[第二期]深度探索以太坊智能合约&lt;/h2&gt;&lt;p&gt;讲师：以太零CTO 钟瑞仙&lt;/p
+        &lt;h4 id=&quot;讲师：以太零CTO-钟瑞仙&quot;&gt;&lt;a href=&quot;#讲师：以太零CTO-钟瑞仙&quot; class=&quot;headerlink&quot; title=&quot;讲师：以太零CTO 钟瑞仙&quot;&gt;&lt;/a&gt;讲师：以太零CTO 钟瑞仙&lt;/h4&gt;&lt;p&gt;主要内容包含:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;以太坊账户
       
     
     </summary>
@@ -90,17 +119,18 @@
     <link href="https://learnblockchain.cn/2018/12/13/dev_meeting_1/"/>
     <id>https://learnblockchain.cn/2018/12/13/dev_meeting_1/</id>
     <published>2018-12-13T03:25:59.000Z</published>
-    <updated>2018-12-17T12:46:43.192Z</updated>
+    <updated>2018-12-17T14:09:41.301Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="第一期-以太坊钱包开发"><a href="#第一期-以太坊钱包开发" class="headerlink" title="[第一期]以太坊钱包开发"></a>[第一期]以太坊钱包开发</h2><p>讲师：登链学院 熊丽兵</p><p>分享大纲：</p><pre><code>1. 私钥 地址 及账号2. 什么是HD钱包（分层确定性钱包）3. 助记词及私钥保存4. 如何测量gasLimit及设定gasPrice5. 如何发送签名交易及转移Token</code></pre><p><a href="https://wiki.learnblockchain.cn/pdf/eth_wallet.pdf" target="_blank" rel="noopener">点击下载PPT</a>及<a href="https://m.qlchat.com/wechat/page/channel-intro?channelId=2000002356009198" target="_blank" rel="noopener">完整课程视频</a></p>]]></content>
+    <content type="html"><![CDATA[<h4 id="讲师：登链学院-熊丽兵"><a href="#讲师：登链学院-熊丽兵" class="headerlink" title="讲师：登链学院 熊丽兵"></a>讲师：登链学院 熊丽兵</h4><p>分享大纲:</p><ol><li>私钥 地址 及账号</li><li>什么是HD钱包（分层确定性钱包）</li><li>助记词及私钥保存</li><li>如何测量gasLimit及设定gasPrice</li><li>如何发送签名交易及转移Token</li></ol><p><a href="https://wiki.learnblockchain.cn/pdf/eth_wallet.pdf" target="_blank" rel="noopener">点击下载PPT</a>及<a href="https://m.qlchat.com/wechat/page/channel-intro?channelId=2000002356009198" target="_blank" rel="noopener">完整课程视频</a></p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h2 id=&quot;第一期-以太坊钱包开发&quot;&gt;&lt;a href=&quot;#第一期-以太坊钱包开发&quot; class=&quot;headerlink&quot; title=&quot;[第一期]以太坊钱包开发&quot;&gt;&lt;/a&gt;[第一期]以太坊钱包开发&lt;/h2&gt;&lt;p&gt;讲师：登链学院 熊丽兵&lt;/p&gt;
-&lt;p&gt;分享大纲：&lt;/p&gt;
-&lt;pr
+        &lt;h4 id=&quot;讲师：登链学院-熊丽兵&quot;&gt;&lt;a href=&quot;#讲师：登链学院-熊丽兵&quot; class=&quot;headerlink&quot; title=&quot;讲师：登链学院 熊丽兵&quot;&gt;&lt;/a&gt;讲师：登链学院 熊丽兵&lt;/h4&gt;&lt;p&gt;分享大纲:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;私钥 地址 及账号&lt;/li&gt;
+
       
     
     </summary>
@@ -139,15 +169,15 @@
     <link href="https://learnblockchain.cn/2018/12/12/dev_meeting/"/>
     <id>https://learnblockchain.cn/2018/12/12/dev_meeting/</id>
     <published>2018-12-12T03:25:59.000Z</published>
-    <updated>2018-12-17T12:48:28.305Z</updated>
+    <updated>2018-12-17T14:11:19.381Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="区块链技术工坊"><a href="#区块链技术工坊" class="headerlink" title="区块链技术工坊"></a>区块链技术工坊</h2>]]></content>
+    <content type="html"><![CDATA[<p><strong>我们是谁、我们的目标</strong><br>区块链技术工坊主要由HiBlock社区牵头，在全国各主要城市由一群热爱区块链技术开发者组织的技术分享活动。<br>深圳地区由Tiny熊组织，我们每周四晚上邀请一位技术大咖进行分享，由于区块链技术涉及面广、发展快速，我们希望通过这个分享大家能够一起学习交流、共同成长。</p><p><strong>如何加入</strong><br>很简单，在活动行报名即可，最新一期交流DAG技术，<a href="http://hiblock.huodongxing.com/event/7470262312411" target="_blank" rel="noopener">戳链接报名</a>。<br>如果你进行分享，欢迎联系Tiny熊，微信：xlbxiong</p><p><strong>致谢</strong><br>一个活动，单靠几个爱好的的兴趣是不够的，因此要感谢中能链提供场地支持，以及多个优秀的区块链项目：以太零、Qtum、FIBOS、AckBlock、HPB对活动的大力赞助。如果你有兴趣赞助，请联系Tiny熊了解权益和义务。</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h2 id=&quot;区块链技术工坊&quot;&gt;&lt;a href=&quot;#区块链技术工坊&quot; class=&quot;headerlink&quot; title=&quot;区块链技术工坊&quot;&gt;&lt;/a&gt;区块链技术工坊&lt;/h2&gt;
+        &lt;p&gt;&lt;strong&gt;我们是谁、我们的目标&lt;/strong&gt;&lt;br&gt;区块链技术工坊主要由HiBlock社区牵头，在全国各主要城市由一群热爱区块链技术开发者组织的技术分享活动。&lt;br&gt;深圳地区由Tiny熊组织，我们每周四晚上邀请一位技术大咖进行分享，由于区块链技术涉及面广、发展快速
       
     
     </summary>
@@ -305,9 +335,9 @@
     
       <category term="比特币" scheme="https://learnblockchain.cn/tags/%E6%AF%94%E7%89%B9%E5%B8%81/"/>
     
-      <category term="钱包" scheme="https://learnblockchain.cn/tags/%E9%92%B1%E5%8C%85/"/>
-    
       <category term="以太坊" scheme="https://learnblockchain.cn/tags/%E4%BB%A5%E5%A4%AA%E5%9D%8A/"/>
+    
+      <category term="钱包" scheme="https://learnblockchain.cn/tags/%E9%92%B1%E5%8C%85/"/>
     
   </entry>
   
@@ -331,9 +361,9 @@
     
       <category term="比特币" scheme="https://learnblockchain.cn/tags/%E6%AF%94%E7%89%B9%E5%B8%81/"/>
     
-      <category term="钱包" scheme="https://learnblockchain.cn/tags/%E9%92%B1%E5%8C%85/"/>
-    
       <category term="以太坊" scheme="https://learnblockchain.cn/tags/%E4%BB%A5%E5%A4%AA%E5%9D%8A/"/>
+    
+      <category term="钱包" scheme="https://learnblockchain.cn/tags/%E9%92%B1%E5%8C%85/"/>
     
   </entry>
   
@@ -357,9 +387,9 @@
     
       <category term="比特币" scheme="https://learnblockchain.cn/tags/%E6%AF%94%E7%89%B9%E5%B8%81/"/>
     
-      <category term="钱包" scheme="https://learnblockchain.cn/tags/%E9%92%B1%E5%8C%85/"/>
-    
       <category term="以太坊" scheme="https://learnblockchain.cn/tags/%E4%BB%A5%E5%A4%AA%E5%9D%8A/"/>
+    
+      <category term="钱包" scheme="https://learnblockchain.cn/tags/%E9%92%B1%E5%8C%85/"/>
     
   </entry>
   
@@ -383,9 +413,9 @@
     
       <category term="比特币" scheme="https://learnblockchain.cn/tags/%E6%AF%94%E7%89%B9%E5%B8%81/"/>
     
-      <category term="钱包" scheme="https://learnblockchain.cn/tags/%E9%92%B1%E5%8C%85/"/>
-    
       <category term="以太坊" scheme="https://learnblockchain.cn/tags/%E4%BB%A5%E5%A4%AA%E5%9D%8A/"/>
+    
+      <category term="钱包" scheme="https://learnblockchain.cn/tags/%E9%92%B1%E5%8C%85/"/>
     
   </entry>
   
@@ -465,9 +495,9 @@
     
       <category term="比特币" scheme="https://learnblockchain.cn/tags/%E6%AF%94%E7%89%B9%E5%B8%81/"/>
     
-      <category term="钱包" scheme="https://learnblockchain.cn/tags/%E9%92%B1%E5%8C%85/"/>
-    
       <category term="以太坊" scheme="https://learnblockchain.cn/tags/%E4%BB%A5%E5%A4%AA%E5%9D%8A/"/>
+    
+      <category term="钱包" scheme="https://learnblockchain.cn/tags/%E9%92%B1%E5%8C%85/"/>
     
   </entry>
   
@@ -494,33 +524,6 @@
       <category term="Web3.js" scheme="https://learnblockchain.cn/tags/Web3-js/"/>
     
       <category term="Dapp入门" scheme="https://learnblockchain.cn/tags/Dapp%E5%85%A5%E9%97%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>程序员如何切入区块链去中心化应用开发</title>
-    <link href="https://learnblockchain.cn/2018/08/31/devDapp/"/>
-    <id>https://learnblockchain.cn/2018/08/31/devDapp/</id>
-    <published>2018-08-31T03:30:55.000Z</published>
-    <updated>2018-09-04T07:05:51.784Z</updated>
-    
-    <content type="html"><![CDATA[<p>前段时间一个以太坊游戏应用：<a href="http://exitscam.me/play" target="_blank" rel="noopener">Fomo3D</a>异常火爆，在短短的几天内就吸引了几万的以太币投入游戏，第一轮游戏一个“黑客”用了一个非常巧妙的利用以太坊规则成为了最终赢家，拿走了1万多以太币奖金。</p><p>区块链应用的价值由这个游戏反映的淋漓尽致，Fomo3D游戏能够成功核心所依赖的是以太坊提供的一个可信、不可篡改平台。当游戏的规则确定之后，一切都按规则运行，无人可干预。今天这篇就来介绍一下程序员如何切入去中心化应用开发。</p><a id="more"></a><h2 id="中心化应用"><a href="#中心化应用" class="headerlink" title="中心化应用"></a>中心化应用</h2><p>作为对比，先来看看中心化应用，其实就是现有的互联网应用，为什么它是中心化应用，看看它的架构图：<br><img src="/images/capp.jpg" alt=""></p><p>平时我们接触的是应用的前端（或称客户端），前端可以是HTML5的web页面、 小程序、APP， 在前端展现的内容通常发送一个请求到服务器，服务器返回相应的内容给前端。在前端的动作同样也会转化请求发送到服务器，服务器处理之后返回数据到前端。也就是说我们所有看到的内容或者操作都是中心化的服务器控制，因此说是中心化应用。</p><h2 id="去中心化应用DAPP"><a href="#去中心化应用DAPP" class="headerlink" title="去中心化应用DAPP"></a>去中心化应用DAPP</h2><p>而去中心化应用有什么不同呢？ 看看它的架构图：<br><img src="/images/dapp.jpg" alt=""><br>前端的表现上是一样的， 还是H5页面、 小程序、APP，DAPP和传统App关键是后端部分不同，是后端不再是一个中心化的服务器，而是分布式网络上任意节点，注意可以是 <strong>任意一个节点</strong>，在应用中给节点发送的请求通常称为 <strong>交易</strong>，交易和中心化下的请求有几个很大的不同是：交易的数据经过用户个人签名之后发送到节点，节点收到交易请求之后，会把 <strong>请求广播到整个网络</strong>，交易在网络达成共识之后，才算是真正的执行（真正其作用的执行不一是连接的后端节点，尽管后端也会执行）。以及中心化下的请求大多数都是同步的（及时拿到结果）， 而交易大多数是异步的，这也是在开发去中心应用时需要注意的地方，</p><p>从节点上获得数据状态（比如交易的结果），一般是通过事件回调来获得。</p><h2 id="如何开发"><a href="#如何开发" class="headerlink" title="如何开发"></a>如何开发</h2><p>在开发中心化应用最重要两部分是 <strong>客户端UI表现</strong>和 <strong>后端服务程序</strong>， UI表现通过HTTP请求连接到后端服务程序，后端服务程序运行在服务器上，比如Nginx Apached等等。</p><p>开发一个去中心化应用最重要也是两部分： <strong>客户端UI表现</strong>及 <strong>智能合约</strong>，智能合约的作用就像后端服务程序，智能合约是运行在节点的EVM上， 客户端调用智能合约，是通过向节点发起RPC请求完成。</p><p>下面是一个对比：</p><pre><code>     客户端UI &lt;=&gt; 客户端UI         HTTP &lt;=&gt; RPC  后端服务程序 &lt;=&gt; 智能合约Nginx/Apache &lt;=&gt; 节点</code></pre><p>因此对于去中心化应用来说，程序员可以从两个方面切入:</p><p>一个是 <strong>去中心化应用的客户端开发</strong>， 熟悉已经熟悉客户端软件（如Web\APP等）开发的同学，只需要了解一下客户端跟区块链节点通信的API接口，如果是在当前应用最广泛的区块链平台以太坊上开发去中心化应用，那么需要了解Web3<br>这个库，Web3对节点暴露出来的JSON-RPC接口进行了封装，比如Web3提供的功能有：获取节点状态，获取账号信息，调用合约、监听合约事件等等。</p><p>目前的主流语言都有Web3的实现，列举一些实现给大家参考：</p><ul><li><a href="https://github.com/ethereum/web3.js" target="_blank" rel="noopener">JavaScript Web3.js</a></li><li><a href="https://github.com/ethereum/web3.py" target="_blank" rel="noopener">Python Web3.py</a></li><li><a href="https://github.com/airalab/hs-web3" target="_blank" rel="noopener">Haskell hs-web3</a></li><li><a href="https://github.com/web3j/web3j" target="_blank" rel="noopener">Java web3j</a></li><li><a href="https://github.com/mslinn/web3j-scala" target="_blank" rel="noopener">Scala web3j-scala</a></li><li><a href="https://github.com/f-o-a-m/purescript-web3" target="_blank" rel="noopener">Purescript purescript-web3</a></li><li><a href="https://github.com/sc0Vu/web3.php" target="_blank" rel="noopener">PHP web3.php</a></li><li><a href="https://github.com/digitaldonkey/ethereum-php" target="_blank" rel="noopener">PHP ethereum-php</a></li></ul><p>另一个切入点是 <strong>智能合约的开发</strong>，在以太坊现在推荐的语言是Solidity，有一些同学对新学一门语言有一些畏惧，Solidity的语法其实很简洁，有过一两门其他语言基础（开发经验）的同学三五天就可以学会，我也录制了一个视频课程：<a href="https://wiki.learnblockchain.cn/course/solidity.html" target="_blank" rel="noopener">深入详解以太坊智能合约语言Solidity</a>。</p><p>下面用一个Hello合约，体会下Solidity的语法：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">contract Hello &#123;</span><br><span class="line">      <span class="function"><span class="keyword">function</span> <span class="title">hello</span>(<span class="params"></span>) <span class="title">public</span> <span class="title">returns</span>(<span class="params">string</span>) </span>&#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="string">"Hello World"</span>; </span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>如果把上面的contract关键字更改为class，就和其他语言定义一个类一样。</p><p>有兴趣的同学可以进一步学习一下这个DApp开发案例<a href="https://learnblockchain.cn/2018/04/15/web3-html/">Web3与智能合约交互实战</a>，</p><p>在DAPP的开发过程中，一些开发工具可以帮助我们事半功倍，如：Truffle开发框架以及Ganache工具来模拟节点等，这篇文章<a href="https://learnblockchain.cn/2018/01/12/first-dapp/">一步步教你开发、部署第一个去中心化应用</a></p><h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>对于想切入到去中心化应用开发的同学，对区块链运行的原理了解肯定会是加分项，尤其是各类共识机制（<a href="https://learnblockchain.cn/2017/11/04/bitcoin-pow/">POW</a>，POS，DPOS等）的理解，P2P网络的理解，以及各类加密和Hash算法的运用。有一些同学想做区块链底层开发，对区块链运行的原理则是必须项。</p><p>欢迎来<a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">知识星球</a>提问，星球内已经聚集了300多位区块链技术爱好者。<br><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;前段时间一个以太坊游戏应用：&lt;a href=&quot;http://exitscam.me/play&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Fomo3D&lt;/a&gt;异常火爆，在短短的几天内就吸引了几万的以太币投入游戏，第一轮游戏一个“黑客”用了一个非常巧妙的利用以太坊规则成为了最终赢家，拿走了1万多以太币奖金。&lt;/p&gt;
-&lt;p&gt;区块链应用的价值由这个游戏反映的淋漓尽致，Fomo3D游戏能够成功核心所依赖的是以太坊提供的一个可信、不可篡改平台。当游戏的规则确定之后，一切都按规则运行，无人可干预。今天这篇就来介绍一下程序员如何切入去中心化应用开发。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="以太坊" scheme="https://learnblockchain.cn/categories/ethereum/"/>
-    
-      <category term="Dapp" scheme="https://learnblockchain.cn/categories/ethereum/Dapp/"/>
-    
-    
-      <category term="Dapp入门" scheme="https://learnblockchain.cn/tags/Dapp%E5%85%A5%E9%97%A8/"/>
-    
-      <category term="以太坊概念" scheme="https://learnblockchain.cn/tags/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E6%A6%82%E5%BF%B5/"/>
     
   </entry>
   

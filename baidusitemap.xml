@@ -5,7 +5,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2018/12/12/dev_meeting/</loc>
-    <lastmod>2018-12-17T12:48:28.305Z</lastmod>
+    <lastmod>2018-12-17T14:11:19.381Z</lastmod>
     <data>
         <display>
         <title>区块链技术工坊</title>
@@ -22,30 +22,12 @@
 
     
   <url>
-    <loc>https://learnblockchain.cn/2018/12/13/dev_meeting_4/</loc>
-    <lastmod>2018-12-17T12:47:07.341Z</lastmod>
+    <loc>https://learnblockchain.cn/2018/12/13/dev_meeting_1/</loc>
+    <lastmod>2018-12-17T14:09:41.301Z</lastmod>
     <data>
         <display>
-        <title>第四期 - 以太坊零手续费及其安全防御的实现</title>
-        <pubTime>2018-12-13T03:41:23.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="技术工坊" url="https://learnblockchain.cn/categories/dev-meeting/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://learnblockchain.cn/2018/12/13/dev_meeting_3/</loc>
-    <lastmod>2018-12-17T12:47:02.298Z</lastmod>
-    <data>
-        <display>
-        <title>第三期 - 高TPS与去中心化存储带来的机遇</title>
-        <pubTime>2018-12-13T03:27:23.000Z</pubTime>
+        <title>第一期 - 以太坊钱包开发</title>
+        <pubTime>2018-12-13T03:25:59.000Z</pubTime>
         
          
            
@@ -59,7 +41,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2018/12/13/dev_meeting_2/</loc>
-    <lastmod>2018-12-17T12:46:57.632Z</lastmod>
+    <lastmod>2018-12-17T14:09:35.981Z</lastmod>
     <data>
         <display>
         <title>第二期 - 深度探索以太坊智能合约</title>
@@ -76,12 +58,48 @@
 
     
   <url>
-    <loc>https://learnblockchain.cn/2018/12/13/dev_meeting_1/</loc>
-    <lastmod>2018-12-17T12:46:43.192Z</lastmod>
+    <loc>https://learnblockchain.cn/2018/12/13/dev_meeting_3/</loc>
+    <lastmod>2018-12-17T14:09:28.127Z</lastmod>
     <data>
         <display>
-        <title>第一期 - 以太坊钱包开发</title>
-        <pubTime>2018-12-13T03:25:59.000Z</pubTime>
+        <title>第三期 - 高TPS与去中心化存储带来的机遇</title>
+        <pubTime>2018-12-13T03:27:23.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="技术工坊" url="https://learnblockchain.cn/categories/dev-meeting/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://learnblockchain.cn/2018/12/13/dev_meeting_4/</loc>
+    <lastmod>2018-12-17T14:09:21.706Z</lastmod>
+    <data>
+        <display>
+        <title>第四期 - 以太坊零手续费及其安全防御的实现</title>
+        <pubTime>2018-12-13T03:41:23.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="技术工坊" url="https://learnblockchain.cn/categories/dev-meeting/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://learnblockchain.cn/2018/12/14/dev_meeting_5/</loc>
+    <lastmod>2018-12-17T14:09:12.512Z</lastmod>
+    <data>
+        <display>
+        <title>第五期 - 搞明白以太坊DAPP开发</title>
+        <pubTime>2018-12-14T03:41:23.000Z</pubTime>
         
          
            
@@ -176,9 +194,9 @@
         
         <tag>比特币</tag>
          
-        <tag>钱包</tag>
-         
         <tag>以太坊</tag>
+         
+        <tag>钱包</tag>
          
          
            
@@ -227,9 +245,9 @@
         
         <tag>比特币</tag>
          
-        <tag>钱包</tag>
-         
         <tag>以太坊</tag>
+         
+        <tag>钱包</tag>
          
          
            
@@ -274,9 +292,9 @@
         
         <tag>比特币</tag>
          
-        <tag>钱包</tag>
-         
         <tag>以太坊</tag>
+         
+        <tag>钱包</tag>
          
          
            
@@ -298,9 +316,9 @@
         
         <tag>比特币</tag>
          
-        <tag>钱包</tag>
-         
         <tag>以太坊</tag>
+         
+        <tag>钱包</tag>
          
          
            
@@ -322,9 +340,9 @@
         
         <tag>比特币</tag>
          
-        <tag>钱包</tag>
-         
         <tag>以太坊</tag>
+         
+        <tag>钱包</tag>
          
          
            
@@ -1306,14 +1324,14 @@
 
     
   <url>
-    <loc>https://learnblockchain.cn/2017/12/12/solidity_func/</loc>
+    <loc>https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/</loc>
     <lastmod>2018-03-18T13:55:32.197Z</lastmod>
     <data>
         <display>
-        <title>智能合约语言 Solidity 教程系列3 - 函数类型</title>
-        <pubTime>2017-12-12T07:25:59.000Z</pubTime>
+        <title>智能合约语言 Solidity 教程系列4 - 数据存储位置分析</title>
+        <pubTime>2017-12-21T03:51:02.000Z</pubTime>
         
-        <tag>Solidity</tag>
+        <tag>Solidity手册</tag>
          
          
            
@@ -1329,14 +1347,14 @@
 
     
   <url>
-    <loc>https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/</loc>
+    <loc>https://learnblockchain.cn/2017/12/12/solidity_func/</loc>
     <lastmod>2018-03-18T13:55:32.197Z</lastmod>
     <data>
         <display>
-        <title>智能合约语言 Solidity 教程系列4 - 数据存储位置分析</title>
-        <pubTime>2017-12-21T03:51:02.000Z</pubTime>
+        <title>智能合约语言 Solidity 教程系列3 - 函数类型</title>
+        <pubTime>2017-12-12T07:25:59.000Z</pubTime>
         
-        <tag>Solidity手册</tag>
+        <tag>Solidity</tag>
          
          
            
