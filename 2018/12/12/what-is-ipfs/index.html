@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+  <meta name="msvalidate.01" content="914C9C1CBC7078C5E2AC612AD5C1CC6C" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Web3,IPFS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深入浅出区块链" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="尽管网络上，已经有不少文章讨论IPFS，不过真正讲明白IPFS想做什么的很少，文本尝试站在未来Web3.0的高度来看看IPFS究竟用来解决什么问题。">
+<meta name="keywords" content="Web3,IPFS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="站在Web3.0 理解IPFS是什么">
+<meta property="og:url" content="https://learnblockchain.cn/2018/12/12/what-is-ipfs/index.html">
+<meta property="og:site_name" content="深入浅出区块链">
+<meta property="og:description" content="尽管网络上，已经有不少文章讨论IPFS，不过真正讲明白IPFS想做什么的很少，文本尝试站在未来Web3.0的高度来看看IPFS究竟用来解决什么问题。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-17T12:36:55.419Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="站在Web3.0 理解IPFS是什么">
+<meta name="twitter:description" content="尽管网络上，已经有不少文章讨论IPFS，不过真正讲明白IPFS想做什么的很少，文本尝试站在未来Web3.0的高度来看看IPFS究竟用来解决什么问题。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'UT2K1ZRSWK',
+      apiKey: '0bbb261dfad58df8f8a657a1ed3255cd',
+      indexName: 'learnblockchain',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://learnblockchain.cn/2018/12/12/what-is-ipfs/"/>
+
+
+
+
+
+  <title>站在Web3.0 理解IPFS是什么 | 深入浅出区块链</title>
+  
+
+
+
+
+
+
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6273382609469378",
+        enable_page_level_ads: true
+    });
+</script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">系统学习区块链技术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wiki">
+          <a href="https://wiki.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Wiki
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-meeting">
+          <a href="/categories/dev-meeting/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            技术工坊
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-course">
+          <a href="/course/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-spinner"></i> <br />
+            
+            视频教程
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-web3">
+          <a href="https://web3.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Web3文档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2018/12/12/what-is-ipfs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">站在Web3.0 理解IPFS是什么</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-12T16:35:33+08:00">
+                2018-12-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T20:36:55+08:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IPFS/" itemprop="url" rel="index">
+                    <span itemprop="name">IPFS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>尽管网络上，已经有不少文章讨论IPFS，不过真正讲明白IPFS想做什么的很少，文本尝试站在未来Web3.0的高度来看看IPFS究竟用来解决什么问题。</p>
+<a id="more"></a>
+<h2 id="DApp-的缺陷"><a href="#DApp-的缺陷" class="headerlink" title="DApp 的缺陷"></a>DApp 的缺陷</h2><p>对区块链有所了解的同学，知道区块链维护的是一个中立的（去中心）、共同信任、难以篡改的数据库、智能合约创造的是一个完全透明（不被干扰）的运行规则，因此可以解决信任问题。</p>
+<p>一切看起来很美好，我们可以<a href="https://ke.qq.com/course/335169" target="_blank" rel="noopener">开发去中心化应用DApp</a> 解决信任问题，由此也确实产生了很多的博彩类DApp游戏。</p>
+<blockquote>
+<p>不熟悉DApp的同学可以看我另一篇文章<a href="https://learnblockchain.cn/2018/08/31/devDapp/">程序员如何切入区块链去中心化应用开发</a>.</p>
+</blockquote>
+<p>细心的同学，也许会发现一个问题，<strong>虽然DApp的后台逻辑（智能合约）是在无中心的节点上运行的透明的规则，但是我们看到内容却来自于一台无信任的中心化服务器。</strong></p>
+<p>这是由当前互联网规则-超文本媒体传输协议（HTTP）决定的，简单来讲，在这个协议下，当我们在浏览器输入一个网址时，总是会先找到这个网址（域名）对应的服务器IP地址，然后请求服务器，并把服务器的响应显示在浏览器。</p>
+<blockquote>
+<p>这种方式下文件能否访问，完全取决于服务器，服务器也许会关闭、内容获取被篡改或删除，对用户都无法保证。我自己看到好内容把网页收藏的习惯，经常会出现过一段时间再去访问的时候，页面已经不存在了。</p>
+</blockquote>
+<h2 id="IPFS想要做什么"><a href="#IPFS想要做什么" class="headerlink" title="IPFS想要做什么"></a>IPFS想要做什么</h2><p>IPFS - InterPlanetary File System 星际文件系统，多数人谈到IPFS都只讲到它的去中心化存储，其实IPFS想要做的远不只存储，其目标是取代HTTP，成为Web3.0时代的基础协议。我们从其<a href="https://ipfs.io/" target="_blank" rel="noopener">官网</a>对IPFS的定义就可以看到其雄心。</p>
+<blockquote>
+<p> 尽管Web3.0目前没有明确定义，从2014年以太坊联合创始人Gavin Wood提出分布式网络的Web3.0概念开始，业界普遍认为Web3.0 特征应该是 分布式、可信任。</p>
+</blockquote>
+<p>在官网的有这样两个描述：</p>
+<ol>
+<li><p>IPFS is the Distributed Web<br>A peer-to-peer hypermedia protocol to make the web faster, safer, and more open.</p>
+</li>
+<li><p>IPFS aims to replace HTTP and build a better web for all of us.</p>
+</li>
+</ol>
+<p>翻译过来就是： 1. IPFS是分布式Web，是点对点的超媒体协议，以构建更快、更安全、更开放的网络。 2. IPFS旨在取代HTTP，为我们构建一个更好的web。</p>
+<p>当然，要完全取代HTTP还有一段路要走，最大的坎是怎样让‍‍主流的浏览器支持IPFS协议，‍‍现在是通过HTTP网关的方式访问IPFS网上面存在的文件。<br>未来IPFS能取代Http的话？就是通过网络浏览器里直接输入 <code>ipfs://文件hash</code> 访问内容，‍‍目前这种方式访问IPFS 必须依靠浏览器插件<a href="https://github.com/ipfs-shipyard/ipfs-companion" target="_blank" rel="noopener">ipfs 伴侣</a>， 并且这个插件的使用不广泛。</p>
+<blockquote>
+<p>注意，这里提到的浏览器，只是沿用这个名词，Web3.0的浏览器也许不叫浏览器， 它更可能是数字钱包和浏览器的组合体，现在浏览器上发起交易也同样需要依靠钱包插件进行签名。所以这样一个形态的产品也是大家的机会，这是一个全新的超大入口级产品。</p>
+</blockquote>
+<p>即未来期望的访问方式是这样的：<br>ipfs://Qme2qNy61yLj9hzDm4VN6HDEkCmksycgSEM33k4eHCgaVu</p>
+<p>而现在通过网关访问是这样的：<br><a href="http://127.0.0.1:8080/ipfs/Qme2qNy61yLj9hzDm4VN6HDEkCmksycgSEM33k4eHCgaVu" target="_blank" rel="noopener">http://127.0.0.1:8080/ipfs/Qme2qNy61yLj9hzDm4VN6HDEkCmksycgSEM33k4eHCgaVu</a><br><a href="https://ipfs.io/ipfs/Qme2qNy61yLj9hzDm4VN6HDEkCmksycgSEM33k4eHCgaVu" target="_blank" rel="noopener">https://ipfs.io/ipfs/Qme2qNy61yLj9hzDm4VN6HDEkCmksycgSEM33k4eHCgaVu</a></p>
+<h2 id="IPFS是怎么做的"><a href="#IPFS是怎么做的" class="headerlink" title="IPFS是怎么做的"></a>IPFS是怎么做的</h2><p>IPFS是一种内容可寻址、版本化、点对点超媒体的分布式存储、传输协议。</p>
+<p>我们知道在现在的网络服务里，内容是基于位置（IP）寻址的，就是在查找内容的时候，需要先找到内容所在的服务器（根据IP），然后再在服务器上找对应的内容。<br>而在IPFS的网络里，是根据内容寻址，每一个‍‍上传到IPFS上面去的文件、文件夹，都是以Qm为开头字母的哈希值，无需知道文件存储在哪里，通过哈希值就能够找到这个文件，这种方式叫内容寻址。</p>
+<h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><p>在IPFS系统中，内容会分块存放（如果内容很小就会直接存在DHT中），并分散存储在IPFS网络中的节点上（不过目前的IPFS实现，一个节点会完整保存内容的所有区块）。系统会给内容的每一个块计算哈希值，然后把所有块的哈希值拼凑起来，再计算一次哈希值，从而得到最终的哈希值。同时每个节点会维护一张DHT（分布式哈希表），包含数据块与目标节点的映射关系。</p>
+<p>在IPFS中是通过哈希去请求文件的，它就会使用这个分布式哈希表找到文件所在的节点，取回文件根据哈希重新组合文件（同样也会验证文件）。</p>
+<h3 id="IPFS的特点"><a href="#IPFS的特点" class="headerlink" title="IPFS的特点"></a>IPFS的特点</h3><p>根据前面的原理，我们可以推倒出IPFS的几个特点：</p>
+<ol>
+<li><p>当我们知道一个文件的哈希值之后，可以确保文件不被修改， 即可以确保访问的文件是没有被篡改的。因为根据哈希的特点，哪怕源文件有一丁点的更改，对应的哈希值也会完全不同。</p>
+</li>
+<li><p>(理论上) 如果IPFS得以普及，节点数达到一定规模，内容将永久保存，就算部分节点离线，也不会影响文件的读取，不像现在的收藏会失效。</p>
+</li>
+<li><p>由于IPFS是一个统一的网络，只要文件在网络中被存储过，除了必要的冗余备份，文件不会被重复存储，对比现有互联网，信息孤岛，各中心间不共享数据，数据不的不重复存储，IPFS一定意义上节约了空间，使得整个网络带宽消耗更低，网络更加高效。</p>
+</li>
+<li><p>相对于中心化存储的容易遭受DDOS攻击，IPFS采用分布式存储网络，文件被存储在不同的网络节点，天然避免了DDOS攻击，同时一个文件可以同时从多个节点同时下载，通信的效率也会更高。</p>
+</li>
+</ol>
+<h2 id="IPNS"><a href="#IPNS" class="headerlink" title="IPNS"></a>IPNS</h2><p>在IPFS中，一个文件的哈希值完全取决于其内容，修改它的内容，其相应的Hash值也会发生改变。这样有一个优点是保证文件的不可篡改，提高数据的安全性。<br>但同时我们在开发应用（如网站）时，经常需要更新内容发布新版本，如果每次都让用户每次在浏览器中输入不同的IPFS地址来访问更新后内容的网页，这个体验肯定是无法接受的。</p>
+<p>IPFS提供了一个解决方案IPNS(Inter-Planetary Naming System)，他提供了一个被私钥限定的IPNS哈希ID（通常是PeerID），其用来指向具体IPFS文件哈希，当有新的内容更新时，就可以更新IPNS哈希ID的指向。</p>
+<p>为了方便大家理解，做一个类比，和DNS类似， DNS记录了域名指向的IP地址， 如果服务器更改，我们可以更改DNS域名指向，保证域名指向最新的服务器。<br>IPNS则是用一个哈希ID指向一个真实内容文件的Hash，文件更新这更改哈希ID的指向，当然更新指向需要有哈希ID对应的私钥。</p>
+<p>通过IPNS访问文件的方式如下：</p>
+<p>利用插件访问：ipns://QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva<br>利用网关访问： <a href="http://127.0.0.1:8080/ipns/QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva" target="_blank" rel="noopener">http://127.0.0.1:8080/ipns/QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva</a></p>
+<p>IPNS同样兼容DNS，使用DNS TXT记录域名对应的IPNS哈希ID，就可以域名来替换IPNS哈希ID来进行访问。从而实现更容易读写和记忆。</p>
+<p>例如使用以下方式简化访问：<br>ipns://ipfs.io<br><a href="https://ipfs.io/ipns/ipfs.io/" target="_blank" rel="noopener">https://ipfs.io/ipns/ipfs.io/</a></p>
+<p>IPFS/IPNS 如果使用，将在后面的文章进一步介绍。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>IPFS是一项非常激动人心的技术，尽管它仍在发展的早期（区块链也是），还有很多问题需要我们一起解决，如NAT穿透问题，浏览器支持问题，内容存储激励问题，存储数据安全与隐私保护问题。<br>但是通过 IPFS + 区块链将真正创建Web3.0时代的应用，这是一个完全可信的、自运转（不停机）的应用，它可以做什么我不知道，我对未来充满期待。</p>
+<p>欢迎来<a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">知识星球</a>提问，星球内已经聚集了300多位区块链技术爱好者。<br><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
+
+      
+    </div>
+    
+    
+    
+    
+      
+        <div>
+          <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="Tiny熊 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信号：深入浅出区块链技术，欢迎订阅</div>
+</div>
+
+        </div>
+      
+    
+
+    
+      
+        <div>
+          <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有收获，赞赏下</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/qr_pay.jpg" alt="Tiny熊 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+        </div>
+      
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Tiny熊
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://learnblockchain.cn/2018/12/12/what-is-ipfs/" title="站在Web3.0 理解IPFS是什么">https://learnblockchain.cn/2018/12/12/what-is-ipfs/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Web3/" rel="tag"># Web3</a>
+          
+            <a href="/tags/IPFS/" rel="tag"># IPFS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/12/dev_meeting/" rel="next" title="区块链技术工坊">
+                <i class="fa fa-chevron-left"></i> 区块链技术工坊
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/13/dev_meeting_1/" rel="prev" title="第一期 - 以太坊钱包开发">
+                第一期 - 以太坊钱包开发 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element" style="margin-top: 20px;">
+              <span>
+                项目
+              </span>
+            </div>
+          
+
+          <div class="links-of-author project motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/bitcoin" target="_self" title="比特币">
+                    
+                      <i class="fa fa-fw fa-false"></i>比特币</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/ethereum" target="_self" title="以太坊">
+                    
+                      <i class="fa fa-fw fa-false"></i>以太坊</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/EOS" target="_self" title="EOS">
+                    
+                      <i class="fa fa-fw fa-false"></i>EOS</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/Fabric" target="_self" title="Fabric">
+                    
+                      <i class="fa fa-fw fa-false"></i>Fabric</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <span>
+                联系我
+              </span>
+            </div>
+          
+          
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/xilibi2003" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiong-li-bing/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.upchain.pro/book.html" title="新书-精通智能合约" target="_blank">新书-精通智能合约</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="区块链技术专栏" target="_blank">区块链技术专栏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://t.xiaomiquan.com/RfAu7uj" title="技术交流-知识星球" target="_blank">技术交流-知识星球</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bitshuo.com" title="区块链技术中文社区" target="_blank">区块链技术中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://news.tangwen.org" title="汤问资讯" target="_blank">汤问资讯</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitask.org" title="币问" target="_blank">币问</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://hiblock.net/" title="HiBlock区块链社区" target="_blank">HiBlock区块链社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eosfans.io/" title="EOS中文社区" target="_blank">EOS中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blockflow.net/" title="BlockFlow" target="_blank">BlockFlow</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.liankexing.com/" title="链客区块链问答社区" target="_blank">链客区块链问答社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitool.cn/" title="币兔" target="_blank">币兔</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wutui.pro/" title="无退社区" target="_blank">无退社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blockgeek.org/" title="BG区块链技术论坛" target="_blank">BG区块链技术论坛</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hpb.io/" title="HPB芯链" target="_blank">HPB芯链</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DApp-的缺陷"><span class="nav-number">1.</span> <span class="nav-text">DApp 的缺陷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IPFS想要做什么"><span class="nav-number">2.</span> <span class="nav-text">IPFS想要做什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IPFS是怎么做的"><span class="nav-number">3.</span> <span class="nav-text">IPFS是怎么做的</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#工作原理"><span class="nav-number">3.1.</span> <span class="nav-text">工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPFS的特点"><span class="nav-number">3.2.</span> <span class="nav-text">IPFS的特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IPNS"><span class="nav-number">4.</span> <span class="nav-text">IPNS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">5.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+  <div class="footer-custom"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17140514号-1</a></div>
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
