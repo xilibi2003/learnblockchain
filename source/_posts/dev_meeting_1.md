@@ -5,13 +5,8 @@ categories: 技术工坊
 hide_in_home: true
 un_subscription: true
 un_reward: true
-tags:
-    - project
----
 
-区块链技术工坊由一群热爱区块链技术的开发者组织，在全国各主要城市每周举办线下区块链技术分享活动。深圳地区由HiBlock、小牛新能源、登链学院联合主办，由以太零、Qtum、FIBOS、AckBlock、HPB赞助。
-欢迎大家关注微信：upchainedu 及时获取活动信息。
-<!-- more -->
+---
 
 ## [第一期]以太坊钱包开发
 
