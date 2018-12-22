@@ -4,12 +4,12 @@
 
     
   <url>
-    <loc>https://learnblockchain.cn/2018/12/21/dev_meeting_6/</loc>
-    <lastmod>2018-12-21T10:45:09.945Z</lastmod>
+    <loc>https://learnblockchain.cn/2018/12/12/dev_meeting/</loc>
+    <lastmod>2018-12-22T11:37:50.033Z</lastmod>
     <data>
         <display>
-        <title>第六期 - DAG技术中的比特币XDAG</title>
-        <pubTime>2018-12-21T03:41:23.000Z</pubTime>
+        <title>区块链技术工坊</title>
+        <pubTime>2018-12-12T03:25:59.000Z</pubTime>
         
          
            
@@ -22,12 +22,12 @@
 
     
   <url>
-    <loc>https://learnblockchain.cn/2018/12/12/dev_meeting/</loc>
-    <lastmod>2018-12-17T14:11:19.381Z</lastmod>
+    <loc>https://learnblockchain.cn/2018/12/21/dev_meeting_6/</loc>
+    <lastmod>2018-12-21T10:45:09.945Z</lastmod>
     <data>
         <display>
-        <title>区块链技术工坊</title>
-        <pubTime>2018-12-12T03:25:59.000Z</pubTime>
+        <title>第六期 - DAG技术中的比特币XDAG</title>
+        <pubTime>2018-12-21T03:41:23.000Z</pubTime>
         
          
            
@@ -254,6 +254,29 @@
 
     
   <url>
+    <loc>https://learnblockchain.cn/2018/11/21/fabric_transaction_process/</loc>
+    <lastmod>2018-12-14T08:43:52.048Z</lastmod>
+    <data>
+        <display>
+        <title>Fabric1.0 交易流程</title>
+        <pubTime>2018-11-21T09:30:27.000Z</pubTime>
+        
+        <tag>Fabric</tag>
+         
+         
+           
+             
+              <breadCrumb title="Fabric" url="https://learnblockchain.cn/categories/Fabric/"/>
+          
+             
+              <breadCrumb title="联盟链" url="https://learnblockchain.cn/categories/Fabric/%E8%81%94%E7%9B%9F%E9%93%BE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://learnblockchain.cn/2018/10/26/eth-web-wallet_4/</loc>
     <lastmod>2018-12-14T08:43:52.048Z</lastmod>
     <data>
@@ -271,29 +294,6 @@
            
              
               <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://learnblockchain.cn/2018/11/21/fabric_transaction_process/</loc>
-    <lastmod>2018-12-14T08:43:52.048Z</lastmod>
-    <data>
-        <display>
-        <title>Fabric1.0 交易流程</title>
-        <pubTime>2018-11-21T09:30:27.000Z</pubTime>
-        
-        <tag>Fabric</tag>
-         
-         
-           
-             
-              <breadCrumb title="Fabric" url="https://learnblockchain.cn/categories/Fabric/"/>
-          
-             
-              <breadCrumb title="联盟链" url="https://learnblockchain.cn/categories/Fabric/%E8%81%94%E7%9B%9F%E9%93%BE/"/>
           
         </display>
     </data>
@@ -1342,14 +1342,14 @@
 
     
   <url>
-    <loc>https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/</loc>
+    <loc>https://learnblockchain.cn/2017/12/12/solidity_func/</loc>
     <lastmod>2018-03-18T13:55:32.197Z</lastmod>
     <data>
         <display>
-        <title>智能合约语言 Solidity 教程系列4 - 数据存储位置分析</title>
-        <pubTime>2017-12-21T03:51:02.000Z</pubTime>
+        <title>智能合约语言 Solidity 教程系列3 - 函数类型</title>
+        <pubTime>2017-12-12T07:25:59.000Z</pubTime>
         
-        <tag>Solidity手册</tag>
+        <tag>Solidity</tag>
          
          
            
@@ -1365,14 +1365,14 @@
 
     
   <url>
-    <loc>https://learnblockchain.cn/2017/12/12/solidity_func/</loc>
+    <loc>https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/</loc>
     <lastmod>2018-03-18T13:55:32.197Z</lastmod>
     <data>
         <display>
-        <title>智能合约语言 Solidity 教程系列3 - 函数类型</title>
-        <pubTime>2017-12-12T07:25:59.000Z</pubTime>
+        <title>智能合约语言 Solidity 教程系列4 - 数据存储位置分析</title>
+        <pubTime>2017-12-21T03:51:02.000Z</pubTime>
         
-        <tag>Solidity</tag>
+        <tag>Solidity手册</tag>
          
          
            
