@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+  <meta name="msvalidate.01" content="914C9C1CBC7078C5E2AC612AD5C1CC6C" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="IPFS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深入浅出区块链" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="在上一篇文章介绍了IPFS要做什么， 本篇文章介绍下IPFS怎么用， 按照本站的风格，我不会仅仅把一个个命令列出来，同时会说明命令在后面为我们做了什么。">
+<meta name="keywords" content="IPFS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IPFS 使用入门">
+<meta property="og:url" content="https://learnblockchain.cn/2018/12/25/use-ipfs/index.html">
+<meta property="og:site_name" content="深入浅出区块链">
+<meta property="og:description" content="在上一篇文章介绍了IPFS要做什么， 本篇文章介绍下IPFS怎么用， 按照本站的风格，我不会仅仅把一个个命令列出来，同时会说明命令在后面为我们做了什么。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://learnblockchain.cn/media/15458049832966.jpg">
+<meta property="og:image" content="https://learnblockchain.cn/media/15458309509991.jpg">
+<meta property="og:image" content="https://learnblockchain.cn/media/15458322289639.jpg">
+<meta property="og:updated_time" content="2018-12-27T08:25:22.807Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IPFS 使用入门">
+<meta name="twitter:description" content="在上一篇文章介绍了IPFS要做什么， 本篇文章介绍下IPFS怎么用， 按照本站的风格，我不会仅仅把一个个命令列出来，同时会说明命令在后面为我们做了什么。">
+<meta name="twitter:image" content="https://learnblockchain.cn/media/15458049832966.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'UT2K1ZRSWK',
+      apiKey: '0bbb261dfad58df8f8a657a1ed3255cd',
+      indexName: 'learnblockchain',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://learnblockchain.cn/2018/12/25/use-ipfs/"/>
+
+
+
+
+
+  <title>IPFS 使用入门 | 深入浅出区块链</title>
+  
+
+
+
+
+
+
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6273382609469378",
+        enable_page_level_ads: true
+    });
+</script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">系统学习区块链技术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wiki">
+          <a href="https://wiki.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Wiki
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-meeting">
+          <a href="/categories/dev-meeting/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            技术工坊
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-course">
+          <a href="/course/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-spinner"></i> <br />
+            
+            视频教程
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-web3">
+          <a href="https://web3.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Web3文档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2018/12/25/use-ipfs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">IPFS 使用入门</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-25T19:16:27+08:00">
+                2018-12-25
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-27T16:25:22+08:00">
+                2018-12-27
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IPFS/" itemprop="url" rel="index">
+                    <span itemprop="name">IPFS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在<a href="https://learnblockchain.cn/2018/12/12/what-is-ipfs/">上一篇文章</a>介绍了IPFS要做什么， 本篇文章介绍下IPFS怎么用， 按照本站的风格，我不会仅仅把一个个命令列出来，同时会说明命令在后面为我们做了什么。</p>
+<a id="more"></a>
+<h2 id="IPFS-安装"><a href="#IPFS-安装" class="headerlink" title="IPFS 安装"></a>IPFS 安装</h2><p>要使用IPFS， 第一步肯定是先把IPFS安装好，IPFS在Mac OS X 、Linux及Window平台均有提供， 可以通过这个<a href="https://dist.ipfs.io/#go-ipfs" target="_blank" rel="noopener">链接</a>下载对应平台可执行文件的压缩包。</p>
+<p>对于Mac OS X 及 Linux 平台，使用一下命令进行安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ tar xvfz go-ipfs.tar.gz</span><br><span class="line">$ <span class="built_in">cd</span> go-ipfs</span><br><span class="line">$ ./install.sh</span><br></pre></td></tr></table></figure>
+<p>上面先使用tar 对压缩包进行解压，然后执行install.sh 进行安装，安装脚本install.sh其实就是把可执行文件<code>ipfs</code>移动到<code>$PATH</code>目录下。安装完成之后，可以在命令行终端敲入<code>ipfs</code>试试看，如果显示一堆命令说明，则说明IPFS安装成功。</p>
+<p>在Windows平台也是类似，把<code>ipfs.exe</code>移动到环境变量<code>%PATH%</code>指定的目录下。</p>
+<h2 id="IPFS-基本用法"><a href="#IPFS-基本用法" class="headerlink" title="IPFS 基本用法"></a>IPFS 基本用法</h2><h3 id="IPFS初始化"><a href="#IPFS初始化" class="headerlink" title="IPFS初始化"></a>IPFS初始化</h3><p>安装完成之后，要使用IPFS第一步是要对IPFS进行初始化，使用<code>ipfs init</code>进行初始化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; ipfs init</span><br><span class="line">initializing ipfs node at /Users/Emmett/.ipfs</span><br><span class="line">generating 2048-bit RSA keypair...done</span><br><span class="line">peer identity: QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva</span><br><span class="line">to get started, enter:</span><br><span class="line"></span><br><span class="line">  ipfs cat /ipfs/QmS4ustL54uo8FzR9455qaxZwuMiUhyvMcX9Ba8nUH4uVv/readme</span><br></pre></td></tr></table></figure>
+<p>上面是执行命令即对应输出，在执行<code>ipfs init</code>进行初始化时，会有一下行为：</p>
+<ol>
+<li><p>生成一个秘钥对并产生对应的节点id， 即命令提示：<code>peer identity</code>后面的hash值。</p>
+<blockquote>
+<p>节点的id用来标识和连接一个节点，每个节点的id是独一无二的， 因此大家看到的提示也会和我的不一样。</p>
+</blockquote>
+</li>
+<li><p>在当前用户的主目录（~ 目录）下产生一个.ipfs 的隐藏目录，这个目录称之为库（repository）目录，ipfs 所有相关的数据都会放在这个目录下。<br>如同步文件数据块放在.ipfs/blocks 目录，秘钥在.ipfs/keystore 目录，ipfs配置文件为：.ipfs/config。</p>
+</li>
+</ol>
+<h4 id="IPFS-配置修改"><a href="#IPFS-配置修改" class="headerlink" title="IPFS 配置修改"></a>IPFS 配置修改</h4><p>在IPFS初始化之后，可以根据需要修改配置（可选），修改方法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ipfs</span><br><span class="line">export EDITOR=/usr/bin/vim</span><br><span class="line">ipfs config edit</span><br></pre></td></tr></table></figure>
+<p>或者直接编辑 ~/.ipfs/config 文件。</p>
+<h3 id="上传文件到IPFS"><a href="#上传文件到IPFS" class="headerlink" title="上传文件到IPFS"></a>上传文件到IPFS</h3><p>我们先创建一个upchain.pro.txt文件，可以使用如下方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; echo &quot;登链学院：区块链教育领先品牌&quot; &gt;&gt; upchain.pro.txt</span><br></pre></td></tr></table></figure>
+<p>ipfs 使用add 命令来添加内容到节点中，  在命令行输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; ipfs add upchain.pro.txt</span><br><span class="line">added QmQgMZKqHzyEdyJja5ioF8WaXrbUDVjqhJDoaUKDymgioi upchain.pro.txt</span><br><span class="line"> 43 B / 43 B [=====================================================] 100%</span><br></pre></td></tr></table></figure>
+<p>当它文件添加到节点时，会为文件生成唯一的hash: QmQgMZKqHzyEdyJja5ioF8WaXrbUDVjqhJDoaUKDymgioi, 可以使用ipfs cat 查看文件的内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; ipfs cat QmQgMZKqHzyEdyJja5ioF8WaXrbUDVjqhJDoaUKDymgioi</span><br><span class="line">登链学院：区块链教育领先品牌</span><br></pre></td></tr></table></figure>
+<p>注意，此时文件仅仅是上传在本地的IPFS节点中，如果需要把文件同步到网络，就需要开启 daemon 服务， 使用命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&gt; ipfs daemon</span><br><span class="line">Initializing daemon...</span><br><span class="line">go-ipfs version: 0.4.18-</span><br><span class="line">Repo version: 7</span><br><span class="line">System version: amd64/darwin</span><br><span class="line">Golang version: go1.11.1</span><br><span class="line">Swarm listening on /ip4/127.0.0.1/tcp/4001</span><br><span class="line">Swarm listening on /ip4/192.168.8.105/tcp/4001</span><br><span class="line">Swarm listening on /ip6/2408:84f3:82e:cfcd:409:fee2:e261:4dc3/tcp/4001</span><br><span class="line">Swarm listening on /ip6/2408:84f3:82e:cfcd:a9c6:116b:349f:8c2b/tcp/4001</span><br><span class="line">Swarm listening on /ip6/2408:84f3:82e:cfcd:ec89:145d:cf27:4/tcp/4001</span><br><span class="line">Swarm listening on /ip6/::1/tcp/4001</span><br><span class="line">Swarm listening on /ip6/fd1d:43b:e89b:eb9b:c405:56af:8f52:67df/tcp/4001</span><br><span class="line">Swarm listening on /p2p-circuit</span><br><span class="line">Swarm announcing /ip4/127.0.0.1/tcp/4001</span><br><span class="line">Swarm announcing /ip4/192.168.8.105/tcp/4001</span><br><span class="line">Swarm announcing /ip6/2408:84f3:82e:cfcd:409:fee2:e261:4dc3/tcp/4001</span><br><span class="line">Swarm announcing /ip6/2408:84f3:82e:cfcd:a9c6:116b:349f:8c2b/tcp/4001</span><br><span class="line">Swarm announcing /ip6/2408:84f3:82e:cfcd:ec89:145d:cf27:4/tcp/4001</span><br><span class="line">Swarm announcing /ip6/::1/tcp/4001</span><br><span class="line">Swarm announcing /ip6/fd1d:43b:e89b:eb9b:c405:56af:8f52:67df/tcp/4001</span><br><span class="line">API server listening on /ip4/127.0.0.1/tcp/5001</span><br><span class="line">Gateway (readonly) server listening on /ip4/127.0.0.1/tcp/8080</span><br><span class="line">Daemon is ready</span><br></pre></td></tr></table></figure>
+<p>开启 daemon 之后，Swarm 就会尝试连接其他的节点，同步数据，同时在本地还会开启两个服务：API服务及Web网关服务，下面分别介绍下：</p>
+<ol>
+<li>API服务，默认在5001端口，可以通过 <a href="http://localhost:5001/webui" target="_blank" rel="noopener">http://localhost:5001/webui</a> 进行访问，界面如：</li>
+</ol>
+<p><img src="https://learnblockchain.cn/media/15458049832966.jpg" alt=""></p>
+<p>这也是IPFS的一个Web版的管理控制台， 可以通过这个控制台添加文件，查看节点连接情况等等。</p>
+<ol>
+<li>网关服务，默认在8080端口， 由于当前浏览器还不支持通过IPFS协议（ipfs://）来访问文件，如果我们要在浏览器里访问文件的话，就需要借助于IPFS 提供的网关服务，由浏览器先访问到网关，网关去获取IPFS网络杀过了的文件。 有了网关服务，就可以通过这个链接：<code>http://localhost:8080/ipfs/QmQgMZKqHzyEdyJja5ioF8WaXrbUDVjqhJDoaUKDymgioi</code> 来访问刚刚上传到ipfs 的文件。</li>
+</ol>
+<blockquote>
+<p>ipfs 也提供了官方的网关服务：<a href="https://ipfs.io/，" target="_blank" rel="noopener">https://ipfs.io/，</a> 因此也可以通过 <a href="https://ipfs.io/ipfs/QmQgMZKqHzyEdyJja5ioF8WaXrbUDVjqhJDoaUKDymgioi" target="_blank" rel="noopener">https://ipfs.io/ipfs/QmQgMZKqHzyEdyJja5ioF8WaXrbUDVjqhJDoaUKDymgioi</a> （需要翻墙）来访问刚刚上传到ipfs 的文件。</p>
+</blockquote>
+<h3 id="上传目录到IPFS"><a href="#上传目录到IPFS" class="headerlink" title="上传目录到IPFS"></a>上传目录到IPFS</h3><p>我们先创建一个文件夹upchain, 并把之前的 upchain.pro.txt 放进目录。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; mkdir upchain</span><br><span class="line">&gt; mv upchain.pro.txt  upchain</span><br></pre></td></tr></table></figure>
+<p>上传目录到IPFS 需要在使用 add 命令时加上 -r ，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; ipfs add -r upchain</span><br><span class="line">added QmQgMZKqHzyEdyJja5ioF8WaXrbUDVjqhJDoaUKDymgioi upchain/upchain.pro.txt</span><br><span class="line">added QmQYpGRFBpHVzoShpwU5C3XgGAxJKqY83X8VXfMbyktdbP upchain</span><br><span class="line"> 43 B / 43 B [===========================================================================] 100.00%</span><br></pre></td></tr></table></figure>
+<p>在上传时文件夹，文件夹也会生成一个对应的hash，可以通过hash后接文件名来进行访问， 如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;ipfs cat QmQYpGRFBpHVzoShpwU5C3XgGAxJKqY83X8VXfMbyktdbP/upchain.pro.txt</span><br><span class="line">登链学院：区块链教育领先品牌</span><br></pre></td></tr></table></figure>
+<p>在浏览器可以链接：<code>http://127.0.0.1:8080/ipfs/QmQYpGRFBpHVzoShpwU5C3XgGAxJKqY83X8VXfMbyktdbP/upchain.pro.txt</code> 来访问。</p>
+<p>通过上传目录的方式，可以把整个静态网站的根目录上传到IPFS网络，这样就可以省去托管服务器，例如可以直接通过以下链接访问深入浅出区块链博客：<br><a href="https://ipfs.io/ipfs/QmaFWgfpRNzeLgfDrH33BuBdiauRTejnF3Yw9AuCphq2ua/index.html" target="_blank" rel="noopener">https://ipfs.io/ipfs/QmaFWgfpRNzeLgfDrH33BuBdiauRTejnF3Yw9AuCphq2ua/index.html</a></p>
+<h2 id="使用IPNS解决文件更新问题"><a href="#使用IPNS解决文件更新问题" class="headerlink" title="使用IPNS解决文件更新问题"></a>使用IPNS解决文件更新问题</h2><p>因为IPFS在IPFS中，对一个文件的内容修改后（如升级），会生成一个完全不同的新Hash，使用IPNS就可以利用同一个链接总是指向更新的内容，其实使用也很简单，只需要每次在内容更新之后使用ipfs name publish <code>hash</code> 发布到节点。 </p>
+<p>例如把upchain.pro.txt发布到节点，使用下面的命令:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; ipfs name publish QmQgMZKqHzyEdyJja5ioF8WaXrbUDVjqhJDoaUKDymgioi</span><br><span class="line">Published to QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva: /ipfs/QmQgMZKqHzyEdyJja5ioF8WaXrbUDVjqhJDoaUKDymgioi</span><br></pre></td></tr></table></figure></p>
+<p>命令中的<code>QmQgMZKqHzyEdyJja5ioF8WaXrbUDVjqhJDoaUKDymgioi</code>是<code>upchain.pro.txt</code>的hash, 命令提示中的<code>QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva</code>是当前节点id(大家可以回看一个前面ipfs init 的输出)。</p>
+<p>发布之后就可以使用<a href="http://127.0.0.1:8080/ipns/QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva" target="_blank" rel="noopener">http://127.0.0.1:8080/ipns/QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva</a> 或 <a href="https://ipfs.io/ipns/QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva" target="_blank" rel="noopener">https://ipfs.io/ipns/QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva</a> 来访问upchain.pro.txt的内容，如图：</p>
+<p><img src="https://learnblockchain.cn/media/15458309509991.jpg" alt=""></p>
+<p>其实理想下是使用 ipns://QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva 来访问，通过网站还是前面提到的浏览器暂不支持ipfs协议。</p>
+<p>现在我们来更新一下upchain.pro.txt 加入文字：”创办人：Tiny熊”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; echo &quot;创办人：Tiny熊&quot; &gt;&gt;  upchain.pro.txt</span><br><span class="line">&gt; ipfs add upchain.pro.txt</span><br><span class="line">added QmUUiDN6tWtj89xmUw1iCK2NczBqE6m3zH9QnbhHoMvZ5S upchain.pro.txt</span><br><span class="line"> 63 B / 63 B [=============================================================] 100.00%</span><br></pre></td></tr></table></figure>
+<p>重新发布一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; ipfs name publish QmUUiDN6tWtj89xmUw1iCK2NczBqE6m3zH9QnbhHoMvZ5S</span><br><span class="line">Published to QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva: /ipfs/QmUUiDN6tWtj89xmUw1iCK2NczBqE6m3zH9QnbhHoMvZ5S</span><br></pre></td></tr></table></figure>
+<p>再次访问 <a href="http://127.0.0.1:8080/ipns/QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva" target="_blank" rel="noopener">http://127.0.0.1:8080/ipns/QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva</a> （这个链接和上面的链接一样）可以看到内容更新了。</p>
+<p><img src="https://learnblockchain.cn/media/15458322289639.jpg" alt=""></p>
+<p>如果我们要查询 节点id 指向的hash 可以使用 <code>ipfs name resolve</code> 进行查询：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; ipfs name resolve</span><br><span class="line">/ipfs/QmUUiDN6tWtj89xmUw1iCK2NczBqE6m3zH9QnbhHoMvZ5</span><br></pre></td></tr></table></figure></p>
+<p>有一点值得大家注意： 节点id其实是公钥的hash，它的关联信息是需要经过私钥签名才可以发布，因此只有我们自己才可以更新节点的指向。</p>
+<p>如果我们有多个站点需要更新，可以新产生一个秘钥对，使用新的key 发布，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; ipfs key gen --type=rsa --size=2048 mykey</span><br><span class="line">QmVZvdYEsdfHSR43Qm1fY8eDFrhB3UNZ2oVyEuVUH3VHrg</span><br><span class="line">&gt; ipfs name publish --key=mykey  hashxxx</span><br></pre></td></tr></table></figure>
+<h2 id="Pinning"><a href="#Pinning" class="headerlink" title="Pinning"></a>Pinning</h2><p>Pinning 在IPFS里是一个很重要的概念，当我们每次请求一个网络上的内容的时候，IPFS总是会把内容先同步的本地提供服务，而为了防止 IPFS 存储空间不停增长，实际上使用cache 机制来处理文件， 如果文件在一段时间内没有被使用，文件会被”回收“。 Pinning 的作用就是把文件”钉“住，确保文件在本地不被”回收“。 如果是重要的文件，就可以使用 Pinning 防止文件被删除。</p>
+<p>当我们使用ipfs add 添加文件时，默认会进行Pinning(使用其他命令获取的文件不会进行pinning），</p>
+<p>IPFS 提供了pin命令进行Pinning操作, 比如我们查询下某一个hash 是否被pin:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; ipfs pin ls QmUUiDN6tWtj89xmUw1iCK2NczBqE6m3zH9QnbhHoMvZ5S</span><br><span class="line">QmUUiDN6tWtj89xmUw1iCK2NczBqE6m3zH9QnbhHoMvZ5S recursive</span><br><span class="line"></span><br><span class="line">&gt; ipfs pin ls QmWnrAEKyDVUQ1jh9vDtQhtBSNEgUnQhAJyMmo3JjwJZK7</span><br><span class="line">Error: path &apos;QmWnrAEKyDVUQ1jh9vDtQhtBSNEgUnQhAJyMmo3JjwJZK7&apos; is not pinned</span><br></pre></td></tr></table></figure>
+<p>可以使用 pin add 手动钉住一个文件，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; ipfs pin add QmWnrAEKyDVUQ1jh9vDtQhtBSNEgUnQhAJyMmo3JjwJZK7</span><br><span class="line">pinned QmWnrAEKyDVUQ1jh9vDtQhtBSNEgUnQhAJyMmo3JjwJZK7 recursively</span><br></pre></td></tr></table></figure>
+<p>如果要删除pin的状态，使用pin rm ， 如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; ipfs pin rm -r QmWnrAEKyDVUQ1jh9vDtQhtBSNEgUnQhAJyMmo3JjwJZK7</span><br><span class="line">unpinned QmWnrAEKyDVUQ1jh9vDtQhtBSNEgUnQhAJyMmo3JjwJZK7</span><br></pre></td></tr></table></figure>
+<p>pin rm 的参数 -r 表示递归的删除pin 状态，对于没有pin住的文件， 如果执行GC操作 <code>ipfs repo gc</code> 文件会被删除。</p>
+<p>欢迎来<a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">知识星球</a>提问，星球内已经聚集了300多位区块链技术爱好者。<br><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
+
+      
+    </div>
+    
+    
+    
+    
+      
+        <div>
+          <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="Tiny熊 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信号：深入浅出区块链技术，欢迎订阅</div>
+</div>
+
+        </div>
+      
+    
+
+    
+      
+        <div>
+          <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有收获，赞赏下</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/qr_pay.jpg" alt="Tiny熊 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+        </div>
+      
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Tiny熊
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://learnblockchain.cn/2018/12/25/use-ipfs/" title="IPFS 使用入门">https://learnblockchain.cn/2018/12/25/use-ipfs/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/IPFS/" rel="tag"># IPFS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/21/dev_meeting_6/" rel="next" title="第六期 - DAG技术中的比特币XDAG">
+                <i class="fa fa-chevron-left"></i> 第六期 - DAG技术中的比特币XDAG
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element" style="margin-top: 20px;">
+              <span>
+                项目
+              </span>
+            </div>
+          
+
+          <div class="links-of-author project motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/bitcoin" target="_self" title="比特币">
+                    
+                      <i class="fa fa-fw fa-false"></i>比特币</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/ethereum" target="_self" title="以太坊">
+                    
+                      <i class="fa fa-fw fa-false"></i>以太坊</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/EOS" target="_self" title="EOS">
+                    
+                      <i class="fa fa-fw fa-false"></i>EOS</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/Fabric" target="_self" title="Fabric">
+                    
+                      <i class="fa fa-fw fa-false"></i>Fabric</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <span>
+                联系我
+              </span>
+            </div>
+          
+          
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/xilibi2003" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiong-li-bing/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.upchain.pro/book.html" title="新书-精通智能合约" target="_blank">新书-精通智能合约</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="区块链技术专栏" target="_blank">区块链技术专栏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://t.xiaomiquan.com/RfAu7uj" title="技术交流-知识星球" target="_blank">技术交流-知识星球</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bitshuo.com" title="区块链技术中文社区" target="_blank">区块链技术中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://news.tangwen.org" title="汤问资讯" target="_blank">汤问资讯</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitask.org" title="币问" target="_blank">币问</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://hiblock.net/" title="HiBlock区块链社区" target="_blank">HiBlock区块链社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eosfans.io/" title="EOS中文社区" target="_blank">EOS中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blockflow.net/" title="BlockFlow" target="_blank">BlockFlow</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.liankexing.com/" title="链客区块链问答社区" target="_blank">链客区块链问答社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitool.cn/" title="币兔" target="_blank">币兔</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wutui.pro/" title="无退社区" target="_blank">无退社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blockgeek.org/" title="BG区块链技术论坛" target="_blank">BG区块链技术论坛</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hpb.io/" title="HPB芯链" target="_blank">HPB芯链</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#IPFS-安装"><span class="nav-number">1.</span> <span class="nav-text">IPFS 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IPFS-基本用法"><span class="nav-number">2.</span> <span class="nav-text">IPFS 基本用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IPFS初始化"><span class="nav-number">2.1.</span> <span class="nav-text">IPFS初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IPFS-配置修改"><span class="nav-number">2.1.1.</span> <span class="nav-text">IPFS 配置修改</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传文件到IPFS"><span class="nav-number">2.2.</span> <span class="nav-text">上传文件到IPFS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传目录到IPFS"><span class="nav-number">2.3.</span> <span class="nav-text">上传目录到IPFS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用IPNS解决文件更新问题"><span class="nav-number">3.</span> <span class="nav-text">使用IPNS解决文件更新问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pinning"><span class="nav-number">4.</span> <span class="nav-text">Pinning</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+  <div class="footer-custom"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17140514号-1</a></div>
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
