@@ -1,0 +1,62 @@
+{
+  "_from": "hexo-generator-index2@^0.2.0",
+  "_id": "hexo-generator-index2@0.2.0",
+  "_inBundle": false,
+  "_integrity": "sha1-CqRr9a/xJesjb3Fo9m+lnIyowyY=",
+  "_location": "/hexo-generator-index2",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "hexo-generator-index2@^0.2.0",
+    "name": "hexo-generator-index2",
+    "escapedName": "hexo-generator-index2",
+    "rawSpec": "^0.2.0",
+    "saveSpec": null,
+    "fetchSpec": "^0.2.0"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/hexo-generator-index2/-/hexo-generator-index2-0.2.0.tgz",
+  "_shasum": "0aa46bf5aff125eb236f7168f66fa59c8ca8c326",
+  "_spec": "hexo-generator-index2@^0.2.0",
+  "_where": "e:\\hexo",
+  "author": {
+    "name": "Jamling",
+    "email": "li.jamling@gmail.com",
+    "url": "http://ieclipse.cn"
+  },
+  "bugs": {
+    "url": "https://github.com/Jamling/hexo-generator-index2/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "hexo-pagination": "0.0.2",
+    "object-assign": "^4.0.1"
+  },
+  "deprecated": false,
+  "description": "Filtered index generator for Hexo.",
+  "directories": {
+    "lib": "./lib"
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "homepage": "https://github.com/Jamling/hexo-generator-index2",
+  "keywords": [
+    "hexo",
+    "generator",
+    "index",
+    "home"
+  ],
+  "license": "MIT",
+  "main": "index",
+  "name": "hexo-generator-index2",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jamling/hexo-generator-index2.git"
+  },
+  "version": "0.2.0"
+}
