@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://learnblockchain.cn/2018/12/28/dev_meeting_7/</loc>
+    
+    <lastmod>2018-12-28T00:55:57.447Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://learnblockchain.cn/2018/12/25/use-ipfs/</loc>
     
-    <lastmod>2018-12-27T08:25:22.807Z</lastmod>
+    <lastmod>2018-12-27T08:25:22.808Z</lastmod>
     
   </url>
   
@@ -436,14 +443,14 @@
   </url>
   
   <url>
-    <loc>https://learnblockchain.cn/2017/12/21/solidity-arrays/</loc>
+    <loc>https://learnblockchain.cn/2017/12/27/solidity-structs/</loc>
     
     <lastmod>2018-03-18T13:55:32.194Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://learnblockchain.cn/2017/12/27/solidity-structs/</loc>
+    <loc>https://learnblockchain.cn/2017/12/21/solidity-arrays/</loc>
     
     <lastmod>2018-03-18T13:55:32.194Z</lastmod>
     

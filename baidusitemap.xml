@@ -4,8 +4,26 @@
 
     
   <url>
+    <loc>https://learnblockchain.cn/2018/12/28/dev_meeting_7/</loc>
+    <lastmod>2018-12-28T00:55:57.447Z</lastmod>
+    <data>
+        <display>
+        <title>第7期 - 选对赛道，穿越凛冬：区块链的设计思想和演化逻辑</title>
+        <pubTime>2018-12-28T03:41:23.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="技术工坊" url="https://learnblockchain.cn/categories/dev-meeting/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://learnblockchain.cn/2018/12/25/use-ipfs/</loc>
-    <lastmod>2018-12-27T08:25:22.807Z</lastmod>
+    <lastmod>2018-12-27T08:25:22.808Z</lastmod>
     <data>
         <display>
         <title>IPFS 使用入门</title>
@@ -1408,12 +1426,12 @@
 
     
   <url>
-    <loc>https://learnblockchain.cn/2017/12/27/solidity-structs/</loc>
+    <loc>https://learnblockchain.cn/2017/12/21/solidity-arrays/</loc>
     <lastmod>2018-03-18T13:55:32.194Z</lastmod>
     <data>
         <display>
-        <title>智能合约语言 Solidity 教程系列6 - 结构体与映射</title>
-        <pubTime>2017-12-27T03:55:26.000Z</pubTime>
+        <title>智能合约语言 Solidity 教程系列5 - 数组介绍</title>
+        <pubTime>2017-12-21T03:55:18.000Z</pubTime>
         
         <tag>Solidity手册</tag>
          
@@ -1431,12 +1449,12 @@
 
     
   <url>
-    <loc>https://learnblockchain.cn/2017/12/21/solidity-arrays/</loc>
+    <loc>https://learnblockchain.cn/2017/12/27/solidity-structs/</loc>
     <lastmod>2018-03-18T13:55:32.194Z</lastmod>
     <data>
         <display>
-        <title>智能合约语言 Solidity 教程系列5 - 数组介绍</title>
-        <pubTime>2017-12-21T03:55:18.000Z</pubTime>
+        <title>智能合约语言 Solidity 教程系列6 - 结构体与映射</title>
+        <pubTime>2017-12-27T03:55:26.000Z</pubTime>
         
         <tag>Solidity手册</tag>
          
