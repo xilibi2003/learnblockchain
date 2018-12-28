@@ -39,16 +39,17 @@ links:
   新书-精通智能合约: http://www.upchain.pro/book.html
   区块链技术专栏: https://xiaozhuanlan.com/blockchaincore
   技术交流-知识星球: https://t.xiaomiquan.com/RfAu7uj
+  BG区块链技术论坛: http://blockgeek.org/
+  HiBlock区块链社区: https://hiblock.one/
   区块链技术中文社区: https://bitshuo.com
   汤问资讯: http://news.tangwen.org
   币问: https://www.bitask.org
-  HiBlock区块链社区: http://hiblock.net/
+  HiBlock区块链社区: https://hiblock.one/
   EOS中文社区: https://eosfans.io/
   BlockFlow: https://blockflow.net/
   链客区块链问答社区: https://www.liankexing.com/
   币兔: https://www.bitool.cn/
   无退社区: https://wutui.pro/
-  BG区块链技术论坛: http://blockgeek.org/
   HPB芯链: https://hpb.io/
 
 
@@ -140,7 +141,7 @@ index2_generator:
   per_page: 10
   order_by: -date
   include:
-    
+
   exclude:
     category 技术工坊 # 不包含分类为Hexo的文章
 
