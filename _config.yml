@@ -121,7 +121,6 @@ category_map:
   比特币: bitcoin
   密码学: cryptography
   其他: other
-  技术工坊: dev_meeting
 tag_map:
 
 # Date / Time format
@@ -172,7 +171,7 @@ menu:
   tags: /tags/ || tags
   categories: /categories/ || th
   archives: /archives/ || archive
-  meeting: /categories/dev-meeting/ || th
+  meeting: /categories/技术工坊/ || th
   course: /course/ || spinner
   web3: https://web3.learnblockchain.cn || book
   #schedule: /schedule/ || calendar
