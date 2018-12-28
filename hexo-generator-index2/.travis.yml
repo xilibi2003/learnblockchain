@@ -1,0 +1,16 @@
+language: node_js
+node-js: 
+  - "4"
+
+cache: 
+  apt: true
+  directories:
+    - node_modules
+
+before_install: 
+#  - npm install object-assign --save
+#   - npm install hexo-pagination --save
+
+script:
+  - npm test
+  
