@@ -2,23 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://learnblockchain.cn/2019/01/04/dev_meeting_8/</loc>
+    
+    <lastmod>2019-01-04T02:52:27.560Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://learnblockchain.cn/2018/12/28/dev_meeting_7/</loc>
     
-    <lastmod>2018-12-28T00:55:57.447Z</lastmod>
+    <lastmod>2018-12-28T00:55:57.446Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://learnblockchain.cn/2018/12/25/use-ipfs/</loc>
     
-    <lastmod>2018-12-27T08:25:22.808Z</lastmod>
+    <lastmod>2018-12-27T08:25:22.807Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://learnblockchain.cn/2018/12/12/dev_meeting/</loc>
     
-    <lastmod>2018-12-22T11:37:50.034Z</lastmod>
+    <lastmod>2018-12-22T11:37:50.033Z</lastmod>
     
   </url>
   
@@ -39,7 +46,7 @@
   <url>
     <loc>https://learnblockchain.cn/2018/12/13/dev_meeting_2/</loc>
     
-    <lastmod>2018-12-17T14:09:35.981Z</lastmod>
+    <lastmod>2018-12-17T14:09:35.980Z</lastmod>
     
   </url>
   
@@ -53,7 +60,7 @@
   <url>
     <loc>https://learnblockchain.cn/2018/12/13/dev_meeting_4/</loc>
     
-    <lastmod>2018-12-17T14:09:21.706Z</lastmod>
+    <lastmod>2018-12-17T14:09:21.705Z</lastmod>
     
   </url>
   
@@ -74,35 +81,35 @@
   <url>
     <loc>https://learnblockchain.cn/2018/12/12/what-is-ipfs/</loc>
     
-    <lastmod>2018-12-17T12:36:55.420Z</lastmod>
+    <lastmod>2018-12-17T12:36:55.419Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://learnblockchain.cn/2018/08/07/python-blockchain-with-pos/</loc>
     
-    <lastmod>2018-12-14T08:43:52.052Z</lastmod>
+    <lastmod>2018-12-14T08:43:52.051Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://learnblockchain.cn/2018/09/28/hdwallet/</loc>
     
-    <lastmod>2018-12-14T08:43:52.051Z</lastmod>
+    <lastmod>2018-12-14T08:43:52.050Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://learnblockchain.cn/2017/11/29/geth_cmd_options/</loc>
     
-    <lastmod>2018-12-14T08:43:52.050Z</lastmod>
+    <lastmod>2018-12-14T08:43:52.049Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://learnblockchain.cn/2018/11/21/fabric_transaction_process/</loc>
     
-    <lastmod>2018-12-14T08:43:52.049Z</lastmod>
+    <lastmod>2018-12-14T08:43:52.048Z</lastmod>
     
   </url>
   
@@ -137,7 +144,7 @@
   <url>
     <loc>https://learnblockchain.cn/2017/11/15/asy-encryption/</loc>
     
-    <lastmod>2018-12-14T08:43:52.044Z</lastmod>
+    <lastmod>2018-12-14T08:43:52.043Z</lastmod>
     
   </url>
   
@@ -165,7 +172,7 @@
   <url>
     <loc>https://learnblockchain.cn/2018/11/21/fabric_startup%20_process/</loc>
     
-    <lastmod>2018-11-25T09:37:48.931Z</lastmod>
+    <lastmod>2018-11-25T09:37:48.930Z</lastmod>
     
   </url>
   
@@ -186,7 +193,7 @@
   <url>
     <loc>https://learnblockchain.cn/about/index.html</loc>
     
-    <lastmod>2018-10-20T08:16:52.344Z</lastmod>
+    <lastmod>2018-10-20T08:16:52.343Z</lastmod>
     
   </url>
   
@@ -207,35 +214,35 @@
   <url>
     <loc>https://learnblockchain.cn/2018/03/18/create_private_blockchain/</loc>
     
-    <lastmod>2018-09-04T07:57:52.817Z</lastmod>
+    <lastmod>2018-09-04T07:57:52.816Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://learnblockchain.cn/2018/05/09/solidity-event/</loc>
     
-    <lastmod>2018-09-04T07:57:23.027Z</lastmod>
+    <lastmod>2018-09-04T07:57:23.026Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://learnblockchain.cn/2018/08/09/understand-abi/</loc>
     
-    <lastmod>2018-09-04T07:57:04.364Z</lastmod>
+    <lastmod>2018-09-04T07:57:04.363Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://learnblockchain.cn/2018/04/15/web3-html/</loc>
     
-    <lastmod>2018-09-04T07:56:48.612Z</lastmod>
+    <lastmod>2018-09-04T07:56:48.611Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://learnblockchain.cn/2017/11/24/init-env/</loc>
     
-    <lastmod>2018-09-04T07:56:20.566Z</lastmod>
+    <lastmod>2018-09-04T07:56:20.565Z</lastmod>
     
   </url>
   
@@ -249,14 +256,14 @@
   <url>
     <loc>https://learnblockchain.cn/2018/01/12/first-dapp/</loc>
     
-    <lastmod>2018-09-04T07:46:54.145Z</lastmod>
+    <lastmod>2018-09-04T07:46:54.144Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://learnblockchain.cn/2018/08/31/devDapp/</loc>
     
-    <lastmod>2018-09-04T07:05:51.785Z</lastmod>
+    <lastmod>2018-09-04T07:05:51.784Z</lastmod>
     
   </url>
   
@@ -284,7 +291,7 @@
   <url>
     <loc>https://learnblockchain.cn/2018/05/17/solidity-functions/</loc>
     
-    <lastmod>2018-08-09T02:58:50.242Z</lastmod>
+    <lastmod>2018-08-09T02:58:50.241Z</lastmod>
     
   </url>
   
@@ -312,7 +319,7 @@
   <url>
     <loc>https://learnblockchain.cn/2018/07/17/whatiseos/</loc>
     
-    <lastmod>2018-07-31T02:40:09.016Z</lastmod>
+    <lastmod>2018-07-31T02:40:09.015Z</lastmod>
     
   </url>
   
@@ -354,7 +361,7 @@
   <url>
     <loc>https://learnblockchain.cn/2018/02/28/ico-crowdsale/</loc>
     
-    <lastmod>2018-07-26T08:46:38.303Z</lastmod>
+    <lastmod>2018-07-26T08:46:38.302Z</lastmod>
     
   </url>
   
@@ -368,7 +375,7 @@
   <url>
     <loc>https://learnblockchain.cn/2018/01/12/create_token/</loc>
     
-    <lastmod>2018-07-26T08:41:39.842Z</lastmod>
+    <lastmod>2018-07-26T08:41:39.841Z</lastmod>
     
   </url>
   
@@ -410,7 +417,7 @@
   <url>
     <loc>https://learnblockchain.cn/2018/03/23/token-erc721/</loc>
     
-    <lastmod>2018-03-26T01:58:47.076Z</lastmod>
+    <lastmod>2018-03-26T01:58:47.075Z</lastmod>
     
   </url>
   
@@ -424,14 +431,14 @@
   <url>
     <loc>https://learnblockchain.cn/2018/03/15/contract-upgrade/</loc>
     
-    <lastmod>2018-03-19T02:07:02.499Z</lastmod>
+    <lastmod>2018-03-19T02:07:02.498Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/</loc>
     
-    <lastmod>2018-03-18T13:55:32.198Z</lastmod>
+    <lastmod>2018-03-18T13:55:32.197Z</lastmod>
     
   </url>
   
@@ -452,21 +459,21 @@
   <url>
     <loc>https://learnblockchain.cn/2017/12/21/solidity-arrays/</loc>
     
-    <lastmod>2018-03-18T13:55:32.194Z</lastmod>
+    <lastmod>2018-03-18T13:55:32.193Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://learnblockchain.cn/2017/11/02/bitcoin-own/</loc>
     
-    <lastmod>2018-03-17T14:01:01.950Z</lastmod>
+    <lastmod>2018-03-17T14:01:01.949Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://learnblockchain.cn/2017/11/10/bitcoin-script/</loc>
     
-    <lastmod>2018-02-08T12:24:30.319Z</lastmod>
+    <lastmod>2018-02-08T12:24:30.318Z</lastmod>
     
   </url>
   
@@ -487,7 +494,7 @@
   <url>
     <loc>https://learnblockchain.cn/2017/12/07/bitcoin-sonsensus/</loc>
     
-    <lastmod>2018-01-10T08:10:46.598Z</lastmod>
+    <lastmod>2018-01-10T08:10:46.597Z</lastmod>
     
   </url>
   

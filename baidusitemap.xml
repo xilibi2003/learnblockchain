@@ -4,8 +4,26 @@
 
     
   <url>
+    <loc>https://learnblockchain.cn/2019/01/04/dev_meeting_8/</loc>
+    <lastmod>2019-01-04T02:52:27.560Z</lastmod>
+    <data>
+        <display>
+        <title>第8期 - 大白话区块链共识机制算法</title>
+        <pubTime>2019-01-04T02:47:23.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="技术工坊" url="https://learnblockchain.cn/categories/dev-meeting/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://learnblockchain.cn/2018/12/28/dev_meeting_7/</loc>
-    <lastmod>2018-12-28T00:55:57.447Z</lastmod>
+    <lastmod>2018-12-28T00:55:57.446Z</lastmod>
     <data>
         <display>
         <title>第7期 - 选对赛道，穿越凛冬：区块链的设计思想和演化逻辑</title>
@@ -23,7 +41,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2018/12/25/use-ipfs/</loc>
-    <lastmod>2018-12-27T08:25:22.808Z</lastmod>
+    <lastmod>2018-12-27T08:25:22.807Z</lastmod>
     <data>
         <display>
         <title>IPFS 使用入门</title>
@@ -43,7 +61,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2018/12/12/dev_meeting/</loc>
-    <lastmod>2018-12-22T11:37:50.034Z</lastmod>
+    <lastmod>2018-12-22T11:37:50.033Z</lastmod>
     <data>
         <display>
         <title>区块链技术工坊</title>
@@ -97,7 +115,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2018/12/13/dev_meeting_2/</loc>
-    <lastmod>2018-12-17T14:09:35.981Z</lastmod>
+    <lastmod>2018-12-17T14:09:35.980Z</lastmod>
     <data>
         <display>
         <title>第二期 - 深度探索以太坊智能合约</title>
@@ -133,7 +151,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2018/12/13/dev_meeting_4/</loc>
-    <lastmod>2018-12-17T14:09:21.706Z</lastmod>
+    <lastmod>2018-12-17T14:09:21.705Z</lastmod>
     <data>
         <display>
         <title>第四期 - 以太坊零手续费及其安全防御的实现</title>
@@ -196,15 +214,15 @@
     
   <url>
     <loc>https://learnblockchain.cn/2018/12/12/what-is-ipfs/</loc>
-    <lastmod>2018-12-17T12:36:55.420Z</lastmod>
+    <lastmod>2018-12-17T12:36:55.419Z</lastmod>
     <data>
         <display>
         <title>站在Web3.0 理解IPFS是什么</title>
         <pubTime>2018-12-12T08:35:33.000Z</pubTime>
         
-        <tag>Web3</tag>
-         
         <tag>IPFS</tag>
+         
+        <tag>Web3</tag>
          
          
            
@@ -218,7 +236,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2018/08/07/python-blockchain-with-pos/</loc>
-    <lastmod>2018-12-14T08:43:52.052Z</lastmod>
+    <lastmod>2018-12-14T08:43:52.051Z</lastmod>
     <data>
         <display>
         <title>Python实现一条基于POS算法的区块链</title>
@@ -242,7 +260,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2018/09/28/hdwallet/</loc>
-    <lastmod>2018-12-14T08:43:52.051Z</lastmod>
+    <lastmod>2018-12-14T08:43:52.050Z</lastmod>
     <data>
         <display>
         <title>理解开发HD 钱包涉及的 BIP32、BIP44、BIP39</title>
@@ -266,7 +284,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2017/11/29/geth_cmd_options/</loc>
-    <lastmod>2018-12-14T08:43:52.050Z</lastmod>
+    <lastmod>2018-12-14T08:43:52.049Z</lastmod>
     <data>
         <display>
         <title>以太坊客户端Geth命令用法-参数详解</title>
@@ -293,7 +311,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2018/11/21/fabric_transaction_process/</loc>
-    <lastmod>2018-12-14T08:43:52.049Z</lastmod>
+    <lastmod>2018-12-14T08:43:52.048Z</lastmod>
     <data>
         <display>
         <title>Fabric1.0 交易流程</title>
@@ -412,7 +430,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2017/11/15/asy-encryption/</loc>
-    <lastmod>2018-12-14T08:43:52.044Z</lastmod>
+    <lastmod>2018-12-14T08:43:52.043Z</lastmod>
     <data>
         <display>
         <title>非对称加密技术- RSA算法数学原理分析</title>
@@ -482,7 +500,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2018/11/21/fabric_startup%20_process/</loc>
-    <lastmod>2018-11-25T09:37:48.931Z</lastmod>
+    <lastmod>2018-11-25T09:37:48.930Z</lastmod>
     <data>
         <display>
         <title>Fabric 网络环境启动过程详解</title>
@@ -612,7 +630,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2018/03/18/create_private_blockchain/</loc>
-    <lastmod>2018-09-04T07:57:52.817Z</lastmod>
+    <lastmod>2018-09-04T07:57:52.816Z</lastmod>
     <data>
         <display>
         <title>如何搭建以太坊私有链</title>
@@ -637,7 +655,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2018/05/09/solidity-event/</loc>
-    <lastmod>2018-09-04T07:57:23.027Z</lastmod>
+    <lastmod>2018-09-04T07:57:23.026Z</lastmod>
     <data>
         <display>
         <title>详解 Solidity 事件Event - 完全搞懂事件的使用</title>
@@ -666,7 +684,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2018/08/09/understand-abi/</loc>
-    <lastmod>2018-09-04T07:57:04.364Z</lastmod>
+    <lastmod>2018-09-04T07:57:04.363Z</lastmod>
     <data>
         <display>
         <title>如何理解以太坊ABI - 应用程序二进制接口</title>
@@ -686,7 +704,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2018/04/15/web3-html/</loc>
-    <lastmod>2018-09-04T07:56:48.612Z</lastmod>
+    <lastmod>2018-09-04T07:56:48.611Z</lastmod>
     <data>
         <display>
         <title>Web3与智能合约交互实战</title>
@@ -710,7 +728,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2017/11/24/init-env/</loc>
-    <lastmod>2018-09-04T07:56:20.566Z</lastmod>
+    <lastmod>2018-09-04T07:56:20.565Z</lastmod>
     <data>
         <display>
         <title>智能合约开发环境搭建及Hello World合约</title>
@@ -759,7 +777,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2018/01/12/first-dapp/</loc>
-    <lastmod>2018-09-04T07:46:54.145Z</lastmod>
+    <lastmod>2018-09-04T07:46:54.144Z</lastmod>
     <data>
         <display>
         <title>一步步教你开发、部署第一个去中心化应用(Dapp) - 宠物商店</title>
@@ -784,7 +802,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2018/08/31/devDapp/</loc>
-    <lastmod>2018-09-04T07:05:51.785Z</lastmod>
+    <lastmod>2018-09-04T07:05:51.784Z</lastmod>
     <data>
         <display>
         <title>程序员如何切入区块链去中心化应用开发</title>
@@ -878,7 +896,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2018/05/17/solidity-functions/</loc>
-    <lastmod>2018-08-09T02:58:50.242Z</lastmod>
+    <lastmod>2018-08-09T02:58:50.241Z</lastmod>
     <data>
         <display>
         <title>Solidity 教程系列11 - 视图函数、虚函数讲解</title>
@@ -979,7 +997,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2018/07/17/whatiseos/</loc>
-    <lastmod>2018-07-31T02:40:09.016Z</lastmod>
+    <lastmod>2018-07-31T02:40:09.015Z</lastmod>
     <data>
         <display>
         <title>什么是EOS（柚子）</title>
@@ -1117,7 +1135,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2018/02/28/ico-crowdsale/</loc>
-    <lastmod>2018-07-26T08:46:38.303Z</lastmod>
+    <lastmod>2018-07-26T08:46:38.302Z</lastmod>
     <data>
         <display>
         <title>如何通过以太坊智能合约来进行众筹（ICO）</title>
@@ -1169,7 +1187,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2018/01/12/create_token/</loc>
-    <lastmod>2018-07-26T08:41:39.842Z</lastmod>
+    <lastmod>2018-07-26T08:41:39.841Z</lastmod>
     <data>
         <display>
         <title>一步步教你创建自己的数字货币（代币）进行ICO</title>
@@ -1308,7 +1326,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2018/03/23/token-erc721/</loc>
-    <lastmod>2018-03-26T01:58:47.076Z</lastmod>
+    <lastmod>2018-03-26T01:58:47.075Z</lastmod>
     <data>
         <display>
         <title>剖析非同质化代币ERC721-全面解析ERC721标准</title>
@@ -1358,7 +1376,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2018/03/15/contract-upgrade/</loc>
-    <lastmod>2018-03-19T02:07:02.499Z</lastmod>
+    <lastmod>2018-03-19T02:07:02.498Z</lastmod>
     <data>
         <display>
         <title>如何编写一个可升级的智能合约</title>
@@ -1373,29 +1391,6 @@
           
              
               <breadCrumb title="智能合约" url="https://learnblockchain.cn/categories/ethereum/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/</loc>
-    <lastmod>2018-03-18T13:55:32.198Z</lastmod>
-    <data>
-        <display>
-        <title>智能合约语言 Solidity 教程系列4 - 数据存储位置分析</title>
-        <pubTime>2017-12-21T03:51:02.000Z</pubTime>
-        
-        <tag>Solidity手册</tag>
-         
-         
-           
-             
-              <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
-          
-             
-              <breadCrumb title="Solidity" url="https://learnblockchain.cn/categories/ethereum/Solidity/"/>
           
         </display>
     </data>
@@ -1426,12 +1421,12 @@
 
     
   <url>
-    <loc>https://learnblockchain.cn/2017/12/21/solidity-arrays/</loc>
-    <lastmod>2018-03-18T13:55:32.194Z</lastmod>
+    <loc>https://learnblockchain.cn/2017/12/21/solidity_reftype_datalocation/</loc>
+    <lastmod>2018-03-18T13:55:32.197Z</lastmod>
     <data>
         <display>
-        <title>智能合约语言 Solidity 教程系列5 - 数组介绍</title>
-        <pubTime>2017-12-21T03:55:18.000Z</pubTime>
+        <title>智能合约语言 Solidity 教程系列4 - 数据存储位置分析</title>
+        <pubTime>2017-12-21T03:51:02.000Z</pubTime>
         
         <tag>Solidity手册</tag>
          
@@ -1472,8 +1467,31 @@
 
     
   <url>
+    <loc>https://learnblockchain.cn/2017/12/21/solidity-arrays/</loc>
+    <lastmod>2018-03-18T13:55:32.193Z</lastmod>
+    <data>
+        <display>
+        <title>智能合约语言 Solidity 教程系列5 - 数组介绍</title>
+        <pubTime>2017-12-21T03:55:18.000Z</pubTime>
+        
+        <tag>Solidity手册</tag>
+         
+         
+           
+             
+              <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
+          
+             
+              <breadCrumb title="Solidity" url="https://learnblockchain.cn/categories/ethereum/Solidity/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://learnblockchain.cn/2017/11/02/bitcoin-own/</loc>
-    <lastmod>2018-03-17T14:01:01.950Z</lastmod>
+    <lastmod>2018-03-17T14:01:01.949Z</lastmod>
     <data>
         <display>
         <title>比特币所有权及隐私问题-非对称加密应用</title>
@@ -1499,7 +1517,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2017/11/10/bitcoin-script/</loc>
-    <lastmod>2018-02-08T12:24:30.319Z</lastmod>
+    <lastmod>2018-02-08T12:24:30.318Z</lastmod>
     <data>
         <display>
         <title>比特币脚本及交易分析 - 智能合约雏形</title>
@@ -1571,7 +1589,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2017/12/07/bitcoin-sonsensus/</loc>
-    <lastmod>2018-01-10T08:10:46.598Z</lastmod>
+    <lastmod>2018-01-10T08:10:46.597Z</lastmod>
     <data>
         <display>
         <title>比特币如何达成共识 - 最长链的选择</title>

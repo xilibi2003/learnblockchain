@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[第8期 - 大白话区块链共识机制算法]]></title>
+    <url>%2F2019%2F01%2F04%2Fdev_meeting_8%2F</url>
+    <content type="text"><![CDATA[分享嘉宾：Nerthus CTO 虞双齐力求用最普通的话语讲解区块链共识机制。 话题大纲： 区块链史前文明 工作量证明(PoW)共识机制算法与分析、以及算力和区块难度等区块链概念。 权益证明(PoS)共识机制、各种优化版的Pos介绍与分析。 点击下载PPT 及 现场视频]]></content>
+      <categories>
+        <category>技术工坊</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[第7期 - 选对赛道，穿越凛冬：区块链的设计思想和演化逻辑]]></title>
     <url>%2F2018%2F12%2F28%2Fdev_meeting_7%2F</url>
     <content type="text"><![CDATA[讲师：AMT社区共建者 Jason分享大纲: 一、 伟大变革or旁氏泡沫：谁需要区块链，需要什么样的区块链？ 二 、区块链对现实世界的依赖性：虚生于实，依于实。 三、 几大公链设计思想对比：面对不可能三角时各公链的取舍和结果 1）TPS:BTC,LTC,ETH的出块时间对比说明了什么 2) 去中心化: 如何面对用去中心化换TPS 3）安全：没有绝对，只有相对 四、 发展焦点： 1）协议共识 VS 社会共识 谁将获胜？ 2）分裂是好是坏 ：BTC分裂BCH, BCH分裂BSV 3）智能合约：新经济的核心 五、 下一跳去到哪里：TPS、新共识、跨链、应用落地（IBO STO等) 六 、匿名技术公链：最后的保留地 七 、前路展望：符合社会需要，百花迎春 点击下载PPT 及 现场视频]]></content>
@@ -75,8 +83,8 @@
         <category>IPFS</category>
       </categories>
       <tags>
-        <tag>Web3</tag>
         <tag>IPFS</tag>
+        <tag>Web3</tag>
       </tags>
   </entry>
   <entry>
