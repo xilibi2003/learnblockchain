@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://learnblockchain.cn/2019/03/07/wallet-annouce/</loc>
+    
+    <lastmod>2019-03-07T13:51:05.678Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://learnblockchain.cn/2019/01/18/dev_meeting_10/</loc>
     
     <lastmod>2019-01-18T02:33:31.334Z</lastmod>
@@ -121,14 +128,14 @@
   </url>
   
   <url>
-    <loc>https://learnblockchain.cn/2018/11/21/fabric_transaction_process/</loc>
+    <loc>https://learnblockchain.cn/2018/10/26/eth-web-wallet_4/</loc>
     
     <lastmod>2018-12-14T08:43:52.048Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://learnblockchain.cn/2018/10/26/eth-web-wallet_4/</loc>
+    <loc>https://learnblockchain.cn/2018/11/21/fabric_transaction_process/</loc>
     
     <lastmod>2018-12-14T08:43:52.048Z</lastmod>
     
