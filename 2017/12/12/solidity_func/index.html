@@ -93,7 +93,7 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="Solidity 教程系列第三篇 - Solidity 函数类型介绍。Solidity 系列完整的文章列表请查看分类-Solidity。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-18T13:55:32.197Z">
+<meta property="og:updated_time" content="2019-03-11T08:38:39.155Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="智能合约语言 Solidity 教程系列3 - 函数类型">
 <meta name="twitter:description" content="Solidity 教程系列第三篇 - Solidity 函数类型介绍。Solidity 系列完整的文章列表请查看分类-Solidity。">
@@ -399,8 +399,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-03-18T21:55:32+08:00">
-                2018-03-18
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-11T16:38:39+08:00">
+                2019-03-11
               </time>
             
           </span>
@@ -472,7 +472,7 @@
 <p>本文前半部分是参考Solidity 官方文档（当前最新版本：0.4.20）进行翻译，后半部分函数可见性（ public, external, internal, privite ）深度分析（仅针对<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">专栏</a>订阅用户）。</p>
 <h2 id="函数类型（Function-Types）"><a href="#函数类型（Function-Types）" class="headerlink" title="函数类型（Function Types）"></a>函数类型（Function Types）</h2><p>函数也是一种类型，且属于值类型。<br>可以将一个函数赋值给一个函数类型的变量。还可以将一个函数作为参数进行传递。也可以在函数调用中返回一个函数。<br>函数类型有两类:内部(internal)和外部(external)函数</p>
 <p><strong>内部(internal)函数</strong>只能在当前合约内被调用（在当前的代码块内，包括内部库函数，和继承的函数中）。<br><strong>外部(external)函数</strong>由地址和函数方法签名两部分组成，可作为外部函数调用的参数，或返回值。</p>
-<p>函数类型定义如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> (<span class="params">&lt;parameter types&gt;</span>) </span>&#123;internal|external&#125; [pure|constant|view|payable] [returns (<span class="xml"><span class="tag">&lt;<span class="name">return</span> <span class="attr">types</span>&gt;</span>)]</span></span><br></pre></td></tr></table></figure></p>
+<p>函数类型定义如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> (<span class="params">&lt;parameter types&gt;</span>) </span>&#123;internal|external&#125; [pure|constant|view|payable] [returns (&lt;return types&gt;)]</span><br></pre></td></tr></table></figure></p>
 <p>如果函数不需要返回，则省去returns (<return types="">)<br>函数类型默认是internal， 因此internal可以省去。但以此相反，合约中函数本身默认是public的， 仅仅是当作类型名使用时默认是internal的。</return></p>
 <p>有两个方式访问函数，一种是直接用函数名<strong>f</strong>, 一种是<strong>this.f</strong>， 前者用于内部函数，后者用于外部函数。</p>
 <p>如果一个函数变量没有初始化，直接调用它将会产生异常。如果delete了一个函数后调用，也会发生同样的异常。</p>
@@ -800,7 +800,7 @@
               <ul class="links-of-blogroll-list">
                 
                   <li class="links-of-blogroll-item">
-                    <a href="http://www.upchain.pro/book.html" title="新书-精通智能合约" target="_blank">新书-精通智能合约</a>
+                    <a href="http://www.upchain.pro/book.html" title="图书-精通智能合约开发" target="_blank">图书-精通智能合约开发</a>
                   </li>
                 
                   <li class="links-of-blogroll-item">
