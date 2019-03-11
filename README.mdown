@@ -61,25 +61,13 @@ hexo new post abc
 另外通常在正文前有一个用`<!-- more -->`分割的简短说明，剩下的事就是编写文章了。
 
 6. 文章编写过程中后完成后，可以启动hexo 服务器来预览文章，命令如下：
-
 `
 > hexo s
 `
-启动后，在浏览器访问 http://localhost:4000
+
+启动后，在浏览器访问 http://localhost:4000 即可。
 
 
+最后，如果你有什么任何问题，欢迎联系微信：xlbxiong 或 hiblocknet 
 
 
-
-微信：xlbxiong 或 hiblocknet 
-
-如何贡献
-
-## 深入浅出区块链
-http://learnblockchain.cn
-
-打造最好的区块链技术博客
-
-
-
-源码为blog分支，欢迎大家发pull requests.

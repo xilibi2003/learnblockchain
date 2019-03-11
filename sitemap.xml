@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://learnblockchain.cn/about/index.html</loc>
+    
+    <lastmod>2019-03-11T12:56:22.794Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://learnblockchain.cn/2018/11/21/fabric_startup_process/</loc>
     
     <lastmod>2019-03-11T08:43:10.279Z</lastmod>
@@ -516,13 +523,6 @@
     <loc>https://learnblockchain.cn/course/index.html</loc>
     
     <lastmod>2018-11-28T09:46:53.338Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://learnblockchain.cn/about/index.html</loc>
-    
-    <lastmod>2018-10-20T08:16:52.343Z</lastmod>
     
   </url>
   
