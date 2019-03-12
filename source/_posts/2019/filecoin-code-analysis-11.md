@@ -7,6 +7,7 @@ categories:
 tags:
     - FileCoin
 author: 先河系统杨尉
+un_reward: true
 ---
 
 我是先河系统CTO杨尉，欢迎大加关注的的Github: [waynewyang](https://github.com/waynewyang)，本文是[filecoin技术架构分析系列文章](https://learnblockchain.cn/2019/03/11/filecoin-code-analysis-0/)第十一章源码分析之内部接口层api包分析。

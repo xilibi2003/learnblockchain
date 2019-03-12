@@ -57,6 +57,8 @@ project:
   以太坊: /categories/ethereum || false
   EOS: /categories/EOS || false
   Fabric: /categories/Fabric || false
+  IPFS: /categories/IPFS || false
+  FileCoin: /categories/FileCoin || false
 
 project_icons:
   enable: true
@@ -70,7 +72,7 @@ language: zh-Hans
 timezone: Asia/Shanghai
 
 # Set default keywords (Use a comma to separate)
-keywords: "区块链技术,Learn BlockChain,系统学习区块链,区块链Wiki,以太坊,solidity,比特币,教程,课程,EOS"
+keywords: "区块链技术,Learn BlockChain,系统学习区块链,区块链Wiki,以太坊,solidity,比特币,教程,课程,EOS,IPFS,钱包,FileCoin"
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -137,7 +139,7 @@ index2_include_index: true # defult is true
 
 # 配置index2 generator，可以是数组或对象
 index2_generator:
-  per_page: 10
+  per_page: 20
   order_by: -date
   include:
 

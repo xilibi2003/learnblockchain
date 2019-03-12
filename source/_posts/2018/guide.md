@@ -10,7 +10,8 @@ tags:
 author: Tiny熊
 ---
 
-本文为博客文章索引，小白必看。有新文章时会更新本文，建议大家加入收藏夹中，如果你觉得本站不错，欢迎你转发给朋友。
+本章的文章越来越多，本文是一个索引帖，方便找到自己感兴趣的文章，你也可以使用左侧的[分类](https://learnblockchain.cn/categories/)、[标签](https://learnblockchain.cn/tags/)及搜索功能。
+有新文章时会更新本文，建议大家加入收藏夹中，如果你觉得本站不错，欢迎你转发给朋友。
 
 <!-- more -->
 ## 引言
@@ -77,6 +78,10 @@ author: Tiny熊
 * [以太坊钱包开发系列2 - 展示钱包信息及发起签名交易](https://learnblockchain.cn/2018/10/26/eth-web-wallet_3/)
 * [以太坊钱包开发系列3 - 发送Token(代币）](https://learnblockchain.cn/2018/10/26/eth-web-wallet_4/)
 
+### 如可开发一款以太安卓钱包
+
+* [登链钱包（一款功能强大的以太坊钱包）完全开源](https://learnblockchain.cn/2019/03/07/wallet-annouce/)
+
 
 ### 以太扩容
 
@@ -111,9 +116,32 @@ Solidity语言是开发智能合约最广泛的语言，本专栏应该是国内
 * [什么是EOS](https://learnblockchain.cn/2018/07/17/whatiseos/)
 
 
+## IPFS 
+
+* [站在Web3.0 理解IPFS是什么](https://learnblockchain.cn/2018/12/12/what-is-ipfs/)
+* [IPFS 使用入门](https://learnblockchain.cn/2018/12/25/use-ipfs/)
+
+## FileCoin
+
+* [1 filecoin概念](https://learnblockchain.cn//2019/02/18/filecoin-code-analysis-1)
+* [2 filecoin通用语言理解](https://learnblockchain.cn//2019/02/20/filecoin-code-analysis-2)
+* [3 filecoin开发网使用](https://learnblockchain.cn//2019/02/22/filecoin-code-analysis-3)
+* [4 filecoin源码顶层架构分析](https://learnblockchain.cn//2019/02/28/filecoin-code-analysis-4)
+* [5 filecoin源码协议层分析之心跳协议](https://learnblockchain.cn//2019/03/04/filecoin-code-analysis-5)
+* [6 filecoin源码协议层分析之hello握手协议](https://learnblockchain.cn//2019/03/04/filecoin-code-analysis-6)
+* [7 filecoin源码协议层分析之存储协议](https://learnblockchain.cn//2019/03/05/filecoin-code-analysis-7)
+* [8 filecoin源码协议层分析之检索协议](https://learnblockchain.cn//2019/03/05/filecoin-code-analysis-8)
+* [9 filecoin源码分析之支撑包分析(1)](https://learnblockchain.cn//2019/03/06/filecoin-code-analysis-9)
+* [10 filecoin源码分析之支撑包分析(2/2)](https://learnblockchain.cn//2019/03/07/filecoin-code-analysis-10)
+* [11 filecoin源码分析之内部接口层api包分析](https://learnblockchain.cn//2019/03/07/filecoin-code-analysis-11)
+* [12 filecoin源码分析之内部接口层plumbing＆porcelain接口](https://learnblockchain.cn//2019/03/07/filecoin-code-analysis-12)
+* [13 filecoin源码分析之服务层actor及vm](https://learnblockchain.cn//2019/03/08/filecoin-code-analysis-13)
+* [14 filecoin源码分析之服务层链同步、共识协议及挖矿](https://learnblockchain.cn//2019/03/09/filecoin-code-analysis-14)
+* [15 filecoin源码分析之节点运行逻辑](https://learnblockchain.cn//2019/03/10/filecoin-code-analysis-15)
+
 ## 更多精彩内容
 
-想要系统学习以太坊智能合约，可以购买的新书：[精通以太坊智能合约](http://www.upchain.pro/book.html)
+想要系统学习以太坊智能合约，可以购买的图书：[精通以太坊智能合约](http://www.upchain.pro/book.html)
 
 首先强烈建议大家订阅[深入浅出区块链技术小专栏](https://xiaozhuanlan.com/blockchaincore)，目前仅需69元（时不时会进行涨价哦）， 部分源码和进阶内容仅在小专栏开放，订阅小专栏还有其他惊喜哦~。
 
@@ -123,6 +151,6 @@ Solidity语言是开发智能合约最广泛的语言，本专栏应该是国内
 
 想围观我朋友圈的，可以加我微信：xlbxiong （温馨提示：微信不提供技术问答服务，提问请到知识星球社区感谢理解）。
 
-one more thing ：我们还承接智能合约、DAPP、公链开发等业余。
+one more thing ：我们还承接智能合约、钱包、DAPP、公链开发等业余。
 
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
