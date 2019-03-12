@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+  <meta name="msvalidate.01" content="914C9C1CBC7078C5E2AC612AD5C1CC6C" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="FileCoin," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深入浅出区块链" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第五章filecoin源码分析之协议层心跳协议。">
+<meta name="keywords" content="FileCoin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="filecoin技术架构分析五:filecoin源码分析之协议层心跳协议">
+<meta property="og:url" content="https://learnblockchain.cn/2019/03/04/filecoin-code-analysis-5/index.html">
+<meta property="og:site_name" content="深入浅出区块链">
+<meta property="og:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第五章filecoin源码分析之协议层心跳协议。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-12T06:50:41.313Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="filecoin技术架构分析五:filecoin源码分析之协议层心跳协议">
+<meta name="twitter:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第五章filecoin源码分析之协议层心跳协议。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'UT2K1ZRSWK',
+      apiKey: '0bbb261dfad58df8f8a657a1ed3255cd',
+      indexName: 'learnblockchain',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://learnblockchain.cn/2019/03/04/filecoin-code-analysis-5/"/>
+
+
+
+
+
+  <title>filecoin技术架构分析五:filecoin源码分析之协议层心跳协议 | 深入浅出区块链</title>
+  
+
+
+
+
+
+
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6273382609469378",
+        enable_page_level_ads: true
+    });
+</script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">系统学习区块链技术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wiki">
+          <a href="https://wiki.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Wiki
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-meeting">
+          <a href="/categories/dev-meeting/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            技术工坊
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-course">
+          <a href="/course/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-spinner"></i> <br />
+            
+            视频教程
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-web3">
+          <a href="https://web3.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Web3文档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2019/03/04/filecoin-code-analysis-5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">filecoin技术架构分析五:filecoin源码分析之协议层心跳协议</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-04T16:35:33+08:00">
+                2019-03-04
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-12T14:50:41+08:00">
+                2019-03-12
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/FileCoin/" itemprop="url" rel="index">
+                    <span itemprop="name">FileCoin</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我是先河系统CTO杨尉，欢迎大加关注的的Github: <a href="https://github.com/waynewyang" target="_blank" rel="noopener">waynewyang</a>，本文是<a href="https://learnblockchain.cn/2019/03/11/filecoin-code-analysis-0/">filecoin技术架构分析系列文章</a>第五章filecoin源码分析之协议层心跳协议。</p>
+<a id="more"></a>
+<h2 id="源码信息"><a href="#源码信息" class="headerlink" title="源码信息"></a>源码信息</h2><ul>
+<li>version<ul>
+<li>master分支 619b0eb1（2019年３月２日）</li>
+</ul>
+</li>
+<li>package<ul>
+<li>metrics</li>
+</ul>
+</li>
+<li>location<ul>
+<li>metrics/heartbeat.go</li>
+<li>node/node.go</li>
+</ul>
+</li>
+</ul>
+<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><ul>
+<li>定义心跳协议名称以及连接超时时间</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// HeartbeatProtocol is the libp2p protocol used for the heartbeat service</span><br><span class="line">const (</span><br><span class="line">	HeartbeatProtocol = &quot;fil/heartbeat/1.0.0&quot;</span><br><span class="line">	// Minutes to wait before logging connection failure at ERROR level</span><br><span class="line">	connectionFailureErrorLogPeriodMinutes = 10 * time.Minute</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>定义心跳信息结构<ul>
+<li>节点的区块头</li>
+<li>节点的区块高度</li>
+<li>节点的昵称</li>
+<li>是否在区块同步中（ＴＯＤＯ）</li>
+<li>矿工地址（如果没有挖矿，这里为零地址）</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// Heartbeat contains the information required to determine the current state of a node.</span><br><span class="line">// Heartbeats are used for aggregating information about nodes in a log aggregator</span><br><span class="line">// to support alerting and devnet visualization.</span><br><span class="line">type Heartbeat struct &#123;</span><br><span class="line">	// Head represents the heaviest tipset the nodes is mining on</span><br><span class="line">	Head string</span><br><span class="line">	// Height represents the current height of the Tipset</span><br><span class="line">	Height uint64</span><br><span class="line">	// Nickname is the nickname given to the filecoin node by the user</span><br><span class="line">	Nickname string</span><br><span class="line">	// TODO: add when implemented</span><br><span class="line">	// Syncing is `true` iff the node is currently syncing its chain with the network.</span><br><span class="line">	// Syncing bool</span><br><span class="line"></span><br><span class="line">	// Address of this node&apos;s active miner. Can be empty - will return the zero address</span><br><span class="line">	MinerAddress address.Address</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>心跳服务结构体<ul>
+<li>主机结构体：对应libp2p主机</li>
+<li>心跳配置</li>
+<li>区块头获取</li>
+<li>挖矿地址获取</li>
+<li>stream锁</li>
+<li>stream</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// HeartbeatService is responsible for sending heartbeats.</span><br><span class="line">type HeartbeatService struct &#123;</span><br><span class="line">	Host   host.Host</span><br><span class="line">	Config *config.HeartbeatConfig</span><br><span class="line"></span><br><span class="line">	// A function that returns the heaviest tipset</span><br><span class="line">	HeadGetter func() types.TipSet</span><br><span class="line"></span><br><span class="line">	// A function that returns the miner&apos;s address</span><br><span class="line">	MinerAddressGetter func() address.Address</span><br><span class="line"></span><br><span class="line">	streamMu sync.Mutex</span><br><span class="line">	stream   net.Stream</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>定义心跳服务Option函数<ul>
+<li>函数入参为心跳服务结构体,主要用于对心跳服务结构体传参或者解析<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// HeartbeatServiceOption is the type of the heartbeat service&apos;s functional options.</span><br><span class="line">type HeartbeatServiceOption func(service *HeartbeatService)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><ul>
+<li>获取心跳服务的stream实例</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// Stream returns the HeartbeatService stream. Safe for concurrent access.</span><br><span class="line">// Stream is a libp2p connection that heartbeat messages are sent over to an aggregator.</span><br><span class="line">func (hbs *HeartbeatService) Stream() net.Stream &#123;</span><br><span class="line">	hbs.streamMu.Lock()</span><br><span class="line">	defer hbs.streamMu.Unlock()</span><br><span class="line">	return hbs.stream</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置心跳服务的stream实例</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// SetStream sets the stream on the HeartbeatService. Safe for concurrent access.</span><br><span class="line">func (hbs *HeartbeatService) SetStream(s net.Stream) &#123;</span><br><span class="line">	hbs.streamMu.Lock()</span><br><span class="line">	defer hbs.streamMu.Unlock()</span><br><span class="line">	hbs.stream = s</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>定时确认连接性，并调用运行心跳服务</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">// Start starts the heartbeat service by, starting the connection loop. The connection</span><br><span class="line">// loop will attempt to connected to the aggregator service, once a successful</span><br><span class="line">// connection is made with the aggregator service hearbeats will be sent to it.</span><br><span class="line">// If the connection is broken the heartbeat service will attempt to reconnect via</span><br><span class="line">// the connection loop. Start will not return until context `ctx` is &apos;Done&apos;.</span><br><span class="line">func (hbs *HeartbeatService) Start(ctx context.Context) &#123;</span><br><span class="line">	log.Debug(&quot;starting heartbeat service&quot;)</span><br><span class="line"></span><br><span class="line">	rd, err := time.ParseDuration(hbs.Config.ReconnectPeriod)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		log.Errorf(&quot;invalid heartbeat reconnectPeriod: %s&quot;, err)</span><br><span class="line">		return</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    //启动重连定时器</span><br><span class="line">	reconTicker := time.NewTicker(rd)</span><br><span class="line">	defer reconTicker.Stop()</span><br><span class="line">	// Timestamp of the first connection failure since the last successful connection.</span><br><span class="line">	// Zero initially and while connected.</span><br><span class="line">	var failedAt time.Time</span><br><span class="line">	// Timestamp of the last ERROR log (or of failure, before the first ERROR log).</span><br><span class="line">	var erroredAt time.Time</span><br><span class="line">	for &#123;</span><br><span class="line">		select &#123;</span><br><span class="line">		case &lt;-ctx.Done():</span><br><span class="line">			return</span><br><span class="line">		case &lt;-reconTicker.C:</span><br><span class="line">            //重连定时周期到，重新连接</span><br><span class="line">			if err := hbs.Connect(ctx); err != nil &#123;</span><br><span class="line">				// Logs once as a warning immediately on failure, then as error every 10 minutes.</span><br><span class="line">				now := time.Now()</span><br><span class="line">				logfn := log.Debugf</span><br><span class="line">				if failedAt.IsZero() &#123; // First failure since connection</span><br><span class="line">					failedAt = now</span><br><span class="line">					erroredAt = failedAt // Start the timer on raising to ERROR level</span><br><span class="line">					logfn = log.Warningf</span><br><span class="line">				&#125; else if now.Sub(erroredAt) &gt; connectionFailureErrorLogPeriodMinutes &#123;</span><br><span class="line">					logfn = log.Errorf</span><br><span class="line">					erroredAt = now // Reset the timer</span><br><span class="line">				&#125;</span><br><span class="line">				failureDuration := now.Sub(failedAt)</span><br><span class="line">				logfn(&quot;Heartbeat service failed to connect for %s: %s&quot;, failureDuration, err)</span><br><span class="line">				// failed to connect, continue reconnect loop</span><br><span class="line">				continue</span><br><span class="line">			&#125;</span><br><span class="line">			failedAt = time.Time&#123;&#125;</span><br><span class="line"></span><br><span class="line">			// we connected, send heartbeats!</span><br><span class="line">			// Run will block until it fails to send a heartbeat.</span><br><span class="line">            //如果连接成功，运行心跳服务</span><br><span class="line">			if err := hbs.Run(ctx); err != nil &#123;</span><br><span class="line">				log.Warning(&quot;disconnecting from aggregator, failed to send heartbeat&quot;)</span><br><span class="line">				continue</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>运行心跳服务</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">// Run is called once the heartbeat service connects to the aggregator. Run</span><br><span class="line">// send the actual heartbeat. Run will block until `ctx` is &apos;Done`. An error will</span><br><span class="line">// be returned if Run encounters an error when sending the heartbeat and the connection</span><br><span class="line">// to the aggregator will be closed.</span><br><span class="line">func (hbs *HeartbeatService) Run(ctx context.Context) error &#123;</span><br><span class="line">	bd, err := time.ParseDuration(hbs.Config.BeatPeriod)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		log.Errorf(&quot;invalid heartbeat beatPeriod: %s&quot;, err)</span><br><span class="line">		return err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    //启动心跳定时器</span><br><span class="line">	beatTicker := time.NewTicker(bd)</span><br><span class="line">	defer beatTicker.Stop()</span><br><span class="line"></span><br><span class="line">    //通过encoder进行流写入</span><br><span class="line">	// TODO use cbor instead of json</span><br><span class="line">	encoder := json.NewEncoder(hbs.stream)</span><br><span class="line">	for &#123;</span><br><span class="line">		select &#123;</span><br><span class="line">		case &lt;-ctx.Done():</span><br><span class="line">			return nil</span><br><span class="line">		case &lt;-beatTicker.C:</span><br><span class="line">        //心跳定时周期到，调用Beat方法获取心跳参数</span><br><span class="line">			hb := hbs.Beat()</span><br><span class="line">            //写入流，发起心跳</span><br><span class="line">			if err := encoder.Encode(hb); err != nil &#123;</span><br><span class="line">                //发生错误会关闭流连接</span><br><span class="line">				hbs.stream.Conn().Close() // nolint: errcheck</span><br><span class="line">				return err</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取心跳参数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// Beat will create a heartbeat.</span><br><span class="line">func (hbs *HeartbeatService) Beat() Heartbeat &#123;</span><br><span class="line">	nick := hbs.Config.Nickname</span><br><span class="line">	ts := hbs.HeadGetter()</span><br><span class="line">	tipset := ts.ToSortedCidSet().String()</span><br><span class="line">	height, err := ts.Height()</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		log.Warningf(&quot;heartbeat service failed to get chain height: %s&quot;, err)</span><br><span class="line">	&#125;</span><br><span class="line">	addr := hbs.MinerAddressGetter()</span><br><span class="line">	return Heartbeat&#123;</span><br><span class="line">		Head:         tipset,</span><br><span class="line">		Height:       height,</span><br><span class="line">		Nickname:     nick,</span><br><span class="line">		MinerAddress: addr,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>心跳流连接<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">// Connect will connects to `hbs.Config.BeatTarget` or returns an error</span><br><span class="line">func (hbs *HeartbeatService) Connect(ctx context.Context) error &#123;</span><br><span class="line">	log.Debugf(&quot;Heartbeat service attempting to connect, targetAddress: %s&quot;, hbs.Config.BeatTarget)</span><br><span class="line">	targetMaddr, err := ma.NewMultiaddr(hbs.Config.BeatTarget)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		return err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	pid, err := targetMaddr.ValueForProtocol(ma.P_P2P)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		return err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	peerid, err := peer.IDB58Decode(pid)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		return err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// Decapsulate the /p2p/&lt;peerID&gt; part from the target</span><br><span class="line">	// /ip4/&lt;a.b.c.d&gt;/p2p/&lt;peer&gt; becomes /ip4/&lt;a.b.c.d&gt;</span><br><span class="line">	targetPeerAddr, _ := ma.NewMultiaddr(</span><br><span class="line">		fmt.Sprintf(&quot;/p2p/%s&quot;, peer.IDB58Encode(peerid)))</span><br><span class="line">	targetAddr := targetMaddr.Decapsulate(targetPeerAddr)</span><br><span class="line"></span><br><span class="line">	hbs.Host.Peerstore().AddAddr(peerid, targetAddr, pstore.PermanentAddrTTL)</span><br><span class="line"></span><br><span class="line">    // 建立心跳服务流</span><br><span class="line">	s, err := hbs.Host.NewStream(ctx, peerid, HeartbeatProtocol)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		log.Debugf(&quot;failed to open stream, peerID: %s, targetAddr: %s %s&quot;, peerid, targetAddr, err)</span><br><span class="line">		return err</span><br><span class="line">	&#125;</span><br><span class="line">	log.Infof(&quot;successfully to open stream, peerID: %s, targetAddr: %s&quot;, peerid, targetAddr)</span><br><span class="line"></span><br><span class="line">    //设置流函数</span><br><span class="line">	hbs.SetStream(s)</span><br><span class="line">	return nil</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><ul>
+<li>向心跳服务结构体传参,用于设置获取矿工地址函数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// WithMinerAddressGetter returns an option that can be used to set the miner address getter.</span><br><span class="line">func WithMinerAddressGetter(ag func() address.Address) HeartbeatServiceOption &#123;</span><br><span class="line">	return func(service *HeartbeatService) &#123;</span><br><span class="line">		service.MinerAddressGetter = ag</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取默认的矿工地址</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">func defaultMinerAddressGetter() address.Address &#123;</span><br><span class="line">	return address.Address&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>实例化心跳服务,具体的实例化在node包中实现。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// NewHeartbeatService returns a HeartbeatService</span><br><span class="line">func NewHeartbeatService(h host.Host, hbc *config.HeartbeatConfig, hg func() types.TipSet, options ...HeartbeatServiceOption) *HeartbeatService &#123;</span><br><span class="line">	srv := &amp;HeartbeatService&#123;</span><br><span class="line">		Host:               h,</span><br><span class="line">		Config:             hbc,</span><br><span class="line">		HeadGetter:         hg,</span><br><span class="line">		MinerAddressGetter: defaultMinerAddressGetter,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    // 设置心跳服务的获取矿工属性,这会覆盖到上面设置的默认矿工地址</span><br><span class="line">	for _, option := range options &#123;</span><br><span class="line">		option(srv)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return srv</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="实例化及业务逻辑"><a href="#实例化及业务逻辑" class="headerlink" title="实例化及业务逻辑"></a>实例化及业务逻辑</h3><ul>
+<li><p>主要由node调用,location:node/node.go,主要逻辑如下</p>
+</li>
+<li><p>在node的启动方法中，调用node.setupHeartbeatServices方法，建立心跳服务</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// Start boots up the node.</span><br><span class="line">func (node *Node) Start(ctx context.Context) error &#123;</span><br><span class="line">    ......</span><br><span class="line"></span><br><span class="line">	if err := node.setupHeartbeatServices(ctx); err != nil &#123;</span><br><span class="line">		return errors.Wrap(err, &quot;failed to start heartbeat services&quot;)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return nil</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>建立心跳服务,具体见如下注释</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">func (node *Node) setupHeartbeatServices(ctx context.Context) error &#123;</span><br><span class="line">    // 设置“矿工地址获取函数”</span><br><span class="line">	mag := func() address.Address &#123;</span><br><span class="line">		addr, err := node.miningAddress()</span><br><span class="line">		// the only error miningAddress() returns is ErrNoMinerAddress.</span><br><span class="line">		// if there is no configured miner address, simply send a zero</span><br><span class="line">		// address across the wire.</span><br><span class="line">		if err != nil &#123;</span><br><span class="line">			return address.Address&#123;&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return addr</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    // 存在心跳目标的时候，实例化心跳服务实例</span><br><span class="line">	// start the primary heartbeat service</span><br><span class="line">	if len(node.Repo.Config().Heartbeat.BeatTarget) &gt; 0 &#123;</span><br><span class="line">        //调用metrics包中的建立心跳服务实例、以及启动心跳服务实例方法</span><br><span class="line">		hbs := metrics.NewHeartbeatService(node.Host(), node.Repo.Config().Heartbeat, node.ChainReader.Head, metrics.WithMinerAddressGetter(mag))</span><br><span class="line">		go hbs.Start(ctx)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    // 确认是否用户有通过环境变量配置额外的心跳告警服务（自定义指向其他节点），根据用户配置的数目，拉起对应的多线程心跳服务。</span><br><span class="line">	// check if we want to connect to an alert service. An alerting service is a heartbeat</span><br><span class="line">	// service that can trigger alerts based on the contents of heatbeats.</span><br><span class="line">	if alertTarget := os.Getenv(&quot;FIL_HEARTBEAT_ALERTS&quot;); len(alertTarget) &gt; 0 &#123;</span><br><span class="line">		ahbs := metrics.NewHeartbeatService(node.Host(), &amp;config.HeartbeatConfig&#123;</span><br><span class="line">			BeatTarget:      alertTarget,</span><br><span class="line">			BeatPeriod:      &quot;10s&quot;,</span><br><span class="line">			ReconnectPeriod: &quot;10s&quot;,</span><br><span class="line">			Nickname:        node.Repo.Config().Heartbeat.Nickname,</span><br><span class="line">		&#125;, node.ChainReader.Head, metrics.WithMinerAddressGetter(mag))</span><br><span class="line">		go ahbs.Start(ctx)</span><br><span class="line">	&#125;</span><br><span class="line">	return nil</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
+
+      
+    </div>
+    
+    
+    
+    
+      
+        <div>
+          <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="Tiny熊 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信号：深入浅出区块链技术，欢迎订阅</div>
+</div>
+
+        </div>
+      
+    
+
+    
+      
+        <div>
+          <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有收获，赞赏下</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/qr_pay.jpg" alt="Tiny熊 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+        </div>
+      
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    先河系统杨尉
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://learnblockchain.cn/2019/03/04/filecoin-code-analysis-5/" title="filecoin技术架构分析五:filecoin源码分析之协议层心跳协议">https://learnblockchain.cn/2019/03/04/filecoin-code-analysis-5/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/FileCoin/" rel="tag"># FileCoin</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/28/filecoin-code-analysis-4/" rel="next" title="filecoin技术架构分析四：filecoin源码顶层架构分析">
+                <i class="fa fa-chevron-left"></i> filecoin技术架构分析四：filecoin源码顶层架构分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/04/filecoin-code-analysis-6/" rel="prev" title="filecoin技术架构分析六:filecoin源码协议层分析之hello握手协议">
+                filecoin技术架构分析六:filecoin源码协议层分析之hello握手协议 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">89</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element" style="margin-top: 20px;">
+              <span>
+                项目
+              </span>
+            </div>
+          
+
+          <div class="links-of-author project motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/bitcoin" target="_self" title="比特币">
+                    
+                      <i class="fa fa-fw fa-false"></i>比特币</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/ethereum" target="_self" title="以太坊">
+                    
+                      <i class="fa fa-fw fa-false"></i>以太坊</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/EOS" target="_self" title="EOS">
+                    
+                      <i class="fa fa-fw fa-false"></i>EOS</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/Fabric" target="_self" title="Fabric">
+                    
+                      <i class="fa fa-fw fa-false"></i>Fabric</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <span>
+                联系我
+              </span>
+            </div>
+          
+          
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/xilibi2003" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiong-li-bing/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hiblock.one/" title="HiBlock区块链社区" target="_blank">HiBlock区块链社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://edu.upchain.pro/book.html" title="图书-精通智能合约开发" target="_blank">图书-精通智能合约开发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="区块链技术专栏" target="_blank">区块链技术专栏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://t.xiaomiquan.com/RfAu7uj" title="技术交流-知识星球" target="_blank">技术交流-知识星球</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blockgeek.org/" title="BG区块链技术论坛" target="_blank">BG区块链技术论坛</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bitshuo.com" title="区块链技术中文社区" target="_blank">区块链技术中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://news.tangwen.org" title="汤问资讯" target="_blank">汤问资讯</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitask.org" title="币问" target="_blank">币问</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eosfans.io/" title="EOS中文社区" target="_blank">EOS中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blockflow.net/" title="BlockFlow" target="_blank">BlockFlow</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.liankexing.com/" title="链客区块链问答社区" target="_blank">链客区块链问答社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitool.cn/" title="币兔" target="_blank">币兔</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wutui.pro/" title="无退社区" target="_blank">无退社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hpb.io/" title="HPB芯链" target="_blank">HPB芯链</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码信息"><span class="nav-number">1.</span> <span class="nav-text">源码信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源码分析"><span class="nav-number">2.</span> <span class="nav-text">源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据结构"><span class="nav-number">2.1.</span> <span class="nav-text">数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">2.2.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数"><span class="nav-number">2.3.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例化及业务逻辑"><span class="nav-number">2.4.</span> <span class="nav-text">实例化及业务逻辑</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+  <div class="footer-custom"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17140514号-1</a></div>
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

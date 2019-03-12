@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+  <meta name="msvalidate.01" content="914C9C1CBC7078C5E2AC612AD5C1CC6C" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="FileCoin," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深入浅出区块链" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第九章filecoin源码分析之支撑包分析(1)。">
+<meta name="keywords" content="FileCoin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="filecoin技术架构分析九：filecoin源码分析之支撑包分析(1)">
+<meta property="og:url" content="https://learnblockchain.cn/2019/03/06/filecoin-code-analysis-9/index.html">
+<meta property="og:site_name" content="深入浅出区块链">
+<meta property="og:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第九章filecoin源码分析之支撑包分析(1)。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-12T06:51:02.601Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="filecoin技术架构分析九：filecoin源码分析之支撑包分析(1)">
+<meta name="twitter:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第九章filecoin源码分析之支撑包分析(1)。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'UT2K1ZRSWK',
+      apiKey: '0bbb261dfad58df8f8a657a1ed3255cd',
+      indexName: 'learnblockchain',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://learnblockchain.cn/2019/03/06/filecoin-code-analysis-9/"/>
+
+
+
+
+
+  <title>filecoin技术架构分析九：filecoin源码分析之支撑包分析(1) | 深入浅出区块链</title>
+  
+
+
+
+
+
+
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6273382609469378",
+        enable_page_level_ads: true
+    });
+</script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">系统学习区块链技术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wiki">
+          <a href="https://wiki.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Wiki
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-meeting">
+          <a href="/categories/dev-meeting/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            技术工坊
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-course">
+          <a href="/course/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-spinner"></i> <br />
+            
+            视频教程
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-web3">
+          <a href="https://web3.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Web3文档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2019/03/06/filecoin-code-analysis-9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">filecoin技术架构分析九：filecoin源码分析之支撑包分析(1)</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-06T16:35:33+08:00">
+                2019-03-06
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-12T14:51:02+08:00">
+                2019-03-12
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/FileCoin/" itemprop="url" rel="index">
+                    <span itemprop="name">FileCoin</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我是先河系统CTO杨尉，欢迎大加关注的的Github: <a href="https://github.com/waynewyang" target="_blank" rel="noopener">waynewyang</a>，本文是<a href="https://learnblockchain.cn/2019/03/11/filecoin-code-analysis-0/">filecoin技术架构分析系列文章</a>第九章filecoin源码分析之支撑包分析(1)。</p>
+<a id="more"></a>
+<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><blockquote>
+<p>简析一些支撑包，便于后面分析的理解</p>
+</blockquote>
+<h2 id="编译相关"><a href="#编译相关" class="headerlink" title="编译相关"></a>编译相关</h2><ul>
+<li>bin目录：主要为编译用shell脚本</li>
+<li>bls-signatures:　通过cgo编译，导出库及头文件</li>
+<li>build: 编译相关</li>
+<li>util/version:版本检查</li>
+<li>scripts:相关脚本</li>
+</ul>
+<h2 id="cborutil"><a href="#cborutil" class="headerlink" title="cborutil"></a>cborutil</h2><ul>
+<li>对外提供功能<ul>
+<li>读取流消息</li>
+<li>写入流消息</li>
+<li>主要被协议层使用</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">▼ package</span><br><span class="line">    cborutil</span><br><span class="line"></span><br><span class="line">▶ imports</span><br><span class="line"></span><br><span class="line">▼ constants</span><br><span class="line">   +MaxMessageSize</span><br><span class="line"></span><br><span class="line">▼ variables</span><br><span class="line">   +ErrMessageTooLarge</span><br><span class="line"></span><br><span class="line">▼+MsgReader : struct</span><br><span class="line">    [fields]</span><br><span class="line">   -br : *bufio.Reader</span><br><span class="line">    [methods]</span><br><span class="line">   +ReadMsg(i interface&#123;&#125;) : error</span><br><span class="line">    [functions]</span><br><span class="line">   +NewMsgReader(r io.Reader) : *MsgReader</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">▼ package</span><br><span class="line">    cborutil</span><br><span class="line"></span><br><span class="line">▶ imports</span><br><span class="line"></span><br><span class="line">▼+MsgWriter : struct</span><br><span class="line">    [fields]</span><br><span class="line">   -w : *bufio.Writer</span><br><span class="line">    [methods]</span><br><span class="line">   +WriteMsg(i interface&#123;&#125;) : error</span><br><span class="line">    [functions]</span><br><span class="line">   +NewMsgWriter(w io.Writer) : *MsgWriter</span><br></pre></td></tr></table></figure>
+<h2 id="address"><a href="#address" class="headerlink" title="address"></a>address</h2><ul>
+<li>对外提供功能<ul>
+<li>地址相关操作功能</li>
+<li>实例化铸币地址、存储市场地址、支付通道地址</li>
+<li>实例化两个测试地址</li>
+<li>提供主网地址、测试网地址创建接口</li>
+<li>提供地址格式转换功能，包含22bytes与41bytes、切片字符串转换、打印。</li>
+<li>提供地址的合法性检查功能</li>
+</ul>
+</li>
+<li>地址格式<ul>
+<li>要与id区分开，id用的是ipfs中的cid,而地址则是filecoin独立定义的。</li>
+<li>22 bytes地址：包含1byte网络类型、1byte地址版本、20bytes哈希</li>
+<li>41 bytes地址：包含2bytes网络类型、1byte地址版本、32bytes编码值、6bytes校验和</li>
+<li>用命令显示的是41bytes格式的地址，address包提供了22bytes与41bytes地址的转换接口</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">location: address/constants.go</span><br><span class="line"></span><br><span class="line">▼ package</span><br><span class="line">    address</span><br><span class="line"></span><br><span class="line">▶ imports</span><br><span class="line"></span><br><span class="line">▼ constants</span><br><span class="line">    // Base32编码的字符集</span><br><span class="line">   +Base32Charset</span><br><span class="line">    // 地址的哈希部分，目前为20 bytes</span><br><span class="line">   +HashLength, 20bytes，160bit</span><br><span class="line">    // 地址长度,为HashLength+1+1= 22 bytes</span><br><span class="line">   +Length</span><br><span class="line">    // 地址格式的版本定义：当前为0</span><br><span class="line">   +Version : byte</span><br><span class="line"></span><br><span class="line">▼ variables</span><br><span class="line">    // 基于Base32Charset的Base32实例,用于编解码</span><br><span class="line">   +Base32</span><br><span class="line">    // Base32 Reverse集合</span><br><span class="line">   +Base32CharsetReverse</span><br><span class="line">    // 铸币地址,基于&quot;filecoin&quot;哈希生成</span><br><span class="line">   +NetworkAddress : Address</span><br><span class="line">    // 支付通道地址</span><br><span class="line">   +PaymentBrokerAddress : Address</span><br><span class="line">    // 存储市场地址</span><br><span class="line">   +StorageMarketAddress : Address</span><br><span class="line">    // 测试地址</span><br><span class="line">   +TestAddress : Address</span><br><span class="line">    // 测试地址</span><br><span class="line">   +TestAddress2 : Address</span><br><span class="line"></span><br><span class="line">▼ functions</span><br><span class="line">   -init()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">location: address/address.go</span><br><span class="line"></span><br><span class="line">▼ package</span><br><span class="line">    address</span><br><span class="line"></span><br><span class="line">▶ imports</span><br><span class="line"></span><br><span class="line">▼ constants</span><br><span class="line">   +Mainnet : Network</span><br><span class="line">   +Testnet</span><br><span class="line"></span><br><span class="line">▼ variables</span><br><span class="line">    // 错误提示</span><br><span class="line">   +ErrInvalidBytes</span><br><span class="line">   +ErrUnknownNetwork</span><br><span class="line">   +ErrUnknownVersion</span><br><span class="line">   -generator</span><br><span class="line">    // 配置输入哈希长度20bytes</span><br><span class="line">   -hashConfig</span><br><span class="line"></span><br><span class="line">   // Address为22字节字符串</span><br><span class="line">▼+Address : []byte</span><br><span class="line">    [methods]</span><br><span class="line">    // 转换为编码前地址切片输出</span><br><span class="line">   +Bytes() : []byte</span><br><span class="line">    // 判断地址是否为空</span><br><span class="line">   +Empty() : bool</span><br><span class="line">    // 打印地址信息</span><br><span class="line">   +Format(f fmt.State, c rune)</span><br><span class="line">    // 输出地址中的20bytes哈希值</span><br><span class="line">   +Hash() : []byte</span><br><span class="line">    // 转换为编码后地址切片输出</span><br><span class="line">   +MarshalText() : []byte, error</span><br><span class="line">    // 输出地址的网络类型</span><br><span class="line">   +Network() : Network</span><br><span class="line">    // 转换为41bytes的编码输出</span><br><span class="line">    // 2(网络类型)+1(地址版本)+32(base32编码)+6(base32校验位)</span><br><span class="line">   +String() : string</span><br><span class="line">    // 编码后地址切片输出转换为字符</span><br><span class="line">   +UnmarshalText(in []byte) : error</span><br><span class="line">    // 获取地址版本号</span><br><span class="line">   +Version() : byte</span><br><span class="line"></span><br><span class="line">    // 类型定义</span><br><span class="line"> +Network : byte</span><br><span class="line"></span><br><span class="line">▼ functions</span><br><span class="line">    // 采用blake2b-160再次哈希</span><br><span class="line">   +Hash(input []byte) : []byte</span><br><span class="line">    // 生成测试网络地址,输入为原始哈希,会执行blake2b-160再次哈希</span><br><span class="line">   +MakeTestAddress(input string) : Address</span><br><span class="line">    // 通过字符串网络类型转换为byte网络类型</span><br><span class="line">    // fc:主网转化为0</span><br><span class="line">    // tf:测试网化为1</span><br><span class="line">   +NetworkFromString(input string) : Network, error</span><br><span class="line">    // 通过byte网络类型转换为字符串网络类型</span><br><span class="line">    // 0:主网转化为fc</span><br><span class="line">    // 1:测试网化为tf</span><br><span class="line">   +NetworkToString(n Network) : string</span><br><span class="line">    // 构建新地址：输入为原始20bytes哈希+网络类型+地址版本</span><br><span class="line">   +New(network Network, hash []byte) : Address</span><br><span class="line">    // 构建新地址：输入为22bytes的原始切片</span><br><span class="line">   +NewFromBytes(raw []byte) : Address, error</span><br><span class="line">    // 通过41bytes的字串串生成22bytes的原始地址</span><br><span class="line">   +NewFromString(s string) : Address, error</span><br><span class="line">    // 构建新地址：输入为原始20bytes哈希,调用New</span><br><span class="line">   +NewMainnet(hash []byte) : Address</span><br><span class="line">    // 生成测试网络地址,输入为原始哈希再次哈希,被MakeTestAddress调用</span><br><span class="line">   +NewTestnet(hash []byte) : Address</span><br><span class="line">    // 校验41bytes地址的合法性</span><br><span class="line">   +ParseError(addr string) : error</span><br><span class="line"></span><br><span class="line">    // base32编码校验码生成，结果为6bytes</span><br><span class="line">   -createChecksum(hrp string, data []byte) : []byte</span><br><span class="line">    // 解码</span><br><span class="line">   -decode(addr string) : string, byte, []byte, error</span><br><span class="line">    // 编码</span><br><span class="line">   -encode(hrp string, version byte, data []byte) : string, error</span><br><span class="line">   -hrpExpand(hrp string) : []byte</span><br><span class="line">   -init()</span><br><span class="line">   -polymod(values []byte) : uint32</span><br><span class="line">    // 校验和验证</span><br><span class="line">   -verifyChecksum(hrp string, data []byte) : bool</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">location: address/set.go</span><br><span class="line"></span><br><span class="line">▼ package</span><br><span class="line">    address</span><br><span class="line"></span><br><span class="line">▶ imports</span><br><span class="line"></span><br><span class="line">▼ variables</span><br><span class="line">   -addrSetEntry</span><br><span class="line"></span><br><span class="line">   // 地址集合</span><br><span class="line"> +Set : map[Address]</span><br><span class="line"></span><br><span class="line">▼ functions</span><br><span class="line">   -init()</span><br></pre></td></tr></table></figure>
+<h2 id="config"><a href="#config" class="headerlink" title="config"></a>config</h2><ul>
+<li>对外提供功能<ul>
+<li>提供对内存中配置的实例化操作</li>
+<li>对具体实例的设置和读取</li>
+<li>对配置文件的读写</li>
+<li>包含API、启动、数据存储、网络连接、挖矿、钱包、心跳相关配置</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line">▼ package</span><br><span class="line">    config</span><br><span class="line"></span><br><span class="line">▶ imports</span><br><span class="line"></span><br><span class="line">▼ variables</span><br><span class="line">    // 对特定参数的合法性校验规则集合</span><br><span class="line">    // 1 目前只是限定昵称为字符</span><br><span class="line">   +Validators</span><br><span class="line"></span><br><span class="line">▼+APIConfig : struct</span><br><span class="line">    [fields]</span><br><span class="line">    // 是否允许跨域请求</span><br><span class="line">   +AccessControlAllowCredentials : bool</span><br><span class="line">    // 允许的方法列表</span><br><span class="line">   +AccessControlAllowMethods : []string</span><br><span class="line">    // 允许的元列表</span><br><span class="line">   +AccessControlAllowOrigin : []string</span><br><span class="line">    // 地址</span><br><span class="line">   +Address : string</span><br><span class="line">    [functions]</span><br><span class="line">    // 实例化APIconfig</span><br><span class="line">   -newDefaultAPIConfig() : *APIConfig</span><br><span class="line"></span><br><span class="line">▼+BootstrapConfig : struct</span><br><span class="line">    [fields]</span><br><span class="line">    // 启动地址集合</span><br><span class="line">   +Addresses : []string</span><br><span class="line">    // 最小节点阈值</span><br><span class="line">   +MinPeerThreshold : int</span><br><span class="line">    // 启动时间阈值，目前为10s</span><br><span class="line">   +Period : string</span><br><span class="line">    [functions]</span><br><span class="line">    //　实例化启动配置的接口</span><br><span class="line">   -newDefaultBootstrapConfig() : *BootstrapConfig</span><br><span class="line"></span><br><span class="line">    // 存储在内存之中的filecoin配置</span><br><span class="line">▼+Config : struct</span><br><span class="line">    [fields]</span><br><span class="line">    // API相关</span><br><span class="line">   +API : *APIConfig</span><br><span class="line">    // 启动相关</span><br><span class="line">   +Bootstrap : *BootstrapConfig</span><br><span class="line">    // 数据存储相关</span><br><span class="line">   +Datastore : *DatastoreConfig</span><br><span class="line">    // 心跳相关</span><br><span class="line">   +Heartbeat : *HeartbeatConfig</span><br><span class="line">    // 挖矿相关</span><br><span class="line">   +Mining : *MiningConfig</span><br><span class="line">    // 网络连接相关</span><br><span class="line">   +Swarm : *SwarmConfig</span><br><span class="line">    // 钱包相关</span><br><span class="line">   +Wallet : *WalletConfig</span><br><span class="line">    [methods]</span><br><span class="line">    // 获取配置，参数为API的上述子结构</span><br><span class="line">   +Get(key string) : interface&#123;&#125;, error</span><br><span class="line">    // 设置配置，参数为API的上述子结构</span><br><span class="line">   +Set(dottedKey string, jsonString string) : error</span><br><span class="line">    // 写对应目录的配置文件</span><br><span class="line">   +WriteFile(file string) : error</span><br><span class="line">    [functions]</span><br><span class="line">    // 实例化配置，会调用各字节口的实例化</span><br><span class="line">   +NewDefaultConfig() : *Config</span><br><span class="line">    // 读对应目录的配置文件</span><br><span class="line">   +ReadFile(file string) : *Config, error</span><br><span class="line"></span><br><span class="line">▼+DatastoreConfig : struct</span><br><span class="line">    [fields]</span><br><span class="line">    // 路径</span><br><span class="line">   +Path : string</span><br><span class="line">    // 类型</span><br><span class="line">   +Type : string</span><br><span class="line">    [functions]</span><br><span class="line">   -newDefaultDatastoreConfig() : *DatastoreConfig</span><br><span class="line"></span><br><span class="line">▼+HeartbeatConfig : struct</span><br><span class="line">    [fields]</span><br><span class="line">    // 心跳周期</span><br><span class="line">   +BeatPeriod : string</span><br><span class="line">    // 心跳目标</span><br><span class="line">   +BeatTarget : string</span><br><span class="line">    // 昵称</span><br><span class="line">   +Nickname : string</span><br><span class="line">    // 重连时间</span><br><span class="line">   +ReconnectPeriod : string</span><br><span class="line">    [functions]</span><br><span class="line">   -newDefaultHeartbeatConfig() : *HeartbeatConfig</span><br><span class="line"></span><br><span class="line">▼+MiningConfig : struct</span><br><span class="line">    [fields]</span><br><span class="line">    // 自动密封间隔周期</span><br><span class="line">   +AutoSealIntervalSeconds : uint</span><br><span class="line">    // 区块签名地址</span><br><span class="line">   +BlockSignerAddress : address.Address</span><br><span class="line">    // 矿工地址</span><br><span class="line">   +MinerAddress : address.Address</span><br><span class="line">    // 存储报价</span><br><span class="line">   +StoragePrice : *types.AttoFIL</span><br><span class="line">    [functions]</span><br><span class="line">   -newDefaultMiningConfig() : *MiningConfig</span><br><span class="line"></span><br><span class="line">▼+SwarmConfig : struct</span><br><span class="line">    [fields]</span><br><span class="line">    // 地址</span><br><span class="line">   +Address : string</span><br><span class="line">    // 转发地址</span><br><span class="line">   +PublicRelayAddress : string</span><br><span class="line">    [functions]</span><br><span class="line">   -newDefaultSwarmConfig() : *SwarmConfig</span><br><span class="line"></span><br><span class="line">▼+WalletConfig : struct</span><br><span class="line">    [fields]</span><br><span class="line">    // 默认钱包地址</span><br><span class="line">   +DefaultAddress : address.Address</span><br><span class="line">    [functions]</span><br><span class="line">   -newDefaultWalletConfig() : *WalletConfig</span><br><span class="line"></span><br><span class="line">▼ functions</span><br><span class="line">   -validate(dottedKey string, jsonString string) : error</span><br><span class="line">   -validateLettersOnly(key string, value string) : error</span><br></pre></td></tr></table></figure>
+<h2 id="crypto"><a href="#crypto" class="headerlink" title="crypto"></a>crypto</h2><ul>
+<li>对外提供功能<ul>
+<li>生成私钥接口</li>
+<li>签名接口</li>
+<li>私钥转公钥接口</li>
+<li>从签名消息中提取公钥接口</li>
+<li>验证消息合法性接口</li>
+<li>主要用于地址生成、钱包相关</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">▼ package</span><br><span class="line">    crypto</span><br><span class="line"></span><br><span class="line">▶ imports</span><br><span class="line"></span><br><span class="line">▼ constants</span><br><span class="line">    // 定义私钥长度32位</span><br><span class="line">   +PrivateKeyBytes</span><br><span class="line">    // 定义公钥长度65位</span><br><span class="line">   +PublicKeyBytes</span><br><span class="line"></span><br><span class="line">▼ functions</span><br><span class="line">    // 从签名消息中恢复公钥</span><br><span class="line">   +EcRecover(msg, signature []byte) : []byte, error</span><br><span class="line">    // 比较私钥是否相同</span><br><span class="line">   +Equals(sk, other []byte) : bool</span><br><span class="line">    // 生成私钥,调用GenerateKeyFromSeed</span><br><span class="line">   +GenerateKey() : []byte, error</span><br><span class="line">    // 生成私钥</span><br><span class="line">   +GenerateKeyFromSeed(seed io.Reader) : []byte, error</span><br><span class="line">    // 由私钥得到公钥</span><br><span class="line">   +PublicKey(sk []byte) : []byte</span><br><span class="line">    // 使用私钥签名</span><br><span class="line">   +Sign(sk, msg []byte) : []byte, error</span><br><span class="line">    // 验证签名合法性</span><br><span class="line">   +Verify(pk, msg, signature []byte) : bool</span><br></pre></td></tr></table></figure>
+<h2 id="util-convert"><a href="#util-convert" class="headerlink" title="util/convert"></a>util/convert</h2><ul>
+<li>提供功能<br>  ToCid:转cid功能</li>
+</ul>
+<h2 id="functional-tests"><a href="#functional-tests" class="headerlink" title="functional-tests"></a>functional-tests</h2><ul>
+<li>测试脚本</li>
+</ul>
+<h2 id="flags"><a href="#flags" class="headerlink" title="flags"></a>flags</h2><ul>
+<li>通过ldflags注入,表示git提交版本号</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var Commit string</span><br></pre></td></tr></table></figure>
+<h2 id="fixtures"><a href="#fixtures" class="headerlink" title="fixtures"></a>fixtures</h2><ul>
+<li>提供功能<ul>
+<li>定义不同网络启动相关地址</li>
+<li>预先分配初始网络状态，比如代币的预先分配</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">▼ package</span><br><span class="line">    fixtures</span><br><span class="line"></span><br><span class="line">▶ imports</span><br><span class="line"></span><br><span class="line">▼ constants</span><br><span class="line">    // 开发人员，开发网络启动相关地址</span><br><span class="line">   -nightlyFilecoinBootstrap0 : string</span><br><span class="line">   -nightlyFilecoinBootstrap1 : string</span><br><span class="line">   -nightlyFilecoinBootstrap2 : string</span><br><span class="line">   -nightlyFilecoinBootstrap3 : string</span><br><span class="line">   -nightlyFilecoinBootstrap4 : string</span><br><span class="line">    // 测试网络启动相关地址</span><br><span class="line">   -testFilecoinBootstrap0 : string</span><br><span class="line">   -testFilecoinBootstrap1 : string</span><br><span class="line">   -testFilecoinBootstrap2 : string</span><br><span class="line">   -testFilecoinBootstrap3 : string</span><br><span class="line">   -testFilecoinBootstrap4 : string</span><br><span class="line">    // 用户，开发网络启动相关地址</span><br><span class="line">   -userFilecoinBootstrap0 : string</span><br><span class="line">   -userFilecoinBootstrap1 : string</span><br><span class="line">   -userFilecoinBootstrap2 : string</span><br><span class="line">   -userFilecoinBootstrap3 : string</span><br><span class="line">   -userFilecoinBootstrap4 : string</span><br><span class="line"></span><br><span class="line">▼ variables</span><br><span class="line">    // 开发人员，开发网络启动相关地址</span><br><span class="line">   +DevnetNightlyBootstrapAddrs</span><br><span class="line">    // 测试网络启动相关地址</span><br><span class="line">   +DevnetTestBootstrapAddrs</span><br><span class="line">    // 用户，开发网络启动相关地址</span><br><span class="line">   +DevnetUserBootstrapAddrs</span><br><span class="line">    // 预生成测试网络地址集合</span><br><span class="line">   +TestAddresses : []string</span><br><span class="line">    // 预生成测试矿工账户集合</span><br><span class="line">   +TestMiners : []string</span><br><span class="line">    // 预生成地址的私钥</span><br><span class="line">   -testKeys : []string</span><br><span class="line"></span><br><span class="line">▼-detailsStruct : struct</span><br><span class="line">    [fields]</span><br><span class="line">    // 创世区块cid</span><br><span class="line">   +GenesisCid : cid.Cid</span><br><span class="line">   +Keys : []*types.KeyInfo</span><br><span class="line">   +Miners : []</span><br><span class="line"></span><br><span class="line">▼ functions</span><br><span class="line">    // 预生成的Key文件路径</span><br><span class="line">   +KeyFilePaths() : []string</span><br><span class="line"></span><br><span class="line">    // 预生成信息</span><br><span class="line">    // 1 解析gen.json文件到detailsStruct结构体</span><br><span class="line">    // 2 追击Miners信息到TestMiners中</span><br><span class="line">   -init()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如下为gen.json文件,可据此预先给特定矿工分配代币</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;keys&quot;: 5,</span><br><span class="line">  &quot;preAlloc&quot;: [</span><br><span class="line">    &quot;1000000000000&quot;,</span><br><span class="line">    &quot;1000000000000&quot;,</span><br><span class="line">    &quot;1000000000000&quot;,</span><br><span class="line">    &quot;1000000000000&quot;,</span><br><span class="line">    &quot;1000000000000&quot;</span><br><span class="line">  ],</span><br><span class="line">  &quot;miners&quot;: [&#123;</span><br><span class="line">    &quot;owner&quot;: 0,</span><br><span class="line">    &quot;power&quot;: 1</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="filnet"><a href="#filnet" class="headerlink" title="filnet"></a>filnet</h2><ul>
+<li>提供功能<ul>
+<li>节点启动</li>
+<li>定期检查连接节点，如果数量不够会链接随机节点</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">location: filnet/address.go</span><br><span class="line"></span><br><span class="line">▼ package</span><br><span class="line">    filnet</span><br><span class="line"></span><br><span class="line">▼ imports</span><br><span class="line">    gx/ipfs/QmNTCey11oxhb1AxDnQBRHtdhap6Ctud872NjAYPYYXPuc/go-multiaddr</span><br><span class="line">    gx/ipfs/QmRhFARzTHcFh8wUxwN5KvyTGq73FLC65EfFAhz8Ng7aGb/go-libp2p-peerstore</span><br><span class="line"></span><br><span class="line">▼ functions</span><br><span class="line">    // 节点id转换为完整的节点信息，包括所有的多地址格式</span><br><span class="line">   +PeerAddrsToPeerInfos(addrs []string) : []pstore.PeerInfo, error</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">location: filnet/bootstrap.go</span><br><span class="line"></span><br><span class="line">▼ package</span><br><span class="line">    filnet</span><br><span class="line"></span><br><span class="line">▶ imports</span><br><span class="line"></span><br><span class="line">▼ variables</span><br><span class="line">   -log</span><br><span class="line"></span><br><span class="line">▼+Bootstrapper : struct</span><br><span class="line">    [fields]</span><br><span class="line">    // 对应bootstrap</span><br><span class="line">   +Bootstrap : func([]peer.ID)</span><br><span class="line">    // 连接超时时间，用于连接随机节点</span><br><span class="line">   +ConnectionTimeout : time.Duration</span><br><span class="line">    // 最小连接节点数量阈值</span><br><span class="line">   +MinPeerThreshold : int</span><br><span class="line">    // 定时检查连接节点数量,小于阈值会处理</span><br><span class="line">   +Period : time.Duration</span><br><span class="line">    // 随机节点切片</span><br><span class="line">   -bootstrapPeers : []pstore.PeerInfo</span><br><span class="line">   -cancel : context.CancelFunc</span><br><span class="line">   -ctx : context.Context</span><br><span class="line">   -d : inet.Dialer</span><br><span class="line">   -dhtBootStarted : bool</span><br><span class="line">   -h : host.Host</span><br><span class="line">   -r : routing.IpfsRouting</span><br><span class="line">   -ticker : *time.Ticker</span><br><span class="line">    [methods]</span><br><span class="line">    // 定时调用Bootstrap 检查连接节点数量,小于阈值会处理</span><br><span class="line">   +Start(ctx context.Context)</span><br><span class="line">    // 停止节点</span><br><span class="line">   +Stop()</span><br><span class="line">    // 如果启动节点不够，将会尝试连接随机节点。</span><br><span class="line">   -bootstrap(currentPeers []peer.ID)</span><br><span class="line">    [functions]</span><br><span class="line">    // 实例化</span><br><span class="line">   +NewBootstrapper(bootstrapPeers []pstore.PeerInfo, h host.Host, d inet.Dialer, r routing.IpfsRouting, minPeer int, period time.Duration) : *Bootstrapper</span><br><span class="line"></span><br><span class="line">▼ functions</span><br><span class="line">   -hasPID(pids []peer.ID, pid peer.ID) : bool</span><br></pre></td></tr></table></figure>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
+
+      
+    </div>
+    
+    
+    
+    
+      
+        <div>
+          <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="Tiny熊 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信号：深入浅出区块链技术，欢迎订阅</div>
+</div>
+
+        </div>
+      
+    
+
+    
+      
+        <div>
+          <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有收获，赞赏下</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/qr_pay.jpg" alt="Tiny熊 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+        </div>
+      
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    先河系统杨尉
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://learnblockchain.cn/2019/03/06/filecoin-code-analysis-9/" title="filecoin技术架构分析九：filecoin源码分析之支撑包分析(1)">https://learnblockchain.cn/2019/03/06/filecoin-code-analysis-9/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/FileCoin/" rel="tag"># FileCoin</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/05/filecoin-code-analysis-8/" rel="next" title="filecoin技术架构分析八：filecoin源码分析之协议层检索协议">
+                <i class="fa fa-chevron-left"></i> filecoin技术架构分析八：filecoin源码分析之协议层检索协议
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/07/wallet-annouce/" rel="prev" title="登链钱包（一款功能强大的以太坊钱包）完全开源">
+                登链钱包（一款功能强大的以太坊钱包）完全开源 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">89</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element" style="margin-top: 20px;">
+              <span>
+                项目
+              </span>
+            </div>
+          
+
+          <div class="links-of-author project motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/bitcoin" target="_self" title="比特币">
+                    
+                      <i class="fa fa-fw fa-false"></i>比特币</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/ethereum" target="_self" title="以太坊">
+                    
+                      <i class="fa fa-fw fa-false"></i>以太坊</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/EOS" target="_self" title="EOS">
+                    
+                      <i class="fa fa-fw fa-false"></i>EOS</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/Fabric" target="_self" title="Fabric">
+                    
+                      <i class="fa fa-fw fa-false"></i>Fabric</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <span>
+                联系我
+              </span>
+            </div>
+          
+          
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/xilibi2003" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiong-li-bing/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hiblock.one/" title="HiBlock区块链社区" target="_blank">HiBlock区块链社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://edu.upchain.pro/book.html" title="图书-精通智能合约开发" target="_blank">图书-精通智能合约开发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="区块链技术专栏" target="_blank">区块链技术专栏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://t.xiaomiquan.com/RfAu7uj" title="技术交流-知识星球" target="_blank">技术交流-知识星球</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blockgeek.org/" title="BG区块链技术论坛" target="_blank">BG区块链技术论坛</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bitshuo.com" title="区块链技术中文社区" target="_blank">区块链技术中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://news.tangwen.org" title="汤问资讯" target="_blank">汤问资讯</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitask.org" title="币问" target="_blank">币问</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eosfans.io/" title="EOS中文社区" target="_blank">EOS中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blockflow.net/" title="BlockFlow" target="_blank">BlockFlow</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.liankexing.com/" title="链客区块链问答社区" target="_blank">链客区块链问答社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitool.cn/" title="币兔" target="_blank">币兔</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wutui.pro/" title="无退社区" target="_blank">无退社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hpb.io/" title="HPB芯链" target="_blank">HPB芯链</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目的"><span class="nav-number">1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译相关"><span class="nav-number">2.</span> <span class="nav-text">编译相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cborutil"><span class="nav-number">3.</span> <span class="nav-text">cborutil</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#address"><span class="nav-number">4.</span> <span class="nav-text">address</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#config"><span class="nav-number">5.</span> <span class="nav-text">config</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#crypto"><span class="nav-number">6.</span> <span class="nav-text">crypto</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#util-convert"><span class="nav-number">7.</span> <span class="nav-text">util/convert</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#functional-tests"><span class="nav-number">8.</span> <span class="nav-text">functional-tests</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flags"><span class="nav-number">9.</span> <span class="nav-text">flags</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fixtures"><span class="nav-number">10.</span> <span class="nav-text">fixtures</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#filnet"><span class="nav-number">11.</span> <span class="nav-text">filnet</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+  <div class="footer-custom"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17140514号-1</a></div>
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

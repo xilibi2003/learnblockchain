@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+  <meta name="msvalidate.01" content="914C9C1CBC7078C5E2AC612AD5C1CC6C" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="FileCoin," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深入浅出区块链" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第十五章源码分析之节点运行逻辑。">
+<meta name="keywords" content="FileCoin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="filecoin技术架构分析之十五：filecoin源码分析之节点运行逻辑">
+<meta property="og:url" content="https://learnblockchain.cn/2019/03/10/filecoin-code-analysis-15/index.html">
+<meta property="og:site_name" content="深入浅出区块链">
+<meta property="og:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第十五章源码分析之节点运行逻辑。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-12T06:51:26.775Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="filecoin技术架构分析之十五：filecoin源码分析之节点运行逻辑">
+<meta name="twitter:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第十五章源码分析之节点运行逻辑。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'UT2K1ZRSWK',
+      apiKey: '0bbb261dfad58df8f8a657a1ed3255cd',
+      indexName: 'learnblockchain',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://learnblockchain.cn/2019/03/10/filecoin-code-analysis-15/"/>
+
+
+
+
+
+  <title>filecoin技术架构分析之十五：filecoin源码分析之节点运行逻辑 | 深入浅出区块链</title>
+  
+
+
+
+
+
+
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6273382609469378",
+        enable_page_level_ads: true
+    });
+</script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">系统学习区块链技术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wiki">
+          <a href="https://wiki.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Wiki
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-meeting">
+          <a href="/categories/dev-meeting/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            技术工坊
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-course">
+          <a href="/course/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-spinner"></i> <br />
+            
+            视频教程
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-web3">
+          <a href="https://web3.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Web3文档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2019/03/10/filecoin-code-analysis-15/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">filecoin技术架构分析之十五：filecoin源码分析之节点运行逻辑</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-10T16:35:33+08:00">
+                2019-03-10
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-12T14:51:26+08:00">
+                2019-03-12
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/FileCoin/" itemprop="url" rel="index">
+                    <span itemprop="name">FileCoin</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我是先河系统CTO杨尉，欢迎大加关注的的Github: <a href="https://github.com/waynewyang" target="_blank" rel="noopener">waynewyang</a>，本文是<a href="https://learnblockchain.cn/2019/03/11/filecoin-code-analysis-0/">filecoin技术架构分析系列文章</a>第十五章源码分析之节点运行逻辑。</p>
+<a id="more"></a>
+<blockquote>
+<p>分析基于的源码版本：go-filecoin master a0598a54(2019年3月9日)</p>
+</blockquote>
+<h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><ul>
+<li><p>我们在前面的章节已经经过了三个阶段的梳理分析</p>
+<ul>
+<li>概念阶段，包括概念、通用语言理解、开发网络使用</li>
+<li>顶层架构与概念的结合理解</li>
+<li>具体源码的简析，包括协议层、支撑包、内部api层、服务层</li>
+</ul>
+</li>
+<li><p>源码部分的command部分比较容易理解，就不单独文章赘述了，基本与内部api层都可以对应起来</p>
+</li>
+<li><p>现在再来看节点的运行逻辑应该会更加清晰了</p>
+</li>
+</ul>
+<h2 id="filecoin节点运行逻辑简析"><a href="#filecoin节点运行逻辑简析" class="headerlink" title="filecoin节点运行逻辑简析"></a>filecoin节点运行逻辑简析</h2><h3 id="基本数据结构"><a href="#基本数据结构" class="headerlink" title="基本数据结构"></a>基本数据结构</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br></pre></td><td class="code"><pre><span class="line">▼ package</span><br><span class="line">    node</span><br><span class="line"></span><br><span class="line">▶ imports</span><br><span class="line"></span><br><span class="line">▼ variables</span><br><span class="line">   +ErrNoMinerAddress</span><br><span class="line">   -filecoinDHTProtocol : dhtprotocol.ID</span><br><span class="line">   -log</span><br><span class="line"></span><br><span class="line">   // 创建具体的filecoin节点实例</span><br><span class="line">▼+Config : struct</span><br><span class="line">    [fields]</span><br><span class="line">    // 设置区块时间</span><br><span class="line">   +BlockTime : time.Duration</span><br><span class="line">    // 配置节点是否转发</span><br><span class="line">   +IsRelay : bool</span><br><span class="line">    // libp2p选项</span><br><span class="line">   +Libp2pOpts : []libp2p.Option</span><br><span class="line">    // 在离线模式下，会关闭libp2p</span><br><span class="line">   +OfflineMode : bool</span><br><span class="line">    // 配置资源</span><br><span class="line">   +Repo : repo.Repo</span><br><span class="line">    // 配置区块奖励方法</span><br><span class="line">   +Rewarder : consensus.BlockRewarder</span><br><span class="line">    // 配置节点时空证明校验函数</span><br><span class="line">   +Verifier : proofs.Verifier</span><br><span class="line">    [methods]</span><br><span class="line">    // 创建node实例</span><br><span class="line">   +Build(ctx context.Context) : *Node, error</span><br><span class="line">   -buildHost(ctx context.Context, makeDHT func(host host.Host) routing.IpfsRouting, error) : host.Host, error</span><br><span class="line"></span><br><span class="line"> +ConfigOpt : func(*Config) error</span><br><span class="line"></span><br><span class="line">▼+Node : struct</span><br><span class="line">    [fields]</span><br><span class="line">    // 确认最新区块，本地持久化并广播</span><br><span class="line">   +AddNewlyMinedBlock : newBlockFunc</span><br><span class="line">    // 订阅主题&quot;/fil/blocks&quot;</span><br><span class="line">   +BlockSub : pubsub.Subscription</span><br><span class="line">    // 块服务接口</span><br><span class="line">   +Blockstore : bstore.Blockstore</span><br><span class="line">    // 维持相关节点连接</span><br><span class="line">   +Bootstrapper : *net.Bootstrapper</span><br><span class="line">    // 读取区块信息</span><br><span class="line">   +ChainReader : chain.ReadStore</span><br><span class="line">    // 同时协议</span><br><span class="line">   +Consensus : consensus.Protocol</span><br><span class="line">    // 块交换,节点间的数据交换</span><br><span class="line">   +Exchange : exchange.Interface</span><br><span class="line">    // new-head 主题</span><br><span class="line">   +HeaviestTipSetCh : chan interface&#123;&#125;</span><br><span class="line">    // 新区块处理请求</span><br><span class="line">   +HeaviestTipSetHandled : func()</span><br><span class="line">    // hello服务</span><br><span class="line">   +HelloSvc : *hello.Handler</span><br><span class="line">    // 消息订阅</span><br><span class="line">   +MessageSub : pubsub.Subscription</span><br><span class="line">    // 挖矿调度</span><br><span class="line">   +MiningScheduler : mining.Scheduler</span><br><span class="line">    // 消息池操作</span><br><span class="line">   +MsgPool : *core.MessagePool</span><br><span class="line">    // 离线模式</span><br><span class="line">   +OfflineMode : bool</span><br><span class="line">   +OnlineStore : *hamt.CborIpldStore</span><br><span class="line">    // 对应libp2p中的host</span><br><span class="line">   +PeerHost : host.Host</span><br><span class="line">    // libp2p中的ping service</span><br><span class="line">   +Ping : *ping.PingService</span><br><span class="line">    // 高层api</span><br><span class="line">   +PorcelainAPI : *porcelain.API</span><br><span class="line">    // 功率表</span><br><span class="line">   +PowerTable : consensus.PowerTableView</span><br><span class="line">    // 配置资源</span><br><span class="line">   +Repo : repo.Repo</span><br><span class="line">    // 检索客户端</span><br><span class="line">   +RetrievalClient : *retrieval.Client</span><br><span class="line">    // 检索矿工</span><br><span class="line">   +RetrievalMiner : *retrieval.Miner</span><br><span class="line">    // 路由,libp2p</span><br><span class="line">   +Router : routing.IpfsRouting</span><br><span class="line">    // 存储矿工</span><br><span class="line">   +StorageMiner : *storage.Miner</span><br><span class="line">    // 存储客户</span><br><span class="line">   +StorageMinerClient : *storage.Client</span><br><span class="line">    // 链同步</span><br><span class="line">   +Syncer : chain.Syncer</span><br><span class="line">    // 钱包管理</span><br><span class="line">   +Wallet : *wallet.Wallet</span><br><span class="line">   -blockTime : time.Duration</span><br><span class="line">   -blockservice : bserv.BlockService</span><br><span class="line">   -cancelMining : context.CancelFunc</span><br><span class="line">   -cancelSubscriptionsCtx : context.CancelFunc</span><br><span class="line">   -cborStore : *hamt.CborIpldStore</span><br><span class="line">   -host : host.Host</span><br><span class="line">   -lookup : lookup.PeerLookupService</span><br><span class="line">   -mining</span><br><span class="line">   -miningCtx : context.Context</span><br><span class="line">   -miningDoneWg : *sync.WaitGroup</span><br><span class="line">   -sectorBuilder : sectorbuilder.SectorBuilder</span><br><span class="line"></span><br><span class="line">    [methods]</span><br><span class="line">   +BlockHeight() : *types.BlockHeight, error</span><br><span class="line">   +BlockService() : bserv.BlockService</span><br><span class="line">   +CborStore() : *hamt.CborIpldStore</span><br><span class="line">   +ChainReadStore() : chain.ReadStore</span><br><span class="line">    // 创建矿工方法</span><br><span class="line">   +CreateMiner(ctx context.Context, accountAddr address.Address, gasPrice types.AttoFIL, gasLimit types.GasUnits, pledge uint64, pid libp2ppeer.ID, collateral *types.AttoFIL) : *address.Address, error</span><br><span class="line">   +GetBlockTime() : time.Duration</span><br><span class="line">   +Host() : host.Host</span><br><span class="line">    // 节点查找方法</span><br><span class="line">   +Lookup() : lookup.PeerLookupService</span><br><span class="line">   +MiningSignerAddress() : address.Address</span><br><span class="line">   +MiningTimes() : time.Duration, time.Duration</span><br><span class="line">    // 创建新的account地址，钱包地址</span><br><span class="line">   +NewAddress() : address.Address, error</span><br><span class="line">   +SectorBuilder() : sectorbuilder.SectorBuilder</span><br><span class="line">   +SetBlockTime(blockTime time.Duration)</span><br><span class="line">    // 启动节点</span><br><span class="line">   +Start(ctx context.Context) : error</span><br><span class="line">    // 启动挖矿</span><br><span class="line">   +StartMining(ctx context.Context) : error</span><br><span class="line">    // 停止节点</span><br><span class="line">   +Stop(ctx context.Context)</span><br><span class="line">    // 停止挖矿</span><br><span class="line">   +StopMining(ctx context.Context)</span><br><span class="line">   -addNewlyMinedBlock(ctx context.Context, b *types.Block)</span><br><span class="line">   -cancelSubscriptions()</span><br><span class="line">   -getLastUsedSectorID(ctx context.Context, minerAddr address.Address) : uint64, error</span><br><span class="line">   -getMinerActorPubKey() : []byte, error</span><br><span class="line">   -handleNewHeaviestTipSet(ctx context.Context, head types.TipSet)</span><br><span class="line">   -handleNewMiningOutput(miningOutCh chan mining.Output)</span><br><span class="line">   -handleSubscription(ctx context.Context, f pubSubProcessorFunc, fname string, s pubsub.Subscription, sname string)</span><br><span class="line">   -isMining() : bool</span><br><span class="line">   -miningAddress() : address.Address, error</span><br><span class="line">   -miningOwnerAddress(ctx context.Context, miningAddr address.Address) : address.Address, error</span><br><span class="line">   -saveMinerConfig(minerAddr address.Address, signerAddr address.Address) : error</span><br><span class="line">   -setIsMining(isMining bool)</span><br><span class="line">   -setupHeartbeatServices(ctx context.Context) : error</span><br><span class="line">   -setupMining(ctx context.Context) : error</span><br><span class="line">    [functions]</span><br><span class="line">    // 调用Build创建node实例</span><br><span class="line">   +New(ctx context.Context, opts ...ConfigOpt) : *Node, error</span><br><span class="line"></span><br><span class="line">▼-blankValidator : struct</span><br><span class="line">    [methods]</span><br><span class="line">   +Select(_ string, _ [][]byte) : int, error</span><br><span class="line">   +Validate(_ string, _ []byte) : error</span><br><span class="line"></span><br><span class="line"> -newBlockFunc : func(context.Context, *types.Block)</span><br><span class="line"></span><br><span class="line"> -pubSubProcessorFunc : func(ctx context.Context, msg pubsub.Message) error</span><br><span class="line"></span><br><span class="line">▼ functions</span><br><span class="line">   +BlockTime(blockTime time.Duration) : ConfigOpt</span><br><span class="line">   +IsRelay() : ConfigOpt</span><br><span class="line">   +Libp2pOptions(opts ...libp2p.Option) : ConfigOpt</span><br><span class="line">   +OfflineMode(offlineMode bool) : ConfigOpt</span><br><span class="line">   +RewarderConfigOption(rewarder consensus.BlockRewarder) : ConfigOpt</span><br><span class="line">   +StartMining(ctx context.Context, node *Node) : error</span><br><span class="line">   +VerifierConfigOption(verifier proofs.Verifier) : ConfigOpt</span><br><span class="line">   -initSectorBuilderForNode(ctx context.Context, node *Node, sectorStoreType proofs.SectorStoreType) : sectorbuilder.SectorBuilder, error</span><br><span class="line">   -initStorageMinerForNode(ctx context.Context, node *Node) : *storage.Miner, error</span><br><span class="line">   -readGenesisCid(ds datastore.Datastore) : cid.Cid, error</span><br></pre></td></tr></table></figure>
+<h3 id="创建filecoin节点实例"><a href="#创建filecoin节点实例" class="headerlink" title="创建filecoin节点实例"></a>创建filecoin节点实例</h3><ul>
+<li>实例化filecoin节点,简析见如下添加的注释</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br></pre></td><td class="code"><pre><span class="line">// Build instantiates a filecoin Node from the settings specified in the config.</span><br><span class="line">func (nc *Config) Build(ctx context.Context) (*Node, error) &#123;</span><br><span class="line">	// 创建内存资源实例</span><br><span class="line">	if nc.Repo == nil &#123;</span><br><span class="line">		nc.Repo = repo.NewInMemoryRepo()</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 创建块服务实例</span><br><span class="line">	bs := bstore.NewBlockstore(nc.Repo.Datastore())</span><br><span class="line"></span><br><span class="line">	validator := blankValidator&#123;&#125;</span><br><span class="line"></span><br><span class="line">	var peerHost host.Host</span><br><span class="line">	var router routing.IpfsRouting</span><br><span class="line"></span><br><span class="line">	// 带宽统计实例,加入libp2popts</span><br><span class="line">	bandwidthTracker := p2pmetrics.NewBandwidthCounter()</span><br><span class="line">	nc.Libp2pOpts = append(nc.Libp2pOpts, libp2p.BandwidthReporter(bandwidthTracker))</span><br><span class="line"></span><br><span class="line">	// 非离线模式才启用libp2p</span><br><span class="line">	if !nc.OfflineMode &#123;</span><br><span class="line">		makeDHT := func(h host.Host) (routing.IpfsRouting, error) &#123;</span><br><span class="line">			r, err := dht.New(</span><br><span class="line">				ctx,</span><br><span class="line">				h,</span><br><span class="line">				dhtopts.Datastore(nc.Repo.Datastore()),</span><br><span class="line">				dhtopts.NamespacedValidator(&quot;v&quot;, validator),</span><br><span class="line">				dhtopts.Protocols(filecoinDHTProtocol),</span><br><span class="line">			)</span><br><span class="line">			if err != nil &#123;</span><br><span class="line">				return nil, errors.Wrap(err, &quot;failed to setup routing&quot;)</span><br><span class="line">			&#125;</span><br><span class="line">			router = r</span><br><span class="line">			return r, err</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		var err error</span><br><span class="line">		// 实例化非离线模式libp2p host</span><br><span class="line">		peerHost, err = nc.buildHost(ctx, makeDHT)</span><br><span class="line">		if err != nil &#123;</span><br><span class="line">			return nil, err</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		// 离线模式处理</span><br><span class="line">		router = offroute.NewOfflineRouter(nc.Repo.Datastore(), validator)</span><br><span class="line">		peerHost = rhost.Wrap(noopLibP2PHost&#123;&#125;, router)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// ping服务实例</span><br><span class="line">	// set up pinger</span><br><span class="line">	pinger := ping.NewPingService(peerHost)</span><br><span class="line"></span><br><span class="line">	// bitswap实例</span><br><span class="line">	// set up bitswap</span><br><span class="line">	nwork := bsnet.NewFromIpfsHost(peerHost, router)</span><br><span class="line">	//nwork := bsnet.NewFromIpfsHost(innerHost, router)</span><br><span class="line">	bswap := bitswap.New(ctx, nwork, bs)</span><br><span class="line">	bservice := bserv.New(bs, bswap)</span><br><span class="line"></span><br><span class="line">	cstOnline := hamt.CborIpldStore&#123;Blocks: bservice&#125;</span><br><span class="line">	cstOffline := hamt.CborIpldStore&#123;Blocks: bserv.New(bs, offline.Exchange(bs))&#125;</span><br><span class="line">	// 获取创世块cid</span><br><span class="line">	genCid, err := readGenesisCid(nc.Repo.Datastore())</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		return nil, err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// chain.Store实例以及功率表</span><br><span class="line">	var chainStore chain.Store = chain.NewDefaultStore(nc.Repo.ChainDatastore(), &amp;cstOffline, genCid)</span><br><span class="line">	powerTable := &amp;consensus.MarketView&#123;&#125;</span><br><span class="line"></span><br><span class="line">	// 共识协议processor实例</span><br><span class="line">	var processor consensus.Processor</span><br><span class="line">	if nc.Rewarder == nil &#123;</span><br><span class="line">		processor = consensus.NewDefaultProcessor()</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		processor = consensus.NewConfiguredProcessor(consensus.NewDefaultMessageValidator(), nc.Rewarder)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 共识协议实例</span><br><span class="line">	var nodeConsensus consensus.Protocol</span><br><span class="line">	if nc.Verifier == nil &#123;</span><br><span class="line">		nodeConsensus = consensus.NewExpected(&amp;cstOffline, bs, processor, powerTable, genCid, &amp;proofs.RustVerifier&#123;&#125;)</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		nodeConsensus = consensus.NewExpected(&amp;cstOffline, bs, processor, powerTable, genCid, nc.Verifier)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 链同步，链读取，消息池实例</span><br><span class="line">	// only the syncer gets the storage which is online connected</span><br><span class="line">	chainSyncer := chain.NewDefaultSyncer(&amp;cstOnline, &amp;cstOffline, nodeConsensus, chainStore)</span><br><span class="line">	chainReader, ok := chainStore.(chain.ReadStore)</span><br><span class="line">	if !ok &#123;</span><br><span class="line">		return nil, errors.New(&quot;failed to cast chain.Store to chain.ReadStore&quot;)</span><br><span class="line">	&#125;</span><br><span class="line">	msgPool := core.NewMessagePool()</span><br><span class="line"></span><br><span class="line">	// Set up libp2p pubsub</span><br><span class="line">	fsub, err := libp2pps.NewFloodSub(ctx, peerHost)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		return nil, errors.Wrap(err, &quot;failed to set up pubsub&quot;)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 钱包服务实例</span><br><span class="line">	backend, err := wallet.NewDSBackend(nc.Repo.WalletDatastore())</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		return nil, errors.Wrap(err, &quot;failed to set up wallet backend&quot;)</span><br><span class="line">	&#125;</span><br><span class="line">	fcWallet := wallet.New(backend)</span><br><span class="line"></span><br><span class="line">	// 实例化高层api</span><br><span class="line">	PorcelainAPI := porcelain.New(plumbing.New(&amp;plumbing.APIDeps&#123;</span><br><span class="line">		Chain:        chainReader,</span><br><span class="line">		Config:       cfg.NewConfig(nc.Repo),</span><br><span class="line">		Deals:        strgdls.New(nc.Repo.DealsDatastore()),</span><br><span class="line">		MsgPool:      msgPool,</span><br><span class="line">		MsgPreviewer: msg.NewPreviewer(fcWallet, chainReader, &amp;cstOffline, bs),</span><br><span class="line">		MsgQueryer:   msg.NewQueryer(nc.Repo, fcWallet, chainReader, &amp;cstOffline, bs),</span><br><span class="line">		MsgSender:    msg.NewSender(fcWallet, chainReader, msgPool, consensus.NewOutboundMessageValidator(), fsub.Publish),</span><br><span class="line">		MsgWaiter:    msg.NewWaiter(chainReader, bs, &amp;cstOffline),</span><br><span class="line">		Network:      net.New(peerHost, pubsub.NewPublisher(fsub), pubsub.NewSubscriber(fsub), net.NewRouter(router), bandwidthTracker),</span><br><span class="line">		SigGetter:    mthdsig.NewGetter(chainReader),</span><br><span class="line">		Wallet:       fcWallet,</span><br><span class="line">	&#125;))</span><br><span class="line"></span><br><span class="line">	// 实例化node</span><br><span class="line">	nd := &amp;Node&#123;</span><br><span class="line">		blockservice: bservice,</span><br><span class="line">		Blockstore:   bs,</span><br><span class="line">		cborStore:    &amp;cstOffline,</span><br><span class="line">		OnlineStore:  &amp;cstOnline,</span><br><span class="line">		Consensus:    nodeConsensus,</span><br><span class="line">		ChainReader:  chainReader,</span><br><span class="line">		Syncer:       chainSyncer,</span><br><span class="line">		PowerTable:   powerTable,</span><br><span class="line">		PorcelainAPI: PorcelainAPI,</span><br><span class="line">		Exchange:     bswap,</span><br><span class="line">		host:         peerHost,</span><br><span class="line">		MsgPool:      msgPool,</span><br><span class="line">		OfflineMode:  nc.OfflineMode,</span><br><span class="line">		PeerHost:     peerHost,</span><br><span class="line">		Ping:         pinger,</span><br><span class="line">		Repo:         nc.Repo,</span><br><span class="line">		Wallet:       fcWallet,</span><br><span class="line">		blockTime:    nc.BlockTime,</span><br><span class="line">		Router:       router,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// Bootstrapping network peers.</span><br><span class="line">	periodStr := nd.Repo.Config().Bootstrap.Period</span><br><span class="line">	period, err := time.ParseDuration(periodStr)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		return nil, errors.Wrapf(err, &quot;couldn&apos;t parse bootstrap period %s&quot;, periodStr)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 实例化Bootstrapper,指定node的该方法</span><br><span class="line">	// Bootstrapper maintains connections to some subset of addresses</span><br><span class="line">	ba := nd.Repo.Config().Bootstrap.Addresses</span><br><span class="line">	bpi, err := net.PeerAddrsToPeerInfos(ba)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		return nil, errors.Wrapf(err, &quot;couldn&apos;t parse bootstrap addresses [%s]&quot;, ba)</span><br><span class="line">	&#125;</span><br><span class="line">	minPeerThreshold := nd.Repo.Config().Bootstrap.MinPeerThreshold</span><br><span class="line">	nd.Bootstrapper = net.NewBootstrapper(bpi, nd.Host(), nd.Host().Network(), nd.Router, minPeerThreshold, period)</span><br><span class="line"></span><br><span class="line">	// 实例化链查找服务，指定node的该方法</span><br><span class="line">	// On-chain lookup service</span><br><span class="line">	defaultAddressGetter := func() (address.Address, error) &#123;</span><br><span class="line">		return nd.PorcelainAPI.GetAndMaybeSetDefaultSenderAddress()</span><br><span class="line">	&#125;</span><br><span class="line">	nd.lookup = lookup.NewChainLookupService(nd.ChainReader, defaultAddressGetter, bs)</span><br><span class="line"></span><br><span class="line">	return nd, nil</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="启动及停止filecoin节点"><a href="#启动及停止filecoin节点" class="headerlink" title="启动及停止filecoin节点"></a>启动及停止filecoin节点</h3><ul>
+<li>启动filecoin节点的流程概览</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">// Start boots up the node.</span><br><span class="line">func (node *Node) Start(ctx context.Context) error &#123;</span><br><span class="line">	// 加载本地chain信息</span><br><span class="line">	if err := node.ChainReader.Load(ctx); err != nil &#123;</span><br><span class="line">		return err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 如果存在存储矿工，配置挖矿功能</span><br><span class="line">	// Only set these up if there is a miner configured.</span><br><span class="line">	if _, err := node.miningAddress(); err == nil &#123;</span><br><span class="line">		if err := node.setupMining(ctx); err != nil &#123;</span><br><span class="line">			log.Errorf(&quot;setup mining failed: %v&quot;, err)</span><br><span class="line">			return err</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 设置链同步回调函数</span><br><span class="line">	// Start up &apos;hello&apos; handshake service</span><br><span class="line">	syncCallBack := func(pid libp2ppeer.ID, cids []cid.Cid, height uint64) &#123;</span><br><span class="line">		// TODO it is possible the syncer interface should be modified to</span><br><span class="line">		// make use of the additional context not used here (from addr + height).</span><br><span class="line">		// To keep things simple for now this info is not used.</span><br><span class="line">		err := node.Syncer.HandleNewBlocks(context.Background(), cids)</span><br><span class="line">		if err != nil &#123;</span><br><span class="line">			log.Infof(&quot;error handling blocks: %s&quot;, types.NewSortedCidSet(cids...).String())</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	// 实例化hello握手协议</span><br><span class="line">	node.HelloSvc = hello.New(node.Host(), node.ChainReader.GenesisCid(), syncCallBack, node.ChainReader.Head)</span><br><span class="line"></span><br><span class="line">	// 实例化存储矿工协议</span><br><span class="line">	cni := storage.NewClientNodeImpl(dag.NewDAGService(node.BlockService()), node.Host(), node.GetBlockTime())</span><br><span class="line">	var err error</span><br><span class="line">	node.StorageMinerClient, err = storage.NewClient(cni, node.PorcelainAPI)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		return errors.Wrap(err, &quot;Could not make new storage client&quot;)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 实例化检索客户及检索矿工协议</span><br><span class="line">	node.RetrievalClient = retrieval.NewClient(node)</span><br><span class="line">	node.RetrievalMiner = retrieval.NewMiner(node)</span><br><span class="line"></span><br><span class="line">	// 订阅区块通知</span><br><span class="line">	// subscribe to block notifications</span><br><span class="line">	blkSub, err := node.PorcelainAPI.PubSubSubscribe(BlockTopic)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		return errors.Wrap(err, &quot;failed to subscribe to blocks topic&quot;)</span><br><span class="line">	&#125;</span><br><span class="line">	node.BlockSub = blkSub</span><br><span class="line"></span><br><span class="line">	// 订阅消息通知</span><br><span class="line">	// subscribe to message notifications</span><br><span class="line">	msgSub, err := node.PorcelainAPI.PubSubSubscribe(msg.Topic)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		return errors.Wrap(err, &quot;failed to subscribe to message topic&quot;)</span><br><span class="line">	&#125;</span><br><span class="line">	node.MessageSub = msgSub</span><br><span class="line"></span><br><span class="line">	cctx, cancel := context.WithCancel(context.Background())</span><br><span class="line">	node.cancelSubscriptionsCtx = cancel</span><br><span class="line"></span><br><span class="line">	// 启用新线程订阅区块及消息主题,设置handle回调</span><br><span class="line">	go node.handleSubscription(cctx, node.processBlock, &quot;processBlock&quot;, node.BlockSub, &quot;BlockSub&quot;)</span><br><span class="line">	go node.handleSubscription(cctx, node.processMessage, &quot;processMessage&quot;, node.MessageSub, &quot;MessageSub&quot;)</span><br><span class="line"></span><br><span class="line">	// 启用新线程处理新的tipset事件</span><br><span class="line">	node.HeaviestTipSetHandled = func() &#123;&#125;</span><br><span class="line">	node.HeaviestTipSetCh = node.ChainReader.HeadEvents().Sub(chain.NewHeadTopic)</span><br><span class="line">	go node.handleNewHeaviestTipSet(cctx, node.ChainReader.Head())</span><br><span class="line"></span><br><span class="line">	// 非离线模式启动bootstapper服务</span><br><span class="line">	if !node.OfflineMode &#123;</span><br><span class="line">		node.Bootstrapper.Start(context.Background())</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 启动心跳服务</span><br><span class="line">	if err := node.setupHeartbeatServices(ctx); err != nil &#123;</span><br><span class="line">		return errors.Wrap(err, &quot;failed to start heartbeat services&quot;)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return nil</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>停止filecoin节点的流程概览 </li>
+</ul>
+<blockquote>
+<p>释放资源，停止相关服务</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">// Stop initiates the shutdown of the node.</span><br><span class="line">func (node *Node) Stop(ctx context.Context) &#123;</span><br><span class="line">	node.ChainReader.HeadEvents().Unsub(node.HeaviestTipSetCh)</span><br><span class="line">	// 停止挖矿</span><br><span class="line">	node.StopMining(ctx)</span><br><span class="line"></span><br><span class="line">	// 取消订阅</span><br><span class="line">	node.cancelSubscriptions()</span><br><span class="line">	// 停止链读取服务</span><br><span class="line">	node.ChainReader.Stop()</span><br><span class="line"></span><br><span class="line">	// 停止密封服务</span><br><span class="line">	if node.SectorBuilder() != nil &#123;</span><br><span class="line">		if err := node.SectorBuilder().Close(); err != nil &#123;</span><br><span class="line">			fmt.Printf(&quot;error closing sector builder: %s\n&quot;, err)</span><br><span class="line">		&#125;</span><br><span class="line">		node.sectorBuilder = nil</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 关闭host实例</span><br><span class="line">	if err := node.Host().Close(); err != nil &#123;</span><br><span class="line">		fmt.Printf(&quot;error closing host: %s\n&quot;, err)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 关闭资源实例</span><br><span class="line">	if err := node.Repo.Close(); err != nil &#123;</span><br><span class="line">		fmt.Printf(&quot;error closing repo: %s\n&quot;, err)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 关闭bootstqpper实例</span><br><span class="line">	node.Bootstrapper.Stop()</span><br><span class="line"></span><br><span class="line">	fmt.Println(&quot;stopping filecoin :(&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="启动及停止挖矿"><a href="#启动及停止挖矿" class="headerlink" title="启动及停止挖矿"></a>启动及停止挖矿</h3><ul>
+<li>启动挖矿</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br></pre></td><td class="code"><pre><span class="line">// StartMining causes the node to start feeding blocks to the mining worker and initializes</span><br><span class="line">// the SectorBuilder for the mining address.</span><br><span class="line">func (node *Node) StartMining(ctx context.Context) error &#123;</span><br><span class="line">	// 如果在挖矿中，退出</span><br><span class="line">	if node.isMining() &#123;</span><br><span class="line">		return errors.New(&quot;Node is already mining&quot;)</span><br><span class="line">	&#125;</span><br><span class="line">	// 获取矿工地址</span><br><span class="line">	minerAddr, err := node.miningAddress()</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		return errors.Wrap(err, &quot;failed to get mining address&quot;)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 确保密封服务实例存在</span><br><span class="line">	// ensure we have a sector builder</span><br><span class="line">	if node.SectorBuilder() == nil &#123;</span><br><span class="line">		if err := node.setupMining(ctx); err != nil &#123;</span><br><span class="line">			return err</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 获取地址</span><br><span class="line">	minerOwnerAddr, err := node.miningOwnerAddress(ctx, minerAddr)</span><br><span class="line">	minerSigningAddress := node.MiningSignerAddress()</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		return errors.Wrapf(err, &quot;failed to get mining owner address for miner %s&quot;, minerAddr)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	blockTime, mineDelay := node.MiningTimes()</span><br><span class="line"></span><br><span class="line">	// 实例化挖矿调度服务</span><br><span class="line">	if node.MiningScheduler == nil &#123;</span><br><span class="line">		getStateFromKey := func(ctx context.Context, tsKey string) (state.Tree, error) &#123;</span><br><span class="line">			tsas, err := node.ChainReader.GetTipSetAndState(ctx, tsKey)</span><br><span class="line">			if err != nil &#123;</span><br><span class="line">				return nil, err</span><br><span class="line">			&#125;</span><br><span class="line">			return state.LoadStateTree(ctx, node.CborStore(), tsas.TipSetStateRoot, builtin.Actors)</span><br><span class="line">		&#125;</span><br><span class="line">		getState := func(ctx context.Context, ts types.TipSet) (state.Tree, error) &#123;</span><br><span class="line">			return getStateFromKey(ctx, ts.String())</span><br><span class="line">		&#125;</span><br><span class="line">		getWeight := func(ctx context.Context, ts types.TipSet) (uint64, error) &#123;</span><br><span class="line">			parent, err := ts.Parents()</span><br><span class="line">			if err != nil &#123;</span><br><span class="line">				return uint64(0), err</span><br><span class="line">			&#125;</span><br><span class="line">			// TODO handle genesis cid more gracefully</span><br><span class="line">			if parent.Len() == 0 &#123;</span><br><span class="line">				return node.Consensus.Weight(ctx, ts, nil)</span><br><span class="line">			&#125;</span><br><span class="line">			pSt, err := getStateFromKey(ctx, parent.String())</span><br><span class="line">			if err != nil &#123;</span><br><span class="line">				return uint64(0), err</span><br><span class="line">			&#125;</span><br><span class="line">			return node.Consensus.Weight(ctx, ts, pSt)</span><br><span class="line">		&#125;</span><br><span class="line">		getAncestors := func(ctx context.Context, ts types.TipSet, newBlockHeight *types.BlockHeight) ([]types.TipSet, error) &#123;</span><br><span class="line">			return chain.GetRecentAncestors(ctx, ts, node.ChainReader, newBlockHeight, consensus.AncestorRoundsNeeded, consensus.LookBackParameter)</span><br><span class="line">		&#125;</span><br><span class="line">		processor := consensus.NewDefaultProcessor()</span><br><span class="line">		worker := mining.NewDefaultWorker(node.MsgPool, getState, getWeight, getAncestors, processor, node.PowerTable,</span><br><span class="line">			node.Blockstore, node.CborStore(), minerAddr, minerOwnerAddr, minerSigningAddress, node.Wallet, blockTime)</span><br><span class="line">		node.MiningScheduler = mining.NewScheduler(worker, mineDelay, node.ChainReader.Head)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// paranoid check</span><br><span class="line">	// 启动挖矿服务</span><br><span class="line">	if !node.MiningScheduler.IsStarted() &#123;</span><br><span class="line">		node.miningCtx, node.cancelMining = context.WithCancel(context.Background())</span><br><span class="line">		outCh, doneWg := node.MiningScheduler.Start(node.miningCtx)</span><br><span class="line"></span><br><span class="line">		node.miningDoneWg = doneWg</span><br><span class="line">		node.AddNewlyMinedBlock = node.addNewlyMinedBlock</span><br><span class="line">		node.miningDoneWg.Add(1)</span><br><span class="line">		go node.handleNewMiningOutput(outCh)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// initialize a storage miner</span><br><span class="line">	// 初始化存储矿工</span><br><span class="line">	storageMiner, err := initStorageMinerForNode(ctx, node)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		return errors.Wrap(err, &quot;failed to initialize storage miner&quot;)</span><br><span class="line">	&#125;</span><br><span class="line">	node.StorageMiner = storageMiner</span><br><span class="line"></span><br><span class="line">	// loop, turning sealing-results into commitSector messages to be included</span><br><span class="line">	// in the chain</span><br><span class="line">	// 新开线程处理，1 密封完成处理；2 接受停止挖矿消息</span><br><span class="line">	go func() &#123;</span><br><span class="line">		for &#123;</span><br><span class="line">			select &#123;</span><br><span class="line">				// 密封完成处理</span><br><span class="line">			case result := &lt;-node.SectorBuilder().SectorSealResults():</span><br><span class="line">				if result.SealingErr != nil &#123;</span><br><span class="line">					log.Errorf(&quot;failed to seal sector with id %d: %s&quot;, result.SectorID, result.SealingErr.Error())</span><br><span class="line">				&#125; else if result.SealingResult != nil &#123;</span><br><span class="line"></span><br><span class="line">					// TODO: determine these algorithmically by simulating call and querying historical prices</span><br><span class="line">					gasPrice := types.NewGasPrice(0)</span><br><span class="line">					gasUnits := types.NewGasUnits(300)</span><br><span class="line"></span><br><span class="line">					val := result.SealingResult</span><br><span class="line">					// This call can fail due to, e.g. nonce collisions. Our miners existence depends on this.</span><br><span class="line">					// We should deal with this, but MessageSendWithRetry is problematic.</span><br><span class="line">					_, err := node.PorcelainAPI.MessageSend(</span><br><span class="line">						node.miningCtx,</span><br><span class="line">						minerOwnerAddr,</span><br><span class="line">						minerAddr,</span><br><span class="line">						nil,</span><br><span class="line">						gasPrice,</span><br><span class="line">						gasUnits,</span><br><span class="line">						&quot;commitSector&quot;,</span><br><span class="line">						val.SectorID,</span><br><span class="line">						val.CommD[:],</span><br><span class="line">						val.CommR[:],</span><br><span class="line">						val.CommRStar[:],</span><br><span class="line">						val.Proof[:],</span><br><span class="line">					)</span><br><span class="line">					if err != nil &#123;</span><br><span class="line">						log.Errorf(&quot;failed to send commitSector message from %s to %s for sector with id %d: %s&quot;, minerOwnerAddr, minerAddr, val.SectorID, err)</span><br><span class="line">						continue</span><br><span class="line">					&#125;</span><br><span class="line"></span><br><span class="line">					node.StorageMiner.OnCommitmentAddedToChain(val, nil)</span><br><span class="line">				&#125;</span><br><span class="line">				// 挖矿取消</span><br><span class="line">			case &lt;-node.miningCtx.Done():</span><br><span class="line">				return</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;()</span><br><span class="line"></span><br><span class="line">	// schedules sealing of staged piece-data</span><br><span class="line">	// 定时密封阶段性的碎片数据</span><br><span class="line">	if node.Repo.Config().Mining.AutoSealIntervalSeconds &gt; 0 &#123;</span><br><span class="line">		go func() &#123;</span><br><span class="line">			for &#123;</span><br><span class="line">				select &#123;</span><br><span class="line">					// 取消</span><br><span class="line">				case &lt;-node.miningCtx.Done():</span><br><span class="line">					return</span><br><span class="line">					// 定时密封</span><br><span class="line">				case &lt;-time.After(time.Duration(node.Repo.Config().Mining.AutoSealIntervalSeconds) * time.Second):</span><br><span class="line">					log.Info(&quot;auto-seal has been triggered&quot;)</span><br><span class="line">					if err := node.SectorBuilder().SealAllStagedSectors(node.miningCtx); err != nil &#123;</span><br><span class="line">						log.Errorf(&quot;scheduler received error from node.SectorBuilder.SealAllStagedSectors (%s) - exiting&quot;, err.Error())</span><br><span class="line">						return</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;()</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		log.Debug(&quot;auto-seal is disabled&quot;)</span><br><span class="line">	&#125;</span><br><span class="line">	// 设置微挖矿状态</span><br><span class="line">	node.setIsMining(true)</span><br><span class="line"></span><br><span class="line">	return nil</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>停止挖矿</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// StopMining stops mining on new blocks.</span><br><span class="line">func (node *Node) StopMining(ctx context.Context) &#123;</span><br><span class="line">	node.setIsMining(false)</span><br><span class="line"></span><br><span class="line">	// 取消挖矿</span><br><span class="line">	if node.cancelMining != nil &#123;</span><br><span class="line">		node.cancelMining()</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 等待执行中的挖矿任务完成后结束</span><br><span class="line">	if node.miningDoneWg != nil &#123;</span><br><span class="line">		node.miningDoneWg.Wait()</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// TODO: stop node.StorageMiner</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="阶段性分析结束说明"><a href="#阶段性分析结束说明" class="headerlink" title="阶段性分析结束说明"></a>阶段性分析结束说明</h2><blockquote>
+<p>至此笔者针对go-filecoin部分的分析快告一个小的段落了</p>
+<p>文章因为时间的关系，书面出来只是将关键部分书面表达出来，更多的像是笔者的一个分析笔记,但是我相信对于想分析源码的朋友有一定帮助</p>
+<p>后面会抽空补充一章总结，笔者在第4章中有提到过，薄读-&gt;厚读-&gt;再薄读,我们还需要一次薄读，来加深我们对filecoin的认识。</p>
+</blockquote>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
+
+      
+    </div>
+    
+    
+    
+    
+      
+        <div>
+          <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="Tiny熊 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信号：深入浅出区块链技术，欢迎订阅</div>
+</div>
+
+        </div>
+      
+    
+
+    
+      
+        <div>
+          <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有收获，赞赏下</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/qr_pay.jpg" alt="Tiny熊 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+        </div>
+      
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    先河系统杨尉
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://learnblockchain.cn/2019/03/10/filecoin-code-analysis-15/" title="filecoin技术架构分析之十五：filecoin源码分析之节点运行逻辑">https://learnblockchain.cn/2019/03/10/filecoin-code-analysis-15/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/FileCoin/" rel="tag"># FileCoin</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/09/filecoin-code-analysis-14/" rel="next" title="filecoin技术架构分析十四：filecoin源码分析之服务层链同步、共识协议及挖矿">
+                <i class="fa fa-chevron-left"></i> filecoin技术架构分析十四：filecoin源码分析之服务层链同步、共识协议及挖矿
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/11/filecoin-code-analysis-0/" rel="prev" title="filecoin技术架构分析系列文章 - 目录">
+                filecoin技术架构分析系列文章 - 目录 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">89</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element" style="margin-top: 20px;">
+              <span>
+                项目
+              </span>
+            </div>
+          
+
+          <div class="links-of-author project motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/bitcoin" target="_self" title="比特币">
+                    
+                      <i class="fa fa-fw fa-false"></i>比特币</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/ethereum" target="_self" title="以太坊">
+                    
+                      <i class="fa fa-fw fa-false"></i>以太坊</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/EOS" target="_self" title="EOS">
+                    
+                      <i class="fa fa-fw fa-false"></i>EOS</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/Fabric" target="_self" title="Fabric">
+                    
+                      <i class="fa fa-fw fa-false"></i>Fabric</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <span>
+                联系我
+              </span>
+            </div>
+          
+          
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/xilibi2003" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiong-li-bing/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hiblock.one/" title="HiBlock区块链社区" target="_blank">HiBlock区块链社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://edu.upchain.pro/book.html" title="图书-精通智能合约开发" target="_blank">图书-精通智能合约开发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="区块链技术专栏" target="_blank">区块链技术专栏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://t.xiaomiquan.com/RfAu7uj" title="技术交流-知识星球" target="_blank">技术交流-知识星球</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blockgeek.org/" title="BG区块链技术论坛" target="_blank">BG区块链技术论坛</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bitshuo.com" title="区块链技术中文社区" target="_blank">区块链技术中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://news.tangwen.org" title="汤问资讯" target="_blank">汤问资讯</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitask.org" title="币问" target="_blank">币问</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eosfans.io/" title="EOS中文社区" target="_blank">EOS中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blockflow.net/" title="BlockFlow" target="_blank">BlockFlow</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.liankexing.com/" title="链客区块链问答社区" target="_blank">链客区块链问答社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitool.cn/" title="币兔" target="_blank">币兔</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wutui.pro/" title="无退社区" target="_blank">无退社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hpb.io/" title="HPB芯链" target="_blank">HPB芯链</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前提"><span class="nav-number">1.</span> <span class="nav-text">前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#filecoin节点运行逻辑简析"><span class="nav-number">2.</span> <span class="nav-text">filecoin节点运行逻辑简析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本数据结构"><span class="nav-number">2.1.</span> <span class="nav-text">基本数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建filecoin节点实例"><span class="nav-number">2.2.</span> <span class="nav-text">创建filecoin节点实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动及停止filecoin节点"><span class="nav-number">2.3.</span> <span class="nav-text">启动及停止filecoin节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动及停止挖矿"><span class="nav-number">2.4.</span> <span class="nav-text">启动及停止挖矿</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阶段性分析结束说明"><span class="nav-number">3.</span> <span class="nav-text">阶段性分析结束说明</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+  <div class="footer-custom"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17140514号-1</a></div>
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

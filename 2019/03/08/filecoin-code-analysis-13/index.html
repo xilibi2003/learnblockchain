@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+  <meta name="msvalidate.01" content="914C9C1CBC7078C5E2AC612AD5C1CC6C" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="FileCoin," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深入浅出区块链" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第十三章源码分析之服务层actor及vm。">
+<meta name="keywords" content="FileCoin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="filecoin技术架构分析十三：filecoin源码分析之服务层actor及vm">
+<meta property="og:url" content="https://learnblockchain.cn/2019/03/08/filecoin-code-analysis-13/index.html">
+<meta property="og:site_name" content="深入浅出区块链">
+<meta property="og:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第十三章源码分析之服务层actor及vm。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://learnblockchain.cn/images/payment.png">
+<meta property="og:updated_time" content="2019-03-12T06:51:17.794Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="filecoin技术架构分析十三：filecoin源码分析之服务层actor及vm">
+<meta name="twitter:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第十三章源码分析之服务层actor及vm。">
+<meta name="twitter:image" content="https://learnblockchain.cn/images/payment.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'UT2K1ZRSWK',
+      apiKey: '0bbb261dfad58df8f8a657a1ed3255cd',
+      indexName: 'learnblockchain',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://learnblockchain.cn/2019/03/08/filecoin-code-analysis-13/"/>
+
+
+
+
+
+  <title>filecoin技术架构分析十三：filecoin源码分析之服务层actor及vm | 深入浅出区块链</title>
+  
+
+
+
+
+
+
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6273382609469378",
+        enable_page_level_ads: true
+    });
+</script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">系统学习区块链技术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wiki">
+          <a href="https://wiki.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Wiki
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-meeting">
+          <a href="/categories/dev-meeting/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            技术工坊
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-course">
+          <a href="/course/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-spinner"></i> <br />
+            
+            视频教程
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-web3">
+          <a href="https://web3.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Web3文档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2019/03/08/filecoin-code-analysis-13/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">filecoin技术架构分析十三：filecoin源码分析之服务层actor及vm</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-08T16:35:33+08:00">
+                2019-03-08
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-12T14:51:17+08:00">
+                2019-03-12
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/FileCoin/" itemprop="url" rel="index">
+                    <span itemprop="name">FileCoin</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我是先河系统CTO杨尉，欢迎大加关注的的Github: <a href="https://github.com/waynewyang" target="_blank" rel="noopener">waynewyang</a>，本文是<a href="https://learnblockchain.cn/2019/03/11/filecoin-code-analysis-0/">filecoin技术架构分析系列文章</a>第十三章源码分析之服务层actor及vm。</p>
+<a id="more"></a>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><blockquote>
+<p>分析源代码版本：master 2c87fd59（2019.3.7）</p>
+<p>回头看第三章开发网使用中创建矿工，提交订单，支付等操作实际上都是actor的新增及状态改变</p>
+<p>当前的实现vm还不具备通用abi数据的解释执行能力，未达到真正智能合约水平</p>
+</blockquote>
+<h2 id="exec-actor及vm的接口定义"><a href="#exec-actor及vm的接口定义" class="headerlink" title="exec(actor及vm的接口定义)"></a>exec(actor及vm的接口定义)</h2><ul>
+<li><p>说明</p>
+<ul>
+<li>提供可执行actor的最小接口要求 ExecutableActor (由actor及具体actor包实现)</li>
+<li>提供actor键值存取接口定义 Lookup (由actor包实现)</li>
+<li>提供状态临时存储的接口定义　Storage (由vm.Storage实现)</li>
+<li>actor的执行环境接口定义 VMContext (由vm.context实现)</li>
+</ul>
+</li>
+<li><p>具体源码注释如下</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">▼ package</span><br><span class="line">    exec</span><br><span class="line"></span><br><span class="line">▶ imports</span><br><span class="line"></span><br><span class="line">▼ constants</span><br><span class="line">   +ErrDanglingPointer</span><br><span class="line">   +ErrDecode</span><br><span class="line">   +ErrInsufficientGas</span><br><span class="line">   +ErrStaleHead</span><br><span class="line"></span><br><span class="line">▼ variables</span><br><span class="line">   +Errors</span><br><span class="line"></span><br><span class="line">▼+Error : string</span><br><span class="line">    [methods]</span><br><span class="line">   +Error() : string</span><br><span class="line"></span><br><span class="line"> +ExportedFunc : func(ctx VMContext) []byte, uint8, error</span><br><span class="line"></span><br><span class="line">    // actor符号集合</span><br><span class="line">▼+Exports : map[string]*FunctionSignature</span><br><span class="line">    [methods]</span><br><span class="line">    // 判断是否存在特定方法</span><br><span class="line">   +Has(method string) : bool</span><br><span class="line">    </span><br><span class="line">    // 对于单个函数的符号表</span><br><span class="line">    // todo中的事情：需要转换为非go类型</span><br><span class="line">▼+FunctionSignature : struct</span><br><span class="line">    [fields]</span><br><span class="line">   +Params : []abi.Type</span><br><span class="line">   +Return : []abi.Type</span><br><span class="line"></span><br><span class="line">    // 可执行合约接口，这是每一类型的合约必须实现的最小接口</span><br><span class="line">    // 包括account,miner,storagemarket,paymentbroker</span><br><span class="line">▼+ExecutableActor : interface</span><br><span class="line">    [methods]</span><br><span class="line">   +Exports() : Exports</span><br><span class="line">   +InitializeState(storage Storage, initializerData interface&#123;&#125;) : error</span><br><span class="line"></span><br><span class="line">   // 由actor.lookup实现键值存储　（actor/storage.go）</span><br><span class="line">▼+Lookup : interface</span><br><span class="line">    [methods]</span><br><span class="line">   +Commit(ctx context.Context) : cid.Cid, error</span><br><span class="line">   +Delete(ctx context.Context, k string) : error</span><br><span class="line">   +Find(ctx context.Context, k string) : interface&#123;&#125;, error</span><br><span class="line">   +IsEmpty() : bool</span><br><span class="line">   +Set(ctx context.Context, k string, v interface&#123;&#125;) : error</span><br><span class="line">   +Values(ctx context.Context) : []*hamt.KV, error</span><br><span class="line"></span><br><span class="line">   // 由vm.Storage实现</span><br><span class="line">   // 解决持久化的问题，有副本防止回滚机制</span><br><span class="line">   // 具体实现还有Flush持久化到datastore功能</span><br><span class="line">▼+Storage : interface</span><br><span class="line">    [methods]</span><br><span class="line">    // 提交最新actor　Head</span><br><span class="line">   +Commit(cid.Cid, cid.Cid) : error</span><br><span class="line">    // 如下都为内存中操作</span><br><span class="line">   +Get(cid.Cid) : []byte, error</span><br><span class="line">   +Head() : cid.Cid</span><br><span class="line">   +Put(interface&#123;&#125;) : cid.Cid, error</span><br><span class="line"></span><br><span class="line">    // actor的abi执行环境接口,由vm.context实现</span><br><span class="line">▼+VMContext : interface</span><br><span class="line">    [methods]</span><br><span class="line">    // 创建新的合约地址</span><br><span class="line">   +AddressForNewActor() : address.Address, error</span><br><span class="line">    // 查询区块高度</span><br><span class="line">   +BlockHeight() : *types.BlockHeight</span><br><span class="line">    // Gas收费</span><br><span class="line">   +Charge(cost types.GasUnits) : error</span><br><span class="line">    //　创建合约</span><br><span class="line">   +CreateNewActor(addr address.Address, code cid.Cid, initalizationParams interface&#123;&#125;) : error</span><br><span class="line">    // 判断是否为account类型的Actor</span><br><span class="line">   +IsFromAccountActor() : bool</span><br><span class="line">    // 合约中交易信息</span><br><span class="line">   +Message() : *types.Message</span><br><span class="line">    // 执行合约函数</span><br><span class="line">   +Send(to address.Address, method string, value *types.AttoFIL, params []interface&#123;&#125;) : [][]byte, uint8, error</span><br><span class="line">   +Storage() : Storage</span><br><span class="line">    // 当Storage接口完成会删除如下两项</span><br><span class="line">   +ReadStorage() : []byte, error</span><br><span class="line">   +WriteStorage(interface&#123;&#125;) : error</span><br></pre></td></tr></table></figure>
+<h2 id="actor的类型及源码分析"><a href="#actor的类型及源码分析" class="headerlink" title="actor的类型及源码分析"></a>actor的类型及源码分析</h2><ul>
+<li>actor包定义及实现了基础actor,此外filecoin还定义了四种内置的actor类型<ul>
+<li>存储市场actor,此类actor整个网络只有一个实例，用于创建存储矿工、更新功率表、获取总存储容量</li>
+<li>Miner actor,此类actor整个网络只有多个实例（随用户数增加而增加），用于执行矿工相关的操作</li>
+<li>paymentbroker actor,此类actor整个网络只有一个实例，用于创建支付通道以及支付相关信息</li>
+<li>account actor,账户actor,此类actor整个网络只有多个实例（随用户数增加而增加），只能用于基本的转账操作</li>
+</ul>
+</li>
+</ul>
+<p>###　基础actor包</p>
+<ul>
+<li>说明<ul>
+<li>定义了actor的基础结构,其中code如果使用内置的如上四种actor，他们的值都是固定的</li>
+<li>提供了actor的基础操作方法</li>
+<li>见笔者在代码中的注释</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">location: actor/actor.go</span><br><span class="line"></span><br><span class="line">▼ package</span><br><span class="line">    actor</span><br><span class="line"></span><br><span class="line">    // Actor可以理解为合约或者账户，转账操作要检查code cid合法性</span><br><span class="line">▼+Actor : struct</span><br><span class="line">    [fields]</span><br><span class="line">    //余额</span><br><span class="line">   +Balance : *types.AttoFIL</span><br><span class="line"></span><br><span class="line">    // 合约代码的cid，vm具体执行其对应的代码</span><br><span class="line">    // 1 具体代码的cid</span><br><span class="line">    // 2 在go语言实现的四种特定合约，这个字段是常量，比如account,miner,storagemarket,paymentbroker</span><br><span class="line">   +Code : cid.Cid</span><br><span class="line"></span><br><span class="line">    //　合约状态的最新状态</span><br><span class="line">   +Head : cid.Cid</span><br><span class="line"></span><br><span class="line">    // 防止重放攻击而设置的参数</span><br><span class="line">   +Nonce : types.Uint64</span><br><span class="line"></span><br><span class="line">    [methods]</span><br><span class="line">    // 计算actor的cid</span><br><span class="line">   +Cid() : cid.Cid, error</span><br><span class="line"></span><br><span class="line">    // 打印合约信息</span><br><span class="line">   +Format(f fmt.State, c rune)</span><br><span class="line"></span><br><span class="line">    // 增加Nonce+1方法</span><br><span class="line">   +IncNonce()</span><br><span class="line"></span><br><span class="line">    // 编码</span><br><span class="line">   +Marshal() : []byte, error</span><br><span class="line"></span><br><span class="line">    // 解码</span><br><span class="line">   +Unmarshal(b []byte) : error</span><br><span class="line">    [functions]</span><br><span class="line">   +NewActor(code cid.Cid, balance *types.AttoFIL) : *Actor</span><br><span class="line"></span><br><span class="line">▼ functions</span><br><span class="line">    // 只有account类型的actor使用</span><br><span class="line">   +NextNonce(actor *Actor) : uint64, error</span><br><span class="line">   -init()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">location: actor/export.go</span><br><span class="line"></span><br><span class="line">▼ functions</span><br><span class="line">    // 返回某个actor的方法执行函数</span><br><span class="line">   +MakeTypedExport(actor exec.ExecutableActor, method string) : exec.ExportedFunc</span><br><span class="line"></span><br><span class="line">   //　序列化成字节切片</span><br><span class="line">   +MarshalValue(val interface&#123;&#125;) : []byte, error</span><br></pre></td></tr></table></figure>
+<h3 id="storagemarket-actor"><a href="#storagemarket-actor" class="headerlink" title="storagemarket actor"></a>storagemarket actor</h3><ul>
+<li>主要功能<ul>
+<li>创建存储矿工</li>
+<li>获取总存储量</li>
+<li>更新功率</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">▼ package</span><br><span class="line">    storagemarket</span><br><span class="line"></span><br><span class="line">▶ imports</span><br><span class="line"></span><br><span class="line">▼ constants</span><br><span class="line">   +ErrInsufficientCollateral</span><br><span class="line">   +ErrPledgeTooLow</span><br><span class="line">   +ErrUnknownMiner</span><br><span class="line"></span><br><span class="line">▼ variables</span><br><span class="line">   +Errors</span><br><span class="line">   +MinimumCollateralPerSector</span><br><span class="line">   +MinimumPledge</span><br><span class="line">   -storageMarketExports</span><br><span class="line"></span><br><span class="line">▼+Actor : struct</span><br><span class="line">    [methods]</span><br><span class="line">    // 创建存储矿工</span><br><span class="line">    // 会调用到miner actor的创建</span><br><span class="line">   +CreateMiner(vmctx exec.VMContext, pledge *big.Int, publicKey []byte, pid peer.ID) : address.Address, uint8, error</span><br><span class="line">   +Exports() : exec.Exports</span><br><span class="line">    // 获取总存储</span><br><span class="line">   +GetTotalStorage(vmctx exec.VMContext) : *big.Int, uint8, error</span><br><span class="line">   +InitializeState(storage exec.Storage, _ interface&#123;&#125;) : error</span><br><span class="line">    // 更新功率</span><br><span class="line">   +UpdatePower(vmctx exec.VMContext, delta *big.Int) : uint8, error</span><br><span class="line"></span><br><span class="line">▼+State : struct</span><br><span class="line">    [fields]</span><br><span class="line">    // miners合集的cid</span><br><span class="line">   +Miners : cid.Cid</span><br><span class="line">   +TotalCommittedStorage : *big.Int</span><br><span class="line"></span><br><span class="line">▼ functions</span><br><span class="line">   +MinimumCollateral(sectors *big.Int) : *types.AttoFIL</span><br><span class="line">    // 实例化存储市场</span><br><span class="line">   +NewActor() : *actor.Actor, error</span><br><span class="line">   -init()</span><br></pre></td></tr></table></figure>
+<h3 id="miner-actor"><a href="#miner-actor" class="headerlink" title="miner actor"></a>miner actor</h3><ul>
+<li>提供功能<ul>
+<li>有基本转账功能 </li>
+<li>提供如下功能</li>
+<li>filecoin网络中存在多个Miner Actor</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">▼ package</span><br><span class="line">    miner</span><br><span class="line"></span><br><span class="line">▶ imports</span><br><span class="line"></span><br><span class="line">▼ constants</span><br><span class="line">   +ErrAskNotFound</span><br><span class="line">   +ErrCallerUnauthorized</span><br><span class="line">   +ErrInsufficientPledge</span><br><span class="line">   +ErrInvalidPoSt</span><br><span class="line">   +ErrInvalidSealProof</span><br><span class="line">   +ErrInvalidSector</span><br><span class="line">   +ErrPublicKeyTooBig</span><br><span class="line">   +ErrSectorCommitted</span><br><span class="line">   +ErrStoragemarketCallFailed</span><br><span class="line">   +MaximumPublicKeySize</span><br><span class="line"></span><br><span class="line">▼ variables</span><br><span class="line">   +Errors</span><br><span class="line">   +GracePeriodBlocks</span><br><span class="line">   +ProvingPeriodBlocks</span><br><span class="line">   -minerExports</span><br><span class="line"></span><br><span class="line">▼+Actor : struct</span><br><span class="line">    [fields]</span><br><span class="line">   +Bootstrap : bool</span><br><span class="line">    [methods]</span><br><span class="line">    // 增加订单</span><br><span class="line">   +AddAsk(ctx exec.VMContext, price *types.AttoFIL, expiry *big.Int) : *big.Int, uint8, error</span><br><span class="line">    // 抵押承诺</span><br><span class="line">   +CommitSector(ctx exec.VMContext, sectorID uint64, commD, commR, commRStar, proof []byte) : uint8, error</span><br><span class="line">   +Exports() : exec.Exports</span><br><span class="line">    // 获取存储矿工相关信息</span><br><span class="line">   +GetAsk(ctx exec.VMContext, askid *big.Int) : []byte, uint8, error</span><br><span class="line">   +GetAsks(ctx exec.VMContext) : []uint64, uint8, error</span><br><span class="line">   +GetKey(ctx exec.VMContext) : []byte, uint8, error</span><br><span class="line">   +GetLastUsedSectorID(ctx exec.VMContext) : uint64, uint8, error</span><br><span class="line">   +GetOwner(ctx exec.VMContext) : address.Address, uint8, error</span><br><span class="line">   +GetPeerID(ctx exec.VMContext) : peer.ID, uint8, error</span><br><span class="line">   +GetPledge(ctx exec.VMContext) : *big.Int, uint8, error</span><br><span class="line">   +GetPower(ctx exec.VMContext) : *big.Int, uint8, error</span><br><span class="line">   +GetProvingPeriodStart(ctx exec.VMContext) : *types.BlockHeight, uint8, error</span><br><span class="line">   +GetSectorCommitments(ctx exec.VMContext) : map[string]types.Commitments, uint8, error</span><br><span class="line">   +InitializeState(storage exec.Storage, initializerData interface&#123;&#125;) : error</span><br><span class="line">    // 提交时空证明</span><br><span class="line">   +SubmitPoSt(ctx exec.VMContext, postProofs []proofs.PoStProof) : uint8, error</span><br><span class="line">    // 更新节点Id</span><br><span class="line">   +UpdatePeerID(ctx exec.VMContext, pid peer.ID) : uint8, error</span><br><span class="line"></span><br><span class="line">    // 报价单：价格，时长，序号</span><br><span class="line">▼+Ask : struct</span><br><span class="line">    [fields]</span><br><span class="line">   +Expiry : *types.BlockHeight</span><br><span class="line">   +ID : *big.Int</span><br><span class="line">   +Price : *types.AttoFIL</span><br><span class="line"></span><br><span class="line">    // 矿工Actor状态</span><br><span class="line">▼+State : struct</span><br><span class="line">    [fields]</span><br><span class="line">   +Asks : []*Ask</span><br><span class="line">   +Collateral : *types.AttoFIL</span><br><span class="line">   +LastPoSt : *types.BlockHeight</span><br><span class="line">   +LastUsedSectorID : uint64</span><br><span class="line">   +NextAskID : *big.Int</span><br><span class="line">   +Owner : address.Address</span><br><span class="line">   +PeerID : peer.ID</span><br><span class="line">   +PledgeSectors : *big.Int</span><br><span class="line">   +Power : *big.Int</span><br><span class="line">   +ProvingPeriodStart : *types.BlockHeight</span><br><span class="line">   +PublicKey : []byte</span><br><span class="line">   +SectorCommitments : map[string]types.Commitments</span><br><span class="line">    [functions]</span><br><span class="line">   +NewState(owner address.Address, key []byte, pledge *big.Int, pid peer.ID, collateral *types.AttoFIL) : *State</span><br><span class="line"></span><br><span class="line">▼ functions</span><br><span class="line">   +NewActor() : *actor.Actor</span><br><span class="line">   -init()</span><br></pre></td></tr></table></figure>
+<h3 id="paymentbroker-actor"><a href="#paymentbroker-actor" class="headerlink" title="paymentbroker actor"></a>paymentbroker actor</h3><ul>
+<li>说明<ul>
+<li>全网只有一个paymentbroker</li>
+<li>几个概念的关系简图</li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/payment.png" alt=""></p>
+<ul>
+<li>源码分析注释<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">▼ package</span><br><span class="line">    paymentbroker</span><br><span class="line"></span><br><span class="line">▼+Actor : struct</span><br><span class="line">    [methods]</span><br><span class="line">    // 关闭支付通道</span><br><span class="line">   +Close(vmctx exec.VMContext, payer address.Address, chid *types.ChannelID, amt *types.AttoFIL, validAt *types.BlockHeight, sig []byte) : uint8, error</span><br><span class="line">    // 创建支付通道</span><br><span class="line">   +CreateChannel(vmctx exec.VMContext, target address.Address, eol *types.BlockHeight) : *types.ChannelID, uint8, error</span><br><span class="line">   +Exports() : exec.Exports</span><br><span class="line">    // 增加资金</span><br><span class="line">   +Extend(vmctx exec.VMContext, chid *types.ChannelID, eol *types.BlockHeight) : uint8, error</span><br><span class="line">   +InitializeState(storage exec.Storage, initializerData interface&#123;&#125;) : error</span><br><span class="line">    // 查询某个支付者的信息</span><br><span class="line">   +Ls(vmctx exec.VMContext, payer address.Address) : []byte, uint8, error</span><br><span class="line">    // 撤回资金</span><br><span class="line">   +Reclaim(vmctx exec.VMContext, chid *types.ChannelID) : uint8, error</span><br><span class="line">    // 赎回(或者收款)资金</span><br><span class="line">   +Redeem(vmctx exec.VMContext, payer address.Address, chid *types.ChannelID, amt *types.AttoFIL, validAt *types.BlockHeight, sig []byte) : uint8, error</span><br><span class="line">    // 收据，指明在特定区块高度之前都是有效的</span><br><span class="line">   +Voucher(vmctx exec.VMContext, chid *types.ChannelID, amount *types.AttoFIL, validAt *types.BlockHeight) : []byte, uint8, error</span><br><span class="line"></span><br><span class="line">▼+PaymentChannel : struct</span><br><span class="line">    [fields]</span><br><span class="line">    // 支付通道内金额</span><br><span class="line">   +Amount : *types.AttoFIL</span><br><span class="line">    // 已被赎回金额</span><br><span class="line">   +AmountRedeemed : *types.AttoFIL</span><br><span class="line">   +Eol : *types.BlockHeight</span><br><span class="line">    // 收款人地址</span><br><span class="line">   +Target : address.Address</span><br><span class="line"></span><br><span class="line">▼ functions</span><br><span class="line">    // 收据的签名及校验</span><br><span class="line">   +SignVoucher(channelID *types.ChannelID, amount *types.AttoFIL, validAt *types.BlockHeight, addr address.Address, signer types.Signer) : types.Signature, error</span><br><span class="line">   +VerifyVoucherSignature(payer address.Address, chid *types.ChannelID, amt *types.AttoFIL, validAt *types.BlockHeight, sig []byte) : bool</span><br><span class="line">   -createVoucherSignatureData(channelID *types.ChannelID, amount *types.AttoFIL, validAt *types.BlockHeight) : []byte</span><br><span class="line">   -findByChannelLookup(ctx context.Context, storage exec.Storage, byPayer exec.Lookup, payer address.Address) : exec.Lookup, error</span><br><span class="line">   -init()</span><br><span class="line">   -reclaim(ctx context.Context, vmctx exec.VMContext, byChannelID exec.Lookup, payer address.Address, chid *types.ChannelID, channel *PaymentChannel) : error</span><br><span class="line">   -updateChannel(ctx exec.VMContext, target address.Address, channel *PaymentChannel, amt *types.AttoFIL, validAt *types.BlockHeight) : error</span><br><span class="line">   -withPayerChannels(ctx context.Context, storage exec.Storage, payer address.Address, f func(exec.Lookup) error) : error</span><br><span class="line">   -withPayerChannelsForReading(ctx context.Context, storage exec.Storage, payer address.Address, f func(exec.Lookup) error) : error</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="account-actor"><a href="#account-actor" class="headerlink" title="account actor"></a>account actor</h3><ul>
+<li>说明<ul>
+<li>纯账户，记录nonce</li>
+<li>只有转帐功能</li>
+<li>filecoin网络中存在多个account Actor</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">▼ package</span><br><span class="line">    account</span><br><span class="line"></span><br><span class="line">▶ imports</span><br><span class="line"></span><br><span class="line">▼ variables</span><br><span class="line">   -accountExports</span><br><span class="line"></span><br><span class="line">▼+Actor : struct</span><br><span class="line">    [methods]</span><br><span class="line">   +Exports() : exec.Exports</span><br><span class="line">   +InitializeState(_ exec.Storage, _ interface&#123;&#125;) : error</span><br><span class="line"></span><br><span class="line">▼ functions</span><br><span class="line">    // 实例化account actor 集成actor包中Actor所实现的所有方法</span><br><span class="line">   +NewActor(balance *types.AttoFIL) : *actor.Actor, error</span><br><span class="line">    // 将其他actor类型转为account，保留余额</span><br><span class="line">   +UpgradeActor(act *actor.Actor) : error</span><br></pre></td></tr></table></figure>
+<h2 id="vm-虚拟机运行环境"><a href="#vm-虚拟机运行环境" class="headerlink" title="vm(虚拟机运行环境)"></a>vm(虚拟机运行环境)</h2><ul>
+<li>虚拟机执行函数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">▼ package</span><br><span class="line">    vm</span><br><span class="line"></span><br><span class="line">▶ imports</span><br><span class="line"></span><br><span class="line">▼-sendDeps : struct</span><br><span class="line">    [fields]</span><br><span class="line">   -transfer : func(*actor.Actor, *actor.Actor, *types.AttoFIL) error</span><br><span class="line"></span><br><span class="line">▼ functions</span><br><span class="line">    // 执行合约</span><br><span class="line">   +Send(ctx context.Context, vmCtx *Context) : [][]byte, uint8, error</span><br><span class="line">    // 转账</span><br><span class="line">   +Transfer(fromActor, toActor *actor.Actor, value *types.AttoFIL) : error</span><br><span class="line">   -send(ctx context.Context, deps sendDeps, vmCtx *Context) : [][]byte, uint8, error</span><br></pre></td></tr></table></figure>
+<ul>
+<li>vm环境实现</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">▼+Context : struct</span><br><span class="line">    [fields]</span><br><span class="line">   -ancestors : []types.TipSet</span><br><span class="line">   -blockHeight : *types.BlockHeight</span><br><span class="line">   -deps : *deps</span><br><span class="line">   -from : *actor.Actor</span><br><span class="line">   -gasTracker : *GasTracker</span><br><span class="line">   -lookBack : int</span><br><span class="line">   -message : *types.Message</span><br><span class="line">   -state : *state.CachedTree</span><br><span class="line">   -storageMap : StorageMap</span><br><span class="line">   -to : *actor.Actor</span><br><span class="line">    [methods]</span><br><span class="line">    // 实现上述VMContext 接口，注释见上</span><br><span class="line">   +AddressForNewActor() : address.Address, error</span><br><span class="line">   +BlockHeight() : *types.BlockHeight</span><br><span class="line">   +Charge(cost types.GasUnits) : error</span><br><span class="line">   +CreateNewActor(addr address.Address, code cid.Cid, initializerData interface&#123;&#125;) : error</span><br><span class="line">   +GasUnits() : types.GasUnits</span><br><span class="line">   +IsFromAccountActor() : bool</span><br><span class="line">   +Message() : *types.Message</span><br><span class="line">   +Rand(sampleHeight *types.BlockHeight) : []byte, error</span><br><span class="line">   +ReadStorage() : []byte, error</span><br><span class="line">   +Send(to address.Address, method string, value *types.AttoFIL, params []interface&#123;&#125;) : [][]byte, uint8, error</span><br><span class="line">   +Storage() : exec.Storage</span><br><span class="line">   +WriteStorage(memory interface&#123;&#125;) : error</span><br><span class="line">    [functions]</span><br><span class="line">   +NewVMContext(params NewContextParams) : *Context</span><br><span class="line"></span><br><span class="line">▼+NewContextParams : struct</span><br><span class="line">    [fields]</span><br><span class="line">   +Ancestors : []types.TipSet</span><br><span class="line">   +BlockHeight : *types.BlockHeight</span><br><span class="line">   +From : *actor.Actor</span><br><span class="line">   +GasTracker : *GasTracker</span><br><span class="line">   +LookBack : int</span><br><span class="line">   +Message : *types.Message</span><br><span class="line">   +State : *state.CachedTree</span><br><span class="line">   +StorageMap : StorageMap</span><br><span class="line">   +To : *actor.Actor</span><br><span class="line"></span><br><span class="line">▼-deps : struct</span><br><span class="line">    [fields]</span><br><span class="line">   +EncodeValues : func([]*abi.Value) []byte, error</span><br><span class="line">   +GetOrCreateActor : func(context.Context, address.Address, func() *actor.Actor, error) *actor.Actor, error</span><br><span class="line">   +Send : func(context.Context, *Context) [][]byte, uint8, error</span><br><span class="line">   +ToValues : func([]interface&#123;&#125;) []*abi.Value, error</span><br><span class="line"></span><br><span class="line">▼ deps* : ctype</span><br><span class="line">    [functions]</span><br><span class="line">   -makeDeps(st *state.CachedTree) : *deps</span><br><span class="line"></span><br><span class="line">▼ functions</span><br><span class="line">   -computeActorAddress(creator address.Address, nonce uint64) : address.Address, error</span><br></pre></td></tr></table></figure>
+<ul>
+<li>合约状态存储</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">▼+Storage : struct</span><br><span class="line">    [fields]</span><br><span class="line">   -actor : *actor.Actor</span><br><span class="line">   -blockstore : blockstore.Blockstore</span><br><span class="line">   -chunks : map[cid.Cid]ipld.Node</span><br><span class="line">    [methods]</span><br><span class="line">   +Commit(newCid cid.Cid, oldCid cid.Cid) : error</span><br><span class="line">   +Flush() : error</span><br><span class="line">   +Get(cid cid.Cid) : []byte, error</span><br><span class="line">   +Head() : cid.Cid</span><br><span class="line">   +Prune() : error</span><br><span class="line">   +Put(v interface&#123;&#125;) : cid.Cid, error</span><br><span class="line">   -liveDescendantIds(id cid.Cid) : *cid.Set, error</span><br><span class="line">    [functions]</span><br><span class="line">   +NewStorage(bs blockstore.Blockstore, act *actor.Actor) : Storage</span><br><span class="line"></span><br><span class="line">▼-storageMap : struct</span><br><span class="line">    [fields]</span><br><span class="line">   -blockstore : blockstore.Blockstore</span><br><span class="line">   -storageMap : map[address.Address]Storage</span><br><span class="line">    [methods]</span><br><span class="line">   +Flush() : error</span><br><span class="line">   +NewStorage(addr address.Address, actor *actor.Actor) : Storage</span><br><span class="line"></span><br><span class="line">▼+StorageMap : interface</span><br><span class="line">    [methods]</span><br><span class="line">   +Flush() : error</span><br><span class="line">   +NewStorage(addr address.Address, actor *actor.Actor) : Storage</span><br><span class="line"></span><br><span class="line">▼ functions</span><br><span class="line">   +NewStorageMap(bs blockstore.Blockstore) : StorageMap</span><br></pre></td></tr></table></figure>
+<h2 id="state包-actor状态"><a href="#state包-actor状态" class="headerlink" title="state包(actor状态)"></a>state包(actor状态)</h2><ul>
+<li>表征actor的状态</li>
+</ul>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
+
+      
+    </div>
+    
+    
+    
+    
+      
+        <div>
+          <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="Tiny熊 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信号：深入浅出区块链技术，欢迎订阅</div>
+</div>
+
+        </div>
+      
+    
+
+    
+      
+        <div>
+          <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有收获，赞赏下</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/qr_pay.jpg" alt="Tiny熊 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+        </div>
+      
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    先河系统杨尉
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://learnblockchain.cn/2019/03/08/filecoin-code-analysis-13/" title="filecoin技术架构分析十三：filecoin源码分析之服务层actor及vm">https://learnblockchain.cn/2019/03/08/filecoin-code-analysis-13/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/FileCoin/" rel="tag"># FileCoin</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/07/filecoin-code-analysis-12/" rel="next" title="filecoin技术架构分析之十二：filecoin源码分析之内部接口层plumbing＆porcelain接口">
+                <i class="fa fa-chevron-left"></i> filecoin技术架构分析之十二：filecoin源码分析之内部接口层plumbing＆porcelain接口
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/09/filecoin-code-analysis-14/" rel="prev" title="filecoin技术架构分析十四：filecoin源码分析之服务层链同步、共识协议及挖矿">
+                filecoin技术架构分析十四：filecoin源码分析之服务层链同步、共识协议及挖矿 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">89</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element" style="margin-top: 20px;">
+              <span>
+                项目
+              </span>
+            </div>
+          
+
+          <div class="links-of-author project motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/bitcoin" target="_self" title="比特币">
+                    
+                      <i class="fa fa-fw fa-false"></i>比特币</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/ethereum" target="_self" title="以太坊">
+                    
+                      <i class="fa fa-fw fa-false"></i>以太坊</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/EOS" target="_self" title="EOS">
+                    
+                      <i class="fa fa-fw fa-false"></i>EOS</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/Fabric" target="_self" title="Fabric">
+                    
+                      <i class="fa fa-fw fa-false"></i>Fabric</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <span>
+                联系我
+              </span>
+            </div>
+          
+          
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/xilibi2003" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiong-li-bing/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hiblock.one/" title="HiBlock区块链社区" target="_blank">HiBlock区块链社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://edu.upchain.pro/book.html" title="图书-精通智能合约开发" target="_blank">图书-精通智能合约开发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="区块链技术专栏" target="_blank">区块链技术专栏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://t.xiaomiquan.com/RfAu7uj" title="技术交流-知识星球" target="_blank">技术交流-知识星球</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blockgeek.org/" title="BG区块链技术论坛" target="_blank">BG区块链技术论坛</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bitshuo.com" title="区块链技术中文社区" target="_blank">区块链技术中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://news.tangwen.org" title="汤问资讯" target="_blank">汤问资讯</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitask.org" title="币问" target="_blank">币问</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eosfans.io/" title="EOS中文社区" target="_blank">EOS中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blockflow.net/" title="BlockFlow" target="_blank">BlockFlow</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.liankexing.com/" title="链客区块链问答社区" target="_blank">链客区块链问答社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitool.cn/" title="币兔" target="_blank">币兔</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wutui.pro/" title="无退社区" target="_blank">无退社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hpb.io/" title="HPB芯链" target="_blank">HPB芯链</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#说明"><span class="nav-number">1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exec-actor及vm的接口定义"><span class="nav-number">2.</span> <span class="nav-text">exec(actor及vm的接口定义)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#actor的类型及源码分析"><span class="nav-number">3.</span> <span class="nav-text">actor的类型及源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#storagemarket-actor"><span class="nav-number">3.1.</span> <span class="nav-text">storagemarket actor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#miner-actor"><span class="nav-number">3.2.</span> <span class="nav-text">miner actor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#paymentbroker-actor"><span class="nav-number">3.3.</span> <span class="nav-text">paymentbroker actor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#account-actor"><span class="nav-number">3.4.</span> <span class="nav-text">account actor</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vm-虚拟机运行环境"><span class="nav-number">4.</span> <span class="nav-text">vm(虚拟机运行环境)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#state包-actor状态"><span class="nav-number">5.</span> <span class="nav-text">state包(actor状态)</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+  <div class="footer-custom"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17140514号-1</a></div>
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

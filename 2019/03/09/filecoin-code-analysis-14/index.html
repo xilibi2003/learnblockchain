@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+  <meta name="msvalidate.01" content="914C9C1CBC7078C5E2AC612AD5C1CC6C" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="FileCoin," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深入浅出区块链" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第十四章源码分析之服务层链同步、共识协议及挖矿。">
+<meta name="keywords" content="FileCoin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="filecoin技术架构分析十四：filecoin源码分析之服务层链同步、共识协议及挖矿">
+<meta property="og:url" content="https://learnblockchain.cn/2019/03/09/filecoin-code-analysis-14/index.html">
+<meta property="og:site_name" content="深入浅出区块链">
+<meta property="og:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第十四章源码分析之服务层链同步、共识协议及挖矿。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-12T06:51:22.332Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="filecoin技术架构分析十四：filecoin源码分析之服务层链同步、共识协议及挖矿">
+<meta name="twitter:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第十四章源码分析之服务层链同步、共识协议及挖矿。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'UT2K1ZRSWK',
+      apiKey: '0bbb261dfad58df8f8a657a1ed3255cd',
+      indexName: 'learnblockchain',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://learnblockchain.cn/2019/03/09/filecoin-code-analysis-14/"/>
+
+
+
+
+
+  <title>filecoin技术架构分析十四：filecoin源码分析之服务层链同步、共识协议及挖矿 | 深入浅出区块链</title>
+  
+
+
+
+
+
+
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6273382609469378",
+        enable_page_level_ads: true
+    });
+</script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">系统学习区块链技术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wiki">
+          <a href="https://wiki.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Wiki
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-meeting">
+          <a href="/categories/dev-meeting/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            技术工坊
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-course">
+          <a href="/course/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-spinner"></i> <br />
+            
+            视频教程
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-web3">
+          <a href="https://web3.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Web3文档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2019/03/09/filecoin-code-analysis-14/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">filecoin技术架构分析十四：filecoin源码分析之服务层链同步、共识协议及挖矿</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-09T16:35:33+08:00">
+                2019-03-09
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-12T14:51:22+08:00">
+                2019-03-12
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/FileCoin/" itemprop="url" rel="index">
+                    <span itemprop="name">FileCoin</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我是先河系统CTO杨尉，欢迎大加关注的的Github: <a href="https://github.com/waynewyang" target="_blank" rel="noopener">waynewyang</a>，本文是<a href="https://learnblockchain.cn/2019/03/11/filecoin-code-analysis-0/">filecoin技术架构分析系列文章</a>第十四章源码分析之服务层链同步、共识协议及挖矿。</p>
+<a id="more"></a>
+<blockquote>
+<p>分析基于的源码版本：go-filecoin master a0598a54(2019年3月9日)</p>
+</blockquote>
+<h2 id="chain同步"><a href="#chain同步" class="headerlink" title="chain同步"></a>chain同步</h2><h3 id="基础结构"><a href="#基础结构" class="headerlink" title="基础结构"></a>基础结构</h3><ul>
+<li>TipIndex 定义定义了tipset的基础结构及方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">▼ package</span><br><span class="line">    chain</span><br><span class="line"></span><br><span class="line">▼+TipIndex : struct</span><br><span class="line">    [fields]</span><br><span class="line">   -mu : sync.Mutex</span><br><span class="line">    // 根据id来获取tipset及其状态根</span><br><span class="line">   -tsasByID : tsasByTipSetID</span><br><span class="line">    // 根据父块来获取tipset及其状态根</span><br><span class="line">   -tsasByParentsAndHeight : map[string]tsasByTipSetID</span><br><span class="line"></span><br><span class="line">    [methods]</span><br><span class="line">    // 根据id来获取tipset及其状态根</span><br><span class="line">   +Get(tsKey string) : *TipSetAndState, error</span><br><span class="line">    // 根据父块来获取tipset及其状态根</span><br><span class="line">   +GetByParentsAndHeight(pKey string, h uint64) : []*TipSetAndState, error</span><br><span class="line">    // 根据Id判断是否有此tipset</span><br><span class="line">   +Has(tsKey string) : bool</span><br><span class="line">    // 根据父块判断是否有此tipset</span><br><span class="line">   +HasByParentsAndHeight(pKey string, h uint64) : bool</span><br><span class="line">    // 设置tipset和状态根</span><br><span class="line">   +Put(tsas *TipSetAndState) : error</span><br><span class="line">    [functions]</span><br><span class="line">   +NewTipIndex() : *TipIndex</span><br><span class="line"></span><br><span class="line">▼+TipSetAndState : struct</span><br><span class="line">    [fields]</span><br><span class="line">    // tipset</span><br><span class="line">   +TipSet : types.TipSet</span><br><span class="line">    // 相当于区块的root cid</span><br><span class="line">   +TipSetStateRoot : cid.Cid</span><br></pre></td></tr></table></figure>
+<h3 id="链同步"><a href="#链同步" class="headerlink" title="链同步"></a>链同步</h3><ul>
+<li>chain同步的接口定义</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">location: chain/syncer.go</span><br><span class="line"></span><br><span class="line">▼ package</span><br><span class="line">    chain</span><br><span class="line"></span><br><span class="line">▼+Syncer : interface</span><br><span class="line">    [methods]</span><br><span class="line">    // 处理新区块的接口定义</span><br><span class="line">   +HandleNewBlocks(ctx context.Context, blkCids []cid.Cid) : error</span><br><span class="line"></span><br><span class="line">   具体接口实现在location: chain/defalut_syncer.go中</span><br></pre></td></tr></table></figure>
+<ul>
+<li>特殊情况的错误</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">location: chain/reorg.go</span><br><span class="line"></span><br><span class="line">    // 如果当前区块头不包含在最新的区块头之上时候，会报此错误</span><br><span class="line">▼ functions</span><br><span class="line">   +IsReorg(curHead types.TipSet, newChain []types.TipSet) : bool</span><br></pre></td></tr></table></figure>
+<h3 id="链存储"><a href="#链存储" class="headerlink" title="链存储"></a>链存储</h3><ul>
+<li>其中<ul>
+<li>Readstore是一个通用接口</li>
+<li>Store的设计基本是给ChainSync使用的</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">location: chain/store.go</span><br><span class="line"></span><br><span class="line">▼ package</span><br><span class="line">    chain</span><br><span class="line"></span><br><span class="line">▼ constants</span><br><span class="line">    // 用于发布新的区块头的主题&quot;new-head&quot;</span><br><span class="line">   +NewHeadTopic</span><br><span class="line"></span><br><span class="line">▼ variables</span><br><span class="line">    // 创世块的key</span><br><span class="line">   +GenesisKey</span><br><span class="line"></span><br><span class="line">▼+ReadStore : interface</span><br><span class="line">    [methods]</span><br><span class="line">    // 获取历史区块，通过channel实现</span><br><span class="line">   +BlockHistory(ctx context.Context, tips types.TipSet) : chan interface&#123;&#125;</span><br><span class="line">    // 获取创世区块cid</span><br><span class="line">   +GenesisCid() : cid.Cid</span><br><span class="line">    // 通过cid获取具体的block</span><br><span class="line">   +GetBlock(ctx context.Context, id cid.Cid) : *types.Block, error</span><br><span class="line">    // 通过cid获取具体的block</span><br><span class="line">   +GetTipSetAndState(ctx context.Context, tsKey string) : *TipSetAndState, error</span><br><span class="line">    // 获取最新区块</span><br><span class="line">   +Head() : types.TipSet</span><br><span class="line">    // 最新区块变更事件</span><br><span class="line">   +HeadEvents() : *pubsub.PubSub</span><br><span class="line">    // 最新合约状态</span><br><span class="line">   +LatestState(ctx context.Context) : state.Tree, error</span><br><span class="line">    // 加载chain</span><br><span class="line">   +Load(ctx context.Context) : error</span><br><span class="line">    // 停止</span><br><span class="line">   +Stop()</span><br><span class="line"></span><br><span class="line">    // 这个接口只是chain同步使用</span><br><span class="line">▼+Store : interface</span><br><span class="line">    [embedded]</span><br><span class="line">   +ReadStore</span><br><span class="line">    [methods]</span><br><span class="line">   +GetBlocks(ctx context.Context, ids types.SortedCidSet) : []*types.Block, error</span><br><span class="line">   +GetTipSetAndStatesByParentsAndHeight(ctx context.Context, pTsKey string, h uint64) : []*TipSetAndState, error</span><br><span class="line">   +HasAllBlocks(ctx context.Context, cs []cid.Cid) : bool</span><br><span class="line">   +HasBlock(ctx context.Context, c cid.Cid) : bool</span><br><span class="line">   +HasTipSetAndState(ctx context.Context, tsKey string) : bool</span><br><span class="line">   +HasTipSetAndStatesWithParentsAndHeight(ctx context.Context, pTsKey string, h uint64) : bool</span><br><span class="line">    // 存储并更新最新区块信息</span><br><span class="line">   +PutTipSetAndState(ctx context.Context, tsas *TipSetAndState) : error</span><br><span class="line">   +SetHead(ctx context.Context, s types.TipSet) : error</span><br></pre></td></tr></table></figure>
+<h2 id="consensus"><a href="#consensus" class="headerlink" title="consensus"></a>consensus</h2><ul>
+<li>主要功能<ul>
+<li>提供创建选票方法，验证中奖选票方法,确定最终的tipset</li>
+<li>将合法的tipset消息取出，生效actor状态</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">▼ package</span><br><span class="line">    consensus</span><br><span class="line"></span><br><span class="line">▶ imports</span><br><span class="line"></span><br><span class="line">▼ constants</span><br><span class="line">   +ECPrM : uint64</span><br><span class="line">   +ECV : uint64</span><br><span class="line">   +LookBackParameter</span><br><span class="line"></span><br><span class="line">▼ variables</span><br><span class="line">   +AncestorRoundsNeeded</span><br><span class="line">   +ErrInvalidBase</span><br><span class="line">   +ErrStateRootMismatch</span><br><span class="line">   +ErrUnorderedTipSets</span><br><span class="line">   -log</span><br><span class="line">   -ticketDomain : *big.Int</span><br><span class="line"></span><br><span class="line">    // Expected实现EC共识</span><br><span class="line">▼+Expected : struct</span><br><span class="line">    [fields]</span><br><span class="line">    // 全局功率表</span><br><span class="line">   +PwrTableView : PowerTableView</span><br><span class="line">   -bstore : blockstore.Blockstore</span><br><span class="line">   -cstore : *hamt.CborIpldStore</span><br><span class="line">   -genesisCid : cid.Cid</span><br><span class="line">   -processor : Processor</span><br><span class="line">   -verifier : proofs.Verifier</span><br><span class="line">    [methods]</span><br><span class="line">    // 比较两个tipset的权重</span><br><span class="line">   +IsHeavier(ctx context.Context, a, b types.TipSet, aSt, bSt state.Tree) : bool, error</span><br><span class="line">    // 建立新的tipset</span><br><span class="line">   +NewValidTipSet(ctx context.Context, blks []*types.Block) : types.TipSet, error</span><br><span class="line">    // 运行状态转换</span><br><span class="line">    // 1 新区块到来的时候出发状态转换(chain sync逻辑)</span><br><span class="line">    // 2 进入后判断tipset的有效性，包括验证选票是否中奖</span><br><span class="line">    // 3 逐一执行消息，切换状态</span><br><span class="line">   +RunStateTransition(ctx context.Context, ts types.TipSet, ancestors []types.TipSet, pSt state.Tree) : state.Tree, error</span><br><span class="line">    // 计算tipset权重</span><br><span class="line">   +Weight(ctx context.Context, ts types.TipSet, pSt state.Tree) : uint64, error</span><br><span class="line">   -runMessages(ctx context.Context, st state.Tree, vms vm.StorageMap, ts types.TipSet, ancestors []types.TipSet) : state.Tree, error</span><br><span class="line">   -validateBlockStructure(ctx context.Context, b *types.Block) : error</span><br><span class="line">   -validateMining(ctx context.Context, st state.Tree, ts types.TipSet, parentTs types.TipSet) : error</span><br><span class="line"></span><br><span class="line">▼+Processor : interface</span><br><span class="line">    // 会被RunStateTransition间接掉用,进行状态切换(生效挖矿成功的tipset消息)</span><br><span class="line">    [methods]</span><br><span class="line">    // 从tipset中逐一取出block处理</span><br><span class="line">   +ProcessBlock(ctx context.Context, st state.Tree, vms vm.StorageMap, blk *types.Block, ancestors []types.TipSet) : []*ApplicationResult, error</span><br><span class="line">   +ProcessTipSet(ctx context.Context, st state.Tree, vms vm.StorageMap, ts types.TipSet, ancestors []types.TipSet) : *ProcessTipSetResponse, error</span><br><span class="line"></span><br><span class="line">▼ functions</span><br><span class="line">    // 与白皮书描述一致，按照存储功率出块，用以判断是否中奖</span><br><span class="line">   +CompareTicketPower(ticket types.Signature, minerPower uint64, totalPower uint64) : bool</span><br><span class="line">    // 产生随机挑战种子,针对时空证明</span><br><span class="line">   +CreateChallengeSeed(parents types.TipSet, nullBlkCount uint64) : proofs.PoStChallengeSeed, error</span><br><span class="line">    // 生成选票</span><br><span class="line">    // 用上一个区块的时空证明+矿工地址（目前直接用的矿工地址,issue1054讨论中） 生成２５６bit哈希</span><br><span class="line">   +CreateTicket(proof proofs.PoStProof, minerAddr address.Address) : []byte</span><br><span class="line">    // 判断是否中奖,调用CompareTicketPower</span><br><span class="line">   +IsWinningTicket(ctx context.Context, bs blockstore.Blockstore, ptv PowerTableView, st state.Tree, ticket types.Signature, miner address.Address) : bool, error</span><br><span class="line">    // 实例化Expected</span><br><span class="line">   +NewExpected(cs *hamt.CborIpldStore, bs blockstore.Blockstore, processor Processor, pt PowerTableView, gCid cid.Cid, verifier proofs.Verifier) : Protocol</span><br><span class="line">   -init()</span><br></pre></td></tr></table></figure>
+<h2 id="mining"><a href="#mining" class="headerlink" title="mining"></a>mining</h2><h3 id="挖矿的主要逻辑"><a href="#挖矿的主要逻辑" class="headerlink" title="挖矿的主要逻辑"></a>挖矿的主要逻辑</h3><ul>
+<li>1 不能将空块最为基准块</li>
+<li>2 基于上一个Tipset信息（如果上一个为空块，必须找到空块之前高度最高的Tipset，并记录中间空块数据）和空块数母生成合法的时空证明挑战参数</li>
+<li>3 生成时空证明</li>
+<li>4 时空证明成功，调用共识协议创建奖票</li>
+<li>5 如果奖票中奖，将未打包的消息打包区块</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">location: mining/working</span><br><span class="line"></span><br><span class="line">//这里是挖矿逻辑的真正入口</span><br><span class="line"></span><br><span class="line">// Mine implements the DefaultWorkers main mining function..</span><br><span class="line">// The returned bool indicates if this miner created a new block or not.</span><br><span class="line">func (w *DefaultWorker) Mine(ctx context.Context, base types.TipSet, nullBlkCount int, outCh chan&lt;- Output) bool &#123;</span><br><span class="line">	log.Info(&quot;Worker.Mine&quot;)</span><br><span class="line">	ctx = log.Start(ctx, &quot;Worker.Mine&quot;)</span><br><span class="line">	defer log.Finish(ctx)</span><br><span class="line">    // 不能将空块作为基准块挖矿</span><br><span class="line">	if len(base) == 0 &#123;</span><br><span class="line">		log.Warning(&quot;Worker.Mine returning because it can&apos;t mine on an empty tipset&quot;)</span><br><span class="line">		outCh &lt;- Output&#123;Err: errors.New(&quot;bad input tipset with no blocks sent to Mine()&quot;)&#125;</span><br><span class="line">		return false</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	st, err := w.getStateTree(ctx, base)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		log.Errorf(&quot;Worker.Mine couldn&apos;t get state tree for tipset: %s&quot;, err.Error())</span><br><span class="line">		outCh &lt;- Output&#123;Err: err&#125;</span><br><span class="line">		return false</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	log.Debugf(&quot;Mining on tipset: %s, with %d null blocks.&quot;, base.String(), nullBlkCount)</span><br><span class="line">	if ctx.Err() != nil &#123;</span><br><span class="line">		log.Warningf(&quot;Worker.Mine returning with ctx error %s&quot;, ctx.Err().Error())</span><br><span class="line">		return false</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    // 基于上一个基准Tipset以及空块数目生成Post随机挑战参数</span><br><span class="line">	challenge, err := consensus.CreateChallengeSeed(base, uint64(nullBlkCount))</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		outCh &lt;- Output&#123;Err: err&#125;</span><br><span class="line">		return false</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    // 生成时空证明</span><br><span class="line">	prCh := createProof(challenge, w.createPoSTFunc)</span><br><span class="line"></span><br><span class="line">	var proof proofs.PoStProof</span><br><span class="line">	var ticket []byte</span><br><span class="line">	select &#123;</span><br><span class="line">	case &lt;-ctx.Done():</span><br><span class="line">		log.Infof(&quot;Mining run on base %s with %d null blocks canceled.&quot;, base.String(), nullBlkCount)</span><br><span class="line">		return false</span><br><span class="line">	case prChRead, more := &lt;-prCh:</span><br><span class="line">		if !more &#123;</span><br><span class="line">			log.Errorf(&quot;Worker.Mine got zero value from channel prChRead&quot;)</span><br><span class="line">			return false</span><br><span class="line">		&#125;</span><br><span class="line">		copy(proof[:], prChRead[:])</span><br><span class="line">        // 时空证明成功，调用共识协议创建奖票</span><br><span class="line">		ticket = consensus.CreateTicket(proof, w.minerAddr)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// TODO: Test the interplay of isWinningTicket() and createPoSTFunc()</span><br><span class="line">	// https://github.com/filecoin-project/go-filecoin/issues/1791</span><br><span class="line">    // 调用共识协议确认是否中奖</span><br><span class="line">	weHaveAWinner, err := consensus.IsWinningTicket(ctx, w.blockstore, w.powerTable, st, ticket, w.minerAddr)</span><br><span class="line"></span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		log.Errorf(&quot;Worker.Mine couldn&apos;t compute ticket: %s&quot;, err.Error())</span><br><span class="line">		outCh &lt;- Output&#123;Err: err&#125;</span><br><span class="line">		return false</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	if weHaveAWinner &#123;</span><br><span class="line">        // 如果中奖将打包消息，生成区块</span><br><span class="line">		next, err := w.Generate(ctx, base, ticket, proof, uint64(nullBlkCount))</span><br><span class="line">		if err == nil &#123;</span><br><span class="line">			log.SetTag(ctx, &quot;block&quot;, next)</span><br><span class="line">			log.Debugf(&quot;Worker.Mine generates new winning block! %s&quot;, next.Cid().String())</span><br><span class="line">		&#125;</span><br><span class="line">		outCh &lt;- NewOutput(next, err)</span><br><span class="line">		return true</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="其他细节源码简析"><a href="#其他细节源码简析" class="headerlink" title="其他细节源码简析"></a>其他细节源码简析</h3><ul>
+<li>消息队列（交易消息集）的处理 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">location: mining/mqueue.go</span><br><span class="line"></span><br><span class="line">▼ package</span><br><span class="line">    mining</span><br><span class="line"></span><br><span class="line">▶ imports</span><br><span class="line"></span><br><span class="line">▼+MessageQueue : struct</span><br><span class="line">    [fields]</span><br><span class="line">   -senderQueues : queueHeap</span><br><span class="line">    [methods]</span><br><span class="line">    // 取出消息切片，即多条消息</span><br><span class="line">   +Drain() : []*types.SignedMessage</span><br><span class="line">   +Empty() : bool</span><br><span class="line">    // 从队列取出一条消息</span><br><span class="line">   +Pop() : *types.SignedMessage, bool</span><br><span class="line">    [functions]</span><br><span class="line">    // 实例化消息队列</span><br><span class="line">   +NewMessageQueue(msgs []*types.SignedMessage) : MessageQueue</span><br><span class="line"></span><br><span class="line"> -nonceQueue : []*types.SignedMessage</span><br><span class="line"></span><br><span class="line">    // 一些队列的基本操作</span><br><span class="line">    // 1 长度、push、pop功能</span><br><span class="line">    // 2 Less主要是比较两条交易中的Gas价格，大家可以回头看看type中的消息定义,这里不赘述了</span><br><span class="line">    // 3 为什么要提供Less接口，留给大家思索一下，熟悉以太坊的可能一眼就看出了</span><br><span class="line">▼-queueHeap : []nonceQueue</span><br><span class="line">    [methods]</span><br><span class="line">   +Len() : int</span><br><span class="line">   +Less(i, j int) : bool</span><br><span class="line">   +Pop() : interface&#123;&#125;</span><br><span class="line">   +Push(x interface&#123;&#125;)</span><br><span class="line">   +Swap(i, j int)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>调度器<ul>
+<li>入口</li>
+<li>node实例会调用NewScheduler创建相关实例并启动挖矿</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">▼ package</span><br><span class="line">    mining</span><br><span class="line"></span><br><span class="line">▶ imports</span><br><span class="line"></span><br><span class="line">▼ constants</span><br><span class="line">   +MineDelayConversionFactor</span><br><span class="line"></span><br><span class="line">▼-timingScheduler : struct</span><br><span class="line">    [fields]</span><br><span class="line">   -isStarted : bool</span><br><span class="line">   -mineDelay : time.Duration</span><br><span class="line">    // 查找权重最高的Tipset</span><br><span class="line">   -pollHeadFunc : func() types.TipSet</span><br><span class="line">    // 底层的挖矿逻辑，在下面会分析Worker</span><br><span class="line">   -worker : Worker</span><br><span class="line">    [methods]</span><br><span class="line">    // 判断是否启动挖矿</span><br><span class="line">   +IsStarted() : bool</span><br><span class="line">    // 启动挖矿</span><br><span class="line">   +Start(miningCtx context.Context) : chan Output, *sync.WaitGroup</span><br><span class="line"></span><br><span class="line">▼+Scheduler : interface</span><br><span class="line">    [methods]</span><br><span class="line">   +IsStarted() : bool</span><br><span class="line">   +Start(miningCtx context.Context) : chan Output, *sync.WaitGroup</span><br><span class="line"></span><br><span class="line">▼ functions</span><br><span class="line">   +MineOnce(ctx context.Context, w Worker, md time.Duration, ts types.TipSet) : Output, error</span><br><span class="line">    // 实例化timingScheduler </span><br><span class="line">   +NewScheduler(w Worker, md time.Duration, f func() types.TipSet) : Scheduler</span><br><span class="line">   -nextNullBlkCount(prevNullBlkCount int, prevBase, currBase types.TipSet) : int</span><br></pre></td></tr></table></figure>
+<ul>
+<li>打包区块<ul>
+<li>具体见如下注释，可对应此查阅源码。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">location: mining/block_generate.go</span><br><span class="line"></span><br><span class="line">▼ package</span><br><span class="line">    mining</span><br><span class="line"></span><br><span class="line">▶ imports</span><br><span class="line"></span><br><span class="line">▼ DefaultWorker* : ctype</span><br><span class="line">    [methods]</span><br><span class="line">    // 1 如果节点没有产生过有效存储，无法参与挖矿</span><br><span class="line">    // 2 计算区块高度= 基准Tipset高度+空块数目</span><br><span class="line">    // 3 取出未打包消息，调用vm执行,生成收据，并更新状态</span><br><span class="line">    // 4 打包区块信息,返回</span><br><span class="line">   +Generate(ctx context.Context, baseTipSet types.TipSet, ticket types.Signature, proof proofs.PoStProof, nullBlockCount uint64) : *types.Block, error</span><br></pre></td></tr></table></figure>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
+
+      
+    </div>
+    
+    
+    
+    
+      
+        <div>
+          <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="Tiny熊 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信号：深入浅出区块链技术，欢迎订阅</div>
+</div>
+
+        </div>
+      
+    
+
+    
+      
+        <div>
+          <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有收获，赞赏下</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/qr_pay.jpg" alt="Tiny熊 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+        </div>
+      
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    先河系统杨尉
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://learnblockchain.cn/2019/03/09/filecoin-code-analysis-14/" title="filecoin技术架构分析十四：filecoin源码分析之服务层链同步、共识协议及挖矿">https://learnblockchain.cn/2019/03/09/filecoin-code-analysis-14/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/FileCoin/" rel="tag"># FileCoin</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/08/filecoin-code-analysis-13/" rel="next" title="filecoin技术架构分析十三：filecoin源码分析之服务层actor及vm">
+                <i class="fa fa-chevron-left"></i> filecoin技术架构分析十三：filecoin源码分析之服务层actor及vm
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/10/filecoin-code-analysis-15/" rel="prev" title="filecoin技术架构分析之十五：filecoin源码分析之节点运行逻辑">
+                filecoin技术架构分析之十五：filecoin源码分析之节点运行逻辑 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">89</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element" style="margin-top: 20px;">
+              <span>
+                项目
+              </span>
+            </div>
+          
+
+          <div class="links-of-author project motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/bitcoin" target="_self" title="比特币">
+                    
+                      <i class="fa fa-fw fa-false"></i>比特币</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/ethereum" target="_self" title="以太坊">
+                    
+                      <i class="fa fa-fw fa-false"></i>以太坊</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/EOS" target="_self" title="EOS">
+                    
+                      <i class="fa fa-fw fa-false"></i>EOS</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/Fabric" target="_self" title="Fabric">
+                    
+                      <i class="fa fa-fw fa-false"></i>Fabric</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <span>
+                联系我
+              </span>
+            </div>
+          
+          
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/xilibi2003" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiong-li-bing/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hiblock.one/" title="HiBlock区块链社区" target="_blank">HiBlock区块链社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://edu.upchain.pro/book.html" title="图书-精通智能合约开发" target="_blank">图书-精通智能合约开发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="区块链技术专栏" target="_blank">区块链技术专栏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://t.xiaomiquan.com/RfAu7uj" title="技术交流-知识星球" target="_blank">技术交流-知识星球</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blockgeek.org/" title="BG区块链技术论坛" target="_blank">BG区块链技术论坛</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bitshuo.com" title="区块链技术中文社区" target="_blank">区块链技术中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://news.tangwen.org" title="汤问资讯" target="_blank">汤问资讯</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitask.org" title="币问" target="_blank">币问</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eosfans.io/" title="EOS中文社区" target="_blank">EOS中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blockflow.net/" title="BlockFlow" target="_blank">BlockFlow</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.liankexing.com/" title="链客区块链问答社区" target="_blank">链客区块链问答社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitool.cn/" title="币兔" target="_blank">币兔</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wutui.pro/" title="无退社区" target="_blank">无退社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hpb.io/" title="HPB芯链" target="_blank">HPB芯链</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#chain同步"><span class="nav-number">1.</span> <span class="nav-text">chain同步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础结构"><span class="nav-number">1.1.</span> <span class="nav-text">基础结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链同步"><span class="nav-number">1.2.</span> <span class="nav-text">链同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链存储"><span class="nav-number">1.3.</span> <span class="nav-text">链存储</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#consensus"><span class="nav-number">2.</span> <span class="nav-text">consensus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mining"><span class="nav-number">3.</span> <span class="nav-text">mining</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#挖矿的主要逻辑"><span class="nav-number">3.1.</span> <span class="nav-text">挖矿的主要逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他细节源码简析"><span class="nav-number">3.2.</span> <span class="nav-text">其他细节源码简析</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+  <div class="footer-custom"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17140514号-1</a></div>
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

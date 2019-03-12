@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+  <meta name="msvalidate.01" content="914C9C1CBC7078C5E2AC612AD5C1CC6C" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="FileCoin," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深入浅出区块链" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第七章filecoin源码协议层分析之存储协议。">
+<meta name="keywords" content="FileCoin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="filecoin技术架构分析七：filecoin源码协议层分析之存储协议">
+<meta property="og:url" content="https://learnblockchain.cn/2019/03/05/filecoin-code-analysis-7/index.html">
+<meta property="og:site_name" content="深入浅出区块链">
+<meta property="og:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第七章filecoin源码协议层分析之存储协议。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://learnblockchain.cn/images/storage_protocol.png">
+<meta property="og:updated_time" content="2019-03-12T06:50:51.562Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="filecoin技术架构分析七：filecoin源码协议层分析之存储协议">
+<meta name="twitter:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第七章filecoin源码协议层分析之存储协议。">
+<meta name="twitter:image" content="https://learnblockchain.cn/images/storage_protocol.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'UT2K1ZRSWK',
+      apiKey: '0bbb261dfad58df8f8a657a1ed3255cd',
+      indexName: 'learnblockchain',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://learnblockchain.cn/2019/03/05/filecoin-code-analysis-7/"/>
+
+
+
+
+
+  <title>filecoin技术架构分析七：filecoin源码协议层分析之存储协议 | 深入浅出区块链</title>
+  
+
+
+
+
+
+
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6273382609469378",
+        enable_page_level_ads: true
+    });
+</script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">系统学习区块链技术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wiki">
+          <a href="https://wiki.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Wiki
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-meeting">
+          <a href="/categories/dev-meeting/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            技术工坊
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-course">
+          <a href="/course/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-spinner"></i> <br />
+            
+            视频教程
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-web3">
+          <a href="https://web3.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Web3文档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2019/03/05/filecoin-code-analysis-7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">filecoin技术架构分析七：filecoin源码协议层分析之存储协议</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-05T16:35:33+08:00">
+                2019-03-05
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-12T14:50:51+08:00">
+                2019-03-12
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/FileCoin/" itemprop="url" rel="index">
+                    <span itemprop="name">FileCoin</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我是先河系统CTO杨尉，欢迎大加关注的的Github: <a href="https://github.com/waynewyang" target="_blank" rel="noopener">waynewyang</a>，本文是<a href="https://learnblockchain.cn/2019/03/11/filecoin-code-analysis-0/">filecoin技术架构分析系列文章</a>第七章filecoin源码协议层分析之存储协议。</p>
+<a id="more"></a>
+<h2 id="协议概览图"><a href="#协议概览图" class="headerlink" title="协议概览图"></a>协议概览图</h2><p><img src="/images/storage_protocol.png" alt=""></p>
+<h2 id="源码信息"><a href="#源码信息" class="headerlink" title="源码信息"></a>源码信息</h2><ul>
+<li>version<ul>
+<li>master分支 619b0eb1（2019年３月２日）</li>
+</ul>
+</li>
+<li>package<ul>
+<li>storage</li>
+</ul>
+</li>
+<li>location<ul>
+<li>protocol/storage</li>
+</ul>
+</li>
+</ul>
+<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><h3 id="存储矿工"><a href="#存储矿工" class="headerlink" title="存储矿工"></a>存储矿工</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br></pre></td><td class="code"><pre><span class="line">▼ package</span><br><span class="line">    storage</span><br><span class="line"></span><br><span class="line">▶ imports</span><br><span class="line"></span><br><span class="line">▼ constants</span><br><span class="line">    //等待密封数据前缀</span><br><span class="line">   -dealsAwatingSealDatastorePrefix</span><br><span class="line">    // 存储交易协议名称：&quot;/fil/storage/mk/1.0.0&quot;</span><br><span class="line">   -makeDealProtocol</span><br><span class="line">    // 矿工数据存储前缀</span><br><span class="line">   -minerDatastorePrefix</span><br><span class="line">    // 存储查询协议名称：&quot;/fil/storage/qry/1.0.0&quot;</span><br><span class="line">   -queryDealProtocol</span><br><span class="line">    // Gas及Gas限制</span><br><span class="line">   -submitPostGasLimit</span><br><span class="line">   -submitPostGasPrice</span><br><span class="line">    // 支付通道建立等待时间</span><br><span class="line">   -waitForPaymentChannelDuration</span><br><span class="line"></span><br><span class="line">▼ variables</span><br><span class="line">   -log</span><br><span class="line"></span><br><span class="line">▼+Miner : struct</span><br><span class="line">    [fields]</span><br><span class="line">    // 交易集合</span><br><span class="line">   -deals : map[cid.Cid]*storageDeal</span><br><span class="line">    // 等待密封结构体</span><br><span class="line">   -dealsAwaitingSeal : *dealsAwaitingSealStruct</span><br><span class="line">    // 交易的资源对象</span><br><span class="line">   -dealsDs : repo.Datastore</span><br><span class="line">    // 交易锁</span><br><span class="line">   -dealsLk : sync.Mutex</span><br><span class="line">    // 存储矿工地址</span><br><span class="line">   -minerAddr : address.Address</span><br><span class="line">    // 节点的Owner地址</span><br><span class="line">   -minerOwnerAddr : address.Address</span><br><span class="line">    // 节点对象，有定义存储矿工必须实现的接口</span><br><span class="line">   -node : node</span><br><span class="line">    // 存储矿工的高层API</span><br><span class="line">   -porcelainAPI : minerPorcelain</span><br><span class="line">    // 是否在生成时空证明中,以及对应的锁</span><br><span class="line">   -postInProcess : *types.BlockHeight</span><br><span class="line">   -postInProcessLk : sync.Mutex</span><br><span class="line">    // 接受交易以及拒绝交易</span><br><span class="line">   -proposalAcceptor : func(ctx context.Context, m *Miner, p *DealProposal) *DealResponse, error</span><br><span class="line">   -proposalRejector : func(ctx context.Context, m *Miner, p *DealProposal, reason string) *DealResponse, error</span><br><span class="line"></span><br><span class="line">    [methods]</span><br><span class="line">    // 密封消息提交到区块链时候，所执行的回调函数,在node中执行</span><br><span class="line">    // 1 失败，则调用dealsAwaitingSeal.fail</span><br><span class="line">    // 2 成功，则调用dealsAwaitingSeal.success</span><br><span class="line">    // 3 成功之后，需要保存密封扇区信息，如果失败调用dealsAwaitingSeal.fail</span><br><span class="line">   +OnCommitmentAddedToChain(sector *sectorbuilder.SealedSectorMetadata, err error)</span><br><span class="line">    // 新区块产生的回调，由node调用,它将会触发新的存储证明</span><br><span class="line">    // 如果时空证明过期，将会在新的周期重新出发时空证明</span><br><span class="line">   +OnNewHeaviestTipSet(ts types.TipSet)</span><br><span class="line">   // 由handleQueryDeal调用,返回查询结果</span><br><span class="line">   +Query(ctx context.Context, c cid.Cid) : *DealResponse</span><br><span class="line">   // 生成时空证明</span><br><span class="line">   -generatePoSt(commRs []proofs.CommR, challenge proofs.PoStChallengeSeed) : proofs.PoStProof, []uint64, error</span><br><span class="line">   // 获取支付通道信息</span><br><span class="line">   // 1 等待支付通道建立完成</span><br><span class="line">   // 2 获取支付通道信息并返回</span><br><span class="line">   // 3 支付信息包括：合约地址、支付者地址、通道信息、支付通道消息cid、支付凭证合集</span><br><span class="line">   -getPaymentChannel(ctx context.Context, p *DealProposal) : *paymentbroker.PaymentChannel, error</span><br><span class="line">   // 获取新的时空证明时间</span><br><span class="line">   -getProvingPeriodStart() : *types.BlockHeight, error</span><br><span class="line">   // 获取存储矿工的特定交易</span><br><span class="line">   -getStorageDeal(c cid.Cid) : *storageDeal</span><br><span class="line">   // 获取存储矿工报价</span><br><span class="line">   -getStoragePrice() : *types.AttoFIL, error</span><br><span class="line">    // 存储交易请求的入口方法,交易请求流的handle函数</span><br><span class="line">    // 1 读取流中交易请求信息</span><br><span class="line">    // 2 调用receiveStorageProposal处理交易请求</span><br><span class="line">    // 3 回复处理回复</span><br><span class="line">   -handleMakeDeal(s inet.Stream)</span><br><span class="line">    //解析具体流信息，处理查询请求，会调用Query请求</span><br><span class="line">   -handleQueryDeal(s inet.Stream)</span><br><span class="line">    // 从资源目录中加载交易信息到Miner实例中</span><br><span class="line">   -loadDeals() : error</span><br><span class="line">    // 加载待密封的信息</span><br><span class="line">   -loadDealsAwaitingSeal() : error</span><br><span class="line">   // 密封失败，更新响应信息</span><br><span class="line">   -onCommitFail(dealCid cid.Cid, message string)</span><br><span class="line">   // 密封成功，更新响应信息</span><br><span class="line">   // 1 切换状态至Posted</span><br><span class="line">   // 2 更新证明信息：扇区ID,副本信息，原始数据信息</span><br><span class="line">   -onCommitSuccess(dealCid cid.Cid, sector *sectorbuilder.SealedSectorMetadata)</span><br><span class="line">   // 处理存储交易</span><br><span class="line">   // 1,获取存储交易信息</span><br><span class="line">   // 2,数据处理，密封</span><br><span class="line">   -processStorageDeal(c cid.Cid)</span><br><span class="line">    // 处理交易请求</span><br><span class="line">    // 1 检查签名的正确性</span><br><span class="line">    // 2 检查支付信息正确性,调用validateDealPayment方法</span><br><span class="line">    // 3 不合法调用proposalRejector(rejectProposal)拒绝请求;合法调用proposalAcceptor(acceptProposal)回复</span><br><span class="line">   -receiveStorageProposal(ctx context.Context, sp *SignedDealProposal) : *DealResponse, error</span><br><span class="line">    // 从Miner对象中存储交易信息到资源目录中</span><br><span class="line">   -saveDeal(proposalCid cid.Cid) : error</span><br><span class="line">    // 存储待密封信息至资源目录</span><br><span class="line">   -saveDealsAwaitingSeal() : error</span><br><span class="line">   // 提交时空证明</span><br><span class="line">   // 1 产生随机种子</span><br><span class="line">   // 2 根据时空证明输入长度，生成副本切片</span><br><span class="line">   // 3 随机种子＋副本切片作为输入生成时空证明</span><br><span class="line">   // 4 调用高层接口发送消息</span><br><span class="line">   -submitPoSt(start, end *types.BlockHeight, inputs []generatePostInput)</span><br><span class="line">   // 更新交易响应消息</span><br><span class="line">   -updateDealResponse(proposalCid cid.Cid, f func(*DealResponse)) : error</span><br><span class="line">   // 检查支付信息的正确性</span><br><span class="line">   // 1 客户出价必须高于矿工报价</span><br><span class="line">   // 2 收款人必须为本节点矿工</span><br><span class="line">   // 3 支付通道总资金必须大于矿工报价</span><br><span class="line">   // 4 必须有交易凭证，且交易凭证总金额必须大于矿工报价</span><br><span class="line">   -validateDealPayment(ctx context.Context, p *DealProposal) : error</span><br><span class="line"></span><br><span class="line">    [functions]</span><br><span class="line">    // 实例化存储矿工</span><br><span class="line">    // 1 通过node传参赋值</span><br><span class="line">    // 2 指定密封成功失败的回调函数</span><br><span class="line">    // 3 设置交易请求以及交易查询的流handle方法</span><br><span class="line">   +NewMiner(ctx context.Context, minerAddr, minerOwnerAddr address.Address, nd node, dealsDs repo.Datastore, porcelainAPI minerPorcelain) : *Miner, error</span><br><span class="line"></span><br><span class="line">▼-dealsAwaitingSealStruct : struct</span><br><span class="line">    [fields]</span><br><span class="line">    // 从扇区id获取失败信息</span><br><span class="line">   +FailedSectors : map[uint64]string</span><br><span class="line">    // 从扇区id获取交易的cid</span><br><span class="line">   +SectorsToDeals : map[uint64][]cid.Cid</span><br><span class="line">    // 从扇区id获取sector元数据</span><br><span class="line">   +SuccessfulSectors : map[uint64]*sectorbuilder.SealedSectorMetadata</span><br><span class="line">   -l : sync.Mutex</span><br><span class="line">    // 失败处理回调，在实例化Miner指向onCommitFail</span><br><span class="line">   -onFail : func(dealCid cid.Cid, message string)</span><br><span class="line">    // 成功处理回调,在实例化Miner指向onCommitSuccess</span><br><span class="line">   -onSuccess : func(dealCid cid.Cid, sector *sectorbuilder.SealedSectorMetadata)</span><br><span class="line"></span><br><span class="line">    [methods]</span><br><span class="line">    // 对数据进行密封</span><br><span class="line">   -add(sectorID uint64, dealCid cid.Cid)</span><br><span class="line">    // 密封失败处理dealsAwaitingSeal.onFail</span><br><span class="line">   -fail(sectorID uint64, message string)</span><br><span class="line">    // 密封成功处理dealsAwaitingSeal.onSuccess</span><br><span class="line">   -success(sector *sectorbuilder.SealedSectorMetadata)</span><br><span class="line"></span><br><span class="line">▼-generatePostInput : struct</span><br><span class="line">    [fields]</span><br><span class="line">    // 副本merkle根</span><br><span class="line">   -commD : proofs.CommD</span><br><span class="line">    // 原始数据merkle根</span><br><span class="line">   -commR : proofs.CommR</span><br><span class="line">    // 中间数据merkle根</span><br><span class="line">   -commRStar : proofs.CommRStar</span><br><span class="line">    // 扇区ID</span><br><span class="line">   -sectorID : uint64</span><br><span class="line"></span><br><span class="line">▼-storageDeal : struct</span><br><span class="line">    [fields]</span><br><span class="line">    // 交易请求结构体</span><br><span class="line">   +Proposal : *DealProposal</span><br><span class="line">    // 交易请求响应结构体</span><br><span class="line">   +Response : *DealResponse</span><br><span class="line"></span><br><span class="line">    // 存储矿工高层API</span><br><span class="line">▼-minerPorcelain : interface</span><br><span class="line">    [methods]</span><br><span class="line">    // 区块高度</span><br><span class="line">   +ChainBlockHeight(ctx context.Context) : *types.BlockHeight, error</span><br><span class="line">    // 获取配置</span><br><span class="line">   +ConfigGet(dottedPath string) : interface&#123;&#125;, error</span><br><span class="line">    // 发送、查询、等待消息</span><br><span class="line">   +MessageQuery(ctx context.Context, optFrom, to address.Address, method string, params ...interface&#123;&#125;) : [][]byte, *exec.FunctionSignature, error</span><br><span class="line">   +MessageSend(ctx context.Context, from, to address.Address, value *types.AttoFIL, gasPrice types.AttoFIL, gasLimit types.GasUnits, method string, params ...interface&#123;&#125;) : cid.Cid, error</span><br><span class="line">   +MessageWait(ctx context.Context, msgCid cid.Cid, cb func(*types.Block, *types.SignedMessage, *types.MessageReceipt) error) : error</span><br><span class="line"></span><br><span class="line">▼-node : interface</span><br><span class="line">    [methods]</span><br><span class="line">    // 区块高度</span><br><span class="line">   +BlockHeight() : *types.BlockHeight, error</span><br><span class="line">    // 区块服务，存储/查询服务</span><br><span class="line">   +BlockService() : bserv.BlockService</span><br><span class="line">    // 区块时间</span><br><span class="line">   +GetBlockTime() : time.Duration</span><br><span class="line">    // 主机信息</span><br><span class="line">   +Host() : host.Host</span><br><span class="line">    // 扇区创建,具体包含</span><br><span class="line">    // 1 增加、读取piece;</span><br><span class="line">    // 2 密封所有非空分期扇区</span><br><span class="line">    // 3 密封结果通过返回，通过通道channel的方式</span><br><span class="line">    // 4 获取扇区中最大的piece字节大小</span><br><span class="line">    // 5 生成时空证明</span><br><span class="line">   +SectorBuilder() : sectorbuilder.SectorBuilder</span><br><span class="line"></span><br><span class="line">▼ functions</span><br><span class="line">    // 存储交易信息之后，调用processStorageDeal处理交易信息</span><br><span class="line">   -acceptProposal(ctx context.Context, sm *Miner, p *DealProposal) : *DealResponse, error</span><br><span class="line">    // 获取具体文件大小</span><br><span class="line">   -getFileSize(ctx context.Context, c cid.Cid, dserv ipld.DAGService) : uint64, error</span><br><span class="line">   -init()</span><br><span class="line">    // 存储交易信息,更新响应消息，并返回</span><br><span class="line">   -rejectProposal(ctx context.Context, sm *Miner, p *DealProposal, reason string) : *DealResponse, error</span><br></pre></td></tr></table></figure>
+<h3 id="存储客户"><a href="#存储客户" class="headerlink" title="存储客户"></a>存储客户</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br></pre></td><td class="code"><pre><span class="line">▼ package</span><br><span class="line">    storage</span><br><span class="line"></span><br><span class="line">▼ imports</span><br><span class="line"></span><br><span class="line">▼ constants</span><br><span class="line">   +ChannelExpiryInterval</span><br><span class="line">    // Gas及Gas限制</span><br><span class="line">   +CreateChannelGasLimit</span><br><span class="line">   +CreateChannelGasPrice</span><br><span class="line">   +ErrDupicateDeal</span><br><span class="line">    // 建立Voucher的周期</span><br><span class="line">   +VoucherInterval</span><br><span class="line">    // 存储前缀</span><br><span class="line">   -clientDatastorePrefix</span><br><span class="line"></span><br><span class="line">▼ variables</span><br><span class="line">   +Errors</span><br><span class="line"></span><br><span class="line">▼+Client : struct</span><br><span class="line">    [fields]</span><br><span class="line">    </span><br><span class="line">    // 存储客户高层API</span><br><span class="line">   -api : clientPorcelainAPI</span><br><span class="line">    // 交易集合</span><br><span class="line">   -deals : map[cid.Cid]*clientDeal</span><br><span class="line">    // 交易资源目录对象及锁</span><br><span class="line">   -dealsDs : repo.Datastore</span><br><span class="line">   -dealsLk : sync.Mutex</span><br><span class="line">    // 存储客户节点</span><br><span class="line">   -node : clientNode</span><br><span class="line"></span><br><span class="line">    [methods]</span><br><span class="line">    // 加载特定交易的凭证</span><br><span class="line">   +LoadVouchersForDeal(dealCid cid.Cid) : []*paymentbroker.PaymentVoucher, error</span><br><span class="line"></span><br><span class="line">    // 发起存储交易</span><br><span class="line">    // 1 获取文件大小、矿工报价、区块高度、目的地址 </span><br><span class="line">    // 2 建立支付通道</span><br><span class="line">    // 3 调用MakeProtocolRequest发起交易请求</span><br><span class="line">    // 4 检查交易响应</span><br><span class="line">    // 5 持久化交易响应并回复</span><br><span class="line">   +ProposeDeal(ctx context.Context, miner address.Address, data cid.Cid, askID uint64, duration uint64, allowDuplicates bool) : *DealResponse, error</span><br><span class="line"></span><br><span class="line">    // 查询交易</span><br><span class="line">    // 1 获取矿工信息，地址、节点ID</span><br><span class="line">    // 2 调用MakeProtocolRequest发起请求</span><br><span class="line">   +QueryDeal(ctx context.Context, proposalCid cid.Cid) : *DealResponse, error</span><br><span class="line"></span><br><span class="line">    // 检查交易响应</span><br><span class="line">   -checkDealResponse(ctx context.Context, resp *DealResponse) : error</span><br><span class="line"></span><br><span class="line">    // 判断是否为重复交易</span><br><span class="line">   -isMaybeDupDeal(p *DealProposal) : bool</span><br><span class="line"></span><br><span class="line">    // 加载交易信息</span><br><span class="line">   -loadDeals() : error</span><br><span class="line"></span><br><span class="line">    // 返回目标矿工地址</span><br><span class="line">   -minerForProposal(c cid.Cid) : address.Address, error</span><br><span class="line"></span><br><span class="line">    // 持久化交易响应</span><br><span class="line">   -recordResponse(resp *DealResponse, miner address.Address, p *DealProposal) : error</span><br><span class="line"></span><br><span class="line">    // 保存交易信息</span><br><span class="line">   -saveDeal(cid cid.Cid) : error</span><br><span class="line"></span><br><span class="line">    [functions]</span><br><span class="line">    // 实例化存储客户</span><br><span class="line">   +NewClient(nd clientNode, api clientPorcelainAPI, dealsDs repo.Datastore) : *Client, error</span><br><span class="line"></span><br><span class="line">▼+ClientNodeImpl : struct</span><br><span class="line">    [fields]</span><br><span class="line">   -blockTime : time.Duration</span><br><span class="line">   -dserv : ipld.DAGService</span><br><span class="line">   -host : host.Host</span><br><span class="line"></span><br><span class="line">    [methods]</span><br><span class="line">    //实现clientNode接口</span><br><span class="line">   +GetBlockTime() : time.Duration</span><br><span class="line"></span><br><span class="line">    // 获取文件大小</span><br><span class="line">   +GetFileSize(ctx context.Context, c cid.Cid) : uint64, error</span><br><span class="line"></span><br><span class="line">    // 发起协议请求</span><br><span class="line">    // 1 建立对应的存储交易或者请求的协议流</span><br><span class="line">    // 2 发起请求</span><br><span class="line">   +MakeProtocolRequest(ctx context.Context, protocol protocol.ID, peer peer.ID, request interface&#123;&#125;, response interface&#123;&#125;) : error</span><br><span class="line"></span><br><span class="line">    [functions]</span><br><span class="line">    // 实例化客户节点</span><br><span class="line">   +NewClientNodeImpl(ds ipld.DAGService, host host.Host, bt time.Duration) : *ClientNodeImpl</span><br><span class="line"></span><br><span class="line">▼-clientDeal : struct</span><br><span class="line">    [fields]</span><br><span class="line">    // 目标矿工，请求及响应</span><br><span class="line">   +Miner : address.Address</span><br><span class="line">   +Proposal : *DealProposal</span><br><span class="line">   +Response : *DealResponse</span><br><span class="line"></span><br><span class="line">▼-clientNode : interface</span><br><span class="line">    // 由ClientNodeImpl实现</span><br><span class="line">    [methods]</span><br><span class="line">   +GetBlockTime() : time.Duration</span><br><span class="line">   +GetFileSize(context.Context, cid.Cid) : uint64, error</span><br><span class="line">   +MakeProtocolRequest(ctx context.Context, protocol protocol.ID, peer peer.ID, request interface&#123;&#125;, response interface&#123;&#125;) : error</span><br><span class="line"></span><br><span class="line">▼-clientPorcelainAPI : interface</span><br><span class="line">    [embedded]</span><br><span class="line">   +types.Signer</span><br><span class="line"></span><br><span class="line">    [methods]</span><br><span class="line">    // 获取区块高度</span><br><span class="line">   +ChainBlockHeight(ctx context.Context) : *types.BlockHeight, error</span><br><span class="line">    // 创建支付通道</span><br><span class="line">    // 包括源及目的地址，价格，时间，支付间隔，通道超时时间，Gas及限制</span><br><span class="line">   +CreatePayments(ctx context.Context, config porcelain.CreatePaymentsParams) : *porcelain.CreatePaymentsReturn, error</span><br><span class="line">    // 获取目标地址</span><br><span class="line">   +GetAndMaybeSetDefaultSenderAddress() : address.Address, error</span><br><span class="line">    // 获取矿工报价</span><br><span class="line">   +MinerGetAsk(ctx context.Context, minerAddr address.Address, askID uint64) : miner.Ask, error</span><br><span class="line">    // 获取矿工Owner地址</span><br><span class="line">   +MinerGetOwnerAddress(ctx context.Context, minerAddr address.Address) : address.Address, error</span><br><span class="line">    // 获取矿工节点ID</span><br><span class="line">   +MinerGetPeerID(ctx context.Context, minerAddr address.Address) : peer.ID, error</span><br><span class="line"></span><br><span class="line">▼ functions</span><br><span class="line">   -init()</span><br></pre></td></tr></table></figure>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
+
+      
+    </div>
+    
+    
+    
+    
+      
+        <div>
+          <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="Tiny熊 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信号：深入浅出区块链技术，欢迎订阅</div>
+</div>
+
+        </div>
+      
+    
+
+    
+      
+        <div>
+          <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有收获，赞赏下</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/qr_pay.jpg" alt="Tiny熊 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+        </div>
+      
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    先河系统杨尉
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://learnblockchain.cn/2019/03/05/filecoin-code-analysis-7/" title="filecoin技术架构分析七：filecoin源码协议层分析之存储协议">https://learnblockchain.cn/2019/03/05/filecoin-code-analysis-7/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/FileCoin/" rel="tag"># FileCoin</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/04/filecoin-code-analysis-6/" rel="next" title="filecoin技术架构分析六:filecoin源码协议层分析之hello握手协议">
+                <i class="fa fa-chevron-left"></i> filecoin技术架构分析六:filecoin源码协议层分析之hello握手协议
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/05/filecoin-code-analysis-8/" rel="prev" title="filecoin技术架构分析八：filecoin源码分析之协议层检索协议">
+                filecoin技术架构分析八：filecoin源码分析之协议层检索协议 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">89</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element" style="margin-top: 20px;">
+              <span>
+                项目
+              </span>
+            </div>
+          
+
+          <div class="links-of-author project motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/bitcoin" target="_self" title="比特币">
+                    
+                      <i class="fa fa-fw fa-false"></i>比特币</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/ethereum" target="_self" title="以太坊">
+                    
+                      <i class="fa fa-fw fa-false"></i>以太坊</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/EOS" target="_self" title="EOS">
+                    
+                      <i class="fa fa-fw fa-false"></i>EOS</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/Fabric" target="_self" title="Fabric">
+                    
+                      <i class="fa fa-fw fa-false"></i>Fabric</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <span>
+                联系我
+              </span>
+            </div>
+          
+          
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/xilibi2003" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiong-li-bing/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hiblock.one/" title="HiBlock区块链社区" target="_blank">HiBlock区块链社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://edu.upchain.pro/book.html" title="图书-精通智能合约开发" target="_blank">图书-精通智能合约开发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="区块链技术专栏" target="_blank">区块链技术专栏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://t.xiaomiquan.com/RfAu7uj" title="技术交流-知识星球" target="_blank">技术交流-知识星球</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blockgeek.org/" title="BG区块链技术论坛" target="_blank">BG区块链技术论坛</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bitshuo.com" title="区块链技术中文社区" target="_blank">区块链技术中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://news.tangwen.org" title="汤问资讯" target="_blank">汤问资讯</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitask.org" title="币问" target="_blank">币问</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eosfans.io/" title="EOS中文社区" target="_blank">EOS中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blockflow.net/" title="BlockFlow" target="_blank">BlockFlow</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.liankexing.com/" title="链客区块链问答社区" target="_blank">链客区块链问答社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitool.cn/" title="币兔" target="_blank">币兔</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wutui.pro/" title="无退社区" target="_blank">无退社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hpb.io/" title="HPB芯链" target="_blank">HPB芯链</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#协议概览图"><span class="nav-number">1.</span> <span class="nav-text">协议概览图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源码信息"><span class="nav-number">2.</span> <span class="nav-text">源码信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源码分析"><span class="nav-number">3.</span> <span class="nav-text">源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储矿工"><span class="nav-number">3.1.</span> <span class="nav-text">存储矿工</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储客户"><span class="nav-number">3.2.</span> <span class="nav-text">存储客户</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+  <div class="footer-custom"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17140514号-1</a></div>
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

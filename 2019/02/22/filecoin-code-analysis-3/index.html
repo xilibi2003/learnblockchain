@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+  <meta name="msvalidate.01" content="914C9C1CBC7078C5E2AC612AD5C1CC6C" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="FileCoin," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深入浅出区块链" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第三章filecoin开发网络使用。">
+<meta name="keywords" content="FileCoin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="filecoin技术架构分析三：filecoin开发网络使用">
+<meta property="og:url" content="https://learnblockchain.cn/2019/02/22/filecoin-code-analysis-3/index.html">
+<meta property="og:site_name" content="深入浅出区块链">
+<meta property="og:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第三章filecoin开发网络使用。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://learnblockchain.cn/images/active.png">
+<meta property="og:image" content="https://learnblockchain.cn/images/wikiissue1.png">
+<meta property="og:updated_time" content="2019-03-12T06:50:21.730Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="filecoin技术架构分析三：filecoin开发网络使用">
+<meta name="twitter:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第三章filecoin开发网络使用。">
+<meta name="twitter:image" content="https://learnblockchain.cn/images/active.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'UT2K1ZRSWK',
+      apiKey: '0bbb261dfad58df8f8a657a1ed3255cd',
+      indexName: 'learnblockchain',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://learnblockchain.cn/2019/02/22/filecoin-code-analysis-3/"/>
+
+
+
+
+
+  <title>filecoin技术架构分析三：filecoin开发网络使用 | 深入浅出区块链</title>
+  
+
+
+
+
+
+
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6273382609469378",
+        enable_page_level_ads: true
+    });
+</script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">系统学习区块链技术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wiki">
+          <a href="https://wiki.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Wiki
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-meeting">
+          <a href="/categories/dev-meeting/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            技术工坊
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-course">
+          <a href="/course/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-spinner"></i> <br />
+            
+            视频教程
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-web3">
+          <a href="https://web3.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Web3文档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2019/02/22/filecoin-code-analysis-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">filecoin技术架构分析三：filecoin开发网络使用</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-22T16:35:33+08:00">
+                2019-02-22
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-12T14:50:21+08:00">
+                2019-03-12
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/FileCoin/" itemprop="url" rel="index">
+                    <span itemprop="name">FileCoin</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我是先河系统CTO杨尉，欢迎大加关注的的Github: <a href="https://github.com/waynewyang" target="_blank" rel="noopener">waynewyang</a>，本文是<a href="https://learnblockchain.cn/201903/11/filecoin-code-analysis-0/">filecoin技术架构分析系列文章</a>第三章filecoin开发网络使用。</p>
+<a id="more"></a>
+<h2 id="filecoin开发网络使用"><a href="#filecoin开发网络使用" class="headerlink" title="filecoin开发网络使用"></a>filecoin开发网络使用<a name="filecoin开发网络使用"></a></h2><h3 id="辅助资源"><a href="#辅助资源" class="headerlink" title="辅助资源"></a>辅助资源</h3><ul>
+<li><p>Filecoin状态:  <a href="https://stats.kittyhawk.wtf" target="_blank" rel="noopener">https://stats.kittyhawk.wtf</a></p>
+<ul>
+<li>网络<ul>
+<li>存储实时价格 FIL/GB/Month</li>
+<li>当前存储容量 GB</li>
+<li>当前网络利用率</li>
+<li>检索平均价格</li>
+<li>激活节点以及分布图</li>
+<li>存储平均价格曲线</li>
+<li>best tipset</li>
+</ul>
+</li>
+<li>存储矿工<ul>
+<li>存储矿工数量变化曲线</li>
+<li>存储矿工共识结果</li>
+<li>近30天的矿工top图</li>
+</ul>
+</li>
+<li>检索矿工<ul>
+<li>平均检索价格</li>
+<li>平均检索时间</li>
+<li>平均检索容量</li>
+</ul>
+</li>
+<li>FIL指数<ul>
+<li>流通FIL及抵押FIL变化图</li>
+<li>FIL地址总数</li>
+<li>FIL总抵押数及对应存储空间</li>
+<li>FIL总数上升曲线图</li>
+<li>FIL区块奖励下降曲线图</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Filecoin区块浏览器：  <a href="http://user.kittyhawk.wtf:8000" target="_blank" rel="noopener">http://user.kittyhawk.wtf:8000</a></p>
+<ul>
+<li>Chain信息</li>
+<li>BestBlock信息</li>
+<li>Actor合约信息</li>
+</ul>
+</li>
+<li><p>获取FIL用于抵押或支付：<a href="http://user.kittyhawk.wtf:9797" target="_blank" rel="noopener">http://user.kittyhawk.wtf:9797</a></p>
+<ul>
+<li>获取mock FIL代币</li>
+</ul>
+</li>
+<li><p>Dashboard: <a href="http://user.kittyhawk.wtf:8010" target="_blank" rel="noopener">http://user.kittyhawk.wtf:8010</a></p>
+<ul>
+<li>Network概览，最新区块信息</li>
+<li>区块浏览器链接</li>
+</ul>
+</li>
+<li><p>Genesis File: <a href="http://user.kittyhawk.wtf:8020/genesis.car" target="_blank" rel="noopener">http://user.kittyhawk.wtf:8020/genesis.car</a></p>
+<ul>
+<li>创始文件，用于初始化filecoin资源</li>
+</ul>
+</li>
+<li><p>Prometheus Endpoint: <a href="http://user.kittyhawk.wtf:9082/metrics" target="_blank" rel="noopener">http://user.kittyhawk.wtf:9082/metrics</a></p>
+<ul>
+<li>一些技术指标，比如内存、进程、线程等</li>
+</ul>
+</li>
+<li><p>Connected Nodes PeerID’s: <a href="http://user.kittyhawk.wtf:9082/nodes" target="_blank" rel="noopener">http://user.kittyhawk.wtf:9082/nodes</a></p>
+<ul>
+<li>连接的节点信息</li>
+</ul>
+</li>
+</ul>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用<a name="使用"></a></h3><h4 id="接入filecoin开发网络"><a href="#接入filecoin开发网络" class="headerlink" title="接入filecoin开发网络"></a>接入filecoin开发网络<a name="接入filecoin开发网络"></a></h4><ul>
+<li>初始化filecoin资源目录</li>
+</ul>
+<blockquote>
+<p>如果之前有运行过filecoin，想重新开始，需要删除filecoin资源，同时重新初始化是需要重新花时间同步开发网区块信息的。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf ~/.filecoin</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>初始化资源目录，使用–devnet-user表示连接至开发网</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">waynewyang:Downloads waynewyang$ go-filecoin init --devnet-user --genesisfile=http://user.kittyhawk.wtf:8020/genesis.car</span><br><span class="line">initializing filecoin node at ~/.filecoin</span><br><span class="line">waynewyang:Downloads waynewyang$</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>启动filecoin进程，接入开发网</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">go-filecoin daemon</span><br><span class="line"></span><br><span class="line">//如果开发者，需要接入nightly devnet，请设置环境变量后启动filecoin</span><br><span class="line">env FIL_USE_SMALL_SECTORS=true go-filecoin daemon</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检查连接性</p>
+</li>
+</ul>
+<blockquote>
+<p>go-filecoin swarm peers 查看已经连接的节点</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">waynewyang:filecoin waynewyang$ go-filecoin swarm peers</span><br><span class="line">/ip4/115.238.154.84/tcp/19109/ipfs/Qmb6ZYi7GLFAje3UekGZ2LZymck7RVHKSKb1bhPzzPTQkm</span><br><span class="line">/ip4/115.238.154.84/tcp/41187/ipfs/QmZ9UHdU2fwDN7emWW8AeaUdkF9fT7RwJrnbbdcQFUq9X6</span><br><span class="line">/ip4/123.134.67.81/tcp/6000/ipfs/QmccrEQsauwge4BZQeN1jBtFyd7dnTi4pSDvkikMWaFccw</span><br><span class="line">/ip4/123.134.67.82/tcp/6000/ipfs/QmWuA1AW4qDqztDrwo2pBgT2au67BJbGtEzWRufbc8isgn</span><br><span class="line">/ip4/123.134.67.83/tcp/6000/ipfs/QmbPCabGcngs3bCgMK8dC3w9pjoyPd1NFyDhbkgLyT2eJ7</span><br><span class="line">/ip4/123.134.67.85/tcp/6000/ipfs/QmUqSSZrwfSUU3vfw7D1UyKaLvEv1Ykcvx3ntvSXWaA7kj</span><br><span class="line">/ip4/123.134.67.86/tcp/6000/ipfs/QmPrz2z764AVaHivM7iX2JqRw5EdE3jcZTrjwVxS4VukyK</span><br><span class="line">/ip4/123.134.67.87/tcp/6000/ipfs/QmTxVFq3u7qPxsXFQdoyqPrdh6meW6JBGkSJ8HJXAiMUfh</span><br><span class="line">/ip4/123.134.67.88/tcp/6000/ipfs/QmXAVRPYu57XDwJHszn9U9x1KtTwPsJBaS1mTdNZzAQVyQ</span><br><span class="line">/ip4/123.134.67.89/tcp/6000/ipfs/Qmc5umx9R3bpD5VxvUmfyLoDz5wtVT43p5xjSEmTe26qTD</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>go-filecoin ping peerID 确认连通性</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">waynewyang:filecoin waynewyang$ go-filecoin ping QmW4Z8p7FCspLV1FeTRW6uCNApUXqkm8xYYw4yuBnqBGeB</span><br><span class="line">PING &lt;peer.ID Qm*nqBGeB&gt;</span><br><span class="line">Pong received: time=245.12 ms</span><br><span class="line">Pong received: time=245.61 ms</span><br><span class="line">Pong received: time=251.98 ms</span><br><span class="line">Pong received: time=245.69 ms</span><br><span class="line">Pong received: time=255.64 ms</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>给你的filecoin Node设置昵称</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">waynewyang:filecoin waynewyang$ go-filecoin config heartbeat.nickname &quot;wwwarsyuncom&quot;</span><br><span class="line">&quot;wwwarsyuncom&quot;</span><br><span class="line">waynewyang:filecoin waynewyang$ go-filecoin config heartbeat.nickname</span><br><span class="line">&quot;wwwarsyuncom&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>激活节点</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go-filecoin config heartbeat.beatTarget &quot;/dns4/stats-infra.kittyhawk.wtf/tcp/8080/ipfs/QmUWmZnpZb6xFryNDeNU7KcJ1Af5oHy7fB9npU67sseEjR&quot;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在 <a href="https://stats.kittyhawk.wtf/" target="_blank" rel="noopener">https://stats.kittyhawk.wtf/</a> 查看filecoin网络，节点已经激活</p>
+</blockquote>
+<p><img src="/images/active.png" alt=""></p>
+<h4 id="获取Mock-FIL用于测试"><a href="#获取Mock-FIL用于测试" class="headerlink" title="获取Mock FIL用于测试"></a>获取Mock FIL用于测试<a name="从faucet中获取mock代币"></a></h4><blockquote>
+<p>FIL用于矿工抵押；或者作为客户进行交易需要</p>
+</blockquote>
+<ul>
+<li>注意：开发网目前运行的都是全节点，获取mock FIL需要建立在本地区块数据同步完成的基础上进行，必须同步完区块之后才能生效，根据个人机器配置情况，这需要较长一段时间。</li>
+<li>go-filecoin message wait ${MESSAGE_CID}  本质上是转账交易，wiki上说明的是等待30s，但是这是在本地区块数据同步完成的基础上才行的。</li>
+<li>笔者已提交建议给官方，在wiki上更为清晰地表述。</li>
+</ul>
+<p><img src="/images/wikiissue1.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">waynewyang:filecoin waynewyang$ go-filecoin wallet addrs ls</span><br><span class="line">fcq09qtmrxgq5sdr95gs93tx79u9uymdwfdsaphpa</span><br><span class="line"></span><br><span class="line">waynewyang:filecoin waynewyang$ export WALLET_ADDR=`go-filecoin wallet addrs ls`</span><br><span class="line"></span><br><span class="line">waynewyang:filecoin waynewyang$ MESSAGE_CID=`curl -X POST -F &quot;target=$&#123;WALLET_ADDR&#125;&quot; &quot;http://user.kittyhawk.wtf:9797/tap&quot; | cut -d&quot; &quot; -f4`</span><br><span class="line">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</span><br><span class="line">                                 Dload  Upload   Total   Spent    Left  Speed</span><br><span class="line">100   232  100    50  100   182     48    177  0:00:01  0:00:01 --:--:--   177</span><br><span class="line"></span><br><span class="line">waynewyang:go-filecoin waynewyang$ go-filecoin message wait $&#123;MESSAGE_CID&#125;</span><br><span class="line">&#123;</span><br><span class="line">	&quot;meteredMessage&quot;: &#123;</span><br><span class="line">		&quot;message&quot;: &#123;</span><br><span class="line">			&quot;to&quot;: &quot;fcqm0u932ja5thlsy4dgpz5urlapk8qhtd0clqv5e&quot;,</span><br><span class="line">			&quot;from&quot;: &quot;fcq09sqhrd4gls86muuenzvqdc37mzscagapjveal&quot;,</span><br><span class="line">			&quot;nonce&quot;: &quot;rQQ=&quot;,</span><br><span class="line">			&quot;value&quot;: &quot;1000&quot;,</span><br><span class="line">			&quot;method&quot;: &quot;&quot;,</span><br><span class="line">			&quot;params&quot;: null</span><br><span class="line">		&#125;,</span><br><span class="line">		&quot;gasPrice&quot;: &quot;0&quot;,</span><br><span class="line">		&quot;gasLimit&quot;: &quot;AA==&quot;</span><br><span class="line">	&#125;,</span><br><span class="line">	&quot;signature&quot;: &quot;WKA+eRY7XCQlSmallzoFu8Tps7NZ2AOAKLRFo21rTERFYJqXJT2qEWZ8sFvm6ZShR5syb7RSAJnDp4Am2Vzp0gE=&quot;</span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">	&quot;exitCode&quot;: 0,</span><br><span class="line">	&quot;return&quot;: null,</span><br><span class="line">	&quot;gasAttoFIL&quot;: &quot;0&quot;</span><br><span class="line">&#125;</span><br><span class="line">waynewyang:filecoin waynewyang$ go-filecoin wallet balance  fcq09qtmrxgq5sdr95gs93tx79u9uymdwfdsaphpa</span><br><span class="line">1000</span><br><span class="line">waynewyang:filecoin waynewyang$ go-filecoin wallet balance  $&#123;WALLET_ADDR&#125;</span><br><span class="line">1000</span><br></pre></td></tr></table></figure>
+<h4 id="矿工操作"><a href="#矿工操作" class="headerlink" title="矿工操作"></a>矿工操作<a name="矿工操作"></a></h4><h4 id="存储矿工"><a href="#存储矿工" class="headerlink" title="存储矿工"></a>存储矿工<a name="存储矿工"></a></h4><ul>
+<li>创建存储矿工示例，需要等待1分钟左右<ul>
+<li>抵押10个扇区的存储空间（当前默认每个扇区256MiB）</li>
+<li>支付100个FIL为担保</li>
+<li>gas价格为0</li>
+<li>限制gas消耗最大为1000个FIL</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">waynewyang:filecoin waynewyang$ go-filecoin miner create 10 100 --price=0 --limit=1000 --peerid `go-filecoin id | jq -r &apos;.ID&apos;`</span><br><span class="line">fcqjge872spqrgtm8dhlndjgfhhuxzx0y3ujvxxsl //所返回的就是矿工地址minerAddress</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>启动挖矿</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">waynewyang:filecoin waynewyang$ go-filecoin mining start</span><br><span class="line">Started mining</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>收益之一: 启动挖矿之后就可以参与挖区块奖励</p>
+<blockquote>
+<p>查询区块头</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">waynewyang:go-filecoin waynewyang$ go-filecoin chain head</span><br><span class="line">[&#123;&quot;/&quot;:&quot;zDPWYqFD2mBqLx7bwQNdeVoMxj6SC5HxzorZAoXpT6xjaythnENw&quot;&#125;]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>查询具体区块信息</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">go-filecoin show block &lt;blockID&gt;</span><br><span class="line"></span><br><span class="line">waynewyang:go-filecoin waynewyang$ go-filecoin show block zDPWYqFD2mBqLx7bwQNdeVoMxj6SC5HxzorZAoXpT6xjaythnENw</span><br><span class="line">Block Details</span><br><span class="line">Miner:  fcq0y72meekgwnvchwml0uzx759q25nk0rqc47ret</span><br><span class="line">Weight: 293567.552</span><br><span class="line">Height: 10787</span><br><span class="line">Nonce:  0</span><br></pre></td></tr></table></figure>
+<ul>
+<li>收益之二：创建报价单ask</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">1) 获取矿工地址</span><br><span class="line">export MINER_ADDR=`go-filecoin config mining.minerAddress | tr -d \&quot;` </span><br><span class="line"></span><br><span class="line">2) 设置矿机Owner</span><br><span class="line">export MINER_OWNER_ADDR=`go-filecoin miner owner $MINER_ADDR`</span><br><span class="line"></span><br><span class="line">3) 创建报价单，价格0.000000001 FIL/byte/block, 交易费0，gas限制1000，提供2880个block空间存储</span><br><span class="line"></span><br><span class="line">go-filecoin miner set-price --from=$MINER_OWNER_ADDR --miner=$MINER_ADDR --price=0 --limit=1000 0.000000001 2880 # output: CID of the ask</span><br><span class="line"></span><br><span class="line">发布报价单，需要打包进去区块</span><br><span class="line"></span><br><span class="line">waynewyang:filecoin waynewyang$ go-filecoin miner set-price --from=$MINER_OWNER_ADDR --miner=$MINER_ADDR --price=0 --limit=1000 0.000000001 15315</span><br><span class="line">Set price for miner fcqjge872spqrgtm8dhlndjgfhhuxzx0y3ujvxxsl to 0.000000001.</span><br><span class="line">	Published ask, cid: zDPWYqFCxL3VW3xzmHhCBqPTvhoQa53pn6DzV3uY23jNL76za1Vt.</span><br><span class="line">	Ask confirmed on chain in block: zDPWYqFD7wjnj74sdB9HqupDmWmpPPEvygB14Pbo6rQC7ho2687D.</span><br><span class="line"></span><br><span class="line">4) 查询区块信息（第三步中是zDPWYqFD7wjnj74sdB9HqupDmWmpPPEvygB14Pbo6rQC7ho2687D）可以找到对应报价单信息</span><br><span class="line"></span><br><span class="line">waynewyang:filecoin waynewyang$ go-filecoin show block zDPWYqFD7wjnj74sdB9HqupDmWmpPPEvygB14Pbo6rQC7ho2687D --enc=json</span><br><span class="line">&#123;&quot;miner&quot;:&quot;fcqnam6n2qml2eyngws25srzvhcdf0t8gcgrsvnrk&quot;,&quot;ticket&quot;:&quot;AM0p5IC9ph+o9dTwd/MXYdeOJW25PfDwhTgonNRkSP4=&quot;,&quot;parents&quot;:[&#123;&quot;/&quot;:&quot;zDPWYqFCwNWHJXdeXcjx7ipUvRKFq5WhLbtSm6ESuNufkLuGiAgW&quot;&#125;],&quot;parentWeight&quot;:&quot;kujBrQE=&quot;,&quot;height&quot;:&quot;2Hc=&quot;,&quot;nonce&quot;:&quot;AA==&quot;,&quot;messages&quot;:[&#123;&quot;meteredMessage&quot;:&#123;&quot;message&quot;:&#123;&quot;to&quot;:&quot;fcqp606qfk5gwmq6ac24g4mhv3cr8zzf67vqkpulh&quot;,&quot;from&quot;:&quot;fcqr89lj0lvduj475zw002j6q5yrl30ks7uep2p5e&quot;,&quot;nonce&quot;:&quot;Ag==&quot;,&quot;value&quot;:&quot;215.6046624&quot;,&quot;method&quot;:&quot;createChannel&quot;,&quot;params&quot;:&quot;glYAABXMs4C0hXqcW94YGyVKxii6SLQhQ6HoAg==&quot;&#125;,&quot;gasPrice&quot;:&quot;0&quot;,&quot;gasLimit&quot;:&quot;rAI=&quot;&#125;,&quot;signature&quot;:&quot;vHzwO73TvM8MW1FKg8Qgfy/IP+wfJIQkEK0ExBB75gBbPMhv6GiU4aBq1T2Gb2OeMfrch8Zg3EFOJd0uUJltwAE=&quot;&#125;,&#123;&quot;meteredMessage&quot;:&#123;&quot;message&quot;:&#123;&quot;to&quot;:&quot;fcqafmqgvzkzpvc6wjxecm7gsweuawjv8t6falk6r&quot;,&quot;from&quot;:&quot;fcqr89lj0lvduj475zw002j6q5yrl30ks7uep2p5e&quot;,&quot;nonce&quot;:&quot;Aw==&quot;,&quot;value&quot;:&quot;100&quot;,&quot;method&quot;:&quot;createMiner&quot;,&quot;params&quot;:&quot;g0EKWEEEiA8ArEoyzhjWwijpTWYqDsOFfwxa2F0pUfOyRI/6yY28OD4QHcwUdb3a9omX9DNxVzdS2a8pWgiLNowe9wYVcFgiEiD3rKfg/NyDnrLF9IGxfp6U72jZxuniXlPcv5SG5OZHrA==&quot;&#125;,&quot;gasPrice&quot;:&quot;0&quot;,&quot;gasLimit&quot;:&quot;6Ac=&quot;&#125;,&quot;signature&quot;:&quot;/X/87zil8InOeLeQ6kqkqnpg7mP/e5jMaaVS4LRMIdYN84HTbABBpvt6quRqVQsadJnqOW7mn+6NA+2d9FDjPAA=&quot;&#125;,&#123;&quot;meteredMessage&quot;:&#123;&quot;message&quot;:&#123;&quot;to&quot;:&quot;fcqp606qfk5gwmq6ac24g4mhv3cr8zzf67vqkpulh&quot;,&quot;from&quot;:&quot;fcqmqr5f2a5qnwnvftpuzd6sjfy5tcq5dd0k24h85&quot;,&quot;nonce&quot;:&quot;Ug==&quot;,&quot;value&quot;:&quot;0.008596&quot;,&quot;method&quot;:&quot;createChannel&quot;,&quot;params&quot;:&quot;glYAAIVV3axUhfe7OGwwSH/IIONRcbinQ/OWAQ==&quot;&#125;,&quot;gasPrice&quot;:&quot;0&quot;,&quot;gasLimit&quot;:&quot;rAI=&quot;&#125;,&quot;signature&quot;:&quot;dxhSaVRvFBtdrbnEByza7a5JqLzm6n6rVZYGuFN6zegCTMDKbGGh++EvVmWo0WSbdcUo2vB/jFTgqzATh9+1NQA=&quot;&#125;,&#123;&quot;meteredMessage&quot;:&#123;&quot;message&quot;:&#123;&quot;to&quot;:&quot;fcqugc6nql2eqglfwq0dw7ep7l9a07jacqgstely7&quot;,&quot;from&quot;:&quot;fcq0nmdcq7updgwc3uh2lz2rnjms7gprdggcvxjqj&quot;,&quot;nonce&quot;:&quot;BA==&quot;,&quot;value&quot;:null,&quot;method&quot;:&quot;commitSector&quot;,&quot;params&quot;:&quot;hUECWCCFzRGqHyJ3VWk3GueHzfkcWF218hOqRGtLxsJ0oJ3pXVgg6qrxCGo6SSjyUSbJWVKPKGaY/wrymC21t5LSScCNpQBYIOeZkdzp7lPt8Fh/Sdl9YqJ8BCaJ7etWEnDnLzRnV/geWQGAlTMp95t1Hh61eFBmzy6Ex/Ee1cso7Cethz+Z2EHCfhi5UzOMeLqeA/Wfypcnrw15mF4OrYR8648RXx6jp8svbgZ6Jg9fP/q0RukszZ/SD9f0pCMg2N/xt5hVIPG7jowSCfkj//CpdRj1GRPLzXvzyWmW4SgKR4lNpJNnmuiXSe8nYLsZgY2v8xy4NB448e/slxh7D4NQPanCoN3WO10oBR42ZxeCZY6stq+JfwucGr5OajgXSK2rGwz/Sj+GYpMbtgpfxSd4Z+jZ6mnoY03NaIHvwnDKchRz797lFL3so6AQRRnctN3Pl7LSn52YA0EOkmhJLMev6DKBWEqSfjXTY4AJSJ7RmGq88BXoHzwGjndRj0QHFtSTjHIoxF9uN86zB6gfSS+A7ZviuTvfturtKee243b9OIojIf2ne2hF8+7PSIwCp5FPLXEqR/UtXnJ6pxjBKhF36k3FRdzsxo52DMImgPhluGWI3xRhpIMmFNDMNynOBQ9F6mnR8fRBdPKB&quot;&#125;,&quot;gasPrice&quot;:&quot;0&quot;,&quot;gasLimit&quot;:&quot;rAI=&quot;&#125;,&quot;signature&quot;:&quot;hEluqbFG8TTSeeJyfOs10fZD/gOsrnFV8QgRAb4mhSFlzYpcijT9ye1yUYam5hcsW1eq1MFRfVGHhqYYUZ4LYwA=&quot;&#125;,&#123;&quot;meteredMessage&quot;:&#123;&quot;message&quot;:&#123;&quot;to&quot;:&quot;fcqjge872spqrgtm8dhlndjgfhhuxzx0y3ujvxxsl&quot;,&quot;from&quot;:&quot;fcqm0u932ja5thlsy4dgpz5urlapk8qhtd0clqv5e&quot;,&quot;nonce&quot;:&quot;AQ==&quot;,&quot;value&quot;:&quot;0&quot;,&quot;method&quot;:&quot;addAsk&quot;,&quot;params&quot;:&quot;gkWAlOvcA0I70w==&quot;&#125;,&quot;gasPrice&quot;:&quot;0&quot;,&quot;gasLimit&quot;:&quot;6Ac=&quot;&#125;,&quot;signature&quot;:&quot;IGUvf7CZ8lKDSTyzbg5kyArIPv8TIoFEWpA3ihRC7I86NFvgebCdEKQ6PqYhTJj1GQK/+JF28kCinXFN/9G8FgE=&quot;&#125;,&#123;&quot;meteredMessage&quot;:&#123;&quot;message&quot;:&#123;&quot;to&quot;:&quot;fcqp606qfk5gwmq6ac24g4mhv3cr8zzf67vqkpulh&quot;,&quot;from&quot;:&quot;fcqsvmdzpy5mjc9m0cuh6uhmprr6gk5w2zcrnjy02&quot;,&quot;nonce&quot;:&quot;Aw==&quot;,&quot;value&quot;:&quot;0.0000301989888&quot;,&quot;method&quot;:&quot;createChannel&quot;,&quot;params&quot;:&quot;glYAAGsLRe4dsJwsvfE2+dkEh1DPX11jQ+OdAQ==&quot;&#125;,&quot;gasPrice&quot;:&quot;0&quot;,&quot;gasLimit&quot;:&quot;rAI=&quot;&#125;,&quot;signature&quot;:&quot;Zg5kUOtEZ9Um+mGKicHaqTCaORppGv5KAaSlTpN/qTcoTptRUP3ZbQ5YOL7zjTG6aF7Y4r0Ck0NsnG0J/i2B0AA=&quot;&#125;,&#123;&quot;meteredMessage&quot;:&#123;&quot;message&quot;:&#123;&quot;to&quot;:&quot;fcqp606qfk5gwmq6ac24g4mhv3cr8zzf67vqkpulh&quot;,&quot;from&quot;:&quot;fcqrqtfcug5hlx7gugvwj0f2dyx6j9cxdn0ynmpu3&quot;,&quot;nonce&quot;:&quot;Ag==&quot;,&quot;value&quot;:&quot;0&quot;,&quot;method&quot;:&quot;createChannel&quot;,&quot;params&quot;:&quot;glYAAJsQ6e5i/M0X04YZwzl3VWckPu4RQ62HAQ==&quot;&#125;,&quot;gasPrice&quot;:&quot;0&quot;,&quot;gasLimit&quot;:&quot;rAI=&quot;&#125;,&quot;signature&quot;:&quot;oisXV83sTFkJw7y5KbO5fLhx2oa48qZKAVwX+1fIvWUDgm5PQNDddPeCkklPg2L+fmp4wL2fLF9R2qPRciLUfAA=&quot;&#125;],&quot;stateRoot&quot;:&#123;&quot;/&quot;:&quot;zdpuAvwpuqNR4J6PJDqGfF5GbyjWarD1BhujTUfyREMHSY1eF&quot;&#125;,&quot;messageReceipts&quot;:[&#123;&quot;exitCode&quot;:0,&quot;return&quot;:[&quot;Ag==&quot;],&quot;gasAttoFIL&quot;:&quot;0&quot;&#125;,&#123;&quot;exitCode&quot;:0,&quot;return&quot;:[&quot;AAA2Qrupiubk6ljOMnMUrnnHKaVXmQ==&quot;],&quot;gasAttoFIL&quot;:&quot;0&quot;&#125;,&#123;&quot;exitCode&quot;:0,&quot;return&quot;:[&quot;0gA=&quot;],&quot;gasAttoFIL&quot;:&quot;0&quot;&#125;,&#123;&quot;exitCode&quot;:0,&quot;return&quot;:null,&quot;gasAttoFIL&quot;:&quot;0&quot;&#125;,&#123;&quot;exitCode&quot;:0,&quot;return&quot;:[&quot;&quot;],&quot;gasAttoFIL&quot;:&quot;0&quot;&#125;,&#123;&quot;exitCode&quot;:0,&quot;return&quot;:[&quot;Aw==&quot;],&quot;gasAttoFIL&quot;:&quot;0&quot;&#125;,&#123;&quot;exitCode&quot;:0,&quot;return&quot;:[&quot;Ag==&quot;],&quot;gasAttoFIL&quot;:&quot;0&quot;&#125;],&quot;proof&quot;:[177,165,90,219,1,18,240,190,113,56,243,22,167,201,232,75,124,152,130,111,74,132,5,192,33,191,102,220,102,9,99,109,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]&#125;</span><br><span class="line"></span><br><span class="line">//查询最新区块信息</span><br><span class="line">waynewyang:go-filecoin waynewyang$ go-filecoin show block `go-filecoin chain head --repodir=~/.filecoin2/ |jq -r &apos;.[0]&apos;|jq -r &apos;.[&quot;/&quot;]&apos;`</span><br><span class="line">Block Details</span><br><span class="line">Miner:  fcq973y2y7hvcce8zkwds7r2847xmfjvdecn98lws</span><br><span class="line">Weight: 134386.836</span><br><span class="line">Height: 5013</span><br><span class="line">Nonce:  0</span><br><span class="line"></span><br><span class="line">5) 获取所有矿工的报价信息</span><br><span class="line">go-filecoin client list-asks --enc=json | jq</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>现在默认是只要客户出价高于矿工报价，默认接受交易。</p>
+</blockquote>
+<ul>
+<li>停止挖矿</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">go-filecoin mining stop</span><br><span class="line">rm -rf ~/.filecoin  //删除filecoin矿工实例，区块同步也被删除，再次实例化，需要再次同步区块</span><br></pre></td></tr></table></figure>
+<h4 id="检索矿工"><a href="#检索矿工" class="headerlink" title="检索矿工"></a>检索矿工<a name="检索矿工"></a></h4><blockquote>
+<p>暂未发现支持，目前可以自己的供应商（具体矿工）处获取；后面通过更深入的分析之后另行补充。</p>
+</blockquote>
+<h4 id="修复矿工"><a href="#修复矿工" class="headerlink" title="修复矿工"></a>修复矿工<a name="修复矿工"></a></h4><blockquote>
+<p>修复矿工的概念是白皮书之后提出的，后面继续深入分析之后再另行补充。</p>
+</blockquote>
+<h4 id="客户操作"><a href="#客户操作" class="headerlink" title="客户操作"></a>客户操作<a name="客户操作"></a></h4><h4 id="存储客户"><a href="#存储客户" class="headerlink" title="存储客户"></a>存储客户<a name="存储客户"></a></h4><ul>
+<li>filecoin 与IPFS数据结构是兼容的</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">//创建测试文件</span><br><span class="line">waynewyang:test waynewyang$ echo &quot;Hi my name is $USER&quot;&gt; hello.txt</span><br><span class="line">waynewyang:test waynewyang$ cat hello.txt </span><br><span class="line">Hi my name is waynewyang</span><br><span class="line"></span><br><span class="line">//导入filecoin本地资源库</span><br><span class="line">waynewyang:test waynewyang$ export CID=`go-filecoin client import ./hello.txt`</span><br><span class="line">waynewyang:test waynewyang$ echo $CID</span><br><span class="line">Qmchgh3N3kxWiaZ2cp9PbV93i77H3K8KtQCBTeVR5Q7wzs</span><br><span class="line"></span><br><span class="line">//这里会发现用IPFS上传得到的CID也是一样</span><br><span class="line">waynewyang:test waynewyang$ ipfs add hello.txt </span><br><span class="line">added Qmchgh3N3kxWiaZ2cp9PbV93i77H3K8KtQCBTeVR5Q7wzs hello.txt</span><br><span class="line"> 25 B / 25 B [========================================================================] 100.00%</span><br><span class="line"></span><br><span class="line">//用go-filecoin或者IPFS命令获取数据，结果一致</span><br><span class="line">waynewyang:test waynewyang$ go-filecoin client cat $CID</span><br><span class="line">Hi my name is waynewyang</span><br><span class="line">waynewyang:test waynewyang$ ipfs block get $CID</span><br><span class="line">Hi my name is waynewyang</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>导入测试数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">waynewyang:sample-data waynewyang$ export CID=`go-filecoin client import camel.jpg`</span><br><span class="line">waynewyang:sample-data waynewyang$ go-filecoin client cat $CID &gt; image.png &amp;&amp; open image.png</span><br><span class="line">waynewyang:sample-data waynewyang$ echo $CID</span><br><span class="line">QmeubcGKFXpafFT4xRFGf3NqDRzJUVoAqe5sh1ugbRPZ7u</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询矿工的报价单</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">waynewyang:sample-data waynewyang$ go-filecoin client list-asks --enc=json | jq</span><br><span class="line">&#123;</span><br><span class="line">  &quot;Miner&quot;: &quot;fcqvnwlanfu7ecflnp3rc5gm0ecdamvxgvlawref4&quot;,</span><br><span class="line">  &quot;Price&quot;: &quot;0.000000001&quot;,</span><br><span class="line">  &quot;Expiry&quot;: 7079,</span><br><span class="line">  &quot;ID&quot;: 0,</span><br><span class="line">  &quot;Error&quot;: null</span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;Miner&quot;: &quot;fcqsmut6jnwchq0qlc3t6v44pzgf8l49lg6r8wl4a&quot;,</span><br><span class="line">  &quot;Price&quot;: &quot;0.000000001&quot;,</span><br><span class="line">  &quot;Expiry&quot;: 16522,</span><br><span class="line">  &quot;ID&quot;: 0,</span><br><span class="line">  &quot;Error&quot;: null</span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;Miner&quot;: &quot;fcqsmut6jnwchq0qlc3t6v44pzgf8l49lg6r8wl4a&quot;,</span><br><span class="line">  &quot;Price&quot;: &quot;0.000000000000000001&quot;,</span><br><span class="line">  &quot;Expiry&quot;: 18753,</span><br><span class="line">  &quot;ID&quot;: 1,</span><br><span class="line">  &quot;Error&quot;: null</span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;Miner&quot;: &quot;fcqghrce7vaf6czj54x5qke0mn2uzzg8ckvgvcjpe&quot;,</span><br><span class="line">  &quot;Price&quot;: &quot;0.000000001&quot;,</span><br><span class="line">  &quot;Expiry&quot;: 14404,</span><br><span class="line">  &quot;ID&quot;: 0,</span><br><span class="line">  &quot;Error&quot;: null</span><br><span class="line">&#125;</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+<ul>
+<li>下单</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">go-filecoin client propose-storage-deal &lt;miner&gt; &lt;data&gt; &lt;ask&gt; &lt;duration&gt;</span><br><span class="line"></span><br><span class="line">&lt;miner&gt; address of the miner from list-asks</span><br><span class="line">&lt;data&gt; CID of the imported data that you want to store</span><br><span class="line">&lt;ask&gt; ID of the ask, also from list-asks (usually 0)</span><br><span class="line">&lt;duration&gt; how long you want to store (in # of ~30sec blocks). For example, storing for 1 day (2 blocks/min * 60 min/hr * 24 hr/day) = 2880 blocks.</span><br></pre></td></tr></table></figure>
+<ul>
+<li>发送数据和支付</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1 支付</span><br><span class="line"></span><br><span class="line">1）支付到paych中</span><br><span class="line">2）定期向矿工付款</span><br><span class="line"></span><br><span class="line">2 数据</span><br><span class="line"></span><br><span class="line">1）未密封完的数据称之为暂存区</span><br><span class="line">2）密封完成后阶段性支付</span><br></pre></td></tr></table></figure>
+<h4 id="检索客户"><a href="#检索客户" class="headerlink" title="检索客户"></a>检索客户<a name="检索客户"></a></h4><blockquote>
+<p>现在是指定所对应的存储矿工进行检索，暂未发现更多支持，在后面的深入分析中会继续跟进。</p>
+</blockquote>
+<ul>
+<li>查询订单状态，必须是密封，posted交易结束后才能查询</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go-filecoin client query-storage-deal &lt; dealID &gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>检索</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go-filecoin retrieval-client retrieve-piece &lt; minerAddress &gt;  &lt; CID &gt;</span><br></pre></td></tr></table></figure>
+<h3 id="filecoin合约"><a href="#filecoin合约" class="headerlink" title="filecoin合约"></a>filecoin合约<a name="filecoin合约"></a></h3><h4 id="文件合约"><a href="#文件合约" class="headerlink" title="文件合约"></a>文件合约<a name="文件合约"></a></h4><blockquote>
+<p>其实现在的创建存储矿工，以及矿工创建报价、存储客户提交订单存储，这些笔者认为属于filecoin文件合约的范畴。</p>
+<p>与以太坊类似，以太坊抽象出了代币合约以及通用智能合约； 而filecoin则是抽象出了文件合约和通用智能合约。</p>
+</blockquote>
+<h4 id="智能合约"><a href="#智能合约" class="headerlink" title="智能合约"></a>智能合约<a name="智能合约"></a></h4><blockquote>
+<p>暂未发现支持，在后面的深入分析中会继续跟进。</p>
+</blockquote>
+<h3 id="单机运行多个filecoin节点"><a href="#单机运行多个filecoin节点" class="headerlink" title="单机运行多个filecoin节点"></a>单机运行多个filecoin节点<a name="单机运行多个filecoin节点"></a></h3><h4 id="修改资源目录和服务端口的方式"><a href="#修改资源目录和服务端口的方式" class="headerlink" title="修改资源目录和服务端口的方式"></a>修改资源目录和服务端口的方式<a name="修改资源目录和服务端口的方式"></a></h4><ul>
+<li><p>go-filecoin init的时候，通过 ‘–repodir=所指定资源目录路径’ 命令进行初始化目录资源，后面的其他命令同样需要所指定资源目录路径进行操作。</p>
+</li>
+<li><p>修改资源目录下的config.json文件，将默认的端口予以修改，避免与另外的本机实例相冲突。</p>
+</li>
+</ul>
+<h4 id="容器部署方式"><a href="#容器部署方式" class="headerlink" title="容器部署方式"></a>容器部署方式<a name="容器部署方式"></a></h4><ul>
+<li>可以打包成docker镜像，有兴趣的朋友可以自行尝试。</li>
+</ul>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
+
+      
+    </div>
+    
+    
+    
+    
+      
+        <div>
+          <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="Tiny熊 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信号：深入浅出区块链技术，欢迎订阅</div>
+</div>
+
+        </div>
+      
+    
+
+    
+      
+        <div>
+          <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有收获，赞赏下</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/qr_pay.jpg" alt="Tiny熊 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+        </div>
+      
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    先河系统杨尉
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://learnblockchain.cn/2019/02/22/filecoin-code-analysis-3/" title="filecoin技术架构分析三：filecoin开发网络使用">https://learnblockchain.cn/2019/02/22/filecoin-code-analysis-3/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/FileCoin/" rel="tag"># FileCoin</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/20/filecoin-code-analysis-2/" rel="next" title="filecoin技术架构分析二：filecoin通用语言理解">
+                <i class="fa fa-chevron-left"></i> filecoin技术架构分析二：filecoin通用语言理解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/28/filecoin-code-analysis-4/" rel="prev" title="filecoin技术架构分析四：filecoin源码顶层架构分析">
+                filecoin技术架构分析四：filecoin源码顶层架构分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">89</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element" style="margin-top: 20px;">
+              <span>
+                项目
+              </span>
+            </div>
+          
+
+          <div class="links-of-author project motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/bitcoin" target="_self" title="比特币">
+                    
+                      <i class="fa fa-fw fa-false"></i>比特币</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/ethereum" target="_self" title="以太坊">
+                    
+                      <i class="fa fa-fw fa-false"></i>以太坊</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/EOS" target="_self" title="EOS">
+                    
+                      <i class="fa fa-fw fa-false"></i>EOS</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/Fabric" target="_self" title="Fabric">
+                    
+                      <i class="fa fa-fw fa-false"></i>Fabric</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <span>
+                联系我
+              </span>
+            </div>
+          
+          
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/xilibi2003" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiong-li-bing/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hiblock.one/" title="HiBlock区块链社区" target="_blank">HiBlock区块链社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://edu.upchain.pro/book.html" title="图书-精通智能合约开发" target="_blank">图书-精通智能合约开发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="区块链技术专栏" target="_blank">区块链技术专栏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://t.xiaomiquan.com/RfAu7uj" title="技术交流-知识星球" target="_blank">技术交流-知识星球</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blockgeek.org/" title="BG区块链技术论坛" target="_blank">BG区块链技术论坛</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bitshuo.com" title="区块链技术中文社区" target="_blank">区块链技术中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://news.tangwen.org" title="汤问资讯" target="_blank">汤问资讯</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitask.org" title="币问" target="_blank">币问</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eosfans.io/" title="EOS中文社区" target="_blank">EOS中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blockflow.net/" title="BlockFlow" target="_blank">BlockFlow</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.liankexing.com/" title="链客区块链问答社区" target="_blank">链客区块链问答社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitool.cn/" title="币兔" target="_blank">币兔</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wutui.pro/" title="无退社区" target="_blank">无退社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hpb.io/" title="HPB芯链" target="_blank">HPB芯链</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#filecoin开发网络使用"><span class="nav-number">1.</span> <span class="nav-text">filecoin开发网络使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#辅助资源"><span class="nav-number">1.1.</span> <span class="nav-text">辅助资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">1.2.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#接入filecoin开发网络"><span class="nav-number">1.2.1.</span> <span class="nav-text">接入filecoin开发网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取Mock-FIL用于测试"><span class="nav-number">1.2.2.</span> <span class="nav-text">获取Mock FIL用于测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#矿工操作"><span class="nav-number">1.2.3.</span> <span class="nav-text">矿工操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#存储矿工"><span class="nav-number">1.2.4.</span> <span class="nav-text">存储矿工</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#检索矿工"><span class="nav-number">1.2.5.</span> <span class="nav-text">检索矿工</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修复矿工"><span class="nav-number">1.2.6.</span> <span class="nav-text">修复矿工</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#客户操作"><span class="nav-number">1.2.7.</span> <span class="nav-text">客户操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#存储客户"><span class="nav-number">1.2.8.</span> <span class="nav-text">存储客户</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#检索客户"><span class="nav-number">1.2.9.</span> <span class="nav-text">检索客户</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#filecoin合约"><span class="nav-number">1.3.</span> <span class="nav-text">filecoin合约</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件合约"><span class="nav-number">1.3.1.</span> <span class="nav-text">文件合约</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#智能合约"><span class="nav-number">1.3.2.</span> <span class="nav-text">智能合约</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单机运行多个filecoin节点"><span class="nav-number">1.4.</span> <span class="nav-text">单机运行多个filecoin节点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#修改资源目录和服务端口的方式"><span class="nav-number">1.4.1.</span> <span class="nav-text">修改资源目录和服务端口的方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#容器部署方式"><span class="nav-number">1.4.2.</span> <span class="nav-text">容器部署方式</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+  <div class="footer-custom"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17140514号-1</a></div>
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

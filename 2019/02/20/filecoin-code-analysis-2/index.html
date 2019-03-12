@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+  <meta name="msvalidate.01" content="914C9C1CBC7078C5E2AC612AD5C1CC6C" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="FileCoin," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深入浅出区块链" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第二章filecoin通用语言理解。">
+<meta name="keywords" content="FileCoin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="filecoin技术架构分析二：filecoin通用语言理解">
+<meta property="og:url" content="https://learnblockchain.cn/2019/02/20/filecoin-code-analysis-2/index.html">
+<meta property="og:site_name" content="深入浅出区块链">
+<meta property="og:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第二章filecoin通用语言理解。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://learnblockchain.cn/images/post.png">
+<meta property="og:image" content="https://learnblockchain.cn/images/sle.png">
+<meta property="og:image" content="https://learnblockchain.cn/images/sle2.png">
+<meta property="og:image" content="https://learnblockchain.cn/images/filecoin-1.png">
+<meta property="og:updated_time" content="2019-03-12T06:49:45.165Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="filecoin技术架构分析二：filecoin通用语言理解">
+<meta name="twitter:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第二章filecoin通用语言理解。">
+<meta name="twitter:image" content="https://learnblockchain.cn/images/post.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'UT2K1ZRSWK',
+      apiKey: '0bbb261dfad58df8f8a657a1ed3255cd',
+      indexName: 'learnblockchain',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://learnblockchain.cn/2019/02/20/filecoin-code-analysis-2/"/>
+
+
+
+
+
+  <title>filecoin技术架构分析二：filecoin通用语言理解 | 深入浅出区块链</title>
+  
+
+
+
+
+
+
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6273382609469378",
+        enable_page_level_ads: true
+    });
+</script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">系统学习区块链技术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wiki">
+          <a href="https://wiki.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Wiki
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-meeting">
+          <a href="/categories/dev-meeting/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            技术工坊
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-course">
+          <a href="/course/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-spinner"></i> <br />
+            
+            视频教程
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-web3">
+          <a href="https://web3.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Web3文档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2019/02/20/filecoin-code-analysis-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">filecoin技术架构分析二：filecoin通用语言理解</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-20T16:35:33+08:00">
+                2019-02-20
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-12T14:49:45+08:00">
+                2019-03-12
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/FileCoin/" itemprop="url" rel="index">
+                    <span itemprop="name">FileCoin</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我是先河系统CTO杨尉，欢迎大加关注的的Github: <a href="https://github.com/waynewyang" target="_blank" rel="noopener">waynewyang</a>，本文是<a href="https://learnblockchain.cn//2019/03/11/filecoin-code-analysis-0/">filecoin技术架构分析系列文章</a>第二章filecoin通用语言理解。</p>
+<a id="more"></a>
+<h2 id="为什么要把filecoin通用语言单独列为一讲"><a href="#为什么要把filecoin通用语言单独列为一讲" class="headerlink" title="为什么要把filecoin通用语言单独列为一讲"></a>为什么要把filecoin通用语言单独列为一讲<a name="为什么要把filecoin通用语言单独列为一讲"></a></h2><p>笔者认为一位优秀的软件从业人员，必须具备两种必备能力</p>
+<pre><code>- 架构设计能力
+- 架构剖析能力
+</code></pre><blockquote>
+<p>这两者是相辅相成的，架构设计师所设计之架构不可能超过自己的认知范畴，故架构设计师必须有效高效地拓展自己的技术认知视图，以适应当代软件架构高速发展的现实。而拓展的途径，一方面就是相关理论体系的快速学习跟进；另一方面，就是实战，对有显著价值的优秀软件项目进行架构剖析。有理论、有实战方是王道。理解具体架构的通用语言就是分析他人架构设计思维的一条捷径。</p>
+</blockquote>
+<ul>
+<li>理解具体技术架构的通用语言是分析架构的一条捷径<ul>
+<li>通用语言是架构设计人员为实现某个具体技术架构，所高度抽象出来的名词或者称谓，通过理解通用语言，可以快速理解架构设计人员的思维和设计目的。</li>
+<li>与读书方法类似（薄读-&gt;厚读&gt;再薄读），理解通用语言就是第一次的薄读过程，非常重要。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>对业务的理解是非常有必要的，所以在<a href="/2019/02/18/filecoin-code-analysis-1">第一章</a>中，笔者铺垫了filecoin的一些基本概念，任何架构的设计不能脱离业务而行，业务驱动开发仍是非常实用的架构模式；filecoin 技术架构从业务来划分，可划分为两个大的范畴。</p>
+<ul>
+<li>分布式存储解决方案<ul>
+<li>存储矿工</li>
+<li>检索矿工</li>
+<li>存储客户端</li>
+<li>检索客户端</li>
+</ul>
+</li>
+<li>区块链项目<ul>
+<li>filecoin公链</li>
+<li>filecoin actors 智能合约 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>filecoin核心通用业务组件</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">组件名称</th>
+<th style="text-align:center">目的</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">DSN</td>
+<td style="text-align:center">保障数据安全、包括故障容错、数据完整性、数据可恢复等</td>
+</tr>
+<tr>
+<td style="text-align:center">新型存储证明</td>
+<td style="text-align:center">证明矿工按照协议规范存储了客户指定的数据，数据有效性</td>
+</tr>
+<tr>
+<td style="text-align:center">可验证市场</td>
+<td style="text-align:center">对矿工与客户组成的交易市场进行了建模，保证交易的有效性</td>
+</tr>
+<tr>
+<td style="text-align:center">有效工作量证明</td>
+<td style="text-align:center">出块的共识机制，很重要，做到激励兼容</td>
+</tr>
+</tbody>
+</table>
+<p><strong>下面各节将会对filecoin技术架构中的核心通用语言进行解释。</strong></p>
+<h2 id="存储证明"><a href="#存储证明" class="headerlink" title="存储证明"></a>存储证明<a name="存储证明"></a></h2><p>Proof-of-Storage包含复制证明(PoR)和时空证明(PoSt)，其作用主要有两点：</p>
+<ul>
+<li><p>证明矿工做了有效存储</p>
+</li>
+<li><p>竞争区块打包出块，获取区块奖励</p>
+</li>
+</ul>
+<h3 id="2-2-1-为什么使用存储证明"><a href="#2-2-1-为什么使用存储证明" class="headerlink" title="2.2.1 为什么使用存储证明"></a>2.2.1 为什么使用存储证明<a name="为什么使用存储证明"></a></h3><ul>
+<li><p>相对于PoW(Proof-of-Work)或者PoC</p>
+<ul>
+<li>PoW耗能严重；PoC以空间换时间，同样存在耗能严重问题</li>
+<li>而filecoin网络的耗能必须远低于类似比特币的PoW，参见<a href="/2019/02/18/filecoin-code-analysis-1">第一讲</a>filecoin的对标对象，filecoin必须实现以更低的成对去应对商业竞争，同时提供相同级别的安全性，以及文件存储的效用</li>
+<li>存储证明需要做要与实体经济挂钩，减少无谓浪费</li>
+</ul>
+</li>
+<li><p>相对于PoS(Proof-of-Stake)或者PoC</p>
+<ul>
+<li>Proof-of-Storage在定向领域（分布式存储）以更简单方式，协调激励，并驱使矿工以有竞争力的价格提供真实的新存储，它促使矿工积极保证filecoin网络的效用</li>
+<li>当然Proof-of-Stake是区块链领域的热点研究问题</li>
+</ul>
+</li>
+<li><p>Proof-of-Storage阻止网络攻击</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">攻击类型</th>
+<th style="text-align:center">说明</th>
+<th>阻止攻击原理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">女巫攻击Sybil attack</td>
+<td style="text-align:center">作恶节点创造多个女巫身份，谎称存储了多个副本</td>
+<td>每个节点的副本都是有签名的，想通过复制证明，就相当于真实做了有效存储</td>
+</tr>
+<tr>
+<td style="text-align:center">外包攻击outsourcing attacks</td>
+<td style="text-align:center">作恶节点快速从其他节点获取内容，谎称他们存储了比他们实际存储更多的内容</td>
+<td>针对外包攻击，从其他节点获取的整个过程，满足不了证明人随机挑战的要求，依然需要重新生成副本（重新seal需要时间），从而阻止外包攻击</td>
+</tr>
+<tr>
+<td style="text-align:center">生成攻击generation attacks</td>
+<td style="text-align:center">作恶节点宣称将要存储超过其实际容量的内容但并未存储内容，以此增加出块的概率</td>
+<td>宣称无用，存储证明一定要确认密封动作并能应对随机挑战才能OK，如果重新密封就来不及证明，每次挑战是有时间要求的</td>
+</tr>
+</tbody>
+</table>
+<h3 id="复制证明"><a href="#复制证明" class="headerlink" title="复制证明"></a>复制证明<a name="复制证明"></a></h3><h4 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h4><ul>
+<li>复制证明本质上可以理解为一种零知识证明，既然是零知识证明，我们在后面需要理解filecoin复制证明的题目和答案</li>
+</ul>
+<blockquote>
+<p>zk-SNARK zero knowledge Succinct Non-interactive ARgument of Knowledge<br>zero knowledge：零知识，即在证明的过程中不透露任何内情<br>succinct：简洁的，主要是指验证过程不涉及大量数据传输以及验证算法简单<br>non-interactive：无交互。</p>
+</blockquote>
+<ul>
+<li>生成证明的方法在filecoin架构中称之为seal密封</li>
+</ul>
+<blockquote>
+<p>密封过程是需要时间的，Seal过程串行加密的过程，无法并行操作，seal密封过程是有意设计慢的，主要目的是为了防攻击。</p>
+</blockquote>
+<h4 id="filecoin复制证明的题目和答案"><a href="#filecoin复制证明的题目和答案" class="headerlink" title="filecoin复制证明的题目和答案"></a>filecoin复制证明的题目和答案</h4><ul>
+<li><p>公开的信息</p>
+<ul>
+<li>矿工的节点公钥、密封公钥、存储公钥、原始Data哈希、该矿工存储的副本根哈希</li>
+</ul>
+</li>
+<li><p>隐含因素理解：</p>
+<ul>
+<li>特有节点的副本哈希是由哪些哈希组成（DAG），任意挑战者或者攻击者是不知情的</li>
+<li>挑战随机参数，通过CRH(防碰撞的哈希散列Collision-resistant hashing)生成哈希之后传递给证明者，作用是确定特定的叶子节点的哈希，比如让证明者自行计算离H(c))最近的叶子节点哈希。</li>
+</ul>
+</li>
+<li><p>复制证明的题目与答案</p>
+<ul>
+<li>挑战参数：副本哈希rt，挑战随机参数c -&gt; H(c)</li>
+<li>证明者输入（题目）：<ul>
+<li>H(c)（每一次挑战都会变）</li>
+<li>隐含信息比喻：该叶子节点是与H(c)最近的节点</li>
+</ul>
+</li>
+<li>证明者输出（答案）：<ul>
+<li>H(c)对应的叶子节点 ——&gt; rt的路径（攻击者是很难反推的）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="时空证明"><a href="#时空证明" class="headerlink" title="时空证明"></a>时空证明<a name="时空证明"></a></h3><ul>
+<li>时空证明可以理解为矿工持续性地生成复制证明<ul>
+<li>挑战者输入一个随机参数c，后面的随机参数由证明者基于上一个的挑战答案去生成。(不用与挑战者持续交互)</li>
+<li>下图中变量i会轮询生成新的时间变量产生随机挑战。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/post.png" alt=""></p>
+<h2 id="预期共识"><a href="#预期共识" class="headerlink" title="预期共识"></a>预期共识<a name="预期共识"></a></h2><h3 id="基础前提"><a href="#基础前提" class="headerlink" title="基础前提"></a>基础前提<a name="基础前提"></a></h3><ul>
+<li>filecoin基于存储证明(有效存储量)来作为矿工在整个网络中的power</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">power属性</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">公开</td>
+<td style="text-align:center">1 某一时刻，整个网络存储总量是公开的<br>2 单个矿工某一时刻，有效存储总量是公开的</td>
+</tr>
+<tr>
+<td style="text-align:center">可公开验证的</td>
+<td style="text-align:center">对于每个存储任务，矿工都需要生成”时空证明“，证明持续提供服务。通过读取区块链，任何人都可以验证矿工的power声明是否是正确的。</td>
+</tr>
+<tr>
+<td style="text-align:center">变化</td>
+<td style="text-align:center">在任意时间点，矿工都可以通过增加新增扇区和扇区补充的抵押来增加新的存储。这样矿工就能变更他们能提供的power。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="使用power达成共识"><a href="#使用power达成共识" class="headerlink" title="使用power达成共识"></a>使用power达成共识<a name="使用power达成共识"></a></h4><ul>
+<li><p>目的：</p>
+<blockquote>
+<p>每一轮选举一个（或多个）矿工，<strong>使得赢得选举的概率与每个矿工分配的存储成比例</strong></p>
+</blockquote>
+</li>
+<li><p>filecoin预期共识(Expected Consensus,EC)</p>
+<ul>
+<li>预期共识的基本直觉是确定性的，不可预测的</li>
+<li>预期的期望是每个周期内当选的Leader是1，但一些周期内可能有0个或者许多的Leader。</li>
+<li>在每个周期，每个区块链被延伸一个或多个区块，见下图</li>
+<li>区块线性扩展，但是数据结构是DAG</li>
+<li>EC是一个概率共识，每个周期都使得比前面的区块更加确定，最终达到了足够的确定性</li>
+</ul>
+</li>
+</ul>
+<h4 id="选举方案"><a href="#选举方案" class="headerlink" title="选举方案"></a>选举方案<a name="选举方案"></a></h4><blockquote>
+<p>预期共识通过选举方案产生</p>
+</blockquote>
+<p><img src="/images/sle.png" alt=""></p>
+<p><img src="/images/sle2.png" alt=""></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">选举方案属性</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">公平</td>
+<td style="text-align:center">每个参与者每次选举只有一次试验，因为签名是确定性的，而且t和rand(t)是固定的。随机值rand(t)在时刻t之前是未知的<br></td>
+</tr>
+<tr>
+<td style="text-align:center">保密</td>
+<td style="text-align:center">由于有能力的攻击者不拥有Mi用来计算签名的秘钥<br></td>
+</tr>
+<tr>
+<td style="text-align:center">公开可验证</td>
+<td style="text-align:center">当选Leader i ∈ Lt 可以通过给出t，rand(t)，H(i)/2L，来说服一个有效的验证者。鉴于前面的观点（复制证明与时间证明），有能力的攻击者在不拥有获胜秘密秘钥的情况下不能生成证明。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="filecoin智能合约"><a href="#filecoin智能合约" class="headerlink" title="filecoin智能合约"></a>filecoin智能合约<a name="filecoin智能合约"></a></h2><h3 id="文件合约"><a href="#文件合约" class="headerlink" title="文件合约"></a>文件合约<a name="文件合约"></a></h3><blockquote>
+<p>允许用户对他们提供的存储服务进行条件编程，<strong>会形成一个多样化市场</strong>。</p>
+</blockquote>
+<ul>
+<li>承包矿工：客户可以提前指定矿工提供服务而不参与市场 </li>
+<li>付款策略：客户可以为矿工设计不同的奖励策略，例如合约可以给矿工支付随着时间的推移越来高的费用</li>
+<li>票务服务：合约可以允许矿工存放token和用于代表用户的存储/检索的支付</li>
+<li>更复杂的操作：客户可以创建合约来运行数据更新</li>
+</ul>
+<h3 id="智能合约"><a href="#智能合约" class="headerlink" title="智能合约"></a>智能合约<a name="智能合约"></a></h3><blockquote>
+<p>用户可以将程序关联到其他系统（如以太坊)的交易上，他们不直接依赖存储的使用。</p>
+</blockquote>
+<h3 id="与其他系统的兼容"><a href="#与其他系统的兼容" class="headerlink" title="与其他系统的兼容"></a>与其他系统的兼容<a name="与其他系统的兼容"></a></h3><blockquote>
+<p>规格支持跨链交互，以便能将filecoin存储带入其他基于区块链的平台，同时也将其他平台的功能带入filecoin。</p>
+</blockquote>
+<h2 id="交易市场"><a href="#交易市场" class="headerlink" title="交易市场"></a>交易市场<a name="交易市场"></a></h2><ul>
+<li>存储需求和供给组成了两个Filecoin市场：存储市场和检索市场。这两个市场是两个去中心化交易所，简而言之，客户和矿工们通过向各自的市场提交订单来设定他们请求服务或者提供服务的订单的价格。交易所为客户和矿工们提供了一种方式来查看匹配出价并执行订单。如果服务请求被成功满足，通过运行管理协议，网络保证了矿工得到报酬，客户将被收取费用。</li>
+<li>可以类比为淘宝商城</li>
+</ul>
+<h3 id="存储市场"><a href="#存储市场" class="headerlink" title="存储市场"></a>存储市场<a name="存储市场"></a></h3><ul>
+<li>交易数据会上链，包含于区块之中。</li>
+<li>本质上也属于filecoin智能合约中的文件合约。</li>
+<li>20190214上线的开发网络已支持</li>
+</ul>
+<h3 id="检索市场"><a href="#检索市场" class="headerlink" title="检索市场"></a>检索市场<a name="检索市场"></a></h3><ul>
+<li>交易数据不会上链，属于offchain的方式。</li>
+<li>本质上也属于filecoin智能合约中的文件合约。</li>
+</ul>
+<h2 id="filecoin节点"><a href="#filecoin节点" class="headerlink" title="filecoin节点"></a>filecoin节点<a name="filecoin节点"></a></h2><ul>
+<li>filecoin节点相关<ul>
+<li>node id表示filecoin网络节点</li>
+<li>account　id并表示账号，默认与钱包地址一致</li>
+<li>wallet addr表示钱包地址</li>
+<li>miner id表示矿工id</li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/filecoin-1.png" alt=""></p>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
+
+      
+    </div>
+    
+    
+    
+    
+      
+        <div>
+          <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="Tiny熊 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信号：深入浅出区块链技术，欢迎订阅</div>
+</div>
+
+        </div>
+      
+    
+
+    
+      
+        <div>
+          <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有收获，赞赏下</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/qr_pay.jpg" alt="Tiny熊 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+        </div>
+      
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    先河系统杨尉
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://learnblockchain.cn/2019/02/20/filecoin-code-analysis-2/" title="filecoin技术架构分析二：filecoin通用语言理解">https://learnblockchain.cn/2019/02/20/filecoin-code-analysis-2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/FileCoin/" rel="tag"># FileCoin</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/18/filecoin-code-analysis-1/" rel="next" title="filecoin技术架构分析一：filecoin概念">
+                <i class="fa fa-chevron-left"></i> filecoin技术架构分析一：filecoin概念
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/22/filecoin-code-analysis-3/" rel="prev" title="filecoin技术架构分析三：filecoin开发网络使用">
+                filecoin技术架构分析三：filecoin开发网络使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">89</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element" style="margin-top: 20px;">
+              <span>
+                项目
+              </span>
+            </div>
+          
+
+          <div class="links-of-author project motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/bitcoin" target="_self" title="比特币">
+                    
+                      <i class="fa fa-fw fa-false"></i>比特币</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/ethereum" target="_self" title="以太坊">
+                    
+                      <i class="fa fa-fw fa-false"></i>以太坊</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/EOS" target="_self" title="EOS">
+                    
+                      <i class="fa fa-fw fa-false"></i>EOS</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/Fabric" target="_self" title="Fabric">
+                    
+                      <i class="fa fa-fw fa-false"></i>Fabric</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <span>
+                联系我
+              </span>
+            </div>
+          
+          
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/xilibi2003" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiong-li-bing/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hiblock.one/" title="HiBlock区块链社区" target="_blank">HiBlock区块链社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://edu.upchain.pro/book.html" title="图书-精通智能合约开发" target="_blank">图书-精通智能合约开发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="区块链技术专栏" target="_blank">区块链技术专栏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://t.xiaomiquan.com/RfAu7uj" title="技术交流-知识星球" target="_blank">技术交流-知识星球</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blockgeek.org/" title="BG区块链技术论坛" target="_blank">BG区块链技术论坛</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bitshuo.com" title="区块链技术中文社区" target="_blank">区块链技术中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://news.tangwen.org" title="汤问资讯" target="_blank">汤问资讯</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitask.org" title="币问" target="_blank">币问</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eosfans.io/" title="EOS中文社区" target="_blank">EOS中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blockflow.net/" title="BlockFlow" target="_blank">BlockFlow</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.liankexing.com/" title="链客区块链问答社区" target="_blank">链客区块链问答社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitool.cn/" title="币兔" target="_blank">币兔</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wutui.pro/" title="无退社区" target="_blank">无退社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hpb.io/" title="HPB芯链" target="_blank">HPB芯链</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要把filecoin通用语言单独列为一讲"><span class="nav-number">1.</span> <span class="nav-text">为什么要把filecoin通用语言单独列为一讲</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储证明"><span class="nav-number">2.</span> <span class="nav-text">存储证明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-为什么使用存储证明"><span class="nav-number">2.1.</span> <span class="nav-text">2.2.1 为什么使用存储证明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复制证明"><span class="nav-number">2.2.</span> <span class="nav-text">复制证明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基础"><span class="nav-number">2.2.1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#filecoin复制证明的题目和答案"><span class="nav-number">2.2.2.</span> <span class="nav-text">filecoin复制证明的题目和答案</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时空证明"><span class="nav-number">2.3.</span> <span class="nav-text">时空证明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预期共识"><span class="nav-number">3.</span> <span class="nav-text">预期共识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础前提"><span class="nav-number">3.1.</span> <span class="nav-text">基础前提</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用power达成共识"><span class="nav-number">3.1.1.</span> <span class="nav-text">使用power达成共识</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#选举方案"><span class="nav-number">3.1.2.</span> <span class="nav-text">选举方案</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#filecoin智能合约"><span class="nav-number">4.</span> <span class="nav-text">filecoin智能合约</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件合约"><span class="nav-number">4.1.</span> <span class="nav-text">文件合约</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#智能合约"><span class="nav-number">4.2.</span> <span class="nav-text">智能合约</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与其他系统的兼容"><span class="nav-number">4.3.</span> <span class="nav-text">与其他系统的兼容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交易市场"><span class="nav-number">5.</span> <span class="nav-text">交易市场</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储市场"><span class="nav-number">5.1.</span> <span class="nav-text">存储市场</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检索市场"><span class="nav-number">5.2.</span> <span class="nav-text">检索市场</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#filecoin节点"><span class="nav-number">6.</span> <span class="nav-text">filecoin节点</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+  <div class="footer-custom"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17140514号-1</a></div>
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

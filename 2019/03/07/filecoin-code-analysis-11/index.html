@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+  <meta name="msvalidate.01" content="914C9C1CBC7078C5E2AC612AD5C1CC6C" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="FileCoin," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深入浅出区块链" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第十一章源码分析之内部接口层api包分析。">
+<meta name="keywords" content="FileCoin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="filecoin技术架构分析十一：filecoin源码分析之内部接口层api包分析">
+<meta property="og:url" content="https://learnblockchain.cn/2019/03/07/filecoin-code-analysis-11/index.html">
+<meta property="og:site_name" content="深入浅出区块链">
+<meta property="og:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第十一章源码分析之内部接口层api包分析。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-12T06:51:10.722Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="filecoin技术架构分析十一：filecoin源码分析之内部接口层api包分析">
+<meta name="twitter:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第十一章源码分析之内部接口层api包分析。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'UT2K1ZRSWK',
+      apiKey: '0bbb261dfad58df8f8a657a1ed3255cd',
+      indexName: 'learnblockchain',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://learnblockchain.cn/2019/03/07/filecoin-code-analysis-11/"/>
+
+
+
+
+
+  <title>filecoin技术架构分析十一：filecoin源码分析之内部接口层api包分析 | 深入浅出区块链</title>
+  
+
+
+
+
+
+
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6273382609469378",
+        enable_page_level_ads: true
+    });
+</script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">系统学习区块链技术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wiki">
+          <a href="https://wiki.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Wiki
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-meeting">
+          <a href="/categories/dev-meeting/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            技术工坊
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-course">
+          <a href="/course/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-spinner"></i> <br />
+            
+            视频教程
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-web3">
+          <a href="https://web3.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Web3文档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2019/03/07/filecoin-code-analysis-11/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">filecoin技术架构分析十一：filecoin源码分析之内部接口层api包分析</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-07T17:35:33+08:00">
+                2019-03-07
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-12T14:51:10+08:00">
+                2019-03-12
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/FileCoin/" itemprop="url" rel="index">
+                    <span itemprop="name">FileCoin</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我是先河系统CTO杨尉，欢迎大加关注的的Github: <a href="https://github.com/waynewyang" target="_blank" rel="noopener">waynewyang</a>，本文是<a href="https://learnblockchain.cn/2019/03/11/filecoin-code-analysis-0/">filecoin技术架构分析系列文章</a>第十一章源码分析之内部接口层api包分析。</p>
+<a id="more"></a>
+<blockquote>
+<p>api包提供内部接口,供协议层、command/REST使用</p>
+<p>较大程度依赖node包</p>
+</blockquote>
+<h2 id="api"><a href="#api" class="headerlink" title="api"></a>api</h2><h3 id="api的接口定义"><a href="#api的接口定义" class="headerlink" title="api的接口定义"></a>api的接口定义</h3><blockquote>
+<p>如下所示，包含了一系列子接口</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">type API interface &#123;</span><br><span class="line">	Actor() Actor</span><br><span class="line">	Address() Address</span><br><span class="line">	Client() Client</span><br><span class="line">	Daemon() Daemon</span><br><span class="line">	Dag() Dag</span><br><span class="line">	ID() ID</span><br><span class="line">	Log() Log</span><br><span class="line">	Miner() Miner</span><br><span class="line">	Mining() Mining</span><br><span class="line">	Paych() Paych</span><br><span class="line">	Ping() Ping</span><br><span class="line">	RetrievalClient() RetrievalClient</span><br><span class="line">	Swarm() Swarm</span><br><span class="line">	Version() Version</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="api的接口实现"><a href="#api的接口实现" class="headerlink" title="api的接口实现"></a>api的接口实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">▼ package</span><br><span class="line">    impl</span><br><span class="line"></span><br><span class="line">▶ imports</span><br><span class="line"></span><br><span class="line">// nodeAPI来实现其接口定义</span><br><span class="line">▼-nodeAPI : struct</span><br><span class="line">    [fields]</span><br><span class="line">    // 合约</span><br><span class="line">   -actor : *nodeActor</span><br><span class="line">    // 地址</span><br><span class="line">   -address : *nodeAddress</span><br><span class="line">    // 客户端</span><br><span class="line">   -client : *nodeClient</span><br><span class="line">    // daemon</span><br><span class="line">   -daemon : *nodeDaemon</span><br><span class="line">    // dag</span><br><span class="line">   -dag : *nodeDag</span><br><span class="line">    // 节点ID</span><br><span class="line">   -id : *nodeID</span><br><span class="line">    // 日志</span><br><span class="line">   -log : *nodeLog</span><br><span class="line">    // 日志</span><br><span class="line">   -logger : logging.EventLogger</span><br><span class="line">    // 矿工</span><br><span class="line">   -miner : *nodeMiner</span><br><span class="line">    // 挖矿</span><br><span class="line">   -mining : *nodeMining</span><br><span class="line">    // 节点</span><br><span class="line">   -node : *node.Node</span><br><span class="line">    // 支付通道</span><br><span class="line">   -paych : *nodePaych</span><br><span class="line">    // ping</span><br><span class="line">   -ping : *nodePing</span><br><span class="line">    // 检索客户端</span><br><span class="line">   -retrievalClient : *nodeRetrievalClient</span><br><span class="line">    // swarm</span><br><span class="line">   -swarm : *nodeSwarm</span><br><span class="line">    // 版本</span><br><span class="line">   -version : *nodeVersion</span><br><span class="line"></span><br><span class="line">    [methods]</span><br><span class="line">    // 如下为实现API接口</span><br><span class="line">   +Actor() : api.Actor</span><br><span class="line">   +Address() : api.Address</span><br><span class="line">   +Client() : api.Client</span><br><span class="line">   +Daemon() : api.Daemon</span><br><span class="line">   +Dag() : api.Dag</span><br><span class="line">   +ID() : api.ID</span><br><span class="line">   +Log() : api.Log</span><br><span class="line">   +Miner() : api.Miner</span><br><span class="line">   +Mining() : api.Mining</span><br><span class="line">   +Paych() : api.Paych</span><br><span class="line">   +Ping() : api.Ping</span><br><span class="line">   +RetrievalClient() : api.RetrievalClient</span><br><span class="line">   +Swarm() : api.Swarm</span><br><span class="line">   +Version() : api.Version</span><br><span class="line"></span><br><span class="line">▼ functions</span><br><span class="line">    // 实例化API</span><br><span class="line">    // 1 获取高层API porcelainAPI 指针,miner与paych有用到</span><br><span class="line">    // 2 调用各子系统的实例化函数逐一实例化</span><br><span class="line">   +New(node *node.Node) : api.API</span><br></pre></td></tr></table></figure>
+<h2 id="actor"><a href="#actor" class="headerlink" title="actor"></a>actor</h2><h3 id="actor的接口定义"><a href="#actor的接口定义" class="headerlink" title="actor的接口定义"></a>actor的接口定义</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">▼ package</span><br><span class="line">    api</span><br><span class="line"></span><br><span class="line">▶ imports</span><br><span class="line"></span><br><span class="line">▼+ActorView : struct</span><br><span class="line">    [fields]</span><br><span class="line">    // actor类型</span><br><span class="line">   +ActorType : string</span><br><span class="line">    // actor地址</span><br><span class="line">   +Address : string</span><br><span class="line">    // actor余额</span><br><span class="line">   +Balance : *types.AttoFIL</span><br><span class="line">    // actor代码-CID</span><br><span class="line">   +Code : cid.Cid</span><br><span class="line">    // 导出符号集合</span><br><span class="line">   +Exports : ReadableExports</span><br><span class="line">    // 表征actor实例的状态</span><br><span class="line">   +Head : cid.Cid</span><br><span class="line">    // 消息计数器，仅为account actors与外部发生交互的时候计算</span><br><span class="line">   +Nonce : uint64</span><br><span class="line"></span><br><span class="line">    // 导出符号集合</span><br><span class="line"> +ReadableExports : map[string]*ReadableFunctionSignature</span><br><span class="line"></span><br><span class="line">▼+ReadableFunctionSignature : struct</span><br><span class="line">    [fields]</span><br><span class="line">    // 参数</span><br><span class="line">   +Params : []string</span><br><span class="line">    // 返回</span><br><span class="line">   +Return : []string</span><br><span class="line"></span><br><span class="line">▼+Actor : interface</span><br><span class="line">    // 目前接口只有查看功能,返回合约的具体信息</span><br><span class="line">    [methods]</span><br><span class="line">   +Ls(ctx context.Context) : []*ActorView, error</span><br></pre></td></tr></table></figure>
+<h3 id="actor的接口实现"><a href="#actor的接口实现" class="headerlink" title="actor的接口实现"></a>actor的接口实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">▼ package</span><br><span class="line">    impl</span><br><span class="line"></span><br><span class="line">▶ imports</span><br><span class="line"></span><br><span class="line">// 使用nodeActor来实现Actor接口</span><br><span class="line">▼-nodeActor : struct</span><br><span class="line">    [fields]</span><br><span class="line">   -api : *nodeAPI</span><br><span class="line">    [methods]</span><br><span class="line">    // 调用ls方法实现查询功能</span><br><span class="line">   +Ls(ctx context.Context) : []*api.ActorView, error</span><br><span class="line">    [functions]</span><br><span class="line">    // 实例化nodeActor，由api实现代码中调用</span><br><span class="line">   -newNodeActor(api *nodeAPI) : *nodeActor</span><br><span class="line"></span><br><span class="line">▼ functions</span><br><span class="line">    // 获取合约类型</span><br><span class="line">    // 1 account actor</span><br><span class="line">    // 2 存储市场actor</span><br><span class="line">    // 3 支付通道actor</span><br><span class="line">    // 4 矿工actor</span><br><span class="line">    // 4 BootstrapMiner actor</span><br><span class="line">   -getActorType(actType exec.ExecutableActor) : string</span><br><span class="line">    // 查询合约状态</span><br><span class="line">   -ls(ctx context.Context, fcn *node.Node, actorGetter state.GetAllActorsFunc) : []*api.ActorView, error</span><br><span class="line">   -makeActorView(act *actor.Actor, addr string, actType exec.ExecutableActor) : *api.ActorView</span><br><span class="line">   -makeReadable(f *exec.FunctionSignature) : *api.ReadableFunctionSignature</span><br><span class="line">   -presentExports(e exec.Exports) : api.ReadableExports</span><br></pre></td></tr></table></figure>
+<h2 id="address"><a href="#address" class="headerlink" title="address"></a>address</h2><ul>
+<li>提供功能<ul>
+<li>地址显示方法</li>
+<li>地址查找方法</li>
+<li>创建地址方法</li>
+<li>导出地址方法</li>
+<li>导入地址方法</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">▼ package</span><br><span class="line">    api</span><br><span class="line"></span><br><span class="line">▶ imports</span><br><span class="line"></span><br><span class="line">▼+Address : interface</span><br><span class="line">    [methods]</span><br><span class="line">   +Addrs() : Addrs</span><br><span class="line">   +Export(ctx context.Context, addrs []address.Address) : []*types.KeyInfo, error</span><br><span class="line">   +Import(ctx context.Context, f files.File) : []address.Address, error</span><br><span class="line"></span><br><span class="line">▼+Addrs : interface</span><br><span class="line">    [methods]</span><br><span class="line">   +Lookup(ctx context.Context, addr address.Address) : peer.ID, error</span><br><span class="line">   +Ls(ctx context.Context) : []address.Address, error</span><br><span class="line">   +New(ctx context.Context) : address.Address, error</span><br></pre></td></tr></table></figure>
+<h2 id="client"><a href="#client" class="headerlink" title="client"></a>client</h2><ul>
+<li>提供如下功能<ul>
+<li>查询piece数据（DAG格式）</li>
+<li>导入数据（相当于ipfs add）</li>
+<li>列出所有订单</li>
+<li>支付</li>
+<li>发起存储交易</li>
+<li>查询存储交易</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">▼+Ask : struct</span><br><span class="line">    [fields]</span><br><span class="line">   +Error : error</span><br><span class="line">   +Expiry : *types.BlockHeight</span><br><span class="line">   +ID : uint64</span><br><span class="line">   +Miner : address.Address</span><br><span class="line">   +Price : *types.AttoFIL</span><br><span class="line"></span><br><span class="line">▼+Client : interface</span><br><span class="line">    [methods]</span><br><span class="line">   +Cat(ctx context.Context, c cid.Cid) : uio.DagReader, error</span><br><span class="line">   +ImportData(ctx context.Context, data io.Reader) : ipld.Node, error</span><br><span class="line">   +ListAsks(ctx context.Context) : chan Ask, error</span><br><span class="line">   +Payments(ctx context.Context, dealCid cid.Cid) : []*paymentbroker.PaymentVoucher, error</span><br><span class="line">   +ProposeStorageDeal(ctx context.Context, data cid.Cid, miner address.Address, ask uint64, duration uint64, allowDuplicates bool) : *storage.DealResponse, error</span><br><span class="line">   +QueryStorageDeal(ctx context.Context, prop cid.Cid) : *storage.DealResponse, error</span><br></pre></td></tr></table></figure>
+<h2 id="config"><a href="#config" class="headerlink" title="config"></a>config</h2><ul>
+<li>提供功能<ul>
+<li>Get配置</li>
+<li>Set配置</li>
+</ul>
+</li>
+</ul>
+<h2 id="daemon"><a href="#daemon" class="headerlink" title="daemon"></a>daemon</h2><ul>
+<li>提供功能<ul>
+<li>启动进程相关</li>
+<li>具体的业务启动逻辑会调用到node包</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">▼ package</span><br><span class="line">    api</span><br><span class="line"></span><br><span class="line">▶ imports</span><br><span class="line"></span><br><span class="line">▼+DaemonInitConfig : struct</span><br><span class="line">    [fields]</span><br><span class="line">    // 如果配置，定期检查并密封staged扇区</span><br><span class="line">   +AutoSealIntervalSeconds : uint</span><br><span class="line">   +DefaultAddress : address.Address</span><br><span class="line">    // 指定网络</span><br><span class="line">   +DevnetNightly : bool</span><br><span class="line">   +DevnetTest : bool</span><br><span class="line">   +DevnetUser : bool</span><br><span class="line">    // 创世文件</span><br><span class="line">   +GenesisFile : string</span><br><span class="line">   +PeerKeyFile : string</span><br><span class="line">    // repo目录</span><br><span class="line">   +RepoDir : string</span><br><span class="line">    // 指定矿工</span><br><span class="line">   +WithMiner : address.Address</span><br><span class="line"></span><br><span class="line"> +DaemonInitOpt : func(*DaemonInitConfig)</span><br><span class="line"></span><br><span class="line">▼+Daemon : interface</span><br><span class="line">    [methods]</span><br><span class="line">   +Init(ctx context.Context, opts ...DaemonInitOpt) : error</span><br><span class="line">   +Start(ctx context.Context) : error</span><br><span class="line">   +Stop(ctx context.Context) : error</span><br></pre></td></tr></table></figure>
+<h2 id="dag"><a href="#dag" class="headerlink" title="dag"></a>dag</h2><ul>
+<li>提供功能<ul>
+<li>dag查询功能</li>
+<li>类似ipfs block get</li>
+</ul>
+</li>
+</ul>
+<h2 id="id"><a href="#id" class="headerlink" title="id"></a>id</h2><ul>
+<li>提供功能<ul>
+<li>ID详细信息</li>
+<li>如多地址、协议版本、导出公钥等</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">▼+IDDetails : struct</span><br><span class="line">    [fields]</span><br><span class="line">   +Addresses : []ma.Multiaddr</span><br><span class="line">   +AgentVersion : string</span><br><span class="line">   +ID : peer.ID</span><br><span class="line">   +ProtocolVersion : string</span><br><span class="line">   +PublicKey : []byte</span><br><span class="line">    [methods]</span><br><span class="line">   +MarshalJSON() : []byte, error</span><br><span class="line">   +UnmarshalJSON(data []byte) : error</span><br><span class="line"></span><br><span class="line">▼+ID : interface</span><br><span class="line">    [methods]</span><br><span class="line">   +Details() : *IDDetails, error</span><br><span class="line"></span><br><span class="line">▼ functions</span><br><span class="line">   -decode(idd map[string]*json.RawMessage, key string, dest interface&#123;&#125;) : error</span><br></pre></td></tr></table></figure>
+<h2 id="log"><a href="#log" class="headerlink" title="log"></a>log</h2><ul>
+<li>提供日志功能</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">▼+Log : interface</span><br><span class="line">    [methods]</span><br><span class="line">   +Tail(ctx context.Context) : io.Reader</span><br></pre></td></tr></table></figure>
+<h2 id="miner"><a href="#miner" class="headerlink" title="miner"></a>miner</h2><ul>
+<li>创建矿工</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">▼+Miner : interface</span><br><span class="line">    [methods]</span><br><span class="line">   +Create(ctx context.Context, fromAddr address.Address, gasPrice types.AttoFIL, gasLimit types.GasUnits, pledge uint64, pid peer.ID, collateral *types.AttoFIL) : address.Address, error</span><br></pre></td></tr></table></figure>
+<h2 id="mining"><a href="#mining" class="headerlink" title="mining"></a>mining</h2><ul>
+<li>挖矿控制<ul>
+<li>启动</li>
+<li>停止</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">▼+Mining : interface</span><br><span class="line">    [methods]</span><br><span class="line">   +Once(ctx context.Context) : *types.Block, error</span><br><span class="line">   +Start(ctx context.Context) : error</span><br><span class="line">   +Stop(ctx context.Context) : error</span><br></pre></td></tr></table></figure>
+<h2 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h2><ul>
+<li>提供ping接口</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">▼+PingResult : struct</span><br><span class="line">    [fields]</span><br><span class="line">   +Success : bool</span><br><span class="line">   +Text : string</span><br><span class="line">   +Time : time.Duration</span><br><span class="line"></span><br><span class="line">▼+Ping : interface</span><br><span class="line">    [methods]</span><br><span class="line">   +Ping(ctx context.Context, pid peer.ID, count uint, delay time.Duration) : chan *PingResult, error</span><br></pre></td></tr></table></figure>
+<h2 id="retrieval-client"><a href="#retrieval-client" class="headerlink" title="retrieval_client"></a>retrieval_client</h2><ul>
+<li>提供检索接口</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">▼+RetrievalClient : interface</span><br><span class="line">    [methods]</span><br><span class="line">   +RetrievePiece(ctx context.Context, pieceCID cid.Cid, minerAddr address.Address) : io.ReadCloser, error</span><br></pre></td></tr></table></figure>
+<h2 id="swarm"><a href="#swarm" class="headerlink" title="swarm"></a>swarm</h2><ul>
+<li>提供节点连接功能<ul>
+<li>显示连接节点</li>
+<li>连接节点</li>
+<li>查找节点</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">▼+SwarmConnInfo : struct</span><br><span class="line">    [fields]</span><br><span class="line">   +Addr : string</span><br><span class="line">   +Latency : string</span><br><span class="line">   +Muxer : string</span><br><span class="line">   +Peer : string</span><br><span class="line">   +Streams : []SwarmStreamInfo</span><br><span class="line">    [methods]</span><br><span class="line">   +Len() : int</span><br><span class="line">   +Less(i, j int) : bool</span><br><span class="line">   +Swap(i, j int)</span><br><span class="line"></span><br><span class="line">▼+SwarmConnInfos : struct</span><br><span class="line">    [fields]</span><br><span class="line">   +Peers : []SwarmConnInfo</span><br><span class="line">    [methods]</span><br><span class="line">   +Len() : int</span><br><span class="line">   +Less(i, j int) : bool</span><br><span class="line">   +Swap(i, j int)</span><br><span class="line"></span><br><span class="line">▼+SwarmConnectResult : struct</span><br><span class="line">    [fields]</span><br><span class="line">   +Peer : string</span><br><span class="line">   +Success : bool</span><br><span class="line"></span><br><span class="line">▼+SwarmStreamInfo : struct</span><br><span class="line">    [fields]</span><br><span class="line">   +Protocol : string</span><br><span class="line"></span><br><span class="line">▼+Swarm : interface</span><br><span class="line">    [methods]</span><br><span class="line">   +Connect(ctx context.Context, addrs []string) : []SwarmConnectResult, error</span><br><span class="line">   +FindPeer(ctx context.Context, peerID peer.ID) : peerstore.PeerInfo, error</span><br><span class="line">   +Peers(ctx context.Context, verbose, latency, streams bool) : *SwarmConnInfos, error</span><br></pre></td></tr></table></figure>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
+
+      
+    </div>
+    
+    
+    
+    
+      
+        <div>
+          <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="Tiny熊 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信号：深入浅出区块链技术，欢迎订阅</div>
+</div>
+
+        </div>
+      
+    
+
+    
+      
+        <div>
+          <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有收获，赞赏下</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/qr_pay.jpg" alt="Tiny熊 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+        </div>
+      
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    先河系统杨尉
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://learnblockchain.cn/2019/03/07/filecoin-code-analysis-11/" title="filecoin技术架构分析十一：filecoin源码分析之内部接口层api包分析">https://learnblockchain.cn/2019/03/07/filecoin-code-analysis-11/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/FileCoin/" rel="tag"># FileCoin</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/07/filecoin-code-analysis-10/" rel="next" title="filecoin技术架构分析十：filecoin源码分析之支撑包分析(2)">
+                <i class="fa fa-chevron-left"></i> filecoin技术架构分析十：filecoin源码分析之支撑包分析(2)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/07/filecoin-code-analysis-12/" rel="prev" title="filecoin技术架构分析之十二：filecoin源码分析之内部接口层plumbing＆porcelain接口">
+                filecoin技术架构分析之十二：filecoin源码分析之内部接口层plumbing＆porcelain接口 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">89</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element" style="margin-top: 20px;">
+              <span>
+                项目
+              </span>
+            </div>
+          
+
+          <div class="links-of-author project motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/bitcoin" target="_self" title="比特币">
+                    
+                      <i class="fa fa-fw fa-false"></i>比特币</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/ethereum" target="_self" title="以太坊">
+                    
+                      <i class="fa fa-fw fa-false"></i>以太坊</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/EOS" target="_self" title="EOS">
+                    
+                      <i class="fa fa-fw fa-false"></i>EOS</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/Fabric" target="_self" title="Fabric">
+                    
+                      <i class="fa fa-fw fa-false"></i>Fabric</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <span>
+                联系我
+              </span>
+            </div>
+          
+          
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/xilibi2003" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiong-li-bing/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hiblock.one/" title="HiBlock区块链社区" target="_blank">HiBlock区块链社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://edu.upchain.pro/book.html" title="图书-精通智能合约开发" target="_blank">图书-精通智能合约开发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="区块链技术专栏" target="_blank">区块链技术专栏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://t.xiaomiquan.com/RfAu7uj" title="技术交流-知识星球" target="_blank">技术交流-知识星球</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blockgeek.org/" title="BG区块链技术论坛" target="_blank">BG区块链技术论坛</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bitshuo.com" title="区块链技术中文社区" target="_blank">区块链技术中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://news.tangwen.org" title="汤问资讯" target="_blank">汤问资讯</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitask.org" title="币问" target="_blank">币问</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eosfans.io/" title="EOS中文社区" target="_blank">EOS中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blockflow.net/" title="BlockFlow" target="_blank">BlockFlow</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.liankexing.com/" title="链客区块链问答社区" target="_blank">链客区块链问答社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitool.cn/" title="币兔" target="_blank">币兔</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wutui.pro/" title="无退社区" target="_blank">无退社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hpb.io/" title="HPB芯链" target="_blank">HPB芯链</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#api"><span class="nav-number">1.</span> <span class="nav-text">api</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#api的接口定义"><span class="nav-number">1.1.</span> <span class="nav-text">api的接口定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#api的接口实现"><span class="nav-number">1.2.</span> <span class="nav-text">api的接口实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#actor"><span class="nav-number">2.</span> <span class="nav-text">actor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#actor的接口定义"><span class="nav-number">2.1.</span> <span class="nav-text">actor的接口定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#actor的接口实现"><span class="nav-number">2.2.</span> <span class="nav-text">actor的接口实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#address"><span class="nav-number">3.</span> <span class="nav-text">address</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#client"><span class="nav-number">4.</span> <span class="nav-text">client</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#config"><span class="nav-number">5.</span> <span class="nav-text">config</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#daemon"><span class="nav-number">6.</span> <span class="nav-text">daemon</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dag"><span class="nav-number">7.</span> <span class="nav-text">dag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#id"><span class="nav-number">8.</span> <span class="nav-text">id</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#log"><span class="nav-number">9.</span> <span class="nav-text">log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#miner"><span class="nav-number">10.</span> <span class="nav-text">miner</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mining"><span class="nav-number">11.</span> <span class="nav-text">mining</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ping"><span class="nav-number">12.</span> <span class="nav-text">ping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#retrieval-client"><span class="nav-number">13.</span> <span class="nav-text">retrieval_client</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#swarm"><span class="nav-number">14.</span> <span class="nav-text">swarm</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+  <div class="footer-custom"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17140514号-1</a></div>
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
