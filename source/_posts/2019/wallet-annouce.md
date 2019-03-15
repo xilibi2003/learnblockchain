@@ -36,7 +36,7 @@ author: Tiny熊
 Gif 图片比较简陋，见谅见谅，可以看的出来界面参考了现在的主流钱包，感谢imToken及[ETHWallet](https://github.com/DwyaneQ/ETHWallet)，
 
 大家可以戳[链接](https://wiki.learnblockchain.cn/images/upchain_wallet.apk)下载APK体验，
-Google play 也已经上架，正在审核中。
+Google play 也已经上架，[链接](https://play.google.com/store/apps/details?id=pro.upchain.ethwallet)
 
 ## 功能介绍
 

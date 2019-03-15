@@ -6,11 +6,14 @@ categories: 以太坊
 tags:
     - 钱包
     - 比特币
-    - 以太坊
+    - BIP32
+    - HD钱包
+    - BIP44
+    - BIP39
 author: Tiny熊
 ---
 
-如果你还在被HD钱包、BIP32、BIP44、BIP39搞的一头雾水，来看看这边文章吧。
+如果你还在被HD钱包(分层确定性钱包)、BIP32、BIP44、BIP39搞的一头雾水，来看看这边文章吧。
 
 <!-- more -->
 

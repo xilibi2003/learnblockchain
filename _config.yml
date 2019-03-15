@@ -176,6 +176,7 @@ menu:
   meeting: /categories/dev-meeting/ || th
   course: /course/ || spinner
   web3: https://web3.learnblockchain.cn || book
+  solidity: https://solidity-cn.readthedocs.io || book
   #schedule: /schedule/ || calendar
   #sitemap: /sitemap.xml || sitemap
   #commonweal: /404/ || heartbeat

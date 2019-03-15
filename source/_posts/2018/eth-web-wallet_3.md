@@ -248,7 +248,7 @@ web3.eth.sendRawTransaction(serializedTx, function (err, transactionHash) {
     })
 ```
 
-哈哈哈~， 干活介绍到这里，现在夹带一点私货，有到了推广时间了，完整源码请订阅[深入浅出区块链技术小专栏](https://xiaozhuanlan.com/blockchaincore)查看，赶紧订阅吧，走过路过，不容错过。
+哈哈哈~， 干活介绍到这里，现在夹带一点私货，又到了推广时间了，完整源码请订阅[深入浅出区块链技术小专栏](https://xiaozhuanlan.com/blockchaincore)查看，赶紧订阅吧，走过路过，不容错过。
 戳链接收看[详细的视频课程讲解](https://ke.qq.com/course/356068?tuin=bd898bbf)。
 
 ## 参考文档
