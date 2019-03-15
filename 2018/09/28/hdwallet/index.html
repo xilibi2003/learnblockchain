@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="比特币,以太坊,钱包," />
+  <meta name="keywords" content="比特币,钱包,BIP32,HD钱包,BIP44,BIP39," />
 
 
 
@@ -85,13 +85,13 @@
 
 
 
-<meta name="description" content="如果你还在被HD钱包、BIP32、BIP44、BIP39搞的一头雾水，来看看这边文章吧。">
-<meta name="keywords" content="比特币,以太坊,钱包">
+<meta name="description" content="如果你还在被HD钱包(分层确定性钱包)、BIP32、BIP44、BIP39搞的一头雾水，来看看这边文章吧。">
+<meta name="keywords" content="比特币,钱包,BIP32,HD钱包,BIP44,BIP39">
 <meta property="og:type" content="article">
 <meta property="og:title" content="理解开发HD 钱包涉及的 BIP32、BIP44、BIP39">
 <meta property="og:url" content="https://learnblockchain.cn/2018/09/28/hdwallet/index.html">
 <meta property="og:site_name" content="深入浅出区块链">
-<meta property="og:description" content="如果你还在被HD钱包、BIP32、BIP44、BIP39搞的一头雾水，来看看这边文章吧。">
+<meta property="og:description" content="如果你还在被HD钱包(分层确定性钱包)、BIP32、BIP44、BIP39搞的一头雾水，来看看这边文章吧。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://learnblockchain.cn/images/9efa20eff737374479d9c6bb86db82b3.png">
 <meta property="og:image" content="https://learnblockchain.cn/images/450b5358b96ef5b32ec775efed901f2a.png">
@@ -99,10 +99,10 @@
 <meta property="og:image" content="https://learnblockchain.cn/images/a9a6e6a31f39e812f579a4c8bdf09347.png">
 <meta property="og:image" content="https://learnblockchain.cn/images/71c0af9474a51296096c3c806ca8f1a1.png">
 <meta property="og:image" content="https://learnblockchain.cn/images/d37f78f8f2d859369d99fc5e0a76c184.png">
-<meta property="og:updated_time" content="2019-03-11T08:38:47.261Z">
+<meta property="og:updated_time" content="2019-03-13T14:06:01.287Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解开发HD 钱包涉及的 BIP32、BIP44、BIP39">
-<meta name="twitter:description" content="如果你还在被HD钱包、BIP32、BIP44、BIP39搞的一头雾水，来看看这边文章吧。">
+<meta name="twitter:description" content="如果你还在被HD钱包(分层确定性钱包)、BIP32、BIP44、BIP39搞的一头雾水，来看看这边文章吧。">
 <meta name="twitter:image" content="https://learnblockchain.cn/images/9efa20eff737374479d9c6bb86db82b3.png">
 
 
@@ -290,6 +290,16 @@
           </a>
         </li>
       
+        
+        <li class="menu-item menu-item-solidity">
+          <a href="https://solidity-cn.readthedocs.io" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Solidity文档
+          </a>
+        </li>
+      
 
       
         <li class="menu-item menu-item-search">
@@ -406,8 +416,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-11T16:38:47+08:00">
-                2019-03-11
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-13T22:06:01+08:00">
+                2019-03-13
               </time>
             
           </span>
@@ -462,7 +472,7 @@
       
 
       
-        <p>如果你还在被HD钱包、BIP32、BIP44、BIP39搞的一头雾水，来看看这边文章吧。</p>
+        <p>如果你还在被HD钱包(分层确定性钱包)、BIP32、BIP44、BIP39搞的一头雾水，来看看这边文章吧。</p>
 <a id="more"></a>
 <h2 id="数字钱包概念"><a href="#数字钱包概念" class="headerlink" title="数字钱包概念"></a>数字钱包概念</h2><p>钱包用来存钱的，在区块链中，我们的数字资产都会对应到一个账户地址上， 只有拥有账户的钥匙（私钥）才可以对资产进行消费（用私钥对消费交易签名）。<br>私钥和地址的关系如下：<img src="/images/9efa20eff737374479d9c6bb86db82b3.png" alt=""><br>（图来自精通比特币）<br>一句话概括下就是：<strong>私钥通过椭圆曲线生成公钥， 公钥通过哈希函数生成地址，这两个过程都是单向的。</strong></p>
 <p>因此实际上，数字钱包实际是一个管理私钥（生成、存储、签名）的工具，注意钱包并不保存资产，资产是在链上的。</p>
@@ -585,9 +595,15 @@
           
             <a href="/tags/比特币/" rel="tag"># 比特币</a>
           
-            <a href="/tags/以太坊/" rel="tag"># 以太坊</a>
-          
             <a href="/tags/钱包/" rel="tag"># 钱包</a>
+          
+            <a href="/tags/BIP32/" rel="tag"># BIP32</a>
+          
+            <a href="/tags/HD钱包/" rel="tag"># HD钱包</a>
+          
+            <a href="/tags/BIP44/" rel="tag"># BIP44</a>
+          
+            <a href="/tags/BIP39/" rel="tag"># BIP39</a>
           
         </div>
       
@@ -689,7 +705,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">89</span>
+                  <span class="site-state-item-count">91</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -711,7 +727,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -851,10 +867,6 @@
                 
                   <li class="links-of-blogroll-item">
                     <a href="https://bitshuo.com" title="区块链技术中文社区" target="_blank">区块链技术中文社区</a>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="http://news.tangwen.org" title="汤问资讯" target="_blank">汤问资讯</a>
                   </li>
                 
                   <li class="links-of-blogroll-item">
