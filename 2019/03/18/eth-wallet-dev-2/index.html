@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+  <meta name="msvalidate.01" content="914C9C1CBC7078C5E2AC612AD5C1CC6C" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="钱包,以太坊," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深入浅出区块链" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="这是如何开发一款以太坊（安卓）钱包系列第2篇，如何导入账号。有时用户可能已经有一个账号，这篇文章接来介绍下，如何实现导入用户已经存在的账号。">
+<meta name="keywords" content="钱包,以太坊">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何开发一款以太坊（安卓）钱包系列2 - 导入账号及账号管理">
+<meta property="og:url" content="https://learnblockchain.cn/2019/03/18/eth-wallet-dev-2/index.html">
+<meta property="og:site_name" content="深入浅出区块链">
+<meta property="og:description" content="这是如何开发一款以太坊（安卓）钱包系列第2篇，如何导入账号。有时用户可能已经有一个账号，这篇文章接来介绍下，如何实现导入用户已经存在的账号。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://learnblockchain.cn/images/15529003884556.jpg">
+<meta property="og:updated_time" content="2019-03-19T06:12:14.775Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何开发一款以太坊（安卓）钱包系列2 - 导入账号及账号管理">
+<meta name="twitter:description" content="这是如何开发一款以太坊（安卓）钱包系列第2篇，如何导入账号。有时用户可能已经有一个账号，这篇文章接来介绍下，如何实现导入用户已经存在的账号。">
+<meta name="twitter:image" content="https://learnblockchain.cn/images/15529003884556.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'UT2K1ZRSWK',
+      apiKey: '0bbb261dfad58df8f8a657a1ed3255cd',
+      indexName: 'learnblockchain',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://learnblockchain.cn/2019/03/18/eth-wallet-dev-2/"/>
+
+
+
+
+
+  <title>如何开发一款以太坊（安卓）钱包系列2 - 导入账号及账号管理 | 深入浅出区块链</title>
+  
+
+
+
+
+
+
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6273382609469378",
+        enable_page_level_ads: true
+    });
+</script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">系统学习区块链技术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wiki">
+          <a href="https://wiki.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Wiki
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-meeting">
+          <a href="/categories/dev-meeting/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            技术工坊
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-course">
+          <a href="/course/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-spinner"></i> <br />
+            
+            视频教程
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-web3">
+          <a href="https://web3.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Web3文档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-solidity">
+          <a href="https://solidity-cn.readthedocs.io" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Solidity文档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2019/03/18/eth-wallet-dev-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">如何开发一款以太坊（安卓）钱包系列2 - 导入账号及账号管理</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-18T11:27:50+08:00">
+                2019-03-18
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-19T14:12:14+08:00">
+                2019-03-19
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ethereum/" itemprop="url" rel="index">
+                    <span itemprop="name">以太坊</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这是如何开发一款以太坊（安卓）钱包系列第2篇，如何导入账号。有时用户可能已经有一个账号，这篇文章接来介绍下，如何实现导入用户已经存在的账号。</p>
+<a id="more"></a>
+<h2 id="导入账号预备知识"><a href="#导入账号预备知识" class="headerlink" title="导入账号预备知识"></a>导入账号预备知识</h2><p>从用户需求上来讲，导入用户已经存在的账号是有必要的。 不过从安全性考虑，当你之前使用的是一个非官方、非开源的钱包产品时（尤其是小众钱包），或者之前没有对私钥、助记词、Keysotre文件小心保存时。<br>正确的做法是提示用户：</p>
+<ol>
+<li>在新的钱包重新创建一个钱包账号、并安全备份（因为之前的可能已经不安全）；</li>
+<li>然后在老钱包里把所有的币转移到新账号。</li>
+</ol>
+<p>导入账号有3种方式：</p>
+<ol>
+<li>通过私钥导入</li>
+<li>通过KeyStore 导入</li>
+<li>通过助记词导入</li>
+</ol>
+<h2 id="通过私钥导入账号"><a href="#通过私钥导入账号" class="headerlink" title="通过私钥导入账号"></a>通过私钥导入账号</h2><p>关键是用用户输入的私钥常见一个椭圆曲线秘钥对，然后用这个秘钥对创建钱包，代码如下：<br>（代码在<a href="https://github.com/xilibi2003/Upchain-wallet" target="_blank" rel="noopener">代码库</a>中的<code>app/src/pro/upchain/wallet/utils/ETHWalletUtils.java</code>文件中）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ETHWallet <span class="title">loadWalletByPrivateKey</span><span class="params">(String privateKey, String pwd)</span> </span>&#123;</span><br><span class="line">    Credentials credentials = <span class="keyword">null</span>;</span><br><span class="line">    ECKeyPair ecKeyPair = ECKeyPair.create(Numeric.toBigInt(privateKey));</span><br><span class="line">    <span class="keyword">return</span> generateWallet(generateNewWalletName(), pwd, ecKeyPair);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>返回语句中的 generateWallet()，在<a href="https://learnblockchain.cn/2019/03/13/eth_wallet_dev_1/">系列1-通过助记词创建账号</a> 已经介绍过，通过椭圆曲线秘钥对创建钱包。</p>
+<p>loadWalletByPrivateKey()中第2个参数密码pwd，在私钥生成账号这个过程并不需要pwd，它是用来加密保存私钥，即为了生成keystore文件。</p>
+<h2 id="通过KeyStore文件导入账号"><a href="#通过KeyStore文件导入账号" class="headerlink" title="通过KeyStore文件导入账号"></a>通过KeyStore文件导入账号</h2><p>关于KeyStore文件，不了解的可以阅读下<a href="https://learnblockchain.cn/2018/10/25/eth-web-wallet_2/">账号Keystore文件导入导出</a>。</p>
+<p>关键步骤：</p>
+<ol>
+<li>KeyStore 文本内容解析WalletFile实例；</li>
+<li>使用密码 解码 WalletFile 生成椭圆曲线秘钥对创建钱包。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> keystore 原json文件内容</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> pwd      keystore解密密码</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ETHWallet <span class="title">loadWalletByKeystore</span><span class="params">(String keystore, String pwd)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        WalletFile walletFile = <span class="keyword">null</span>;</span><br><span class="line">        walletFile = objectMapper.readValue(keystore, WalletFile.class);</span><br><span class="line">        <span class="keyword">return</span> generateWallet(generateNewWalletName(), pwd, Wallet.decrypt(pwd, walletFile));</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (CipherException e) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="通过助记词导入账号"><a href="#通过助记词导入账号" class="headerlink" title="通过助记词导入账号"></a>通过助记词导入账号</h2><p>导入和<a href="https://learnblockchain.cn/2019/03/13/eth_wallet_dev_1/">上一篇</a>中，常见非常相似，不同的是，种子由用户提供的助记词生成。</p>
+<p>使用助记词导入账号时，还需要用户选择（或输入）一个推倒路径(参考<a href="https://learnblockchain.cn/2018/09/28/hdwallet/">BIP44</a>)，关键步骤是：</p>
+<ol>
+<li>通过助记词常见随机数种子；</li>
+<li>通过 种子 + 路径 派生生成私钥 创建钱包 ；</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 通过导入助记词，导入钱包</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> path bip44路径</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> list 助记词</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> pwd  密码</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ETHWallet <span class="title">importMnemonic</span><span class="params">(String path, String mnemonic, String pwd)</span> </span>&#123;</span><br><span class="line">    List&lt;String&gt;  list =  Arrays.asList(mnemonic.split(<span class="string">" "</span>))；</span><br><span class="line">    <span class="keyword">if</span> (!path.startsWith(<span class="string">"m"</span>) &amp;&amp; !path.startsWith(<span class="string">"M"</span>)) &#123;</span><br><span class="line">        <span class="comment">//参数非法</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    String[] pathArray = path.split(<span class="string">"/"</span>);</span><br><span class="line">    <span class="keyword">if</span> (pathArray.length &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="comment">//内容不对</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    String passphrase = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">long</span> creationTimeSeconds = System.currentTimeMillis() / <span class="number">1000</span>;</span><br><span class="line">    DeterministicSeed ds = <span class="keyword">new</span> DeterministicSeed(list, <span class="keyword">null</span>, passphrase, creationTimeSeconds);</span><br><span class="line">    <span class="keyword">return</span> generateWalletByMnemonic(generateNewWalletName(), ds, pathArray, pwd);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>generateWalletByMnemonic在<a href="https://learnblockchain.cn/2019/03/13/eth_wallet_dev_1/">上一篇</a>中已经介绍过，</p>
+<h2 id="账号存储（保存到数据库）"><a href="#账号存储（保存到数据库）" class="headerlink" title="账号存储（保存到数据库）"></a>账号存储（保存到数据库）</h2><p>很多同学肯定已经注意到， 不管通过什么方式构造的账号，都会最终构造为一个ETHWallet 钱包对象，他的定义如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ETHWallet</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Id</span>(autoincrement = <span class="keyword">true</span>)</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String address;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String password;   <span class="comment">// 经过加密后的pwd</span></span><br><span class="line">    <span class="keyword">private</span> String keystorePath;  </span><br><span class="line">    <span class="keyword">private</span> String mnemonic;   </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isCurrent;   <span class="comment">// 是否是当前选中的钱包</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isBackup;    <span class="comment">// 是否备份过</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>前面构造的ETHWallet是只存在于内容之中， 在应用程序退出之后，这个数据将丢失， 因此我们需要把它序列化到<br>序列化数据库中存储起来，在下一次进入应用的时候加载数据库还原出账号。</p>
+<h3 id="greenDAO"><a href="#greenDAO" class="headerlink" title="greenDAO"></a>greenDAO</h3><p>greenDAO 是一个将<strong>对象映射到 SQLite 数据库</strong>中的轻量且快速的 ORM 解决方案，以下是一个greenDAO的作用示意图：</p>
+<p><img src="https://learnblockchain.cn/images/15529003884556.jpg" alt=""></p>
+<p>这里我们也使用了 greenDAO 来把ETHWallet对象映射到 SQLite 数据库， greenDAO的用法这里只简单说明，不详细阐述，大家可以跟随官方提供的<a href="http://greenrobot.org/greendao/documentation/introduction/" target="_blank" rel="noopener">introduction</a> 和 <a href="http://greenrobot.org/greendao/documentation/how-to-get-started/" target="_blank" rel="noopener">how-to-get-started</a>。</p>
+<h3 id="对象映射保存"><a href="#对象映射保存" class="headerlink" title="对象映射保存"></a>对象映射保存</h3><p>把ETHWallet映射的到数据库，需要给类加上@Entity注解，这样greenDAO会生成几个类：<code>DaoMaster</code>、<code>DaoSession</code>及 <code>ETHWalletDao</code> 帮我们完成构建数据库表等操作。</p>
+<p>在使用ETHWalletDao插入到数据库之前需要先进行一个初始化，通常初始化放在应用程序入口中进行，如：pro.upchain.wallet.UpChainWalletApp的onCreate()中执行，初始化代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    DaoMaster.DevOpenHelper mHelper = <span class="keyword">new</span> DaoMaster.DevOpenHelper(<span class="keyword">this</span>, <span class="string">"wallet"</span>, <span class="keyword">null</span>);</span><br><span class="line">    SQLiteDatabase db = mHelper.getWritableDatabase();</span><br><span class="line">    DaoSession daoSession = <span class="keyword">new</span> DaoMaster(db).newSession();</span><br><span class="line">    ETHWalletDao ethWalletDao = daoSession.getETHWalletDao();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有了greenDAO为我们生成的辅助类，插入到数据库就很简单了，一行代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ethWalletDao.insert(ethWallet);  //</span><br></pre></td></tr></table></figure>
+<p>ethWallet为ETHWallet实例， 前面不管是新创建还是导入的账号都会构造这样一个实例。</p>
+<h2 id="多账号管理"><a href="#多账号管理" class="headerlink" title="多账号管理"></a>多账号管理</h2><p>考虑到用户可能会创建多个账号，因此需要确定一个当前选定的账号，一般情况下，用户新创建的账号应该作为当前选中的的账号，同时其他账号应该取消选中， 我们完善下账号存储逻辑， 如下：<br>（代码在<a href="https://github.com/xilibi2003/Upchain-wallet" target="_blank" rel="noopener">代码库</a>中的<code>app/src/pro/upchain/wallet/utils/WalletDaoUtils.java</code>文件中）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 插入新创建钱包</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> ethWallet 钱</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">insertNewWallet</span><span class="params">(ETHWallet ethWallet)</span> </span>&#123;</span><br><span class="line">    updateCurrent(-<span class="number">1</span>);  <span class="comment">// 取消其他站账号选中状态</span></span><br><span class="line">    ethWallet.setCurrent(<span class="keyword">true</span>);</span><br><span class="line">    ethWalletDao.insert(ethWallet);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 更新选中钱包</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> id 钱包ID</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ETHWallet <span class="title">updateCurrent</span><span class="params">(<span class="keyword">long</span> id)</span> </span>&#123;</span><br><span class="line"><span class="comment">// 加载所有钱包账号</span></span><br><span class="line">    List&lt;ETHWallet&gt; ethWallets = ethWalletDao.loadAll();</span><br><span class="line">    ETHWallet currentWallet = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">for</span> (ETHWallet ethwallet : ethWallets) &#123;</span><br><span class="line">        <span class="keyword">if</span> (id != -<span class="number">1</span> &amp;&amp; ethwallet.getId() == id) &#123;</span><br><span class="line">            ethwallet.setCurrent(<span class="keyword">true</span>);</span><br><span class="line">            currentWallet = ethwallet;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            ethwallet.setCurrent(<span class="keyword">false</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        ethWalletDao.update(ethwallet);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> currentWallet;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="打通账号创建与保存"><a href="#打通账号创建与保存" class="headerlink" title="打通账号创建与保存"></a>打通账号创建与保存</h2><p>以通过私钥导入账号进行保存为例，把创建账号和保存账号打通，这里我们使用响应式编程 ReactiveX，<br>这部分作为订阅者福利，发表在我的<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">小专栏</a>，趁还未涨价，赶紧订阅吧，超值的！</p>
+<h2 id="学习资料"><a href="#学习资料" class="headerlink" title="学习资料"></a>学习资料</h2><ol>
+<li><a href="https://github.com/ReactiveX/RxAndroid/" target="_blank" rel="noopener">RxAndroid</a> 了解更多响应式编程</li>
+<li><a href="http://greenrobot.org/greendao/documentation/introduction/" target="_blank" rel="noopener">introduction</a> 和 <a href="http://greenrobot.org/greendao/documentation/how-to-get-started/" target="_blank" rel="noopener">how-to-get-started</a> 了解greenDAO。</li>
+</ol>
+<p>加入<a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">知识星球</a>，和一群优秀的区块链从业者一起学习。<br><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
+<!--
+
+（代码在[代码库](https://github.com/xilibi2003/Upchain-wallet)中的`app/src/pro/upchain/wallet/interact/CreateWalletInteract.java`中）
+
+
+java
+    public Single<ETHWallet> loadWalletByPrivateKey(final String privateKey, final String pwd) {
+        return Single.fromCallable(() -> {
+                    ETHWallet ethWallet = ETHWalletUtils.loadWalletByPrivateKey(privateKey, pwd);
+                    if (ethWallet != null) {
+                        WalletDaoUtils.insertNewWallet(ethWallet);
+                    }
+                    return ethWallet;
+                }
+        ).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+
+    }
+
+
+这个方法使用响应式编程方法，返回了一个可订阅的Single<ETHWallet> 对象。
+
+响应式编程 ReactiveX 提供了一个清晰、准确处理异步问题和事件的方法。RxJava是一个ReactiveX在JVM上的实现，在Android应用开发中使用RxJava 为[RxAndroid](https://github.com/ReactiveX/RxAndroid/)。
+
+补充下为什么要用响应式编程方法，因为加解密及数据库（磁盘IO）操作都是耗时操作，不能放在主线程中执行（会造成UI卡顿）， 传统的做法是用`AsyncTask`在`doInBackground`执行耗时操作，而使用ReactiveX代码将简洁很多。
+
+代码中使用`subscribeOn`指定被观察者在单独 的**io 子线程**运行（Schedulers.io()） ，`observeOn` 指定观察者运行在AndroidSchedulers.mainThread() 主线程（UI）线程，这样观察者在订阅收到ETHWallet对象后，就可以UI 展示等操作。
+
+提示大家阅读本文时，最好把[代码库](https://github.com/xilibi2003/Upchain-wallet)克隆到本地对照阅读。
+ -->
+
+      
+    </div>
+    
+    
+    
+    
+      
+        <div>
+          <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="Tiny熊 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信号：深入浅出区块链技术，欢迎订阅</div>
+</div>
+
+        </div>
+      
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Tiny熊
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://learnblockchain.cn/2019/03/18/eth-wallet-dev-2/" title="如何开发一款以太坊（安卓）钱包系列2 - 导入账号及账号管理">https://learnblockchain.cn/2019/03/18/eth-wallet-dev-2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/钱包/" rel="tag"># 钱包</a>
+          
+            <a href="/tags/以太坊/" rel="tag"># 以太坊</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/16/dev_meeting_11/" rel="next" title="技术工坊 第11期">
+                <i class="fa fa-chevron-left"></i> 技术工坊 第11期
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element" style="margin-top: 20px;">
+              <span>
+                项目
+              </span>
+            </div>
+          
+
+          <div class="links-of-author project motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/bitcoin" target="_self" title="比特币">
+                    
+                      <i class="fa fa-fw fa-false"></i>比特币</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/ethereum" target="_self" title="以太坊">
+                    
+                      <i class="fa fa-fw fa-false"></i>以太坊</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/EOS" target="_self" title="EOS">
+                    
+                      <i class="fa fa-fw fa-false"></i>EOS</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/Fabric" target="_self" title="Fabric">
+                    
+                      <i class="fa fa-fw fa-false"></i>Fabric</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/IPFS" target="_self" title="IPFS">
+                    
+                      <i class="fa fa-fw fa-false"></i>IPFS</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/FileCoin" target="_self" title="FileCoin">
+                    
+                      <i class="fa fa-fw fa-false"></i>FileCoin</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <span>
+                联系我
+              </span>
+            </div>
+          
+          
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/xilibi2003" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiong-li-bing/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hiblock.one/" title="HiBlock区块链社区" target="_blank">HiBlock区块链社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://edu.upchain.pro/book.html" title="图书-精通智能合约开发" target="_blank">图书-精通智能合约开发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="区块链技术专栏" target="_blank">区块链技术专栏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://t.xiaomiquan.com/RfAu7uj" title="技术交流-知识星球" target="_blank">技术交流-知识星球</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blockgeek.org/" title="BG区块链技术论坛" target="_blank">BG区块链技术论坛</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bitshuo.com" title="区块链技术中文社区" target="_blank">区块链技术中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitask.org" title="币问" target="_blank">币问</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eosfans.io/" title="EOS中文社区" target="_blank">EOS中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blockflow.net/" title="BlockFlow" target="_blank">BlockFlow</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.liankexing.com/" title="链客区块链问答社区" target="_blank">链客区块链问答社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitool.cn/" title="币兔" target="_blank">币兔</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wutui.pro/" title="无退社区" target="_blank">无退社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hpb.io/" title="HPB芯链" target="_blank">HPB芯链</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#导入账号预备知识"><span class="nav-number">1.</span> <span class="nav-text">导入账号预备知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过私钥导入账号"><span class="nav-number">2.</span> <span class="nav-text">通过私钥导入账号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过KeyStore文件导入账号"><span class="nav-number">3.</span> <span class="nav-text">通过KeyStore文件导入账号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过助记词导入账号"><span class="nav-number">4.</span> <span class="nav-text">通过助记词导入账号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#账号存储（保存到数据库）"><span class="nav-number">5.</span> <span class="nav-text">账号存储（保存到数据库）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#greenDAO"><span class="nav-number">5.1.</span> <span class="nav-text">greenDAO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象映射保存"><span class="nav-number">5.2.</span> <span class="nav-text">对象映射保存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多账号管理"><span class="nav-number">6.</span> <span class="nav-text">多账号管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打通账号创建与保存"><span class="nav-number">7.</span> <span class="nav-text">打通账号创建与保存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学习资料"><span class="nav-number">8.</span> <span class="nav-text">学习资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+  <div class="footer-custom"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17140514号-1</a></div>
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
