@@ -22,7 +22,7 @@ un_reward: true
 5. Filecoin开发网络实战
 
 
-[点击下载PPT](https://learnblockchain.cn/pdf/filecoin_11.pdf)
+[点击下载PPT](https://learnblockchain.cn/pdf/filecoin_11.pdf) 或[收听音频](https://m.qlchat.com/live/channel/channelPage/2000003954872128.htm)
 
 **分享嘉宾：温国兵 SuperONE COO**
 
@@ -37,7 +37,7 @@ un_reward: true
 5. EOS DApp 生态
 
 
-[点击下载PPT](https://learnblockchain.cn/pdf/EOS-DApp_11.pdf)
+[点击下载PPT](https://learnblockchain.cn/pdf/EOS-DApp_11.pdf)或[收听音频](https://m.qlchat.com/live/channel/channelPage/2000003954872128.htm)
 
 
 **分享嘉宾：谭长生 DLB数链产品经理**

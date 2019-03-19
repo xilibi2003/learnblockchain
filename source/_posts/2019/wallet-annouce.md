@@ -81,13 +81,17 @@ Google play 也已经上架，[链接](https://play.google.com/store/apps/detail
 * [Trust-ray](https://github.com/TrustWallet/trust-ray)
 
 
- ## 再啰嗦几句
+## 再啰嗦几句
 
 本次开源也是受到区块链社区的影响，尤其是HiBlock区块链社区一些朋友坚持布道和开源的精神影响。
 > HiBlock区块链社区 是国内最大的区块链开发者社区，社区已经聚集了数千名区块链开发者。
 
 登链钱包是由登链学院出品，希望大家知道[登链学院](https://upchain.ke.qq.com)不单出品优质课程，我们也为行业发展贡献一份力量，感谢大家转发。
 
-PS: 我们提供专业的钱包定制开发，欢迎咨询微信：xlbxiong
+想要加入开源钱包讨论群的的朋友，加微信：xlbxiong  备注：钱包
+
+PS: 我们提供专业的钱包定制开发，欢迎咨询微信：xlbxiong 备注：定制开发
 
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
+
+

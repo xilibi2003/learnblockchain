@@ -138,10 +138,12 @@ implementation 'org.bitcoinj:bitcoinj-core:0.14.7'
         return ethWallet;
     }
 
+    //  通过椭圆曲线秘钥对创建钱包
         @Nullable
     private static ETHWallet generateWallet(String walletName, String pwd, ECKeyPair ecKeyPair) {
         WalletFile keyStoreFile;
         try {
+            //最后两个参数： n 是 CPU/Memory 开销值，越高的开销值，计算就越困难。r 表示块大小，p 表示并行度
             keyStoreFile = Wallet.create(pwd, ecKeyPair, 1024, 1); // WalletUtils. .generateNewWalletFile();
         } catch (Exception e) {
             e.printStackTrace();
