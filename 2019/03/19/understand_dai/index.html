@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+  <meta name="msvalidate.01" content="914C9C1CBC7078C5E2AC612AD5C1CC6C" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="稳定币,DAI," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深入浅出区块链" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="随着摩根大通推出JPM Coin 稳定币，可以预见稳定币将成为区块链落地的一大助推器。坦白来讲，对于一个程序员的我来讲（不懂一点专业经济和金融），理解DAI的机制，真的有一点复杂。耐心看完，必有收获。">
+<meta name="keywords" content="稳定币,DAI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="理解去中心化 稳定币 DAI">
+<meta property="og:url" content="https://learnblockchain.cn/2019/03/19/understand_dai/index.html">
+<meta property="og:site_name" content="深入浅出区块链">
+<meta property="og:description" content="随着摩根大通推出JPM Coin 稳定币，可以预见稳定币将成为区块链落地的一大助推器。坦白来讲，对于一个程序员的我来讲（不懂一点专业经济和金融），理解DAI的机制，真的有一点复杂。耐心看完，必有收获。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://learnblockchain.cn/images/15530688001807.jpg">
+<meta property="og:updated_time" content="2019-03-20T10:30:04.474Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="理解去中心化 稳定币 DAI">
+<meta name="twitter:description" content="随着摩根大通推出JPM Coin 稳定币，可以预见稳定币将成为区块链落地的一大助推器。坦白来讲，对于一个程序员的我来讲（不懂一点专业经济和金融），理解DAI的机制，真的有一点复杂。耐心看完，必有收获。">
+<meta name="twitter:image" content="https://learnblockchain.cn/images/15530688001807.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'UT2K1ZRSWK',
+      apiKey: '0bbb261dfad58df8f8a657a1ed3255cd',
+      indexName: 'learnblockchain',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://learnblockchain.cn/2019/03/19/understand_dai/"/>
+
+
+
+
+
+  <title>理解去中心化 稳定币 DAI | 深入浅出区块链</title>
+  
+
+
+
+
+
+
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6273382609469378",
+        enable_page_level_ads: true
+    });
+</script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">系统学习区块链技术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wiki">
+          <a href="https://wiki.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Wiki
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-meeting">
+          <a href="/categories/dev-meeting/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            技术工坊
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-course">
+          <a href="/course/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-spinner"></i> <br />
+            
+            视频教程
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-web3">
+          <a href="https://web3.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Web3文档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-solidity">
+          <a href="https://solidity-cn.readthedocs.io" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Solidity文档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2019/03/19/understand_dai/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">理解去中心化 稳定币 DAI</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-19T20:44:58+08:00">
+                2019-03-19
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-20T18:30:04+08:00">
+                2019-03-20
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ethereum/" itemprop="url" rel="index">
+                    <span itemprop="name">以太坊</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>随着摩根大通推出JPM Coin 稳定币，可以预见稳定币将成为区块链落地的一大助推器。<br>坦白来讲，对于一个程序员的我来讲（不懂一点专业经济和金融），理解DAI的机制，真的有一点复杂。耐心看完，必有收获。</p>
+<a id="more"></a>
+<h2 id="为什么需要稳定币"><a href="#为什么需要稳定币" class="headerlink" title="为什么需要稳定币"></a>为什么需要稳定币</h2><p>如果一个货币其价值时刻在剧烈波动，就无法作为一个日常支付和交易的货币，谁也无法承担今天发的工资，第二天就跌掉了三分之一。</p>
+<p>在币价高度不稳定时，在不退出加密货币市场的情况下，稳定币就可以提供价值保值。</p>
+<p>通常发行稳定币的方式是通过资产担保来发行，像USDT、TUSD等就是通过美元资产来担保发行等额稳定币，如银行存款1亿美元就发行1亿USDT， 既通过锚定法币来实行稳定性。</p>
+<blockquote>
+<p>USDT 因审计不公开，经常被质疑超发，如1亿美元担保发行1.5亿USDT，就会导致0.5亿USDT无法兑换美元。这也是为什么在监管下发行的稳定币，如TUSD、GUSD有逐步取代USDT的趋势。</p>
+</blockquote>
+<p>本文的主角 DAI 同样是通过<strong>资产抵押</strong>发行， DAI 是通过<strong>抵押数字资产</strong>发行，<strong>去中心化</strong>发行。</p>
+<p>注意加粗的两个关键字<strong>抵押数字资产</strong>和<strong>去中心化</strong>，它是用一套称之为Maker的智能合约发行的，其背后的团队为MakerDAO。</p>
+<blockquote>
+<p>Maker目前只支持抵押ETH，后面可能会加入其它代币。<br>DAO (Decentralized Autonomous Organization): 去中心化的自治组织</p>
+</blockquote>
+<p>我们都知道数字资产的价值是有很大波动的， 那么Maker怎么来确保 1 DAI = 1 USD的呢？</p>
+<h2 id="稳定币-DAI的发行"><a href="#稳定币-DAI的发行" class="headerlink" title="稳定币 DAI的发行"></a>稳定币 DAI的发行</h2><p>Maker体系中有一个实现了抵押贷款逻辑的智能合约（CDP）， 当我们抵押（发送）ETH到智能合约，合约根据当时ETH的价值，计算一个<strong>折扣</strong>后，发行对应的DAI（符合ERC20标准的代币）。</p>
+<blockquote>
+<p>以太价格获取Maker采用的是中心化方案，从各大交易所获取再加权平均。</p>
+</blockquote>
+<p>为了方便理解，类比抵押屋产贷款，我们把房子作为抵押品向银行贷款，ETH就相当于房子，智能合约相当于银行，DAI 相当于贷款拿到的钱。银行给我们贷款时，银行也会对房子的价值打一个折扣。</p>
+<p>这个折扣在Maker系统中称之为<strong>抵押率</strong>，这是一个很重要的概念，大家务必理解。</p>
+<p>我们给他一个数学定义： <code>抵押率 = 抵押物的价值 / 放贷的价值</code>。</p>
+<p>如果房子价值200万，抵押率为200%， 银行就只能给我们贷款100万，这个大家应该能够理解。<br>同样，假设以太币现在价值200美元，抵押率为200％，那么把1个以太币（200美元）发送到CDP智能合约，就可以获得发行的100个DAI。</p>
+<p>在抵押ETH生成DAI的同时，合约会为我们生成一张<strong>CDP借贷凭证</strong>，它记录着借贷关系及金额，并且抵押ETH会一直锁定在合约里，在还清100个DAI时，ETH将归还我们。 就像银行扣押房子直到我们还清贷款一样。</p>
+<p>到这里，DAI的发行应该明白了。</p>
+<h3 id="套现保值"><a href="#套现保值" class="headerlink" title="套现保值"></a>套现保值</h3><p>DAI的这种抵押贷款逻辑非常有意思 ，它生成的CDP借贷凭证提供给我们一个<strong>套现保值</strong>的手段。假如你有一大笔以太在手里， 而你又急需一笔资金怎么办？ 那么抵押生成DAI是获得资金的一个绝佳选择。如果在交易所把币卖掉换成稳定币，会失去以太的所有权，币价上涨时就无法换回对应的以太。</p>
+<p>例如：目前 ETH 价格约为 130 美元， 按200%的抵押率， 1000个以太可以抵押生成6.5万个DAI，即可以获得6.5万美元资金，假设一年之后，ETH价格涨到到500 美元，只需要偿还6.5万个DAI（美元）及一点利息就可以赎回1000个以太（价值50万美元）。</p>
+<h2 id="DAI是如何保持稳定的？"><a href="#DAI是如何保持稳定的？" class="headerlink" title="DAI是如何保持稳定的？"></a>DAI是如何保持稳定的？</h2><p>依靠抵押美元发行的USDT、TUSD，能保持价值相对稳定很容易理解，靠抵押ETH的DAI如何保持稳定呢？</p>
+<p>分两种情况：如果 ETH 升值， 意味着 DAI 有更足够的抵押（更高的抵押率，担保更充足），这不会有太大影响。如果DAI的交易价格超过1美元，Maker也会激励用户创造更多的DAI（目标利率反馈机制）。</p>
+<blockquote>
+<p>目标利率反馈机制（TRFM）：不过最重要的是以下几点：当DAI的交易价格超过1美元时，智能合约会激励人们生成DAI。当DAI的交易价格不到1美元时，智能合约会激励人们赎返DAI。</p>
+</blockquote>
+<p>如果 ETH 价值下降则复杂一些，回到抵押屋产贷款的类比，如果我们的房子价值下降，银行会要求我们追加抵押物或及时还款，Maker也是一样，始终要求DAI是超额抵押的。</p>
+<p>如果资产下跌到一定值（如抵押率150%），并且原抵押人没有追加抵押物或偿还（部分）DAI，合约会自动启动<strong>清算（liquidated）</strong>，之前抵押的以太币被拍卖，直到从CDP合约借出的DAI被还清。</p>
+<p>还是前面的类比，价值200万房子，抵押率200%，贷款了100万，在房子下跌到150万时，银行就会拍卖房子，清除这笔贷款。 Maker也是使用这种方式从市面上回购DAI用来偿还给CDP。</p>
+<p>简单总结：<br><strong>Maker始终要求DAI是超额抵押的</strong>，当系统发现有部分资产存在风险时，就会对风险过高的资产进行清算，它会首先清算抵押率低于 150% 的CDP借贷凭证，而为了防止清算持有人必须往CDP借贷凭证存入更多ETH或偿还DAI来提高抵押率。</p>
+<p>现在我们来看 <a href="https://cdp.makerdao.com/" target="_blank" rel="noopener">MakerDao抵押借款的界面</a>就清晰了，以下截图是抵押1 ETH 生成60个DAI：</p>
+<p><img src="/images/15530688001807.jpg" alt=""></p>
+<p>Collateralization ratio 抵押率为 228%， Liquidation price 清算价格为90 美金。</p>
+<h3 id="清算"><a href="#清算" class="headerlink" title="清算"></a>清算</h3><p>关于清算也许还有几点需要了解：</p>
+<ol>
+<li>在发生清算后， 就再也无法通过偿还DAI来取回之前抵押的ETH了（CDP借贷凭证会关闭）。</li>
+<li>清算发生时，会扣除一部分的罚金（13%的罚金）和手续费。</li>
+<li>拍卖ETH得到的DAI  会被销毁， 就像用户偿还DAI 被销毁一样。</li>
+<li>拍卖偿还DAI后， 剩余的资产用户可以拿回。</li>
+<li>Maker系统中有一个专门负责清算的合约。</li>
+</ol>
+<h2 id="MKR-应对暴跌"><a href="#MKR-应对暴跌" class="headerlink" title="MKR 应对暴跌"></a>MKR 应对暴跌</h2><p>上面一有一个前提，不管如果 DAI 都是超额抵押， 如果以太价格急剧下跌，抵押品的价值达不到借出的DAI的价值时，这时启动清算，将由Mkr持有者负责回购。</p>
+<p>Mkr 是Maker系统中的权益代币， Mkr持有者是系统的收益者，获取借款利息及罚金等。</p>
+<p>还是前面的类比，如果价值200万房子， 突然跌倒100万以下， 这时候在公开市场拍卖，市场是没有买家出100万以上购买房子的，那么银行将启用自有资金回购。</p>
+<p>相当于损失的价值转嫁到Mkr持有者，价格波动是没发消灭的，它只能转移，DAI的价格波动性实际由CDP 借贷凭证持有者和Mkr持有者共同承担。</p>
+<h2 id="一点拓展"><a href="#一点拓展" class="headerlink" title="一点拓展"></a>一点拓展</h2><p>DAI 由于它的超额抵押借款机制，是一个很好的杠杆做多工具。</p>
+<p>如果我们预期以太币会上涨，我们可以把前面1000个以太抵押生成6.5万个DAI，再此购买以太进行抵押，多次操作之后，可能获得数倍的增值。</p>
+<p>为了写这边文章，拓展我不少金融领域知识，以前一直不理解做多做空（因为我不炒股、不炒币），现在把我的理解做一个记录，供参考：</p>
+<h3 id="做多"><a href="#做多" class="headerlink" title="做多"></a>做多</h3><p>做多就是看好其上涨而买入，杠杆做多则是借钱买入。<br>上面就是借DAI（美元）买入以太，借来的6.5万个DAI（美元），按130美元一个以太，可以购买到500个以太，如果一个月后以太涨到200美元， 500个以太就是10万美元，还掉6.5万美元后，相当于<strong>凭空</strong>赚了3.5万美元。</p>
+<h3 id="做空"><a href="#做空" class="headerlink" title="做空"></a>做空</h3><p>做空就是认为其下跌而卖出，同样也可以借别人的卖出。<br>现在130美元一个以太，我认为以太会下跌到100美元，于是我向交易所借了1000个币卖掉获得13万美元，如果真下跌到100美元，就用10万美元换1000个币还给交易所，这样我<strong>凭空</strong>赚了3万美元。</p>
+<h2 id="参考文章："><a href="#参考文章：" class="headerlink" title="参考文章："></a>参考文章：</h2><p><a href="https://makerdao.com/zh-CN/whitepaper" target="_blank" rel="noopener">DAI 白皮书</a><br><a href="https://www.chainnews.com/articles/858804412113.htm" target="_blank" rel="noopener">DAI 稳定币的通俗解释</a></p>
+<p>如果你对稳定币感兴趣，我们可以一起交流，我的微信：xlbxiong 备注：稳定币。</p>
+<p>加入<a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">知识星球</a>，和一群优秀的区块链从业者一起学习。<br><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
+
+      
+    </div>
+    
+    
+    
+    
+      
+        <div>
+          <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="Tiny熊 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信号：深入浅出区块链技术，欢迎订阅</div>
+</div>
+
+        </div>
+      
+    
+
+    
+      
+        <div>
+          <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>有收获，赞赏下</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/qr_pay.jpg" alt="Tiny熊 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+        </div>
+      
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Tiny熊
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://learnblockchain.cn/2019/03/19/understand_dai/" title="理解去中心化 稳定币 DAI">https://learnblockchain.cn/2019/03/19/understand_dai/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/稳定币/" rel="tag"># 稳定币</a>
+          
+            <a href="/tags/DAI/" rel="tag"># DAI</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/18/eth-wallet-dev-2/" rel="next" title="如何开发一款以太坊（安卓）钱包系列2 - 导入账号及账号管理">
+                <i class="fa fa-chevron-left"></i> 如何开发一款以太坊（安卓）钱包系列2 - 导入账号及账号管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">93</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element" style="margin-top: 20px;">
+              <span>
+                项目
+              </span>
+            </div>
+          
+
+          <div class="links-of-author project motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/bitcoin" target="_self" title="比特币">
+                    
+                      <i class="fa fa-fw fa-false"></i>比特币</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/ethereum" target="_self" title="以太坊">
+                    
+                      <i class="fa fa-fw fa-false"></i>以太坊</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/EOS" target="_self" title="EOS">
+                    
+                      <i class="fa fa-fw fa-false"></i>EOS</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/Fabric" target="_self" title="Fabric">
+                    
+                      <i class="fa fa-fw fa-false"></i>Fabric</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/IPFS" target="_self" title="IPFS">
+                    
+                      <i class="fa fa-fw fa-false"></i>IPFS</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/FileCoin" target="_self" title="FileCoin">
+                    
+                      <i class="fa fa-fw fa-false"></i>FileCoin</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <span>
+                联系我
+              </span>
+            </div>
+          
+          
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/xilibi2003" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiong-li-bing/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hiblock.one/" title="HiBlock区块链社区" target="_blank">HiBlock区块链社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://edu.upchain.pro/book.html" title="图书-精通智能合约开发" target="_blank">图书-精通智能合约开发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="区块链技术专栏" target="_blank">区块链技术专栏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://t.xiaomiquan.com/RfAu7uj" title="技术交流-知识星球" target="_blank">技术交流-知识星球</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blockgeek.org/" title="BG区块链技术论坛" target="_blank">BG区块链技术论坛</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bitshuo.com" title="区块链技术中文社区" target="_blank">区块链技术中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitask.org" title="币问" target="_blank">币问</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eosfans.io/" title="EOS中文社区" target="_blank">EOS中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blockflow.net/" title="BlockFlow" target="_blank">BlockFlow</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.liankexing.com/" title="链客区块链问答社区" target="_blank">链客区块链问答社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bitool.cn/" title="币兔" target="_blank">币兔</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wutui.pro/" title="无退社区" target="_blank">无退社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hpb.io/" title="HPB芯链" target="_blank">HPB芯链</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么需要稳定币"><span class="nav-number">1.</span> <span class="nav-text">为什么需要稳定币</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#稳定币-DAI的发行"><span class="nav-number">2.</span> <span class="nav-text">稳定币 DAI的发行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#套现保值"><span class="nav-number">2.1.</span> <span class="nav-text">套现保值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DAI是如何保持稳定的？"><span class="nav-number">3.</span> <span class="nav-text">DAI是如何保持稳定的？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#清算"><span class="nav-number">3.1.</span> <span class="nav-text">清算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MKR-应对暴跌"><span class="nav-number">4.</span> <span class="nav-text">MKR 应对暴跌</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一点拓展"><span class="nav-number">5.</span> <span class="nav-text">一点拓展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#做多"><span class="nav-number">5.1.</span> <span class="nav-text">做多</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#做空"><span class="nav-number">5.2.</span> <span class="nav-text">做空</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文章："><span class="nav-number">6.</span> <span class="nav-text">参考文章：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+  <div class="footer-custom"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17140514号-1</a></div>
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

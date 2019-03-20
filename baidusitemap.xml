@@ -4,8 +4,30 @@
 
     
   <url>
+    <loc>https://learnblockchain.cn/2019/03/19/understand_dai/</loc>
+    <lastmod>2019-03-20T10:30:04.474Z</lastmod>
+    <data>
+        <display>
+        <title>理解去中心化 稳定币 DAI</title>
+        <pubTime>2019-03-19T12:44:58.000Z</pubTime>
+        
+        <tag>稳定币</tag>
+         
+        <tag>DAI</tag>
+         
+         
+           
+             
+              <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://learnblockchain.cn/2019/03/18/eth-wallet-dev-2/</loc>
-    <lastmod>2019-03-19T06:30:33.003Z</lastmod>
+    <lastmod>2019-03-20T10:01:40.661Z</lastmod>
     <data>
         <display>
         <title>如何开发一款以太坊（安卓）钱包系列2 - 导入账号及账号管理</title>
@@ -611,9 +633,9 @@
         <title>站在Web3.0 理解IPFS是什么</title>
         <pubTime>2018-12-12T08:35:33.000Z</pubTime>
         
-        <tag>IPFS</tag>
-         
         <tag>Web3</tag>
+         
+        <tag>IPFS</tag>
          
          
            
@@ -2034,13 +2056,13 @@
         <title>比特币所有权及隐私问题-非对称加密应用</title>
         <pubTime>2017-11-02T09:19:29.000Z</pubTime>
         
-        <tag>非对称加密</tag>
-         
         <tag>比特币</tag>
          
         <tag>所有权问题</tag>
          
         <tag>隐私问题</tag>
+         
+        <tag>非对称加密</tag>
          
          
            
