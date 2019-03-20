@@ -1,7 +1,6 @@
 ---
 title: 如何开发一款以太坊（安卓）钱包系列2 - 导入账号及账号管理
 permalink: eth-wallet-dev-2
-un_reward: true
 date: 2019-03-18 11:27:50
 categories: 以太坊
 tags:
@@ -227,6 +226,7 @@ ethWallet为ETHWallet实例， 前面不管是新创建还是导入的账号都�
 1. [RxAndroid](https://github.com/ReactiveX/RxAndroid/) 了解更多响应式编程
 2. [introduction](http://greenrobot.org/greendao/documentation/introduction/) 和 [how-to-get-started](http://greenrobot.org/greendao/documentation/how-to-get-started/) 了解greenDAO。
 
+我创建了一个专门讨论钱包开发的微信群，加微信：xlbxiong 备注：钱包。
 
 
 加入[知识星球](https://t.xiaomiquan.com/RfAu7uj)，和一群优秀的区块链从业者一起学习。
