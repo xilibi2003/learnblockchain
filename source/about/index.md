@@ -24,14 +24,14 @@ date: 2017-10-24 18:16:10
 
 ### 部分作者
 
-* Tiny熊
-  写过代码，带过团队，抱过娃。
+* [Tiny熊](http://tinyxiong.com)
+  写过代码，带过团队，抱过娃，
   北航硕士，登链创始人&CTO，[精通以太坊智能合约开发](http://edu.upchain.pro/book.html)作者。
 
 * Bob 
   HiBlock 社区发起人，敏捷开发培训专家。
 
-* 虞是户
+* 虞是乎
   磨链社区共建者，Nerthus CTO。
 
 * 盖盖
