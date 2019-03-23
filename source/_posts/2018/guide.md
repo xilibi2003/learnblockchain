@@ -71,29 +71,8 @@ author: Tiny熊
 * [如何编写一个可升级的智能合约](https://learnblockchain.cn/2018/03/15/contract-upgrade/)
 * [美链BEC合约漏洞技术分析](https://learnblockchain.cn/2018/04/25/bec-overflow/)
 
-### 钱包开发系列
-* [理解开发HD 钱包涉及的 BIP32、BIP44、BIP39](https://learnblockchain.cn/2018/09/28/hdwallet/)
-* [以太坊钱包开发系列1 - 创建钱包账号](https://learnblockchain.cn/2018/10/25/eth-web-wallet_1/)
-* [以太坊钱包开发系列1 - 账号Keystore文件导入导出](https://learnblockchain.cn/2018/10/25/eth-web-wallet_2/)
-* [以太坊钱包开发系列2 - 展示钱包信息及发起签名交易](https://learnblockchain.cn/2018/10/26/eth-web-wallet_3/)
-* [以太坊钱包开发系列3 - 发送Token(代币）](https://learnblockchain.cn/2018/10/26/eth-web-wallet_4/)
-
-### 如可开发一款以太安卓钱包
-
-* [登链钱包（一款功能强大的以太坊钱包）完全开源](https://learnblockchain.cn/2019/03/07/wallet-annouce/)
-
-
-### 以太扩容
-
-* [深入理解Plasma（一）Plasma 框架](https://learnblockchain.cn/2018/10/20/plasma-framework/)
-* [深入理解Plasma（二）Plasma 细节](https://learnblockchain.cn/2018/10/24/plasma-in-detail/)
-* [深入理解Plasma（三）Plasma MVP](https://learnblockchain.cn/2018/11/03/plasma-mvp/)
-* [深入理解Plasma（四）Plasma Cash](https://learnblockchain.cn/2018/11/16/plasma-cash/)
-
 ### Solidity语言教程
-Solidity语言是开发智能合约最广泛的语言，本专栏应该是国内最深度介绍Solidity的文章了。
-当然还有一个选择是购买我的新书：[精通以太坊智能合约](http://www.upchain.pro/book.html)
-
+全面学习Solidity语言可以购买图书：[精通以太坊智能合约](http://www.upchain.pro/book.html)
 
 * [Solidity 教程系列1 - 类型介绍](https://learnblockchain.cn/2017/12/05/solidity1/)
 * [Solidity 教程系列2 - 地址类型介绍](https://learnblockchain.cn/2017/12/12/solidity2/)
@@ -111,9 +90,36 @@ Solidity语言是开发智能合约最广泛的语言，本专栏应该是国内
 * [智能合约最佳实践 之 Solidity 编码规范](https://learnblockchain.cn/2018/05/04/solidity-style-guide/)
 * [如何理解以太坊ABI - 应用程序二进制接口](https://learnblockchain.cn/2018/08/09/understand-abi/)
 
+
+### 以太扩容
+
+* [深入理解Plasma（一）Plasma 框架](https://learnblockchain.cn/2018/10/20/plasma-framework/)
+* [深入理解Plasma（二）Plasma 细节](https://learnblockchain.cn/2018/10/24/plasma-in-detail/)
+* [深入理解Plasma（三）Plasma MVP](https://learnblockchain.cn/2018/11/03/plasma-mvp/)
+* [深入理解Plasma（四）Plasma Cash](https://learnblockchain.cn/2018/11/16/plasma-cash/)
+
+
+### 钱包开发系列
+* [理解开发HD 钱包涉及的 BIP32、BIP44、BIP39](https://learnblockchain.cn/2018/09/28/hdwallet/)
+* [以太坊钱包开发系列1 - 创建钱包账号](https://learnblockchain.cn/2018/10/25/eth-web-wallet_1/)
+* [以太坊钱包开发系列1 - 账号Keystore文件导入导出](https://learnblockchain.cn/2018/10/25/eth-web-wallet_2/)
+* [以太坊钱包开发系列2 - 展示钱包信息及发起签名交易](https://learnblockchain.cn/2018/10/26/eth-web-wallet_3/)
+* [以太坊钱包开发系列3 - 发送Token(代币）](https://learnblockchain.cn/2018/10/26/eth-web-wallet_4/)
+
+### 如可开发一款以太安卓钱包
+
+* [登链钱包（一款功能强大的以太坊钱包）完全开源](https://learnblockchain.cn/2019/03/07/wallet-annouce/)
+* [如何开发一款以太坊（安卓）钱包系列1 - 通过助记词创建账号](https://learnblockchain.cn/2019/03/13/eth_wallet_dev_1/)
+* [如何开发一款以太坊（安卓）钱包系列2 - 导入账号及账号管理](https://learnblockchain.cn/2019/03/18/eth-wallet-dev-2/)
+
+
 ## 柚子EOS
 
 * [什么是EOS](https://learnblockchain.cn/2018/07/17/whatiseos/)
+
+## 跨链研究
+
+* [跨链技术的分析和思考](https://learnblockchain.cn/2019/03/23/blockchain_interoperability/)
 
 
 ## IPFS 
@@ -123,34 +129,34 @@ Solidity语言是开发智能合约最广泛的语言，本专栏应该是国内
 
 ## FileCoin
 
-* [1 filecoin概念](https://learnblockchain.cn//2019/02/18/filecoin-code-analysis-1)
-* [2 filecoin通用语言理解](https://learnblockchain.cn//2019/02/20/filecoin-code-analysis-2)
-* [3 filecoin开发网使用](https://learnblockchain.cn//2019/02/22/filecoin-code-analysis-3)
-* [4 filecoin源码顶层架构分析](https://learnblockchain.cn//2019/02/28/filecoin-code-analysis-4)
-* [5 filecoin源码协议层分析之心跳协议](https://learnblockchain.cn//2019/03/04/filecoin-code-analysis-5)
-* [6 filecoin源码协议层分析之hello握手协议](https://learnblockchain.cn//2019/03/04/filecoin-code-analysis-6)
-* [7 filecoin源码协议层分析之存储协议](https://learnblockchain.cn//2019/03/05/filecoin-code-analysis-7)
-* [8 filecoin源码协议层分析之检索协议](https://learnblockchain.cn//2019/03/05/filecoin-code-analysis-8)
-* [9 filecoin源码分析之支撑包分析(1)](https://learnblockchain.cn//2019/03/06/filecoin-code-analysis-9)
-* [10 filecoin源码分析之支撑包分析(2/2)](https://learnblockchain.cn//2019/03/07/filecoin-code-analysis-10)
-* [11 filecoin源码分析之内部接口层api包分析](https://learnblockchain.cn//2019/03/07/filecoin-code-analysis-11)
-* [12 filecoin源码分析之内部接口层plumbing＆porcelain接口](https://learnblockchain.cn//2019/03/07/filecoin-code-analysis-12)
-* [13 filecoin源码分析之服务层actor及vm](https://learnblockchain.cn//2019/03/08/filecoin-code-analysis-13)
-* [14 filecoin源码分析之服务层链同步、共识协议及挖矿](https://learnblockchain.cn//2019/03/09/filecoin-code-analysis-14)
-* [15 filecoin源码分析之节点运行逻辑](https://learnblockchain.cn//2019/03/10/filecoin-code-analysis-15)
+* [1 filecoin概念](https://learnblockchain.cn/2019/02/18/filecoin-code-analysis-1)
+* [2 filecoin通用语言理解](https://learnblockchain.cn/2019/02/20/filecoin-code-analysis-2)
+* [3 filecoin开发网使用](https://learnblockchain.cn/2019/02/22/filecoin-code-analysis-3)
+* [4 filecoin源码顶层架构分析](https://learnblockchain.cn/2019/02/28/filecoin-code-analysis-4)
+* [5 filecoin源码协议层分析之心跳协议](https://learnblockchain.cn/2019/03/04/filecoin-code-analysis-5)
+* [6 filecoin源码协议层分析之hello握手协议](https://learnblockchain.cn/2019/03/04/filecoin-code-analysis-6)
+* [7 filecoin源码协议层分析之存储协议](https://learnblockchain.cn/2019/03/05/filecoin-code-analysis-7)
+* [8 filecoin源码协议层分析之检索协议](https://learnblockchain.cn/2019/03/05/filecoin-code-analysis-8)
+* [9 filecoin源码分析之支撑包分析(1)](https://learnblockchain.cn/2019/03/06/filecoin-code-analysis-9)
+* [10 filecoin源码分析之支撑包分析(2)](https://learnblockchain.cn/2019/03/07/filecoin-code-analysis-10)
+* [11 filecoin源码分析之内部接口层api包分析](https://learnblockchain.cn/2019/03/07/filecoin-code-analysis-11)
+* [12 filecoin源码分析之内部接口层plumbing＆porcelain接口](https://learnblockchain.cn/2019/03/07/filecoin-code-analysis-12)
+* [13 filecoin源码分析之服务层actor及vm](https://learnblockchain.cn/2019/03/08/filecoin-code-analysis-13)
+* [14 filecoin源码分析之服务层链同步、共识协议及挖矿](https://learnblockchain.cn/2019/03/09/filecoin-code-analysis-14)
+* [15 filecoin源码分析之节点运行逻辑](https://learnblockchain.cn/2019/03/10/filecoin-code-analysis-15)
 
-## 更多精彩内容
+## 推荐
 
-想要系统学习以太坊智能合约，可以购买的图书：[精通以太坊智能合约](http://www.upchain.pro/book.html)
+**深入浅出只给大家推荐优质内容**，大家也需要理解很多优质内容是需要付费的，这样作者才可持续输出优质内容。
 
-首先强烈建议大家订阅[深入浅出区块链技术小专栏](https://xiaozhuanlan.com/blockchaincore)，目前仅需69元（时不时会进行涨价哦）， 部分源码和进阶内容仅在小专栏开放，订阅小专栏还有其他惊喜哦~。
+推荐大家订阅[深入浅出区块链技术小专栏](https://xiaozhuanlan.com/blockchaincore)，目前仅需69元（不定时涨价哦）， 部分源码和进阶内容仅在小专栏开放，订阅小专栏还有其他惊喜哦~。
 
-我们推出了高质量的视频课程，视频课程要比文章内容更丰富，也更容易理解。欢迎关注登链学院公众号: edupchain，同时招募课程体验师还有少量名额，[了解课程及体验师详情](https://learnblockchain.cn/course)
+通过视频课程学习区块链技术，推荐大家关注**登链学院**， 公众号: edupchain， 成为[课程体验师](https://learnblockchain.cn/course)还可以免费学习课程。
 
-如果在学习过程中遇到问题，欢迎来国内最专业的区块链问答及交流社区：知识星球[《深入浅出区块链》](https://t.xiaomiquan.com/RfAu7uj)，提问不限于博客文章内容。同时星友还有一个专属的微信技术交流群，目前微信群已经聚集了300多位区块链技术牛人和爱好者，形成为非常好的积极氛围。
+如果在学习过程中遇到问题，可以关注最专业的区块链问答社区：[《知识星球：深入浅出区块链》](https://t.xiaomiquan.com/RfAu7uj)，跟随星主一起学习，可以让你无论从广度还是深度上都提升一个层次。
+加星主微信：xlbxiong， 还进入专属的微信交流群，同时链接数千区块链开发者。
 
-想围观我朋友圈的，可以加我微信：xlbxiong （温馨提示：微信不提供技术问答服务，提问请到知识星球社区感谢理解）。
+如果你有开发钱包、DAPP、交易所、公链、人才招聘等需求，也欢迎勾搭Tiny熊（微信：xlbxiong）
 
-one more thing ：我们还承接智能合约、钱包、DAPP、公链开发等业余。
 
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。

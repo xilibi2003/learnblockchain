@@ -51,6 +51,7 @@ links:
   虞双齐的博客: https://yushuangqi.com
   HPB芯链: https://hpb.io/
   TopJohn’s Blog: https://www.xuanzhangjiong.top
+  Tiny熊的博客: http://tinyxiong.com
 
 
 project:
@@ -123,6 +124,7 @@ category_map:
   以太坊: ethereum
   比特币: bitcoin
   密码学: cryptography
+  跨链: cross_chain
   其他: other
   技术工坊: dev_meeting
 tag_map:
@@ -174,7 +176,6 @@ menu:
   about: /about/ || user
   tags: /tags/ || tags
   categories: /categories/ || th
-  archives: /archives/ || archive
   meeting: /categories/dev-meeting/ || th
   course: /course/ || spinner
   web3: https://web3.learnblockchain.cn || book
