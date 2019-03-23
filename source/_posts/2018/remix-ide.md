@@ -206,7 +206,7 @@ contract SimpleStorage {
 我们还为区块链技术爱好者提供了系统的区块链视频教程，觉得文章学习不过瘾的同学可以戳[入门视频教程](https://wiki.learnblockchain.cn/course/beginner.html)及[以太坊智能合约开发](https://wiki.learnblockchain.cn/course/solidity.html)。
 
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
-如果你学习区块链中遇到问题，欢迎加入知识星球[深入浅出区块链](https://t.xiaomiquan.com/RfAu7uj)问答社区，作为星友福利，星友可加入我创建的区块链技术群，群内已经聚集了300多位区块链技术牛人和爱好者。
+如果你学习区块链中遇到问题，欢迎加入知识星球[深入浅出区块链](https://learnblockchain.cn/images/zsxq.png)问答社区，作为星友福利，星友可加入我创建的区块链技术群，群内已经聚集了300多位区块链技术牛人和爱好者。
 
 
 <!---

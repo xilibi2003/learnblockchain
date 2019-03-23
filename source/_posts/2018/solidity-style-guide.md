@@ -513,4 +513,4 @@ function transfer() external {}
 [Solidity style-guide](https://solidity.readthedocs.io/en/v0.4.23/style-guide.html)
 
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
-如果你想和我有密切的联系，欢迎加入知识星球[深入浅出区块链](https://t.xiaomiquan.com/RfAu7uj)，我会在星球为大家解答技术问题，作为星友福利，星友可加入我创建的区块链技术群，群内已经聚集了200多位区块链技术牛人和爱好者。
+如果你想和我有密切的联系，欢迎加入知识星球[深入浅出区块链](https://learnblockchain.cn/images/zsxq.png)，我会在星球为大家解答技术问题，作为星友福利，星友可加入我创建的区块链技术群，群内已经聚集了200多位区块链技术牛人和爱好者。

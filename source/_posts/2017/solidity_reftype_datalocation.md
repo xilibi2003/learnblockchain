@@ -112,7 +112,7 @@ EVM是一个基于栈的语言，栈实际是在内存(memory)的一个数据结
 [Solidity官方文档-类型](https://solidity.readthedocs.io/en/develop/types.html#data-location)
 
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
-我的**[知识星球](https://t.xiaomiquan.com/RfAu7uj)**为各位解答区块链技术问题，欢迎加入讨论。
+我的**[知识星球](https://learnblockchain.cn/images/zsxq.png)**为各位解答区块链技术问题，欢迎加入讨论。
 
 
 <!---

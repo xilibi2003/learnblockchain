@@ -174,7 +174,7 @@ addressOfTokenUsedAsReward： 代币合约地址。
 
 如何创建代币发行代币，现在也录制了对应的**[视频教程:通过代币学以太坊智能合约开发](https://wiki.learnblockchain.cn/course/token.html)**，目前我们也在**招募体验师**，可以点击[链接](https://learnblockchain.cn/course)了解。
 
-如果你在学习中遇到问题，欢迎到我的**[知识星球](https://t.xiaomiquan.com/RfAu7uj)**提问，作为星球成员福利，成员可加入区块链技术付费交流群。
+如果你在学习中遇到问题，欢迎到我的**[知识星球](https://learnblockchain.cn/images/zsxq.png)**提问，作为星球成员福利，成员可加入区块链技术付费交流群。
 
 ## 参考文档
 * [Create a crowdsale](https://ethereum.org/crowdsale)

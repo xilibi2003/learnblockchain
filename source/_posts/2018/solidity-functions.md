@@ -89,6 +89,6 @@ contract C {
 ## 参考文献
 [官方文档-函数](https://solidity.readthedocs.io/en/develop/contracts.html#functions)
 
-欢迎来[知识星球](https://t.xiaomiquan.com/RfAu7uj)提问，星球内已经聚集了300多位区块链技术爱好者。
+欢迎来[知识星球](https://learnblockchain.cn/images/zsxq.png)提问，星球内已经聚集了300多位区块链技术爱好者。
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
 

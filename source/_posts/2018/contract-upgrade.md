@@ -125,6 +125,6 @@ contract DataContract {
 尽管合约可以通过本文的方式升级，但我们依然要谨慎升级，因为升级表示你可以重写逻辑，会降低用户对你的信任度。
 本文介绍升级方法更多的是一种思路，实际项目中可能会对应多个控制合约及数据合约。
 
-欢迎来我的**[知识星球](https://t.xiaomiquan.com/RfAu7uj)**讨论区块链技术。
+欢迎来我的**[知识星球](https://learnblockchain.cn/images/zsxq.png)**讨论区块链技术。
 
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。

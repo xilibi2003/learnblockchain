@@ -86,7 +86,7 @@ contract Hello {
 对于想切入到去中心化应用开发的同学，对区块链运行的原理了解肯定会是加分项，尤其是各类共识机制（[POW](https://learnblockchain.cn/2017/11/04/bitcoin-pow/)，POS，DPOS等）的理解，P2P网络的理解，以及各类加密和Hash算法的运用。有一些同学想做区块链底层开发，对区块链运行的原理则是必须项。
 
 
-欢迎来[知识星球](https://t.xiaomiquan.com/RfAu7uj)提问，星球内已经聚集了300多位区块链技术爱好者。
+欢迎来[知识星球](https://learnblockchain.cn/images/zsxq.png)提问，星球内已经聚集了300多位区块链技术爱好者。
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
 
 

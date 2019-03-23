@@ -194,7 +194,7 @@ implementation 'org.bitcoinj:bitcoinj-core:0.14.7'
 
 我创建了一个专门讨论钱包开发的微信群，加微信：xlbxiong 备注：钱包。
 
-加入[知识星球](https://t.xiaomiquan.com/RfAu7uj)，和一群优秀的区块链从业者一起学习。
+加入最专业的[区块链问答社区](https://learnblockchain.cn/images/zsxq.png)，和一群优秀的区块链从业者一起学习。
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
 
 

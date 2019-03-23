@@ -124,4 +124,4 @@ if (web3.isAddress(fromAccount) &&
 想好好系统学习以太坊DApp开发，这门视频课程[以太坊DAPP开发实战](https://wiki.learnblockchain.cn/course/dapp.html)不容错过。
 
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
-深入浅出区块链[知识星球](https://t.xiaomiquan.com/RfAu7uj)，最专业的区块链问题技术社区，欢迎加入，作为星友福利，星友还可以加入我创建优质区块链技术群，群内聚集了300多位区块链技术大牛和爱好者。
+深入浅出区块链[知识星球](https://learnblockchain.cn/images/zsxq.png)，最专业的区块链问题技术社区，欢迎加入，作为星友福利，星友还可以加入我创建优质区块链技术群，群内聚集了300多位区块链技术大牛和爱好者。

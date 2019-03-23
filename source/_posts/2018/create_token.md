@@ -186,7 +186,7 @@ contract TokenERC20 {
 代币交易是不是很简单，只要明白了交易流程，使用其他的钱包也是一样的道理。
 
 如何创建代币发行代币，现在也录制了对应的**[视频教程:通过代币学以太坊智能合约开发](https://wiki.learnblockchain.cn/course/token.html)**，现在我们在[招募体验师](https://learnblockchain.cn/course)可以点击链接了解。
-如果你在创建代币的过程中遇到问题，我的**[知识星球](https://t.xiaomiquan.com/RfAu7uj)**可为大家解答问题，作为星球成员福利，成员还可加入区块链技术付费交流群。
+如果你在创建代币的过程中遇到问题，我的**[知识星球](https://learnblockchain.cn/images/zsxq.png)**可为大家解答问题，作为星球成员福利，成员还可加入区块链技术付费交流群。
 
 ## 参考文档
 

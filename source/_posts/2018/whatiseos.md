@@ -84,5 +84,5 @@ BitShares在2014年上线时，是当时的明星项目，也由于bug太多、�
 我们为区块链爱者这提供了系统的区块链视频教程，觉得文章学习不过瘾的同学可以戳[区块链视频教程](https://learnblockchain.cn/course/)。
 
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
-我的**[知识星球](https://t.xiaomiquan.com/RfAu7uj)**为各位解答区块链技术问题，欢迎加入讨论。
+我的**[知识星球](https://learnblockchain.cn/images/zsxq.png)**为各位解答区块链技术问题，欢迎加入讨论。
 

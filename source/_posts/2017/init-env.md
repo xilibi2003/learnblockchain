@@ -201,5 +201,5 @@ Contract mined! address: 0x79544078dcd9d560ec3f6eff0af42a9fc84c7d19 transactionH
 如果你想学习以太坊DApp开发，这门视频课程[以太坊DAPP开发实战](https://wiki.learnblockchain.cn/course/dapp.html)是你不错的选择。
 
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
-我的**[知识星球](https://t.xiaomiquan.com/RfAu7uj)**为各位解答区块链技术问题，欢迎加入讨论。
+我的**[知识星球](https://learnblockchain.cn/images/zsxq.png)**为各位解答区块链技术问题，欢迎加入讨论。
 

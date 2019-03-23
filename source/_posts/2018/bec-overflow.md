@@ -62,7 +62,7 @@ function batchTransfer(address[] _receivers, uint256 _value) public whenNotPause
 大家可请前往我的[小专栏](https://xiaozhuanlan.com/blockchaincore)阅读。
 
 
-知识星球**[深入浅出区块链](https://t.xiaomiquan.com/RfAu7uj)**做好的区块链技术问答社区，欢迎来提问，作为星球成员福利，成员可加入区块链技术付费交流群。
+知识星球**[深入浅出区块链](https://learnblockchain.cn/images/zsxq.png)**做好的区块链技术问答社区，欢迎来提问，作为星球成员福利，成员可加入区块链技术付费交流群。
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
 
 <!--

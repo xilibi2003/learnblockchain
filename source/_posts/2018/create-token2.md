@@ -179,7 +179,7 @@ finney 是货币单位 1 finney = 0.001eth
 
 如何创建代币发行代币，现在也录制了对应的**[视频教程:通过代币学以太坊智能合约开发](https://wiki.learnblockchain.cn/course/token.html)**，现在我们在**招募体验师**，可以点击[链接](https://learnblockchain.cn/course)了解详情。
 
-如果你在创建代币的过程中遇到问题，欢迎到我的**[知识星球](https://t.xiaomiquan.com/RfAu7uj)**提问，作为星球成员福利，成员可加入区块链技术付费交流群。
+如果你在创建代币的过程中遇到问题，欢迎到我的**[知识星球](https://learnblockchain.cn/images/zsxq.png)**提问，作为星球成员福利，成员可加入区块链技术付费交流群。
 
 ## 参考文档
 * [Create your own crypto-currency with ethereum](https://ethereum.org/token)

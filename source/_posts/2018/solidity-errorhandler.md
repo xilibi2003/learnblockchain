@@ -111,7 +111,7 @@ contract Sharer {
 ## 参考文献
 * [Solidity 错误处理](https://solidity.readthedocs.io/en/v0.4.21/control-structures.html#error-handling-assert-require-revert-and-exceptions)
 
-欢迎来我的知识星球[**深入浅出区块链**](https://t.xiaomiquan.com/RfAu7uj)讨论区块链技术，同时我也会为大家提供区块链技术解答，作为星友福利，星友可加入区块链技术付费交流群。
+欢迎来我的知识星球[**深入浅出区块链**](https://learnblockchain.cn/images/zsxq.png)讨论区块链技术，同时我也会为大家提供区块链技术解答，作为星友福利，星友可加入区块链技术付费交流群。
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
 
 

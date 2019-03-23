@@ -80,4 +80,4 @@ Hash(上一个Hash值、序号1、记账时间、交易记录) = 456635BCD
 我们还为区块链技术爱好者提供了系统的区块链视频教程，觉得文章学习不过瘾的同学可以戳[入门视频教程](https://wiki.learnblockchain.cn/course/beginner.html)及[以太坊智能合约开发](https://wiki.learnblockchain.cn/course/solidity.html)。
 
 [深入浅出区块链](https://learnblockchain.cn/)系统学习区块链，打造最好的区块链技术博客。
-我的**[知识星球](https://t.xiaomiquan.com/RfAu7uj)**为各位解答区块链技术问题，欢迎加入讨论。
+我的**[知识星球](https://learnblockchain.cn/images/zsxq.png)**为各位解答区块链技术问题，欢迎加入讨论。
