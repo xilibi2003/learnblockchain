@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>https://learnblockchain.cn/2018/01/11/guide/</loc>
+    <lastmod>2019-03-23T05:22:31.305Z</lastmod>
+    <data>
+        <display>
+        <title>区块链技术学习指引</title>
+        <pubTime>2018-01-11T07:03:36.000Z</pubTime>
+        
+        <tag>如何学习</tag>
+         
+        <tag>目录</tag>
+         
+         
+           
+             
+              <breadCrumb title="目录" url="https://learnblockchain.cn/categories/%E7%9B%AE%E5%BD%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://learnblockchain.cn/2019/03/23/blockchain_interoperability/</loc>
     <lastmod>2019-03-23T04:33:18.755Z</lastmod>
     <data>
@@ -520,28 +542,6 @@
            
              
               <breadCrumb title="FileCoin" url="https://learnblockchain.cn/categories/FileCoin/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://learnblockchain.cn/2018/01/11/guide/</loc>
-    <lastmod>2019-03-12T07:12:27.966Z</lastmod>
-    <data>
-        <display>
-        <title>区块链技术学习指引</title>
-        <pubTime>2018-01-11T07:03:36.000Z</pubTime>
-        
-        <tag>如何学习</tag>
-         
-        <tag>目录</tag>
-         
-         
-           
-             
-              <breadCrumb title="目录" url="https://learnblockchain.cn/categories/%E7%9B%AE%E5%BD%95/"/>
           
         </display>
     </data>
@@ -2098,13 +2098,13 @@
         <title>比特币所有权及隐私问题-非对称加密应用</title>
         <pubTime>2017-11-02T09:19:29.000Z</pubTime>
         
+        <tag>非对称加密</tag>
+         
         <tag>比特币</tag>
          
         <tag>所有权问题</tag>
          
         <tag>隐私问题</tag>
-         
-        <tag>非对称加密</tag>
          
          
            

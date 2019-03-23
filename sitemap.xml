@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://learnblockchain.cn/2018/01/11/guide/</loc>
+    
+    <lastmod>2019-03-23T05:22:31.305Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://learnblockchain.cn/2019/03/23/blockchain_interoperability/</loc>
     
     <lastmod>2019-03-23T04:33:18.755Z</lastmod>
@@ -180,13 +187,6 @@
     <loc>https://learnblockchain.cn/2019/02/18/filecoin-code-analysis-1/</loc>
     
     <lastmod>2019-03-12T07:25:13.813Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://learnblockchain.cn/2018/01/11/guide/</loc>
-    
-    <lastmod>2019-03-12T07:12:27.966Z</lastmod>
     
   </url>
   
