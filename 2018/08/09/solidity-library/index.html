@@ -93,7 +93,7 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="这是Solidity教程系列文章第12篇介绍库的使用：库与合约的不同，使用库的正姿势。 Solidity 系列完整的文章列表请查看分类-Solidity。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-11T08:38:47.375Z">
+<meta property="og:updated_time" content="2019-03-23T14:53:06.597Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="智能合约语言 Solidity 教程系列12 -  库的使用">
 <meta name="twitter:description" content="这是Solidity教程系列文章第12篇介绍库的使用：库与合约的不同，使用库的正姿势。 Solidity 系列完整的文章列表请查看分类-Solidity。">
@@ -399,8 +399,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-11T16:38:47+08:00">
-                2019-03-11
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-23T22:53:06+08:00">
+                2019-03-23
               </time>
             
           </span>
@@ -505,7 +505,7 @@
 <p>同样可以使用Using for的方式来对基本类型（elementary types）进行扩展： </p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.16</span>;</span><br><span class="line"></span><br><span class="line">library Search &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">indexOf</span>(<span class="params">uint[] storage self, uint value</span>)</span></span><br><span class="line"><span class="function">        <span class="title">public</span></span></span><br><span class="line"><span class="function">        <span class="title">view</span></span></span><br><span class="line"><span class="function">        <span class="title">returns</span> (<span class="params">uint</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (uint i = <span class="number">0</span>; i &lt; self.length; i++)</span><br><span class="line">            <span class="keyword">if</span> (self[i] == value) <span class="keyword">return</span> i;</span><br><span class="line">        <span class="keyword">return</span> uint(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">contract C &#123;</span><br><span class="line">    using Search <span class="keyword">for</span> uint[];</span><br><span class="line">    uint[] data;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">append</span>(<span class="params">uint value</span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        data.push(value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">replace</span>(<span class="params">uint _old, uint _new</span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 进行库调用</span></span><br><span class="line">        uint index = data.indexOf(_old);</span><br><span class="line">        <span class="keyword">if</span> (index == uint(<span class="number">-1</span>))</span><br><span class="line">            data.push(_new);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            data[index] = _new;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>需要注意的是所有库调用都实际上是EVM函数调用。这意味着，如果传的是memory类型的，或者是值类型，那么进行一次拷贝，即使是self变量，解决方法是使用存储(storage)类型的引用来避免拷贝内容。</p>
-<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。<br>如果想与我有更密切的交流可以选择加入我的<a href="https://t.xiaomiquan.com/RfAu7uj" target="_blank" rel="noopener">知识星球</a>（星球成员可加入微信技术交流群）</p>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。<br>如果想与我有更密切的交流可以选择加入我的<a href="https://learnblockchain.cn/images/zsxq.png">知识星球</a>（星球成员可加入微信技术交流群）</p>
 
       
     </div>
@@ -819,19 +819,19 @@
               <ul class="links-of-blogroll-list">
                 
                   <li class="links-of-blogroll-item">
+                    <a href="https://learnblockchain.cn/images/zsxq.png" title="深入浅出-<b>问答社区<b>" target="_blank">深入浅出-<b>问答社区<b></a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="深入浅出-<b>小专栏<b>" target="_blank">深入浅出-<b>小专栏<b></a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
                     <a href="https://hiblock.one/" title="HiBlock区块链社区" target="_blank">HiBlock区块链社区</a>
                   </li>
                 
                   <li class="links-of-blogroll-item">
                     <a href="http://edu.upchain.pro/book.html" title="图书-精通智能合约开发" target="_blank">图书-精通智能合约开发</a>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="https://xiaozhuanlan.com/blockchaincore" title="区块链技术专栏" target="_blank">区块链技术专栏</a>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="https://t.xiaomiquan.com/RfAu7uj" title="技术交流-知识星球" target="_blank">技术交流-知识星球</a>
                   </li>
                 
                   <li class="links-of-blogroll-item">
