@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://learnblockchain.cn/friends/index.html</loc>
+    
+    <lastmod>2019-03-24T08:15:32.437Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://learnblockchain.cn/2019/03/13/eth_wallet_dev_1/</loc>
     
     <lastmod>2019-03-23T14:54:48.104Z</lastmod>
