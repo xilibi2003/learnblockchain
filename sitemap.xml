@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://learnblockchain.cn/about/index.html</loc>
+    
+    <lastmod>2019-03-25T06:16:05.425Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://learnblockchain.cn/friends/index.html</loc>
     
     <lastmod>2019-03-24T08:27:14.717Z</lastmod>
@@ -397,13 +404,6 @@
     <loc>https://learnblockchain.cn/2019/03/23/blockchain_interoperability/</loc>
     
     <lastmod>2019-03-23T04:33:18.755Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://learnblockchain.cn/about/index.html</loc>
-    
-    <lastmod>2019-03-22T14:48:25.294Z</lastmod>
     
   </url>
   

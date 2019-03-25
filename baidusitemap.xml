@@ -4,6 +4,7 @@
 
     
     
+    
   <url>
     <loc>https://learnblockchain.cn/2019/03/13/eth_wallet_dev_1/</loc>
     <lastmod>2019-03-23T14:54:48.104Z</lastmod>
@@ -964,6 +965,30 @@
 
     
   <url>
+    <loc>https://learnblockchain.cn/2017/10/27/build_blockchain_by_python/</loc>
+    <lastmod>2019-03-23T14:53:06.568Z</lastmod>
+    <data>
+        <display>
+        <title>用Python从零开始创建区块链</title>
+        <pubTime>2017-10-27T02:15:28.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>创建区块链</tag>
+         
+        <tag>翻译</tag>
+         
+         
+           
+             
+              <breadCrumb title="其他" url="https://learnblockchain.cn/categories/other/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://learnblockchain.cn/2017/11/02/bitcoin-own/</loc>
     <lastmod>2019-03-23T14:53:06.568Z</lastmod>
     <data>
@@ -983,30 +1008,6 @@
            
              
               <breadCrumb title="比特币" url="https://learnblockchain.cn/categories/bitcoin/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://learnblockchain.cn/2017/10/27/build_blockchain_by_python/</loc>
-    <lastmod>2019-03-23T14:53:06.568Z</lastmod>
-    <data>
-        <display>
-        <title>用Python从零开始创建区块链</title>
-        <pubTime>2017-10-27T02:15:28.000Z</pubTime>
-        
-        <tag>python</tag>
-         
-        <tag>创建区块链</tag>
-         
-        <tag>翻译</tag>
-         
-         
-           
-             
-              <breadCrumb title="其他" url="https://learnblockchain.cn/categories/other/"/>
           
         </display>
     </data>
@@ -1338,7 +1339,6 @@
     </data>
     </url>
 
-    
     
   <url>
     <loc>https://learnblockchain.cn/2019/03/22/easy_raft/</loc>
