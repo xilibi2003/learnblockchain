@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="FileCoin," />
+  <meta name="keywords" content="以太坊,钱包," />
 
 
 
@@ -85,23 +85,21 @@
 
 
 
-<meta name="description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第二章filecoin通用语言理解。">
-<meta name="keywords" content="FileCoin">
+<meta name="description" content="这是如何开发以太坊（安卓）钱包系列第3篇， 钱包账号资产信息展示，展示信息主要包括账号地址、eth余额及该账号所拥有的Token及余额。">
+<meta name="keywords" content="以太坊,钱包">
 <meta property="og:type" content="article">
-<meta property="og:title" content="filecoin技术架构分析二：filecoin通用语言理解">
-<meta property="og:url" content="https://learnblockchain.cn/2019/02/20/filecoin-code-analysis-2/index.html">
+<meta property="og:title" content="如何开发一款以太坊（安卓）钱包系列3 - 钱包账号资产信息展示">
+<meta property="og:url" content="https://learnblockchain.cn/2019/03/24/eth_wallet_dev_3/index.html">
 <meta property="og:site_name" content="深入浅出区块链">
-<meta property="og:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第二章filecoin通用语言理解。">
+<meta property="og:description" content="这是如何开发以太坊（安卓）钱包系列第3篇， 钱包账号资产信息展示，展示信息主要包括账号地址、eth余额及该账号所拥有的Token及余额。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://learnblockchain.cn/images/post.png">
-<meta property="og:image" content="https://learnblockchain.cn/images/sle.png">
-<meta property="og:image" content="https://learnblockchain.cn/images/sle2.png">
-<meta property="og:image" content="https://learnblockchain.cn/images/filecoin-1.png">
-<meta property="og:updated_time" content="2019-03-12T07:25:20.234Z">
+<meta property="og:image" content="https://learnblockchain.cn/images/15532408840119.jpg">
+<meta property="og:image" content="https://learnblockchain.cn/images/15532473043633.jpg">
+<meta property="og:updated_time" content="2019-03-26T13:34:27.926Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="filecoin技术架构分析二：filecoin通用语言理解">
-<meta name="twitter:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第二章filecoin通用语言理解。">
-<meta name="twitter:image" content="https://learnblockchain.cn/images/post.png">
+<meta name="twitter:title" content="如何开发一款以太坊（安卓）钱包系列3 - 钱包账号资产信息展示">
+<meta name="twitter:description" content="这是如何开发以太坊（安卓）钱包系列第3篇， 钱包账号资产信息展示，展示信息主要包括账号地址、eth余额及该账号所拥有的Token及余额。">
+<meta name="twitter:image" content="https://learnblockchain.cn/images/15532408840119.jpg">
 
 
 
@@ -131,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="https://learnblockchain.cn/2019/02/20/filecoin-code-analysis-2/"/>
+  <link rel="canonical" href="https://learnblockchain.cn/2019/03/24/eth_wallet_dev_3/"/>
 
 
 
 
 
-  <title>filecoin技术架构分析二：filecoin通用语言理解 | 深入浅出区块链</title>
+  <title>如何开发一款以太坊（安卓）钱包系列3 - 钱包账号资产信息展示 | 深入浅出区块链</title>
   
 
 
@@ -359,7 +357,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2019/02/20/filecoin-code-analysis-2/">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2019/03/24/eth_wallet_dev_3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Tiny熊">
@@ -376,7 +374,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">filecoin技术架构分析二：filecoin通用语言理解</h2>
+          <h2 class="post-title" itemprop="name headline">如何开发一款以太坊（安卓）钱包系列3 - 钱包账号资产信息展示</h2>
         
 
         <div class="post-meta">
@@ -388,8 +386,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-20T16:35:33+08:00">
-                2019-02-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-24T21:59:44+08:00">
+                2019-03-24
               </time>
             
 
@@ -404,8 +402,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-12T15:25:20+08:00">
-                2019-03-12
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-26T21:34:27+08:00">
+                2019-03-26
               </time>
             
           </span>
@@ -423,8 +421,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/FileCoin/" itemprop="url" rel="index">
-                    <span itemprop="name">FileCoin</span>
+                  <a href="/categories/ethereum/" itemprop="url" rel="index">
+                    <span itemprop="name">以太坊</span>
                   </a>
                 </span>
 
@@ -460,272 +458,61 @@
       
 
       
-        <p>我是先河系统CTO杨尉，欢迎大加关注的的Github: <a href="https://github.com/waynewyang" target="_blank" rel="noopener">waynewyang</a>，本文是<a href="https://learnblockchain.cn/2019/03/11/filecoin-code-analysis-0/">filecoin技术架构分析系列文章</a>第二章filecoin通用语言理解。</p>
+        <p>这是如何开发以太坊（安卓）钱包系列第3篇， 钱包账号资产信息展示，展示信息主要包括账号地址、eth余额及该账号所拥有的Token及余额。</p>
 <a id="more"></a>
-<h2 id="为什么要把filecoin通用语言单独列为一讲"><a href="#为什么要把filecoin通用语言单独列为一讲" class="headerlink" title="为什么要把filecoin通用语言单独列为一讲"></a>为什么要把filecoin通用语言单独列为一讲<a name="为什么要把filecoin通用语言单独列为一讲"></a></h2><p>笔者认为一位优秀的软件从业人员，必须具备两种必备能力</p>
-<pre><code>- 架构设计能力
-- 架构剖析能力
-</code></pre><blockquote>
-<p>这两者是相辅相成的，架构设计师所设计之架构不可能超过自己的认知范畴，故架构设计师必须有效高效地拓展自己的技术认知视图，以适应当代软件架构高速发展的现实。而拓展的途径，一方面就是相关理论体系的快速学习跟进；另一方面，就是实战，对有显著价值的优秀软件项目进行架构剖析。有理论、有实战方是王道。理解具体架构的通用语言就是分析他人架构设计思维的一条捷径。</p>
-</blockquote>
-<ul>
-<li>理解具体技术架构的通用语言是分析架构的一条捷径<ul>
-<li>通用语言是架构设计人员为实现某个具体技术架构，所高度抽象出来的名词或者称谓，通过理解通用语言，可以快速理解架构设计人员的思维和设计目的。</li>
-<li>与读书方法类似（薄读-&gt;厚读&gt;再薄读），理解通用语言就是第一次的薄读过程，非常重要。</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>对业务的理解是非常有必要的，所以在<a href="/2019/02/18/filecoin-code-analysis-1">第一章</a>中，笔者铺垫了filecoin的一些基本概念，任何架构的设计不能脱离业务而行，业务驱动开发仍是非常实用的架构模式；filecoin 技术架构从业务来划分，可划分为两个大的范畴。</p>
-<ul>
-<li>分布式存储解决方案<ul>
-<li>存储矿工</li>
-<li>检索矿工</li>
-<li>存储客户端</li>
-<li>检索客户端</li>
-</ul>
-</li>
-<li>区块链项目<ul>
-<li>filecoin公链</li>
-<li>filecoin actors 智能合约 </li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>filecoin核心通用业务组件</p>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">组件名称</th>
-<th style="text-align:center">目的</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">DSN</td>
-<td style="text-align:center">保障数据安全、包括故障容错、数据完整性、数据可恢复等</td>
-</tr>
-<tr>
-<td style="text-align:center">新型存储证明</td>
-<td style="text-align:center">证明矿工按照协议规范存储了客户指定的数据，数据有效性</td>
-</tr>
-<tr>
-<td style="text-align:center">可验证市场</td>
-<td style="text-align:center">对矿工与客户组成的交易市场进行了建模，保证交易的有效性</td>
-</tr>
-<tr>
-<td style="text-align:center">有效工作量证明</td>
-<td style="text-align:center">出块的共识机制，很重要，做到激励兼容</td>
-</tr>
-</tbody>
-</table>
-<p><strong>下面各节将会对filecoin技术架构中的核心通用语言进行解释。</strong></p>
-<h2 id="存储证明"><a href="#存储证明" class="headerlink" title="存储证明"></a>存储证明<a name="存储证明"></a></h2><p>Proof-of-Storage包含复制证明(PoR)和时空证明(PoSt)，其作用主要有两点：</p>
-<ul>
-<li><p>证明矿工做了有效存储</p>
-</li>
-<li><p>竞争区块打包出块，获取区块奖励</p>
-</li>
-</ul>
-<h3 id="2-2-1-为什么使用存储证明"><a href="#2-2-1-为什么使用存储证明" class="headerlink" title="2.2.1 为什么使用存储证明"></a>2.2.1 为什么使用存储证明<a name="为什么使用存储证明"></a></h3><ul>
-<li><p>相对于PoW(Proof-of-Work)或者PoC</p>
-<ul>
-<li>PoW耗能严重；PoC以空间换时间，同样存在耗能严重问题</li>
-<li>而filecoin网络的耗能必须远低于类似比特币的PoW，参见<a href="/2019/02/18/filecoin-code-analysis-1">第一讲</a>filecoin的对标对象，filecoin必须实现以更低的成对去应对商业竞争，同时提供相同级别的安全性，以及文件存储的效用</li>
-<li>存储证明需要做要与实体经济挂钩，减少无谓浪费</li>
-</ul>
-</li>
-<li><p>相对于PoS(Proof-of-Stake)或者PoC</p>
-<ul>
-<li>Proof-of-Storage在定向领域（分布式存储）以更简单方式，协调激励，并驱使矿工以有竞争力的价格提供真实的新存储，它促使矿工积极保证filecoin网络的效用</li>
-<li>当然Proof-of-Stake是区块链领域的热点研究问题</li>
-</ul>
-</li>
-<li><p>Proof-of-Storage阻止网络攻击</p>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">攻击类型</th>
-<th style="text-align:center">说明</th>
-<th>阻止攻击原理</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">女巫攻击Sybil attack</td>
-<td style="text-align:center">作恶节点创造多个女巫身份，谎称存储了多个副本</td>
-<td>每个节点的副本都是有签名的，想通过复制证明，就相当于真实做了有效存储</td>
-</tr>
-<tr>
-<td style="text-align:center">外包攻击outsourcing attacks</td>
-<td style="text-align:center">作恶节点快速从其他节点获取内容，谎称他们存储了比他们实际存储更多的内容</td>
-<td>针对外包攻击，从其他节点获取的整个过程，满足不了证明人随机挑战的要求，依然需要重新生成副本（重新seal需要时间），从而阻止外包攻击</td>
-</tr>
-<tr>
-<td style="text-align:center">生成攻击generation attacks</td>
-<td style="text-align:center">作恶节点宣称将要存储超过其实际容量的内容但并未存储内容，以此增加出块的概率</td>
-<td>宣称无用，存储证明一定要确认密封动作并能应对随机挑战才能OK，如果重新密封就来不及证明，每次挑战是有时间要求的</td>
-</tr>
-</tbody>
-</table>
-<h3 id="复制证明"><a href="#复制证明" class="headerlink" title="复制证明"></a>复制证明<a name="复制证明"></a></h3><h4 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h4><ul>
-<li>复制证明本质上可以理解为一种零知识证明，既然是零知识证明，我们在后面需要理解filecoin复制证明的题目和答案</li>
-</ul>
+<h2 id="预备知识-MVVM"><a href="#预备知识-MVVM" class="headerlink" title="预备知识 MVVM"></a>预备知识 MVVM</h2><p>本文会涉及和UI界面的交互，提前理解下界面和数据如何交互是非常有必要的，如果你已经很熟悉MVVM，可跳过这一小节。</p>
+<p>最早写Android的时候，数据和界面经常耦合在一起，一个Activity文件总是特别大，每当产品界面改版就非常痛苦，吐槽下，很多产品经理都喜欢对界面改来改去。</p>
+<p>后来Google 推荐多个架构模式： MPV、 MVVM模式来解决数据和UI耦合的问题，<a href="https://github.com/xilibi2003/Upchain-wallet" target="_blank" rel="noopener">登链钱包代码</a>，使用的就是MVVM模式，所以对它做一个简单介绍，下面是MVVM的视图和数据的交互图：</p>
+<p><img src="/images/15532408840119.jpg" alt=""></p>
+<p>View 通常对应于Activity/Fragment/自定义View<br>Model：则是和数据相关的模块。</p>
+<p>View 与 Model 不直接发生联系， 而是通过ViewModel负责接收View层的事件以及获取并处理数据，ViewModel层的数据变化也会通知给View层进行相应的UI的更新，从而实现业务逻辑和Ui的隔离。</p>
+<p>使用MVVM模式最大的优点就是<strong>解耦</strong>， 因为数据处理逻辑是独立于View, 在UI更改时，ViewModel 不用做太多改动。</p>
+<p>我们使用了Google在I/O大会推出的一套遵循MVVM开发模式的<strong>LiveData和ViewModel</strong>组件架构。</p>
+<h3 id="ViewModel-和-LiveData"><a href="#ViewModel-和-LiveData" class="headerlink" title="ViewModel 和 LiveData"></a>ViewModel 和 LiveData</h3><p>ViewModel 会关注UI生命周期来存储和管理数据，在Activity发生变化（锁屏开屏、旋转）时，ViewModel 会自动保留之前的数据并给新的Activity或Fragment使用，当界面被系统销毁时，ViewModel也会进行资源清理，避免内存泄漏。</p>
+<p>ViewModel 还可以用于不同界面间数据共享。</p>
+<p>LiveData是一个可观察的数据持有者类。观察者可以方便我们以<strong>异步的方式获取数据</strong>，同时LiveData也是有生命周期感知的。如果其生命周期处于STARTED或RESUMED状态。LiveData会将观察者视为活动状态，并通知其数据的变化。LiveData未注册的观察对象以及非活动观察者是不会收到有关更新的通知。</p>
+<p>了解更多，可自行以关键字： Lifecycle、ViewModel、LiveData 进行搜索。</p>
+<h2 id="账号信息展示"><a href="#账号信息展示" class="headerlink" title="账号信息展示"></a>账号信息展示</h2><p>展示信息主要包括账号地址、eth余额及该账号所拥有的Token及余额， 其界面效果如下:</p>
+<p><img src="/images/15532473043633.jpg" alt="上图"></p>
 <blockquote>
-<p>zk-SNARK zero knowledge Succinct Non-interactive ARgument of Knowledge<br>zero knowledge：零知识，即在证明的过程中不透露任何内情<br>succinct：简洁的，主要是指验证过程不涉及大量数据传输以及验证算法简单<br>non-interactive：无交互。</p>
+<p>这个界面应的是<a href="https://github.com/xilibi2003/Upchain-wallet" target="_blank" rel="noopener">登链钱包</a>的<code>PropertyFragment</code>，上图的UPT 是我自己发行的Token，所以没有显示价格</p>
 </blockquote>
-<ul>
-<li>生成证明的方法在filecoin架构中称之为seal密封</li>
-</ul>
+<p>现在我们来<strong>思考</strong>一下， 怎么来展现上面的数据， 别着急往下看， 可以先想想。</p>
+<p>先对问题做一个拆分，把数据拆分为4个部分：</p>
+<ol>
+<li>显示当前选中的账号</li>
+<li>显示当前账号 ETH 余额</li>
+<li>显示当前账号下 Token 数量</li>
+<li>显示对应的法币金额。</li>
+</ol>
+<p>为了避免 UI 与上面4个数据的耦合，代码使用了一个<code>TokensViewModel</code>， 获取到的数据用 LiveData做了一个Wrap，以便UI可以订阅数据，TokensViewModel类像下面，<a href="https://github.com/xilibi2003/Upchain-wallet" target="_blank" rel="noopener">代码</a>有删减：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TokensViewModel</span> <span class="keyword">extends</span> <span class="title">ViewModel</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> MutableLiveData&lt;ETHWallet&gt; defaultWallet;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> MutableLiveData&lt;NetworkInfo&gt; defaultNetwork;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> MutableLiveData&lt;Token[]&gt; tokens;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> MutableLiveData&lt;Ticker&gt; prices;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>MutableLiveData</code>  是前面提到的 LiveData的子类，在UI界面中就可以对数据进行订阅，下面我们逐一拆解下每个数据。</p>
+<h3 id="显示当前账号"><a href="#显示当前账号" class="headerlink" title="显示当前账号"></a>显示当前账号</h3><p>可以分为两个步骤： </p>
+<ol>
+<li>从数据库中读取账号；</li>
+<li>界面显示账号</li>
+</ol>
+<p>TokensViewModel中定义了一个<code>MutableLiveData&lt;ETHWallet&gt; defaultWallet</code> ，从数据库中读取账号会保存在defaultWallet中，然后UI对 defaultWallet 进行观察显示。</p>
 <blockquote>
-<p>密封过程是需要时间的，Seal过程串行加密的过程，无法并行操作，seal密封过程是有意设计慢的，主要目的是为了防攻击。</p>
+<p>注解: <a href="https://github.com/xilibi2003/Upchain-wallet" target="_blank" rel="noopener">登链钱包</a> 里大量使用的这个方式，通过一个LiveData 做数据桥接。</p>
 </blockquote>
-<h4 id="filecoin复制证明的题目和答案"><a href="#filecoin复制证明的题目和答案" class="headerlink" title="filecoin复制证明的题目和答案"></a>filecoin复制证明的题目和答案</h4><ul>
-<li><p>公开的信息</p>
-<ul>
-<li>矿工的节点公钥、密封公钥、存储公钥、原始Data哈希、该矿工存储的副本根哈希</li>
-</ul>
-</li>
-<li><p>隐含因素理解：</p>
-<ul>
-<li>特有节点的副本哈希是由哪些哈希组成（DAG），任意挑战者或者攻击者是不知情的</li>
-<li>挑战随机参数，通过CRH(防碰撞的哈希散列Collision-resistant hashing)生成哈希之后传递给证明者，作用是确定特定的叶子节点的哈希，比如让证明者自行计算离H(c))最近的叶子节点哈希。</li>
-</ul>
-</li>
-<li><p>复制证明的题目与答案</p>
-<ul>
-<li>挑战参数：副本哈希rt，挑战随机参数c -&gt; H(c)</li>
-<li>证明者输入（题目）：<ul>
-<li>H(c)（每一次挑战都会变）</li>
-<li>隐含信息比喻：该叶子节点是与H(c)最近的节点</li>
-</ul>
-</li>
-<li>证明者输出（答案）：<ul>
-<li>H(c)对应的叶子节点 ——&gt; rt的路径（攻击者是很难反推的）</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="时空证明"><a href="#时空证明" class="headerlink" title="时空证明"></a>时空证明<a name="时空证明"></a></h3><ul>
-<li>时空证明可以理解为矿工持续性地生成复制证明<ul>
-<li>挑战者输入一个随机参数c，后面的随机参数由证明者基于上一个的挑战答案去生成。(不用与挑战者持续交互)</li>
-<li>下图中变量i会轮询生成新的时间变量产生随机挑战。</li>
-</ul>
-</li>
-</ul>
-<p><img src="/images/post.png" alt=""></p>
-<h2 id="预期共识"><a href="#预期共识" class="headerlink" title="预期共识"></a>预期共识<a name="预期共识"></a></h2><h3 id="基础前提"><a href="#基础前提" class="headerlink" title="基础前提"></a>基础前提<a name="基础前提"></a></h3><ul>
-<li>filecoin基于存储证明(有效存储量)来作为矿工在整个网络中的power</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">power属性</th>
-<th style="text-align:center">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">公开</td>
-<td style="text-align:center">1 某一时刻，整个网络存储总量是公开的<br>2 单个矿工某一时刻，有效存储总量是公开的</td>
-</tr>
-<tr>
-<td style="text-align:center">可公开验证的</td>
-<td style="text-align:center">对于每个存储任务，矿工都需要生成”时空证明“，证明持续提供服务。通过读取区块链，任何人都可以验证矿工的power声明是否是正确的。</td>
-</tr>
-<tr>
-<td style="text-align:center">变化</td>
-<td style="text-align:center">在任意时间点，矿工都可以通过增加新增扇区和扇区补充的抵押来增加新的存储。这样矿工就能变更他们能提供的power。</td>
-</tr>
-</tbody>
-</table>
-<h4 id="使用power达成共识"><a href="#使用power达成共识" class="headerlink" title="使用power达成共识"></a>使用power达成共识<a name="使用power达成共识"></a></h4><ul>
-<li><p>目的：</p>
-<blockquote>
-<p>每一轮选举一个（或多个）矿工，<strong>使得赢得选举的概率与每个矿工分配的存储成比例</strong></p>
-</blockquote>
-</li>
-<li><p>filecoin预期共识(Expected Consensus,EC)</p>
-<ul>
-<li>预期共识的基本直觉是确定性的，不可预测的</li>
-<li>预期的期望是每个周期内当选的Leader是1，但一些周期内可能有0个或者许多的Leader。</li>
-<li>在每个周期，每个区块链被延伸一个或多个区块，见下图</li>
-<li>区块线性扩展，但是数据结构是DAG</li>
-<li>EC是一个概率共识，每个周期都使得比前面的区块更加确定，最终达到了足够的确定性</li>
-</ul>
-</li>
-</ul>
-<h4 id="选举方案"><a href="#选举方案" class="headerlink" title="选举方案"></a>选举方案<a name="选举方案"></a></h4><blockquote>
-<p>预期共识通过选举方案产生</p>
-</blockquote>
-<p><img src="/images/sle.png" alt=""></p>
-<p><img src="/images/sle2.png" alt=""></p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">选举方案属性</th>
-<th style="text-align:center">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">公平</td>
-<td style="text-align:center">每个参与者每次选举只有一次试验，因为签名是确定性的，而且t和rand(t)是固定的。随机值rand(t)在时刻t之前是未知的<br></td>
-</tr>
-<tr>
-<td style="text-align:center">保密</td>
-<td style="text-align:center">由于有能力的攻击者不拥有Mi用来计算签名的秘钥<br></td>
-</tr>
-<tr>
-<td style="text-align:center">公开可验证</td>
-<td style="text-align:center">当选Leader i ∈ Lt 可以通过给出t，rand(t)，H(i)/2L，来说服一个有效的验证者。鉴于前面的观点（复制证明与时间证明），有能力的攻击者在不拥有获胜秘密秘钥的情况下不能生成证明。</td>
-</tr>
-</tbody>
-</table>
-<h2 id="filecoin智能合约"><a href="#filecoin智能合约" class="headerlink" title="filecoin智能合约"></a>filecoin智能合约<a name="filecoin智能合约"></a></h2><h3 id="文件合约"><a href="#文件合约" class="headerlink" title="文件合约"></a>文件合约<a name="文件合约"></a></h3><blockquote>
-<p>允许用户对他们提供的存储服务进行条件编程，<strong>会形成一个多样化市场</strong>。</p>
-</blockquote>
-<ul>
-<li>承包矿工：客户可以提前指定矿工提供服务而不参与市场 </li>
-<li>付款策略：客户可以为矿工设计不同的奖励策略，例如合约可以给矿工支付随着时间的推移越来高的费用</li>
-<li>票务服务：合约可以允许矿工存放token和用于代表用户的存储/检索的支付</li>
-<li>更复杂的操作：客户可以创建合约来运行数据更新</li>
-</ul>
-<h3 id="智能合约"><a href="#智能合约" class="headerlink" title="智能合约"></a>智能合约<a name="智能合约"></a></h3><blockquote>
-<p>用户可以将程序关联到其他系统（如以太坊)的交易上，他们不直接依赖存储的使用。</p>
-</blockquote>
-<h3 id="与其他系统的兼容"><a href="#与其他系统的兼容" class="headerlink" title="与其他系统的兼容"></a>与其他系统的兼容<a name="与其他系统的兼容"></a></h3><blockquote>
-<p>规格支持跨链交互，以便能将filecoin存储带入其他基于区块链的平台，同时也将其他平台的功能带入filecoin。</p>
-</blockquote>
-<h2 id="交易市场"><a href="#交易市场" class="headerlink" title="交易市场"></a>交易市场<a name="交易市场"></a></h2><ul>
-<li>存储需求和供给组成了两个Filecoin市场：存储市场和检索市场。这两个市场是两个去中心化交易所，简而言之，客户和矿工们通过向各自的市场提交订单来设定他们请求服务或者提供服务的订单的价格。交易所为客户和矿工们提供了一种方式来查看匹配出价并执行订单。如果服务请求被成功满足，通过运行管理协议，网络保证了矿工得到报酬，客户将被收取费用。</li>
-<li>可以类比为淘宝商城</li>
-</ul>
-<h3 id="存储市场"><a href="#存储市场" class="headerlink" title="存储市场"></a>存储市场<a name="存储市场"></a></h3><ul>
-<li>交易数据会上链，包含于区块之中。</li>
-<li>本质上也属于filecoin智能合约中的文件合约。</li>
-<li>20190214上线的开发网络已支持</li>
-</ul>
-<h3 id="检索市场"><a href="#检索市场" class="headerlink" title="检索市场"></a>检索市场<a name="检索市场"></a></h3><ul>
-<li>交易数据不会上链，属于offchain的方式。</li>
-<li>本质上也属于filecoin智能合约中的文件合约。</li>
-</ul>
-<h2 id="filecoin节点"><a href="#filecoin节点" class="headerlink" title="filecoin节点"></a>filecoin节点<a name="filecoin节点"></a></h2><ul>
-<li>filecoin节点相关<ul>
-<li>node id表示filecoin网络节点</li>
-<li>account　id并表示账号，默认与钱包地址一致</li>
-<li>wallet addr表示钱包地址</li>
-<li>miner id表示矿工id</li>
-</ul>
-</li>
-</ul>
-<p><img src="/images/filecoin-1.png" alt=""></p>
-<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
+<p>在上一篇<a href="https://learnblockchain.cn/2019/03/18/eth-wallet-dev-2/">导入账号及账号管理</a>，所有的账号使用greenDao 存储起来， 因此我们只需要把所有账号从加载出来，挑选出当前选中的那一个。 结合代码看一看：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// WalletDaoUtils.java</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ETHWallet <span class="title">getCurrent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        List&lt;ETHWallet&gt; ethWallets = ethWalletDao.loadAll();</span><br><span class="line">        <span class="keyword">for</span> (ETHWallet ethwallet : ethWallets) &#123;</span><br><span class="line">            <span class="keyword">if</span> (ethwallet.isCurrent()) &#123;</span><br><span class="line">                ethwallet.setCurrent(<span class="keyword">true</span>);</span><br><span class="line">                <span class="keyword">return</span> ethwallet;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>上面代码先用 <code>ETHWalletDao.loadAll</code> 加载出所有的账号，返回当前选中的，上面的代码会被<code>FetchWalletInteract.findDefault</code> 调用，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// FetchWalletInteract.java</span></span><br><span class="line"><span class="comment">// 返回一个可订阅的Single&lt;ETHWallet&gt; 对象</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Single&lt;ETHWallet&gt; <span class="title">findDefault</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     <span class="keyword">return</span> Single.fromCallable(() -&gt; &#123;</span><br><span class="line">         <span class="keyword">return</span> WalletDaoUtils.getCurrent();</span><br><span class="line">     &#125;).subscribe(<span class="keyword">this</span>::onDefaultWallet);</span><br><span class="line"> &#125; </span><br><span class="line"></span><br><span class="line"> <span class="comment">// 获取到默认钱包账号 设置到 defaultWallet 这个LiveData</span></span><br><span class="line"> <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">onDefaultWallet</span><span class="params">(ETHWallet wallet)</span> </span>&#123;</span><br><span class="line">     defaultWallet.setValue(wallet);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>在ViewModle里，很多时候以数据进行交互的类，我们会命名为 <code>xxxInteract</code>，这也是一个习惯用法，之后，在UI界面<code>PropertyFragment.java</code> 中， 就可以对 <code>defaultWallet</code> 进行订阅：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tokensViewModel.defaultWallet().observe(<span class="keyword">this</span>,  <span class="keyword">this</span>::showWallet);</span><br></pre></td></tr></table></figure>
+<p>当获取到默认账号时，就会回调<code>showWallet</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// UI 显示</span><br><span class="line">    public void showWallet(ETHWallet wallet) &#123;</span><br><span class="line">        tvWalletName.setText(wallet.getName());</span><br><span class="line">        tvWalletAddress.setText(wallet.getAddress());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>这样， 界面的显示就完成了。</p>
+<h3 id="当前账号-ETH-余额"><a href="#当前账号-ETH-余额" class="headerlink" title="当前账号 ETH 余额"></a>当前账号 ETH 余额</h3><p><a href="https://github.com/xilibi2003/Upchain-wallet" target="_blank" rel="noopener">https://github.com/xilibi2003/Upchain-wallet</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> BigDecimal <span class="title">getEthBalance</span><span class="params">(String walletAddress)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> BigDecimal(web3j</span><br><span class="line">            .ethGetBalance(walletAddress, DefaultBlockParameterName.LATEST)</span><br><span class="line">            .send()</span><br><span class="line">            .getBalance());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="显示-Token-数量"><a href="#显示-Token-数量" class="headerlink" title="显示 Token 数量"></a>显示 Token 数量</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">onDefaultWallet</span><span class="params">(ETHWallet wallet)</span> </span>&#123;</span><br><span class="line">    defaultWallet.setValue(wallet);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>lifecycle官方文档地址：</p>
+<p><a href="https://developer.android.com/topic/libraries/architecture/lifecycle" target="_blank" rel="noopener">https://developer.android.com/topic/libraries/architecture/lifecycle</a></p>
+<p>我创建了一个专门讨论钱包开发的微信群，加微信：xlbxiong 备注：钱包。</p>
+<p>加入<a href="https://learnblockchain.cn/images/zsxq.png">知识星球</a>，和一群优秀的区块链从业者一起学习。<br><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，学区块链的都在这里，打造最好的区块链技术博客。</p>
 
       
     </div>
@@ -751,11 +538,11 @@
         <ul class="post-copyright">
   <li class="post-copyright-author">
     <strong>本文作者：</strong>
-    先河系统杨尉
+    Tiny熊
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://learnblockchain.cn/2019/02/20/filecoin-code-analysis-2/" title="filecoin技术架构分析二：filecoin通用语言理解">https://learnblockchain.cn/2019/02/20/filecoin-code-analysis-2/</a>
+    <a href="https://learnblockchain.cn/2019/03/24/eth_wallet_dev_3/" title="如何开发一款以太坊（安卓）钱包系列3 - 钱包账号资产信息展示">https://learnblockchain.cn/2019/03/24/eth_wallet_dev_3/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -770,7 +557,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/FileCoin/" rel="tag"># FileCoin</a>
+            <a href="/tags/以太坊/" rel="tag"># 以太坊</a>
+          
+            <a href="/tags/钱包/" rel="tag"># 钱包</a>
           
         </div>
       
@@ -783,8 +572,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/18/filecoin-code-analysis-1/" rel="next" title="filecoin技术架构分析一：filecoin概念">
-                <i class="fa fa-chevron-left"></i> filecoin技术架构分析一：filecoin概念
+              <a href="/2019/03/23/blockchain_interoperability/" rel="next" title="跨链技术的分析和思考">
+                <i class="fa fa-chevron-left"></i> 跨链技术的分析和思考
               </a>
             
           </div>
@@ -792,10 +581,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/22/filecoin-code-analysis-3/" rel="prev" title="filecoin技术架构分析三：filecoin开发网络使用">
-                filecoin技术架构分析三：filecoin开发网络使用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -1079,7 +864,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要把filecoin通用语言单独列为一讲"><span class="nav-number">1.</span> <span class="nav-text">为什么要把filecoin通用语言单独列为一讲</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储证明"><span class="nav-number">2.</span> <span class="nav-text">存储证明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-为什么使用存储证明"><span class="nav-number">2.1.</span> <span class="nav-text">2.2.1 为什么使用存储证明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复制证明"><span class="nav-number">2.2.</span> <span class="nav-text">复制证明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基础"><span class="nav-number">2.2.1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#filecoin复制证明的题目和答案"><span class="nav-number">2.2.2.</span> <span class="nav-text">filecoin复制证明的题目和答案</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时空证明"><span class="nav-number">2.3.</span> <span class="nav-text">时空证明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预期共识"><span class="nav-number">3.</span> <span class="nav-text">预期共识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础前提"><span class="nav-number">3.1.</span> <span class="nav-text">基础前提</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用power达成共识"><span class="nav-number">3.1.1.</span> <span class="nav-text">使用power达成共识</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#选举方案"><span class="nav-number">3.1.2.</span> <span class="nav-text">选举方案</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#filecoin智能合约"><span class="nav-number">4.</span> <span class="nav-text">filecoin智能合约</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件合约"><span class="nav-number">4.1.</span> <span class="nav-text">文件合约</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#智能合约"><span class="nav-number">4.2.</span> <span class="nav-text">智能合约</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与其他系统的兼容"><span class="nav-number">4.3.</span> <span class="nav-text">与其他系统的兼容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交易市场"><span class="nav-number">5.</span> <span class="nav-text">交易市场</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储市场"><span class="nav-number">5.1.</span> <span class="nav-text">存储市场</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检索市场"><span class="nav-number">5.2.</span> <span class="nav-text">检索市场</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#filecoin节点"><span class="nav-number">6.</span> <span class="nav-text">filecoin节点</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#预备知识-MVVM"><span class="nav-number">1.</span> <span class="nav-text">预备知识 MVVM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ViewModel-和-LiveData"><span class="nav-number">1.1.</span> <span class="nav-text">ViewModel 和 LiveData</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#账号信息展示"><span class="nav-number">2.</span> <span class="nav-text">账号信息展示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#显示当前账号"><span class="nav-number">2.1.</span> <span class="nav-text">显示当前账号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#当前账号-ETH-余额"><span class="nav-number">2.2.</span> <span class="nav-text">当前账号 ETH 余额</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显示-Token-数量"><span class="nav-number">2.3.</span> <span class="nav-text">显示 Token 数量</span></a></li></ol></li></ol></div>
             
 
           </div>
