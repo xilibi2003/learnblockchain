@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="钱包,以太坊," />
+  <meta name="keywords" content="以太坊,钱包," />
 
 
 
@@ -86,7 +86,7 @@
 
 
 <meta name="description" content="这是如何开发以太坊（安卓）钱包系列第3篇， 钱包账号资产信息展示，展示信息主要包括账号地址、eth余额及该账号所拥有的Token及余额。">
-<meta name="keywords" content="钱包,以太坊">
+<meta name="keywords" content="以太坊,钱包">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何开发一款以太坊安卓钱包系列3 - 资产信息展示">
 <meta property="og:url" content="https://learnblockchain.cn/2019/03/24/eth_wallet_dev_3/index.html">
@@ -95,7 +95,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://learnblockchain.cn/images/15532408840119.jpg">
 <meta property="og:image" content="https://learnblockchain.cn/images/15532473043633.jpg">
-<meta property="og:updated_time" content="2019-03-26T14:08:31.937Z">
+<meta property="og:updated_time" content="2019-03-27T14:42:57.956Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何开发一款以太坊安卓钱包系列3 - 资产信息展示">
 <meta name="twitter:description" content="这是如何开发以太坊（安卓）钱包系列第3篇， 钱包账号资产信息展示，展示信息主要包括账号地址、eth余额及该账号所拥有的Token及余额。">
@@ -402,8 +402,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-26T22:08:31+08:00">
-                2019-03-26
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-27T22:42:57+08:00">
+                2019-03-27
               </time>
             
           </span>
@@ -463,7 +463,7 @@
 <h2 id="预备知识-MVVM"><a href="#预备知识-MVVM" class="headerlink" title="预备知识 MVVM"></a>预备知识 MVVM</h2><p>本文会涉及和UI界面的交互，提前理解下界面和数据如何交互是非常有必要的，如果你已经很熟悉MVVM，可跳过这一小节。</p>
 <p>最早写Android的时候，数据和界面经常耦合在一起，一个Activity文件总是特别大，每当产品界面改版就非常痛苦，吐槽下，很多产品经理都喜欢对界面改来改去。</p>
 <p>后来Google 推荐多个架构模式： MPV、 MVVM模式来解决数据和UI耦合的问题，<a href="https://github.com/xilibi2003/Upchain-wallet" target="_blank" rel="noopener">登链钱包代码</a>，使用的就是MVVM模式，所以对它做一个简单介绍，下面是MVVM的视图和数据的交互图：</p>
-<p><img src="/images/15532408840119.jpg" alt=""></p>
+<p><img src="https://learnblockchain.cn/images/15532408840119.jpg" alt=""></p>
 <p>View 通常对应于Activity/Fragment/自定义View<br>Model：则是和数据相关的模块。</p>
 <p>View 与 Model 不直接发生联系， 而是通过ViewModel负责接收View层的事件以及获取并处理数据，ViewModel层的数据变化也会通知给View层进行相应的UI的更新，从而实现业务逻辑和Ui的隔离。</p>
 <p>使用MVVM模式最大的优点就是<strong>解耦</strong>， 因为数据处理逻辑是独立于View, 在UI更改时，ViewModel 不用做太多改动。</p>
@@ -473,7 +473,7 @@
 <p>LiveData是一个可观察的数据持有者类。观察者可以方便我们以<strong>异步的方式获取数据</strong>，同时LiveData也是有生命周期感知的。如果其生命周期处于STARTED或RESUMED状态。LiveData会将观察者视为活动状态，并通知其数据的变化。LiveData未注册的观察对象以及非活动观察者是不会收到有关更新的通知。</p>
 <p>了解更多，可自行以关键字： Lifecycle、ViewModel、LiveData 进行搜索。</p>
 <h2 id="账号信息展示"><a href="#账号信息展示" class="headerlink" title="账号信息展示"></a>账号信息展示</h2><p>展示信息主要包括账号地址、eth余额及该账号所拥有的Token及余额， 其界面效果如下:</p>
-<p><img src="/images/15532473043633.jpg" alt="上图"></p>
+<p><img src="https://learnblockchain.cn/images/15532473043633.jpg" alt="上图"></p>
 <blockquote>
 <p>这个界面应的是<a href="https://github.com/xilibi2003/Upchain-wallet" target="_blank" rel="noopener">登链钱包</a>的<code>PropertyFragment</code>，上图的UPT 是我自己发行的Token，所以没有显示价格</p>
 </blockquote>
@@ -507,7 +507,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tokensViewModel.defaultWallet().observe(<span class="keyword">this</span>,  <span class="keyword">this</span>::showWallet);</span><br></pre></td></tr></table></figure>
 <p>当获取到默认账号时，就会回调<code>showWallet</code>:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// UI 显示</span><br><span class="line">    public void showWallet(ETHWallet wallet) &#123;</span><br><span class="line">        tvWalletName.setText(wallet.getName());</span><br><span class="line">        tvWalletAddress.setText(wallet.getAddress());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>这样， 界面的显示就完成了，下一篇继续介绍获取余额。</p>
+<p>这样， 界面的显示就完成了，<a href="https://learnblockchain.cn/2019/03/26/eth_wallet_dev_4/">下一篇</a>继续介绍获取余额。</p>
 <h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ol>
 <li><a href="https://developer.android.com/topic/libraries/architecture/lifecycle" target="_blank" rel="noopener">lifecycle官方文档地址</a></li>
 <li><a href="https://github.com/ReactiveX/RxAndroid/" target="_blank" rel="noopener">RxAndroid</a> 了解更多响应式编程</li>
@@ -584,9 +584,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/钱包/" rel="tag"># 钱包</a>
-          
             <a href="/tags/以太坊/" rel="tag"># 以太坊</a>
+          
+            <a href="/tags/钱包/" rel="tag"># 钱包</a>
           
         </div>
       
@@ -608,6 +608,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/26/eth-wallet-dev-4/" rel="prev" title="如何开发一款以太坊安卓钱包系列4 - 以太及Token余额">
+                如何开发一款以太坊安卓钱包系列4 - 以太及Token余额 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -684,7 +688,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">96</span>
+                  <span class="site-state-item-count">97</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

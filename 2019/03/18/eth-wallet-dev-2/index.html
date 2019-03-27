@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="钱包,以太坊," />
+  <meta name="keywords" content="以太坊,钱包," />
 
 
 
@@ -86,7 +86,7 @@
 
 
 <meta name="description" content="这是如何开发一款以太坊（安卓）钱包系列第2篇，如何导入账号。有时用户可能已经有一个账号，这篇文章接来介绍下，如何实现导入用户已经存在的账号。">
-<meta name="keywords" content="钱包,以太坊">
+<meta name="keywords" content="以太坊,钱包">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何开发一款以太坊（安卓）钱包系列2 - 导入账号及账号管理">
 <meta property="og:url" content="https://learnblockchain.cn/2019/03/18/eth-wallet-dev-2/index.html">
@@ -94,7 +94,7 @@
 <meta property="og:description" content="这是如何开发一款以太坊（安卓）钱包系列第2篇，如何导入账号。有时用户可能已经有一个账号，这篇文章接来介绍下，如何实现导入用户已经存在的账号。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://learnblockchain.cn/images/15529003884556.jpg">
-<meta property="og:updated_time" content="2019-03-23T14:53:06.574Z">
+<meta property="og:updated_time" content="2019-03-27T14:44:12.222Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何开发一款以太坊（安卓）钱包系列2 - 导入账号及账号管理">
 <meta name="twitter:description" content="这是如何开发一款以太坊（安卓）钱包系列第2篇，如何导入账号。有时用户可能已经有一个账号，这篇文章接来介绍下，如何实现导入用户已经存在的账号。">
@@ -401,8 +401,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-23T22:53:06+08:00">
-                2019-03-23
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-27T22:44:12+08:00">
+                2019-03-27
               </time>
             
           </span>
@@ -504,6 +504,7 @@
 <h2 id="多账号管理"><a href="#多账号管理" class="headerlink" title="多账号管理"></a>多账号管理</h2><p>考虑到用户可能会创建多个账号，因此需要确定一个当前选定的账号，一般情况下，用户新创建的账号应该作为当前选中的的账号，同时其他账号应该取消选中， 我们完善下账号存储逻辑， 如下：<br>（代码在<a href="https://github.com/xilibi2003/Upchain-wallet" target="_blank" rel="noopener">代码库</a>中的<code>app/src/pro/upchain/wallet/utils/WalletDaoUtils.java</code>文件中）</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 插入新创建钱包</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> ethWallet 钱</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">insertNewWallet</span><span class="params">(ETHWallet ethWallet)</span> </span>&#123;</span><br><span class="line">    updateCurrent(-<span class="number">1</span>);  <span class="comment">// 取消其他站账号选中状态</span></span><br><span class="line">    ethWallet.setCurrent(<span class="keyword">true</span>);</span><br><span class="line">    ethWalletDao.insert(ethWallet);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 更新选中钱包</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> id 钱包ID</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ETHWallet <span class="title">updateCurrent</span><span class="params">(<span class="keyword">long</span> id)</span> </span>&#123;</span><br><span class="line"><span class="comment">// 加载所有钱包账号</span></span><br><span class="line">    List&lt;ETHWallet&gt; ethWallets = ethWalletDao.loadAll();</span><br><span class="line">    ETHWallet currentWallet = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">for</span> (ETHWallet ethwallet : ethWallets) &#123;</span><br><span class="line">        <span class="keyword">if</span> (id != -<span class="number">1</span> &amp;&amp; ethwallet.getId() == id) &#123;</span><br><span class="line">            ethwallet.setCurrent(<span class="keyword">true</span>);</span><br><span class="line">            currentWallet = ethwallet;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            ethwallet.setCurrent(<span class="keyword">false</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        ethWalletDao.update(ethwallet);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> currentWallet;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="打通账号创建与保存"><a href="#打通账号创建与保存" class="headerlink" title="打通账号创建与保存"></a>打通账号创建与保存</h2><p>以通过私钥导入账号进行保存为例，把创建账号和保存账号打通，这里我们使用响应式编程 ReactiveX，<br>这部分作为订阅者福利，发表在我的<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">小专栏</a>，趁还未涨价，赶紧订阅吧，超值的！</p>
+<p><a href="https://learnblockchain.cn/2019/03/24/eth_wallet_dev_3/">下一篇</a> 将继续介绍资产的显示。</p>
 <h2 id="学习资料"><a href="#学习资料" class="headerlink" title="学习资料"></a>学习资料</h2><ol>
 <li><a href="https://github.com/ReactiveX/RxAndroid/" target="_blank" rel="noopener">RxAndroid</a> 了解更多响应式编程</li>
 <li><a href="http://greenrobot.org/greendao/documentation/introduction/" target="_blank" rel="noopener">introduction</a> 和 <a href="http://greenrobot.org/greendao/documentation/how-to-get-started/" target="_blank" rel="noopener">how-to-get-started</a> 了解greenDAO。</li>
@@ -610,9 +611,9 @@ java
       
         <div class="post-tags">
           
-            <a href="/tags/钱包/" rel="tag"># 钱包</a>
-          
             <a href="/tags/以太坊/" rel="tag"># 以太坊</a>
+          
+            <a href="/tags/钱包/" rel="tag"># 钱包</a>
           
         </div>
       
@@ -714,7 +715,7 @@ java
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">96</span>
+                  <span class="site-state-item-count">97</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
