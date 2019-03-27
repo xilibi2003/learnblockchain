@@ -190,6 +190,7 @@ implementation 'org.bitcoinj:bitcoinj-core:0.14.7'
 
 ## 参考文档
 * [web3j API 文档](https://docs.web3j.io/)
+* [web3j GitHub](https://github.com/web3j)
 * [bitcoinj 介绍及文档 ](https://bitcoinj.github.io/)
 
 我创建了一个专门讨论钱包开发的微信群，加微信：xlbxiong 备注：钱包。

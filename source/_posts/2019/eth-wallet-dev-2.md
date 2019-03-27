@@ -220,6 +220,7 @@ ethWallet为ETHWallet实例， 前面不管是新创建还是导入的账号都�
 以通过私钥导入账号进行保存为例，把创建账号和保存账号打通，这里我们使用响应式编程 ReactiveX，
 这部分作为订阅者福利，发表在我的[小专栏](https://xiaozhuanlan.com/blockchaincore)，趁还未涨价，赶紧订阅吧，超值的！
 
+[下一篇](https://learnblockchain.cn/2019/03/24/eth_wallet_dev_3/) 将继续介绍资产的显示。
 
 ## 学习资料
 
