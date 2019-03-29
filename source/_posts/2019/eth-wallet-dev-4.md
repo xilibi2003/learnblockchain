@@ -1,5 +1,5 @@
 ---
-title: 如何开发一款以太坊安卓钱包系列4 - 以太及Token余额
+title: 如何开发一款以太坊安卓钱包系列4 - 获取以太及Token余额
 permalink: eth-wallet-dev-4
 un_reward: false
 date: 2019-03-26 21:40:50
@@ -7,6 +7,7 @@ categories: 以太坊
 tags:
     - 钱包
     - 以太坊
+    - web3j
 author: Tiny熊
 ---
 
@@ -236,7 +237,7 @@ web3j对象在TokenRepository初始化的时候完成，在TokenRepository获取
 在TokenRepository获取到Token列表之后，如果是ERC20代币会随即会调用`getBalance` 方法。
 根据前面的介绍获取代币的余额需要调用合约的balanceOf方法，在以太坊上**对合约方法的调用实际上会合约地址发起一个调用，调用的附加数据是函数及参数的ABI编码数据**。
 
-> [如何理解以太坊ABI](https://learnblockchain.cn/2018/08/09/understand-abi/)
+> 之前写过一篇文章：[如何理解以太坊ABI](https://learnblockchain.cn/2018/08/09/understand-abi/)， 大家可以读一下。
 
 用以下方法构造出`balanceOf`的ABI函数类型：
 
