@@ -1,5 +1,5 @@
 ---
-title:  一步步教你开发、部署第一个去中心化应用(Dapp) - 宠物商店
+title:  Truffle 教程：教你开发、部署第一个去中心化应用(Dapp) - 宠物商店
 permalink: first-dapp
 date: 2018-01-12 22:36:39
 categories: 
@@ -8,10 +8,15 @@ categories:
 tags:
     - Dapp入门
     - 以太坊概念
+    - Truffle
 author: Tiny熊
 ---
 
 今天我们来编写一个完整的去中心化（区块链）应用（Dapps）, 本文可以和[编写智能合约](https://learnblockchain.cn/2017/11/24/init-env/)结合起来看。
+2019/03/30更新：
+ 1. 适配 Truffle v5.0.0;
+ 1. 更新Solidity 代码，适配solidity 0.5.0以上版本;
+ 2. 适配MetaMask 更新, 适配支持`window.ethereum` 对象;
 
 <!-- more -->
 
@@ -48,11 +53,14 @@ Pete有一个宠物店，有16只宠物，他想开发一个去中心化应用�
 ## 创建项目
 
 1. 建立项目目录并进入
+
 ```shell
 > mkdir pet-shop-tutorial
 > cd pet-shop-tutorial
 ```
+
 2. 使用truffle unbox 创建项目
+
 ```shell
  > truffle unbox pet-shop
  Downloading...
@@ -87,7 +95,7 @@ Commands:
 
 在contracts目录下，添加合约文件Adoption.sol
 ```js
-pragma solidity ^0.4.17;
+pragma solidity ^0.5.0;
 
 contract Adoption {
 
@@ -102,7 +110,7 @@ contract Adoption {
   }
 
   // 返回领养者
-  function getAdopters() public view returns (address[16]) {
+  function getAdopters() public view returns (address[16] memory) {
     return adopters;
   }
 
@@ -114,19 +122,23 @@ contract Adoption {
 Truffle集成了一个开发者控制台，可用来生成一个开发链用来测试和部署智能合约。
 
 ### 编译
+
 Solidity是编译型语言，需要把可读的Solidity代码编译为EVM字节码才能运行。
-dapp的根目录pet-shop-tutorial下，
+dapp的根目录pet-shop-tutorial下
+
 ```shell
 > truffle compile
 ```
 
 输出
+
 ```
 Compiling ./contracts/Adoption.sol...
 Writing artifacts to ./build/contracts
 ```
 
 ### 部署
+
 编译之后，就可以部署到区块链上。
 在migrations文件夹下已经有一个1_initial_migration.js部署脚本，用来部署Migrations.sol合约。
 Migrations.sol 用来确保不会部署相同的合约。
@@ -147,10 +159,13 @@ Ganache 启动之后是这样：
 ![](https://learnblockchain.cn/images/ganache-initial.png)
 
 接下来执行部署命令:
+
 ```bash
 > truffle  migrate
 ```
+
 执行后，有一下类似的输出，
+
 ```
 Using network 'develop'.
 
@@ -169,18 +184,20 @@ Saving successful migration to network...
   ... 0xf36163615f41ef7ed8f4a8f192149a0bf633fe1a2398ce001bf44c43dc7bdda0
 Saving artifacts...
 ```
+
 在打开的Ganache里可以看到区块链状态的变化，现在产生了4个区块。
 ![](https://learnblockchain.cn/images/ganache-migrated.png)
 这时说明已经智能合约已经部署好了。
 
-
 ## 测试
-现在我们来测试一下智能合约，测试用例可以用 JavaScript or Solidity来编写，这里使用Solidity。
+
+现在我们来测试一下智能合约，测试用例可以用 JavaScript 或 Solidity来编写，这里使用Solidity。
 
 在`test`目录下新建一个`TestAdoption.sol`，编写测试合约
+
 ```js
 
-pragma solidity ^0.4.17;
+pragma solidity ^0.5.0;
 
 import "truffle/Assert.sol";   // 引入的断言
 import "truffle/DeployedAddresses.sol";  // 用来获取被测试合约的地址
@@ -215,17 +232,20 @@ contract TestAdoption {
 }
 ```
 
-Assert.sol 及 DeployedAddresses.sol是Truffle框架提供，在test目录下并不提供truffle目录。
+提示：Assert.sol 及 DeployedAddresses.sol是Truffle框架提供，在test目录下并不提供truffle目录。
 
-TestAdoption合约中添加adopt的测试用例
+TestAdoption合约中添加adopt的测试用例。
 
 ### 运行测试用例
 
 在终端中，执行
+
 ```bash
 truffle test
 ```
+
 如果测试通过，则终端输出：
+
 ```
 Using network 'develop'.
 
@@ -247,24 +267,41 @@ Compiling truffle/DeployedAddresses.sol...
 
 
 ## 创建用户接口和智能合约交互
+
 我们已经编写和部署及测试好了我们的合约，接下我们为合约编写UI，让合约真正可以用起来。
 
 在Truffle Box `pet-shop`里，已经包含了应用的前端代码，代码在`src/`文件夹下。
 
 在编辑器中打开`src/js/app.js`
+
 可以看到用来管理整个应用的App对象，init函数加载宠物信息，就初始化[web3](https://github.com/ethereum/web3.js/).
 web3是一个实现了与以太坊节点通信的库，我们利用web3来和合约进行交互。
 
-### 初始化web3
+### 初始化web3、
+
 接下来，我们来编辑app.js修改initWeb3():
 删除注释，修改为：
+
 ```js
   initWeb3: function() {
-    // Is there an injected web3 instance?
-    if (typeof web3 !== 'undefined') {
-      App.web3Provider = web3.currentProvider;
-    } else {
-      // If no injected web3 instance is detected, fall back to Ganache
+
+    // Modern dapp browsers...
+    if (window.ethereum) {
+      App.web3Provider = window.ethereum;
+      try {
+        // Request account access
+        await window.ethereum.enable();
+      } catch (error) {
+        // User denied account access...
+        console.error("User denied account access")
+      }
+    }
+    // Legacy dapp browsers...
+    else if (window.web3) {
+      App.web3Provider = window.web3.currentProvider;
+    }
+    // If no injected web3 instance is detected, fall back to Ganache
+    else {
       App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
     }
     web3 = new Web3(App.web3Provider);
@@ -273,10 +310,14 @@ web3是一个实现了与以太坊节点通信的库，我们利用web3来和合
   }
 ```
 
+新的Dapp浏览器或MetaMask的新版本，注入了一个`ethereum` 对象到`window`对象里， 应该优先使用`ethereum`来构造web3， 同时使用`ethereum.enable()`来请求用户授权访问链接账号。
+
+
 代码中优先使用[Mist](https://github.com/ethereum/mist) 或 [MetaMask](https://metamask.io/)提供的web3实例，如果没有则从本地环境创建一个。
 
 ### 实例化合约
 使用truffle-contract会帮我们保存合约部署的信息，就不需要我们手动修改合约地址，修改initContract()代码如下：
+
 ```js
 initContract: function() {
   // 加载Adoption.json，保存了Adoption的ABI（接口说明）信息及部署后的网络(地址)信息，它在编译合约的时候生成ABI，在部署的时候追加网络信息
@@ -298,6 +339,7 @@ initContract: function() {
 ### 处理领养
 
 修改markAdopted()代码：
+
 ```js
   markAdopted: function(adopters, account) {
     var adoptionInstance;
@@ -320,6 +362,7 @@ initContract: function() {
 ```
 
 修改handleAdopt()代码：
+
 ```js
   handleAdopt: function(event) {
     event.preventDefault();
@@ -361,9 +404,11 @@ MetaMask 是一款插件形式的以太坊轻客户端，开发过程中使用Me
 ![](https://learnblockchain.cn/images/metamask-initial.png)
 
 这里我们通过还原一个Ganache为我们创建好的钱包，作为我们的开发测试钱包。点击页面的** Import Existing DEN**，输入Ganache显示的助记词。
+
 ```
 candy maple cake sugar pudding cream honey rich smooth crumble sweet treat
 ```
+
 然后自己想要的密码，点击OK。
 如图：
 ![](https://learnblockchain.cn/images/metamask-seed.png)
@@ -380,6 +425,7 @@ candy maple cake sugar pudding cream honey rich smooth crumble sweet treat
 ### 安装和配置lite-server
 接下来需要本地的web 服务器提供服务的访问， Truffle Box **pet-shop**里提供了一个**lite-server**可以直接使用，我们看看它是如何工作的。
 **bs-config.json**指示了lite-server的工作目录。
+
 ```json
 {
   "server": {
@@ -387,6 +433,7 @@ candy maple cake sugar pudding cream honey rich smooth crumble sweet treat
   }
 }
 ```
+
 ./src 是网站文件目录
 ./build/contracts 是合约输出目录
 
@@ -401,9 +448,11 @@ candy maple cake sugar pudding cream honey rich smooth crumble sweet treat
 当运行npm run dev的时候，就会启动lite-server
 
 ### 启动服务
+
 ```bash
 > npm run dev
 ```
+
 会自动打开浏览器显示我们的dapp，如本文的第一张图。
 现在领养一直宠物看看，当我们点击**Adopt**时，MetaMask会提示我们交易的确认，如图：
 
@@ -425,3 +474,5 @@ candy maple cake sugar pudding cream honey rich smooth crumble sweet treat
 
 
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
+
+
