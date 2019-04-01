@@ -5,7 +5,7 @@
     
   <url>
     <loc>https://learnblockchain.cn/2018/01/12/first-dapp/</loc>
-    <lastmod>2019-03-30T13:08:27.177Z</lastmod>
+    <lastmod>2019-04-01T03:01:58.713Z</lastmod>
     <data>
         <display>
         <title>Truffle 教程：教你开发、部署第一个去中心化应用(Dapp) - 宠物商店</title>
@@ -16,6 +16,31 @@
         <tag>Dapp入门</tag>
          
         <tag>Truffle</tag>
+         
+         
+           
+             
+              <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
+          
+             
+              <breadCrumb title="Dapp" url="https://learnblockchain.cn/categories/ethereum/Dapp/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://learnblockchain.cn/2019/03/30/dapp_noteOnChain/</loc>
+    <lastmod>2019-04-01T03:01:41.438Z</lastmod>
+    <data>
+        <display>
+        <title>DApp教程：用Truffle 开发一个链上记事本</title>
+        <pubTime>2019-03-30T13:29:55.000Z</pubTime>
+        
+        <tag>Truffle</tag>
+         
+        <tag>Dapp</tag>
          
          
            
@@ -917,29 +942,6 @@
 
     
   <url>
-    <loc>https://learnblockchain.cn/2017/12/12/solidity2/</loc>
-    <lastmod>2019-03-23T14:53:06.572Z</lastmod>
-    <data>
-        <display>
-        <title>智能合约语言 Solidity 教程系列2 - 地址类型介绍</title>
-        <pubTime>2017-12-12T07:25:59.000Z</pubTime>
-        
-        <tag>Solidity</tag>
-         
-         
-           
-             
-              <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
-          
-             
-              <breadCrumb title="Solidity" url="https://learnblockchain.cn/categories/ethereum/Solidity/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://learnblockchain.cn/2017/11/09/merkle/</loc>
     <lastmod>2019-03-23T14:53:06.572Z</lastmod>
     <data>
@@ -959,6 +961,29 @@
            
              
               <breadCrumb title="比特币" url="https://learnblockchain.cn/categories/bitcoin/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://learnblockchain.cn/2017/12/12/solidity2/</loc>
+    <lastmod>2019-03-23T14:53:06.572Z</lastmod>
+    <data>
+        <display>
+        <title>智能合约语言 Solidity 教程系列2 - 地址类型介绍</title>
+        <pubTime>2017-12-12T07:25:59.000Z</pubTime>
+        
+        <tag>Solidity</tag>
+         
+         
+           
+             
+              <breadCrumb title="以太坊" url="https://learnblockchain.cn/categories/ethereum/"/>
+          
+             
+              <breadCrumb title="Solidity" url="https://learnblockchain.cn/categories/ethereum/Solidity/"/>
           
         </display>
     </data>
@@ -1041,30 +1066,6 @@
 
     
   <url>
-    <loc>https://learnblockchain.cn/2017/10/27/build_blockchain_by_python/</loc>
-    <lastmod>2019-03-23T14:53:06.568Z</lastmod>
-    <data>
-        <display>
-        <title>用Python从零开始创建区块链</title>
-        <pubTime>2017-10-27T02:15:28.000Z</pubTime>
-        
-        <tag>python</tag>
-         
-        <tag>创建区块链</tag>
-         
-        <tag>翻译</tag>
-         
-         
-           
-             
-              <breadCrumb title="其他" url="https://learnblockchain.cn/categories/other/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://learnblockchain.cn/2017/11/02/bitcoin-own/</loc>
     <lastmod>2019-03-23T14:53:06.568Z</lastmod>
     <data>
@@ -1084,6 +1085,30 @@
            
              
               <breadCrumb title="比特币" url="https://learnblockchain.cn/categories/bitcoin/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://learnblockchain.cn/2017/10/27/build_blockchain_by_python/</loc>
+    <lastmod>2019-03-23T14:53:06.568Z</lastmod>
+    <data>
+        <display>
+        <title>用Python从零开始创建区块链</title>
+        <pubTime>2017-10-27T02:15:28.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>创建区块链</tag>
+         
+        <tag>翻译</tag>
+         
+         
+           
+             
+              <breadCrumb title="其他" url="https://learnblockchain.cn/categories/other/"/>
           
         </display>
     </data>

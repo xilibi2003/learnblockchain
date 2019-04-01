@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+  <meta name="msvalidate.01" content="914C9C1CBC7078C5E2AC612AD5C1CC6C" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Truffle,Dapp," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深入浅出区块链" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="以编写一个链上记事本为例，介绍如何开发DApp，一年多前写的开发、部署第一个DApp因为Truffle 、MetaMask、Solidity都有升级，也随手更新了。通过两个教程大家可以更好理解前端如何与合约进行交互， 本文也将介绍如何使用Truffle 把合约部署到以太坊正式网络上（貌似很多人遇到问题）。">
+<meta name="keywords" content="Truffle,Dapp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DApp教程：用Truffle 开发一个链上记事本">
+<meta property="og:url" content="https://learnblockchain.cn/2019/03/30/dapp_noteOnChain/index.html">
+<meta property="og:site_name" content="深入浅出区块链">
+<meta property="og:description" content="以编写一个链上记事本为例，介绍如何开发DApp，一年多前写的开发、部署第一个DApp因为Truffle 、MetaMask、Solidity都有升级，也随手更新了。通过两个教程大家可以更好理解前端如何与合约进行交互， 本文也将介绍如何使用Truffle 把合约部署到以太坊正式网络上（貌似很多人遇到问题）。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://learnblockchain.cn/images/15539548973073.jpg">
+<meta property="og:image" content="https://learnblockchain.cn/images/15540848537217.jpg">
+<meta property="og:updated_time" content="2019-04-01T03:01:41.438Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DApp教程：用Truffle 开发一个链上记事本">
+<meta name="twitter:description" content="以编写一个链上记事本为例，介绍如何开发DApp，一年多前写的开发、部署第一个DApp因为Truffle 、MetaMask、Solidity都有升级，也随手更新了。通过两个教程大家可以更好理解前端如何与合约进行交互， 本文也将介绍如何使用Truffle 把合约部署到以太坊正式网络上（貌似很多人遇到问题）。">
+<meta name="twitter:image" content="https://learnblockchain.cn/images/15539548973073.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'UT2K1ZRSWK',
+      apiKey: '0bbb261dfad58df8f8a657a1ed3255cd',
+      indexName: 'learnblockchain',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://learnblockchain.cn/2019/03/30/dapp_noteOnChain/"/>
+
+
+
+
+
+  <title>DApp教程：用Truffle 开发一个链上记事本 | 深入浅出区块链</title>
+  
+
+
+
+
+
+
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6273382609469378",
+        enable_page_level_ads: true
+    });
+</script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">系统学习区块链技术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wiki">
+          <a href="https://wiki.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            技术导航
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-meeting">
+          <a href="/categories/dev-meeting/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            技术工坊
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-course">
+          <a href="/course/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-spinner"></i> <br />
+            
+            视频教程
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-web3">
+          <a href="https://web3.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Web3文档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-solidity">
+          <a href="https://solidity-cn.readthedocs.io" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Solidity文档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2019/03/30/dapp_noteOnChain/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">DApp教程：用Truffle 开发一个链上记事本</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-30T21:29:55+08:00">
+                2019-03-30
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-01T11:01:41+08:00">
+                2019-04-01
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ethereum/" itemprop="url" rel="index">
+                    <span itemprop="name">以太坊</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ethereum/Dapp/" itemprop="url" rel="index">
+                    <span itemprop="name">Dapp</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>以编写一个链上记事本为例，介绍如何开发DApp，一年多前写的<a href="https://learnblockchain.cn/2018/01/12/first-dapp/">开发、部署第一个DApp</a>因为Truffle 、MetaMask、Solidity都有升级，也随手更新了。<br>通过两个教程大家可以更好理解前端如何与合约进行交互， 本文也将介绍如何使用Truffle 把合约部署到以太坊正式网络上（貌似很多人遇到问题）。</p>
+<a id="more"></a>
+<h2 id="项目背景及效果"><a href="#项目背景及效果" class="headerlink" title="项目背景及效果"></a>项目背景及效果</h2><p>链上记事本让事件永久上链，让事件成为无法修改的历史，从此再无删帖，之前有一个帖子，介绍如何MetaMask上链记事，现在我们通过这个DApp来完成。</p>
+<p>链上记事本有两个功能：</p>
+<ol>
+<li>添加一个新记事</li>
+<li>查看之前(自己的)记事本</li>
+</ol>
+<p><strong>实现效果：</strong><br><img src="https://learnblockchain.cn/images/15539548973073.jpg" alt=""></p>
+<p>本合约也部署到以太坊官方测试网络Ropsten， 如Englist first Note 的交易记录可以在<a href="https://ropsten.etherscan.io/tx/0xd6b7366fa06a643be0de7abc26e04b0509595f9a1cf216e6f7c29f1ad78c8775" target="_blank" rel="noopener">EtherScan查询</a>。</p>
+<h2 id="项目准备"><a href="#项目准备" class="headerlink" title="项目准备"></a>项目准备</h2><p>创建项目文件夹：noteOnChain，然后在目录下，执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">truffle unbox pet-shop</span><br></pre></td></tr></table></figure>
+<p>使用Truffle 对项目初始化。</p>
+<blockquote>
+<p>如果没有使用过truffle 可以阅读<a href="https://learnblockchain.cn/2018/01/12/first-dapp/">开发、部署第一个DApp</a>。</p>
+</blockquote>
+<p>Truffle 的Box，是一套套的开发模板， 它会帮助我们安装好相应的依赖，快速的启动应用开发。<br>如果我们项目需要是使用到 JQuery， Bootstrap库，使用<code>pet-shop</code>这个Box 是不错的选择，官方还提供了React 、 Vue 项目相应的模板，所有的Box 可以在<a href="https://truffleframework.com/boxes" target="_blank" rel="noopener">这里</a>查询。</p>
+<h2 id="合约实现"><a href="#合约实现" class="headerlink" title="合约实现"></a>合约实现</h2><p>项目初始化会在<code>noteOnChain</code>目录下生成<code>contracts</code>目录来存放合约文件，在<code>contracts</code>目录下添加一个合约文件<code>NoteContract.sol</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^0.5.0;</span><br><span class="line"></span><br><span class="line">contract NoteContract &#123;    </span><br><span class="line">    mapping(address =&gt; string [] ) public notes;</span><br><span class="line"></span><br><span class="line">    constructor() public &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    event NewNote(address, string note);</span><br><span class="line"></span><br><span class="line">// 添加记事</span><br><span class="line">    function addNote( string memory note) public &#123;</span><br><span class="line">        notes[msg.sender].push(note);</span><br><span class="line">        emit NewNote(msg.sender, note);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function getNotesLen(address own) public view returns (uint) &#123;</span><br><span class="line">        return notes[own].length;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>合约关键是状态变量<code>notes</code>的定义，这是一个mapping， 保存着所有地址下所有的记事本。</p>
+<h3 id="修改记事本逻辑"><a href="#修改记事本逻辑" class="headerlink" title="修改记事本逻辑"></a>修改记事本逻辑</h3><p>如果需要修改笔记功能，可以在合约中加入以下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">event ModifyNote(address, uint index);</span><br><span class="line"></span><br><span class="line">function modifyNote(address own, uint index, string memory note) public &#123;</span><br><span class="line">    notes[own][index] = note;</span><br><span class="line">    emit ModifyNote(own, index);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果需要只有自己能修改笔记可以modifyNote的第一行加上:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">require(own == msg.sender);</span><br></pre></td></tr></table></figure></p>
+<h2 id="合约部署"><a href="#合约部署" class="headerlink" title="合约部署"></a>合约部署</h2><p>先为合约添加一个部署脚本：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var Note = artifacts.require(&quot;./NoteContract.sol&quot;);</span><br><span class="line"></span><br><span class="line">module.exports = function(deployer) &#123;</span><br><span class="line">  deployer.deploy(Note);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>truffle部署的命令是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">truffle migrate</span><br></pre></td></tr></table></figure>
+<p>默认情况下，会部署到本地的Ganache提供的测试网络，本文介绍下如何通过Truffle部署到太坊官方网络，这里以<br>Ropsten为例介绍。</p>
+<blockquote>
+<p>Ganache 的安装使用可阅读<a href="https://learnblockchain.cn/2018/01/12/first-dapp/">开发、部署第一个DApp</a></p>
+</blockquote>
+<h3 id="Infura-节点服务注册-与-HDWalletProvider-安装"><a href="#Infura-节点服务注册-与-HDWalletProvider-安装" class="headerlink" title="Infura 节点服务注册 与 HDWalletProvider 安装"></a>Infura 节点服务注册 与 HDWalletProvider 安装</h3><p>大多数人应该都没有部署自己的节点，我们可以使用<a href="https://infura.io/" target="_blank" rel="noopener">Infura</a> 提供的节点服务。</p>
+<blockquote>
+<p>有部分人可能不解 Infura 服务，其实 MetaMask 后面的节点服务就是Infura。</p>
+</blockquote>
+<p>然后通过 <code>HDWalletProvider</code> 连接到Infura节点，并为我们签署交易，通过下面命令安装HDWalletProvider：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install truffle-hdwallet-provider</span><br></pre></td></tr></table></figure>
+<p>在使用Infura之前，我们需要注册一个访问Infura服务的Token， 注册地址为：<a href="https://infura.io/register" target="_blank" rel="noopener">https://infura.io/register</a>， 注册后创建一个  Project, 复制节点url：</p>
+<p><img src="https://learnblockchain.cn/images/15540848537217.jpg" alt=""></p>
+<h3 id="为-truffle-配置一个新网络"><a href="#为-truffle-配置一个新网络" class="headerlink" title="为 truffle 配置一个新网络"></a>为 truffle 配置一个新网络</h3><p>修改<code>truffle.js</code> 加入一个新网络.</p>
+<ol>
+<li>首先引入 HDWalletProvider：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var HDWalletProvider = require(&quot;truffle-hdwallet-provider&quot;);</span><br></pre></td></tr></table></figure>
+<ol>
+<li>配置签名的钱包助记词：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var mnemonic = &quot;orange apple banana ... &quot;;</span><br></pre></td></tr></table></figure>
+<p>助记词其实不应该明文配置保存，最好配置在一个隐私文件里，并被代码管理工具所忽略。</p>
+<ol>
+<li>加入新网络，以Ropsten为例：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">networks: &#123;</span><br><span class="line">  ropsten: &#123;</span><br><span class="line">    provider: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> HDWalletProvider(mnemonic, <span class="string">"https://ropsten.infura.io/xxx"</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    network_id: <span class="number">3</span>,</span><br><span class="line">    gas: <span class="number">7003605</span>,</span><br><span class="line">    gasPrice: <span class="number">100000000000</span>,</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>HDWalletProvider 的第一个参数是助记词（确保账号有足够的余额），第二个参数是 上面复制的 Infura 节点服务地址，gas 和 gasPrice 分别配置部署时的Gas Limit 和 Gas Price。</p>
+<p>Truffle 网络的配置可查阅<a href="https://truffleframework.com/docs/truffle/reference/configuration#networks" target="_blank" rel="noopener">链接</a>。</p>
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>通过以下命令来选择网络部署：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">truffle migrate --network ropsten</span><br></pre></td></tr></table></figure>
+<p>此过程大约需要等待半分钟，正常的话会输出像下面的提示：</p>
+<figure class="highlight plain"><figcaption><span>network 'ropsten'.</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Running migration: 1_initial_migration.js</span><br><span class="line">  Deploying Migrations...</span><br><span class="line">  ... 0xd79bc3c5a7d338a7f85db9f86febbee738ebdec9494f49bda8f9f4c90b649db7</span><br><span class="line">  Migrations: 0x0c6c4fc8831755595eda4b5724a61ff989e2f8b9</span><br><span class="line">Saving successful migration to network...</span><br><span class="line">  ... 0xc37320561d0004dc149ea42d839375c3fc53752bae5776e4e7543ad16c1b06f0</span><br><span class="line">Saving artifacts...</span><br><span class="line">Running migration: 2_deploy_contracts.js</span><br><span class="line">  Deploying NoteContract...</span><br><span class="line">  ... 0x7efbb3e4f028aa8834d0078293e0db7ff8aff88e72f33960fc806a618a6ce4d3</span><br><span class="line">  NoteContract: 0xda05d7bfa5b6af7feab7bd156e812b4e564ef2b1</span><br><span class="line">Saving successful migration to network...</span><br><span class="line">  ... 0x6257dd237eb8b120c8038b066e257baee03b9c447c3ba43f843d1856de1fe132</span><br><span class="line">Saving artifacts...</span><br></pre></td></tr></table></figure>
+<p>我们可以用输出的交易Hash到<a href="https://ropsten.etherscan.io/" target="_blank" rel="noopener">https://ropsten.etherscan.io/</a> 查询。</p>
+<h2 id="前端界面"><a href="#前端界面" class="headerlink" title="前端界面"></a>前端界面</h2><p>Truffle Boxs为项目生成了html前端文件<code>src/index.html</code>，删除原来Boxs提供的宠物相关代码，加入一下html：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-sm-8 col-sm-push-1 "</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">id</span>=<span class="string">"new_note"</span> &gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">for</span>=<span class="string">"new_note"</span> <span class="attr">class</span>=<span class="string">""</span> <span class="attr">id</span>=<span class="string">"add_new"</span>&gt;</span>添加笔记<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"notes"</span> &gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>以上html 定义了一个文本框<code>textarea</code>用来输入笔记，定义了一个<code>button</code>用来提交笔记上链。<br>定义了一个id为 notes 的div， 用来加载已有笔记。初始内容为空，后通过<a href="https://web3.learnblockchain.cn/0.2x.x/" target="_blank" rel="noopener">web3</a>读取到合约里笔记后，通过JQuery插入。</p>
+<h2 id="合约交互"><a href="#合约交互" class="headerlink" title="合约交互"></a>合约交互</h2><p>删除原来Boxs提供的加载宠物逻辑，逻辑分三个部分：</p>
+<ol>
+<li>初始化 web3 及合约</li>
+<li>获取笔记填充到前端页面</li>
+<li>发布笔记上链</li>
+</ol>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p> 在<code>initWeb3</code>函数中，完成web3的初始化：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 最新dapp 浏览器或MetaMask  </span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">window</span>.ethereum) &#123;</span><br><span class="line">  App.web3Provider = <span class="built_in">window</span>.ethereum;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// 请求账号授权</span></span><br><span class="line">    <span class="keyword">await</span> <span class="built_in">window</span>.ethereum.enable();</span><br><span class="line">  &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">    <span class="comment">// User denied account access...</span></span><br><span class="line">    <span class="built_in">console</span>.error(<span class="string">"User denied account access"</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Legacy dapp browsers...</span></span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">window</span>.web3) &#123;</span><br><span class="line">  App.web3Provider = <span class="built_in">window</span>.web3.currentProvider;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">  App.web3Provider = <span class="keyword">new</span> Web3.providers.HttpProvider(<span class="string">'http://localhost:9545'</span>);</span><br><span class="line">&#125;</span><br><span class="line">web3 = <span class="keyword">new</span> Web3(App.web3Provider);</span><br></pre></td></tr></table></figure>
+<p>完成<code>initContract</code>初始化合约：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">initContract: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    $.getJSON(<span class="string">'NoteContract.json'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">      App.contracts.noteContract = TruffleContract(data);</span><br><span class="line">      App.contracts.noteContract.setProvider(App.web3Provider);</span><br><span class="line"></span><br><span class="line">      App.contracts.noteContract.deployed().then(<span class="function"><span class="keyword">function</span>(<span class="params">instance</span>) </span>&#123;</span><br><span class="line">        App.noteIntance = instance;</span><br><span class="line">        <span class="keyword">return</span> App.getNotes();</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> App.bindEvents();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="获取笔记填充到前端页面"><a href="#获取笔记填充到前端页面" class="headerlink" title="获取笔记填充到前端页面"></a>获取笔记填充到前端页面</h3><p><code>initContract</code>函数里， <code>noteIntance</code>保存了部署后的合约实例，getNotes用来获取当前账号的所有笔记:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">getNotes: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    App.noteIntance.getNotesLen(App.account).then(<span class="function"><span class="keyword">function</span>(<span class="params">len</span>) </span>&#123;</span><br><span class="line">      App.noteLength = len;</span><br><span class="line">      <span class="keyword">if</span> (len &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        App.loadNote( len - <span class="number">1</span>);</span><br><span class="line">      &#125; </span><br><span class="line">    &#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>目前solidity 还无法支持返回动态类型的数组，没有办法直接获取到如string 数组的内容，所有这里采用一个变通的方法，先获取到笔记的长度，然后通过loadNote来逐条获取笔记：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">loadNote: <span class="function"><span class="keyword">function</span>(<span class="params">index</span>) </span>&#123;</span><br><span class="line">    App.noteIntance.notes(App.account, index).then(<span class="function"><span class="keyword">function</span>(<span class="params">note</span>) </span>&#123;</span><br><span class="line">      $(<span class="string">"#notes"</span>).append(</span><br><span class="line">      <span class="string">'&lt;div &gt; &lt;textarea &gt;'</span></span><br><span class="line">      + note</span><br><span class="line">      + <span class="string">'&lt;/textarea&gt;&lt;/div&gt;'</span> ;</span><br><span class="line">      <span class="keyword">if</span> (index <span class="number">-1</span> &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">        App.loadNote(index - <span class="number">1</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; ).catch(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="发布笔记上链"><a href="#发布笔记上链" class="headerlink" title="发布笔记上链"></a>发布笔记上链</h3><p>使用JQuery监听用户点击<code>add_new</code>按钮，然后调用合约的 <code>addNote</code> 函数把用户输入的笔记存储到智能合约。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">  bindEvents: function() &#123;</span><br><span class="line">    $(&quot;#add_new&quot;).on(&apos;click&apos;, function() &#123;</span><br><span class="line">      $(&quot;#loader&quot;).show();</span><br><span class="line"></span><br><span class="line">      App.noteIntance.addNote($(&quot;#new_note&quot;).val()).then(function(result) &#123;</span><br><span class="line">         return App.watchChange();</span><br><span class="line">      &#125;).catch(function (err) &#123;</span><br><span class="line">        console.log(err.message);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="运行DApp"><a href="#运行DApp" class="headerlink" title="运行DApp"></a>运行DApp</h2><p>使用以下命令，启动DApp 服务：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run dev</span><br></pre></td></tr></table></figure>
+<p>在浏览器打开<code>http://localhost:3000</code> 浏览器的MetaMask 也需要连接Ropsten网络，确保网络一致。</p>
+<blockquote>
+<p>不知道如何设置MetaMask 可阅读<a href="https://learnblockchain.cn/2018/01/12/first-dapp/">开发、部署第一个去中心化应用(</a>。</p>
+</blockquote>
+<p>本文为保持主干清晰，代码有删减， 网站代码请订阅<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">小专栏</a>查看。</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://truffleframework.com/" target="_blank" rel="noopener">Truffle 官方文档</a> </p>
+<p>加我微信：xlbxiong 备注：DApp， 加入以太坊DApp开发微信群。</p>
+<p>加入<a href="https://learnblockchain.cn/images/zsxq.png">知识星球</a> 成长比别人快一点。</p>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，学区块链的都在这里，打造最好的区块链技术博客。</p>
+
+      
+    </div>
+    
+    
+    
+    
+      
+        <div>
+          <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="Tiny熊 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信号：深入浅出区块链技术，欢迎订阅</div>
+</div>
+
+        </div>
+      
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Tiny熊
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://learnblockchain.cn/2019/03/30/dapp_noteOnChain/" title="DApp教程：用Truffle 开发一个链上记事本">https://learnblockchain.cn/2019/03/30/dapp_noteOnChain/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Truffle/" rel="tag"># Truffle</a>
+          
+            <a href="/tags/Dapp/" rel="tag"># Dapp</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/26/eth-wallet-dev-4/" rel="next" title="如何开发一款以太坊安卓钱包系列4 - 获取以太及Token余额">
+                <i class="fa fa-chevron-left"></i> 如何开发一款以太坊安卓钱包系列4 - 获取以太及Token余额
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">98</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element" style="margin-top: 20px;">
+              <span>
+                项目
+              </span>
+            </div>
+          
+
+          <div class="links-of-author project motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/bitcoin" target="_self" title="比特币">
+                    
+                      <i class="fa fa-fw fa-false"></i>比特币</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/ethereum" target="_self" title="以太坊">
+                    
+                      <i class="fa fa-fw fa-false"></i>以太坊</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/EOS" target="_self" title="EOS">
+                    
+                      <i class="fa fa-fw fa-false"></i>EOS</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/Fabric" target="_self" title="Fabric">
+                    
+                      <i class="fa fa-fw fa-false"></i>Fabric</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/IPFS" target="_self" title="IPFS">
+                    
+                      <i class="fa fa-fw fa-false"></i>IPFS</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/FileCoin" target="_self" title="FileCoin">
+                    
+                      <i class="fa fa-fw fa-false"></i>FileCoin</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <span>
+                联系我
+              </span>
+            </div>
+          
+          
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/xilibi2003" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiong-li-bing/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://learnblockchain.cn/images/zsxq.png" title="深入浅出-<b>问答社区<b>" target="_blank">深入浅出-<b>问答社区<b></a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="深入浅出-<b>小专栏<b>" target="_blank">深入浅出-<b>小专栏<b></a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hiblock.one/" title="HiBlock区块链社区" target="_blank">HiBlock区块链社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://edu.upchain.pro/book.html" title="图书-精通智能合约开发" target="_blank">图书-精通智能合约开发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://me.tryblockchain.org/" title="区块链技术博客" target="_blank">区块链技术博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blockgeek.org/" title="BG区块链技术论坛" target="_blank">BG区块链技术论坛</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eosfans.io/" title="EOS中文社区" target="_blank">EOS中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.liankexing.com/" title="链客区块链问答社区" target="_blank">链客区块链问答社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://yushuangqi.com" title="虞双齐的博客" target="_blank">虞双齐的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.xuanzhangjiong.top" title="TopJohn’s Blog" target="_blank">TopJohn’s Blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://tinyxiong.com" title="Tiny熊的博客" target="_blank">Tiny熊的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://learnblockchain.cn/friends" title="更多" target="_blank">更多</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#项目背景及效果"><span class="nav-number">1.</span> <span class="nav-text">项目背景及效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目准备"><span class="nav-number">2.</span> <span class="nav-text">项目准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合约实现"><span class="nav-number">3.</span> <span class="nav-text">合约实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改记事本逻辑"><span class="nav-number">3.1.</span> <span class="nav-text">修改记事本逻辑</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合约部署"><span class="nav-number">4.</span> <span class="nav-text">合约部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Infura-节点服务注册-与-HDWalletProvider-安装"><span class="nav-number">4.1.</span> <span class="nav-text">Infura 节点服务注册 与 HDWalletProvider 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为-truffle-配置一个新网络"><span class="nav-number">4.2.</span> <span class="nav-text">为 truffle 配置一个新网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署"><span class="nav-number">4.3.</span> <span class="nav-text">部署</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前端界面"><span class="nav-number">5.</span> <span class="nav-text">前端界面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合约交互"><span class="nav-number">6.</span> <span class="nav-text">合约交互</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化"><span class="nav-number">6.1.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取笔记填充到前端页面"><span class="nav-number">6.2.</span> <span class="nav-text">获取笔记填充到前端页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发布笔记上链"><span class="nav-number">6.3.</span> <span class="nav-text">发布笔记上链</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行DApp"><span class="nav-number">7.</span> <span class="nav-text">运行DApp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文档"><span class="nav-number">8.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+  <div class="footer-custom"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17140514号-1</a></div>
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
