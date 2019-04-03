@@ -36,9 +36,9 @@
       <category term="Dapp" scheme="https://learnblockchain.cn/categories/ethereum/Dapp/"/>
     
     
-      <category term="Dapp" scheme="https://learnblockchain.cn/tags/Dapp/"/>
-    
       <category term="Truffle" scheme="https://learnblockchain.cn/tags/Truffle/"/>
+    
+      <category term="Dapp" scheme="https://learnblockchain.cn/tags/Dapp/"/>
     
   </entry>
   
@@ -60,9 +60,9 @@
       <category term="以太坊" scheme="https://learnblockchain.cn/categories/ethereum/"/>
     
     
-      <category term="钱包" scheme="https://learnblockchain.cn/tags/%E9%92%B1%E5%8C%85/"/>
-    
       <category term="以太坊" scheme="https://learnblockchain.cn/tags/%E4%BB%A5%E5%A4%AA%E5%9D%8A/"/>
+    
+      <category term="钱包" scheme="https://learnblockchain.cn/tags/%E9%92%B1%E5%8C%85/"/>
     
       <category term="web3j" scheme="https://learnblockchain.cn/tags/web3j/"/>
     
@@ -86,9 +86,9 @@
       <category term="以太坊" scheme="https://learnblockchain.cn/categories/ethereum/"/>
     
     
-      <category term="钱包" scheme="https://learnblockchain.cn/tags/%E9%92%B1%E5%8C%85/"/>
-    
       <category term="以太坊" scheme="https://learnblockchain.cn/tags/%E4%BB%A5%E5%A4%AA%E5%9D%8A/"/>
+    
+      <category term="钱包" scheme="https://learnblockchain.cn/tags/%E9%92%B1%E5%8C%85/"/>
     
       <category term="web3j" scheme="https://learnblockchain.cn/tags/web3j/"/>
     
@@ -185,9 +185,9 @@
       <category term="以太坊" scheme="https://learnblockchain.cn/categories/ethereum/"/>
     
     
-      <category term="钱包" scheme="https://learnblockchain.cn/tags/%E9%92%B1%E5%8C%85/"/>
-    
       <category term="以太坊" scheme="https://learnblockchain.cn/tags/%E4%BB%A5%E5%A4%AA%E5%9D%8A/"/>
+    
+      <category term="钱包" scheme="https://learnblockchain.cn/tags/%E9%92%B1%E5%8C%85/"/>
     
   </entry>
   
@@ -237,9 +237,9 @@
       <category term="以太坊" scheme="https://learnblockchain.cn/categories/ethereum/"/>
     
     
-      <category term="钱包" scheme="https://learnblockchain.cn/tags/%E9%92%B1%E5%8C%85/"/>
-    
       <category term="以太坊" scheme="https://learnblockchain.cn/tags/%E4%BB%A5%E5%A4%AA%E5%9D%8A/"/>
+    
+      <category term="钱包" scheme="https://learnblockchain.cn/tags/%E9%92%B1%E5%8C%85/"/>
     
       <category term="助记词" scheme="https://learnblockchain.cn/tags/%E5%8A%A9%E8%AE%B0%E8%AF%8D/"/>
     
@@ -402,18 +402,18 @@
   </entry>
   
   <entry>
-    <title>登链钱包（一款功能强大的以太坊钱包）完全开源</title>
+    <title>登链钱包-一款功能强大的完全开源以太坊钱包</title>
     <link href="https://learnblockchain.cn/2019/03/07/wallet-annouce/"/>
     <id>https://learnblockchain.cn/2019/03/07/wallet-annouce/</id>
     <published>2019-03-07T02:34:57.000Z</published>
-    <updated>2019-04-03T09:25:21.136Z</updated>
+    <updated>2019-04-03T09:32:37.637Z</updated>
     
-    <content type="html"><![CDATA[<p>你是否和我前段时间一样，苦苦的寻找一款好用的开源以太坊钱包，你会发现可用都很少，因为很多钱包说开源，仅仅是开源部分代码，现在不需要再找了，</p><p>登链钱包完全<strong>开源</strong>，登链钱包完全<strong>开源</strong>，登链钱包完全<strong>开源</strong>，重要的事情说三遍。<br>登链钱包完全<strong>免费</strong>，登链钱包完全<strong>免费</strong>，登链钱包完全<strong>免费</strong>，重要的事情说三遍。</p><p>再也不用傻乎乎找人开发以太坊钱包了， 直接拿去用吧；再也不用担心私钥会被上传到别人的服务器上。</p><a id="more"></a><h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>区块链是开放的，很难想象一个封闭的项目如何产生信任，开源一直是区块链社区所倡导的行为准则。<br>我们也希望开源能够降低行业的开发门槛，吸引更多的开发者和公司能够利用我们的代码，找到更多落地的应用场景，一起来推动行业的发展。<br>同时我们也相信开源可以是产品更加的安全，我们也邀请专业的区块链安全团队<a href="https://www.noneage.com/" target="_blank" rel="noopener">零时科技</a>来为钱包做安全审计。</p><h2 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示"></a>效果演示</h2><p>先来看看钱包长什么样吧，我制作了一个gif图片：</p><p align="center"><br>  <img src="https://wiki.learnblockchain.cn/images/upchainwallet.gif" width="450"><br></p><p>Gif 图片比较简陋，见谅见谅，可以看的出来界面参考了现在的主流钱包，感谢imToken及<a href="https://github.com/DwyaneQ/ETHWallet" target="_blank" rel="noopener">ETHWallet</a>，</p><p>大家可以戳<a href="https://wiki.learnblockchain.cn/images/upchain_wallet.apk" target="_blank" rel="noopener">链接</a>下载APK体验，<br>Google play 也已经上架，<a href="https://play.google.com/store/apps/details?id=pro.upchain.ethwallet" target="_blank" rel="noopener">链接</a></p><h2 id="功能介绍"><a href="#功能介绍" class="headerlink" title="功能介绍"></a>功能介绍</h2><p>目前版本支持一下功能：</p><ul><li style="list-style: none"><input type="checkbox" checked> 支持通过生成助记词、Keystore文件、私钥 创建钱包账号；</li><li style="list-style: none"><input type="checkbox" checked> 支持导出钱包账号助记词、私钥、Keystore文件；</li><li style="list-style: none"><input type="checkbox" checked> 账户余额查询及转账功能；</li><li style="list-style: none"><input type="checkbox" checked> 支持多个钱包账号管理；</li><li style="list-style: none"><input type="checkbox" checked> 支持ERC20 代币（余额显示、转账、代币币价显示）；</li><li style="list-style: none"><input type="checkbox" checked> 历史交易列表显示；</li><li style="list-style: none"><input type="checkbox" checked> 二维码扫描，兼容imToken格式；</li><li style="list-style: none"><input type="checkbox" checked> 支持用法币（美元和人民币）实时显示币价；</li><li style="list-style: none"><input type="checkbox" checked> 支持以太坊官方测试网络（Infura Koven及Ropsten）及本地测试网络。</li></ul><p>功能够全面吧，尤其是最后一个功能支持以太坊官方测试网络（Infura Koven及Ropsten）及本地测试网络，估计是开发者的最爱，做为开发者的我，懂你们的痛（可以获取到免费的以太币用于测试）。</p><p>代码的讲解和相应的课程，我们后面会陆续放出，在还没有放出之前，先提醒大家几个注意的点：</p><ol><li>使用本地网络测试的时候注意Geth 或 Ganache 设置下可接收RPC连接的地址，因为默认情况下只支持本地连接，这样手机上就无法连接。</li><li>显示交易记录功能需要自己搭建一个服务器提供API接口，这个接口来自TrustWallet，为了和本应用保持版本一致，我Fork了一份，地址为<a href="https://github.com/xilibi2003/trust-ray" target="_blank" rel="noopener">trust-ray</a>，这个库会解析区块，并把交易信息存到MongoDb数据库里，然后用API提供给客户端使用。</li><li>实时币价的显示其实也是使用trust-ray提供的接口，trust-ray 使用的是<a href="https://coinmarketcap.com/" target="_blank" rel="noopener">CoinMarketCap</a>的数据，目前使用的是CoinMarketCap免费提供的数据，CoinMarketCap现在有一套新的付费接口，免费的数据可能在将来会停用，到时需要使用CoinMarketCap 的apikey来访问。</li><li>代码中ERC20_Contract目录提供了一个ERC20合约给大家部署测试Token功能。</li></ol><p>其他的代码介绍及环境搭建大家就只有等我的文章了，大家也可以学习<a href="https://ke.qq.com/course/356068?tuin=bd898bbf" target="_blank" rel="noopener">网页钱包开发课程</a>，课程详细介绍了开发钱包必备的理论知识。</p><p>有什么需要的功能，可以提issue或加我微信留言。</p><p>对了本项目的GitHub地址为：<a href="https://github.com/xilibi2003/Upchain-wallet" target="_blank" rel="noopener">Upchain-wallet</a>,  点 Star 的同学都会发大财，哈哈哈~~~  </p><h2 id="参考的开源项目"><a href="#参考的开源项目" class="headerlink" title="参考的开源项目"></a>参考的开源项目</h2><p>本钱包在开发是站在巨人的肩膀上完成，特别感谢以下项目：</p><ul><li><a href="https://docs.web3j.io/index.html" target="_blank" rel="noopener">web3j</a></li><li><a href="https://bitcoinj.github.io/javadoc/0.14.7/" target="_blank" rel="noopener">bitcoinj</a></li><li><a href="https://github.com/TrustWallet/trust-wallet-android-source" target="_blank" rel="noopener">Trust-wallet</a></li><li><a href="https://github.com/DwyaneQ/ETHWallet" target="_blank" rel="noopener">ETHWallet</a></li><li><a href="https://github.com/bingoogolapple/BGAQRCode-Android" target="_blank" rel="noopener">BGAQRCode</a></li><li><a href="https://github.com/TrustWallet/trust-ray" target="_blank" rel="noopener">Trust-ray</a></li></ul><h2 id="再啰嗦几句"><a href="#再啰嗦几句" class="headerlink" title="再啰嗦几句"></a>再啰嗦几句</h2><p>本次开源也是受到区块链社区的影响，尤其是HiBlock区块链社区一些朋友坚持布道和开源的精神影响。</p><blockquote><p>HiBlock区块链社区 是国内最大的区块链开发者社区，社区已经聚集了数千名区块链开发者。</p></blockquote><p>登链钱包是由登链学院出品，希望大家知道<a href="https://upchain.ke.qq.com" target="_blank" rel="noopener">登链学院</a>不单出品优质课程，我们也为行业发展贡献一份力量，感谢大家转发。</p><p>想要加入开源钱包讨论群的的朋友，加微信：xlbxiong  备注：钱包</p><p>PS: 我们提供专业的钱包定制开发，欢迎咨询微信：xlbxiong 备注：定制开发</p><p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>]]></content>
+    <content type="html"><![CDATA[<p>你是否和我前段时间一样，苦苦的寻找一款好用的开源以太坊钱包，你会发现可用都很少，因为很多钱包说开源，仅仅是开源部分代码，现在不需要再找了。</p><p>重要的事情说三遍：<br>这是一个款<strong>完全开源</strong>，<strong>完全免费</strong>，功能强大<strong>支持DApp浏览器功能</strong>的钱包；<br>这是一个款<strong>完全开源</strong>，<strong>完全免费</strong>，功能强大<strong>支持DApp浏览器功能</strong>的钱包；<br>这是一个款<strong>完全开源</strong>，<strong>完全免费</strong>，功能强大<strong>支持DApp浏览器功能</strong>的钱包。</p><p>再也不用傻乎乎找人开发以太坊钱包了， 直接拿去用吧；再也不用担心私钥会被上传到别人的服务器上。</p><a id="more"></a><h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>区块链是开放的，很难想象一个封闭的项目如何产生信任，开源一直是区块链社区所倡导的行为准则。<br>我们也希望开源能够降低行业的开发门槛，吸引更多的开发者和公司能够利用我们的代码，找到更多落地的应用场景，一起来推动行业的发展。<br>同时我们也相信开源可以是产品更加的安全，我们也邀请专业的区块链安全团队<a href="https://www.noneage.com/" target="_blank" rel="noopener">零时科技</a>来为钱包做安全审计。</p><h2 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示"></a>效果演示</h2><p>先来看看钱包长什么样吧，我制作了一个gif图片：</p><p align="center"><br>  <img src="https://learnblockchain.cn/images/upchainwallet.gif" width="450"><br></p><p>19年4月更新：加入 <strong>DApp 浏览器</strong> 功能</p><p align="center"><br>  <img src="https://learnblockchain.cn/images/dapp.gif" width="450"><br></p><p>DApp 浏览器，目前暂为开源，需要请加微信：xlbxiong。</p><p>Gif 图片比较简陋，见谅见谅，可以看的出来界面参考了现在的主流钱包，感谢imToken及<a href="https://github.com/DwyaneQ/ETHWallet" target="_blank" rel="noopener">ETHWallet</a>，</p><p>大家可以戳<a href="https://wiki.learnblockchain.cn/images/upchain_wallet.apk" target="_blank" rel="noopener">链接</a>下载APK体验，<br>Google play 也已经上架，<a href="https://play.google.com/store/apps/details?id=pro.upchain.ethwallet" target="_blank" rel="noopener">链接</a></p><h2 id="功能介绍"><a href="#功能介绍" class="headerlink" title="功能介绍"></a>功能介绍</h2><p>目前版本支持一下功能：</p><ul><li style="list-style: none"><input type="checkbox" checked> 支持通过生成助记词、Keystore文件、私钥 创建钱包账号；</li><li style="list-style: none"><input type="checkbox" checked> 支持导出钱包账号助记词、私钥、Keystore文件；</li><li style="list-style: none"><input type="checkbox" checked> 账户余额查询及转账功能；</li><li style="list-style: none"><input type="checkbox" checked> 支持多个钱包账号管理；</li><li style="list-style: none"><input type="checkbox" checked> 支持ERC20 代币（余额显示、转账、代币币价显示）；</li><li style="list-style: none"><input type="checkbox" checked> 历史交易列表显示；</li><li style="list-style: none"><input type="checkbox" checked> 支持DApp Browser 浏览器 </li><li style="list-style: none"><input type="checkbox" checked> 二维码扫描，兼容imToken格式；</li><li style="list-style: none"><input type="checkbox" checked> 支持用法币（美元和人民币）实时显示币价；</li><li style="list-style: none"><input type="checkbox" checked> 支持以太坊官方测试网络（Infura Koven及Ropsten）及本地测试网络。</li></ul><p>功能够全面吧，尤其是最后一个功能支持以太坊官方测试网络（Infura Koven及Ropsten）及本地测试网络，估计是开发者的最爱，做为开发者的我，懂你们的痛（可以获取到免费的以太币用于测试）。</p><p>代码的讲解和相应的课程，我们后面会陆续放出，在还没有放出之前，先提醒大家几个注意的点：</p><ol><li>使用本地网络测试的时候注意Geth 或 Ganache 设置下可接收RPC连接的地址，因为默认情况下只支持本地连接，这样手机上就无法连接。</li><li>显示交易记录功能需要自己搭建一个服务器提供API接口，这个接口来自TrustWallet，为了和本应用保持版本一致，我Fork了一份，地址为<a href="https://github.com/xilibi2003/trust-ray" target="_blank" rel="noopener">trust-ray</a>，这个库会解析区块，并把交易信息存到MongoDb数据库里，然后用API提供给客户端使用。</li><li>实时币价的显示其实也是使用trust-ray提供的接口，trust-ray 使用的是<a href="https://coinmarketcap.com/" target="_blank" rel="noopener">CoinMarketCap</a>的数据，目前使用的是CoinMarketCap免费提供的数据，CoinMarketCap现在有一套新的付费接口，免费的数据可能在将来会停用，到时需要使用CoinMarketCap 的apikey来访问。</li><li>代码中ERC20_Contract目录提供了一个ERC20合约给大家部署测试Token功能。</li></ol><p>其他的代码介绍及环境搭建大家就只有等我的文章了，大家也可以学习<a href="https://ke.qq.com/course/356068?tuin=bd898bbf" target="_blank" rel="noopener">网页钱包开发课程</a>，课程详细介绍了开发钱包必备的理论知识。</p><p>有什么需要的功能，可以提issue或加我微信留言。</p><p>对了本项目的GitHub地址为：<a href="https://github.com/xilibi2003/Upchain-wallet" target="_blank" rel="noopener">Upchain-wallet</a>,  点 Star 的同学都会发大财，哈哈哈~~~  </p><h2 id="参考的开源项目"><a href="#参考的开源项目" class="headerlink" title="参考的开源项目"></a>参考的开源项目</h2><p>本钱包在开发是站在巨人的肩膀上完成，特别感谢以下项目：</p><ul><li><a href="https://docs.web3j.io/index.html" target="_blank" rel="noopener">web3j</a></li><li><a href="https://bitcoinj.github.io/javadoc/0.14.7/" target="_blank" rel="noopener">bitcoinj</a></li><li><a href="https://github.com/TrustWallet/trust-wallet-android-source" target="_blank" rel="noopener">Trust-wallet</a></li><li><a href="https://github.com/DwyaneQ/ETHWallet" target="_blank" rel="noopener">ETHWallet</a></li><li><a href="https://github.com/bingoogolapple/BGAQRCode-Android" target="_blank" rel="noopener">BGAQRCode</a></li><li><a href="https://github.com/TrustWallet/trust-ray" target="_blank" rel="noopener">Trust-ray</a></li></ul><h2 id="再啰嗦几句"><a href="#再啰嗦几句" class="headerlink" title="再啰嗦几句"></a>再啰嗦几句</h2><p>本次开源也是受到区块链社区的影响，尤其是HiBlock区块链社区一些朋友坚持布道和开源的精神影响。</p><blockquote><p>HiBlock区块链社区 是国内最大的区块链开发者社区，社区已经聚集了数千名区块链开发者。</p></blockquote><p>登链钱包是由登链学院出品，希望大家知道<a href="https://upchain.ke.qq.com" target="_blank" rel="noopener">登链学院</a>不单出品优质课程，我们也为行业发展贡献一份力量，感谢大家转发。</p><p>想要加入开源钱包讨论群的的朋友，加微信：xlbxiong  备注：钱包</p><p>PS: 我们提供专业的钱包定制开发，欢迎咨询微信：xlbxiong 备注：定制开发</p><p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;你是否和我前段时间一样，苦苦的寻找一款好用的开源以太坊钱包，你会发现可用都很少，因为很多钱包说开源，仅仅是开源部分代码，现在不需要再找了，&lt;/p&gt;
-&lt;p&gt;登链钱包完全&lt;strong&gt;开源&lt;/strong&gt;，登链钱包完全&lt;strong&gt;开源&lt;/strong&gt;，登链钱包完全&lt;strong&gt;开源&lt;/strong&gt;，重要的事情说三遍。&lt;br&gt;登链钱包完全&lt;strong&gt;免费&lt;/strong&gt;，登链钱包完全&lt;strong&gt;免费&lt;/strong&gt;，登链钱包完全&lt;strong&gt;免费&lt;/strong&gt;，重要的事情说三遍。&lt;/p&gt;
+      &lt;p&gt;你是否和我前段时间一样，苦苦的寻找一款好用的开源以太坊钱包，你会发现可用都很少，因为很多钱包说开源，仅仅是开源部分代码，现在不需要再找了。&lt;/p&gt;
+&lt;p&gt;重要的事情说三遍：&lt;br&gt;这是一个款&lt;strong&gt;完全开源&lt;/strong&gt;，&lt;strong&gt;完全免费&lt;/strong&gt;，功能强大&lt;strong&gt;支持DApp浏览器功能&lt;/strong&gt;的钱包；&lt;br&gt;这是一个款&lt;strong&gt;完全开源&lt;/strong&gt;，&lt;strong&gt;完全免费&lt;/strong&gt;，功能强大&lt;strong&gt;支持DApp浏览器功能&lt;/strong&gt;的钱包；&lt;br&gt;这是一个款&lt;strong&gt;完全开源&lt;/strong&gt;，&lt;strong&gt;完全免费&lt;/strong&gt;，功能强大&lt;strong&gt;支持DApp浏览器功能&lt;/strong&gt;的钱包。&lt;/p&gt;
 &lt;p&gt;再也不用傻乎乎找人开发以太坊钱包了， 直接拿去用吧；再也不用担心私钥会被上传到别人的服务器上。&lt;/p&gt;
     
     </summary>
@@ -421,9 +421,9 @@
       <category term="以太坊" scheme="https://learnblockchain.cn/categories/ethereum/"/>
     
     
-      <category term="钱包" scheme="https://learnblockchain.cn/tags/%E9%92%B1%E5%8C%85/"/>
-    
       <category term="以太坊" scheme="https://learnblockchain.cn/tags/%E4%BB%A5%E5%A4%AA%E5%9D%8A/"/>
+    
+      <category term="钱包" scheme="https://learnblockchain.cn/tags/%E9%92%B1%E5%8C%85/"/>
     
   </entry>
   
