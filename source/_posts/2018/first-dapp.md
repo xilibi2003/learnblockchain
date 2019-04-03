@@ -464,9 +464,15 @@ candy maple cake sugar pudding cream honey rich smooth crumble sweet treat
 ![](https://learnblockchain.cn/images/metamask-transactionsuccess.png)
 
 好了，恭喜你，即将成为一名去中心化式应用开发者的你已经成为迈出了坚实的一步。
-如果学习中遇到问题，欢迎来我的**[知识星球](https://learnblockchain.cn/images/zsxq.png)**交流。
+还可以阅读另一篇[开发链上记事本](https://learnblockchain.cn/2019/03/30/dapp_noteOnChain) 进一步巩固DApp 开发。 
+
+加我微信：xlbxiong 备注：DApp， 加入以太坊DApp开发微信群。
+
+如果学习中遇到问题，欢迎加入**[知识星球](https://learnblockchain.cn/images/zsxq.png)**交流。
 
 想全面学习去中心化应用的同学可以学习我们的视频课程[区块链全栈-以太坊DAPP开发实战](https://wiki.learnblockchain.cn/course/dapp.html)。
+
+
 
 ## 参考文档
 
