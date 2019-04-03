@@ -1,5 +1,5 @@
 ---
-title: 登链钱包（一款功能强大的以太坊钱包）完全开源
+title: 登链钱包-一款功能强大的完全开源以太坊钱包
 permalink: wallet-annouce
 date: 2019-03-07 10:34:57
 categories:
@@ -10,10 +10,12 @@ tags:
 author: Tiny熊
 ---
 
-你是否和我前段时间一样，苦苦的寻找一款好用的开源以太坊钱包，你会发现可用都很少，因为很多钱包说开源，仅仅是开源部分代码，现在不需要再找了，
+你是否和我前段时间一样，苦苦的寻找一款好用的开源以太坊钱包，你会发现可用都很少，因为很多钱包说开源，仅仅是开源部分代码，现在不需要再找了。
 
-登链钱包完全**开源**，登链钱包完全**开源**，登链钱包完全**开源**，重要的事情说三遍。
-登链钱包完全**免费**，登链钱包完全**免费**，登链钱包完全**免费**，重要的事情说三遍。
+重要的事情说三遍：
+这是一个款**完全开源**，**完全免费**，功能强大**支持DApp浏览器功能**的钱包；
+这是一个款**完全开源**，**完全免费**，功能强大**支持DApp浏览器功能**的钱包；
+这是一个款**完全开源**，**完全免费**，功能强大**支持DApp浏览器功能**的钱包。
 
 再也不用傻乎乎找人开发以太坊钱包了， 直接拿去用吧；再也不用担心私钥会被上传到别人的服务器上。
 
@@ -31,8 +33,17 @@ author: Tiny熊
 先来看看钱包长什么样吧，我制作了一个gif图片：
 
 <p align="center">
-  <img src="https://wiki.learnblockchain.cn/images/upchainwallet.gif" width="450">
+  <img src="https://learnblockchain.cn/images/upchainwallet.gif" width="450">
 </p>
+
+19年4月更新：加入 **DApp 浏览器** 功能
+
+<p align="center">
+  <img src="https://learnblockchain.cn/images/dapp.gif" width="450">
+</p>
+
+DApp 浏览器，目前暂为开源，需要请加微信：xlbxiong。
+
 
 Gif 图片比较简陋，见谅见谅，可以看的出来界面参考了现在的主流钱包，感谢imToken及[ETHWallet](https://github.com/DwyaneQ/ETHWallet)，
 
@@ -49,6 +60,7 @@ Google play 也已经上架，[链接](https://play.google.com/store/apps/detail
 - [x] 支持多个钱包账号管理；
 - [x] 支持ERC20 代币（余额显示、转账、代币币价显示）；
 - [x] 历史交易列表显示；
+- [x] 支持DApp Browser 浏览器 
 - [x] 二维码扫描，兼容imToken格式；
 - [x] 支持用法币（美元和人民币）实时显示币价；
 - [x] 支持以太坊官方测试网络（Infura Koven及Ropsten）及本地测试网络。
