@@ -6,3 +6,6 @@ node_modules/
 public/
 .deploy*/
 .npmignore
+source/_posts/2019/images/*
+source/.MWebMetaData
+

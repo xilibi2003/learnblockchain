@@ -42,7 +42,7 @@ author: Tiny熊
   <img src="https://learnblockchain.cn/images/dapp.gif" width="450">
 </p>
 
-DApp 浏览器，目前暂为开源，需要请加微信：xlbxiong。
+DApp 浏览器，目前暂未开源，需要请加微信：xlbxiong。
 
 
 Gif 图片比较简陋，见谅见谅，可以看的出来界面参考了现在的主流钱包，感谢imToken及[ETHWallet](https://github.com/DwyaneQ/ETHWallet)，

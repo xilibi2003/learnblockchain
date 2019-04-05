@@ -17,9 +17,9 @@ author: Tiny熊
 <!-- more -->
 ## 写在前面
 
-钱包是使用Android安卓平台编写，使用的是原生代码Java 语言编写， 是基于Java 1.8 版本，也使用了Java 1.8 中一些较新的语言特性，如 Lambda表达式等；另外还较多使用了[ReactiveX/RxAndroid](https://github.com/ReactiveX/RxAndroid/)响应式编程用法。
+本钱包是基于Android安卓平台开发，使用的是原生语言 Java 编写， 是基于Java 1.8 版本，其中使用了Java 1.8 中一些较新的语言特性，如 Lambda表达式等；另外还较多使用了[ReactiveX/RxAndroid](https://github.com/ReactiveX/RxAndroid/)响应式编程用法。
 
-在本系列文章中，重点是介绍以太坊钱包账号、交易等逻辑，有时可能会假定读者已经了解Android开发等相关知识，因为这些内容不是文章的重点，因此不会过多介绍，请海涵。
+在本系列文章中，重点是介绍以太坊钱包账号、交易等逻辑，有时可能会假定读者已经了解[以太坊](https://wiki.learnblockchain.cn/ethereum/readme.html)及Android开发等相关知识，因为这些内容不是文章的重点，因此不会过多介绍，请海涵。
 
 
 ## 钱包包含的功能
