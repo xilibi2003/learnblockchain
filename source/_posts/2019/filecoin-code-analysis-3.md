@@ -142,7 +142,7 @@ go-filecoin config heartbeat.beatTarget "/dns4/stats-infra.kittyhawk.wtf/tcp/808
 
 > 在 https://stats.kittyhawk.wtf/ 查看filecoin网络，节点已经激活
 
-![](/images/active.png)
+![](https://img.learnblockchain.cn/2019/active.png!wl)
 
 #### 获取Mock FIL用于测试<a name="从faucet中获取mock代币"></a>
 
@@ -152,7 +152,7 @@ go-filecoin config heartbeat.beatTarget "/dns4/stats-infra.kittyhawk.wtf/tcp/808
 - go-filecoin message wait ${MESSAGE_CID}  本质上是转账交易，wiki上说明的是等待30s，但是这是在本地区块数据同步完成的基础上才行的。
 - 笔者已提交建议给官方，在wiki上更为清晰地表述。
 
-![](/images/wikiissue1.png)
+![](https://img.learnblockchain.cn/2019/wikiissue1.png!wl)
 
 
 ```
@@ -427,4 +427,4 @@ go-filecoin retrieval-client retrieve-piece < minerAddress >  < CID >
 
 - 可以打包成docker镜像，有兴趣的朋友可以自行尝试。
 
-[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
+[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客

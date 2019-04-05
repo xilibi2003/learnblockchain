@@ -708,4 +708,4 @@ func (node *Node) StopMining(ctx context.Context) {
 > 后面会抽空补充一章总结，笔者在第4章中有提到过，薄读->厚读->再薄读,我们还需要一次薄读，来加深我们对filecoin的认识。
 
 
-[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
+[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客

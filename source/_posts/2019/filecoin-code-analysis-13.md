@@ -330,7 +330,7 @@ location: actor/export.go
     - 全网只有一个paymentbroker
     - 几个概念的关系简图
 
-![](/images/payment.png)
+![](https://img.learnblockchain.cn/2019/payment.png!wl)
 
 - 源码分析注释
 ```
@@ -526,4 +526,4 @@ location: actor/export.go
 - 表征actor的状态
     
 
-[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
+[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客

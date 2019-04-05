@@ -43,7 +43,7 @@ author: Tiny熊
 
 实现完成的，界面如下图：
 
-![](https://learnblockchain.cn/images/1551843006.png)
+![](https://img.learnblockchain.cn/2019/1551843006.png!wl)
 
 这是一张导入钱包账号的截图（导入和创建，其实原理一样），界面仿照ImToken，不过本文将不会介绍UI部分的编写。
 
@@ -52,7 +52,7 @@ author: Tiny熊
 为了完成创建账号功能，我们需要使用到两个库：[Web3j](https://github.com/web3j/web3j/) 和 [bitcoinj](https://github.com/bitcoinj/bitcoinj)
 
 Web3是一套和以太坊通信的封装库，Web3j是Java版本的实现，例如发起交易和智能合约进行交互，下图很好的表达了其作用。
-![](https://learnblockchain.cn/images/15525530768209.jpg)
+![](https://img.learnblockchain.cn/2019/15525530768209.jpg!wl)
 
 不过本文中的功能，主要是使用了web3j中椭圆曲线加密及KeyStore文件的生成与解密。
 

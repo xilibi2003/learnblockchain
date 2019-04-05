@@ -25,7 +25,7 @@ author: Tiny熊
 
 后来Google 推荐多个架构模式： MPV、 MVVM模式来解决数据和UI耦合的问题，[登链钱包代码](https://github.com/xilibi2003/Upchain-wallet)，使用的就是MVVM模式，所以对它做一个简单介绍，下面是MVVM的视图和数据的交互图：
 
-![](https://learnblockchain.cn/images/15532408840119.jpg)
+![](https://img.learnblockchain.cn/2019/15532408840119.jpg!wl)
 
 View 通常对应于Activity/Fragment/自定义View
 Model：则是和数据相关的模块。
@@ -52,7 +52,7 @@ LiveData是一个可观察的数据持有者类。观察者可以方便我们以
 
 展示信息主要包括账号地址、eth余额及该账号所拥有的Token及余额， 其界面效果如下:
 
-![上图](https://learnblockchain.cn/images/15532473043633.jpg)
+![上图](https://img.learnblockchain.cn/2019/15532473043633.jpg!wl)
 > 这个界面应的是[登链钱包](https://github.com/xilibi2003/Upchain-wallet)的`PropertyFragment`，上图的UPT 是我自己发行的Token，所以没有显示价格
 
 

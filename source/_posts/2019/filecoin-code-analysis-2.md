@@ -118,7 +118,7 @@ Proof-of-Storage包含复制证明(PoR)和时空证明(PoSt)，其作用主要�
   - 下图中变量i会轮询生成新的时间变量产生随机挑战。
 
 
-![](/images/post.png)
+![](https://img.learnblockchain.cn/2019/post.png!wl)
 
 
 ## 预期共识<a name="预期共识"></a>
@@ -146,9 +146,9 @@ Proof-of-Storage包含复制证明(PoR)和时空证明(PoSt)，其作用主要�
 
 > 预期共识通过选举方案产生
 
-![](/images/sle.png)
+![](https://img.learnblockchain.cn/2019/sle.png!wl)
 
-![](/images/sle2.png)
+![](https://img.learnblockchain.cn/2019/sle2.png!wl)
 
 
 |选举方案属性|说明|
@@ -200,6 +200,6 @@ Proof-of-Storage包含复制证明(PoR)和时空证明(PoSt)，其作用主要�
 	- wallet addr表示钱包地址
 	- miner id表示矿工id
 
-![](/images/filecoin-1.png)
+![](https://img.learnblockchain.cn/2019/filecoin-1.png!wl)
 
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。

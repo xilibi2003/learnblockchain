@@ -86,7 +86,7 @@ DAI的这种抵押贷款逻辑非常有意思 ，它生成的CDP借贷凭证提�
 
 现在我们来看 [MakerDao抵押借款的界面](https://cdp.makerdao.com/)就清晰了，以下截图是抵押1 ETH 生成60个DAI：
 
-![](https://learnblockchain.cn/images/15530688001807.jpg)
+![](https://img.learnblockchain.cn/2019/15530688001807.jpg!wl)
 
 Collateralization ratio 抵押率为 228%， Liquidation price 清算价格为90 美金。
 

@@ -51,7 +51,7 @@ un_reward: true
 > 详细参见下图
 
 
-![](/images/filecoin_arch.png)
+![](https://img.learnblockchain.cn/2019/filecoin_arch.png!wl)
 
 - 在顶层源码中分为go-filecon和rust-fil-proofs。分别为主框架和存储证明部分，本文主要分析go-filecoin源码的顶层框架。
 
@@ -105,7 +105,7 @@ Protocols  │ Storage  │ │  Mining   │ │Retrieval │     │          
 
 #### IPFS与filecoin在技术架构层面的关系
 
-![](/images/ipfsandfilecoin.png)
+![](https://img.learnblockchain.cn/2019/ipfsandfilecoin.png!wl)
 
 - IPFS与filecoin同样采用IPLD结构，数据结构是互通的，简而言之，在IPFS之上存储的数据，filecoin可以读取。filecoin存储的未密封数据，IPFS也是可以读取的。
 - IPFS与filecoin网络部分均复用libp2p部分。
@@ -340,4 +340,4 @@ type API interface {
 
 > 钱包管理。
 
-[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
+[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客

@@ -27,7 +27,7 @@ author: Tiny熊
 2. 查看之前(自己的)记事本
 
 **实现效果：**
-![](https://learnblockchain.cn/images/15539548973073.jpg)
+![](https://img.learnblockchain.cn/2019/15539548973073.jpg!wl)
 
 本合约也部署到以太坊官方测试网络Ropsten， 如Englist first Note 的交易记录可以在[EtherScan查询](https://ropsten.etherscan.io/tx/0xd6b7366fa06a643be0de7abc26e04b0509595f9a1cf216e6f7c29f1ad78c8775)。
 
@@ -139,7 +139,7 @@ npm install truffle-hdwallet-provider
 
 在使用Infura之前，我们需要注册一个访问Infura服务的Token， 注册地址为：[https://infura.io/register](https://infura.io/register)， 注册后创建一个  Project, 复制节点url：
 
-![](https://learnblockchain.cn/images/15540848537217.jpg)
+![](https://img.learnblockchain.cn/2019/15540848537217.jpg!wl)
 
 ### 为 truffle 配置一个新网络
 

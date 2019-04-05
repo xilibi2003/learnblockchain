@@ -654,4 +654,4 @@ func init() {
    +NewPublisher(sub *pubsub.PubSub) : *Publisher
 ```
 
-[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
+[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客

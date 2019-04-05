@@ -143,7 +143,7 @@ public class ETHWallet {
 greenDAO 是一个将**对象映射到 SQLite 数据库**中的轻量且快速的 ORM 解决方案，以下是一个greenDAO的作用示意图：
 
 
-![](https://learnblockchain.cn/images/15529003884556.jpg)
+![](https://img.learnblockchain.cn/2019/15529003884556.jpg!wl)
 
 
 这里我们也使用了 greenDAO 来把ETHWallet对象映射到 SQLite 数据库， greenDAO的用法这里只简单说明，不详细阐述，大家可以跟随官方提供的[introduction](http://greenrobot.org/greendao/documentation/introduction/) 和 [how-to-get-started](http://greenrobot.org/greendao/documentation/how-to-get-started/)。

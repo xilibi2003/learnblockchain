@@ -15,7 +15,7 @@ un_reward: true
 <!-- more -->
 
 ##  协议概览图
-![](/images/retrieval_protocol.png)
+![](https://img.learnblockchain.cn/2019/retrieval_protocol.png!wl)
 
 - 此概览图为当前的实现，整个检索的代码还没有完善
 - 目前的逻辑比较简单，需要指定矿工、内容cid即可进行免费检索
@@ -104,4 +104,4 @@ un_reward: true
    +Host() : host.Host
 ```
 
-[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
+[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客

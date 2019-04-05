@@ -36,7 +36,7 @@ author: Xiaoyi Wang
 
 最传统的公证人机制是基于中心化交易所得跨链资产交换，这种跨链的方式比较单一，只支持资产的交换，如下图演示了Alice通过交易所，用比特币和Bob交换ETH的过程。 
 
-![](https://learnblockchain.cn/images/15533141959843.jpg)
+![](https://img.learnblockchain.cn/2019/15533141959843.jpg!wl)
 
 
 1. Alice 通过交易所钱包将自己的比特币打入交易所地址;
@@ -50,7 +50,7 @@ author: Xiaoyi Wang
 
 至此完成了Alice和Bob的BTC和ETH的交换（案例中省去了交易所的服务费）。通过该例子可以看出交易所的方式目前仅能够支持资产的交换，且资产交换的原子性、安全性完全由中心化的交易所保障存在较大的中心化风险。
 
-![](https://learnblockchain.cn/images/15533142153122.jpg)
+![](https://img.learnblockchain.cn/2019/15533142153122.jpg!wl)
 
 
 除此之外还有一种著名的分布式账本技术Ripple，也是采用类似公证人的机制来解决全球金融机构之间的资产交换。Ripple的系统架构如上图所示，Ripple系统中交易通过网络中的验证者进行交易的验证，验证者验证的交易通过加密算法保护交易内容不能被验证着窥探从而保证交易的隐私性。
@@ -64,7 +64,7 @@ author: Xiaoyi Wang
 
 如下图所示，我们用一个例子来阐述如何使用哈希时间锁定进行跨链的原子资产交换，假设Alice和Bob有资产交换的需求，Alice想用1个BTC和Bob换20个ETH. 那么首先需要在两条链上设置哈希时间锁定合约，然后执行如下步骤：
 
-![](https://learnblockchain.cn/images/15533142967423.jpg)
+![](https://img.learnblockchain.cn/2019/15533142967423.jpg!wl)
 
 1. Alice 随机构建一个字符串s，并计算出其哈希 `h = hash(s)`；
 2. Alice 将h发送给Bob的合约；
@@ -94,7 +94,7 @@ BTC-Relay是号称的史上第一个侧链，BTC-Relay是通过以太坊构建�
 4. Alice 接下来就可以调用relay tx;
 5. BTCSwap合约结合tx和BTC链的区块链进行SPV验证，验证通过则将20ETH转给Alice以太坊地址。
 
-![](https://learnblockchain.cn/images/15533145100219.jpg)
+![](https://img.learnblockchain.cn/2019/15533145100219.jpg!wl)
 
 这种跨链的实现方式简单，但是BTC Relay需要额外的信任和维护成本，且智能合约内部的数据存储会有体积膨胀的问题。但是侧链的机制相对哈希锁定而言能够提供更多的跨链交互场景，侧链以及类SPV验证的思想适合所有跨链的场景。
 
@@ -109,7 +109,7 @@ Hub: 用于处理跨链交互的中继链；
 Zone: Cosmos中的平行链， Cosmos中平行链需要具备两个前提条件： 1. 快速确定性（fast finality）, 这个特性由共识算法保障，也就是说Cosmos的跨链不直接支持PoW等概率确定模型的区块链； 2. 强监管性（Sovereignty)：每个平行链都具有一组验证者能够决定其出块。 
 
 
-![](https://learnblockchain.cn/images/15533146074350.jpg)
+![](https://img.learnblockchain.cn/2019/15533146074350.jpg!wl)
 
 为了支持平行链之间的跨链互操作，Cosmos提出了一种跨链交互协议IBC(Inter-Blockchain Communication protocol), 并利用tendermint共识算法的即时确定性实现多个异构链之间的价值和数据传输。
 
@@ -120,7 +120,7 @@ Zone: Cosmos中的平行链， Cosmos中平行链需要具备两个前提条件�
 如下图所示是Cosmos 网络的详细架构图，Cosmos为方便平行链开发提供了基本服务CosmosSDK包括：共识、网络以及IBC协议等，这样基于Cosmos SDK开发的子链之间都能够方便地互相交互。此外对于非Cosmos SDK 开发的区块链需要使用Peg Zone进行桥接，如图中的Ethereum。
 
 
-![](https://learnblockchain.cn/images/15533146255840.jpg)
+![](https://img.learnblockchain.cn/2019/15533146255840.jpg!wl)
 
 
 笔者认为Cosmos为跨链带来的最大贡献在于IBC协议的设计，IBC协议提供了一种通用的跨链协议标准。IBC的设计使得跨链交易可以在多个Hub之间进行安全路由和转发，类似目前互联网的TCP/IP 协议。但是遗憾的是目前的Cosmos设计也只能够支持资产的跨链，而且由于不同区块链的业务不同其共识速率的不一致也会影响跨链交易有效性的证明。
@@ -130,7 +130,7 @@ Zone: Cosmos中的平行链， Cosmos中平行链需要具备两个前提条件�
 
 Polkadot也是一种集成平行链和中继链的多层多链架构，Polkadot区块链的整体架构图如下图所示，主要包含三种角色链和四种参与方：
 
-![](https://learnblockchain.cn/images/15533146731752.jpg)
+![](https://img.learnblockchain.cn/2019/15533146731752.jpg!wl)
 
 
 三种链角色：
@@ -158,7 +158,7 @@ Polkadot的特性包括两个，一个是共享安全性，一个是不需信任
 
 以上便是Polkadot跨链交易的主要步骤，由于所有平行链的共识同步发生（中继链区块示意图如下），因此跨链交易不会有诸如双花等安全性问题。
 
-![](https://learnblockchain.cn/images/15533147383944.jpg)
+![](https://img.learnblockchain.cn/2019/15533147383944.jpg!wl)
 
 Polkadot 的平行链之间的跨链交换的安全性保障主要来自共享安全性这个特点，共享安全性使得跨链交易和普通交易同步发生也就不存在其他跨链场景中的双花等跨链数据不一致问题。其次Polkadot中的引入的特殊状态验证方法方便中继链进行跨链等消息的有效性验证。
 
