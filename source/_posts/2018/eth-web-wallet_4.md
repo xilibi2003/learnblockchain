@@ -124,7 +124,7 @@ ethers.js 构造合约对象很简单，仅需要提供三个参数给ethers.Con
 
 结合UI来实现以下获取Token余额，UI如下：
 
- ![](https://learnblockchain.cn/media/15405195250777.jpg)
+ ![](https://img.learnblockchain.cn/2018/15405195250777.jpg!wl)
 
 在HTML里，定义的标签如下：
 
@@ -152,7 +152,7 @@ ethers.js 构造合约对象很简单，仅需要提供三个参数给ethers.Con
 
 转移Token的UI效果如下：
 
- ![](https://learnblockchain.cn/media/15405195493994.jpg)
+ ![](https://img.learnblockchain.cn/2018/15405195493994.jpg!wl)
 
 界面的HTML代码如下：
 
@@ -229,3 +229,5 @@ ethers.js 的 Contract 提供了一个非常方便方法：`contract.estimate.fu
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
 
 [深入浅出区块链知识星球](https://learnblockchain.cn/images/zsxq.png)最专业技术问答社区，加入社区还可以在微信群里和300多位区块链技术爱好者一起交流。
+
+
