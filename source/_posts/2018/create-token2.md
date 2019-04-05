@@ -173,7 +173,7 @@ finney 是货币单位 1 finney = 0.001eth
 
 高级功能完整代码请前往我的[小专栏](https://xiaozhuanlan.com/blockchaincore)， 项目的完整的部署方法参考[上一篇](https://learnblockchain.cn/2018/01/12/create_token/)，不同的是创建合约时需要预存余额，如图：
 
-![](https://learnblockchain.cn/images/create_adv_token.jpg)
+![](https://img.learnblockchain.cn/2018/create_adv_token.jpg!wl)
 
 专栏已经有多篇文章介绍Remix Solidity IDE的使用，这里就不一一截图演示了，请大家自己测试验证。
 

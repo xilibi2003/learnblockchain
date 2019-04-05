@@ -153,7 +153,7 @@ durationInMinutes： 募资时间
 finneyCostOfEachToken 每个代币的价格, 这里为了方便使用了[单位finney](https://learnblockchain.cn/2018/02/02/solidity-unit/)及值为：1 （1 ether =  1000 finney）
 addressOfTokenUsedAsReward： 代币合约地址。
 如：
-![](https://learnblockchain.cn/images/crowdsale_create.jpeg)
+![](https://img.learnblockchain.cn/2018/crowdsale_create.jpeg!wl)
 本文使用的参数为：
 ```
 "0xc6f9ea59d424733e8e1902c7837ea75e20abfb49",3, 100, 1,"0xad8972e2b583f580fc52f737b98327eb65d08f8c"
@@ -161,7 +161,7 @@ addressOfTokenUsedAsReward： 代币合约地址。
 
 2. 参与人投资的时候实际购买众筹合约代币，所以需要先向合约预存代币，代币的数量为：募资额度 / 代币的价格 ， 这里为：3 * 1000/1 = 3000 （当能也可以大于3000）。
 向合约预存代币可以使用[myetherwallet](https://www.myetherwallet.com/#send-transaction)钱包，或在remix中重新加载代币合约，执行代币合约tranfer()函数进行代币转账，转账的地址就是我们创建合约的地址。如使用myetherwallet转账如图：
-![](https://learnblockchain.cn//images/crowdsale_send_token.jpeg)
+![](https://img.learnblockchain.cn/2018/crowdsale_send_token.jpeg!wl)
 
 3. 投资人向众筹合约转账（发送以太币）即是参与众筹行为，转账时，会执行Fallback回退函数（即无名函数）向其账户打回相应的代币。
 

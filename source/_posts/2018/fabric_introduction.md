@@ -292,7 +292,7 @@ service docker restart
   在CLI启动的时候，会运行scripts/script.sh文件，这个脚本文件包含了创建Channel，加入Channel，安装Example02，运行Example02等功能。
 
 运行完如果出现下图所示，说明整个Fabric网络已经通了。
-![在这里插入图片描述](/images/fabric_test.png)
+![在这里插入图片描述](https://img.learnblockchain.cn/2018/fabric_test.png!wl)
 
 #### 这里记录本人测试Fabric环境是否成功时遇到的问题
 **1.** 如果发现运行 **./network_setup.sh up**命令 后提示在...fabric/release/linux-amd64/bin文件夹下找不到指定文件

@@ -19,7 +19,7 @@ author: lgy
 
 Fabric中的所有交易都是通过chaincode执行
 
-![](/images/transaction_process.png)
+![](https://img.learnblockchain.cn/2018/transaction_process.png!wl)
 
 1. 应用程序客户端通过SDK调用证书服务（CA）服务，进行注册和登记，并获取身份证书。
 

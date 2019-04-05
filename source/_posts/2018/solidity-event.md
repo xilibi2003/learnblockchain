@@ -165,7 +165,7 @@ instructorEvent.watch(function(error, result) {
 ```
 
 代码更新之后，可以在浏览器查看效果，这是点击"Updata Info"按钮之后，会及时更新界面，如图：
-![](/images/solidity_event.jpg)
+![](https://img.learnblockchain.cn/2018/solidity_event.jpg!wl)
 
 完整的代码请订阅小专栏[区块链技术](https://xiaozhuanlan.com/blockchaincore)查看。
 

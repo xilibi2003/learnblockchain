@@ -23,7 +23,7 @@ author: Tiny熊
 ## 转账UI 页面的编写
 
 转账UI主体的界面如图：
-![](/images/web3_sendeth_ui.jpg)
+![](https://img.learnblockchain.cn/2018/web3_sendeth_ui.jpg!wl)
 
 实现这个界面很简单，这里就不代码了。大家可以打开[Demo](https://web3.learnblockchain.cn/transDemo.html)，右击查看页面源码。
 

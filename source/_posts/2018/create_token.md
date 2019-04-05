@@ -23,7 +23,7 @@ author: Tiny熊
 如果不那么追求精确的定义，代币就是数字货币，比特币、以太币就是一个代币。
 利用以太坊的智能合约可以轻松编写出属于自己的代币，代币可以代表任何可以交易的东西，如：积分、财产、证书等等。
 因此不管是出于商业，还是学习很多人想创建一个自己的代币，先贴一个图看看创建的代币是什么样子。
-![](https://learnblockchain.cn/images/token_info.jpeg)
+![](https://img.learnblockchain.cn/2018/token_info.jpeg!wl)
 
 今天我们就来详细讲一讲怎样创建一个这样的代币。
 
@@ -156,17 +156,17 @@ contract TokenERC20 {
 在开发测试智能合约时，[MetaMask](https://metamask.io/)和[Remix Solidity IDE](https://remix.ethereum.org)是两个非常好用的工具，今天就用他们来完成部署。
 
 1. 安装和配置MetaMask请参考[开发、部署第一个去中心化应用](https://learnblockchain.cn/2018/01/12/first-dapp)，不同的上本文选择了以太坊的测试网络Ropsten，如果你没有余额请点击购买buy，进入的网站可以送一些测试以太币给你，配置好之后，界面应该如下：
-![](https://learnblockchain.cn/images/metamask_main.png)
+![](https://img.learnblockchain.cn/2018/metamask_main.png!wl)
 
 2. 浏览器打开Remix Solidity IDE，复制以上源码粘贴上，在右侧选项参考如图的设置：
-![](https://learnblockchain.cn/images/token_create_remix.jpeg)
+![](https://img.learnblockchain.cn/2018/token_create_remix.jpeg!wl)
  注意Environment和Account和MetaMask保持一致，然后选择合约TokenERC20，填入你想要的发行量，名称及代号，就可以创建合约了。
  这时MetaMask会弹出一个交易确认框，点SUBMIT。待合约部署交易确认之后，复制合约地址。
 
 3. 打开Metamask界面，切换到TOKENS，点添加合约，出现如下对话框：
-![](https://learnblockchain.cn/images/metamask_add_token.png)
+![](https://img.learnblockchain.cn/2018/metamask_add_token.png!wl)
 填入刚刚复制的地址，点ADD，这时你就可以看到你创建的代币了，如图：
-![](https://learnblockchain.cn/images/metamask_token_added.png)
+![](https://img.learnblockchain.cn/2018/metamask_token_added.png!wl)
 
 哈哈，你已经完成了代币的创建和部署(正式网络和测试网络部署方法一样)，可以在[Etherscan](https://ropsten.etherscan.io/token/0x1f0c085ad323bb69758111cf9ecdc32a32d9a5bb)查询到我们刚刚部署的代币。可以用它进行ICO了，从此走上人生巅峰（玩笑话，不鼓励大家发行无意义的代币）。
 
@@ -174,15 +174,15 @@ contract TokenERC20 {
 由于MetaMask插件没有提供代币交易功能，同时考虑到很多人并没有以太坊钱包或是被以太坊钱包网络同步问题折磨，今天我用[网页钱包](https://www.myetherwallet.com)来讲解代币交易。
 1. 进入[网页钱包地址](https://www.myetherwallet.com/#send-transaction), 第一次进入有一些安全提示需要用户确认。
 2. 进入之后，按照下图进行设置：
-![](https://learnblockchain.cn/images/myetherwaller.jpeg)
+![](https://img.learnblockchain.cn/2018/myetherwaller.jpeg!wl)
 3. 连接上之后，如图
-![](https://learnblockchain.cn/images/myetherwaller_connected.jpeg)
+![](https://img.learnblockchain.cn/2018/myetherwaller_connected.jpeg!wl)
 需要添加代币，填入代币合约地址。
 4. 进行代币转账交易
-![](https://learnblockchain.cn/images/myetherwaller_transfer.jpeg)
+![](https://img.learnblockchain.cn/2018/myetherwaller_transfer.jpeg!wl)
 在接下来的交易确认也，点击确认即可。
 5. 交易完成后，可以看到MetaMask中代币余额减少了，如图：
-![](https://learnblockchain.cn/images/metamask_token_tansfered.png)
+![](https://img.learnblockchain.cn/2018/metamask_token_tansfered.png!wl)
 
 代币交易是不是很简单，只要明白了交易流程，使用其他的钱包也是一样的道理。
 

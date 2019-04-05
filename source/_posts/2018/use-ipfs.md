@@ -127,7 +127,7 @@ Daemon is ready
 
 1. API服务，默认在5001端口，可以通过 http://localhost:5001/webui 进行访问，界面如：
 
-![](https://learnblockchain.cn/media/15458049832966.jpg)
+![](https://img.learnblockchain.cn/2018/15458049832966.jpg!wl)
 
 这也是IPFS的一个Web版的管理控制台， 可以通过这个控制台添加文件，查看节点连接情况等等。
 
@@ -182,7 +182,7 @@ Published to QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva: /ipfs/QmQgMZKqHzyEd
 
 发布之后就可以使用http://127.0.0.1:8080/ipns/QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva 或 https://ipfs.io/ipns/QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva 来访问upchain.pro.txt的内容，如图：
 
-![](https://learnblockchain.cn/media/15458309509991.jpg)
+![](https://img.learnblockchain.cn/2018/15458309509991.jpg!wl)
 
 其实理想下是使用 ipns://QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva 来访问，通过网站还是前面提到的浏览器暂不支持ipfs协议。
 
@@ -204,7 +204,7 @@ Published to QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva: /ipfs/QmUUiDN6tWtj8
 
 再次访问 http://127.0.0.1:8080/ipns/QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva （这个链接和上面的链接一样）可以看到内容更新了。
 
-![](https://learnblockchain.cn/media/15458322289639.jpg)
+![](https://img.learnblockchain.cn/2018/15458322289639.jpg!wl)
 
 
 如果我们要查询 节点id 指向的hash 可以使用 `ipfs name resolve ` 进行查询：

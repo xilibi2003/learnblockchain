@@ -17,7 +17,7 @@ author: Tiny熊
 
 我们先来还原下攻击交易，这个交易可以在这个[链接](https://etherscan.io/tx/0xad89ff16fd1ebe3a0a7cf4ed282302c06626c1af33221ebe0d3a470aba4a660f)查询到。
 我截图给大家看一下：
-![](https://learnblockchain.cn/images/BEC_transfer.jpg)
+![](https://img.learnblockchain.cn/2018/BEC_transfer.jpg!wl)
 
 攻击者向两个账号转移57896044618...000.792003956564819968个BEC，相当于BEC凭空进行了一个巨大的增发，几乎导致BEC价格瞬间归零。
 下面我们来分析下这个攻击过程。
@@ -47,7 +47,7 @@ function batchTransfer(address[] _receivers, uint256 _value) public whenNotPause
 
 我们来结合实际攻击交易使用的参数来分析一下：
 
-![](https://learnblockchain.cn/images/BEC_transfer_params.jpg)
+![](https://img.learnblockchain.cn/2018/BEC_transfer_params.jpg!wl)
 
 `batchTransfer`的参数`_value`值为16进制的`800000000000000000000...`，参数`_receivers`数组的大小为2，相乘之后刚好可超过uint256所能表示的整数大小上限，引发溢出问题`amount`实际的值为0，后面的转账操作实际上msg.sender的余额减0， 而对两个账号进行了加16进制的`800000000000000000000...`，最终的结果是相当于增发了2 * 16进制的`800000000000000000000...`。
 
@@ -96,6 +96,6 @@ contract TestFlow {
 
 ```
 合约部署和运行，之前已经经过很多次，我直接贴运行结果：
-![](https://learnblockchain.cn/images/BEC_transfer_flow.jpg)
+![](https://img.learnblockchain.cn/2018/BEC_transfer_flow.jpg!wl)
 
 -->

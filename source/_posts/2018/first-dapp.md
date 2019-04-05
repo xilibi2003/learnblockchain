@@ -25,7 +25,7 @@ author: Tiny熊
 除此之外，你最好还了解一些HTML及JavaScript知识。
 
 本文通过实例教大家来开发去中心化应用，应用效果如图：
-![](https://learnblockchain.cn/images/Petshop.jpg)
+![](https://img.learnblockchain.cn/2018/Petshop.jpg!wl)
 
 从本文，你可以学习到：
 * 搭建智能合约开发环境
@@ -156,7 +156,7 @@ module.exports = function(deployer) {
 在执行部署之前，需要确保有一个区块链运行, 可以使用
 [Ganache](http://truffleframework.com/ganache/)来开启一个私链来进行开发测试，默认会在7545端口上运行一个开发链。
 Ganache 启动之后是这样：
-![](https://learnblockchain.cn/images/ganache-initial.png)
+![](https://img.learnblockchain.cn/2018/ganache-initial.png!wl)
 
 接下来执行部署命令:
 
@@ -186,7 +186,7 @@ Saving artifacts...
 ```
 
 在打开的Ganache里可以看到区块链状态的变化，现在产生了4个区块。
-![](https://learnblockchain.cn/images/ganache-migrated.png)
+![](https://img.learnblockchain.cn/2018/ganache-migrated.png!wl)
 这时说明已经智能合约已经部署好了。
 
 ## 测试
@@ -401,7 +401,7 @@ MetaMask 是一款插件形式的以太坊轻客户端，开发过程中使用Me
 
 ### 配置钱包
 在接受隐私说明后，会出现页面如下：
-![](https://learnblockchain.cn/images/metamask-initial.png)
+![](https://img.learnblockchain.cn/2018/metamask-initial.png!wl)
 
 这里我们通过还原一个Ganache为我们创建好的钱包，作为我们的开发测试钱包。点击页面的** Import Existing DEN**，输入Ganache显示的助记词。
 
@@ -411,12 +411,12 @@ candy maple cake sugar pudding cream honey rich smooth crumble sweet treat
 
 然后自己想要的密码，点击OK。
 如图：
-![](https://learnblockchain.cn/images/metamask-seed.png)
+![](https://img.learnblockchain.cn/2018/metamask-seed.png!wl)
 
 
 ### 连接开发区块链网络
 默认连接的是以太坊主网（左上角显示），选择**Custom RPC**，添加一个网络：**http://127.0.0.1:7545**，点返回后，显示如下：
-![](/images/metamask-account1.png)
+![](https://img.learnblockchain.cn/2018/metamask-account1.png!wl)
 这是左上角显示为**Private Network**，账号是Ganache中默认的第一个账号。
 
 至此MetaMask的安装，配置已经完成。
@@ -456,12 +456,12 @@ candy maple cake sugar pudding cream honey rich smooth crumble sweet treat
 会自动打开浏览器显示我们的dapp，如本文的第一张图。
 现在领养一直宠物看看，当我们点击**Adopt**时，MetaMask会提示我们交易的确认，如图：
 
-![](https://learnblockchain.cn/images/metamask-transactionconfirm.png)
+![](https://img.learnblockchain.cn/2018/metamask-transactionconfirm.png!wl)
 
 点击Submit确认后，就可以看到成功领养了这次宠物。
 
 在MetaMask中，也可以看到交易的清单：
-![](https://learnblockchain.cn/images/metamask-transactionsuccess.png)
+![](https://img.learnblockchain.cn/2018/metamask-transactionsuccess.png!wl)
 
 好了，恭喜你，即将成为一名去中心化式应用开发者的你已经成为迈出了坚实的一步。
 还可以阅读另一篇[开发链上记事本](https://learnblockchain.cn/2019/03/30/dapp_noteOnChain) 进一步巩固DApp 开发。 

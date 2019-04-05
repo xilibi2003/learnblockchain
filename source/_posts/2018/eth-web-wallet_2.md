@@ -54,7 +54,7 @@ DK = Scrypt(salt, dk_len, n, r, p)
 
 实际使用中，还会加上一个密码进行计算，用一张图来表示这个过程就是：
 
-![](https://learnblockchain.cn/media/15402189467872.png)
+![](https://img.learnblockchain.cn/2018/15402189467872.png!wl)
 
 #### 对私钥进行对称加密
 
@@ -114,19 +114,19 @@ DK = Scrypt(salt, dk_len, n, r, p)
 
 当我们在使用Keystore文件来还原私钥时，依然是使用kdf生成一个秘钥，然后用秘钥对ciphertext进行解密，其过程如下：
 
-![](https://learnblockchain.cn/media/15402194796574.png)
+![](https://img.learnblockchain.cn/2018/15402194796574.png!wl)
 
 此时细心的同学会发现，无论使用说明密码，来进行这个操作，都会生成一个私钥，但是最终计算的以太坊私钥到底是不是正确的，却不得而知。
 
 这就是 keystore 文件中 mac 值的作用。mac 值是 kdf输出 和 ciphertext 密文进行SHA3-256运算的结果，显然密码不同，计算的mac 值也不同，因此可以用来检验密码的正确性。检验过程用图表示如下：
 
 
-![](https://learnblockchain.cn/media/15402227441945.png)
+![](https://img.learnblockchain.cn/2018/15402227441945.png!wl)
 
 现在我们以解密的角度完整的梳理下流程，就可以得到以下图：
 
 
-![](https://learnblockchain.cn/media/15402229547319.png)
+![](https://img.learnblockchain.cn/2018/15402229547319.png!wl)
 
 
 
@@ -149,7 +149,7 @@ ethers.js 直接提供了加载keystore JSON来创建钱包对象以及加密生
 
 现在结合界面来完整的实现账号导出及导入，先看看导出，UI图如下：
 
-![](https://learnblockchain.cn/media/15402637447655.jpg)
+![](https://img.learnblockchain.cn/2018/15402637447655.jpg!wl)
 
 HTML 代码如下：
 
@@ -195,7 +195,7 @@ HTML 代码如下：
 
 再来看看导入keystore 文件, UI图如下：
 
-![](https://learnblockchain.cn/media/15402647159310.jpg)
+![](https://img.learnblockchain.cn/2018/15402647159310.jpg!wl)
 
 
 ```html

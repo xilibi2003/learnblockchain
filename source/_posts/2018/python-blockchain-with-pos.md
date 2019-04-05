@@ -371,7 +371,7 @@ if __name__ == '__main__':
 为了充分减少程序的复杂性，tcp client我们这里就不实现了，可以放在后面拓展部分。 毕竟我们这个系统是很容易扩展的，后面我们拆分了多线程的部分，在实现tcp client就是一个完整的分布式系统了。
 
 所以，我们这里用linux自带的命令 nc，不知道nc怎么用的同学可以google或者 man nc
-![](https://diycode.b0.upaiyun.com/photo/2018/de1ec95397b1f627c1ded8fc3ac256e1.png)
+![](https://img.learnblockchain.cn/2018/de1ec95397b1f627c1ded8fc3ac256e1.png!wl)
 
 - 启动服务    运行 python pos.py  
 - 打开3个终端
@@ -388,12 +388,12 @@ Enter token balance:
 接下来依次按照提示操作。 balance可以按心情来操作，因为这里是测试，我们输入100，
 紧接着会提示输入BPM，我们前面提到过，输入BPM是为了生成Block，那么就输入吧，随便输入个9. ok， 接下来就稍等片刻，等待记账。
 输出如同所示
-![](https://diycode.b0.upaiyun.com/photo/2018/4eee010dfd46e7672d48d063b08cae47.png)
+![](https://img.learnblockchain.cn/2018/4eee010dfd46e7672d48d063b08cae47.png!wl)
 依次在不同的终端，根据提示输入数字，等待消息同步。
 
 # 生成区块链
 下面是我这边获得的3个block信息。
-![](https://diycode.b0.upaiyun.com/photo/2018/1e5f93c93cc2bc5443902b89abd4ac02.png)
+![](https://img.learnblockchain.cn/2018/1e5f93c93cc2bc5443902b89abd4ac02.png!wl)
 
 # 总结
 在上面的代码中，我们实现了一个完整的基于POS算法记账的链，当然这里有许多值得扩展与改进的地方。

@@ -113,7 +113,7 @@ npm start
 
 Remix IDE 默认是使用8080端口启动的，启动之后在浏览器打开：`http://localhost:8080/`, 如图：
 
-![](/images/remix-setup.jpg)
+![](https://img.learnblockchain.cn/2018/remix-setup.jpg!wl)
 
 和大多数IDE一样，最左边是文件浏览，中间是代码编辑区域，右边是功能区域，下边是日志区域。
 在右侧的功能区域，常用的是`Compile`、`Run`及`Debuger`几个标签页（Tab）。
@@ -133,7 +133,7 @@ Remix IDE 默认是使用8080端口启动的，启动之后在浏览器打开：
 1. 在需要的本地合约代码的目录下启动`remix-ide`, Remix IDE 会自动把当前目录做为共享目录。如果是使用在线的Remix，需要使用命令`remixd -s shared-folder` 来指定共享目录。
 
 2. 加载共享目录，在文件浏览区域上有，有这样一个图标，他用来加载本地共享目录，如图：
-![](https://learnblockchain.cn/images/remixd_connectionok.png)
+![](https://img.learnblockchain.cn/2018/remixd_connectionok.png!wl)
 
 
 ## 调试
@@ -163,14 +163,14 @@ contract SimpleStorage {
 ### 开始调试
 
 在我们每次执行一个交易（不管是方式调用还是函数执行）的时候，在日志都会输出一条记录，如图：
-![](https://learnblockchain.cn/images/remix-debug-console.png)
+![](https://img.learnblockchain.cn/2018/remix-debug-console.png!wl)
 
 点击上图中的“Debug”按钮，在Remix右侧的功能区域会切换到调试面板，如下图：
-![](/images/remix-debug-panel.png)
+![](https://img.learnblockchain.cn/2018/remix-debug-panel.png!wl)
 调试过程过程中，有下面几项需要重点关注：
 
 * Transactions: 可以查看交易及交易的执行过程，并且提供了7个调试的按钮，如下图：
-![](https://learnblockchain.cn/images/remix-debug-buttons.png)
+![](https://img.learnblockchain.cn/2018/remix-debug-buttons.png!wl)
 
     为了方便介绍，我为每个按钮编了号，每个按钮的含义是：
     1. 后退一步（不进入函数内部）
@@ -182,16 +182,16 @@ contract SimpleStorage {
     7. 跳到下一个断点
 * Solidity Locals：显示当前上下文的局部变量的值， 如图：
 
-![](https://learnblockchain.cn/images/remix-debug-locals.png)
+![](https://img.learnblockchain.cn/2018/remix-debug-locals.png!wl)
 
 
 * Solidity State： 显示当前执行合约的状态变量，如下图:
-![](https://learnblockchain.cn/images/remix-debug-state.png)
+![](https://img.learnblockchain.cn/2018/remix-debug-state.png!wl)
 
 在本例中，我们跟踪运行步骤的时候，可以看到局部变量的值为2，赋值给状态变量之后，状态变量的值更改为了3，所以可以判断运行当前语句的时候出错了。
 
 * Step detail： 显示当前步骤的gas详情等，如下图:
-![](https://learnblockchain.cn/images/remix-debug-gas.png)
+![](https://img.learnblockchain.cn/2018/remix-debug-gas.png!wl)
 
 
 ###  设置断点
@@ -211,7 +211,7 @@ contract SimpleStorage {
 
 <!---
 在本例中，我们的代码比较简单，执行的不多，可以不用设置断点，如果代码比较多，这可以设置断点，利用上面介绍的第7个按钮快速的调转到断点处，设置断点的方法很简单，在编辑区域，点击代码的行号，就可以在当前行设置一个断点，如下图：
-![](/images/remix-debug-break.png)
+![](https://img.learnblockchain.cn/2018/remix-debug-break.png!wl)
 
 上图在第8行出设置了一个断点，成功设置断点会在行号处，加上一个色块来标示断点。取消断点的方式是，再次点击断点处。
 有一点需要注意一下，如果在声明变量的地方设置断点，这断点可能会触发两次，第一次是初始化为0，第二次是赋实际的值。

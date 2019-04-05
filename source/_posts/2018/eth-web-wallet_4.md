@@ -46,7 +46,7 @@ contract ERC20Interface {
 
 ABI 全称是 Application Binary Interface，它就是合约接口的描述，因此有了合约的接口定义，就可以很容易通过编译拿到ABI 信息，比如像下图在Remix 的编译选项卡就可以直接复制ABI。
 
-![](https://learnblockchain.cn/media/15403775499051.jpg)
+![](https://img.learnblockchain.cn/2018/15403775499051.jpg!wl)
 
 生成的 ABI 描述大概长这样：
 
