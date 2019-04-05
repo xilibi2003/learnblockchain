@@ -33,13 +33,13 @@ author: Tiny熊
 先来看看钱包长什么样吧，我制作了一个gif图片：
 
 <p align="center">
-  <img src="https://learnblockchain.cn/images/upchainwallet.gif" width="450">
+  <img src="https://img.learnblockchain.cn/2019/upchainwallet.gif" width="450">
 </p>
 
 19年4月更新：加入 **DApp 浏览器** 功能
 
 <p align="center">
-  <img src="https://learnblockchain.cn/images/dapp.gif" width="450">
+  <img src="https://img.learnblockchain.cn/2019/dapp.gif" width="450">
 </p>
 
 DApp 浏览器，目前暂未开源，需要请加微信：xlbxiong。
