@@ -149,7 +149,7 @@ Gas Limit用来确定工作量，不像Gas Price 谁时间的变化而浮动，�
 
 为了避免 SendActivity（UI） 与数据的耦合使用了`ConfirmationViewModel`， `ConfirmationViewModel` 中保留了一个 `FetchGasSettingsInteract` 对象，界面提供推荐的gas的代码逻辑调用流程是这样：
 
-![diagram](images/diagram.svg)
+![diagram](https://learnblockchain.cn/svg/wallet_gas.svg)
 
 其中虚线部分是数据订阅回调，在SendActivity拿到GasSettings就可以进行展示。
 
@@ -203,7 +203,7 @@ public Single<BigInteger> getLastTransactionNonce(Web3j web3j, String walletAddr
 
 完整的交易流程调用序列图如下：
 
-![diagram-3](images/diagram-3.svg)
+![diagram-3](https://learnblockchain.cn/svg/wallet_transfer.svg)
 
 <div style='display: none'>
 
