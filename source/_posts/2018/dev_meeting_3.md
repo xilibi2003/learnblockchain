@@ -18,4 +18,6 @@ un_reward: true
   3. 去中心化存储能在工程上带来哪些应用
   4. 区块链应用的项目探索（基于EOS、FIBOS和IPFS 应用）
 
-[点击下载PPT](https://wiki.learnblockchain.cn/pdf/meeting_3.pdf)及[完整课程视频](https://m.qlchat.com/live/channel/channelPage/2000002746846802.htm)
+[点击下载PPT](https://img.learnblockchain.cn/pdf/meeting_3.pdf)及[完整课程视频](https://m.qlchat.com/live/channel/channelPage/2000002746846802.htm)
+
+

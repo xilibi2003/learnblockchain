@@ -18,4 +18,4 @@ un_reward: true
   4. XDAG的技术实践
   5. 未来的挑战
 
-[点击下载PPT](https://wiki.learnblockchain.cn/pdf/meetup_6.pdf) 及 [现场视频](https://m.qlchat.com/live/channel/channelPage/2000003040784741.htm)
+[点击下载PPT](https://img.learnblockchain.cn/pdf/meetup_6.pdf) 及 [现场视频](https://m.qlchat.com/live/channel/channelPage/2000003040784741.htm)

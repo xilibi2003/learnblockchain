@@ -17,4 +17,4 @@ un_reward: true
   3. web3.js 与 合约交互
   4. MetaMask, Remix , Truffle，Ganache 使用
 
-[点击下载PPT](https://wiki.learnblockchain.cn/pdf/meetup_5.pdf) 及 [现场视频](https://m.qlchat.com/wechat/page/channel-intro?channelId=2000002953398745)
+[点击下载PPT](https://img.learnblockchain.cn/pdf/meetup_5.pdf) 及 [现场视频](https://m.qlchat.com/wechat/page/channel-intro?channelId=2000002953398745)

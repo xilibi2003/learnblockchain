@@ -20,4 +20,4 @@ un_reward: true
 5、Conflux特性和发布时间
 
 
-[点击下载PPT](https://wiki.learnblockchain.cn/pdf/xdag_conflux.pdf) 及 [现场视频](https://m.qlchat.com/live/channel/channelPage/2000003282116880.htm)
+[点击下载PPT](https://img.learnblockchain.cn/pdf/xdag_conflux.pdf) 及 [现场视频](https://m.qlchat.com/live/channel/channelPage/2000003282116880.htm)

@@ -24,4 +24,4 @@ un_reward: true
 3. 权益证明(PoS)共识机制、各种优化版的Pos介绍与分析。
 
 
-[点击下载PPT](https://wiki.learnblockchain.cn/pdf/meetup_8.pdf) 及 [现场视频](https://m.qlchat.com/wechat/page/channel-intro?channelId=2000003201470300)
+[点击下载PPT](https://img.learnblockchain.cn/pdf/meetup_8.pdf) 及 [现场视频](https://m.qlchat.com/wechat/page/channel-intro?channelId=2000003201470300)

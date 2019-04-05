@@ -22,5 +22,5 @@ un_reward: true
 五、区块链安全解决方案
 
 
-[点击下载PPT](https://learnblockchain.cn//pdf/10_blockchain_serurity.pdf)
+[点击下载PPT](https://img.learnblockchain.cn//pdf/10_blockchain_serurity.pdf)
 因可能涉及的某些安全问题可能对一些项目产生影响，本期的视频暂不公开。

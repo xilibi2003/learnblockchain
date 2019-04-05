@@ -18,4 +18,4 @@ un_reward: true
   4. 零⼿手续费带来的安全问题及其解决⽅方案
   5. 零⼿手续费的副作⽤
 
-[点击下载PPT](https://wiki.learnblockchain.cn/pdf/meetup_4.pdf)及[完整课程视频](https://m.qlchat.com/wechat/page/channel-intro?channelId=2000002858537956)
+[点击下载PPT](https://img.learnblockchain.cn/pdf/meetup_4.pdf)及[完整课程视频](https://m.qlchat.com/wechat/page/channel-intro?channelId=2000002858537956)

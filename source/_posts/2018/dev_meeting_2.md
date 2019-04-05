@@ -18,4 +18,4 @@ un_reward: true
   3. 智能合约属性的索引和存储
   4. 预编译合约介绍及汇编调⽤
 
-[点击下载PPT](https://wiki.learnblockchain.cn/pdf/deep_smartcontract.pdf)及[完整课程视频](https://m.qlchat.com/wechat/page/channel-intro?channelId=2000002631831830&sourceNo=link)
+[点击下载PPT](https://img.learnblockchain.cn/pdf/deep_smartcontract.pdf)及[完整课程视频](https://m.qlchat.com/wechat/page/channel-intro?channelId=2000002631831830&sourceNo=link)

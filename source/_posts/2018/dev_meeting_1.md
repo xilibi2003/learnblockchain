@@ -18,4 +18,4 @@ un_reward: true
   4. 如何测量gasLimit及设定gasPrice
   5. 如何发送签名交易及转移Token
 
-[点击下载PPT](https://wiki.learnblockchain.cn/pdf/eth_wallet.pdf)及[完整课程视频](https://m.qlchat.com/wechat/page/channel-intro?channelId=2000002356009198)
+[点击下载PPT](https://img.learnblockchain.cn/pdf/eth_wallet.pdf)及[完整课程视频](https://m.qlchat.com/wechat/page/channel-intro?channelId=2000002356009198)

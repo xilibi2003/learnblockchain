@@ -36,4 +36,4 @@ un_reward: true
 
 七 、前路展望：符合社会需要，百花迎春
 
-[点击下载PPT](https://wiki.learnblockchain.cn/pdf/meetup_7.pdf) 及 [现场视频](https://m.qlchat.com/live/channel/channelPage/2000003125933455.htm)
+[点击下载PPT](https://img.learnblockchain.cn/pdf/meetup_7.pdf) 及 [现场视频](https://m.qlchat.com/live/channel/channelPage/2000003125933455.htm)
