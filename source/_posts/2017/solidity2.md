@@ -153,7 +153,7 @@ contract CallTest{
 
 <!---
 和[类型介绍](https://xiaozhuanlan.com/topic/7518269403)篇一样，打开[Remix - Solidity IDE](https://ethereum.github.io/browser-solidity),帖入代码，依次创建合约AddrTest及CallTest，如图：
-![](/images/testaddr.jpg)
+![](https://img.learnblockchain.cn/2017/testaddr.jpg!wl)
 
 创建合约后，可以看到，AddrTest合约内没有命令的函数，显示fallback。
 
@@ -167,10 +167,10 @@ CallTest合约的函数说明：
 关于fallback函数用法可进一步参考这一篇:[Ethereum-Development-Best-Practices][1]及[问答](https://ethereum.stackexchange.com/questions/7570/whats-a-fallback-function-when-using-address-send)
 下面截图演示下，存款和转账，其他的调用请读者动手练习。
 存款操作如图：
-![](/images/testaddr1.jpg)
+![](https://img.learnblockchain.cn/2017/testaddr1.jpg!wl)
 完成后，可以在左下角区域查看日志Details->value。
 然后进行转账，如图：
-![](/images/testaddr2.jpg)
+![](https://img.learnblockchain.cn/2017/testaddr2.jpg!wl)
 
 完成后，可以在左下角区域查看日志Details->logs数据，可以看到fallback函数被调用。
 还可以调用AddrTest的getBalance查看余额数据。

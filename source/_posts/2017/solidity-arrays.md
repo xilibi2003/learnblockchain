@@ -208,7 +208,7 @@ contract C {
 ```
 
 打开[Remix - Solidity IDE](https://ethereum.github.io/browser-solidity),帖入代码，依次创建合约，如图：
-![](/images/testarray.jpg)
+![](https://img.learnblockchain.cn/2017/testarray.jpg!wl)
 
 创建合约后，可以看到public的数组u，生成了对应访问器，可直接访问。
 

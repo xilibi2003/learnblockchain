@@ -240,11 +240,11 @@ contract testType{
 3. 传参数调用
 4. 点Details 查看结果
 上一张截图大家就明白了。
-![]((https://diycode.b0.upaiyun.com/photo/2017/b2b5529012ae930f5ae3e9a700247cbe.jpg)
+![](https://img.learnblockchain.cn/2017/b2b5529012ae930f5ae3e9a700247cbe.jpg!wl)
 
 建议根据自己对类型的理解，修改代码，使用不同的参数进行调用以增强对类型的理解。
 如：运行hexLiteralBytes()查看输出结果，十六进制常量可转化为字节数组。
-![](https://diycode.b0.upaiyun.com/photo/2017/e28c82c8442eca12422d32b9d6563dfa.jpg)
+![](https://img.learnblockchain.cn/2017/e28c82c8442eca12422d32b9d6563dfa.jpg!wl)
 
 -->
 

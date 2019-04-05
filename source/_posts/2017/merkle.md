@@ -20,13 +20,13 @@ author: Tiny熊
 
 
 在[工作量证明](https://xiaozhuanlan.com/topic/7548206913)中出现过一个区块信息截图：
-![区块#493050](/images/block_info_493050.jpg)
+![区块#493050](https://img.learnblockchain.cn/2017/block_info_493050.jpg!wl)
 
 细心的同学一定已经在里面发现了很多未讲的其他信息，如：时间戳，版本号，交易次数，二进制哈希树根(Merkle根)等。
 
 我们来看看一个区块结构到底是怎样的：
 
-![区块结构图](/images/block_structure.jpeg)
+![区块结构图](https://img.learnblockchain.cn/2017/block_structure.jpeg!wl)
 
 如上图（下文称：区块结构图）所示：每个数据区块包含区块头和区块体。
 区块头封装了当前版本号、前一区块哈希值、当前区块PoW要求的随机数(Nonce)、时间戳、以及Merkle根信息。
@@ -41,7 +41,7 @@ SPV节点只下载区块头，不下载包含在每个区块中的交易信息�
 
 ### 简单文件验证
 我们通常用哈希来检验下载的文件是否完整，我经常看到这样的下载页面：
-![下载hash](/images/ex_check_file.jpeg)
+![下载hash](https://img.learnblockchain.cn/2017/ex_check_file.jpeg!wl)
 可以看到下载链接后面提供了一个MD5（MD5也是一种Hash算法），这样我们可以在下载之后对文件计算MD5，如果MD5与提供的MD5相等，说明文件有没有被损坏，这个验证过程相信大家都能理解。
 
 

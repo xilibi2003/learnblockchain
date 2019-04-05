@@ -23,7 +23,7 @@ tags:
 > 在比特币没有余额概念，只有分散到区块链里的UTXO
 
 随着钱从一个地址被移动到另一个地址的同时形成了一条所有权链，像这样：
-![own_chain](/images/own_chain.jpeg)
+![own_chain](https://img.learnblockchain.cn/2017/own_chain.jpeg!wl)
 
 ## 比特币脚本
 
@@ -34,7 +34,7 @@ tags:
 > 当解锁版脚本与锁定版脚本的设定条件相匹配时，执行组合有效脚本时才会显示结果为真
 
 如最为常见类型的比特币交易脚本（支付到公钥哈希：P2PKH（Pay-to-Public-Key-Hash））组合是这样：
-![script](/images/script.jpeg)
+![script](https://img.learnblockchain.cn/2017/script.jpeg!wl)
 
 ### 常见交易脚本验证过程
 比特币交易脚本语言是一种基于逆波兰表示法的基于栈的执行语言（不知道逆波兰和栈的同学去翻大学数据结构课本，你也可跳过这个部分）。
@@ -43,16 +43,16 @@ tags:
 脚本语言通过从左至右地处理每个项目的方式执行脚本。
 
 下面用两个图说明下常见类型的比特币交易脚本验证执行过程：
-![script_run1](/images/script_run1.jpeg)
+![script_run1](https://img.learnblockchain.cn/2017/script_run1.jpeg!wl)
 上图为解锁脚本运行过程（主要是入栈）
-![script_run2](/images/script_run2.jpeg)
+![script_run2](https://img.learnblockchain.cn/2017/script_run2.jpeg!wl)
 上图为锁定脚本运行过程（主要是出栈），最后的结果为真，说明交易有效。
 
 ## 交易分析
 实际上比特币的交易被设计为可以纳入多个输入和输出。
 ### 交易结构
 我们来看看完整的交易结构，
-![](/images/tx_struce.jpeg)
+![](https://img.learnblockchain.cn/2017/tx_struce.jpeg!wl)
 
 > 交易的锁定时间定义了能被加到区块链里的最早的交易时间。在大多数交易里，它被设置成0，用来表示立即执行。
 如果锁定时间不是0并且小于5亿，就被视为区块高度，意指在这个指定的区块高度之前，该交易不会被包含在区块链里。
@@ -64,16 +64,16 @@ tags:
 
 ### 交易输入结构
 刚刚我们提过输入需要提供一个解锁脚本，现在来看看一个交易的输入结构：
-![](/images/tx_input_struce.jpeg)
+![](https://img.learnblockchain.cn/2017/tx_input_struce.jpeg!wl)
 
 我们结合整个交易的结构里看输入结构就是这样子：
-![](/images/tx_input_overview.jpeg)
+![](https://img.learnblockchain.cn/2017/tx_input_overview.jpeg!wl)
 
 ### 交易输出结构
 刚刚我们提过输出是指向一个解锁脚本，具体交易的输出结构为：
-![](/images/tx_output_struce.jpeg)
+![](https://img.learnblockchain.cn/2017/tx_output_struce.jpeg!wl)
 我们结合整个交易的结构里看输出结构就是这样子：
-![](/images/tx_output_overview.jpeg)
+![](https://img.learnblockchain.cn/2017/tx_output_overview.jpeg!wl)
 
 ### 交易哈希计算
 在[比特币区块结构Merkle 树及简单支付验证分析](https://xiaozhuanlan.com/topic/1402935768) 讲到区块结构，区块结构包含多个交易的哈希。

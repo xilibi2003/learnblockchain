@@ -190,8 +190,8 @@ contract Test {
 ```
 打开[Remix - Solidity IDE](https://ethereum.github.io/browser-solidity),帖入代码，创建合约。
 然后，我们分别调用 test 及 test2 ，对比执行花费的 gas。
-![](/images/test_func.jpg)
-![](/images/test_func2.jpg)
+![](https://img.learnblockchain.cn/2017/test_func.jpg!wl)
+![](https://img.learnblockchain.cn/2017/test_func2.jpg!wl)
 可以看到调用pubic函数花销更大，这是为什么呢？
 
 当使用public 函数时，Solidity会立即复制数组参数数据到内存， 而external函数则是从calldata读取，而分配内存开销比直接从calldata读取要大的多。

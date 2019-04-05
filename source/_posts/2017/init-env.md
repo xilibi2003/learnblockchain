@@ -42,7 +42,7 @@ brew install ethereum
 geth --datadir testNet --dev console 2>> test.log
 ```
 执行命名后，会进入geth控制台，这时光标停在一个向右的箭头处，像这样：
-![](https://learnblockchain.cn/images/open_geth_eth.jpg)
+![](https://img.learnblockchain.cn/2017/open_geth_eth.jpg!wl)
 
 命令参数说明（更多命令详解可阅读[Geth命令用法-参数详解篇](https://learnblockchain.cn/2017/11/29/geth_cmd_options/)）:
 **--dev** 启用开发者网络（模式），开发者网络会使用POA共识，默认预分配一个开发者账户并且会自动开启挖矿。
@@ -63,7 +63,7 @@ tail -f test.log
 > eth.accounts
 ```
 回车后，返回一个账户数组，里面有一个默认账户，如：
-![](https://learnblockchain.cn/images/geth_accounts_1.jpg)
+![](https://img.learnblockchain.cn/2017/geth_accounts_1.jpg!wl)
 > 也可以使用personal.listAccounts查看账户，
 
 再来看一下账户里的余额，使用一下命令：
@@ -95,7 +95,7 @@ TinyXiong为新账户的密码，回车后，返回一个新账户。
 0
 ```
 回车后，返回的是0，新账户是0。结果如：
-![](https://learnblockchain.cn/images/geth_accounts_2.jpg)
+![](https://img.learnblockchain.cn/2017/geth_accounts_2.jpg!wl)
 
 ### 给新账户转账
 我们知道没有余额的账户是没法部署合约的，那我们就从默认账户转1以太币给新账户，使用以下命令（请使用你自己eth.accounts对应输出的账户）：
@@ -105,7 +105,7 @@ eth.sendTransaction({from: '0xb0ebe17ef0e96b5c525709c0a1ede347c66bd391', to: '0x
 
 > 在打开的**tail -f test.log**日志终端里，可以同时看到挖矿记录
 再次查看新账户余额，可以新账户有1个以太币
-![](https://learnblockchain.cn/images/geth_accounts_3.jpg)
+![](https://img.learnblockchain.cn/2017/geth_accounts_3.jpg!wl)
 
 ### 解锁账户
 
@@ -136,10 +136,10 @@ contract hello {
 ```
 简单解释下，我们定义了一个名为hello的合约，在合约初始化时保存了一个字符串（我们会传入hello world），每次调用say返回字符串。
 把这段代码写(拷贝)到[Browser-Solidity](https://ethereum.github.io/browser-solidity)，如果没有错误，点击Details获取部署代码，如：
-![](https://learnblockchain.cn/images/eth_code_hello_step1.jpeg)
+![](https://img.learnblockchain.cn/2017/eth_code_hello_step1.jpeg!wl)
 
 在弹出的对话框中找到WEB3DEPLOY部分，点拷贝，粘贴到编辑器后，修改初始化字符串为hello world。
-![](https://learnblockchain.cn/images/eth_code_hello_step2.jpeg)
+![](https://img.learnblockchain.cn/2017/eth_code_hello_step2.jpeg!wl)
 
 > solidity在博文写作时（2017/11/24），版本为0.4.18，solidity发展非常快，solidity版本之间有可能不能兼容，这是你可以在Browser-Solidity的Settings里选择对应的编译器版本。
 > Browser-Solidity也不停的更新中，截图可能和你看到的界面不一样。
@@ -193,7 +193,7 @@ Contract mined! address: 0x79544078dcd9d560ec3f6eff0af42a9fc84c7d19 transactionH
 输出Hello World，我们第一个合约Hello World，成功运行了。
 
 运行截图如下：
-![](/images/init_example_show.jpg)
+![](https://img.learnblockchain.cn/2017/init_example_show.jpg!wl)
 
 本文会随geth，solidity语言版本升级保持更新，查看本文原始链接：[https://learnblockchain.cn/2017/11/24/init-env/](https://learnblockchain.cn/2017/11/24/init-env/)
 

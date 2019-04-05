@@ -442,11 +442,11 @@ $ python blockchain.py
 
 让我们通过请求 http://localhost:5000/mine 来进行挖矿
 
-![用Postman请求挖矿](/images/postman_get_mine.png)
+![用Postman请求挖矿](https://img.learnblockchain.cn/2017/postman_get_mine.png!wl)
 
 通过post请求，添加一个新交易
 
-![用Postman请求挖矿](/images/postman_post_new.png)
+![用Postman请求挖矿](https://img.learnblockchain.cn/2017/postman_post_new.png!wl)
 
 如果不是使用Postman，则用一下的cURL语句也是一样的：
 ```bash
@@ -661,11 +661,11 @@ pipenv run python blockchain.py
 pipenv run python blockchain.py -p 5001
 ```
 
-![注册新节点](/images/postman_register.png)
+![注册新节点](https://img.learnblockchain.cn/2017/postman_register.png!wl)
 
 然后在节点2上挖两个块，确保是更长的链，然后在节点1上访问接口/nodes/resolve ,这时节点1的链会通过共识算法被节点2的链取代。
 
-![共识算法解决冲突](/images/postman_resolve.png)
+![共识算法解决冲突](https://img.learnblockchain.cn/2017/postman_resolve.png!wl)
 
 好啦，你可以邀请朋友们一起来测试你的区块链
 
