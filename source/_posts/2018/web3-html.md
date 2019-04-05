@@ -29,7 +29,7 @@ Web3与智能合约交互实战
 
 Web3与geth通信使用的是 [JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC) ，这是一种轻量级的RPC（Remote Procedure Call）协议，整个通信的模型可以抽象为下图。
 
-![Web3 Communication Model](/images/Communication_Model.jpg)
+![Web3 Communication Model](https://img.learnblockchain.cn/2018/Communication_Model.jpg!wl)
 
 ## 搭建测试链
 在开发初期，我们并没有必要使用真实的公链，为了开发效率，一般选择在本地搭建测试链。在本文我们选择的[Ganache](http://truffleframework.com/ganache/)（在此之前使用的是testrpc，Ganache属于它的升级版），一个图形化测试软件（也有命令行版本），可以一键在本地搭建以太坊区块链测试环境，并且将区块链的状态通过图形界面显示出来，Ganache的运行界面如下图所示。
