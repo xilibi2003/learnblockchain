@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="以太坊,钱包,web3j," />
+  <meta name="keywords" content="钱包,以太坊,web3j," />
 
 
 
@@ -86,7 +86,7 @@
 
 
 <meta name="description" content="这是如何开发以太坊安卓钱包系列第5篇，利用钱包对交易进行本地签名，然后发送到以太坊网络。">
-<meta name="keywords" content="以太坊,钱包,web3j">
+<meta name="keywords" content="钱包,以太坊,web3j">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何开发一款以太坊安卓钱包系列5 - 发送转账交易">
 <meta property="og:url" content="https://learnblockchain.cn/2019/04/04/eth-wallet-dev-5/index.html">
@@ -94,10 +94,10 @@
 <meta property="og:description" content="这是如何开发以太坊安卓钱包系列第5篇，利用钱包对交易进行本地签名，然后发送到以太坊网络。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://img.learnblockchain.cn/2019/15543662438500.jpg!wl">
-<meta property="og:image" content="https://learnblockchain.cn/2019/04/04/eth-wallet-dev-5/images/diagram.svg">
+<meta property="og:image" content="https://learnblockchain.cn/svg/wallet_gas.svg">
 <meta property="og:image" content="https://img.learnblockchain.cn/2019/15543883352378.jpg!wl">
-<meta property="og:image" content="https://learnblockchain.cn/2019/04/04/eth-wallet-dev-5/images/diagram-3.svg">
-<meta property="og:updated_time" content="2019-04-05T05:02:59.642Z">
+<meta property="og:image" content="https://learnblockchain.cn/svg/wallet_transfer.svg">
+<meta property="og:updated_time" content="2019-04-05T05:15:22.928Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何开发一款以太坊安卓钱包系列5 - 发送转账交易">
 <meta name="twitter:description" content="这是如何开发以太坊安卓钱包系列第5篇，利用钱包对交易进行本地签名，然后发送到以太坊网络。">
@@ -404,7 +404,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-04-05T13:02:59+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-05T13:15:22+08:00">
                 2019-04-05
               </time>
             
@@ -511,7 +511,7 @@
 <p>这里使用推荐默认值，在FetchGasSettingsInteract加入方法：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Single&lt;GasSettings&gt; <span class="title">fetch</span><span class="params">(ConfirmationType type)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Single.fromCallable( () -&gt; &#123;</span><br><span class="line">        BigInteger gasLimit;</span><br><span class="line">        <span class="keyword">if</span> (type == ConfirmationType.ETH) &#123;</span><br><span class="line">            gasLimit = <span class="keyword">new</span> BigInteger(<span class="number">21000</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (type == ConfirmationType.ERC20) &#123;</span><br><span class="line">            gasLimit = <span class="keyword">new</span> BigInteger(<span class="number">21000</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;   </span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> GasSettings(cachedGasPrice, gasLimit);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>为了避免 SendActivity（UI） 与数据的耦合使用了<code>ConfirmationViewModel</code>， <code>ConfirmationViewModel</code> 中保留了一个 <code>FetchGasSettingsInteract</code> 对象，界面提供推荐的gas的代码逻辑调用流程是这样：</p>
-<p><img src="images/diagram.svg" alt="diagram"></p>
+<p><img src="https://learnblockchain.cn/svg/wallet_gas.svg" alt="diagram"></p>
 <p>其中虚线部分是数据订阅回调，在SendActivity拿到GasSettings就可以进行展示。</p>
 <div style="display: none"><br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Title: 获取Gas 过程</span><br><span class="line">SendActivity-&gt;ConfirmationViewModel: prepare</span><br><span class="line">ConfirmationViewModel-&gt;FetchGasSettingsInteract: gasPriceUpdate</span><br><span class="line">Note right of FetchGasSettingsInteract: 定时请求</span><br><span class="line">FetchGasSettingsInteract--&gt;&gt;ConfirmationViewModel: onGasPrice</span><br><span class="line">ConfirmationViewModel-&gt;FetchGasSettingsInteract: fetch</span><br><span class="line">FetchGasSettingsInteract-&gt;FetchGasSettingsInteract: fetch</span><br><span class="line">FetchGasSettingsInteract--&gt;&gt;ConfirmationViewModel: onGasSettings</span><br><span class="line">ConfirmationViewModel--&gt;&gt;SendActivity: onGasSettings</span><br></pre></td></tr></table></figure><br><br>流程图源码， hexo 无法渲染，使用 <a href="https://bramp.github.io/js-sequence-diagrams/" target="_blank" rel="noopener">https://bramp.github.io/js-sequence-diagrams/</a><br></div>
 
@@ -524,7 +524,7 @@
 <h2 id="获取nonce"><a href="#获取nonce" class="headerlink" title="获取nonce"></a>获取nonce</h2><p>细心的同学可能会发现，现在构造交易结构还差<code>nonce</code>，web3j提供了相应的API，获取的逻辑在EthereumNetworkRepository类中，代码如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Single&lt;BigInteger&gt; <span class="title">getLastTransactionNonce</span><span class="params">(Web3j web3j, String walletAddress)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Single.fromCallable(() -&gt; &#123;</span><br><span class="line">        EthGetTransactionCount ethGetTransactionCount = web3j</span><br><span class="line">                .ethGetTransactionCount(walletAddress, DefaultBlockParameterName.PENDING)</span><br><span class="line">                .send();</span><br><span class="line">        <span class="keyword">return</span> ethGetTransactionCount.getTransactionCount();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="发起交易"><a href="#发起交易" class="headerlink" title="发起交易"></a>发起交易</h2><p>完整的交易流程调用序列图如下：</p>
-<p><img src="images/diagram-3.svg" alt="diagram-3"></p>
+<p><img src="https://learnblockchain.cn/svg/wallet_transfer.svg" alt="diagram-3"></p>
 <div style="display: none"><br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Title: 用户发起交易调用</span><br><span class="line">Note left of SendActivity: 用户点击发送</span><br><span class="line">SendActivity-&gt;ConfirmationViewModel: createTransaction</span><br><span class="line">ConfirmationViewModel-&gt;CreateTransactionInteract: createEthTransaction</span><br><span class="line">CreateTransactionInteract-&gt;EthereumNetworkRepository: getLastTransactionNonce</span><br><span class="line">CreateTransactionInteract-&gt;CreateTransactionInteract: createRawTransaction</span><br><span class="line">CreateTransactionInteract-&gt;CreateTransactionInteract: signMessage</span><br><span class="line">CreateTransactionInteract-&gt;CreateTransactionInteract: ethSendRawTransaction</span><br><span class="line">CreateTransactionInteract--&gt;&gt;ConfirmationViewModel: onCreateTransaction</span><br><span class="line">ConfirmationViewModel--&gt;&gt;SendActivity:onTransaction</span><br></pre></td></tr></table></figure><br><br>流程图源码， 因 hexo 无法渲染，使用 <a href="https://bramp.github.io/js-sequence-diagrams/" target="_blank" rel="noopener">https://bramp.github.io/js-sequence-diagrams/</a><br></div>
 
 
@@ -588,9 +588,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/以太坊/" rel="tag"># 以太坊</a>
-          
             <a href="/tags/钱包/" rel="tag"># 钱包</a>
+          
+            <a href="/tags/以太坊/" rel="tag"># 以太坊</a>
           
             <a href="/tags/web3j/" rel="tag"># web3j</a>
           
