@@ -22,27 +22,29 @@
 步骤如下：
 1. 先把博客站git clone 到本地，命令如下：
 
+```
+git clone git@github.com:xilibi2003/learnblockchain.git
+```
 
-> git clone git@github.com:xilibi2003/learnblockchain.git
+2. 使用npm install 安装一下依赖
 
+3. 我们的默认分支是blog 分支， 因此我们需要在blog分支上切分出自己的分支，命令如下：
 
-2. 由于master 分支是Hexo 编译生成的HTML文件，而文章源文件Markdown文件在blog 分支，因此我们需要在blog分支上切分出自己的分支，命令如下：
+```
+git checkout blog -b my-blog
+```
 
+> 备注： master 分支是Hexo 编译生成的HTML文件, 由而文章源文件Markdown文件在blog 分支
 
-> git checkout blog
+4. 现在就可以开始在 `source/_posts` 下新建一个md文件写文章了，写好之后提交Pull Request。
 
-> git checkout blog -b my-blog
-
-
-3. 现在就可以开始在 `source/_posts` 下新建一个md文件写文章了，写好之后提交Pull Request。
-
-4. 以下是可选，当然也建议安装下Hexo，上次Hexo 命令行来新建文件及预览文章，安装Hexo命令如下：
+5. 以下是可选，当然也建议安装下Hexo，上次Hexo 命令行来新建文件及预览文章，安装Hexo命令如下：
 
 
 > npm install hexo-cli -g
 
 
-5. 安装完成后，在刚才步骤2 的目录及分支下，使用hexo 命令创建一篇文章， 如创建一个文件名为：abc.md （实际写文章时名字最好是内容主题的英文单词组合）的文章，命令如下：
+6. 安装完成后，在刚才步骤2 的目录及分支下，使用hexo 命令创建一篇文章， 如创建一个文件名为：abc.md （实际写文章时名字最好是内容主题的英文单词组合）的文章，命令如下：
 
 
 > hexo new post abc
@@ -63,7 +65,7 @@
 有几项内容需要根据实际情况修改，title 是文章的标题，categories是文章的分类，tags是关键字标签，author是作者。
 另外通常在正文前有一个用`<!-- more -->`分割的简短说明，剩下的事就是编写文章了。
 
-6. 文章编写过程中后完成后，可以启动hexo 服务器来预览文章，命令如下：
+7. 文章编写过程中后完成后，可以启动hexo 服务器来预览文章，命令如下：
 
 
 > hexo s
@@ -72,6 +74,4 @@
 启动后，在浏览器访问 http://localhost:4000 即可。
 
 
-最后，如果你有什么任何问题，欢迎联系微信：xlbxiong 或 hiblocknet 
-
-
+最后，如果你有什么任何问题，欢迎联系微信：xlbxiong 或 hiblocknet
