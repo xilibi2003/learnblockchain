@@ -93,7 +93,7 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第九章filecoin源码分析之支撑包分析(1)。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-12T07:25:59.069Z">
+<meta property="og:updated_time" content="2019-04-05T10:29:31.045Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="filecoin技术架构分析九：filecoin源码分析之支撑包分析(1)">
 <meta name="twitter:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第九章filecoin源码分析之支撑包分析(1)。">
@@ -399,8 +399,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-12T15:25:59+08:00">
-                2019-03-12
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-05T18:29:31+08:00">
+                2019-04-05
               </time>
             
           </span>
@@ -551,7 +551,7 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">location: filnet/address.go</span><br><span class="line"></span><br><span class="line">▼ package</span><br><span class="line">    filnet</span><br><span class="line"></span><br><span class="line">▼ imports</span><br><span class="line">    gx/ipfs/QmNTCey11oxhb1AxDnQBRHtdhap6Ctud872NjAYPYYXPuc/go-multiaddr</span><br><span class="line">    gx/ipfs/QmRhFARzTHcFh8wUxwN5KvyTGq73FLC65EfFAhz8Ng7aGb/go-libp2p-peerstore</span><br><span class="line"></span><br><span class="line">▼ functions</span><br><span class="line">    // 节点id转换为完整的节点信息，包括所有的多地址格式</span><br><span class="line">   +PeerAddrsToPeerInfos(addrs []string) : []pstore.PeerInfo, error</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">location: filnet/bootstrap.go</span><br><span class="line"></span><br><span class="line">▼ package</span><br><span class="line">    filnet</span><br><span class="line"></span><br><span class="line">▶ imports</span><br><span class="line"></span><br><span class="line">▼ variables</span><br><span class="line">   -log</span><br><span class="line"></span><br><span class="line">▼+Bootstrapper : struct</span><br><span class="line">    [fields]</span><br><span class="line">    // 对应bootstrap</span><br><span class="line">   +Bootstrap : func([]peer.ID)</span><br><span class="line">    // 连接超时时间，用于连接随机节点</span><br><span class="line">   +ConnectionTimeout : time.Duration</span><br><span class="line">    // 最小连接节点数量阈值</span><br><span class="line">   +MinPeerThreshold : int</span><br><span class="line">    // 定时检查连接节点数量,小于阈值会处理</span><br><span class="line">   +Period : time.Duration</span><br><span class="line">    // 随机节点切片</span><br><span class="line">   -bootstrapPeers : []pstore.PeerInfo</span><br><span class="line">   -cancel : context.CancelFunc</span><br><span class="line">   -ctx : context.Context</span><br><span class="line">   -d : inet.Dialer</span><br><span class="line">   -dhtBootStarted : bool</span><br><span class="line">   -h : host.Host</span><br><span class="line">   -r : routing.IpfsRouting</span><br><span class="line">   -ticker : *time.Ticker</span><br><span class="line">    [methods]</span><br><span class="line">    // 定时调用Bootstrap 检查连接节点数量,小于阈值会处理</span><br><span class="line">   +Start(ctx context.Context)</span><br><span class="line">    // 停止节点</span><br><span class="line">   +Stop()</span><br><span class="line">    // 如果启动节点不够，将会尝试连接随机节点。</span><br><span class="line">   -bootstrap(currentPeers []peer.ID)</span><br><span class="line">    [functions]</span><br><span class="line">    // 实例化</span><br><span class="line">   +NewBootstrapper(bootstrapPeers []pstore.PeerInfo, h host.Host, d inet.Dialer, r routing.IpfsRouting, minPeer int, period time.Duration) : *Bootstrapper</span><br><span class="line"></span><br><span class="line">▼ functions</span><br><span class="line">   -hasPID(pids []peer.ID, pid peer.ID) : bool</span><br></pre></td></tr></table></figure>
-<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客</p>
 
       
     </div>
@@ -698,7 +698,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -720,7 +720,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

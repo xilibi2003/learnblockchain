@@ -93,14 +93,14 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="在比特币网络中，不是每个节点都有能力储存完整的区块链数据，受限于存储空间的的限制，很多节点是以SPV（Simplified Payment Verification简单支付验证）钱包接入比特币网络，通过简单支付验证可以在不必存储完整区块链下对交易进行验证，本文将分析区块结构Merkle树及如何进行交易验证。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://learnblockchain.cn/images/block_info_493050.jpg">
-<meta property="og:image" content="https://learnblockchain.cn/images/block_structure.jpeg">
-<meta property="og:image" content="https://learnblockchain.cn/images/ex_check_file.jpeg">
-<meta property="og:updated_time" content="2019-03-23T14:53:06.572Z">
+<meta property="og:image" content="https://img.learnblockchain.cn/2017/block_info_493050.jpg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2017/block_structure.jpeg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2017/ex_check_file.jpeg!wl">
+<meta property="og:updated_time" content="2019-04-05T10:29:30.985Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="比特币区块结构Merkle树及简单支付验证分析">
 <meta name="twitter:description" content="在比特币网络中，不是每个节点都有能力储存完整的区块链数据，受限于存储空间的的限制，很多节点是以SPV（Simplified Payment Verification简单支付验证）钱包接入比特币网络，通过简单支付验证可以在不必存储完整区块链下对交易进行验证，本文将分析区块结构Merkle树及如何进行交易验证。">
-<meta name="twitter:image" content="https://learnblockchain.cn/images/block_info_493050.jpg">
+<meta name="twitter:image" content="https://img.learnblockchain.cn/2017/block_info_493050.jpg!wl">
 
 
 
@@ -403,8 +403,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-23T22:53:06+08:00">
-                2019-03-23
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-05T18:29:30+08:00">
+                2019-04-05
               </time>
             
           </span>
@@ -461,17 +461,17 @@
       
         <p>在比特币网络中，不是每个节点都有能力储存完整的区块链数据，受限于存储空间的的限制，很多节点是以SPV（Simplified Payment Verification简单支付验证）钱包接入比特币网络，通过简单支付验证可以在不必存储完整区块链下对交易进行验证，本文将分析区块结构Merkle树及如何进行交易验证。</p>
 <a id="more"></a>
-<h2 id="区块结构"><a href="#区块结构" class="headerlink" title="区块结构"></a>区块结构</h2><p>在<a href="https://xiaozhuanlan.com/topic/7548206913" target="_blank" rel="noopener">工作量证明</a>中出现过一个区块信息截图：<br><img src="/images/block_info_493050.jpg" alt="区块#493050"></p>
+<h2 id="区块结构"><a href="#区块结构" class="headerlink" title="区块结构"></a>区块结构</h2><p>在<a href="https://xiaozhuanlan.com/topic/7548206913" target="_blank" rel="noopener">工作量证明</a>中出现过一个区块信息截图：<br><img src="https://img.learnblockchain.cn/2017/block_info_493050.jpg!wl" alt="区块#493050"></p>
 <p>细心的同学一定已经在里面发现了很多未讲的其他信息，如：时间戳，版本号，交易次数，二进制哈希树根(Merkle根)等。</p>
 <p>我们来看看一个区块结构到底是怎样的：</p>
-<p><img src="/images/block_structure.jpeg" alt="区块结构图"></p>
+<p><img src="https://img.learnblockchain.cn/2017/block_structure.jpeg!wl" alt="区块结构图"></p>
 <p>如上图（下文称：区块结构图）所示：每个数据区块包含区块头和区块体。<br>区块头封装了当前版本号、前一区块哈希值、当前区块PoW要求的随机数(Nonce)、时间戳、以及Merkle根信息。<br>区块体则包括当前区块经过验证的、 区块创建过程中生成的所有交易记录。这些记录通过 Merkle树的哈希过程生成唯一的Merkle根并记入区块头.</p>
 <blockquote>
 <p>区块哈希值实际上并不包含在区块的数据结构里，其实区块打包时只有区块头被用于计算哈希（从网络被接收时由每个节点计算出来），常说的区块哈希值实际是区块头哈希值，它可以用来唯一、明确地标识一个区块。</p>
 </blockquote>
 <p>区块头是80字节，而平均每个交易至少是250字节，而且平均每个区块包含2000个交易。因此，包含完整交易的区块比区块头的4千倍还要大。<br>SPV节点只下载区块头，不下载包含在每个区块中的交易信息。这样的不含交易信息的区块链，大小只有完整区块链的几千分之1，那SPV节点是如何验证交易的呢？</p>
 <h2 id="哈希验证"><a href="#哈希验证" class="headerlink" title="哈希验证"></a>哈希验证</h2><p>上面先留一个引子，先来回顾下哈希函数，<a href="https://xiaozhuanlan.com/topic/9827453061" target="_blank" rel="noopener">记账原理</a>我们知道原始信息任何微小的变化都会哈希完全不同的哈希值。</p>
-<h3 id="简单文件验证"><a href="#简单文件验证" class="headerlink" title="简单文件验证"></a>简单文件验证</h3><p>我们通常用哈希来检验下载的文件是否完整，我经常看到这样的下载页面：<br><img src="/images/ex_check_file.jpeg" alt="下载hash"><br>可以看到下载链接后面提供了一个MD5（MD5也是一种Hash算法），这样我们可以在下载之后对文件计算MD5，如果MD5与提供的MD5相等，说明文件有没有被损坏，这个验证过程相信大家都能理解。</p>
+<h3 id="简单文件验证"><a href="#简单文件验证" class="headerlink" title="简单文件验证"></a>简单文件验证</h3><p>我们通常用哈希来检验下载的文件是否完整，我经常看到这样的下载页面：<br><img src="https://img.learnblockchain.cn/2017/ex_check_file.jpeg!wl" alt="下载hash"><br>可以看到下载链接后面提供了一个MD5（MD5也是一种Hash算法），这样我们可以在下载之后对文件计算MD5，如果MD5与提供的MD5相等，说明文件有没有被损坏，这个验证过程相信大家都能理解。</p>
 <h3 id="多点文件验证-哈希列表"><a href="#多点文件验证-哈希列表" class="headerlink" title="多点文件验证(哈希列表)"></a>多点文件验证(哈希列表)</h3><p>现在复杂度提高一点，在P2P网络中下载时，会把大文件切成小文件，同时从多个机器上下载数据，这个时候怎么验证数据呢？</p>
 <p>以BT下载为例，在下载真正的数据之前，我们会先下载一个哈希列表的（每个下小块计算出一个哈希），如果有一个小块数据在传输过程中损坏了，那我只要重新下载这一个数据块就行了，这时有一个问题就出现了，那么多的哈希，怎么保证它们本身(哈希列表中的哈希值)都是正确地呢？</p>
 <p>答案是把每个小块数据的哈希值拼到一起，然后对这个长字符串在作一次哈希运算，得到哈希列表的根哈希。只要根哈希校对比一样就说明验哈希列表是正确的，再通过哈希列表校验小数据块，如果所有的小数据块验证通过则说明大文件没有被损坏。</p>
@@ -661,7 +661,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -683,7 +683,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

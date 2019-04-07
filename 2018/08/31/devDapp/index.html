@@ -93,13 +93,13 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="前段时间一个以太坊游戏应用：Fomo3D异常火爆，在短短的几天内就吸引了几万的以太币投入游戏，第一轮游戏一个“黑客”用了一个非常巧妙的利用以太坊规则成为了最终赢家，拿走了1万多以太币奖金。 区块链应用的价值由这个游戏反映的淋漓尽致，Fomo3D游戏能够成功核心所依赖的是以太坊提供的一个可信、不可篡改平台。当游戏的规则确定之后，一切都按规则运行，无人可干预。今天这篇就来介绍一下程序员如何切入去中心化">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://learnblockchain.cn/images/capp.jpg">
-<meta property="og:image" content="https://learnblockchain.cn/images/dapp.jpg">
-<meta property="og:updated_time" content="2019-04-03T09:25:21.086Z">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/capp.jpg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/dapp.jpg!wl">
+<meta property="og:updated_time" content="2019-04-05T10:29:32.291Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="程序员如何切入区块链去中心化应用开发">
 <meta name="twitter:description" content="前段时间一个以太坊游戏应用：Fomo3D异常火爆，在短短的几天内就吸引了几万的以太币投入游戏，第一轮游戏一个“黑客”用了一个非常巧妙的利用以太坊规则成为了最终赢家，拿走了1万多以太币奖金。 区块链应用的价值由这个游戏反映的淋漓尽致，Fomo3D游戏能够成功核心所依赖的是以太坊提供的一个可信、不可篡改平台。当游戏的规则确定之后，一切都按规则运行，无人可干预。今天这篇就来介绍一下程序员如何切入去中心化">
-<meta name="twitter:image" content="https://learnblockchain.cn/images/capp.jpg">
+<meta name="twitter:image" content="https://img.learnblockchain.cn/2018/capp.jpg!wl">
 
 
 
@@ -402,8 +402,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-04-03T17:25:21+08:00">
-                2019-04-03
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-05T18:29:32+08:00">
+                2019-04-05
               </time>
             
           </span>
@@ -472,9 +472,9 @@
         <p>前段时间一个以太坊游戏应用：<a href="http://exitscam.me/play" target="_blank" rel="noopener">Fomo3D</a>异常火爆，在短短的几天内就吸引了几万的以太币投入游戏，第一轮游戏一个“黑客”用了一个非常巧妙的利用以太坊规则成为了最终赢家，拿走了1万多以太币奖金。</p>
 <p>区块链应用的价值由这个游戏反映的淋漓尽致，Fomo3D游戏能够成功核心所依赖的是以太坊提供的一个可信、不可篡改平台。当游戏的规则确定之后，一切都按规则运行，无人可干预。今天这篇就来介绍一下程序员如何切入去中心化应用开发。</p>
 <a id="more"></a>
-<h2 id="中心化应用"><a href="#中心化应用" class="headerlink" title="中心化应用"></a>中心化应用</h2><p>作为对比，先来看看中心化应用，其实就是现有的互联网应用，为什么它是中心化应用，看看它的架构图：<br><img src="/images/capp.jpg" alt=""></p>
+<h2 id="中心化应用"><a href="#中心化应用" class="headerlink" title="中心化应用"></a>中心化应用</h2><p>作为对比，先来看看中心化应用，其实就是现有的互联网应用，为什么它是中心化应用，看看它的架构图：<br><img src="https://img.learnblockchain.cn/2018/capp.jpg!wl" alt=""></p>
 <p>平时我们接触的是应用的前端（或称客户端），前端可以是HTML5的web页面、 小程序、APP， 在前端展现的内容通常发送一个请求到服务器，服务器返回相应的内容给前端。在前端的动作同样也会转化请求发送到服务器，服务器处理之后返回数据到前端。也就是说我们所有看到的内容或者操作都是中心化的服务器控制，因此说是中心化应用。</p>
-<h2 id="去中心化应用DAPP"><a href="#去中心化应用DAPP" class="headerlink" title="去中心化应用DAPP"></a>去中心化应用DAPP</h2><p>而去中心化应用有什么不同呢？ 看看它的架构图：<br><img src="/images/dapp.jpg" alt=""><br>前端的表现上是一样的， 还是H5页面、 小程序、APP，DAPP和传统App关键是后端部分不同，是后端不再是一个中心化的服务器，而是分布式网络上任意节点，注意可以是 <strong>任意一个节点</strong>，在应用中给节点发送的请求通常称为 <strong>交易</strong>，交易和中心化下的请求有几个很大的不同是：交易的数据经过用户个人签名之后发送到节点，节点收到交易请求之后，会把 <strong>请求广播到整个网络</strong>，交易在网络达成共识之后，才算是真正的执行（真正其作用的执行不一是连接的后端节点，尽管后端也会执行）。以及中心化下的请求大多数都是同步的（及时拿到结果）， 而交易大多数是异步的，这也是在开发去中心应用时需要注意的地方，</p>
+<h2 id="去中心化应用DAPP"><a href="#去中心化应用DAPP" class="headerlink" title="去中心化应用DAPP"></a>去中心化应用DAPP</h2><p>而去中心化应用有什么不同呢？ 看看它的架构图：<br><img src="https://img.learnblockchain.cn/2018/dapp.jpg!wl" alt=""><br>前端的表现上是一样的， 还是H5页面、 小程序、APP，DAPP和传统App关键是后端部分不同，是后端不再是一个中心化的服务器，而是分布式网络上任意节点，注意可以是 <strong>任意一个节点</strong>，在应用中给节点发送的请求通常称为 <strong>交易</strong>，交易和中心化下的请求有几个很大的不同是：交易的数据经过用户个人签名之后发送到节点，节点收到交易请求之后，会把 <strong>请求广播到整个网络</strong>，交易在网络达成共识之后，才算是真正的执行（真正其作用的执行不一是连接的后端节点，尽管后端也会执行）。以及中心化下的请求大多数都是同步的（及时拿到结果）， 而交易大多数是异步的，这也是在开发去中心应用时需要注意的地方，</p>
 <p>从节点上获得数据状态（比如交易的结果），一般是通过事件回调来获得。</p>
 <h2 id="如何开发"><a href="#如何开发" class="headerlink" title="如何开发"></a>如何开发</h2><p>在开发中心化应用最重要两部分是 <strong>客户端UI表现</strong>和 <strong>后端服务程序</strong>， UI表现通过HTTP请求连接到后端服务程序，后端服务程序运行在服务器上，比如Nginx Apached等等。</p>
 <p>开发一个去中心化应用最重要也是两部分： <strong>客户端UI表现</strong>及 <strong>智能合约</strong>，智能合约的作用就像后端服务程序，智能合约是运行在节点的EVM上， 客户端调用智能合约，是通过向节点发起RPC请求完成。</p>
@@ -678,7 +678,7 @@ Nginx/Apache &lt;=&gt; 节点
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -700,7 +700,7 @@ Nginx/Apache &lt;=&gt; 节点
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

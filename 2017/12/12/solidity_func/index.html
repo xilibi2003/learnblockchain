@@ -93,7 +93,7 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="Solidity 教程系列第三篇 - Solidity 函数类型介绍。Solidity 系列完整的文章列表请查看分类-Solidity。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-23T14:53:06.569Z">
+<meta property="og:updated_time" content="2019-04-05T10:29:30.978Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="智能合约语言 Solidity 教程系列3 - 函数类型">
 <meta name="twitter:description" content="Solidity 教程系列第三篇 - Solidity 函数类型介绍。Solidity 系列完整的文章列表请查看分类-Solidity。">
@@ -399,8 +399,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-23T22:53:06+08:00">
-                2019-03-23
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-05T18:29:30+08:00">
+                2019-04-05
               </time>
             
           </span>
@@ -493,7 +493,7 @@
 <!---
 先上一个例子看 public 与 external 不同，代码如下：
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity^<span class="number">0.4</span><span class="number">.18</span>;</span><br><span class="line"></span><br><span class="line">contract Test &#123;</span><br><span class="line">    uint[<span class="number">10</span>] x = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">uint[<span class="number">10</span>] a</span>) <span class="title">public</span> <span class="title">returns</span> (<span class="params">uint</span>)</span>&#123;</span><br><span class="line">         <span class="keyword">return</span> a[<span class="number">9</span>]*<span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">test2</span>(<span class="params">uint[<span class="number">10</span>] a</span>) <span class="title">external</span> <span class="title">returns</span> (<span class="params">uint</span>)</span>&#123;</span><br><span class="line">         <span class="keyword">return</span> a[<span class="number">9</span>]*<span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">calltest</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        test(x);</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">calltest2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.test2(x);</span><br><span class="line">        <span class="comment">//test2(x);  //不能在内部调用一个外部函数，会报编译错误。</span></span><br><span class="line">    &#125;  </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>打开<a href="https://ethereum.github.io/browser-solidity">Remix - Solidity IDE</a>,帖入代码，创建合约。<br>然后，我们分别调用 test 及 test2 ，对比执行花费的 gas。<br><img src="/images/test_func.jpg" alt=""><br><img src="/images/test_func2.jpg" alt=""><br>可以看到调用pubic函数花销更大，这是为什么呢？</p>
+<p>打开<a href="https://ethereum.github.io/browser-solidity">Remix - Solidity IDE</a>,帖入代码，创建合约。<br>然后，我们分别调用 test 及 test2 ，对比执行花费的 gas。<br><img src="https://img.learnblockchain.cn/2017/test_func.jpg!wl" alt=""><br><img src="https://img.learnblockchain.cn/2017/test_func2.jpg!wl" alt=""><br>可以看到调用pubic函数花销更大，这是为什么呢？</p>
 <p>当使用public 函数时，Solidity会立即复制数组参数数据到内存， 而external函数则是从calldata读取，而分配内存开销比直接从calldata读取要大的多。<br>那为什么public函数要复制数组参数数据到内存呢？是因为public函数可能会被内部调用，而内部调用数组的参数是当做指向一块内存的指针。<br>对于external函数不允许内部调用，它直接从<strong>calldata</strong>读取数据，省去了复制的过程。</p>
 <p>所以，如果确认一个函数仅仅在外部访问，请用<strong>external</strong>。</p>
 <p>同样，我们接着对比calltest()及calltest2()，这里不截图了，大家自己运行对比一下，可以发现：calltest2的开销比calltest的开销大很多，这是因为通过<strong>this.f()</strong>模式调用，会有一个大开销的<strong>CALL</strong>调用，并且它传参的方式也比内部传递开销更大。</p>
@@ -582,8 +582,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/07/bitcoin-sonsensus/" rel="next" title="比特币如何达成共识 - 最长链的选择">
-                <i class="fa fa-chevron-left"></i> 比特币如何达成共识 - 最长链的选择
+              <a href="/2017/12/12/solidity2/" rel="next" title="智能合约语言 Solidity 教程系列2 - 地址类型介绍">
+                <i class="fa fa-chevron-left"></i> 智能合约语言 Solidity 教程系列2 - 地址类型介绍
               </a>
             
           </div>
@@ -592,8 +592,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/12/solidity2/" rel="prev" title="智能合约语言 Solidity 教程系列2 - 地址类型介绍">
-                智能合约语言 Solidity 教程系列2 - 地址类型介绍 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/12/21/solidity_reftype_datalocation/" rel="prev" title="智能合约语言 Solidity 教程系列4 - 数据存储位置分析">
+                智能合约语言 Solidity 教程系列4 - 数据存储位置分析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -671,7 +671,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -693,7 +693,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

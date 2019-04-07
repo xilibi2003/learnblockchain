@@ -93,19 +93,19 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="当前的区块链底层技术平台百花齐放，不同的业务、不同的技术底层的区块链之间缺乏统一的互联互通的机制，这极大限制了区块链技术和应用生态的健康发展。跨链的需求由此而来，本文通过分析几种主流的跨链方案探讨跨链技术的本质及相应的解决思路。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://learnblockchain.cn/images/15533141959843.jpg">
-<meta property="og:image" content="https://learnblockchain.cn/images/15533142153122.jpg">
-<meta property="og:image" content="https://learnblockchain.cn/images/15533142967423.jpg">
-<meta property="og:image" content="https://learnblockchain.cn/images/15533145100219.jpg">
-<meta property="og:image" content="https://learnblockchain.cn/images/15533146074350.jpg">
-<meta property="og:image" content="https://learnblockchain.cn/images/15533146255840.jpg">
-<meta property="og:image" content="https://learnblockchain.cn/images/15533146731752.jpg">
-<meta property="og:image" content="https://learnblockchain.cn/images/15533147383944.jpg">
-<meta property="og:updated_time" content="2019-03-23T04:33:18.755Z">
+<meta property="og:image" content="https://img.learnblockchain.cn/2019/15533141959843.jpg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2019/15533142153122.jpg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2019/15533142967423.jpg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2019/15533145100219.jpg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2019/15533146074350.jpg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2019/15533146255840.jpg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2019/15533146731752.jpg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2019/15533147383944.jpg!wl">
+<meta property="og:updated_time" content="2019-04-05T10:29:31.003Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="跨链技术的分析和思考">
 <meta name="twitter:description" content="当前的区块链底层技术平台百花齐放，不同的业务、不同的技术底层的区块链之间缺乏统一的互联互通的机制，这极大限制了区块链技术和应用生态的健康发展。跨链的需求由此而来，本文通过分析几种主流的跨链方案探讨跨链技术的本质及相应的解决思路。">
-<meta name="twitter:image" content="https://learnblockchain.cn/images/15533141959843.jpg">
+<meta name="twitter:image" content="https://img.learnblockchain.cn/2019/15533141959843.jpg!wl">
 
 
 
@@ -408,8 +408,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-23T12:33:18+08:00">
-                2019-03-23
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-05T18:29:31+08:00">
+                2019-04-05
               </time>
             
           </span>
@@ -477,7 +477,7 @@
 </ol>
 <p>下面就这几种跨链方式的典型实现方式进行详细分析：</p>
 <h2 id="典型跨链机制实现分析"><a href="#典型跨链机制实现分析" class="headerlink" title="典型跨链机制实现分析"></a>典型跨链机制实现分析</h2><h3 id="公证人机制"><a href="#公证人机制" class="headerlink" title="公证人机制"></a>公证人机制</h3><p>最传统的公证人机制是基于中心化交易所得跨链资产交换，这种跨链的方式比较单一，只支持资产的交换，如下图演示了Alice通过交易所，用比特币和Bob交换ETH的过程。 </p>
-<p><img src="https://learnblockchain.cn/images/15533141959843.jpg" alt=""></p>
+<p><img src="https://img.learnblockchain.cn/2019/15533141959843.jpg!wl" alt=""></p>
 <ol>
 <li>Alice 通过交易所钱包将自己的比特币打入交易所地址;</li>
 <li>Alice 在交易所上挂上卖单1个BTC卖出20ETH价格；</li>
@@ -488,12 +488,12 @@
 <li>交易所将Bob在交易所存储的20ETH 转移给Alice的以太坊地址；</li>
 </ol>
 <p>至此完成了Alice和Bob的BTC和ETH的交换（案例中省去了交易所的服务费）。通过该例子可以看出交易所的方式目前仅能够支持资产的交换，且资产交换的原子性、安全性完全由中心化的交易所保障存在较大的中心化风险。</p>
-<p><img src="https://learnblockchain.cn/images/15533142153122.jpg" alt=""></p>
+<p><img src="https://img.learnblockchain.cn/2019/15533142153122.jpg!wl" alt=""></p>
 <p>除此之外还有一种著名的分布式账本技术Ripple，也是采用类似公证人的机制来解决全球金融机构之间的资产交换。Ripple的系统架构如上图所示，Ripple系统中交易通过网络中的验证者进行交易的验证，验证者验证的交易通过加密算法保护交易内容不能被验证着窥探从而保证交易的隐私性。</p>
 <p>公证人机制的跨链技术实现简单，且能够比较灵活地支持不同类型的底层区块链体系。公证人机制的主要问题在于公证人机制的安全性保障完全由公证人系统保障。参与跨链的相关方需要对中间人给予较大的信任。</p>
 <h3 id="哈希锁定"><a href="#哈希锁定" class="headerlink" title="哈希锁定"></a>哈希锁定</h3><p>哈希时间锁定（HTLC）最早出现在比特币的闪电网络，跨链资产交换支持一定数量的A链资产和一定数量的B链资产进行原子交换。哈希时间锁定巧妙地采用了<a href="https://en.bitcoin.it/wiki/Hashlock" target="_blank" rel="noopener">哈希锁</a>和<a href="https://en.bitcoin.it/wiki/Timelock" target="_blank" rel="noopener">时间锁</a>，迫使资产的接收方在deadline内确定收款并产生一种收款证明给打款人，否则资产会归还给打款人。收款证明能够被付款人用来获取接收人区块链上的等量价值的数量资产或触发其他事件。</p>
 <p>如下图所示，我们用一个例子来阐述如何使用哈希时间锁定进行跨链的原子资产交换，假设Alice和Bob有资产交换的需求，Alice想用1个BTC和Bob换20个ETH. 那么首先需要在两条链上设置哈希时间锁定合约，然后执行如下步骤：</p>
-<p><img src="https://learnblockchain.cn/images/15533142967423.jpg" alt=""></p>
+<p><img src="https://img.learnblockchain.cn/2019/15533142967423.jpg!wl" alt=""></p>
 <ol>
 <li>Alice 随机构建一个字符串s，并计算出其哈希 <code>h = hash(s)</code>；</li>
 <li>Alice 将h发送给Bob的合约；</li>
@@ -517,19 +517,19 @@
 <li>Alice 接下来就可以调用relay tx;</li>
 <li>BTCSwap合约结合tx和BTC链的区块链进行SPV验证，验证通过则将20ETH转给Alice以太坊地址。</li>
 </ol>
-<p><img src="https://learnblockchain.cn/images/15533145100219.jpg" alt=""></p>
+<p><img src="https://img.learnblockchain.cn/2019/15533145100219.jpg!wl" alt=""></p>
 <p>这种跨链的实现方式简单，但是BTC Relay需要额外的信任和维护成本，且智能合约内部的数据存储会有体积膨胀的问题。但是侧链的机制相对哈希锁定而言能够提供更多的跨链交互场景，侧链以及类SPV验证的思想适合所有跨链的场景。</p>
 <h4 id="中继链"><a href="#中继链" class="headerlink" title="中继链"></a>中继链</h4><p>中继链本质上算是公证人机制和侧链机制的融合和扩展，目前社区内最活跃的两个跨链项目<code>Cosmos</code> 和 <code>Polkadot</code> 采用的都是基于中继链的多链多层架构，其中<code>Cosmos</code>目前支持的是跨链资产交互而<code>Polkadot</code>则宣称提供任意类型的跨链交互，具体实现还有待观察。</p>
 <h5 id="Cosmos"><a href="#Cosmos" class="headerlink" title="Cosmos"></a>Cosmos</h5><p><strong>Cosmos</strong>网络是一个多链混合的区块链网格结构，如下图所示，该网络中主要包括两种角色：<br>Hub: 用于处理跨链交互的中继链；<br>Zone: Cosmos中的平行链， Cosmos中平行链需要具备两个前提条件： 1. 快速确定性（fast finality）, 这个特性由共识算法保障，也就是说Cosmos的跨链不直接支持PoW等概率确定模型的区块链； 2. 强监管性（Sovereignty)：每个平行链都具有一组验证者能够决定其出块。 </p>
-<p><img src="https://learnblockchain.cn/images/15533146074350.jpg" alt=""></p>
+<p><img src="https://img.learnblockchain.cn/2019/15533146074350.jpg!wl" alt=""></p>
 <p>为了支持平行链之间的跨链互操作，Cosmos提出了一种跨链交互协议IBC(Inter-Blockchain Communication protocol), 并利用tendermint共识算法的即时确定性实现多个异构链之间的价值和数据传输。</p>
 <p>首先我们以Chain A 到Chain B 转账10 token为例说明使用IBC的跨链交互： 1. 互相跟踪，也就是说如果A要和B进行跨链交易，那么A和B链需要分别运行相当于对方区块链的轻节点服务，这样互相可以实时接收到对方的区块头信息（方便后续执行类SPV验证）； 2. A链上初始化IBC协议，冻结相关资产10 token, 并生成相应的证明发送给B区块链； 3. B链接收到相应的IBC消息，通过A链的区块头信息确定A确实进行相应的资产冻结，然后B链会生成等价值10 token的资产。</p>
 <p>以上是使用IBC协议的两个平行链直接进行跨链的基本过程，如果区块链很多，那么这种方式的两两跨链复杂度会呈现组合级别增加。因此Cosmos网络又引入了一种Hub的中继链，所有的平行链都通过IBC连接到Hub，让Hub辅助跨链交易的验证和转移，目前Cosmos实现了一个官方的Hub称为Cosmos Hub（如前图所示）。</p>
 <p>如下图所示是Cosmos 网络的详细架构图，Cosmos为方便平行链开发提供了基本服务CosmosSDK包括：共识、网络以及IBC协议等，这样基于Cosmos SDK开发的子链之间都能够方便地互相交互。此外对于非Cosmos SDK 开发的区块链需要使用Peg Zone进行桥接，如图中的Ethereum。</p>
-<p><img src="https://learnblockchain.cn/images/15533146255840.jpg" alt=""></p>
+<p><img src="https://img.learnblockchain.cn/2019/15533146255840.jpg!wl" alt=""></p>
 <p>笔者认为Cosmos为跨链带来的最大贡献在于IBC协议的设计，IBC协议提供了一种通用的跨链协议标准。IBC的设计使得跨链交易可以在多个Hub之间进行安全路由和转发，类似目前互联网的TCP/IP 协议。但是遗憾的是目前的Cosmos设计也只能够支持资产的跨链，而且由于不同区块链的业务不同其共识速率的不一致也会影响跨链交易有效性的证明。</p>
 <h5 id="Polkadot"><a href="#Polkadot" class="headerlink" title="Polkadot"></a>Polkadot</h5><p>Polkadot也是一种集成平行链和中继链的多层多链架构，Polkadot区块链的整体架构图如下图所示，主要包含三种角色链和四种参与方：</p>
-<p><img src="https://learnblockchain.cn/images/15533146731752.jpg" alt=""></p>
+<p><img src="https://img.learnblockchain.cn/2019/15533146731752.jpg!wl" alt=""></p>
 <p>三种链角色：</p>
 <ol>
 <li>中继链（Relay chain）: 中继链位于Polkadot的体系的核心地位，主要是为整个系统提供统一的共识和安全性保障；</li>
@@ -553,7 +553,7 @@
 <li>B链执行区块，将ingress queue中相应交易执行并修改自身账本。</li>
 </ol>
 <p>以上便是Polkadot跨链交易的主要步骤，由于所有平行链的共识同步发生（中继链区块示意图如下），因此跨链交易不会有诸如双花等安全性问题。</p>
-<p><img src="https://learnblockchain.cn/images/15533147383944.jpg" alt=""></p>
+<p><img src="https://img.learnblockchain.cn/2019/15533147383944.jpg!wl" alt=""></p>
 <p>Polkadot 的平行链之间的跨链交换的安全性保障主要来自共享安全性这个特点，共享安全性使得跨链交易和普通交易同步发生也就不存在其他跨链场景中的双花等跨链数据不一致问题。其次Polkadot中的引入的特殊状态验证方法方便中继链进行跨链等消息的有效性验证。</p>
 <p>值得一提的是Polkadot项目目前还处在项目初期，对于parachain的设计、Collator的协作以及Validator的共识、工作效率等都未完善。这种共享安全性的方式是否也限制了平行链自身的性能都还有待考证。</p>
 <h2 id="关于跨链技术的几点思考"><a href="#关于跨链技术的几点思考" class="headerlink" title="关于跨链技术的几点思考"></a>关于跨链技术的几点思考</h2><p>综合以上的一些主流跨链场景和方案的分析，从跨链的概念以及需求上看跨链的本质其实就是 <code>如何将A链上的消息M安全可信地转移到B链并在B链上产生预期效果</code>。那么一个成功的跨链交互到底需要解决哪些问题呢？笔者认为主要有以下四个问题：</p>
@@ -724,7 +724,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -746,7 +746,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

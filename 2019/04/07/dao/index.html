@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Xyy9fg5uzmq0Ysc9cQNgP4xPutZF0sBaJsjSHK55zC0" />
+
+
+
+  <meta name="msvalidate.01" content="914C9C1CBC7078C5E2AC612AD5C1CC6C" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="攻击," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深入浅出区块链" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="虽然 The DAO 攻击发生在2016年，但解除攻击的方案依然值得学习。">
+<meta name="keywords" content="攻击">
+<meta property="og:type" content="article">
+<meta property="og:title" content="以太坊DAO攻击解决方案代码解析">
+<meta property="og:url" content="https://learnblockchain.cn/2019/04/07/dao/index.html">
+<meta property="og:site_name" content="深入浅出区块链">
+<meta property="og:description" content="虽然 The DAO 攻击发生在2016年，但解除攻击的方案依然值得学习。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-07T12:26:31.072Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="以太坊DAO攻击解决方案代码解析">
+<meta name="twitter:description" content="虽然 The DAO 攻击发生在2016年，但解除攻击的方案依然值得学习。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'UT2K1ZRSWK',
+      apiKey: '0bbb261dfad58df8f8a657a1ed3255cd',
+      indexName: 'learnblockchain',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://learnblockchain.cn/2019/04/07/dao/"/>
+
+
+
+
+
+  <title>以太坊DAO攻击解决方案代码解析 | 深入浅出区块链</title>
+  
+
+
+
+
+
+
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6273382609469378",
+        enable_page_level_ads: true
+    });
+</script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深入浅出区块链</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">系统学习区块链技术</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wiki">
+          <a href="https://wiki.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            技术导航
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-meeting">
+          <a href="/categories/dev-meeting/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            技术工坊
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-course">
+          <a href="/course/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-spinner"></i> <br />
+            
+            视频教程
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-web3">
+          <a href="https://web3.learnblockchain.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Web3文档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-solidity">
+          <a href="https://solidity-cn.readthedocs.io" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            Solidity文档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://learnblockchain.cn/2019/04/07/dao/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiny熊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深入浅出区块链">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">以太坊DAO攻击解决方案代码解析</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-07T19:41:25+08:00">
+                2019-04-07
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-07T20:26:31+08:00">
+                2019-04-07
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ethereum/" itemprop="url" rel="index">
+                    <span itemprop="name">以太坊</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>虽然 The DAO 攻击发生在2016年，但解除攻击的方案依然值得学习。</p>
+<a id="more"></a>
+<p>区块链本是去中心化架构，在以太坊首次遭遇严重黑客攻击智能合约事件时，采用的解决方案却破坏了去中心化理念。</p>
+<p>这里不讨论其是否违背区块链精神，本文重点介绍解决方案的技术实施细节。<br>方案中涉及网络隔离技术和矿工共识投票技术。且只是从软件上处理，未破坏共识协议。解决方案的成功实施，为区块链分叉提供了实操经验，值得公链开发者学习。</p>
+<h2 id="什么是-The-DAO-攻击"><a href="#什么是-The-DAO-攻击" class="headerlink" title="什么是 The DAO 攻击"></a>什么是 The DAO 攻击</h2><p>简单地讲，在2016年4月30日开始，一个名为“The DAO”的初创团队，在以太坊上通过智能合约进行ICO众筹。<br>28天时间，筹得1.5亿美元，成为历史上最大的众筹项目。</p>
+<p>THE DAO创始人之一Stephan TualTual在6月12日宣布，他们发现了软件中存在的“递归调用漏洞”问题。 不幸的是，在程序员修复这一漏洞及其他问题的期间，一个不知名的黑客开始利用这一途径收集THE DAO代币销售中所得的以太币。6月18日，黑客成功挖到超过360万个以太币，并投入到一个DAO子组织中，这个组织和THE DAO有着同样的结构。</p>
+<p>THE DAO持有近15%的以太币总数，因此THE DAO这次的问题对以太坊网络及其加密币都产生了负面影响。 </p>
+<p>6月17日，以太坊基金会的Vitalik Buterin更新一项重要报告，他表示，DAO正在遭到攻击，不过他已经研究出了解决方案：</p>
+<p>现在提出了软件分叉解决方案，通过这种软件分叉，任何调用代码或委托调用的交易——借助代码hash0x7278d050619a624f84f51987149ddb439cdaadfba5966f7cfaea7ad44340a4ba（也就是DAO和子DAO）来减少账户余额——都会视为无效…… </p>
+<p>最终因为社交的不同意见，最终以太坊分裂出支持继续维持原状的以太经典 ETC，同意软件分叉解决方案的在以太坊当前网络实施。</p>
+<blockquote>
+<p>以上内容整理自文章<a href="http://chainb.com/?P=Cont&amp;id=1290" target="_blank" rel="noopener">The DAO 攻击</a>。</p>
+</blockquote>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>因为投资者已经将以太币投入了 The DAO 合约或者其子合约中，在攻击后无法立刻撤回。<br>需要让投资者快速撤回投资，且能封锁黑客转移资产。</p>
+<p>V神公布的解决方案是，在程序中植入转移合约以太币代码，让矿工选择是否支持分叉。<br>在分叉点到达时则将 The DAO 和其子合约中的以太币转移到一个新的安全的可取款合约中。<br>全部转移后，原投资者则可以直接从取款合约中快速的拿回以太币。</p>
+<p>取款合约在讨论方案时，已经部署到主网。合约地址是 <a href="https://etherscan.io/address/0xbf4ed7b27f1d666546e30d74d50d173d20bca754" target="_blank" rel="noopener">0xbf4ed7b27f1d666546e30d74d50d173d20bca754</a>。</p>
+<p>取款合约代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// Deployed on mainnet at 0xbf4ed7b27f1d666546e30d74d50d173d20bca754</span><br><span class="line"></span><br><span class="line">contract DAO &#123;</span><br><span class="line">    function balanceOf(address addr) returns (uint);</span><br><span class="line">    function transferFrom(address from, address to, uint balance) returns (bool);</span><br><span class="line">    uint public totalSupply;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">contract WithdrawDAO &#123;</span><br><span class="line">    DAO constant public mainDAO = DAO(0xbb9bc244d798123fde783fcc1c72d3bb8c189413);</span><br><span class="line">    address public trustee = 0xda4a4626d3e16e094de3225a751aab7128e96526;</span><br><span class="line"></span><br><span class="line">    function withdraw()&#123;</span><br><span class="line">        uint balance = mainDAO.balanceOf(msg.sender);</span><br><span class="line"></span><br><span class="line">        if (!mainDAO.transferFrom(msg.sender, this, balance) || !msg.sender.send(balance))</span><br><span class="line">            throw;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function trusteeWithdraw() &#123;</span><br><span class="line">        trustee.send((this.balance + mainDAO.balanceOf(this)) - mainDAO.totalSupply());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>同时，为照顾两个阵营，软件提供硬分叉开关，选择权则交给社区。<br>支持分叉的矿工会在X区块到X+9区块出块时，在区块<code>extradata</code>字段中写入<code>0x64616f2d686172642d666f726b</code>（“dao-hard-fork”的十六进制数）。</p>
+<p>从分叉点开始，如果连续10个区块均有硬分叉投票，则表示硬分叉成功。</p>
+<h2 id="矿工投票与区块头校验"><a href="#矿工投票与区块头校验" class="headerlink" title="矿工投票与区块头校验"></a>矿工投票与区块头校验</h2><p>首先，选择权交给社区。<br>因此是否同意硬分叉，可通过参数进行选择。<br>但是在当前版本中，社区已完成硬分叉，所以已移除开关类代码。</p>
+<p>当前，主网已默认配置支持DAO分叉，并设定了开始硬分叉高度 1920000，代码如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// params/config.go:38</span></span><br><span class="line">MainnetChainConfig = &amp;ChainConfig&#123; </span><br><span class="line">		DAOForkBlock:        big.NewInt(<span class="number">1920000</span>),</span><br><span class="line">		DAOForkSupport:      <span class="literal">true</span>, </span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>如果矿工支持分叉，则需要在从高度 192000 到 192009，<br>在区块头 <code>extradata</code> 写入指定信息 0x64616f2d686172642d666f726b ，以表示支持硬分叉。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//params/dao.go:28</span></span><br><span class="line"><span class="keyword">var</span> DAOForkBlockExtra = common.FromHex(<span class="string">"0x64616f2d686172642d666f726b"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// params/dao.go:32</span></span><br><span class="line"><span class="keyword">var</span> DAOForkExtraRange = big.NewInt(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<p>支持硬分叉时矿工写入固定的投票信息：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miner/worker.go:857</span></span><br><span class="line"><span class="keyword">if</span> daoBlock := w.config.DAOForkBlock; daoBlock != <span class="literal">nil</span> &#123; </span><br><span class="line">    <span class="comment">// 检查是否区块是否仍然属于分叉处理期间：[DAOForkBlock,DAOForkBlock+10)</span></span><br><span class="line">    limit := <span class="built_in">new</span>(big.Int).Add(daoBlock, params.DAOForkExtraRange)</span><br><span class="line">    <span class="keyword">if</span> header.Number.Cmp(daoBlock) &gt;= <span class="number">0</span> &amp;&amp; header.Number.Cmp(limit) &lt; <span class="number">0</span> &#123;</span><br><span class="line">        <span class="comment">// 如果支持分叉，则覆盖Extra，写入保留的投票信息</span></span><br><span class="line">        <span class="keyword">if</span> w.config.DAOForkSupport &#123;</span><br><span class="line">        header.Extra = common.CopyBytes(params.DAOForkBlockExtra)</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> bytes.Equal(header.Extra, params.DAOForkBlockExtra) &#123;</span><br><span class="line">            <span class="comment">// 如果矿工反对，则不能让其使用保留信息，覆盖它。</span></span><br><span class="line">        header.Extra = []<span class="keyword">byte</span>&#123;&#125;  </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要连续10个区块的原因是为了防止矿工使用保留信息污染非分叉块和方便轻节点安全同步数据。<br>同时，所有节点在校验区块头时，必须安全地校验特殊字段信息，校验区块是否属于正确的分叉上。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// consensus/ethash/consensus.go:294 </span></span><br><span class="line"><span class="keyword">if</span> err := misc.VerifyDAOHeaderExtraData(chain.Config(), header); err != <span class="literal">nil</span> &#123; <span class="comment">//❶</span></span><br><span class="line">	<span class="keyword">return</span> err</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// consensus/misc/dao.go:47 </span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">VerifyDAOHeaderExtraData</span><span class="params">(config *params.ChainConfig, header *types.Header)</span> <span class="title">error</span></span> &#123; </span><br><span class="line">	<span class="keyword">if</span> config.DAOForkBlock == <span class="literal">nil</span> &#123;<span class="comment">//❷</span></span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">	limit := <span class="built_in">new</span>(big.Int).Add(config.DAOForkBlock, params.DAOForkExtraRange) <span class="comment">//❸</span></span><br><span class="line">	<span class="keyword">if</span> header.Number.Cmp(config.DAOForkBlock) &lt; <span class="number">0</span> || header.Number.Cmp(limit) &gt;= <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> config.DAOForkSupport &#123;</span><br><span class="line">		<span class="keyword">if</span> !bytes.Equal(header.Extra, params.DAOForkBlockExtra) &#123; <span class="comment">//❹</span></span><br><span class="line">			<span class="keyword">return</span> ErrBadProDAOExtra</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> bytes.Equal(header.Extra, params.DAOForkBlockExtra) &#123;<span class="comment">//❺</span></span><br><span class="line">			<span class="keyword">return</span> ErrBadNoDAOExtra</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// All ok, header has the same extra-data we expect</span></span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>❶ 在校验区块头时增加 DAO 区块头识别校验。</li>
+<li>❷ 如果节点未设置分叉点，则不校验。</li>
+<li>❸ 确保只需在 DAO 分叉点的10个区块上校验。</li>
+<li>❹ 如果节点允许分叉，则要求区块头 Extra 必须符合要求。</li>
+<li>❺ 当然，如果节点不允许分叉，则也不能在区块头中加入非分叉链的 Extra 特殊信息。</li>
+</ul>
+<p>这种 <code>config.DAOForkBlock</code> 开关，类似于互联网公司产品新功能灰度上线的功能开关。<br>在区块链上，可以先实现功能代码逻辑。至于何时启用，则可以在社区、开发者讨论后，确定最终的开启时间。<br>当然区块链上区块高度等价于时间戳，比如 DAO 分叉点 1920000 也是讨论后敲定。</p>
+<h3 id="如何分离网络？"><a href="#如何分离网络？" class="headerlink" title="如何分离网络？"></a>如何分离网络？</h3><p>如果分叉后不能快速地分离网络，会导致节点出现奇奇怪怪的问题。<br>长远来说，为针对以后可能出现的分叉，应设计一种通用解决方案，已降低代码噪音。<br>否则，你会发现代码中到处充斥着一些各种梗。<br>但时间又非常紧急，这次的 The DAO 分叉处理是通过特定代码拦截实现。</p>
+<p>在我看来，区块链项目不同于其他传统软件，一旦发现严重BUG是非常致命的。<br>在上线后的代码修改，应保持尽可能少和充分测试。非常同意 the dao 的代码处理方式。<br>不必为以后可能的分叉，而做出觉得“很棒”的功能。<br>务实地解决问题才是正道。</p>
+<p>不应该让节点同时成为两个阵营的中继点，应分离出两个网络，以让其互不干预。<br>The DAO 硬分叉的处理方式是:节点连接握手后，向对方请求分叉区块头信息。<br>在15秒必须响应，否则断开连接。</p>
+<p>代码实现是在<code>eth/handler.go</code>文件中，在消息层进行拦截处理。</p>
+<p>节点握手后，开始15秒倒计时，一旦倒计时结束，则断开连接。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// eth/handler.go:300</span></span><br><span class="line">	p.forkDrop = time.AfterFunc(daoChallengeTimeout, <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		p.Log().Debug(<span class="string">"Timed out DAO fork-check, dropping"</span>)</span><br><span class="line">		pm.removePeer(p.id)</span><br><span class="line">	&#125;)</span><br></pre></td></tr></table></figure>
+<p>在倒计时前，需要向对方索要区块头信息，以进行分叉校验。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// eth/handler.go:297</span></span><br><span class="line">	<span class="keyword">if</span> err := p.RequestHeadersByNumber(daoBlock.Uint64(), <span class="number">1</span>, <span class="number">0</span>, <span class="literal">false</span>); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> err</span><br><span class="line">	&#125;</span><br><span class="line"><span class="string">``</span><span class="string">` </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">此时，对方在接收到请求时，如果存在此区块头则返回，否则忽略。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span><span class="keyword">go</span></span><br><span class="line"><span class="comment">// eth/handler.go:348</span></span><br><span class="line">	<span class="keyword">case</span> msg.Code == GetBlockHeadersMsg:  </span><br><span class="line">		<span class="keyword">var</span> query getBlockHeadersData</span><br><span class="line">		<span class="keyword">if</span> err := msg.Decode(&amp;query); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> errResp(ErrDecode, <span class="string">"%v: %v"</span>, msg, err)</span><br><span class="line">		&#125;</span><br><span class="line">		hashMode := query.Origin.Hash != (common.Hash&#123;&#125;)</span><br><span class="line">		first := <span class="literal">true</span></span><br><span class="line">		maxNonCanonical := <span class="keyword">uint64</span>(<span class="number">100</span>) </span><br><span class="line">		<span class="keyword">var</span> (</span><br><span class="line">			bytes   common.StorageSize</span><br><span class="line">			headers []*types.Header</span><br><span class="line">			unknown <span class="keyword">bool</span></span><br><span class="line">		)</span><br><span class="line">		<span class="comment">//省略一部分 ...</span></span><br><span class="line">		<span class="keyword">return</span> p.SendBlockHeaders(headers)</span><br></pre></td></tr></table></figure>
+<p>这样，有几种情况出现。根据不同情况分别处理：</p>
+<ol>
+<li>有返回区块头：</li>
+</ol>
+<p>如果返回的区块头不一致，则校验不通过，等待倒计时结束。<br>如果区块头一致，则根据前面提到的校验分叉区块方式检查。<br>校验失败，此直接断开连接，说明已经属于不同分叉。<br>校验通过，则关闭倒计时，完成校验。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// eth/handler.go:465</span></span><br><span class="line"><span class="keyword">if</span> p.forkDrop != <span class="literal">nil</span> &amp;&amp; pm.chainconfig.DAOForkBlock.Cmp(headers[<span class="number">0</span>].Number) == <span class="number">0</span> &#123; </span><br><span class="line">				p.forkDrop.Stop()</span><br><span class="line">				p.forkDrop = <span class="literal">nil</span></span><br><span class="line"> </span><br><span class="line">				<span class="keyword">if</span> err := misc.VerifyDAOHeaderExtraData(pm.chainconfig, headers[<span class="number">0</span>]); err != <span class="literal">nil</span> &#123;</span><br><span class="line">					p.Log().Debug(<span class="string">"Verified to be on the other side of the DAO fork, dropping"</span>)</span><br><span class="line">					<span class="keyword">return</span> err</span><br><span class="line">				&#125;</span><br><span class="line">				p.Log().Debug(<span class="string">"Verified to be on the same side of the DAO fork"</span>)</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">			&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>没有返回区块头：</li>
+</ol>
+<p>如果自己也没有到达分叉高度，则不校验，假定双方在同一个网络。<br>但我自己已经到达分叉高度，则考虑对方的TD是否高于我的分叉块。<br>如果是，则包容，暂时认为属于同一网络。否则，则校验失败。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// eth/handler.go:442 </span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(headers) == <span class="number">0</span> &amp;&amp; p.forkDrop != <span class="literal">nil</span> &#123; </span><br><span class="line">	verifyDAO := <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> daoHeader := pm.blockchain.GetHeaderByNumber(pm.chainconfig.DAOForkBlock.Uint64()); daoHeader != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> _, td := p.Head(); td.Cmp(pm.blockchain.GetTd(daoHeader.Hash(), daoHeader.Number.Uint64())) &gt;= <span class="number">0</span> &#123;</span><br><span class="line">			verifyDAO = <span class="literal">false</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="keyword">if</span> verifyDAO &#123;</span><br><span class="line">		p.Log().Debug(<span class="string">"Seems to be on the same side of the DAO fork"</span>)</span><br><span class="line">		p.forkDrop.Stop()</span><br><span class="line">		p.forkDrop = <span class="literal">nil</span></span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="转移资产"><a href="#转移资产" class="headerlink" title="转移资产"></a>转移资产</h3><p>上述所做的一切均为安全、稳定的硬分叉，隔离两个网络。<br>硬分叉的目的是，以人为介入的方式拦截攻击者资产。</p>
+<p>一旦到达分叉点，则立即激活资产转移操作。<br>首先，矿工在挖到分叉点时，需执行转移操作：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miner/worker.go:877</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(w *worker)</span> <span class="title">commitNewWork</span><span class="params">(interrupt *<span class="keyword">int32</span>, noempty <span class="keyword">bool</span>, timestamp <span class="keyword">int64</span>)</span></span> &#123;</span><br><span class="line">	<span class="comment">// ...</span></span><br><span class="line"><span class="comment">// Create the current work task and check any fork transitions needed</span></span><br><span class="line">	env := w.current</span><br><span class="line">	<span class="keyword">if</span> w.config.DAOForkSupport &amp;&amp; w.config.DAOForkBlock != <span class="literal">nil</span> &amp;&amp; w.config.DAOForkBlock.Cmp(header.Number) == <span class="number">0</span> &#123;</span><br><span class="line">		misc.ApplyDAOHardFork(env.state)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其次，任何节点在接收区块，进行本地处理校验时同样需要在分叉点执行：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// core/state_processor.go:66</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p *StateProcessor)</span> <span class="title">Process</span><span class="params">(block *types.Block, statedb *state.StateDB, cfg vm.Config)</span> <span class="params">(types.Receipts, []*types.Log, <span class="keyword">uint64</span>, error)</span></span> &#123;</span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">	<span class="comment">// Mutate the block and state according to any hard-fork specs</span></span><br><span class="line">	<span class="keyword">if</span> p.config.DAOForkSupport &amp;&amp; p.config.DAOForkBlock != <span class="literal">nil</span> &amp;&amp; p.config.DAOForkBlock.Cmp(block.Number()) == <span class="number">0</span> &#123;</span><br><span class="line">		misc.ApplyDAOHardFork(statedb)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>转移资金也是通过取款合约处理。<br>将The DAO 合约包括子合约的资金，全部转移到新合约中。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ApplyDAOHardFork</span><span class="params">(statedb *state.StateDB)</span></span> &#123;</span><br><span class="line">	<span class="comment">// Retrieve the contract to refund balances into</span></span><br><span class="line">	<span class="keyword">if</span> !statedb.Exist(params.DAORefundContract) &#123;</span><br><span class="line">		statedb.CreateAccount(params.DAORefundContract)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Move every DAO account and extra-balance account funds into the refund contract</span></span><br><span class="line">	<span class="keyword">for</span> _, addr := <span class="keyword">range</span> params.DAODrainList() &#123;</span><br><span class="line">		statedb.AddBalance(params.DAORefundContract, statedb.GetBalance(addr))</span><br><span class="line">		statedb.SetBalance(addr, <span class="built_in">new</span>(big.Int))</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>至此，合约资金已全部强制转移到新合约。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="http://eips.ethereum.org/EIPS/eip-779" target="_blank" rel="noopener">EIP 779: Hardfork Meta: DAO Fork</a></li>
+<li><a href="https://blog.slock.it/hard-fork-specification-24b889e70703" target="_blank" rel="noopener">Hard Fork Specification</a></li>
+<li><a href="https://github.com/ethereum/go-ethereum/pull/2814" target="_blank" rel="noopener">PR#2814-finalize the DAO fork</a></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+    
+      
+        <div>
+          <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="Tiny熊 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信号：深入浅出区块链技术，欢迎订阅</div>
+</div>
+
+        </div>
+      
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    虞双齐
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://learnblockchain.cn/2019/04/07/dao/" title="以太坊DAO攻击解决方案代码解析">https://learnblockchain.cn/2019/04/07/dao/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/攻击/" rel="tag"># 攻击</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/04/eth-wallet-dev-5/" rel="next" title="如何开发一款以太坊安卓钱包系列5 - 发送转账交易">
+                <i class="fa fa-chevron-left"></i> 如何开发一款以太坊安卓钱包系列5 - 发送转账交易
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiny熊</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">100</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element" style="margin-top: 20px;">
+              <span>
+                项目
+              </span>
+            </div>
+          
+
+          <div class="links-of-author project motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/bitcoin" target="_self" title="比特币">
+                    
+                      <i class="fa fa-fw fa-false"></i>比特币</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/ethereum" target="_self" title="以太坊">
+                    
+                      <i class="fa fa-fw fa-false"></i>以太坊</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/EOS" target="_self" title="EOS">
+                    
+                      <i class="fa fa-fw fa-false"></i>EOS</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/Fabric" target="_self" title="Fabric">
+                    
+                      <i class="fa fa-fw fa-false"></i>Fabric</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/IPFS" target="_self" title="IPFS">
+                    
+                      <i class="fa fa-fw fa-false"></i>IPFS</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="/categories/FileCoin" target="_self" title="FileCoin">
+                    
+                      <i class="fa fa-fw fa-false"></i>FileCoin</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <span>
+                联系我
+              </span>
+            </div>
+          
+          
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/xilibi2003" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/xilibi2003" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiong-li-bing/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xilibi2003@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://learnblockchain.cn/images/zsxq.png" title="深入浅出-<b>问答社区<b>" target="_blank">深入浅出-<b>问答社区<b></a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xiaozhuanlan.com/blockchaincore" title="深入浅出-<b>小专栏<b>" target="_blank">深入浅出-<b>小专栏<b></a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hiblock.one/" title="HiBlock区块链社区" target="_blank">HiBlock区块链社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://edu.upchain.pro/book.html" title="图书-精通智能合约开发" target="_blank">图书-精通智能合约开发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://me.tryblockchain.org/" title="区块链技术博客" target="_blank">区块链技术博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blockgeek.org/" title="BG区块链技术论坛" target="_blank">BG区块链技术论坛</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eosfans.io/" title="EOS中文社区" target="_blank">EOS中文社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.liankexing.com/" title="链客区块链问答社区" target="_blank">链客区块链问答社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://yushuangqi.com" title="虞双齐的博客" target="_blank">虞双齐的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.xuanzhangjiong.top" title="TopJohn’s Blog" target="_blank">TopJohn’s Blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://tinyxiong.com" title="Tiny熊的博客" target="_blank">Tiny熊的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://learnblockchain.cn/friends" title="更多" target="_blank">更多</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是-The-DAO-攻击"><span class="nav-number">1.</span> <span class="nav-text">什么是 The DAO 攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案"><span class="nav-number">2.</span> <span class="nav-text">解决方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#矿工投票与区块头校验"><span class="nav-number">3.</span> <span class="nav-text">矿工投票与区块头校验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何分离网络？"><span class="nav-number">3.1.</span> <span class="nav-text">如何分离网络？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转移资产"><span class="nav-number">3.2.</span> <span class="nav-text">转移资产</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiny熊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+  <div class="footer-custom"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备17140514号-1</a></div>
+
+
+        
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1265946080&web_id=1265946080" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

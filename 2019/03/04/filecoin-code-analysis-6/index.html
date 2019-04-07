@@ -93,7 +93,7 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第六章filecoin源码协议层分析之hello握手协议.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-12T07:25:43.834Z">
+<meta property="og:updated_time" content="2019-04-05T10:29:31.054Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="filecoin技术架构分析六:filecoin源码协议层分析之hello握手协议">
 <meta name="twitter:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第六章filecoin源码协议层分析之hello握手协议.">
@@ -399,8 +399,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-12T15:25:43+08:00">
-                2019-03-12
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-05T18:29:31+08:00">
+                2019-04-05
               </time>
             
           </span>
@@ -549,7 +549,7 @@
 <li>启动hello服务</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// Start boots up the node.</span><br><span class="line">func (node *Node) Start(ctx context.Context) error &#123;</span><br><span class="line">    ......</span><br><span class="line"></span><br><span class="line">	// Start up &apos;hello&apos; handshake service</span><br><span class="line">    // 定义区块同步的回调函数</span><br><span class="line">	syncCallBack := func(pid libp2ppeer.ID, cids []cid.Cid, height uint64) &#123;</span><br><span class="line">		// TODO it is possible the syncer interface should be modified to</span><br><span class="line">		// make use of the additional context not used here (from addr + height).</span><br><span class="line">		// To keep things simple for now this info is not used.</span><br><span class="line">        // 触发调用会启动同步区块的动作</span><br><span class="line">		err := node.Syncer.HandleNewBlocks(context.Background(), cids)</span><br><span class="line">		if err != nil &#123;</span><br><span class="line">			log.Infof(&quot;error handling blocks: %s&quot;, types.NewSortedCidSet(cids...).String())</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">    //实例化hello服务</span><br><span class="line">	node.HelloSvc = hello.New(node.Host(), node.ChainReader.GenesisCid(), syncCallBack, node.ChainReader.Head)</span><br><span class="line"></span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客</p>
 
       
     </div>
@@ -696,7 +696,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -718,7 +718,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

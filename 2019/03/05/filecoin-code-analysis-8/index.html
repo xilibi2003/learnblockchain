@@ -93,12 +93,12 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第八章filecoin源码分析之协议层检索协议。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://learnblockchain.cn/images/retrieval_protocol.png">
-<meta property="og:updated_time" content="2019-03-12T07:25:54.601Z">
+<meta property="og:image" content="https://img.learnblockchain.cn/2019/retrieval_protocol.png!wl">
+<meta property="og:updated_time" content="2019-04-05T10:29:31.037Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="filecoin技术架构分析八：filecoin源码分析之协议层检索协议">
 <meta name="twitter:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第八章filecoin源码分析之协议层检索协议。">
-<meta name="twitter:image" content="https://learnblockchain.cn/images/retrieval_protocol.png">
+<meta name="twitter:image" content="https://img.learnblockchain.cn/2019/retrieval_protocol.png!wl">
 
 
 
@@ -401,8 +401,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-12T15:25:54+08:00">
-                2019-03-12
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-05T18:29:31+08:00">
+                2019-04-05
               </time>
             
           </span>
@@ -459,7 +459,7 @@
       
         <p>我是先河系统CTO杨尉，欢迎大加关注的的Github: <a href="https://github.com/waynewyang" target="_blank" rel="noopener">waynewyang</a>，本文是<a href="https://learnblockchain.cn/2019/03/11/filecoin-code-analysis-0/">filecoin技术架构分析系列文章</a>第八章filecoin源码分析之协议层检索协议。</p>
 <a id="more"></a>
-<h2 id="协议概览图"><a href="#协议概览图" class="headerlink" title="协议概览图"></a>协议概览图</h2><p><img src="/images/retrieval_protocol.png" alt=""></p>
+<h2 id="协议概览图"><a href="#协议概览图" class="headerlink" title="协议概览图"></a>协议概览图</h2><p><img src="https://img.learnblockchain.cn/2019/retrieval_protocol.png!wl" alt=""></p>
 <ul>
 <li>此概览图为当前的实现，整个检索的代码还没有完善</li>
 <li>目前的逻辑比较简单，需要指定矿工、内容cid即可进行免费检索</li>
@@ -480,7 +480,7 @@
 </ul>
 <h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><h3 id="检索矿工"><a href="#检索矿工" class="headerlink" title="检索矿工"></a>检索矿工</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">▼ package</span><br><span class="line">    retrieval</span><br><span class="line"></span><br><span class="line">▼ imports</span><br><span class="line">    github.com/filecoin-project/go-filecoin/cborutil</span><br><span class="line">    github.com/filecoin-project/go-filecoin/proofs/sectorbuilder</span><br><span class="line">    gx/ipfs/QmTGxDz2CjBucFzPNTiWwzQmTWdrBnzqbqrMucDYMsjuPb/go-libp2p-net</span><br><span class="line">    gx/ipfs/QmZNkThpqfVXs9GNbexPrfBbXSLNYeKrE7jwFM2oqHbyqN/go-libp2p-protocol</span><br><span class="line">    gx/ipfs/QmbkT7eMTyXfpeyB3ZMxxcxg7XH8t6uXp49jqzz4HB7BGF/go-log</span><br><span class="line">    gx/ipfs/Qmd52WKRSwrBK5gUaJKawryZQ5by6UbNB8KVW2Zy6JtbyW/go-libp2p-host</span><br><span class="line">    io/ioutil</span><br><span class="line"></span><br><span class="line">▼ constants</span><br><span class="line">    // 定义检索协议: &quot;/fil/retrieval/free/0.0.0&quot;</span><br><span class="line">   -retrievalFreeProtocol</span><br><span class="line"></span><br><span class="line">▼ variables</span><br><span class="line">   -log</span><br><span class="line"></span><br><span class="line">▼+Miner : struct</span><br><span class="line">    [fields]</span><br><span class="line">    // 矿工节点，参见minerNode </span><br><span class="line">   -node : minerNode</span><br><span class="line"></span><br><span class="line">    [methods]</span><br><span class="line">    // 执行具体的检索服务</span><br><span class="line">    // 通过解析协议流数据，执行检索动作并返回</span><br><span class="line">   -handleRetrievePieceForFree(s inet.Stream)</span><br><span class="line"></span><br><span class="line">    [functions]</span><br><span class="line">    // 实例化检索矿工</span><br><span class="line">    // 设置处理免费检索的handle方法：handleRetrievePieceForFree</span><br><span class="line">   +NewMiner(nd minerNode) : *Miner</span><br><span class="line"></span><br><span class="line">▼-minerNode : interface</span><br><span class="line">    [methods]</span><br><span class="line">   +Host() : host.Host</span><br><span class="line">   +SectorBuilder() : sectorbuilder.SectorBuilder</span><br></pre></td></tr></table></figure>
 <h3 id="检索客户"><a href="#检索客户" class="headerlink" title="检索客户"></a>检索客户</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">▼ package</span><br><span class="line">    retrieval</span><br><span class="line"></span><br><span class="line">▶ imports</span><br><span class="line"></span><br><span class="line">▼ constants</span><br><span class="line">    // 检索内容大小限制</span><br><span class="line">   +RetrievePieceChunkSize</span><br><span class="line"></span><br><span class="line">▼+Client : struct</span><br><span class="line">    [fields]</span><br><span class="line">   -node : clientNode</span><br><span class="line"></span><br><span class="line">    [methods]</span><br><span class="line">    // 通过cid进行检索</span><br><span class="line">    // 通过协议流，发送检索请求以及接受检索回复和数据</span><br><span class="line">   +RetrievePiece(ctx context.Context, minerPeerID peer.ID, pieceCID cid.Cid) : io.ReadCloser, error</span><br><span class="line"></span><br><span class="line">    [functions]</span><br><span class="line">    // 实例化检索客户</span><br><span class="line">   +NewClient(nd clientNode) : *Client</span><br><span class="line"></span><br><span class="line">▼-clientNode : interface</span><br><span class="line">    [methods]</span><br><span class="line">   +Host() : host.Host</span><br></pre></td></tr></table></figure>
-<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客</p>
 
       
     </div>
@@ -627,7 +627,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -649,7 +649,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

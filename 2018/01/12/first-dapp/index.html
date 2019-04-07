@@ -93,19 +93,19 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="今天我们来编写一个完整的去中心化（区块链）应用（Dapps）, 本文可以和编写智能合约结合起来看。2019/03/30更新：  适配 Truffle v5.0.0; 更新Solidity 代码，适配solidity 0.5.0以上版本; 适配MetaMask 更新, 适配支持window.ethereum 对象;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://learnblockchain.cn/images/Petshop.jpg">
-<meta property="og:image" content="https://learnblockchain.cn/images/ganache-initial.png">
-<meta property="og:image" content="https://learnblockchain.cn/images/ganache-migrated.png">
-<meta property="og:image" content="https://learnblockchain.cn/images/metamask-initial.png">
-<meta property="og:image" content="https://learnblockchain.cn/images/metamask-seed.png">
-<meta property="og:image" content="https://learnblockchain.cn/images/metamask-account1.png">
-<meta property="og:image" content="https://learnblockchain.cn/images/metamask-transactionconfirm.png">
-<meta property="og:image" content="https://learnblockchain.cn/images/metamask-transactionsuccess.png">
-<meta property="og:updated_time" content="2019-04-03T09:25:21.109Z">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/Petshop.jpg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/ganache-initial.png!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/ganache-migrated.png!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/metamask-initial.png!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/metamask-seed.png!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/metamask-account1.png!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/metamask-transactionconfirm.png!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/metamask-transactionsuccess.png!wl">
+<meta property="og:updated_time" content="2019-04-05T10:29:32.231Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Truffle 教程：教你开发、部署第一个去中心化应用(Dapp) - 宠物商店">
 <meta name="twitter:description" content="今天我们来编写一个完整的去中心化（区块链）应用（Dapps）, 本文可以和编写智能合约结合起来看。2019/03/30更新：  适配 Truffle v5.0.0; 更新Solidity 代码，适配solidity 0.5.0以上版本; 适配MetaMask 更新, 适配支持window.ethereum 对象;">
-<meta name="twitter:image" content="https://learnblockchain.cn/images/Petshop.jpg">
+<meta name="twitter:image" content="https://img.learnblockchain.cn/2018/Petshop.jpg!wl">
 
 
 
@@ -408,8 +408,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-04-03T17:25:21+08:00">
-                2019-04-03
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-05T18:29:32+08:00">
+                2019-04-05
               </time>
             
           </span>
@@ -483,7 +483,7 @@
 </ol>
 <a id="more"></a>
 <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>阅读本文前，你应该对以太坊、智能合约有所了解，如果你还不了解，建议你先看<a href="https://learnblockchain.cn/2017/11/20/whatiseth/">以太坊是什么</a><br>除此之外，你最好还了解一些HTML及JavaScript知识。</p>
-<p>本文通过实例教大家来开发去中心化应用，应用效果如图：<br><img src="https://learnblockchain.cn/images/Petshop.jpg" alt=""></p>
+<p>本文通过实例教大家来开发去中心化应用，应用效果如图：<br><img src="https://img.learnblockchain.cn/2018/Petshop.jpg!wl" alt=""></p>
 <p>从本文，你可以学习到：</p>
 <ul>
 <li>搭建智能合约开发环境</li>
@@ -527,12 +527,12 @@
 <h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>编译之后，就可以部署到区块链上。<br>在migrations文件夹下已经有一个1_initial_migration.js部署脚本，用来部署Migrations.sol合约。<br>Migrations.sol 用来确保不会部署相同的合约。</p>
 <p>现在我们来创建一个自己的部署脚本<code>2_deploy_contracts.js</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var Adoption = artifacts.require(&quot;Adoption&quot;);</span><br><span class="line"></span><br><span class="line">module.exports = function(deployer) &#123;</span><br><span class="line">  deployer.deploy(Adoption);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>在执行部署之前，需要确保有一个区块链运行, 可以使用<br><a href="http://truffleframework.com/ganache/" target="_blank" rel="noopener">Ganache</a>来开启一个私链来进行开发测试，默认会在7545端口上运行一个开发链。<br>Ganache 启动之后是这样：<br><img src="https://learnblockchain.cn/images/ganache-initial.png" alt=""></p>
+<p>在执行部署之前，需要确保有一个区块链运行, 可以使用<br><a href="http://truffleframework.com/ganache/" target="_blank" rel="noopener">Ganache</a>来开启一个私链来进行开发测试，默认会在7545端口上运行一个开发链。<br>Ganache 启动之后是这样：<br><img src="https://img.learnblockchain.cn/2018/ganache-initial.png!wl" alt=""></p>
 <p>接下来执行部署命令:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; truffle  migrate</span><br></pre></td></tr></table></figure>
 <p>执行后，有一下类似的输出，</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Using network &apos;develop&apos;.</span><br><span class="line"></span><br><span class="line">Running migration: 1_initial_migration.js</span><br><span class="line">  Deploying Migrations...</span><br><span class="line">  ... 0x3076b7dac65afc44ec51508bf6f2b6894f833f0f9560ecad2d6d41ed98a4679f</span><br><span class="line">  Migrations: 0x8cdaf0cd259887258bc13a92c0a6da92698644c0</span><br><span class="line">Saving successful migration to network...</span><br><span class="line">  ... 0xd7bc86d31bee32fa3988f1c1eabce403a1b5d570340a3a9cdba53a472ee8c956</span><br><span class="line">Saving artifacts...</span><br><span class="line">Running migration: 2_deploy_contracts.js</span><br><span class="line">  Deploying Adoption...</span><br><span class="line">  ... 0x2c6ab4471c225b5473f2079ee42ca1356007e51d5bb57eb80bfeb406acc35cd4</span><br><span class="line">  Adoption: 0x345ca3e014aaf5dca488057592ee47305d9b3e10</span><br><span class="line">Saving successful migration to network...</span><br><span class="line">  ... 0xf36163615f41ef7ed8f4a8f192149a0bf633fe1a2398ce001bf44c43dc7bdda0</span><br><span class="line">Saving artifacts...</span><br></pre></td></tr></table></figure>
-<p>在打开的Ganache里可以看到区块链状态的变化，现在产生了4个区块。<br><img src="https://learnblockchain.cn/images/ganache-migrated.png" alt=""><br>这时说明已经智能合约已经部署好了。</p>
+<p>在打开的Ganache里可以看到区块链状态的变化，现在产生了4个区块。<br><img src="https://img.learnblockchain.cn/2018/ganache-migrated.png!wl" alt=""><br>这时说明已经智能合约已经部署好了。</p>
 <h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>现在我们来测试一下智能合约，测试用例可以用 JavaScript 或 Solidity来编写，这里使用Solidity。</p>
 <p>在<code>test</code>目录下新建一个<code>TestAdoption.sol</code>，编写测试合约</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">pragma solidity ^<span class="number">0.5</span><span class="number">.0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"truffle/Assert.sol"</span>;   <span class="comment">// 引入的断言</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"truffle/DeployedAddresses.sol"</span>;  <span class="comment">// 用来获取被测试合约的地址</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"../contracts/Adoption.sol"</span>;      <span class="comment">// 被测试合约</span></span><br><span class="line"></span><br><span class="line">contract TestAdoption &#123;</span><br><span class="line">  Adoption adoption = Adoption(DeployedAddresses.Adoption());</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 领养测试用例</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">testUserCanAdoptPet</span>(<span class="params"></span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">    uint returnedId = adoption.adopt(<span class="number">8</span>);</span><br><span class="line"></span><br><span class="line">    uint expected = <span class="number">8</span>;</span><br><span class="line">    Assert.equal(returnedId, expected, <span class="string">"Adoption of pet ID 8 should be recorded."</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 宠物所有者测试用例</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">testGetAdopterAddressByPetId</span>(<span class="params"></span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 期望领养者的地址就是本合约地址，因为交易是由测试合约发起交易，</span></span><br><span class="line">    address expected = <span class="keyword">this</span>;</span><br><span class="line">    address adopter = adoption.adopters(<span class="number">8</span>);</span><br><span class="line">    Assert.equal(adopter, expected, <span class="string">"Owner of pet ID 8 should be recorded."</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 测试所有领养者</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">testGetAdopterAddressByPetIdInArray</span>(<span class="params"></span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 领养者的地址就是本合约地址</span></span><br><span class="line">    address expected = <span class="keyword">this</span>;</span><br><span class="line">    address[<span class="number">16</span>] memory adopters = adoption.getAdopters();</span><br><span class="line">    Assert.equal(adopters[<span class="number">8</span>], expected, <span class="string">"Owner of pet ID 8 should be recorded."</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -557,11 +557,11 @@
 <p>修改handleAdopt()代码：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">handleAdopt: <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">  event.preventDefault();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> petId = <span class="built_in">parseInt</span>($(event.target).data(<span class="string">'id'</span>));</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> adoptionInstance;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 获取用户账号</span></span><br><span class="line">  web3.eth.getAccounts(<span class="function"><span class="keyword">function</span>(<span class="params">error, accounts</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (error) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(error);</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">var</span> account = accounts[<span class="number">0</span>];</span><br><span class="line">  </span><br><span class="line">    App.contracts.Adoption.deployed().then(<span class="function"><span class="keyword">function</span>(<span class="params">instance</span>) </span>&#123;</span><br><span class="line">      adoptionInstance = instance;</span><br><span class="line">  </span><br><span class="line">      <span class="comment">// 发送交易领养宠物</span></span><br><span class="line">      <span class="keyword">return</span> adoptionInstance.adopt(petId, &#123;<span class="attr">from</span>: account&#125;);</span><br><span class="line">    &#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> App.markAdopted();</span><br><span class="line">    &#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(err.message);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="在浏览器中运行"><a href="#在浏览器中运行" class="headerlink" title="在浏览器中运行"></a>在浏览器中运行</h2><h3 id="安装-MetaMask"><a href="#安装-MetaMask" class="headerlink" title="安装 MetaMask"></a>安装 MetaMask</h3><p>MetaMask 是一款插件形式的以太坊轻客户端，开发过程中使用MetaMask和我们的dapp进行交互是个很好的选择，通过此<a href="https://metamask.io/" target="_blank" rel="noopener">链接</a>安装，安装完成后，浏览器工具条会显示一个小狐狸图标。</p>
-<h3 id="配置钱包"><a href="#配置钱包" class="headerlink" title="配置钱包"></a>配置钱包</h3><p>在接受隐私说明后，会出现页面如下：<br><img src="https://learnblockchain.cn/images/metamask-initial.png" alt=""></p>
+<h3 id="配置钱包"><a href="#配置钱包" class="headerlink" title="配置钱包"></a>配置钱包</h3><p>在接受隐私说明后，会出现页面如下：<br><img src="https://img.learnblockchain.cn/2018/metamask-initial.png!wl" alt=""></p>
 <p>这里我们通过还原一个Ganache为我们创建好的钱包，作为我们的开发测试钱包。点击页面的<strong> Import Existing DEN</strong>，输入Ganache显示的助记词。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">candy maple cake sugar pudding cream honey rich smooth crumble sweet treat</span><br></pre></td></tr></table></figure>
-<p>然后自己想要的密码，点击OK。<br>如图：<br><img src="https://learnblockchain.cn/images/metamask-seed.png" alt=""></p>
-<h3 id="连接开发区块链网络"><a href="#连接开发区块链网络" class="headerlink" title="连接开发区块链网络"></a>连接开发区块链网络</h3><p>默认连接的是以太坊主网（左上角显示），选择<strong>Custom RPC</strong>，添加一个网络：<strong><a href="http://127.0.0.1:7545" target="_blank" rel="noopener">http://127.0.0.1:7545</a></strong>，点返回后，显示如下：<br><img src="/images/metamask-account1.png" alt=""><br>这是左上角显示为<strong>Private Network</strong>，账号是Ganache中默认的第一个账号。</p>
+<p>然后自己想要的密码，点击OK。<br>如图：<br><img src="https://img.learnblockchain.cn/2018/metamask-seed.png!wl" alt=""></p>
+<h3 id="连接开发区块链网络"><a href="#连接开发区块链网络" class="headerlink" title="连接开发区块链网络"></a>连接开发区块链网络</h3><p>默认连接的是以太坊主网（左上角显示），选择<strong>Custom RPC</strong>，添加一个网络：<strong><a href="http://127.0.0.1:7545" target="_blank" rel="noopener">http://127.0.0.1:7545</a></strong>，点返回后，显示如下：<br><img src="https://img.learnblockchain.cn/2018/metamask-account1.png!wl" alt=""><br>这是左上角显示为<strong>Private Network</strong>，账号是Ganache中默认的第一个账号。</p>
 <p>至此MetaMask的安装，配置已经完成。</p>
 <h3 id="安装和配置lite-server"><a href="#安装和配置lite-server" class="headerlink" title="安装和配置lite-server"></a>安装和配置lite-server</h3><p>接下来需要本地的web 服务器提供服务的访问， Truffle Box <strong>pet-shop</strong>里提供了一个<strong>lite-server</strong>可以直接使用，我们看看它是如何工作的。<br><strong>bs-config.json</strong>指示了lite-server的工作目录。</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"server"</span>: &#123;</span><br><span class="line">    <span class="attr">"baseDir"</span>: [<span class="string">"./src"</span>, <span class="string">"./build/contracts"</span>]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -570,9 +570,9 @@
 <p>当运行npm run dev的时候，就会启动lite-server</p>
 <h3 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; npm run dev</span><br></pre></td></tr></table></figure>
 <p>会自动打开浏览器显示我们的dapp，如本文的第一张图。<br>现在领养一直宠物看看，当我们点击<strong>Adopt</strong>时，MetaMask会提示我们交易的确认，如图：</p>
-<p><img src="https://learnblockchain.cn/images/metamask-transactionconfirm.png" alt=""></p>
+<p><img src="https://img.learnblockchain.cn/2018/metamask-transactionconfirm.png!wl" alt=""></p>
 <p>点击Submit确认后，就可以看到成功领养了这次宠物。</p>
-<p>在MetaMask中，也可以看到交易的清单：<br><img src="https://learnblockchain.cn/images/metamask-transactionsuccess.png" alt=""></p>
+<p>在MetaMask中，也可以看到交易的清单：<br><img src="https://img.learnblockchain.cn/2018/metamask-transactionsuccess.png!wl" alt=""></p>
 <p>好了，恭喜你，即将成为一名去中心化式应用开发者的你已经成为迈出了坚实的一步。<br>还可以阅读另一篇<a href="https://learnblockchain.cn/2019/03/30/dapp_noteOnChain">开发链上记事本</a> 进一步巩固DApp 开发。 </p>
 <p>加我微信：xlbxiong 备注：DApp， 加入以太坊DApp开发微信群。</p>
 <p>如果学习中遇到问题，欢迎加入<strong><a href="https://learnblockchain.cn/images/zsxq.png">知识星球</a></strong>交流。</p>
@@ -757,7 +757,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -779,7 +779,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

@@ -93,13 +93,13 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="这是Solidity教程系列文章第9篇介绍Solidity 错误处理。Solidity系列完整的文章列表请查看分类-Solidity。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://learnblockchain.cn/images/solidity_error1.jpg">
-<meta property="og:image" content="https://learnblockchain.cn/images/solidity_error2.jpg">
-<meta property="og:updated_time" content="2019-04-03T09:25:21.121Z">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/solidity_error1.jpg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/solidity_error2.jpg!wl">
+<meta property="og:updated_time" content="2019-04-05T10:29:32.295Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="智能合约语言 Solidity 教程系列9 - 错误处理">
 <meta name="twitter:description" content="这是Solidity教程系列文章第9篇介绍Solidity 错误处理。Solidity系列完整的文章列表请查看分类-Solidity。">
-<meta name="twitter:image" content="https://learnblockchain.cn/images/solidity_error1.jpg">
+<meta name="twitter:image" content="https://img.learnblockchain.cn/2018/solidity_error1.jpg!wl">
 
 
 
@@ -402,8 +402,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-04-03T17:25:21+08:00">
-                2019-04-03
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-05T18:29:32+08:00">
+                2019-04-05
               </time>
             
           </span>
@@ -487,12 +487,12 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.0</span>;</span><br><span class="line"></span><br><span class="line">contract Sharer &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">sendHalf</span>(<span class="params">address addr</span>) <span class="title">public</span> <span class="title">payable</span> <span class="title">returns</span> (<span class="params">uint balance</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">require</span>(msg.value % <span class="number">2</span> == <span class="number">0</span>); <span class="comment">// 仅允许偶数</span></span><br><span class="line">        uint balanceBeforeTransfer = <span class="keyword">this</span>.balance;</span><br><span class="line">        addr.transfer(msg.value / <span class="number">2</span>);  <span class="comment">// 如果失败，会抛出异常，下面的代码就不是执行</span></span><br><span class="line">        assert(<span class="keyword">this</span>.balance == balanceBeforeTransfer - msg.value / <span class="number">2</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.balance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>我们实际运行下，看看异常是如何发生的：</p>
 <ol>
-<li><p>首先打开<a href="https://remix.ethereum.org" target="_blank" rel="noopener">Remix</a>，贴入代码，点击创建合约。如下图：<br><img src="/images/solidity_error1.jpg" alt=""></p>
+<li><p>首先打开<a href="https://remix.ethereum.org" target="_blank" rel="noopener">Remix</a>，贴入代码，点击创建合约。如下图：<br><img src="https://img.learnblockchain.cn/2018/solidity_error1.jpg!wl" alt=""></p>
 </li>
 <li><p>运行测试1：附加1wei (奇数)去调用sendHalf，这时会发生异常，如下图:</p>
 </li>
 </ol>
-<p><img src="/images/solidity_error2.jpg" alt=""></p>
+<p><img src="https://img.learnblockchain.cn/2018/solidity_error2.jpg!wl" alt=""></p>
 <ol>
 <li>运行测试2：附加2wei 去调用sendHalf，运行正常。</li>
 <li>运行测试3：附加2wei以及sendHalf参数为当前合约本身，在转账是发生异常，因为合约无法接收转账，错误提示上图类似。</li>
@@ -696,7 +696,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -718,7 +718,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

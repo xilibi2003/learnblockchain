@@ -93,12 +93,12 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="本文主要介绍代币高级功能的实现: 代币管理、代币增发、代币兑换、资产冻结、Gas自动补充。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://learnblockchain.cn/images/create_adv_token.jpg">
-<meta property="og:updated_time" content="2019-04-03T09:25:21.083Z">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/create_adv_token.jpg!wl">
+<meta property="og:updated_time" content="2019-04-05T10:29:32.249Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="实现一个可管理、增发、兑换、冻结等高级功能的代币">
 <meta name="twitter:description" content="本文主要介绍代币高级功能的实现: 代币管理、代币增发、代币兑换、资产冻结、Gas自动补充。">
-<meta name="twitter:image" content="https://learnblockchain.cn/images/create_adv_token.jpg">
+<meta name="twitter:image" content="https://img.learnblockchain.cn/2018/create_adv_token.jpg!wl">
 
 
 
@@ -401,8 +401,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-04-03T17:25:21+08:00">
-                2019-04-03
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-05T18:29:32+08:00">
+                2019-04-05
               </time>
             
           </span>
@@ -494,7 +494,7 @@
 <p>先来设定余额阈值：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">uint minBalanceForAccounts;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">setMinBalance</span>(<span class="params">uint minimumBalanceInFinney</span>) <span class="title">onlyOwner</span> </span>&#123;</span><br><span class="line">         minBalanceForAccounts = minimumBalanceInFinney * <span class="number">1</span> finney;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
 <p>finney 是货币单位 1 finney = 0.001eth<br>然后交易中加入对用户的余额的判断。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">transfer</span>(<span class="params">address _to, uint256 _value</span>) </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">if</span>(msg.sender.balance &lt; minBalanceForAccounts)</span><br><span class="line">        sell((minBalanceForAccounts - msg.sender.balance) / sellPrice);</span><br><span class="line">    <span class="keyword">if</span>(_to.balance&lt;minBalanceForAccounts)   <span class="comment">// 可选，让接受者也补充余额，以便接受者使用代币。</span></span><br><span class="line">        _to.send(sell((minBalanceForAccounts - _to.balance) / sellPrice));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="代码部署"><a href="#代码部署" class="headerlink" title="代码部署"></a>代码部署</h2><p>高级功能完整代码请前往我的<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">小专栏</a>， 项目的完整的部署方法参考<a href="https://learnblockchain.cn/2018/01/12/create_token/">上一篇</a>，不同的是创建合约时需要预存余额，如图：</p>
-<p><img src="https://learnblockchain.cn/images/create_adv_token.jpg" alt=""></p>
+<p><img src="https://img.learnblockchain.cn/2018/create_adv_token.jpg!wl" alt=""></p>
 <p>专栏已经有多篇文章介绍Remix Solidity IDE的使用，这里就不一一截图演示了，请大家自己测试验证。</p>
 <p>如何创建代币发行代币，现在也录制了对应的<strong><a href="https://wiki.learnblockchain.cn/course/token.html" target="_blank" rel="noopener">视频教程:通过代币学以太坊智能合约开发</a></strong>，现在我们在<strong>招募体验师</strong>，可以点击<a href="https://learnblockchain.cn/course">链接</a>了解详情。</p>
 <p>如果你在创建代币的过程中遇到问题，欢迎到我的<strong><a href="https://learnblockchain.cn/images/zsxq.png">知识星球</a></strong>提问，作为星球成员福利，成员可加入区块链技术付费交流群。</p>
@@ -676,7 +676,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -698,7 +698,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

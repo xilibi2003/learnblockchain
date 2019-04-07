@@ -93,15 +93,15 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="Web3与智能合约交互实战">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://learnblockchain.cn/images/Communication_Model.jpg">
-<meta property="og:image" content="https://learnblockchain.cn/images/Ganache.png">
-<meta property="og:image" content="https://learnblockchain.cn/images/ABI.png">
-<meta property="og:image" content="https://learnblockchain.cn/images/page.png">
-<meta property="og:updated_time" content="2019-04-03T09:25:21.131Z">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/Communication_Model.jpg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/Ganache.png!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/ABI.png!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/page.png!wl">
+<meta property="og:updated_time" content="2019-04-05T10:29:32.293Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Web3与智能合约交互实战">
 <meta name="twitter:description" content="Web3与智能合约交互实战">
-<meta name="twitter:image" content="https://learnblockchain.cn/images/Communication_Model.jpg">
+<meta name="twitter:image" content="https://img.learnblockchain.cn/2018/Communication_Model.jpg!wl">
 
 
 
@@ -404,8 +404,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-04-03T17:25:21+08:00">
-                2019-04-03
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-05T18:29:32+08:00">
+                2019-04-05
               </time>
             
           </span>
@@ -471,9 +471,9 @@
 <li><code>web3-utils</code>包含了一些Dapp开发有用的功能</li>
 </ul>
 <p>Web3与geth通信使用的是 <a href="https://github.com/ethereum/wiki/wiki/JSON-RPC" target="_blank" rel="noopener">JSON-RPC</a> ，这是一种轻量级的RPC（Remote Procedure Call）协议，整个通信的模型可以抽象为下图。</p>
-<p><img src="/images/Communication_Model.jpg" alt="Web3 Communication Model"></p>
+<p><img src="https://img.learnblockchain.cn/2018/Communication_Model.jpg!wl" alt="Web3 Communication Model"></p>
 <h2 id="搭建测试链"><a href="#搭建测试链" class="headerlink" title="搭建测试链"></a>搭建测试链</h2><p>在开发初期，我们并没有必要使用真实的公链，为了开发效率，一般选择在本地搭建测试链。在本文我们选择的<a href="http://truffleframework.com/ganache/" target="_blank" rel="noopener">Ganache</a>（在此之前使用的是testrpc，Ganache属于它的升级版），一个图形化测试软件（也有命令行版本），可以一键在本地搭建以太坊区块链测试环境，并且将区块链的状态通过图形界面显示出来，Ganache的运行界面如下图所示。</p>
-<p><img src="/images/Ganache.png" alt="Ganache"></p>
+<p><img src="https://img.learnblockchain.cn/2018/Ganache.png!wl" alt="Ganache"></p>
 <p>从图中可以看到Ganache会默认创建10个账户，监听地址是<code>http://127.0.0.1:7545</code>，可以实时看到<code>Current Block</code>、<code>Gas Price</code>、<code>Gas Limit</code>等信息。</p>
 <h2 id="创建智能合约"><a href="#创建智能合约" class="headerlink" title="创建智能合约"></a>创建智能合约</h2><p>目前以太坊官方全力支持的智能合约开发环境是<a href="https://remix.ethereum.org" target="_blank" rel="noopener">Remix IDE</a>，我们在合约编辑页面编写如下代码：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.21</span>;</span><br><span class="line"></span><br><span class="line">contract InfoContract &#123;</span><br><span class="line">    </span><br><span class="line">   string fName;</span><br><span class="line">   uint age;</span><br><span class="line">   </span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">setInfo</span>(<span class="params">string _fName, uint _age</span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">       fName = _fName;</span><br><span class="line">       age = _age;</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">getInfo</span>(<span class="params"></span>) <span class="title">public</span> <span class="title">constant</span> <span class="title">returns</span> (<span class="params">string, uint</span>) </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> (fName, age);</span><br><span class="line">   &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -507,7 +507,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">web3.eth.defaultAccount = web3.eth.accounts[<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
 <p>在上文中我们使用 Ganache 已经创建了 10 个账户了，这里我们选择第一个账户当作默认账户。</p>
 <p>接下来需要让我们的<code>web3</code>知道我们的合约是什么样的，这里需要用到合约的 <a href="https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI" target="_blank" rel="noopener">ABI（Application Binary Interface）</a>。<code>ABI</code>可以使我们调用合约的函数，并且从合约中获取数据。</p>
-<p>在上文中我们已经在 Remix 中创建了我们的合约，这时重新回到 Remix，在 Compile 的 tab 下我们点击<code>Details</code> 出现的页面中我们可以拷贝合约的<code>ABI</code>，如下图所示。<br><img src="/images/ABI.png" alt=""><br>将其复制到代码中：</p>
+<p>在上文中我们已经在 Remix 中创建了我们的合约，这时重新回到 Remix，在 Compile 的 tab 下我们点击<code>Details</code> 出现的页面中我们可以拷贝合约的<code>ABI</code>，如下图所示。<br><img src="https://img.learnblockchain.cn/2018/ABI.png!wl" alt=""><br>将其复制到代码中：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> infoContract = web3.eth.contract(PASTE ABI HERE!);</span><br></pre></td></tr></table></figure>
 <p>接下来转到 run 的tab，拷贝合约的地址，将其复制到下面的代码中：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> info = InfoContract.at(<span class="string">'PASTE CONTRACT ADDRESS HERE'</span>);</span><br></pre></td></tr></table></figure>
@@ -515,7 +515,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">info.getInfo(<span class="function"><span class="keyword">function</span>(<span class="params">error, result</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!error)</span><br><span class="line">        &#123;</span><br><span class="line">            $(<span class="string">"#info"</span>).html(result[<span class="number">0</span>]+<span class="string">' ('</span>+result[<span class="number">1</span>]+<span class="string">' years old)'</span>);</span><br><span class="line">            <span class="built_in">console</span>.log(result);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">console</span>.error(error);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$(<span class="string">"#button"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    info.setInfo($(<span class="string">"#name"</span>).val(), $(<span class="string">"#age"</span>).val());</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>以上的代码就简单地实现了对合约中两个函数的调用，分别读取和显示<code>name</code>和<code>age</code>变量。</p>
 <p>到此我们就完成了全部的代码，完整代码可以在 <a href="https://github.com/xilibi2003/InfoContract" target="_blank" rel="noopener">InfoContract</a> 中找到。在浏览器中打开<code>index.html</code>测试效果如下图（输入名字和年龄后刷新）。</p>
-<p><img src="/images/page.png" alt=""></p>
+<p><img src="https://img.learnblockchain.cn/2018/page.png!wl" alt=""></p>
 <p>本文中点击”Updata Info”按钮之后，虽然调用智能合约成功，但是当前的界面并没有得到更新，下一篇文章会介绍<a href="https://learnblockchain.cn/2018/05/09/solidity-event/">Web3监听合约事件更新界面</a>。</p>
 <p>本文的作者是盖盖，他的微信公众号: chainlab</p>
 <p>如果你想学习以太坊DApp开发，这门视频课程<a href="https://wiki.learnblockchain.cn/course/dapp.html" target="_blank" rel="noopener">以太坊DAPP开发实战</a>是你不错的选择。</p>
@@ -699,7 +699,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -721,7 +721,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

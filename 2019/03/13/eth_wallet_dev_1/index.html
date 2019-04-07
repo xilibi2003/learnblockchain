@@ -93,13 +93,13 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="上周我开源了一款钱包，反映很好，一周时间不到已经快到100 Star。接下来我会几篇系列文章把开发以太坊钱包的核心要点写出来，也算是对代码的一个解读。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://learnblockchain.cn/images/1551843006.png">
-<meta property="og:image" content="https://learnblockchain.cn/images/15525530768209.jpg">
-<meta property="og:updated_time" content="2019-04-04T06:41:52.694Z">
+<meta property="og:image" content="https://img.learnblockchain.cn/2019/1551843006.png!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2019/15525530768209.jpg!wl">
+<meta property="og:updated_time" content="2019-04-05T10:29:31.051Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何开发一款以太坊（安卓）钱包系列1 - 通过助记词创建账号">
 <meta name="twitter:description" content="上周我开源了一款钱包，反映很好，一周时间不到已经快到100 Star。接下来我会几篇系列文章把开发以太坊钱包的核心要点写出来，也算是对代码的一个解读。">
-<meta name="twitter:image" content="https://learnblockchain.cn/images/1551843006.png">
+<meta name="twitter:image" content="https://img.learnblockchain.cn/2019/1551843006.png!wl">
 
 
 
@@ -402,8 +402,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-04-04T14:41:52+08:00">
-                2019-04-04
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-05T18:29:31+08:00">
+                2019-04-05
               </time>
             
           </span>
@@ -474,10 +474,10 @@
 </ul>
 <h2 id="创建账号预备知识"><a href="#创建账号预备知识" class="headerlink" title="创建账号预备知识"></a>创建账号预备知识</h2><p>我们先来介绍第一个功能：通过生成助记词、Keystore文件、私钥创建钱包账号。<br>本系列中，钱包都是指分层确定性钱包，（HD钱包 Hierarchical Deterministic Wallets）， 之前博客有一篇文章<a href="https://learnblockchain.cn/2018/09/28/hdwallet/">分层钱包</a>进行了详细的介绍，还不熟悉的可以读一下。<br>为了保持本文的完整，这里做一个总结性回顾：以太坊及比特币的<strong>地址是由随机生成的私钥经过椭圆曲线等算法单向推倒而来</strong> ，BIP32及BIP44是为方便管理私钥提出的分层推倒方案，BIP39 定义助记词让分层种子的备份更方便。<br>而KeyStore文件是用来解密以太坊保存私钥的一种方式，大家可以阅读下<a href="https://learnblockchain.cn/2018/10/25/eth-web-wallet_2/">这篇文章: 账号Keystore文件导入导出</a>了解更多。</p>
 <p>实现完成的，界面如下图：</p>
-<p><img src="https://learnblockchain.cn/images/1551843006.png" alt=""></p>
+<p><img src="https://img.learnblockchain.cn/2019/1551843006.png!wl" alt=""></p>
 <p>这是一张导入钱包账号的截图（导入和创建，其实原理一样），界面仿照ImToken，不过本文将不会介绍UI部分的编写。</p>
 <h3 id="Web3j-amp-bitcoinj"><a href="#Web3j-amp-bitcoinj" class="headerlink" title="Web3j &amp; bitcoinj"></a>Web3j &amp; bitcoinj</h3><p>为了完成创建账号功能，我们需要使用到两个库：<a href="https://github.com/web3j/web3j/" target="_blank" rel="noopener">Web3j</a> 和 <a href="https://github.com/bitcoinj/bitcoinj" target="_blank" rel="noopener">bitcoinj</a></p>
-<p>Web3是一套和以太坊通信的封装库，Web3j是Java版本的实现，例如发起交易和智能合约进行交互，下图很好的表达了其作用。<br><img src="https://learnblockchain.cn/images/15525530768209.jpg" alt=""></p>
+<p>Web3是一套和以太坊通信的封装库，Web3j是Java版本的实现，例如发起交易和智能合约进行交互，下图很好的表达了其作用。<br><img src="https://img.learnblockchain.cn/2019/15525530768209.jpg!wl" alt=""></p>
 <p>不过本文中的功能，主要是使用了web3j中椭圆曲线加密及KeyStore文件的生成与解密。</p>
 <p>bitcoinj 的功能和web3类似，它是比特币协议的Java实现，他实现了 BIP32、BIP44及BIP39 相关协议。</p>
 <p>Android使用Gradle来构建，直接在<code>app/build.gradle</code>文件中加入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">implementation &apos;org.web3j:core:4.1.0-android&apos;</span><br><span class="line">implementation &apos;org.bitcoinj:bitcoinj-core:0.14.7&apos;</span><br></pre></td></tr></table></figure></p>
@@ -665,7 +665,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -687,7 +687,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

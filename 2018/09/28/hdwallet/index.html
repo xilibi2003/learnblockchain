@@ -93,17 +93,17 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="如果你还在被HD钱包(分层确定性钱包)、BIP32、BIP44、BIP39搞的一头雾水，来看看这边文章吧。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://learnblockchain.cn/images/9efa20eff737374479d9c6bb86db82b3.png">
-<meta property="og:image" content="https://learnblockchain.cn/images/450b5358b96ef5b32ec775efed901f2a.png">
-<meta property="og:image" content="https://learnblockchain.cn/images/3ec7468aa49d907b0ec66b5d8b41a0a1.png">
-<meta property="og:image" content="https://learnblockchain.cn/images/a9a6e6a31f39e812f579a4c8bdf09347.png">
-<meta property="og:image" content="https://learnblockchain.cn/images/71c0af9474a51296096c3c806ca8f1a1.png">
-<meta property="og:image" content="https://learnblockchain.cn/images/d37f78f8f2d859369d99fc5e0a76c184.png">
-<meta property="og:updated_time" content="2019-04-03T09:25:21.110Z">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/9efa20eff737374479d9c6bb86db82b3.png!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/450b5358b96ef5b32ec775efed901f2a.png!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/3ec7468aa49d907b0ec66b5d8b41a0a1.png!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/a9a6e6a31f39e812f579a4c8bdf09347.png!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/71c0af9474a51296096c3c806ca8f1a1.png!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/d37f78f8f2d859369d99fc5e0a76c184.png!wl">
+<meta property="og:updated_time" content="2019-04-05T10:29:32.227Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解开发HD 钱包涉及的 BIP32、BIP44、BIP39">
 <meta name="twitter:description" content="如果你还在被HD钱包(分层确定性钱包)、BIP32、BIP44、BIP39搞的一头雾水，来看看这边文章吧。">
-<meta name="twitter:image" content="https://learnblockchain.cn/images/9efa20eff737374479d9c6bb86db82b3.png">
+<meta name="twitter:image" content="https://img.learnblockchain.cn/2018/9efa20eff737374479d9c6bb86db82b3.png!wl">
 
 
 
@@ -406,8 +406,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-04-03T17:25:21+08:00">
-                2019-04-03
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-05T18:29:32+08:00">
+                2019-04-05
               </time>
             
           </span>
@@ -464,7 +464,7 @@
       
         <p>如果你还在被HD钱包(分层确定性钱包)、BIP32、BIP44、BIP39搞的一头雾水，来看看这边文章吧。</p>
 <a id="more"></a>
-<h2 id="数字钱包概念"><a href="#数字钱包概念" class="headerlink" title="数字钱包概念"></a>数字钱包概念</h2><p>钱包用来存钱的，在区块链中，我们的数字资产都会对应到一个账户地址上， 只有拥有账户的钥匙（私钥）才可以对资产进行消费（用私钥对消费交易签名）。<br>私钥和地址的关系如下：<img src="/images/9efa20eff737374479d9c6bb86db82b3.png" alt=""><br>（图来自精通比特币）<br>一句话概括下就是：<strong>私钥通过椭圆曲线生成公钥， 公钥通过哈希函数生成地址，这两个过程都是单向的。</strong></p>
+<h2 id="数字钱包概念"><a href="#数字钱包概念" class="headerlink" title="数字钱包概念"></a>数字钱包概念</h2><p>钱包用来存钱的，在区块链中，我们的数字资产都会对应到一个账户地址上， 只有拥有账户的钥匙（私钥）才可以对资产进行消费（用私钥对消费交易签名）。<br>私钥和地址的关系如下：<img src="https://img.learnblockchain.cn/2018/9efa20eff737374479d9c6bb86db82b3.png!wl" alt=""><br>（图来自精通比特币）<br>一句话概括下就是：<strong>私钥通过椭圆曲线生成公钥， 公钥通过哈希函数生成地址，这两个过程都是单向的。</strong></p>
 <p>因此实际上，数字钱包实际是一个管理私钥（生成、存储、签名）的工具，注意钱包并不保存资产，资产是在链上的。</p>
 <h2 id="如何创建账号"><a href="#如何创建账号" class="headerlink" title="如何创建账号"></a>如何创建账号</h2><p>创建账号关键是生成一个私钥， 私钥是一个32个字节的数， <strong>生成一个私钥在本质上在1到2^256之间选一个数字</strong>。<br>因此生成密钥的第一步也是最重要的一步，是要找到足够安全的熵源，即随机性来源，只要选取的结果是不可预测或不可重复的，那么选取数字的具体方法并不重要。</p>
 <p>比如可以掷硬币256次，用纸和笔记录正反面并转换为0和1，随机得到的256位二进制数字可作为钱包的私钥。</p>
@@ -477,12 +477,12 @@
 <p>最早期的比特币钱包就是就是这样，还有一个昵称：“Just a Bunch Of Keys(一堆私钥)“</p>
 </blockquote>
 <p>为了解决这种麻烦，就有了<a href="https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki" target="_blank" rel="noopener">BIP32 提议</a>： 根据一个随机数种子通过分层确定性推导的方式得到n个私钥，这样保存的时候，只需要保存一个种子就可以，私钥可以推导出来，如图：</p>
-<p><img src="/images/450b5358b96ef5b32ec775efed901f2a.png" alt=""><br>（图来自精通比特币）上图中的孙秘钥就可以用来签发交易。</p>
+<p><img src="https://img.learnblockchain.cn/2018/450b5358b96ef5b32ec775efed901f2a.png!wl" alt=""><br>（图来自精通比特币）上图中的孙秘钥就可以用来签发交易。</p>
 <blockquote>
 <p>补充说明下 BIP: Bitcoin Improvement Proposals 比特币改进建议, bip32是第32个改进建议。<br>BIP32提案的名字是：Hierarchical Deterministic Wallets， 就是我们所说的HD钱包。</p>
 </blockquote>
-<p>来分析下这个分层推导的过程，第一步推导主秘钥的过程：<br><img src="/images/3ec7468aa49d907b0ec66b5d8b41a0a1.png" alt=""></p>
-<p>根种子输入到HMAC-SHA512算法中就可以得到一个可用来创造主私钥(m) 和 一个主链编码（ a master chain code)这一步生成的秘钥（由私钥或公钥）及主链编码再加上一个索引号，将作为HMAC-SHA512算法的输入继续衍生出下一层的私钥及链编码，如下图：<img src="/images/a9a6e6a31f39e812f579a4c8bdf09347.png" alt=""></p>
+<p>来分析下这个分层推导的过程，第一步推导主秘钥的过程：<br><img src="https://img.learnblockchain.cn/2018/3ec7468aa49d907b0ec66b5d8b41a0a1.png!wl" alt=""></p>
+<p>根种子输入到HMAC-SHA512算法中就可以得到一个可用来创造主私钥(m) 和 一个主链编码（ a master chain code)这一步生成的秘钥（由私钥或公钥）及主链编码再加上一个索引号，将作为HMAC-SHA512算法的输入继续衍生出下一层的私钥及链编码，如下图：<img src="https://img.learnblockchain.cn/2018/a9a6e6a31f39e812f579a4c8bdf09347.png!wl" alt=""></p>
 <blockquote>
 <p>衍生推导的方案其实有两个：一个用父私钥推导（称为强化衍生方程），一个用父公钥推导。同时为了区分这两种不同的衍生，在索引号也进行了区分，索引号小于2^31用于常规衍生，而2^31到2^32-1之间用于强化衍生，为了方便表示索引号i’，表示2^31+i。</p>
 </blockquote>
@@ -497,12 +497,12 @@
 <p>可以简单的做一个对比，下面那一种备份起来更友好：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 随机数种子</span><br><span class="line">090ABCB3A6e1400e9345bC60c78a8BE7  </span><br><span class="line">// 助记词种子</span><br><span class="line">candy maple cake sugar pudding cream honey rich smooth crumble sweet treat</span><br></pre></td></tr></table></figure></p>
 <p>使用助记词作为种子其实包含2个部分：助记词生成及助记词推导出随机种子，下面分析下这个过程。</p>
 <h3 id="生成助记词"><a href="#生成助记词" class="headerlink" title="生成助记词"></a>生成助记词</h3><p>助记词生成的过程是这样的：先生成一个128位随机数，再加上对随机数做的校验4位，得到132位的一个数，然后按每11位做切分，这样就有了12个二进制数，然后用每个数去查<a href="https://github.com/bitcoin/bips/blob/master/bip-0039/bip-0039-wordlists.md" target="_blank" rel="noopener">BIP39定义的单词表</a>，这样就得到12个助记词，这个过程图示如下：</p>
-<p><img src="/images/71c0af9474a51296096c3c806ca8f1a1.png" alt=""><br>（图来源于网络）</p>
+<p><img src="https://img.learnblockchain.cn/2018/71c0af9474a51296096c3c806ca8f1a1.png!wl" alt=""><br>（图来源于网络）</p>
 <p>下面是使用bip39生成生成助记词的一段代码：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> bip39 = <span class="built_in">require</span>(<span class="string">'bip39'</span>)</span><br><span class="line"><span class="comment">// 生成助记词</span></span><br><span class="line"><span class="keyword">var</span> mnemonic = bip39.generateMnemonic()</span><br><span class="line"><span class="built_in">console</span>.log(mnemonic)</span><br></pre></td></tr></table></figure>
 <h3 id="助记词推导出种子"><a href="#助记词推导出种子" class="headerlink" title="助记词推导出种子"></a>助记词推导出种子</h3><p>这个过程使用密钥拉伸（Key stretching）函数，被用来增强弱密钥的安全性，PBKDF2是常用的密钥拉伸算法中的一种。<br>PBKDF2基本原理是通过一个为随机函数(例如 HMAC 函数)，把助记词明文和盐值作为输入参数，然后重复进行运算最终产生生成一个更长的（512 位）密钥种子。这个种子再构建一个确定性钱包并派生出它的密钥。</p>
 <p>密钥拉伸函数需要两个参数：助记词和盐。盐可以提高暴力破解的难度。 盐由常量字符串 “mnemonic” 及一个可选的密码组成，注意使用不同密码，则拉伸函数在使用同一个助记词的情况下会产生一个不同的种子，这个过程图示图下:</p>
-<p><img src="/images/d37f78f8f2d859369d99fc5e0a76c184.png" alt=""><br>（图来源于网络）</p>
+<p><img src="https://img.learnblockchain.cn/2018/d37f78f8f2d859369d99fc5e0a76c184.png!wl" alt=""><br>（图来源于网络）</p>
 <p>同样代码来表示一下：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> hdkey = <span class="built_in">require</span>(<span class="string">'ethereumjs-wallet/hdkey'</span>)</span><br><span class="line"><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">'ethereumjs-util'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> seed = bip39.mnemonicToSeed(mnemonic, <span class="string">"pwd"</span>);</span><br><span class="line"><span class="keyword">var</span> hdWallet = hdkey.fromMasterSeed(seed);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> key1 = hdWallet.derivePath(<span class="string">"m/44'/60'/0'/0/0"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"私钥："</span>+util.bufferToHex(key1._hdkey._privateKey));</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> address1 = util.pubToAddress(key1._hdkey._publicKey, <span class="literal">true</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"地址："</span>+util.bufferToHex(address1));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"校验和地址："</span>+ util.toChecksumAddress(address1.toString(<span class="string">'hex'</span>)));</span><br></pre></td></tr></table></figure>
 <p>校验和地址是<a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md" target="_blank" rel="noopener">EIP-55</a>中定义的对大小写有要求的一种地址形式。</p>
@@ -695,7 +695,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -717,7 +717,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

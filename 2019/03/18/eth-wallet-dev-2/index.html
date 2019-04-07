@@ -93,12 +93,12 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="这是如何开发一款以太坊（安卓）钱包系列第2篇，如何导入账号。有时用户可能已经有一个账号，这篇文章接来介绍下，如何实现导入用户已经存在的账号。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://learnblockchain.cn/images/15529003884556.jpg">
-<meta property="og:updated_time" content="2019-03-27T14:44:12.222Z">
+<meta property="og:image" content="https://img.learnblockchain.cn/2019/15529003884556.jpg!wl">
+<meta property="og:updated_time" content="2019-04-05T10:29:31.010Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何开发一款以太坊（安卓）钱包系列2 - 导入账号及账号管理">
 <meta name="twitter:description" content="这是如何开发一款以太坊（安卓）钱包系列第2篇，如何导入账号。有时用户可能已经有一个账号，这篇文章接来介绍下，如何实现导入用户已经存在的账号。">
-<meta name="twitter:image" content="https://learnblockchain.cn/images/15529003884556.jpg">
+<meta name="twitter:image" content="https://img.learnblockchain.cn/2019/15529003884556.jpg!wl">
 
 
 
@@ -401,8 +401,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-27T22:44:12+08:00">
-                2019-03-27
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-05T18:29:31+08:00">
+                2019-04-05
               </time>
             
           </span>
@@ -493,7 +493,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ETHWallet</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Id</span>(autoincrement = <span class="keyword">true</span>)</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String address;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String password;   <span class="comment">// 经过加密后的pwd</span></span><br><span class="line">    <span class="keyword">private</span> String keystorePath;  </span><br><span class="line">    <span class="keyword">private</span> String mnemonic;   </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isCurrent;   <span class="comment">// 是否是当前选中的钱包</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isBackup;    <span class="comment">// 是否备份过</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>前面构造的ETHWallet是只存在于内容之中， 在应用程序退出之后，这个数据将丢失， 因此我们需要把它序列化到<br>序列化数据库中存储起来，在下一次进入应用的时候加载数据库还原出账号。</p>
 <h3 id="greenDAO"><a href="#greenDAO" class="headerlink" title="greenDAO"></a>greenDAO</h3><p>greenDAO 是一个将<strong>对象映射到 SQLite 数据库</strong>中的轻量且快速的 ORM 解决方案，以下是一个greenDAO的作用示意图：</p>
-<p><img src="https://learnblockchain.cn/images/15529003884556.jpg" alt=""></p>
+<p><img src="https://img.learnblockchain.cn/2019/15529003884556.jpg!wl" alt=""></p>
 <p>这里我们也使用了 greenDAO 来把ETHWallet对象映射到 SQLite 数据库， greenDAO的用法这里只简单说明，不详细阐述，大家可以跟随官方提供的<a href="http://greenrobot.org/greendao/documentation/introduction/" target="_blank" rel="noopener">introduction</a> 和 <a href="http://greenrobot.org/greendao/documentation/how-to-get-started/" target="_blank" rel="noopener">how-to-get-started</a>。</p>
 <h3 id="对象映射保存"><a href="#对象映射保存" class="headerlink" title="对象映射保存"></a>对象映射保存</h3><p>把ETHWallet映射的到数据库，需要给类加上@Entity注解，这样greenDAO会生成几个类：<code>DaoMaster</code>、<code>DaoSession</code>及 <code>ETHWalletDao</code> 帮我们完成构建数据库表等操作。</p>
 <p>在使用ETHWalletDao插入到数据库之前需要先进行一个初始化，通常初始化放在应用程序入口中进行，如：pro.upchain.wallet.UpChainWalletApp的onCreate()中执行，初始化代码如下：</p>
@@ -715,7 +715,7 @@ java
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -737,7 +737,7 @@ java
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

@@ -93,15 +93,15 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="本文主要内容翻译自Learn Blockchains by Building One本文原始链接,转载请注明出处。作者认为最快的学习区块链的方式是自己创建一个，本文就跟随作者用Python来创建一个区块链。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://learnblockchain.cn/images/postman_get_mine.png">
-<meta property="og:image" content="https://learnblockchain.cn/images/postman_post_new.png">
-<meta property="og:image" content="https://learnblockchain.cn/images/postman_register.png">
-<meta property="og:image" content="https://learnblockchain.cn/images/postman_resolve.png">
-<meta property="og:updated_time" content="2019-03-23T14:53:06.568Z">
+<meta property="og:image" content="https://img.learnblockchain.cn/2017/postman_get_mine.png!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2017/postman_post_new.png!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2017/postman_register.png!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2017/postman_resolve.png!wl">
+<meta property="og:updated_time" content="2019-04-05T10:29:30.972Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用Python从零开始创建区块链">
 <meta name="twitter:description" content="本文主要内容翻译自Learn Blockchains by Building One本文原始链接,转载请注明出处。作者认为最快的学习区块链的方式是自己创建一个，本文就跟随作者用Python来创建一个区块链。">
-<meta name="twitter:image" content="https://learnblockchain.cn/images/postman_get_mine.png">
+<meta name="twitter:image" content="https://img.learnblockchain.cn/2017/postman_get_mine.png!wl">
 
 
 
@@ -404,8 +404,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-23T22:53:06+08:00">
-                2019-03-23
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-05T18:29:30+08:00">
+                2019-04-05
               </time>
             
           </span>
@@ -518,9 +518,9 @@
 <h2 id="运行区块链"><a href="#运行区块链" class="headerlink" title="运行区块链"></a>运行区块链</h2><p>你可以使用cURL 或Postman 去和API进行交互</p>
 <p>启动server:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python blockchain.py</span><br><span class="line">* Runing on http://127.0.0.1:5000/ (Press CTRL+C to quit)</span><br></pre></td></tr></table></figure></p>
 <p>让我们通过请求 <a href="http://localhost:5000/mine" target="_blank" rel="noopener">http://localhost:5000/mine</a> 来进行挖矿</p>
-<p><img src="/images/postman_get_mine.png" alt="用Postman请求挖矿"></p>
+<p><img src="https://img.learnblockchain.cn/2017/postman_get_mine.png!wl" alt="用Postman请求挖矿"></p>
 <p>通过post请求，添加一个新交易</p>
-<p><img src="/images/postman_post_new.png" alt="用Postman请求挖矿"></p>
+<p><img src="https://img.learnblockchain.cn/2017/postman_post_new.png!wl" alt="用Postman请求挖矿"></p>
 <p>如果不是使用Postman，则用一下的cURL语句也是一样的：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ curl -X POST -H <span class="string">"Content-Type: application/json"</span> -d <span class="string">'&#123;</span></span><br><span class="line"><span class="string"> "sender": "d4ee26eee15148ee92c6cd394edd974e",</span></span><br><span class="line"><span class="string"> "recipient": "someone-other-address",</span></span><br><span class="line"><span class="string"> "amount": 5</span></span><br><span class="line"><span class="string">&#125;'</span> <span class="string">"http://localhost:5000/transactions/new"</span></span><br></pre></td></tr></table></figure></p>
 <p>在挖了两次矿之后，就有3个块了，通过请求 <a href="http://localhost:5000/chain" target="_blank" rel="noopener">http://localhost:5000/chain</a> 可以得到所有的块信息。</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"chain"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"index"</span>: <span class="number">1</span>,</span><br><span class="line">      <span class="attr">"previous_hash"</span>: <span class="number">1</span>,</span><br><span class="line">      <span class="attr">"proof"</span>: <span class="number">100</span>,</span><br><span class="line">      <span class="attr">"timestamp"</span>: <span class="number">1506280650.770839</span>,</span><br><span class="line">      <span class="attr">"transactions"</span>: []</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"index"</span>: <span class="number">2</span>,</span><br><span class="line">      <span class="attr">"previous_hash"</span>: <span class="string">"c099bc...bfb7"</span>,</span><br><span class="line">      <span class="attr">"proof"</span>: <span class="number">35293</span>,</span><br><span class="line">      <span class="attr">"timestamp"</span>: <span class="number">1506280664.717925</span>,</span><br><span class="line">      <span class="attr">"transactions"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"amount"</span>: <span class="number">1</span>,</span><br><span class="line">          <span class="attr">"recipient"</span>: <span class="string">"8bbcb347e0634905b0cac7955bae152b"</span>,</span><br><span class="line">          <span class="attr">"sender"</span>: <span class="string">"0"</span></span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"index"</span>: <span class="number">3</span>,</span><br><span class="line">      <span class="attr">"previous_hash"</span>: <span class="string">"eff91a...10f2"</span>,</span><br><span class="line">      <span class="attr">"proof"</span>: <span class="number">35089</span>,</span><br><span class="line">      <span class="attr">"timestamp"</span>: <span class="number">1506280666.1086972</span>,</span><br><span class="line">      <span class="attr">"transactions"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"amount"</span>: <span class="number">1</span>,</span><br><span class="line">          <span class="attr">"recipient"</span>: <span class="string">"8bbcb347e0634905b0cac7955bae152b"</span>,</span><br><span class="line">          <span class="attr">"sender"</span>: <span class="string">"0"</span></span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"length"</span>: <span class="number">3</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -539,9 +539,9 @@
 <p>让我们添加两个路由，一个用来注册节点，一个用来解决冲突。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/nodes/register', methods=['POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">register_nodes</span><span class="params">()</span>:</span></span><br><span class="line">    values = request.get_json()</span><br><span class="line"></span><br><span class="line">    nodes = values.get(<span class="string">'nodes'</span>)</span><br><span class="line">    <span class="keyword">if</span> nodes <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Error: Please supply a valid list of nodes"</span>, <span class="number">400</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> node <span class="keyword">in</span> nodes:</span><br><span class="line">        blockchain.register_node(node)</span><br><span class="line"></span><br><span class="line">    response = &#123;</span><br><span class="line">        <span class="string">'message'</span>: <span class="string">'New nodes have been added'</span>,</span><br><span class="line">        <span class="string">'total_nodes'</span>: list(blockchain.nodes),</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> jsonify(response), <span class="number">201</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/nodes/resolve', methods=['GET'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">consensus</span><span class="params">()</span>:</span></span><br><span class="line">    replaced = blockchain.resolve_conflicts()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> replaced:</span><br><span class="line">        response = &#123;</span><br><span class="line">            <span class="string">'message'</span>: <span class="string">'Our chain was replaced'</span>,</span><br><span class="line">            <span class="string">'new_chain'</span>: blockchain.chain</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        response = &#123;</span><br><span class="line">            <span class="string">'message'</span>: <span class="string">'Our chain is authoritative'</span>,</span><br><span class="line">            <span class="string">'chain'</span>: blockchain.chain</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> jsonify(response), <span class="number">200</span></span><br></pre></td></tr></table></figure></p>
 <p>你可以在不同的机器运行节点，或在一台机机开启不同的网络端口来模拟多节点的网络，这里在同一台机器开启不同的端口演示，在不同的终端运行一下命令，就启动了两个节点：<a href="http://localhost:5000" target="_blank" rel="noopener">http://localhost:5000</a> 和 <a href="http://localhost:5001" target="_blank" rel="noopener">http://localhost:5001</a></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pipenv run python blockchain.py</span><br><span class="line">pipenv run python blockchain.py -p 5001</span><br></pre></td></tr></table></figure>
-<p><img src="/images/postman_register.png" alt="注册新节点"></p>
+<p><img src="https://img.learnblockchain.cn/2017/postman_register.png!wl" alt="注册新节点"></p>
 <p>然后在节点2上挖两个块，确保是更长的链，然后在节点1上访问接口/nodes/resolve ,这时节点1的链会通过共识算法被节点2的链取代。</p>
-<p><img src="/images/postman_resolve.png" alt="共识算法解决冲突"></p>
+<p><img src="https://img.learnblockchain.cn/2017/postman_resolve.png!wl" alt="共识算法解决冲突"></p>
 <p>好啦，你可以邀请朋友们一起来测试你的区块链</p>
 <p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。<br>我的<strong><a href="https://learnblockchain.cn/images/zsxq.png">知识星球</a></strong>为各位解答区块链技术问题，欢迎加入讨论。</p>
 
@@ -720,7 +720,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -742,7 +742,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

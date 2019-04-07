@@ -93,7 +93,7 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第五章filecoin源码分析之协议层心跳协议。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-12T07:25:38.614Z">
+<meta property="og:updated_time" content="2019-04-05T10:29:30.996Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="filecoin技术架构分析五:filecoin源码分析之协议层心跳协议">
 <meta name="twitter:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第五章filecoin源码分析之协议层心跳协议。">
@@ -399,8 +399,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-12T15:25:38+08:00">
-                2019-03-12
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-05T18:29:30+08:00">
+                2019-04-05
               </time>
             
           </span>
@@ -553,7 +553,7 @@
 <li>建立心跳服务,具体见如下注释</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">func (node *Node) setupHeartbeatServices(ctx context.Context) error &#123;</span><br><span class="line">    // 设置“矿工地址获取函数”</span><br><span class="line">	mag := func() address.Address &#123;</span><br><span class="line">		addr, err := node.miningAddress()</span><br><span class="line">		// the only error miningAddress() returns is ErrNoMinerAddress.</span><br><span class="line">		// if there is no configured miner address, simply send a zero</span><br><span class="line">		// address across the wire.</span><br><span class="line">		if err != nil &#123;</span><br><span class="line">			return address.Address&#123;&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return addr</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    // 存在心跳目标的时候，实例化心跳服务实例</span><br><span class="line">	// start the primary heartbeat service</span><br><span class="line">	if len(node.Repo.Config().Heartbeat.BeatTarget) &gt; 0 &#123;</span><br><span class="line">        //调用metrics包中的建立心跳服务实例、以及启动心跳服务实例方法</span><br><span class="line">		hbs := metrics.NewHeartbeatService(node.Host(), node.Repo.Config().Heartbeat, node.ChainReader.Head, metrics.WithMinerAddressGetter(mag))</span><br><span class="line">		go hbs.Start(ctx)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    // 确认是否用户有通过环境变量配置额外的心跳告警服务（自定义指向其他节点），根据用户配置的数目，拉起对应的多线程心跳服务。</span><br><span class="line">	// check if we want to connect to an alert service. An alerting service is a heartbeat</span><br><span class="line">	// service that can trigger alerts based on the contents of heatbeats.</span><br><span class="line">	if alertTarget := os.Getenv(&quot;FIL_HEARTBEAT_ALERTS&quot;); len(alertTarget) &gt; 0 &#123;</span><br><span class="line">		ahbs := metrics.NewHeartbeatService(node.Host(), &amp;config.HeartbeatConfig&#123;</span><br><span class="line">			BeatTarget:      alertTarget,</span><br><span class="line">			BeatPeriod:      &quot;10s&quot;,</span><br><span class="line">			ReconnectPeriod: &quot;10s&quot;,</span><br><span class="line">			Nickname:        node.Repo.Config().Heartbeat.Nickname,</span><br><span class="line">		&#125;, node.ChainReader.Head, metrics.WithMinerAddressGetter(mag))</span><br><span class="line">		go ahbs.Start(ctx)</span><br><span class="line">	&#125;</span><br><span class="line">	return nil</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客</p>
 
       
     </div>
@@ -700,7 +700,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -722,7 +722,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

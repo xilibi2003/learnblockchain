@@ -93,14 +93,14 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="区块链中的共识算法在比特币公链架构解析中，就曾提到过为了实现去中介化的设计，比特币设计了一套共识协议，并通过此协议来保证系统的稳定性和防攻击性。 并且我们知道，截止目前使用最广泛，也是最被大家接受的共识算法，是我们先前介绍过的POW(proof of work)工作量证明算法。目前市值排名前二的比特币和以太坊也是采用的此算法。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://diycode.b0.upaiyun.com/photo/2018/de1ec95397b1f627c1ded8fc3ac256e1.png">
-<meta property="og:image" content="https://diycode.b0.upaiyun.com/photo/2018/4eee010dfd46e7672d48d063b08cae47.png">
-<meta property="og:image" content="https://diycode.b0.upaiyun.com/photo/2018/1e5f93c93cc2bc5443902b89abd4ac02.png">
-<meta property="og:updated_time" content="2019-04-03T09:25:21.116Z">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/de1ec95397b1f627c1ded8fc3ac256e1.png!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/4eee010dfd46e7672d48d063b08cae47.png!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/1e5f93c93cc2bc5443902b89abd4ac02.png!wl">
+<meta property="og:updated_time" content="2019-04-05T10:29:32.281Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python实现一条基于POS算法的区块链">
 <meta name="twitter:description" content="区块链中的共识算法在比特币公链架构解析中，就曾提到过为了实现去中介化的设计，比特币设计了一套共识协议，并通过此协议来保证系统的稳定性和防攻击性。 并且我们知道，截止目前使用最广泛，也是最被大家接受的共识算法，是我们先前介绍过的POW(proof of work)工作量证明算法。目前市值排名前二的比特币和以太坊也是采用的此算法。">
-<meta name="twitter:image" content="https://diycode.b0.upaiyun.com/photo/2018/de1ec95397b1f627c1ded8fc3ac256e1.png">
+<meta name="twitter:image" content="https://img.learnblockchain.cn/2018/de1ec95397b1f627c1ded8fc3ac256e1.png!wl">
 
 
 
@@ -403,8 +403,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-04-03T17:25:21+08:00">
-                2019-04-03
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-05T18:29:32+08:00">
+                2019-04-05
               </time>
             
           </span>
@@ -504,7 +504,7 @@
 <h1 id="测试POS的记账方式"><a href="#测试POS的记账方式" class="headerlink" title="测试POS的记账方式"></a>测试POS的记账方式</h1><p>在测试之前，起始还有一部分工作要做，前面我们的run方法需要完善下，代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># create a genesis block</span></span><br><span class="line">    t = str(datetime.now())</span><br><span class="line">    genesis_block = &#123;</span><br><span class="line">        <span class="string">"Index"</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="string">"Timestamp"</span>: t,</span><br><span class="line">        <span class="string">"BPM"</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="string">"PrevHash"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="string">"Validator"</span>: <span class="string">""</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    genesis_block[<span class="string">"Hash"</span>] = calculate_hash(genesis_block)</span><br><span class="line">    print(genesis_block)</span><br><span class="line">    block_chain.append(genesis_block)</span><br><span class="line"></span><br><span class="line">    thread_canditate = threading.Thread(target=candidate, args=(candidate_blocks,), daemon=<span class="keyword">True</span>)</span><br><span class="line">    thread_pick = threading.Thread(target=pick_winner, args=(announcements,), daemon=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">    thread_canditate.start()</span><br><span class="line">    thread_pick.start()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># start a tcp server</span></span><br><span class="line">    serv = ThreadingTCPServer((<span class="string">''</span>, <span class="number">9090</span>), HandleConn)</span><br><span class="line">    serv.serve_forever()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">candidate</span><span class="params">(candidate_blocks)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    :param candidate_blocks:</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            candi = candidate_blocks.get(block=<span class="keyword">False</span>)</span><br><span class="line">        <span class="keyword">except</span> Empty:</span><br><span class="line">            time.sleep(<span class="number">5</span>)</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        temp_blocks.append(candi)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    run()</span><br></pre></td></tr></table></figure>
 <h1 id="添加节点连接到TCPServer"><a href="#添加节点连接到TCPServer" class="headerlink" title="添加节点连接到TCPServer"></a>添加节点连接到TCPServer</h1><p>为了充分减少程序的复杂性，tcp client我们这里就不实现了，可以放在后面拓展部分。 毕竟我们这个系统是很容易扩展的，后面我们拆分了多线程的部分，在实现tcp client就是一个完整的分布式系统了。</p>
-<p>所以，我们这里用linux自带的命令 nc，不知道nc怎么用的同学可以google或者 man nc<br><img src="https://diycode.b0.upaiyun.com/photo/2018/de1ec95397b1f627c1ded8fc3ac256e1.png" alt=""></p>
+<p>所以，我们这里用linux自带的命令 nc，不知道nc怎么用的同学可以google或者 man nc<br><img src="https://img.learnblockchain.cn/2018/de1ec95397b1f627c1ded8fc3ac256e1.png!wl" alt=""></p>
 <ul>
 <li>启动服务    运行 python pos.py  </li>
 <li>打开3个终端</li>
@@ -515,8 +515,8 @@
 </ul>
 <p>终端如果输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Enter token balance:</span><br></pre></td></tr></table></figure></p>
 <p>说明你client已经链接服务器ok啦.</p>
-<h1 id="测试POS的记账方式-1"><a href="#测试POS的记账方式-1" class="headerlink" title="测试POS的记账方式"></a>测试POS的记账方式</h1><p>接下来依次按照提示操作。 balance可以按心情来操作，因为这里是测试，我们输入100，<br>紧接着会提示输入BPM，我们前面提到过，输入BPM是为了生成Block，那么就输入吧，随便输入个9. ok， 接下来就稍等片刻，等待记账。<br>输出如同所示<br><img src="https://diycode.b0.upaiyun.com/photo/2018/4eee010dfd46e7672d48d063b08cae47.png" alt=""><br>依次在不同的终端，根据提示输入数字，等待消息同步。</p>
-<h1 id="生成区块链"><a href="#生成区块链" class="headerlink" title="生成区块链"></a>生成区块链</h1><p>下面是我这边获得的3个block信息。<br><img src="https://diycode.b0.upaiyun.com/photo/2018/1e5f93c93cc2bc5443902b89abd4ac02.png" alt=""></p>
+<h1 id="测试POS的记账方式-1"><a href="#测试POS的记账方式-1" class="headerlink" title="测试POS的记账方式"></a>测试POS的记账方式</h1><p>接下来依次按照提示操作。 balance可以按心情来操作，因为这里是测试，我们输入100，<br>紧接着会提示输入BPM，我们前面提到过，输入BPM是为了生成Block，那么就输入吧，随便输入个9. ok， 接下来就稍等片刻，等待记账。<br>输出如同所示<br><img src="https://img.learnblockchain.cn/2018/4eee010dfd46e7672d48d063b08cae47.png!wl" alt=""><br>依次在不同的终端，根据提示输入数字，等待消息同步。</p>
+<h1 id="生成区块链"><a href="#生成区块链" class="headerlink" title="生成区块链"></a>生成区块链</h1><p>下面是我这边获得的3个block信息。<br><img src="https://img.learnblockchain.cn/2018/1e5f93c93cc2bc5443902b89abd4ac02.png!wl" alt=""></p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>在上面的代码中，我们实现了一个完整的基于POS算法记账的链，当然这里有许多值得扩展与改进的地方。</p>
 <ul>
 <li>python中多线程开销比较大，可以改成协程的方式</li>
@@ -710,7 +710,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -732,7 +732,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

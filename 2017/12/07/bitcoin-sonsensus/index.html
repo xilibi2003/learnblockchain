@@ -93,13 +93,13 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="比特币没有中心机构，几乎所有的完整节点都有一份公共总帐本，那么大家如何达成共识：确认哪一份才是公认权威的总账本呢？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://learnblockchain.cn/images/block_branch.jpg">
-<meta property="og:image" content="https://learnblockchain.cn/images/block_branch2.jpg">
-<meta property="og:updated_time" content="2019-03-23T14:53:06.573Z">
+<meta property="og:image" content="https://img.learnblockchain.cn/2017/block_branch.jpg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2017/block_branch2.jpg!wl">
+<meta property="og:updated_time" content="2019-04-05T10:29:30.986Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="比特币如何达成共识 - 最长链的选择">
 <meta name="twitter:description" content="比特币没有中心机构，几乎所有的完整节点都有一份公共总帐本，那么大家如何达成共识：确认哪一份才是公认权威的总账本呢？">
-<meta name="twitter:image" content="https://learnblockchain.cn/images/block_branch.jpg">
+<meta name="twitter:image" content="https://img.learnblockchain.cn/2017/block_branch.jpg!wl">
 
 
 
@@ -402,8 +402,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-23T22:53:06+08:00">
-                2019-03-23
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-05T18:29:30+08:00">
+                2019-04-05
               </time>
             
           </span>
@@ -474,8 +474,8 @@
 <p>共识最终目的是保证比特币不停的在工作量最大的区块链上运转，工作量最大的区块链就是权威的公共总帐本。</p>
 <p>第1 2 3步在<a href="https://learnblockchain.cn/2017/11/04/bitcoin-pow/">比特币如何挖矿-工作量证明</a>一篇有提到过，下面着重讲第4步。</p>
 <h2 id="最长链的选择"><a href="#最长链的选择" class="headerlink" title="最长链的选择"></a>最长链的选择</h2><p>先来一个定义，把累计了最多难度的区块链。在一般情况下，也是包含最多区块的那个链称为<strong>主链</strong><br>每一个（挖矿）节点总是选择并尝试延长主链。</p>
-<h3 id="分叉"><a href="#分叉" class="headerlink" title="分叉"></a>分叉</h3><p>当有两名矿工在几乎在相同的时间内，各自都算得了工作量证明解，便立即传播自己的“获胜”区块到网络中，先是传播给邻近的节点而后传播到整个网络。每个收到有效区块的节点都会将其并入并延长区块链。<br>当这个两个区块传播时，一些节点首先收到#3458A, 一些节点首先收到#3458B，这两个候选区块（通常这两个候选区块会包含几乎相同的交易）都是主链的延伸，分叉就会产生，这时分叉出有竞争关系的两条链，如图：<br><img src="/images/block_branch.jpg" alt=""><br>两个块都收到的节点，会把其中有更多工作量的一条会继续作为主链，另一条作为<strong>备用链</strong>保存（保存是因为备用链将来可能会超过主链难度称为新主链）。</p>
-<h3 id="分叉解决"><a href="#分叉解决" class="headerlink" title="分叉解决"></a>分叉解决</h3><p>收到#3458A的（挖矿）节点，会立刻以这个区块为父区块来产生新的候选区块，并尝试寻找这个候选区块的工作量证明解。同样地，接受#3458B区块的节点会以这个区块为链的顶点开始生成新块，延长这个链（下面称为B链）。<br>这时总会有一方抢先发现工作量证明解并将其传播出去，假设以#3458B为父区块的工作量证明首先解出，如图：<br><img src="/images/block_branch2.jpg" alt=""></p>
+<h3 id="分叉"><a href="#分叉" class="headerlink" title="分叉"></a>分叉</h3><p>当有两名矿工在几乎在相同的时间内，各自都算得了工作量证明解，便立即传播自己的“获胜”区块到网络中，先是传播给邻近的节点而后传播到整个网络。每个收到有效区块的节点都会将其并入并延长区块链。<br>当这个两个区块传播时，一些节点首先收到#3458A, 一些节点首先收到#3458B，这两个候选区块（通常这两个候选区块会包含几乎相同的交易）都是主链的延伸，分叉就会产生，这时分叉出有竞争关系的两条链，如图：<br><img src="https://img.learnblockchain.cn/2017/block_branch.jpg!wl" alt=""><br>两个块都收到的节点，会把其中有更多工作量的一条会继续作为主链，另一条作为<strong>备用链</strong>保存（保存是因为备用链将来可能会超过主链难度称为新主链）。</p>
+<h3 id="分叉解决"><a href="#分叉解决" class="headerlink" title="分叉解决"></a>分叉解决</h3><p>收到#3458A的（挖矿）节点，会立刻以这个区块为父区块来产生新的候选区块，并尝试寻找这个候选区块的工作量证明解。同样地，接受#3458B区块的节点会以这个区块为链的顶点开始生成新块，延长这个链（下面称为B链）。<br>这时总会有一方抢先发现工作量证明解并将其传播出去，假设以#3458B为父区块的工作量证明首先解出，如图：<br><img src="https://img.learnblockchain.cn/2017/block_branch2.jpg!wl" alt=""></p>
 <p>当原本以#3458A为父区块求解的节点在收到#3458B, #3459B之后，会立刻将B链作为主链（因为#3458A为顶点的链已经不是最长链了）继续挖矿。</p>
 <blockquote>
 <p>节点也有可能先收到#3459B，再收到#3458B，收到#3459B时，会被认为是“孤块“（因为还找不到#3459B的父块#3458B）保存在孤块池中，一旦收到父块#3458B时，节点就会将孤块从孤块池中取出，并且连接到它的父区块，让它作为区块链的一部分。</p>
@@ -577,8 +577,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/12/solidity_func/" rel="prev" title="智能合约语言 Solidity 教程系列3 - 函数类型">
-                智能合约语言 Solidity 教程系列3 - 函数类型 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/12/12/solidity2/" rel="prev" title="智能合约语言 Solidity 教程系列2 - 地址类型介绍">
+                智能合约语言 Solidity 教程系列2 - 地址类型介绍 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -656,7 +656,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -678,7 +678,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

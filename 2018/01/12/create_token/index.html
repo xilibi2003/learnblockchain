@@ -93,20 +93,20 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="本文从技术角度详细介绍如何基于以太坊ERC20创建代币的流程.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://learnblockchain.cn/images/token_info.jpeg">
-<meta property="og:image" content="https://learnblockchain.cn/images/metamask_main.png">
-<meta property="og:image" content="https://learnblockchain.cn/images/token_create_remix.jpeg">
-<meta property="og:image" content="https://learnblockchain.cn/images/metamask_add_token.png">
-<meta property="og:image" content="https://learnblockchain.cn/images/metamask_token_added.png">
-<meta property="og:image" content="https://learnblockchain.cn/images/myetherwaller.jpeg">
-<meta property="og:image" content="https://learnblockchain.cn/images/myetherwaller_connected.jpeg">
-<meta property="og:image" content="https://learnblockchain.cn/images/myetherwaller_transfer.jpeg">
-<meta property="og:image" content="https://learnblockchain.cn/images/metamask_token_tansfered.png">
-<meta property="og:updated_time" content="2019-04-03T09:25:21.085Z">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/token_info.jpeg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/metamask_main.png!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/token_create_remix.jpeg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/metamask_add_token.png!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/metamask_token_added.png!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/myetherwaller.jpeg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/myetherwaller_connected.jpeg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/myetherwaller_transfer.jpeg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/metamask_token_tansfered.png!wl">
+<meta property="og:updated_time" content="2019-04-05T10:29:32.297Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一步步教你创建自己的数字货币（代币）进行ICO">
 <meta name="twitter:description" content="本文从技术角度详细介绍如何基于以太坊ERC20创建代币的流程.">
-<meta name="twitter:image" content="https://learnblockchain.cn/images/token_info.jpeg">
+<meta name="twitter:image" content="https://img.learnblockchain.cn/2018/token_info.jpeg!wl">
 
 
 
@@ -409,8 +409,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-04-03T17:25:21+08:00">
-                2019-04-03
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-05T18:29:32+08:00">
+                2019-04-05
               </time>
             
           </span>
@@ -479,7 +479,7 @@
         <p>本文从技术角度详细介绍如何基于以太坊ERC20创建代币的流程.</p>
 <a id="more"></a>
 <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>本文所讲的代币是使用以太坊智能合约创建，阅读本文前，你应该对以太坊、智能合约有所了解，如果你还不了解，建议你先看<a href="https://learnblockchain.cn/2017/11/20/whatiseth/">以太坊是什么</a></p>
-<h2 id="代币Token"><a href="#代币Token" class="headerlink" title="代币Token"></a>代币Token</h2><p>如果不那么追求精确的定义，代币就是数字货币，比特币、以太币就是一个代币。<br>利用以太坊的智能合约可以轻松编写出属于自己的代币，代币可以代表任何可以交易的东西，如：积分、财产、证书等等。<br>因此不管是出于商业，还是学习很多人想创建一个自己的代币，先贴一个图看看创建的代币是什么样子。<br><img src="https://learnblockchain.cn/images/token_info.jpeg" alt=""></p>
+<h2 id="代币Token"><a href="#代币Token" class="headerlink" title="代币Token"></a>代币Token</h2><p>如果不那么追求精确的定义，代币就是数字货币，比特币、以太币就是一个代币。<br>利用以太坊的智能合约可以轻松编写出属于自己的代币，代币可以代表任何可以交易的东西，如：积分、财产、证书等等。<br>因此不管是出于商业，还是学习很多人想创建一个自己的代币，先贴一个图看看创建的代币是什么样子。<br><img src="https://img.learnblockchain.cn/2018/token_info.jpeg!wl" alt=""></p>
 <p>今天我们就来详细讲一讲怎样创建一个这样的代币。</p>
 <h3 id="ERC20-Token"><a href="#ERC20-Token" class="headerlink" title="ERC20 Token"></a>ERC20 Token</h3><p>也许你经常看到ERC20和代币一同出现， ERC20是以太坊定义的一个<a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md" target="_blank" rel="noopener">代币标准</a>。<br>要求我们在实现代币的时候必须要遵守的协议，如指定代币名称、总量、实现代币交易函数等，只有支持了协议才能被以太坊钱包支持。<br>其接口如下：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">contract ERC20Interface &#123;</span><br><span class="line"></span><br><span class="line">    string public constant name = <span class="string">"Token Name"</span>;</span><br><span class="line">    string public constant symbol = <span class="string">"SYM"</span>;</span><br><span class="line">    uint8 public constant decimals = <span class="number">18</span>;  <span class="comment">// 18 is the most common number of decimal places</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">totalSupply</span>(<span class="params"></span>) <span class="title">public</span> <span class="title">constant</span> <span class="title">returns</span> (<span class="params">uint</span>);</span></span><br><span class="line"><span class="function">    <span class="title">function</span> <span class="title">balanceOf</span>(<span class="params">address tokenOwner</span>) <span class="title">public</span> <span class="title">constant</span> <span class="title">returns</span> (<span class="params">uint balance</span>);</span></span><br><span class="line"><span class="function">    <span class="title">function</span> <span class="title">allowance</span>(<span class="params">address tokenOwner, address spender</span>) <span class="title">public</span> <span class="title">constant</span> <span class="title">returns</span> (<span class="params">uint remaining</span>);</span></span><br><span class="line"><span class="function">    <span class="title">function</span> <span class="title">transfer</span>(<span class="params">address to, uint tokens</span>) <span class="title">public</span> <span class="title">returns</span> (<span class="params">bool success</span>);</span></span><br><span class="line"><span class="function">    <span class="title">function</span> <span class="title">approve</span>(<span class="params">address spender, uint tokens</span>) <span class="title">public</span> <span class="title">returns</span> (<span class="params">bool success</span>);</span></span><br><span class="line"><span class="function">    <span class="title">function</span> <span class="title">transferFrom</span>(<span class="params">address from, address to, uint tokens</span>) <span class="title">public</span> <span class="title">returns</span> (<span class="params">bool success</span>);</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">    <span class="title">event</span> <span class="title">Transfer</span>(<span class="params">address indexed from, address indexed to, uint tokens</span>);</span></span><br><span class="line"><span class="function">    <span class="title">event</span> <span class="title">Approval</span>(<span class="params">address indexed tokenOwner, address indexed spender, uint tokens</span>);</span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
@@ -489,21 +489,21 @@
 <p>代码的详细解读，请订阅我的<a href="https://xiaozhuanlan.com/blockchaincore" target="_blank" rel="noopener">小专栏</a>。</p>
 <h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><p>在开发测试智能合约时，<a href="https://metamask.io/" target="_blank" rel="noopener">MetaMask</a>和<a href="https://remix.ethereum.org" target="_blank" rel="noopener">Remix Solidity IDE</a>是两个非常好用的工具，今天就用他们来完成部署。</p>
 <ol>
-<li><p>安装和配置MetaMask请参考<a href="https://learnblockchain.cn/2018/01/12/first-dapp">开发、部署第一个去中心化应用</a>，不同的上本文选择了以太坊的测试网络Ropsten，如果你没有余额请点击购买buy，进入的网站可以送一些测试以太币给你，配置好之后，界面应该如下：<br><img src="https://learnblockchain.cn/images/metamask_main.png" alt=""></p>
+<li><p>安装和配置MetaMask请参考<a href="https://learnblockchain.cn/2018/01/12/first-dapp">开发、部署第一个去中心化应用</a>，不同的上本文选择了以太坊的测试网络Ropsten，如果你没有余额请点击购买buy，进入的网站可以送一些测试以太币给你，配置好之后，界面应该如下：<br><img src="https://img.learnblockchain.cn/2018/metamask_main.png!wl" alt=""></p>
 </li>
-<li><p>浏览器打开Remix Solidity IDE，复制以上源码粘贴上，在右侧选项参考如图的设置：<br><img src="https://learnblockchain.cn/images/token_create_remix.jpeg" alt=""><br>注意Environment和Account和MetaMask保持一致，然后选择合约TokenERC20，填入你想要的发行量，名称及代号，就可以创建合约了。<br>这时MetaMask会弹出一个交易确认框，点SUBMIT。待合约部署交易确认之后，复制合约地址。</p>
+<li><p>浏览器打开Remix Solidity IDE，复制以上源码粘贴上，在右侧选项参考如图的设置：<br><img src="https://img.learnblockchain.cn/2018/token_create_remix.jpeg!wl" alt=""><br>注意Environment和Account和MetaMask保持一致，然后选择合约TokenERC20，填入你想要的发行量，名称及代号，就可以创建合约了。<br>这时MetaMask会弹出一个交易确认框，点SUBMIT。待合约部署交易确认之后，复制合约地址。</p>
 </li>
-<li><p>打开Metamask界面，切换到TOKENS，点添加合约，出现如下对话框：<br><img src="https://learnblockchain.cn/images/metamask_add_token.png" alt=""><br>填入刚刚复制的地址，点ADD，这时你就可以看到你创建的代币了，如图：<br><img src="https://learnblockchain.cn/images/metamask_token_added.png" alt=""></p>
+<li><p>打开Metamask界面，切换到TOKENS，点添加合约，出现如下对话框：<br><img src="https://img.learnblockchain.cn/2018/metamask_add_token.png!wl" alt=""><br>填入刚刚复制的地址，点ADD，这时你就可以看到你创建的代币了，如图：<br><img src="https://img.learnblockchain.cn/2018/metamask_token_added.png!wl" alt=""></p>
 </li>
 </ol>
 <p>哈哈，你已经完成了代币的创建和部署(正式网络和测试网络部署方法一样)，可以在<a href="https://ropsten.etherscan.io/token/0x1f0c085ad323bb69758111cf9ecdc32a32d9a5bb" target="_blank" rel="noopener">Etherscan</a>查询到我们刚刚部署的代币。可以用它进行ICO了，从此走上人生巅峰（玩笑话，不鼓励大家发行无意义的代币）。</p>
 <h2 id="代币交易"><a href="#代币交易" class="headerlink" title="代币交易"></a>代币交易</h2><p>由于MetaMask插件没有提供代币交易功能，同时考虑到很多人并没有以太坊钱包或是被以太坊钱包网络同步问题折磨，今天我用<a href="https://www.myetherwallet.com" target="_blank" rel="noopener">网页钱包</a>来讲解代币交易。</p>
 <ol>
 <li>进入<a href="https://www.myetherwallet.com/#send-transaction" target="_blank" rel="noopener">网页钱包地址</a>, 第一次进入有一些安全提示需要用户确认。</li>
-<li>进入之后，按照下图进行设置：<br><img src="https://learnblockchain.cn/images/myetherwaller.jpeg" alt=""></li>
-<li>连接上之后，如图<br><img src="https://learnblockchain.cn/images/myetherwaller_connected.jpeg" alt=""><br>需要添加代币，填入代币合约地址。</li>
-<li>进行代币转账交易<br><img src="https://learnblockchain.cn/images/myetherwaller_transfer.jpeg" alt=""><br>在接下来的交易确认也，点击确认即可。</li>
-<li>交易完成后，可以看到MetaMask中代币余额减少了，如图：<br><img src="https://learnblockchain.cn/images/metamask_token_tansfered.png" alt=""></li>
+<li>进入之后，按照下图进行设置：<br><img src="https://img.learnblockchain.cn/2018/myetherwaller.jpeg!wl" alt=""></li>
+<li>连接上之后，如图<br><img src="https://img.learnblockchain.cn/2018/myetherwaller_connected.jpeg!wl" alt=""><br>需要添加代币，填入代币合约地址。</li>
+<li>进行代币转账交易<br><img src="https://img.learnblockchain.cn/2018/myetherwaller_transfer.jpeg!wl" alt=""><br>在接下来的交易确认也，点击确认即可。</li>
+<li>交易完成后，可以看到MetaMask中代币余额减少了，如图：<br><img src="https://img.learnblockchain.cn/2018/metamask_token_tansfered.png!wl" alt=""></li>
 </ol>
 <p>代币交易是不是很简单，只要明白了交易流程，使用其他的钱包也是一样的道理。</p>
 <p>如何创建代币发行代币，现在也录制了对应的<strong><a href="https://wiki.learnblockchain.cn/course/token.html" target="_blank" rel="noopener">视频教程:通过代币学以太坊智能合约开发</a></strong>，现在我们在<a href="https://learnblockchain.cn/course">招募体验师</a>可以点击链接了解。<br>如果你在创建代币的过程中遇到问题，我的<strong><a href="https://learnblockchain.cn/images/zsxq.png">知识星球</a></strong>可为大家解答问题，作为星球成员福利，成员还可加入区块链技术付费交流群。</p>
@@ -688,7 +688,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -710,7 +710,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

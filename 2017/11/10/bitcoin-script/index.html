@@ -93,20 +93,20 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="大家都有转过账，每笔交易是这样的：张三账上减￥200，李四账上加￥200。在比特币区块链中，交易不是这么简单，交易实际是通过脚本来完成，以承载更多的功能个，这也是为什么比特币被称为是一种“可编程的货币”。本文就来分析一下交易是如何实现可编程的。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://learnblockchain.cn/images/own_chain.jpeg">
-<meta property="og:image" content="https://learnblockchain.cn/images/script.jpeg">
-<meta property="og:image" content="https://learnblockchain.cn/images/script_run1.jpeg">
-<meta property="og:image" content="https://learnblockchain.cn/images/script_run2.jpeg">
-<meta property="og:image" content="https://learnblockchain.cn/images/tx_struce.jpeg">
-<meta property="og:image" content="https://learnblockchain.cn/images/tx_input_struce.jpeg">
-<meta property="og:image" content="https://learnblockchain.cn/images/tx_input_overview.jpeg">
-<meta property="og:image" content="https://learnblockchain.cn/images/tx_output_struce.jpeg">
-<meta property="og:image" content="https://learnblockchain.cn/images/tx_output_overview.jpeg">
-<meta property="og:updated_time" content="2019-03-23T14:53:06.566Z">
+<meta property="og:image" content="https://img.learnblockchain.cn/2017/own_chain.jpeg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2017/script.jpeg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2017/script_run1.jpeg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2017/script_run2.jpeg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2017/tx_struce.jpeg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2017/tx_input_struce.jpeg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2017/tx_input_overview.jpeg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2017/tx_output_struce.jpeg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2017/tx_output_overview.jpeg!wl">
+<meta property="og:updated_time" content="2019-04-05T10:29:30.966Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="比特币脚本及交易分析 - 智能合约雏形">
 <meta name="twitter:description" content="大家都有转过账，每笔交易是这样的：张三账上减￥200，李四账上加￥200。在比特币区块链中，交易不是这么简单，交易实际是通过脚本来完成，以承载更多的功能个，这也是为什么比特币被称为是一种“可编程的货币”。本文就来分析一下交易是如何实现可编程的。">
-<meta name="twitter:image" content="https://learnblockchain.cn/images/own_chain.jpeg">
+<meta name="twitter:image" content="https://img.learnblockchain.cn/2017/own_chain.jpeg!wl">
 
 
 
@@ -409,8 +409,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-23T22:53:06+08:00">
-                2019-03-23
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-05T18:29:30+08:00">
+                2019-04-05
               </time>
             
           </span>
@@ -472,21 +472,21 @@
 <blockquote>
 <p>挖矿奖励属于一个特殊的交易（称为coinbase交易），可以没有输入。<br>UTXO是交易的基本单元，不能再分割。<br>在比特币没有余额概念，只有分散到区块链里的UTXO</p>
 </blockquote>
-<p>随着钱从一个地址被移动到另一个地址的同时形成了一条所有权链，像这样：<br><img src="/images/own_chain.jpeg" alt="own_chain"></p>
+<p>随着钱从一个地址被移动到另一个地址的同时形成了一条所有权链，像这样：<br><img src="https://img.learnblockchain.cn/2017/own_chain.jpeg!wl" alt="own_chain"></p>
 <h2 id="比特币脚本"><a href="#比特币脚本" class="headerlink" title="比特币脚本"></a>比特币脚本</h2><p>比特币交易是首先要提供一个用于解锁UTXO（用私钥去匹配锁定脚本）的脚本（常称为解锁脚本：Signature script)，这也叫交易输入，<br>交易的输出则是指向一个脚本（称为锁定脚本：PubKey script），这个脚本表达了：谁的签名（签名是常见形式，并不一定必须是签名）能匹配这个输出地址，钱就支付给谁。</p>
 <p>每一个比特币节点会通过同时执行这解锁和锁定脚本（不是当前的锁定脚本，是指上一个交易的锁定脚本）来验证一笔交易，脚本组合结果为真，则为有效交易。</p>
 <blockquote>
 <p>当解锁版脚本与锁定版脚本的设定条件相匹配时，执行组合有效脚本时才会显示结果为真</p>
 </blockquote>
-<p>如最为常见类型的比特币交易脚本（支付到公钥哈希：P2PKH（Pay-to-Public-Key-Hash））组合是这样：<br><img src="/images/script.jpeg" alt="script"></p>
+<p>如最为常见类型的比特币交易脚本（支付到公钥哈希：P2PKH（Pay-to-Public-Key-Hash））组合是这样：<br><img src="https://img.learnblockchain.cn/2017/script.jpeg!wl" alt="script"></p>
 <h3 id="常见交易脚本验证过程"><a href="#常见交易脚本验证过程" class="headerlink" title="常见交易脚本验证过程"></a>常见交易脚本验证过程</h3><p>比特币交易脚本语言是一种基于逆波兰表示法的基于栈的执行语言（不知道逆波兰和栈的同学去翻大学数据结构课本，你也可跳过这个部分）。</p>
 <blockquote>
 <p>比特币脚本语言包含基本算数计算、基本逻辑(比如if…then)、报错以及返回结果和一些加密指令，不支持循环。想了解更多语言细节可参考:<a href="http://www.8btc.com/bitcoin_scripts" target="_blank" rel="noopener">比特币脚本</a></p>
 </blockquote>
 <p>脚本语言通过从左至右地处理每个项目的方式执行脚本。</p>
-<p>下面用两个图说明下常见类型的比特币交易脚本验证执行过程：<br><img src="/images/script_run1.jpeg" alt="script_run1"><br>上图为解锁脚本运行过程（主要是入栈）<br><img src="/images/script_run2.jpeg" alt="script_run2"><br>上图为锁定脚本运行过程（主要是出栈），最后的结果为真，说明交易有效。</p>
+<p>下面用两个图说明下常见类型的比特币交易脚本验证执行过程：<br><img src="https://img.learnblockchain.cn/2017/script_run1.jpeg!wl" alt="script_run1"><br>上图为解锁脚本运行过程（主要是入栈）<br><img src="https://img.learnblockchain.cn/2017/script_run2.jpeg!wl" alt="script_run2"><br>上图为锁定脚本运行过程（主要是出栈），最后的结果为真，说明交易有效。</p>
 <h2 id="交易分析"><a href="#交易分析" class="headerlink" title="交易分析"></a>交易分析</h2><p>实际上比特币的交易被设计为可以纳入多个输入和输出。</p>
-<h3 id="交易结构"><a href="#交易结构" class="headerlink" title="交易结构"></a>交易结构</h3><p>我们来看看完整的交易结构，<br><img src="/images/tx_struce.jpeg" alt=""></p>
+<h3 id="交易结构"><a href="#交易结构" class="headerlink" title="交易结构"></a>交易结构</h3><p>我们来看看完整的交易结构，<br><img src="https://img.learnblockchain.cn/2017/tx_struce.jpeg!wl" alt=""></p>
 <blockquote>
 <p>交易的锁定时间定义了能被加到区块链里的最早的交易时间。在大多数交易里，它被设置成0，用来表示立即执行。<br>如果锁定时间不是0并且小于5亿，就被视为区块高度，意指在这个指定的区块高度之前，该交易不会被包含在区块链里。<br>如果锁定时间大于5亿，则它被当作是一个Unix纪元时间戳（从1970年1月1日以来的秒数），并且在这个指定时间之前，该交易不会被包含在区块链里。</p>
 </blockquote>
@@ -494,9 +494,9 @@
 <blockquote>
 <p>交易费 = 求和（所有输入） - 求和（所有输出）</p>
 </blockquote>
-<h3 id="交易输入结构"><a href="#交易输入结构" class="headerlink" title="交易输入结构"></a>交易输入结构</h3><p>刚刚我们提过输入需要提供一个解锁脚本，现在来看看一个交易的输入结构：<br><img src="/images/tx_input_struce.jpeg" alt=""></p>
-<p>我们结合整个交易的结构里看输入结构就是这样子：<br><img src="/images/tx_input_overview.jpeg" alt=""></p>
-<h3 id="交易输出结构"><a href="#交易输出结构" class="headerlink" title="交易输出结构"></a>交易输出结构</h3><p>刚刚我们提过输出是指向一个解锁脚本，具体交易的输出结构为：<br><img src="/images/tx_output_struce.jpeg" alt=""><br>我们结合整个交易的结构里看输出结构就是这样子：<br><img src="/images/tx_output_overview.jpeg" alt=""></p>
+<h3 id="交易输入结构"><a href="#交易输入结构" class="headerlink" title="交易输入结构"></a>交易输入结构</h3><p>刚刚我们提过输入需要提供一个解锁脚本，现在来看看一个交易的输入结构：<br><img src="https://img.learnblockchain.cn/2017/tx_input_struce.jpeg!wl" alt=""></p>
+<p>我们结合整个交易的结构里看输入结构就是这样子：<br><img src="https://img.learnblockchain.cn/2017/tx_input_overview.jpeg!wl" alt=""></p>
+<h3 id="交易输出结构"><a href="#交易输出结构" class="headerlink" title="交易输出结构"></a>交易输出结构</h3><p>刚刚我们提过输出是指向一个解锁脚本，具体交易的输出结构为：<br><img src="https://img.learnblockchain.cn/2017/tx_output_struce.jpeg!wl" alt=""><br>我们结合整个交易的结构里看输出结构就是这样子：<br><img src="https://img.learnblockchain.cn/2017/tx_output_overview.jpeg!wl" alt=""></p>
 <h3 id="交易哈希计算"><a href="#交易哈希计算" class="headerlink" title="交易哈希计算"></a>交易哈希计算</h3><p>在<a href="https://xiaozhuanlan.com/topic/1402935768" target="_blank" rel="noopener">比特币区块结构Merkle 树及简单支付验证分析</a> 讲到区块结构，区块结构包含多个交易的哈希。<br>那么交易哈希是怎么计算的呢？</p>
 <ol>
 <li>交易结构各字段序列化为字节数组</li>
@@ -697,7 +697,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -719,7 +719,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

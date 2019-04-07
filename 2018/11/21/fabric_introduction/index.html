@@ -93,12 +93,12 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="这篇文章首先简单介绍了联盟链是什么，再详细的介绍了Fabric环境搭建的整个流程。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://learnblockchain.cn/images/fabric_test.png">
-<meta property="og:updated_time" content="2019-04-03T09:25:21.105Z">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/fabric_test.png!wl">
+<meta property="og:updated_time" content="2019-04-05T10:29:32.239Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="联盟链初识以及Fabric环境搭建流程">
 <meta name="twitter:description" content="这篇文章首先简单介绍了联盟链是什么，再详细的介绍了Fabric环境搭建的整个流程。">
-<meta name="twitter:image" content="https://learnblockchain.cn/images/fabric_test.png">
+<meta name="twitter:image" content="https://img.learnblockchain.cn/2018/fabric_test.png!wl">
 
 
 
@@ -401,8 +401,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-04-03T17:25:21+08:00">
-                2019-04-03
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-05T18:29:32+08:00">
+                2019-04-05
               </time>
             
           </span>
@@ -562,7 +562,7 @@
 <li>基于crypto-config.yaml生成公私钥和证书信息，并保存在crypto-config文件夹中。基于crypto-config.yaml生成公私钥和证书信息，并保存在crypto-config文件夹中。</li>
 <li>基于docker-compose-cli.yaml启动1Orderer+4Peer+1CLI的Fabric容器。基于docker-compose-cli.yaml启动1Orderer+4Peer+1CLI的Fabric容器。<br>在CLI启动的时候，会运行scripts/script.sh文件，这个脚本文件包含了创建Channel，加入Channel，安装Example02，运行Example02等功能。</li>
 </ol>
-<p>运行完如果出现下图所示，说明整个Fabric网络已经通了。<br><img src="/images/fabric_test.png" alt="在这里插入图片描述"></p>
+<p>运行完如果出现下图所示，说明整个Fabric网络已经通了。<br><img src="https://img.learnblockchain.cn/2018/fabric_test.png!wl" alt="在这里插入图片描述"></p>
 <h4 id="这里记录本人测试Fabric环境是否成功时遇到的问题"><a href="#这里记录本人测试Fabric环境是否成功时遇到的问题" class="headerlink" title="这里记录本人测试Fabric环境是否成功时遇到的问题"></a>这里记录本人测试Fabric环境是否成功时遇到的问题</h4><p><strong>1.</strong> 如果发现运行 <strong>./network_setup.sh up</strong>命令 后提示在…fabric/release/linux-amd64/bin文件夹下找不到指定文件<br><strong>解决办法</strong>：<br>可以在~/go/src/github.com/hyperledger/fabric/scripts文件下找到 <strong>bootstrap.1.0.0.sh</strong>文件，手动运行它    <strong>./bootstrap.1.0.0.sh</strong>， 此时可以在当前文件夹生成一个<strong>bin</strong>文件夹，bin里面的文件就是我们需要的，将它拷贝到前面的…fabric/release/linux-amd64/bin文件夹下</p>
 <p><strong>2.</strong> 如果出现：Error on outputBlock: Error writing genesis block: open ./channel-artifacts/genesis.block: is a directory不能生成创世块的错误。<br><strong>解决办法：</strong><br>可以在~/go/src/github.com/hyperledger/fabric/examples/e2e_cli/channel-artifacts目录下，将genesis.block这个目录删除，<strong>rm -rf genesis.block/</strong></p>
 <p><strong>3.</strong> 如果出现：.ERROR: for orderer.example.com  Cannot start service orderer.example.com: b’OCI runtime create failed: container_linux.go:348: starting container process caused “process_linux.go:402: container init caused \“rootfs_linux.go:58:<br><strong>解决办法：</strong><br>执行./network_setup.sh down 清除网络后再启动即可</p>
@@ -674,8 +674,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/21/fabric_transaction_process/" rel="next" title="Fabric1.0 交易流程">
-                <i class="fa fa-chevron-left"></i> Fabric1.0 交易流程
+              <a href="/2018/11/21/fabric_startup_process/" rel="next" title="Fabric 网络环境启动过程详解">
+                <i class="fa fa-chevron-left"></i> Fabric 网络环境启动过程详解
               </a>
             
           </div>
@@ -684,8 +684,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/11/21/fabric_startup_process/" rel="prev" title="Fabric 网络环境启动过程详解">
-                Fabric 网络环境启动过程详解 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/11/21/fabric_transaction_process/" rel="prev" title="Fabric1.0 交易流程">
+                Fabric1.0 交易流程 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -763,7 +763,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -785,7 +785,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

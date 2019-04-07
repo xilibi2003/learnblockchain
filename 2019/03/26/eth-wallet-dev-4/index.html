@@ -93,14 +93,14 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="这是如何开发以太坊安卓钱包系列，接上一篇继续展示钱包账号资产信息，这篇来看看如何获取账号的以太余额及Token余额。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://learnblockchain.cn/images/15536708197342.jpg">
-<meta property="og:image" content="https://learnblockchain.cn/images/15536710194901.jpg">
-<meta property="og:image" content="https://learnblockchain.cn/images/15536757559224.jpg">
-<meta property="og:updated_time" content="2019-03-28T02:06:52.413Z">
+<meta property="og:image" content="https://img.learnblockchain.cn/2019/15536708197342.jpg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2019/15536710194901.jpg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2019/15536757559224.jpg!wl">
+<meta property="og:updated_time" content="2019-04-05T10:29:31.039Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何开发一款以太坊安卓钱包系列4 - 获取以太及Token余额">
 <meta name="twitter:description" content="这是如何开发以太坊安卓钱包系列，接上一篇继续展示钱包账号资产信息，这篇来看看如何获取账号的以太余额及Token余额。">
-<meta name="twitter:image" content="https://learnblockchain.cn/images/15536708197342.jpg">
+<meta name="twitter:image" content="https://img.learnblockchain.cn/2019/15536708197342.jpg!wl">
 
 
 
@@ -403,8 +403,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-28T10:06:52+08:00">
-                2019-03-28
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-05T18:29:31+08:00">
+                2019-04-05
               </time>
             
           </span>
@@ -483,7 +483,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">geth --datadir  my_datadir --dev --rpc --rpcaddr <span class="string">"0.0.0.0"</span> console</span><br></pre></td></tr></table></figure>
 <p>特别要注意，需要对<code>--rpcaddr</code> 进行设置，表示哪一个地址能接受RPC请求，因为默认情况下，geth只接受来自 localhost 的请求，这样就无法接受到来自手机的客户端的请求。<br>如果是Ganache，可以点击Ganache右上角的设置，进行配置。</p>
 <h3 id="确定当前网络"><a href="#确定当前网络" class="headerlink" title="确定当前网络"></a>确定当前网络</h3><p>在钱包有一个设置项，会把用户选中的网络的<code>name</code>保存到 <code>SharedPreference</code>， 如图：</p>
-<p><img src="https://learnblockchain.cn/images/15536708197342.jpg" alt=""></p>
+<p><img src="https://img.learnblockchain.cn/2019/15536708197342.jpg!wl" alt=""></p>
 <p>确定网络的代码逻辑就简单了： 从<code>SharedPreference</code>读取到选中的网络名再对<code>NETWORKS</code> 做一个匹配，<a href="https://github.com/xilibi2003/Upchain-wallet" target="_blank" rel="noopener">代码</a>在<code>EthereumNetworkRepository</code>中，大家可对照查看。</p>
 <h2 id="Coin-还是-Token"><a href="#Coin-还是-Token" class="headerlink" title="Coin 还是 Token"></a>Coin 还是 Token</h2><p>Coin 指的是以太币，Token 是大家通常所说的代币 或 通证，以太余额何Token余额，他们的获取方式是不一样的，明白这一点很重要，有必要先介绍下以太坊账户模型。</p>
 <h3 id="以太坊账户模型"><a href="#以太坊账户模型" class="headerlink" title="以太坊账户模型"></a>以太坊账户模型</h3><p>以太币Eth是以太坊的原生代币，在以太坊的账户模型中，有一个字段<code>balance</code>存储着余额，例如账号的定义像下面：</p>
@@ -502,9 +502,9 @@
 <blockquote>
 <p>Realm 是一个移动端数据库，是替代sqlite的一种解决方案。</p>
 </blockquote>
-<p>在用户通过以下界面添加新资产，会调用<code>RealmTokenSource</code>类的<code>put</code>方法保存到<code>.realm</code>文件。<br><img src="https://learnblockchain.cn/images/15536710194901.jpg" alt=""></p>
+<p>在用户通过以下界面添加新资产，会调用<code>RealmTokenSource</code>类的<code>put</code>方法保存到<code>.realm</code>文件。<br><img src="https://img.learnblockchain.cn/2019/15536710194901.jpg!wl" alt=""></p>
 <p>现在来看看如何获取账号所关联的 Token， 逻辑上比较简单，不过涉及了多个类，我把调用序列图梳理一下：</p>
-<p><img src="https://learnblockchain.cn/images/15536757559224.jpg" alt=""></p>
+<p><img src="https://img.learnblockchain.cn/2019/15536757559224.jpg!wl" alt=""></p>
 <div style="display: none"><br><br>流程图源码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Title: 获取账号Token种类</span><br><span class="line">TokensViewModel-&gt;FetchTokensInteract: fetch</span><br><span class="line">FetchTokensInteract-&gt;TokenRepository: fetch</span><br><span class="line">TokenRepository-&gt;TokenLocalSource: fetch</span><br><span class="line">TokenLocalSource--&gt;&gt;TokensViewModel: OnTokens</span><br></pre></td></tr></table></figure><br><br></div>
 
 
@@ -718,7 +718,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -740,7 +740,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

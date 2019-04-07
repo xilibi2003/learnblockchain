@@ -93,14 +93,14 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="在上一篇文章介绍了IPFS要做什么， 本篇文章介绍下IPFS怎么用， 按照本站的风格，我不会仅仅把一个个命令列出来，同时会说明命令在后面为我们做了什么。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://learnblockchain.cn/media/15458049832966.jpg">
-<meta property="og:image" content="https://learnblockchain.cn/media/15458309509991.jpg">
-<meta property="og:image" content="https://learnblockchain.cn/media/15458322289639.jpg">
-<meta property="og:updated_time" content="2019-04-03T09:25:21.130Z">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/15458049832966.jpg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/15458309509991.jpg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/15458322289639.jpg!wl">
+<meta property="og:updated_time" content="2019-04-05T10:29:32.284Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IPFS 使用入门">
 <meta name="twitter:description" content="在上一篇文章介绍了IPFS要做什么， 本篇文章介绍下IPFS怎么用， 按照本站的风格，我不会仅仅把一个个命令列出来，同时会说明命令在后面为我们做了什么。">
-<meta name="twitter:image" content="https://learnblockchain.cn/media/15458049832966.jpg">
+<meta name="twitter:image" content="https://img.learnblockchain.cn/2018/15458049832966.jpg!wl">
 
 
 
@@ -403,8 +403,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-04-03T17:25:21+08:00">
-                2019-04-03
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-05T18:29:32+08:00">
+                2019-04-05
               </time>
             
           </span>
@@ -493,7 +493,7 @@
 <ol>
 <li>API服务，默认在5001端口，可以通过 <a href="http://localhost:5001/webui" target="_blank" rel="noopener">http://localhost:5001/webui</a> 进行访问，界面如：</li>
 </ol>
-<p><img src="https://learnblockchain.cn/media/15458049832966.jpg" alt=""></p>
+<p><img src="https://img.learnblockchain.cn/2018/15458049832966.jpg!wl" alt=""></p>
 <p>这也是IPFS的一个Web版的管理控制台， 可以通过这个控制台添加文件，查看节点连接情况等等。</p>
 <ol>
 <li>网关服务，默认在8080端口， 由于当前浏览器还不支持通过IPFS协议（ipfs://）来访问文件，如果我们要在浏览器里访问文件的话，就需要借助于IPFS 提供的网关服务，由浏览器先访问到网关，网关去获取IPFS网络杀过了的文件。 有了网关服务，就可以通过这个链接：<code>http://localhost:8080/ipfs/QmQgMZKqHzyEdyJja5ioF8WaXrbUDVjqhJDoaUKDymgioi</code> 来访问刚刚上传到ipfs 的文件。</li>
@@ -513,14 +513,14 @@
 <p>例如把upchain.pro.txt发布到节点，使用下面的命令:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; ipfs name publish QmQgMZKqHzyEdyJja5ioF8WaXrbUDVjqhJDoaUKDymgioi</span><br><span class="line">Published to QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva: /ipfs/QmQgMZKqHzyEdyJja5ioF8WaXrbUDVjqhJDoaUKDymgioi</span><br></pre></td></tr></table></figure></p>
 <p>命令中的<code>QmQgMZKqHzyEdyJja5ioF8WaXrbUDVjqhJDoaUKDymgioi</code>是<code>upchain.pro.txt</code>的hash, 命令提示中的<code>QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva</code>是当前节点id(大家可以回看一个前面ipfs init 的输出)。</p>
 <p>发布之后就可以使用<a href="http://127.0.0.1:8080/ipns/QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva" target="_blank" rel="noopener">http://127.0.0.1:8080/ipns/QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva</a> 或 <a href="https://ipfs.io/ipns/QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva" target="_blank" rel="noopener">https://ipfs.io/ipns/QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva</a> 来访问upchain.pro.txt的内容，如图：</p>
-<p><img src="https://learnblockchain.cn/media/15458309509991.jpg" alt=""></p>
+<p><img src="https://img.learnblockchain.cn/2018/15458309509991.jpg!wl" alt=""></p>
 <p>其实理想下是使用 ipns://QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva 来访问，通过网站还是前面提到的浏览器暂不支持ipfs协议。</p>
 <p>现在我们来更新一下upchain.pro.txt 加入文字：”创办人：Tiny熊”</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; echo &quot;创办人：Tiny熊&quot; &gt;&gt;  upchain.pro.txt</span><br><span class="line">&gt; ipfs add upchain.pro.txt</span><br><span class="line">added QmUUiDN6tWtj89xmUw1iCK2NczBqE6m3zH9QnbhHoMvZ5S upchain.pro.txt</span><br><span class="line"> 63 B / 63 B [=============================================================] 100.00%</span><br></pre></td></tr></table></figure>
 <p>重新发布一下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; ipfs name publish QmUUiDN6tWtj89xmUw1iCK2NczBqE6m3zH9QnbhHoMvZ5S</span><br><span class="line">Published to QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva: /ipfs/QmUUiDN6tWtj89xmUw1iCK2NczBqE6m3zH9QnbhHoMvZ5S</span><br></pre></td></tr></table></figure>
 <p>再次访问 <a href="http://127.0.0.1:8080/ipns/QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva" target="_blank" rel="noopener">http://127.0.0.1:8080/ipns/QmYM36s4ut2TiufVvVUABSVWmx8VvmDU7xKUiVeswBuTva</a> （这个链接和上面的链接一样）可以看到内容更新了。</p>
-<p><img src="https://learnblockchain.cn/media/15458322289639.jpg" alt=""></p>
+<p><img src="https://img.learnblockchain.cn/2018/15458322289639.jpg!wl" alt=""></p>
 <p>如果我们要查询 节点id 指向的hash 可以使用 <code>ipfs name resolve</code> 进行查询：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; ipfs name resolve</span><br><span class="line">/ipfs/QmUUiDN6tWtj89xmUw1iCK2NczBqE6m3zH9QnbhHoMvZ5</span><br></pre></td></tr></table></figure></p>
 <p>有一点值得大家注意： 节点id其实是公钥的hash，它的关联信息是需要经过私钥签名才可以发布，因此只有我们自己才可以更新节点的指向。</p>
 <p>如果我们有多个站点需要更新，可以新产生一个秘钥对，使用新的key 发布，如：</p>
@@ -707,7 +707,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -729,7 +729,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

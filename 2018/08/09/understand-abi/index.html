@@ -93,14 +93,14 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="很多同学不是很明白以太坊ABI是什么，他的作用是什么，读完本文就明白了。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://learnblockchain.cn/images/abi1.jpg">
-<meta property="og:image" content="https://learnblockchain.cn/images/abi2.jpg">
-<meta property="og:image" content="https://learnblockchain.cn/images/abi3.jpg">
-<meta property="og:updated_time" content="2019-04-03T09:25:21.129Z">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/abi1.jpg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/abi2.jpg!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2018/abi3.jpg!wl">
+<meta property="og:updated_time" content="2019-04-05T10:29:32.247Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何理解以太坊ABI - 应用程序二进制接口">
 <meta name="twitter:description" content="很多同学不是很明白以太坊ABI是什么，他的作用是什么，读完本文就明白了。">
-<meta name="twitter:image" content="https://learnblockchain.cn/images/abi1.jpg">
+<meta name="twitter:image" content="https://img.learnblockchain.cn/2018/abi1.jpg!wl">
 
 
 
@@ -403,8 +403,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-04-03T17:25:21+08:00">
-                2019-04-03
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-05T18:29:32+08:00">
+                2019-04-05
               </time>
             
           </span>
@@ -463,15 +463,15 @@
 <a id="more"></a>
 <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>阅读本文前，你应该对以太坊、智能合约有所了解，<br>如果你还不了解，建议你先看<a href="https://learnblockchain.cn/2017/11/20/whatiseth/">以太坊是什么</a>，也可以观看我们的视频：<a href="https://wiki.learnblockchain.cn/course/beginner.html" target="_blank" rel="noopener">零基础搞懂区块链</a>和<a href="https://wiki.learnblockchain.cn/course/solidity.html" target="_blank" rel="noopener">深入详解以太坊智能合约语言Solidity</a>, 可以系统全面学习理解以太坊、智能合约。</p>
 <h2 id="ABI-是什么"><a href="#ABI-是什么" class="headerlink" title="ABI 是什么"></a>ABI 是什么</h2><p>ABI 全称是 Application Binary Interface，翻译过来就是：应用程序二进制接口，简单来说就是 以太坊的调用合约时的接口说明。还不是很理解，没关系。</p>
-<h2 id="调用合约函数发生了什么"><a href="#调用合约函数发生了什么" class="headerlink" title="调用合约函数发生了什么"></a>调用合约函数发生了什么</h2><p>从外部施加给以太坊的行为都称之为向以太坊网络提交了一个交易， 调用合约函数其实是向合约地址（账户）提交了一个交易，这个交易有一个附加数据，这个附加的数据就是ABI的编码数据。<br><img src="/images/abi1.jpg" alt=""></p>
+<h2 id="调用合约函数发生了什么"><a href="#调用合约函数发生了什么" class="headerlink" title="调用合约函数发生了什么"></a>调用合约函数发生了什么</h2><p>从外部施加给以太坊的行为都称之为向以太坊网络提交了一个交易， 调用合约函数其实是向合约地址（账户）提交了一个交易，这个交易有一个附加数据，这个附加的数据就是ABI的编码数据。<br><img src="https://img.learnblockchain.cn/2018/abi1.jpg!wl" alt=""></p>
 <blockquote>
 <p>比特币的交易也可以附加数据，以太坊革命性的地方就是能把附加数据转化为都函数的执行。</p>
 </blockquote>
 <p>因此要想和合约交互，就离不开ABI数据。</p>
 <h3 id="演示调用函数"><a href="#演示调用函数" class="headerlink" title="演示调用函数"></a>演示调用函数</h3><p>以下面以个最简单的合约为例，我们看看用参数 1 调用<code>set(uint x)</code>，这个交易附带的数据是什么。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.0</span>;</span><br><span class="line"></span><br><span class="line">contract SimpleStorage &#123;</span><br><span class="line">    </span><br><span class="line">    uint storedData;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">set</span>(<span class="params">uint x</span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        storedData = x;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">get</span>(<span class="params"></span>) <span class="title">public</span> <span class="title">constant</span> <span class="title">returns</span> (<span class="params">uint</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> storedData;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当然第一步需要先把合约部署到以太坊网络（其实部署也是一个）上，然后用 “1” 作为参数调用set，如下图:<br><img src="/images/abi2.jpg" alt=""></p>
-<p>然后我们打开etherscan查看<a href="https://ropsten.etherscan.io/tx/0xd773a6909808f99c5a26c0c890af8b0bb6d784f29a3af55e04fa35d44d7716e2" target="_blank" rel="noopener">交易详情数据</a>, 可以看到其附加数据如下图：<br><img src="/images/abi3.jpg" alt=""></p>
+<p>当然第一步需要先把合约部署到以太坊网络（其实部署也是一个）上，然后用 “1” 作为参数调用set，如下图:<br><img src="https://img.learnblockchain.cn/2018/abi2.jpg!wl" alt=""></p>
+<p>然后我们打开etherscan查看<a href="https://ropsten.etherscan.io/tx/0xd773a6909808f99c5a26c0c890af8b0bb6d784f29a3af55e04fa35d44d7716e2" target="_blank" rel="noopener">交易详情数据</a>, 可以看到其附加数据如下图：<br><img src="https://img.learnblockchain.cn/2018/abi3.jpg!wl" alt=""></p>
 <p>这个数据就是ABI的编码数据：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x60fe47b10000000000000000000000000000000000000000000000000000000000000001</span><br></pre></td></tr></table></figure></p>
 <h2 id="ABI-编码分析"><a href="#ABI-编码分析" class="headerlink" title="ABI 编码分析"></a>ABI 编码分析</h2><p>我把上面交易的附加数据拷贝出来分析一下，这个数据可以分成两个子部分：</p>
 <ul>
@@ -672,7 +672,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -694,7 +694,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

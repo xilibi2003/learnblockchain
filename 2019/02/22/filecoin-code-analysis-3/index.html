@@ -93,13 +93,13 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第三章filecoin开发网络使用。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://learnblockchain.cn/images/active.png">
-<meta property="og:image" content="https://learnblockchain.cn/images/wikiissue1.png">
-<meta property="og:updated_time" content="2019-03-12T07:25:27.940Z">
+<meta property="og:image" content="https://img.learnblockchain.cn/2019/active.png!wl">
+<meta property="og:image" content="https://img.learnblockchain.cn/2019/wikiissue1.png!wl">
+<meta property="og:updated_time" content="2019-04-05T10:29:31.062Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="filecoin技术架构分析三：filecoin开发网络使用">
 <meta name="twitter:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第三章filecoin开发网络使用。">
-<meta name="twitter:image" content="https://learnblockchain.cn/images/active.png">
+<meta name="twitter:image" content="https://img.learnblockchain.cn/2019/active.png!wl">
 
 
 
@@ -402,8 +402,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-12T15:25:27+08:00">
-                2019-03-12
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-05T18:29:31+08:00">
+                2019-04-05
               </time>
             
           </span>
@@ -566,7 +566,7 @@
 <blockquote>
 <p>在 <a href="https://stats.kittyhawk.wtf/" target="_blank" rel="noopener">https://stats.kittyhawk.wtf/</a> 查看filecoin网络，节点已经激活</p>
 </blockquote>
-<p><img src="/images/active.png" alt=""></p>
+<p><img src="https://img.learnblockchain.cn/2019/active.png!wl" alt=""></p>
 <h4 id="获取Mock-FIL用于测试"><a href="#获取Mock-FIL用于测试" class="headerlink" title="获取Mock FIL用于测试"></a>获取Mock FIL用于测试<a name="从faucet中获取mock代币"></a></h4><blockquote>
 <p>FIL用于矿工抵押；或者作为客户进行交易需要</p>
 </blockquote>
@@ -575,7 +575,7 @@
 <li>go-filecoin message wait ${MESSAGE_CID}  本质上是转账交易，wiki上说明的是等待30s，但是这是在本地区块数据同步完成的基础上才行的。</li>
 <li>笔者已提交建议给官方，在wiki上更为清晰地表述。</li>
 </ul>
-<p><img src="/images/wikiissue1.png" alt=""></p>
+<p><img src="https://img.learnblockchain.cn/2019/wikiissue1.png!wl" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">waynewyang:filecoin waynewyang$ go-filecoin wallet addrs ls</span><br><span class="line">fcq09qtmrxgq5sdr95gs93tx79u9uymdwfdsaphpa</span><br><span class="line"></span><br><span class="line">waynewyang:filecoin waynewyang$ export WALLET_ADDR=`go-filecoin wallet addrs ls`</span><br><span class="line"></span><br><span class="line">waynewyang:filecoin waynewyang$ MESSAGE_CID=`curl -X POST -F &quot;target=$&#123;WALLET_ADDR&#125;&quot; &quot;http://user.kittyhawk.wtf:9797/tap&quot; | cut -d&quot; &quot; -f4`</span><br><span class="line">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</span><br><span class="line">                                 Dload  Upload   Total   Spent    Left  Speed</span><br><span class="line">100   232  100    50  100   182     48    177  0:00:01  0:00:01 --:--:--   177</span><br><span class="line"></span><br><span class="line">waynewyang:go-filecoin waynewyang$ go-filecoin message wait $&#123;MESSAGE_CID&#125;</span><br><span class="line">&#123;</span><br><span class="line">	&quot;meteredMessage&quot;: &#123;</span><br><span class="line">		&quot;message&quot;: &#123;</span><br><span class="line">			&quot;to&quot;: &quot;fcqm0u932ja5thlsy4dgpz5urlapk8qhtd0clqv5e&quot;,</span><br><span class="line">			&quot;from&quot;: &quot;fcq09sqhrd4gls86muuenzvqdc37mzscagapjveal&quot;,</span><br><span class="line">			&quot;nonce&quot;: &quot;rQQ=&quot;,</span><br><span class="line">			&quot;value&quot;: &quot;1000&quot;,</span><br><span class="line">			&quot;method&quot;: &quot;&quot;,</span><br><span class="line">			&quot;params&quot;: null</span><br><span class="line">		&#125;,</span><br><span class="line">		&quot;gasPrice&quot;: &quot;0&quot;,</span><br><span class="line">		&quot;gasLimit&quot;: &quot;AA==&quot;</span><br><span class="line">	&#125;,</span><br><span class="line">	&quot;signature&quot;: &quot;WKA+eRY7XCQlSmallzoFu8Tps7NZ2AOAKLRFo21rTERFYJqXJT2qEWZ8sFvm6ZShR5syb7RSAJnDp4Am2Vzp0gE=&quot;</span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">	&quot;exitCode&quot;: 0,</span><br><span class="line">	&quot;return&quot;: null,</span><br><span class="line">	&quot;gasAttoFIL&quot;: &quot;0&quot;</span><br><span class="line">&#125;</span><br><span class="line">waynewyang:filecoin waynewyang$ go-filecoin wallet balance  fcq09qtmrxgq5sdr95gs93tx79u9uymdwfdsaphpa</span><br><span class="line">1000</span><br><span class="line">waynewyang:filecoin waynewyang$ go-filecoin wallet balance  $&#123;WALLET_ADDR&#125;</span><br><span class="line">1000</span><br></pre></td></tr></table></figure>
 <h4 id="矿工操作"><a href="#矿工操作" class="headerlink" title="矿工操作"></a>矿工操作<a name="矿工操作"></a></h4><h4 id="存储矿工"><a href="#存储矿工" class="headerlink" title="存储矿工"></a>存储矿工<a name="存储矿工"></a></h4><ul>
 <li>创建存储矿工示例，需要等待1分钟左右<ul>
@@ -666,7 +666,7 @@
 <h4 id="容器部署方式"><a href="#容器部署方式" class="headerlink" title="容器部署方式"></a>容器部署方式<a name="容器部署方式"></a></h4><ul>
 <li>可以打包成docker镜像，有兴趣的朋友可以自行尝试。</li>
 </ul>
-<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客</p>
 
       
     </div>
@@ -813,7 +813,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -835,7 +835,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

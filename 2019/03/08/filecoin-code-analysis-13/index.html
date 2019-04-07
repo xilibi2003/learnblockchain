@@ -93,12 +93,12 @@
 <meta property="og:site_name" content="深入浅出区块链">
 <meta property="og:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第十三章源码分析之服务层actor及vm。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://learnblockchain.cn/images/payment.png">
-<meta property="og:updated_time" content="2019-03-12T07:26:18.158Z">
+<meta property="og:image" content="https://img.learnblockchain.cn/2019/payment.png!wl">
+<meta property="og:updated_time" content="2019-04-05T10:29:31.035Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="filecoin技术架构分析十三：filecoin源码分析之服务层actor及vm">
 <meta name="twitter:description" content="我是先河系统CTO杨尉，欢迎大加关注的的Github: waynewyang，本文是filecoin技术架构分析系列文章第十三章源码分析之服务层actor及vm。">
-<meta name="twitter:image" content="https://learnblockchain.cn/images/payment.png">
+<meta name="twitter:image" content="https://img.learnblockchain.cn/2019/payment.png!wl">
 
 
 
@@ -401,8 +401,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-12T15:26:18+08:00">
-                2019-03-12
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-05T18:29:31+08:00">
+                2019-04-05
               </time>
             
           </span>
@@ -522,7 +522,7 @@
 </ul>
 </li>
 </ul>
-<p><img src="/images/payment.png" alt=""></p>
+<p><img src="https://img.learnblockchain.cn/2019/payment.png!wl" alt=""></p>
 <ul>
 <li>源码分析注释<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">▼ package</span><br><span class="line">    paymentbroker</span><br><span class="line"></span><br><span class="line">▼+Actor : struct</span><br><span class="line">    [methods]</span><br><span class="line">    // 关闭支付通道</span><br><span class="line">   +Close(vmctx exec.VMContext, payer address.Address, chid *types.ChannelID, amt *types.AttoFIL, validAt *types.BlockHeight, sig []byte) : uint8, error</span><br><span class="line">    // 创建支付通道</span><br><span class="line">   +CreateChannel(vmctx exec.VMContext, target address.Address, eol *types.BlockHeight) : *types.ChannelID, uint8, error</span><br><span class="line">   +Exports() : exec.Exports</span><br><span class="line">    // 增加资金</span><br><span class="line">   +Extend(vmctx exec.VMContext, chid *types.ChannelID, eol *types.BlockHeight) : uint8, error</span><br><span class="line">   +InitializeState(storage exec.Storage, initializerData interface&#123;&#125;) : error</span><br><span class="line">    // 查询某个支付者的信息</span><br><span class="line">   +Ls(vmctx exec.VMContext, payer address.Address) : []byte, uint8, error</span><br><span class="line">    // 撤回资金</span><br><span class="line">   +Reclaim(vmctx exec.VMContext, chid *types.ChannelID) : uint8, error</span><br><span class="line">    // 赎回(或者收款)资金</span><br><span class="line">   +Redeem(vmctx exec.VMContext, payer address.Address, chid *types.ChannelID, amt *types.AttoFIL, validAt *types.BlockHeight, sig []byte) : uint8, error</span><br><span class="line">    // 收据，指明在特定区块高度之前都是有效的</span><br><span class="line">   +Voucher(vmctx exec.VMContext, chid *types.ChannelID, amount *types.AttoFIL, validAt *types.BlockHeight) : []byte, uint8, error</span><br><span class="line"></span><br><span class="line">▼+PaymentChannel : struct</span><br><span class="line">    [fields]</span><br><span class="line">    // 支付通道内金额</span><br><span class="line">   +Amount : *types.AttoFIL</span><br><span class="line">    // 已被赎回金额</span><br><span class="line">   +AmountRedeemed : *types.AttoFIL</span><br><span class="line">   +Eol : *types.BlockHeight</span><br><span class="line">    // 收款人地址</span><br><span class="line">   +Target : address.Address</span><br><span class="line"></span><br><span class="line">▼ functions</span><br><span class="line">    // 收据的签名及校验</span><br><span class="line">   +SignVoucher(channelID *types.ChannelID, amount *types.AttoFIL, validAt *types.BlockHeight, addr address.Address, signer types.Signer) : types.Signature, error</span><br><span class="line">   +VerifyVoucherSignature(payer address.Address, chid *types.ChannelID, amt *types.AttoFIL, validAt *types.BlockHeight, sig []byte) : bool</span><br><span class="line">   -createVoucherSignatureData(channelID *types.ChannelID, amount *types.AttoFIL, validAt *types.BlockHeight) : []byte</span><br><span class="line">   -findByChannelLookup(ctx context.Context, storage exec.Storage, byPayer exec.Lookup, payer address.Address) : exec.Lookup, error</span><br><span class="line">   -init()</span><br><span class="line">   -reclaim(ctx context.Context, vmctx exec.VMContext, byChannelID exec.Lookup, payer address.Address, chid *types.ChannelID, channel *PaymentChannel) : error</span><br><span class="line">   -updateChannel(ctx exec.VMContext, target address.Address, channel *PaymentChannel, amt *types.AttoFIL, validAt *types.BlockHeight) : error</span><br><span class="line">   -withPayerChannels(ctx context.Context, storage exec.Storage, payer address.Address, f func(exec.Lookup) error) : error</span><br><span class="line">   -withPayerChannelsForReading(ctx context.Context, storage exec.Storage, payer address.Address, f func(exec.Lookup) error) : error</span><br></pre></td></tr></table></figure>
 </li>
@@ -551,7 +551,7 @@
 <h2 id="state包-actor状态"><a href="#state包-actor状态" class="headerlink" title="state包(actor状态)"></a>state包(actor状态)</h2><ul>
 <li>表征actor的状态</li>
 </ul>
-<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客。</p>
+<p><a href="https://learnblockchain.cn/">深入浅出区块链</a> - 系统学习区块链，打造最好的区块链技术博客</p>
 
       
     </div>
@@ -698,7 +698,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -720,7 +720,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
