@@ -61,7 +61,8 @@ author: Tiny熊
 * [PHP web3.php](https://github.com/sc0Vu/web3.php)
 * [PHP ethereum-php](https://github.com/digitaldonkey/ethereum-php)
  
-另一个切入点是 **智能合约的开发**，在以太坊现在推荐的语言是Solidity，有一些同学对新学一门语言有一些畏惧，Solidity的语法其实很简洁，有过一两门其他语言基础（开发经验）的同学三五天就可以学会，我也录制了一个视频课程：[深入详解以太坊智能合约语言Solidity](https://wiki.learnblockchain.cn/course/solidity.html)。
+另一个切入点是 **智能合约的开发**，在以太坊现在推荐的语言是Solidity，有一些同学对新学一门语言有一些畏惧，Solidity的语法其实很简洁，有过一两门其他语言基础（开发经验）的同学三五天就可以学会。
+
 
 下面用一个Hello合约，体会下Solidity的语法：
 
@@ -79,6 +80,10 @@ contract Hello {
 
 在DAPP的开发过程中，一些开发工具可以帮助我们事半功倍，如：Truffle开发框架以及Ganache工具来模拟节点等，这篇文章[一步步教你开发、部署第一个去中心化应用](https://learnblockchain.cn/2018/01/12/first-dapp/)
 
+
+另外强烈安利两门课程给大家：
+1. [深入详解以太坊智能合约语言Solidity](https://ke.qq.com/course/326528)。
+2. [以太坊DAPP开发实战](https://ke.qq.com/course/335169) - 轻轻松松学会DAPP开发
 
 
 ## 补充

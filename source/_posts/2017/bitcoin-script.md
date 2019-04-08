@@ -107,11 +107,20 @@ P2SH支付中，锁定脚本被密码学哈希所取代，当一笔交易试图�
 
 相信随着区块链的普及，会对未来的交易模式和商业结构带来巨大的影响。不过由于比特币的脚本语言不是图灵完备的，交易模式依旧有限，以太坊就是为解决这一问题而出现，后面我们会有大量介绍以太坊的文章。
 
+
 ## 参考文献 & 补充阅读
 1. [精通比特币](http://book.8btc.com/master_bitcoin)
 2. 廖雪峰的[深入理解比特币交易的脚本](http://www.infoq.com/cn/articles/deep-understanding-of-bitcoin-transaction-script)
 3. [比特币合同](http://www.8btc.com/bitcoin_contracts)
 
 
+
+我们特意为区块链技术学习者，提供了几门课程:
+* [入门视频教程](https://ke.qq.com/course/318230) - 入门的最佳选择
+* [精讲以太坊智能合约开发](https://ke.qq.com/course/326528) - Solidity 语言面面俱到
+* [以太坊DAPP开发实战](https://ke.qq.com/course/335169) - 轻轻松松学会DApp开发
+
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
 我的**[知识星球](https://learnblockchain.cn/images/zsxq.png)**为各位解答区块链技术问题，欢迎加入讨论。
+
+

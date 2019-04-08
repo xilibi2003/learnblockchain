@@ -470,8 +470,8 @@ candy maple cake sugar pudding cream honey rich smooth crumble sweet treat
 
 如果学习中遇到问题，欢迎加入**[知识星球](https://learnblockchain.cn/images/zsxq.png)**交流。
 
-想全面学习去中心化应用的同学可以学习我们的视频课程[区块链全栈-以太坊DAPP开发实战](https://wiki.learnblockchain.cn/course/dapp.html)。
 
+推荐一门课程给大家：[以太坊DAPP开发实战](https://ke.qq.com/course/335169) - 轻轻松松学会DAPP开发
 
 
 ## 参考文档

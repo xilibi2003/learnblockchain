@@ -16,7 +16,8 @@ author: Tiny熊
 ## 写在前面
 
 阅读本文前，你应该对以太坊、智能合约有所了解，
-如果你还不了解，建议你先看[以太坊是什么](https://learnblockchain.cn/2017/11/20/whatiseth/)，也可以观看我们的视频：[零基础搞懂区块链](https://wiki.learnblockchain.cn/course/beginner.html)和[深入详解以太坊智能合约语言Solidity](https://wiki.learnblockchain.cn/course/solidity.html), 可以系统全面学习理解以太坊、智能合约。
+如果你还不了解，建议你先看[以太坊是什么](https://learnblockchain.cn/2017/11/20/whatiseth/)，也可以观看我们的视频：[零基础搞懂区块链](https://ke.qq.com/course/318230
+)和[深入详解以太坊智能合约语言Solidity](https://ke.qq.com/course/326528), 可以系统全面学习理解以太坊、智能合约。
 
 ## ABI 是什么
 
@@ -126,7 +127,9 @@ web3.eth.abi.encodeFunctionSignature('myMethod(uint256,string)');
 
 其完整的文档在[这里](http://web3js.readthedocs.io/en/1.0/web3-eth-abi.html)，这里不一一演示。
 
-如果你想学习以太坊DApp开发，这门视频课程[以太坊DAPP开发实战](https://wiki.learnblockchain.cn/course/dapp.html)是你不错的选择。
+另外安利两门视频课程给大家：
+*  [深入详解以太坊智能合约语言Solidity](https://ke.qq.com/course/326528) - Solidity 语言面面俱到
+* [以太坊DAPP开发实战](https://ke.qq.com/course/335169) - 轻轻松松学会DAPP开发
 
 欢迎来[知识星球](https://learnblockchain.cn/images/zsxq.png)提问，星球内已经聚集了300多位区块链技术爱好者。
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。

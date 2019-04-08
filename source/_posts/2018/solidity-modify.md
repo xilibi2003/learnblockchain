@@ -169,9 +169,13 @@ a = 11;
 
 这个时候就一目了然了，最后a 为11， 注意第5及第6行是不是执行的。
 
+强烈安利一门课程给大家：[深入详解以太坊智能合约语言Solidity](https://ke.qq.com/course/326528)
+
 ## 参考文献
 [官方文档-Function Modifiers](https://solidity.readthedocs.io/en/develop/contracts.html#function-modifiers)
 
 如果你想和认识我，和我建立联系，欢迎加入知识星球[深入浅出区块链](https://learnblockchain.cn/images/zsxq.png)，我会在星球为大家解答技术问题，作为星友福利，星友可加入我创建的区块链技术群，群内已经聚集了200多位区块链技术爱好者。
 
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
+
+

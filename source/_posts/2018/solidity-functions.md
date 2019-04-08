@@ -86,6 +86,8 @@ contract C {
 尽管view 和 pure 修饰符编译器并未强制要求使用，view 和 pure 修饰也不会带来gas 消耗的改变，但是更好的编码习惯让我们跟容易发现智能合约中的错误。
 
 
+强烈安利一门课程给大家：[深入详解以太坊智能合约语言Solidity](https://ke.qq.com/course/326528)
+
 ## 参考文献
 [官方文档-函数](https://solidity.readthedocs.io/en/develop/contracts.html#functions)
 

@@ -149,6 +149,7 @@ setPrices()添加了**onlyOwner**修改器，注意买卖的价格单位是wei�
 自动补充的逻辑是这样了，在执行交易之前，我们判断用户的余额（用来支付矿工的费用），如果用户的余额非常少（低于某个阈值时）可能影响到交易进行，合约自动售出一部分代币来补充余额，以帮助用户顺利完成交易。
 
 先来设定余额阈值：
+
 ```js
 uint minBalanceForAccounts;
 
@@ -157,8 +158,9 @@ uint minBalanceForAccounts;
     }
 ```
 finney 是货币单位 1 finney = 0.001eth
-然后交易中加入对用户的余额的判断。
-```js
+然后交易中加入对用户的余额的判断:
+
+```javascript
     function transfer(address _to, uint256 _value) {
         ...
         if(msg.sender.balance < minBalanceForAccounts)
@@ -177,7 +179,11 @@ finney 是货币单位 1 finney = 0.001eth
 
 专栏已经有多篇文章介绍Remix Solidity IDE的使用，这里就不一一截图演示了，请大家自己测试验证。
 
-如何创建代币发行代币，现在也录制了对应的**[视频教程:通过代币学以太坊智能合约开发](https://wiki.learnblockchain.cn/course/token.html)**，现在我们在**招募体验师**，可以点击[链接](https://learnblockchain.cn/course)了解详情。
+另外强烈安利几门视频课程给大家：
+1. [通过代币（Token）学以太坊智能合约开发](https://ke.qq.com/course/317230)
+2. [深入详解以太坊智能合约语言Solidity](https://ke.qq.com/course/326528)
+3.  [以太坊DAPP开发实战](https://ke.qq.com/course/335169) - 轻轻松松学会DAPP开发
+
 
 如果你在创建代币的过程中遇到问题，欢迎到我的**[知识星球](https://learnblockchain.cn/images/zsxq.png)**提问，作为星球成员福利，成员可加入区块链技术付费交流群。
 
