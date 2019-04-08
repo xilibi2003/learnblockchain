@@ -267,5 +267,9 @@ contract C {
 需要注意的是所有库调用都实际上是EVM函数调用。这意味着，如果传的是memory类型的，或者是值类型，那么进行一次拷贝，即使是self变量，解决方法是使用存储(storage)类型的引用来避免拷贝内容。
 
 
+强烈安利一门课程给大家：[深入详解以太坊智能合约语言Solidity](https://ke.qq.com/course/326528)
+
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
 如果想与我有更密切的交流可以选择加入我的[知识星球](https://learnblockchain.cn/images/zsxq.png)（星球成员可加入微信技术交流群）
+
+

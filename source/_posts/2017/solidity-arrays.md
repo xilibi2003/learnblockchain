@@ -174,6 +174,8 @@ contract ArrayContract {
 ## 补充事例说明
 事例代码及讲解，请订阅[区块链技术](https://xiaozhuanlan.com/blockchaincore)查看。
 
+另外强烈安利一门课程给大家： [深入详解以太坊智能合约语言Solidity](https://ke.qq.com/course/326528)。
+
 ## 参考文档
 [Solidity官方文档-数组](https://solidity.readthedocs.io/en/develop/types.html#arrays)
 
@@ -214,3 +216,5 @@ contract C {
 
 
 -->
+
+

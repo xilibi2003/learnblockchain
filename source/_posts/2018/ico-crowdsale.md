@@ -172,7 +172,12 @@ addressOfTokenUsedAsReward： 代币合约地址。
 上面是一个很正规的募资合约。接下来讲两个募资合约的扩展，如何实现无限募资合约及割韭菜合约。
 这部分内容独家发布在我的小专栏[区块链技术](https://xiaozhuanlan.com/blockchaincore)
 
-如何创建代币发行代币，现在也录制了对应的**[视频教程:通过代币学以太坊智能合约开发](https://wiki.learnblockchain.cn/course/token.html)**，目前我们也在**招募体验师**，可以点击[链接](https://learnblockchain.cn/course)了解。
+
+另外安利几门视频课程给大家：
+1. [通过代币（Token）学以太坊智能合约开发](https://ke.qq.com/course/317230) 
+2. [深入详解以太坊智能合约语言Solidity](https://ke.qq.com/course/326528) 
+3. [以太坊DAPP开发实战](https://ke.qq.com/course/335169) - 轻轻松松学会DAPP开发
+
 
 如果你在学习中遇到问题，欢迎到我的**[知识星球](https://learnblockchain.cn/images/zsxq.png)**提问，作为星球成员福利，成员可加入区块链技术付费交流群。
 

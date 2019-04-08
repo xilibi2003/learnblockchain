@@ -186,6 +186,7 @@ selfdestruct的别名
 
 另外，当前合约里的所有函数均可支持调用，包括当前函数本身。
 
+强烈安利一门课程给大家：[深入详解以太坊智能合约语言Solidity](https://ke.qq.com/course/326528)
 
 ## 参考文档
 * [Special Variables and Functions](https://solidity.readthedocs.io/en/develop/units-and-global-variables.html#units-and-globally-available-variables)

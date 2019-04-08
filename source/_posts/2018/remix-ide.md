@@ -203,7 +203,10 @@ contract SimpleStorage {
 1. [remix-ide github](https://github.com/ethereum/remix-ide)
 2. [Remix Document](http://remix.readthedocs.io/en/latest/index.html)
 
-我们还为区块链技术爱好者提供了系统的区块链视频教程，觉得文章学习不过瘾的同学可以戳[入门视频教程](https://wiki.learnblockchain.cn/course/beginner.html)及[以太坊智能合约开发](https://wiki.learnblockchain.cn/course/solidity.html)。
+给大家推荐两门特别好的区块链技术学习课程:
+* [精讲以太坊智能合约开发](https://ke.qq.com/course/326528) - Solidity 语言面面俱到
+* [以太坊DAPP开发实战](https://ke.qq.com/course/335169) - 轻轻松松学会DAPP开发
+
 
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
 如果你学习区块链中遇到问题，欢迎加入知识星球[深入浅出区块链](https://learnblockchain.cn/images/zsxq.png)问答社区，作为星友福利，星友可加入我创建的区块链技术群，群内已经聚集了300多位区块链技术牛人和爱好者。
@@ -217,3 +220,5 @@ contract SimpleStorage {
 有一点需要注意一下，如果在声明变量的地方设置断点，这断点可能会触发两次，第一次是初始化为0，第二次是赋实际的值。
 
 -->
+
+
