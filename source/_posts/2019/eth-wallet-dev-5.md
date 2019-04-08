@@ -301,6 +301,6 @@ rawTransaction = RawTransaction.createTransaction(
 微信：xlbxiong 备注：钱包， 加入钱包开发的微信群。
 
 加入[知识星球](https://learnblockchain.cn/images/zsxq.png)，和一群优秀的区块链开发者一起学习。
-[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，学区块链的都在这里，打造最好的区块链技术博客。
+[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，学区块链都在这里，打造最好的区块链技术博客。
 
 

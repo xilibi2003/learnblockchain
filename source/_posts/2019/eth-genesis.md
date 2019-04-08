@@ -309,3 +309,6 @@ func (g *Genesis) ToBlock(db ethdb.Database) *types.Block{
 + ❼ 将内存 trie 数据更新到 db 中。
 这是多余的一步，因为提交到数据库是由外部进行，这里只需要负责生成区块。
 + ❽ 利用区块头创建区块，且区块中无交易记录。
+
+[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，学区块链都在这里，打造最好的区块链技术博客。
+

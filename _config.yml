@@ -64,7 +64,7 @@ project_icons:
 # Site
 title: 深入浅出区块链
 subtitle: 系统学习区块链技术
-description: 打造最好的区块链技术博客
+description: 打造最好、最专业的区块链技术博客，内容从入门到及精通，范围覆盖比特币、以太坊及EOS柚子等公链及超级账本等联盟链、已经IPFS、FileCoin等去中心化存储以及Plasma Loom 等Layer2技术，是系统学习区块链的地方。
 author: Tiny熊
 language: zh-Hans
 timezone: Asia/Shanghai
@@ -111,7 +111,7 @@ highlight:
 # order_by: Posts order. (Order by date descending by default)
 index_generator:
   path: ''
-  per_page: 10
+  per_page: 20
   order_by: -date
 
 # Category & Tag
