@@ -187,11 +187,12 @@ wechatpay: /images/qr_pay.jpg
 #alipay: /images/alipay.jpg
 #bitcoin: /images/bitcoin.png
 
+#http://creativecommons.org.au/content/licensing-flowchart.pdf
 # Declare license on posts
 post_copyright:
   enable: true
-  license: CC BY-NC-SA 3.0
-  license_url: https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh
+  license: CC BY-NC-ND 3.0
+  license_url: https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh
   
 
 
