@@ -17,7 +17,6 @@ author: Star Li
 以太坊虚拟机，简称EVM，是用来执行以太坊上的交易的。业务流程如下图：
 ![](https://img.learnblockchain.cn/2019/15548145070948.jpg)
 
-
 输入一笔交易，内部会转换成一个Message对象，传入EVM执行。
 
 如果是一笔普通转账交易，那么直接修改`StateDB`中对应的账户余额即可。如果是智能合约的创建或者调用，则通过EVM中的解释器加载和执行字节码，执行过程中可能会查询或者修改StateDB。
@@ -88,9 +87,9 @@ Input数据通常分为两个部分：
 
 这么讲可能有点抽象，我们可以看一看上图中的合约对应的反汇编代码就一目了然了：
 
-![](https://img.learnblockchain.cn/2019/15548157930961.jpg)
+![函数signature](https://img.learnblockchain.cn/2019/15548157930961.jpg)
 
-![](https://img.learnblockchain.cn/2019/15548158001820.jpg)
+![反汇编代码](https://img.learnblockchain.cn/2019/15548158001820.jpg)
 
 这里提到了`CALLDATALOAD`，就顺便讲一下数据加载相关的指令，一共有4种：
 
@@ -114,7 +113,7 @@ Input数据通常分为两个部分：
 
 后面会专门写篇文章比较它们的异同，这里先以最简单的CALL为例，调用流程如下图所示：
 
-![](https://img.learnblockchain.cn/2019/15548159348670.jpg)
+![CALL调用流程](https://img.learnblockchain.cn/2019/15548159348670.jpg)
 
 可以看到，调用者把调用参数存储在内存中，然后执行CALL指令。
 
@@ -135,13 +134,13 @@ CALL指令执行时会创建新的Contract对象，并以内存中的调用参�
 
 下一步就是根据合约地址创建对应的`stateObject`，然后存储交易中包含的合约代码。该合约的所有状态变化会存储在一个`storage trie`中，最终以`Key-Value`的形式存储到StateDB中。代码一经存储则无法改变，而`storage trie`中的内容则是可以通过调用合约进行修改的，比如通过SSTORE指令。
 
-![](https://img.learnblockchain.cn/2019/15548162475872.jpg)
+![生成合约地址](https://img.learnblockchain.cn/2019/15548162475872.jpg)
 
 
 ## 油费计算
 
 最后啰嗦一下油费的计算，计算公式基本上是根据[以太坊黄皮书](http://gavwood.com/paper.pdf)中的定义。
-![](https://img.learnblockchain.cn/2019/15548163052935.jpg)
+![以太坊黄皮书 gas](https://img.learnblockchain.cn/2019/15548163052935.jpg)
 
 当然你可以直接read the fucking code，代码位于core/vm/gas.go和core/vm/gas_table.go中。
 
@@ -213,7 +212,7 @@ CALLCODE和DELEGATECALL的区别在于：`msg.sender`不同。
 
 具体来说，DELEGATECALL会一直使用原始调用者的地址，而CALLCODE不会。
 
-![](https://img.learnblockchain.cn/2019/15548165586862.jpg)
+![CALLCODE和DELEGATECALL区别](https://img.learnblockchain.cn/2019/15548165586862.jpg)
 
 我们还是写一段代码来验证我们的理解：
 
@@ -270,5 +269,7 @@ view类型的函数表明其不能修改状态变量，而pure类型的函数则
 
 总结：以太坊虚拟机用来执行以太坊上的交易，更改以太坊状态。交易分两种：普通交易和智能合约交易。在执行交易时需要支付油费。智能合约之间的调用有四种方式。
 
-本文经作者Star Li授权转发自公众号：[星想法](https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzU5MzMxNTk2Nw==&scene=124#wechat_redirect), 公众号[星想法](https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzU5MzMxNTk2Nw==&scene=124#wechat_redirect)有很多原创高质量文章，欢迎大家关注。
+作者Star Li，他的公众号[星想法](https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzU5MzMxNTk2Nw==&scene=124#wechat_redirect)有很多原创高质量文章，欢迎大家关注。
+
+[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，学区块链都在这里，打造最好的区块链技术博客。
 
