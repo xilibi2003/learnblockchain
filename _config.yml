@@ -32,22 +32,19 @@ social_icons:
 # title, chinese available
 # Blog rolls
 links_icon: link
-links_title: 友链
+links_title: 推荐阅读
 links_layout: block
 # links
 links:
-  深入浅出-<b>问答社区<b>: https://learnblockchain.cn/images/zsxq.png
-  深入浅出-<b>小专栏<b>: https://xiaozhuanlan.com/blockchaincore
-  HiBlock区块链社区: https://hiblock.one/
-  图书-精通智能合约开发: http://edu.upchain.pro/book.html
-  区块链技术博客: http://me.tryblockchain.org/
-  BG区块链技术论坛: http://blockgeek.org/
-  EOS中文社区: https://eosfans.io/
-  链客区块链问答社区: https://www.liankexing.com/
-  虞双齐的博客: https://yushuangqi.com
-  TopJohn’s Blog: https://www.xuanzhangjiong.top
-  Tiny熊的博客: http://tinyxiong.com
-  更多: https://learnblockchain.cn/friends
+  区块链入门及比特币: https://wiki.learnblockchain.cn/bitcoin/readme.html
+  以太坊开发资源汇总: https://wiki.learnblockchain.cn/ethereum/readme.html
+  柚子EOS开发资源汇总: https://wiki.learnblockchain.cn/eos/readme.html
+  超级账本开发资源汇总: ttps://wiki.learnblockchain.cn/hyperledger/readme.html
+  IPFS开发资源汇总: ttps://wiki.learnblockchain.cn/hyperledger/readme.html
+  跨链开发资源汇总: ttps://wiki.learnblockchain.cn/hyperledger/readme.html
+  区块链专业分享及问答: https://learnblockchain.cn/images/zsxq.png
+  区块链付费小专栏: https://xiaozhuanlan.com/blockchaincore
+  友情链接: https://learnblockchain.cn/friends
 
 
 project:
@@ -111,7 +108,7 @@ highlight:
 # order_by: Posts order. (Order by date descending by default)
 index_generator:
   path: ''
-  per_page: 20
+  per_page: 15
   order_by: -date
 
 # Category & Tag
