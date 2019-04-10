@@ -42,6 +42,7 @@ links:
   超级账本开发资源汇总: https://wiki.learnblockchain.cn/hyperledger/readme.html
   IPFS开发资源汇总: https://wiki.learnblockchain.cn/hyperledger/readme.html
   跨链开发资源汇总: https://wiki.learnblockchain.cn/hyperledger/readme.html
+  以太坊设计与实现: http://geth.learnblockchain.cn
   区块链专业分享及问答: https://learnblockchain.cn/images/zsxq.png
   区块链付费小专栏: https://xiaozhuanlan.com/blockchaincore
   友情链接: https://learnblockchain.cn/friends/
@@ -62,7 +63,7 @@ project_icons:
 title: 深入浅出区块链
 subtitle: 系统学习区块链技术
 description: 打造最好、最专业的区块链技术博客，内容从入门到及精通，范围覆盖比特币、以太坊及EOS柚子等公链及超级账本等联盟链、已经IPFS、FileCoin等去中心化存储以及Plasma Loom 等Layer2技术，是系统学习区块链的地方。
-author: Tiny熊
+author: 深入浅出
 language: zh-Hans
 timezone: Asia/Shanghai
 
