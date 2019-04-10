@@ -13,7 +13,7 @@ author: Tiny熊
 ---
 
 以编写一个链上记事本为例，介绍如何开发DApp，一年多前写的[开发、部署第一个DApp](https://learnblockchain.cn/2018/01/12/first-dapp/)因为Truffle 、MetaMask、Solidity都有升级，也随手更新了。
-通过两个教程大家可以更好理解前端如何与合约进行交互， 本文也将介绍如何使用Truffle 把合约部署到以太坊正式网络上（貌似很多人遇到问题）。
+通过两个教程大家可以更好理解前端如何与合约进行交互， 本文也将介绍如何使用**Truffle 把合约部署到以太坊正式网络**上（貌似很多人遇到问题）。
 
 <!-- more -->
 
@@ -27,7 +27,7 @@ author: Tiny熊
 2. 查看之前(自己的)记事本
 
 **实现效果：**
-![](https://img.learnblockchain.cn/2019/15539548973073.jpg!wl)
+![记事本DApp 效果图](https://img.learnblockchain.cn/2019/15539548973073.jpg!wl)
 
 本合约也部署到以太坊官方测试网络Ropsten， 如Englist first Note 的交易记录可以在[EtherScan查询](https://ropsten.etherscan.io/tx/0xd6b7366fa06a643be0de7abc26e04b0509595f9a1cf216e6f7c29f1ad78c8775)。
 
@@ -116,8 +116,7 @@ truffle部署的命令是
 truffle migrate
 ```
 
-默认情况下，会部署到本地的Ganache提供的测试网络，本文介绍下如何通过Truffle部署到太坊官方网络，这里以
-Ropsten为例介绍。
+默认情况下，会部署到本地的Ganache提供的测试网络，本文介绍下如何**通过Truffle部署到太坊官方网络**，这里以部署到以太坊测试网络Ropsten为例进行介绍。
 
 
 > Ganache 的安装使用可阅读[开发、部署第一个DApp](https://learnblockchain.cn/2018/01/12/first-dapp/)
@@ -345,7 +344,6 @@ npm run dev
 
 
 本文为保持主干清晰，代码有删减， 网站代码请订阅[小专栏](https://xiaozhuanlan.com/blockchaincore)查看。
-
 
 
 ## 参考文档
