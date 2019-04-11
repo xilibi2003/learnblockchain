@@ -1,13 +1,14 @@
 ---
-title: 以太坊钱包开发系列4 - 发送Token(代币）
+title: 使用ethers.js开发以太坊Web钱包4 - 发送Token(代币）
 permalink: eth-web-wallet_4
 date: 2018-10-26 17:34:44
-categories: 以太坊
+categories: 
+    - 以太坊
+    - 钱包
 tags:
     - 钱包
-    - 比特币
-    - 以太坊
-
+    - ERC20
+    - ethers.js
 author: Tiny熊
 ---
 
@@ -18,6 +19,8 @@ author: Tiny熊
 ## 合约 ABI 信息
 
 首先我们需要明白，进行Token转账的时候，其实是在调用合约的转账函数，而要调用一个合约的函数，需要知道合约的 ABI 信息。
+
+> 如何创建直接的Token，可阅读[创建ERC20代币](https://learnblockchain.cn/2018/01/12/create_token/)
 
 其次 通常我们所说的Token， 其实指的是符合 ERC20 标准接口的合约， [ERC20](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md) 接口定义如下：
 

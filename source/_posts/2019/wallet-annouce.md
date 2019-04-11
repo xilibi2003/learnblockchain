@@ -67,7 +67,7 @@ Google play 也已经上架，[链接](https://play.google.com/store/apps/detail
 
 功能够全面吧，尤其是最后一个功能支持以太坊官方测试网络（Infura Koven及Ropsten）及本地测试网络，估计是开发者的最爱，做为开发者的我，懂你们的痛（可以获取到免费的以太币用于测试）。
 
-代码的讲解和相应的课程，我们后面会陆续放出，在还没有放出之前，先提醒大家几个注意的点：
+[代码的讲解](https://learnblockchain.cn/2019/04/11/wallet-dev-guide/)和相应的课程，我们后面会陆续放出，在还没有放出之前，先提醒大家几个注意的点：
 1. 使用本地网络测试的时候注意Geth 或 Ganache 设置下可接收RPC连接的地址，因为默认情况下只支持本地连接，这样手机上就无法连接。
 2. 显示交易记录功能需要自己搭建一个服务器提供API接口，这个接口来自TrustWallet，为了和本应用保持版本一致，我Fork了一份，地址为[trust-ray](https://github.com/xilibi2003/trust-ray)，这个库会解析区块，并把交易信息存到MongoDb数据库里，然后用API提供给客户端使用。
 3. 实时币价的显示其实也是使用trust-ray提供的接口，trust-ray 使用的是[CoinMarketCap](https://coinmarketcap.com/)的数据，目前使用的是CoinMarketCap免费提供的数据，CoinMarketCap现在有一套新的付费接口，免费的数据可能在将来会停用，到时需要使用CoinMarketCap 的apikey来访问。

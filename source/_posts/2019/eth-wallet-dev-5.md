@@ -3,7 +3,9 @@ title: 如何开发一款以太坊安卓钱包系列5 - 发送转账交易
 permalink: eth-wallet-dev-5
 un_reward: true
 date: 2019-04-04 14:34:14
-categories: 以太坊
+categories: 
+    - 以太坊
+    - 钱包
 tags:
     - 钱包
     - 以太坊
@@ -11,7 +13,7 @@ tags:
 ---
 
 
-这是如何开发以太坊安卓钱包系列第5篇，利用钱包对交易进行本地签名，然后发送到以太坊网络。
+这是如何[开发以太坊安卓钱包系列](https://learnblockchain.cn/2019/04/11/wallet-dev-guide/)第5篇，利用钱包对交易进行本地签名，然后发送到以太坊网络。
 
 
 <!-- more -->

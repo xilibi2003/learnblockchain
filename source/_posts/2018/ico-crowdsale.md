@@ -9,6 +9,7 @@ tags:
     - Token
     - ICO
     - 智能合约
+    - ERC20
 author: Tiny熊
 ---
 

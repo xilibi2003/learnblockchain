@@ -8,6 +8,7 @@ categories:
 tags:
     - Token
     - 智能合约
+    - ERC20
 author: Tiny熊
 ---
 

@@ -3,7 +3,9 @@ title: 如何开发一款以太坊（安卓）钱包系列1 - 通过助记词创
 permalink: eth_wallet_dev_1
 un_reward: true
 date: 2019-03-13 16:56:50
-categories: 以太坊
+categories: 
+    - 以太坊
+    - 钱包
 tags:
     - 钱包
     - 以太坊
@@ -12,7 +14,7 @@ tags:
 author: Tiny熊
 ---
 
-上周我开源了一款[钱包](https://github.com/xilibi2003/Upchain-wallet)，反映很好，一周时间不到已经快到100 Star。接下来我会几篇系列文章把开发以太坊钱包的核心要点写出来，也算是对代码的一个解读。
+上周我们开源了[登链钱包](https://github.com/xilibi2003/Upchain-wallet)，反映很好，一周时间不到已经快到100 Star。接下来我会写把钱包核心要点写出来作为一个[以太坊钱包开发系列文章](https://learnblockchain.cn/2019/04/11/wallet-dev-guide/)，对代码进行一个解读。
 
 <!-- more -->
 ## 写在前面

@@ -3,7 +3,9 @@ title: 如何开发一款以太坊安卓钱包系列3 - 资产信息展示
 permalink: eth_wallet_dev_3
 un_reward: false
 date: 2019-03-24 21:59:44
-categories: 以太坊
+categories: 
+    - 以太坊
+    - 钱包
 tags:
     - 钱包
     - 以太坊
@@ -12,7 +14,7 @@ author: Tiny熊
 ---
 
 
-这是如何开发以太坊（安卓）钱包系列第3篇， 钱包账号资产信息展示，展示信息主要包括账号地址、eth余额及该账号所拥有的Token及余额。
+这是[如何开发以太坊安卓钱包系列](https://learnblockchain.cn/2019/04/11/wallet-dev-guide/)第3篇， 钱包账号资产信息展示，展示信息主要包括账号地址、eth余额及该账号所拥有的Token及余额。
 
 
 <!-- more -->

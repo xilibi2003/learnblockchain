@@ -1,13 +1,15 @@
 ---
-title: 以太坊钱包开发系列3 - 展示钱包信息及发起签名交易
+title: 使用ethers.js开发以太坊Web钱包3 - 展示钱包信息及发起签名交易
 permalink: eth-web-wallet_3
 date: 2018-10-26 10:31:44
-categories: 以太坊
+categories: 
+    - 以太坊
+    - 钱包
 tags:
     - 钱包
-    - 比特币
-    - 以太坊
-
+    - ethers.js
+    - 交易
+    - 签名
 author: Tiny熊
 ---
 
@@ -260,3 +262,5 @@ web3.eth.sendRawTransaction(serializedTx, function (err, transactionHash) {
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
 
 [深入浅出区块链知识星球](https://learnblockchain.cn/images/zsxq.png)最专业技术问答社区，加入社区还可以在微信群里和300多位区块链技术爱好者一起交流。
+
+
