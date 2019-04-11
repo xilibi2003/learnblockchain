@@ -1,12 +1,12 @@
 ---
 title: Hyperledger Fabric 2.0 Alpha发布了！
-permalink: Hyperledger Fabric 2.0 Alpha发布了！
+permalink: hyperledger-fabric-2-0-alpha
 un_reward: true
 date: 2019-04-11 18:55:09
 categories:
-- Fabric
+    - Fabric
 tags:
-- Fabric
+    - Fabric
 author: TopJohn
 ---
 
@@ -70,4 +70,6 @@ Fabric 2.0 Alpha还为用户提供了在Fabric通道上轻松将资产转化为t
 
 本文经TopJohn授权转自[TopJohn’s Blog](https://www.xuanzhangjiong.top/2019/04/11/Hyperledger-Fabric-2-0-Alpha%E5%8F%91%E5%B8%83%E4%BA%86%EF%BC%81/)
 
-![AwesomeBlockchain](http://img.mochain.info/topjohn/blog/awesome_blockchain.jpg)
+
+[深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
+

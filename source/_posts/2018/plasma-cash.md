@@ -13,7 +13,7 @@ tags:
 author: 盖盖
 ---
 
-这一系列文章将围绕以太坊的二层扩容框架 Plasma，介绍其基本运行原理，具体操作细节，安全性讨论以及未来研究方向等。本篇文章主要介绍在 Plasma 框架下的项目 Plasma Cash。
+这一系列文章将围绕[以太坊的二层扩容](https://wiki.learnblockchain.cn/ethereum/layer-2.html)框架 Plasma，介绍其基本运行原理，具体操作细节，安全性讨论以及未来研究方向等。本篇文章主要介绍在 Plasma 框架下的项目 Plasma Cash。
 
 
 <!-- more -->
@@ -118,3 +118,5 @@ Plasma Cash 中的取款操作在流程上跟 Plasma MVP 大体相同，都要�
 本文的作者是盖盖，他的微信公众号: chainlab
 
 [深入浅出区块链](https://learnblockchain.cn/) - 系统学习区块链，打造最好的区块链技术博客。
+
+
