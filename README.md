@@ -1,5 +1,7 @@
 # 深入浅出区块链博客
 
+**警告**：本库将不在更新，已迁移到[深入浅出区块链团队](https://github.com/lbc-team)号
+
 [深入浅出区块链](http://learnblockchain.cn)是由一群区块链技术爱好者共同维护的一个秉承去中心化精神的区块链技术博客。
 
 博客最初由Tiny熊发起，后[HiBlock区块链社区](https://hiblock.one)、[登链学院-区块链技术培训学院](https://upchain.ke.qq.com/?tuin=bd898bbf) 等其他的组织及个人加入贡献内容。
